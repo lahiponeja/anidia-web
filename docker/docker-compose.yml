@@ -1,0 +1,24 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: PASSWORD
+      MYSQL_DATABASE: demo_liferay_docker
+    ports:
+      - "4306:3306"
+    volumes:
+      - ./db-data:/var/lib/mysql
+  portal:
+    image: liferay/portal:7.3.4-ga5
+    environment:
+      LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_DRIVER_UPPERCASEC_LASS_UPPERCASEN_AME: "com.mysql.cj.jdbc.Driver"
+      LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_URL: jdbc:mysql://db/demo_liferay_docker?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
+      LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_USERNAME: root
+      LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_PASSWORD: PASSWORD
+    ports:
+      - "8000:8000"
+      - "8080:8080"
+      - "11311:11311"
+    volumes:
+      - ../liferay:/mnt/liferay
