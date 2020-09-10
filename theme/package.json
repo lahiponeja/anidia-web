@@ -1,0 +1,16 @@
+{
+  "name": "anidia-theme",
+  "version": "1.0.0",
+  "description": "Anidia Theme for Liferay",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "generator-liferay-theme": "^10.0.0",
+    "node-sass": "^4.14.1",
+    "yo": "^3.1.1"
+  }
+}
