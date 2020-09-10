@@ -1,0 +1,9 @@
+{
+  "LiferayTheme": {
+    "appServerPath": "/opt/liferay/tomcat",
+    "deployPath": "/opt/liferay/deploy",
+    "deploymentStrategy": "DockerContainer",
+    "dockerContainerName": "docker_portal_1",
+    "url": "http://localhost:8080"
+  }
+}
