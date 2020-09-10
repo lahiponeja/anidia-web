@@ -26,6 +26,7 @@
 		"deploy": "gulp deploy",
 		"extend": "gulp extend",
 		"kickstart": "gulp kickstart",
+		"overwrite": "gulp overwrite",
 		"status": "gulp status",
 		"upgrade": "gulp upgrade",
 		"watch": "gulp watch"
