@@ -17,6 +17,7 @@ services:
       LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_URL: jdbc:mysql://db/demo_liferay_docker?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
       LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_USERNAME: root
       LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_PASSWORD: PASSWORD
+      JAVA_VERSION: zulu11
     ports:
       - "8000:8000"
       - "8080:8080"
