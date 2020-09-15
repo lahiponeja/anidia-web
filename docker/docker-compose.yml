@@ -11,6 +11,7 @@ services:
       - ./db-data:/var/lib/mysql
   portal:
     image: liferay/portal:7.3.4-ga5
+    user: root
     environment:
       LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_DRIVER_UPPERCASEC_LASS_UPPERCASEN_AME: "com.mysql.cj.jdbc.Driver"
       LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_URL: jdbc:mysql://db/demo_liferay_docker?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
@@ -21,4 +22,4 @@ services:
       - "8080:8080"
       - "11311:11311"
     volumes:
-      - ../liferay:/mnt/liferay
+      - ../liferay:/mnt/liferay:Z
