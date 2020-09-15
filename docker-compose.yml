@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+
+  db:
+    image: mysql:latest
+    container_name: mysql
+    restart: always    
+    environment:
+      MYSQL_DATABASE: liferay
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USERS: liferay
+      MYSQL_PASSWORD: l1f3ray
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+  
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.9.1
+    container_name: elasticsearch
+    restart: always    
+    volumes:
+      - elastic_data:/usr/share/elasticsearch/data
+    environment:
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+
+  portal:
+    image: liferay/portal:7.3.4-ga5
+    user: root
+    container_name: liferay
+    restart: always     
+    environment:
+      LIFERAY_JVM_OPTS: $JAVA_OPTS -XX:NewSize=700m -XX:MaxNewSize=700m -Xms2048m -Xmx2048m -XX:MaxPermSize=128m -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:SurvivorRatio=20 -XX:ParallelGCThreads=8
+      LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_DRIVER_UPPERCASEC_LASS_UPPERCASEN_AME: com.mysql.cj.jdbc.Driver
+      LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_URL: jdbc:mysql://db/liferay?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
+      LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_USERNAME: root
+      LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_PASSWORD: password
+    ports:
+      - "8000:8000"
+      - "8080:8080"
+      - "11311:11311"
+    volumes:
+      - ./liferay:/mnt/liferay:Z
+    depends_on:
+      - db
+      - elasticsearch
+
+networks:
+  default:
+
+volumes:
+  db-data: {}
+  elastic_data: {}
