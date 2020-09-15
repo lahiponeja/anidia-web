@@ -24,3 +24,4 @@ services:
       - "11311:11311"
     volumes:
       - ../liferay:/mnt/liferay:Z
+      - ./liferay/war:/opt/liferay/osgi/war/:Z
