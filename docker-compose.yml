@@ -3,7 +3,7 @@ version: '3'
 services:
 
   db:
-    image: mysql:latest
+    image: mysql:8.0.21
     container_name: mysql
     restart: always
     environment:
