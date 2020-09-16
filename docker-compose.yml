@@ -45,6 +45,7 @@ services:
       - "11311:11311"
     volumes:
       - ./liferay:/mnt/liferay:Z
+      - liferay_war:/opt/liferay/osgi/war
     depends_on:
       - db        
       - elasticsearch
@@ -58,3 +59,4 @@ networks:
 volumes:
   db-data: {}
   elastic_data: {}
+  liferay_war: {}
