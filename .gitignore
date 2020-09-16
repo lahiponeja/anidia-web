@@ -51,3 +51,9 @@ Thumbs.db
 # Docker
 
 docker/db-data
+
+# Portlets
+
+.gradle
+RemoteSystemsTempFiles
+.metadata
