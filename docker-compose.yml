@@ -4,7 +4,7 @@ services:
 
   db:
     image: mysql:8
-    container_name: mysql
+    container_name: liferay_db
     restart: always
     environment:
       MYSQL_DATABASE: liferay
@@ -18,7 +18,7 @@ services:
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.9.1
-    container_name: elasticsearch
+    container_name: liferay_es
     restart: always
     volumes:
       - elastic_data:/usr/share/elasticsearch/data
@@ -31,10 +31,10 @@ services:
   portal:
     image: liferay/portal:7.3.4-ga5
     user: root
-    container_name: liferay
+    container_name: liferay_portal
     restart: on-failure
     environment:
-      LIFERAY_JVM_OPTS: $JAVA_OPTS -XX:NewSize=700m -XX:MaxNewSize=700m -Xms2048m -Xmx2048m -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:SurvivorRatio=20 -XX:ParallelGCThreads=8
+      LIFERAY_JVM_OPTS: -XX:NewSize=700m -XX:MaxNewSize=700m -Xms2048m -Xmx2048m -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:SurvivorRatio=20 -XX:ParallelGCThreads=8
       LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_DRIVER_UPPERCASEC_LASS_UPPERCASEN_AME: com.mysql.cj.jdbc.Driver
       LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_URL: jdbc:mysql://db/liferay?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
       LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_USERNAME: root
