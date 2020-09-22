@@ -1,0 +1,643 @@
+$an-icon-bulb-green: url('../../assets/img/icons/bulb-green.svg');
+.an-icon--bulb-green-svg {
+  &:before {
+    background: $an-icon-bulb-green no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-bulb-white: url('../../assets/img/icons/bulb-white.svg');
+.an-icon--bulb-white-svg {
+  &:before {
+    background: $an-icon-bulb-white no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-gas-green: url('../../assets/img/icons/gas-green.svg');
+.an-icon--gas-green-svg {
+  &:before {
+    background: $an-icon-gas-green no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-gas-white: url('../../assets/img/icons/gas-white.svg');
+.an-icon--gas-white-svg {
+  &:before {
+    background: $an-icon-gas-white no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-heater-green: url('../../assets/img/icons/heater-green.svg');
+.an-icon--heater-green-svg {
+  &:before {
+    background: $an-icon-heater-green no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-heater-white: url('../../assets/img/icons/heater-white.svg');
+.an-icon--heater-white-svg {
+  &:before {
+    background: $an-icon-heater-white no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-solar-panel-green: url('../../assets/img/icons/solar-panel-green.svg');
+.an-icon--solar-panel-green-svg {
+  &:before {
+    background: $an-icon-solar-panel-green no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-solar-panel-white: url('../../assets/img/icons/solar-panel-white.svg');
+.an-icon--solar-panel-white-svg {
+  &:before {
+    background: $an-icon-solar-panel-white no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-stove-green: url('../../assets/img/icons/stove-green.svg');
+.an-icon--stove-green-svg {
+  &:before {
+    background: $an-icon-stove-green no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-secure: url('../../assets/img/icons/secure.svg');
+.an-icon--secure-svg {
+  &:before {
+    background: $an-icon-secure no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-respectful: url('../../assets/img/icons/respectful.svg');
+.an-icon--respectful-svg {
+  &:before {
+    background: $an-icon-respectful no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-profitable: url('../../assets/img/icons/profitable.svg');
+.an-icon--profitable-svg {
+  &:before {
+    background: $an-icon-profitable no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-flexible: url('../../assets/img/icons/flexible.svg');
+.an-icon--flexible-svg {
+  &:before {
+    background: $an-icon-flexible no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-efficiency-responsibility: url('../../assets/img/icons/efficiency-responsibility.svg');
+.an-icon--efficiency-responsibility-svg {
+  &:before {
+    background: $an-icon-efficiency-responsibility no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-efficiency-responsibility: url('../../assets/img/icons/efficiency-responsibility.svg');
+.an-icon--efficiency-responsibility-svg {
+  &:before {
+    background: $an-icon-efficiency-responsibility no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-comfortable: url('../../assets/img/icons/comfortable.svg');
+.an-icon--comfortable-svg {
+  &:before {
+    background: $an-icon-comfortable no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-call-us-free: url('../../assets/img/icons/call-us-free.svg');
+.an-icon--call-us-free-svg {
+  &:before {
+    background: $an-icon-call-us-free no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-tailor-made: url('../../assets/img/icons/tailor-made.svg');
+.an-icon--tailor-made-svg {
+  &:before {
+    background: $an-icon-tailor-made no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-euro-coin: url('../../assets/img/icons/euro-coin.svg');
+.an-icon--euro-coin-svg {
+  &:before {
+    background: $an-icon-euro-coin no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-check-leafs: url('../../assets/img/icons/check-leafs.svg');
+.an-icon--check-leafs-svg {
+  &:before {
+    background: $an-icon-check-leafs no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-euro-sign: url('../../assets/img/icons/euro-sign.svg');
+.an-icon--euro-sign-svg {
+  &:before {
+    background: $an-icon-euro-sign no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+$an-icon-leafs-percentage: url('../../assets/img/icons/leafs-percentage.svg');
+.an-icon--leafs-percentage-svg {
+  &:before {
+    background: $an-icon-leafs-percentage no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(95);
+    width: rem(95);
+  }
+}
+
+// Icons font
+
+$an-icon-half-arrow-down: "\e900";
+.an-icon--half-arrow-down:before {
+  font-family: $an-icons;
+  content: $an-icon-half-arrow-down;
+  display: block;
+}
+
+$an-icon-half-arrow-up: "\e901";
+.an-icon--half-arrow-up:before {
+  font-family: $an-icons;
+  content: $an-icon-half-arrow-up;
+  display: block;
+}
+
+$an-icon-half-arrow-left: "\e902";
+.an-icon--half-arrow-left:before {
+  font-family: $an-icons;
+  content: $an-icon-half-arrow-left;
+  display: block;
+}
+
+$an-icon-half-arrow-right: "\e903";
+.an-icon--half-arrow-right:before {
+  font-family: $an-icons;
+  content: $an-icon-half-arrow-right;
+  display: block;
+}
+
+$an-icon-check-circle: "\e904";
+.an-icon--check-circle:before {
+  font-family: $an-icons;
+  content: $an-icon-check-circle;
+  display: block;
+}
+
+$an-icon-unselected: "\e905";
+.an-icon--unselected:before {
+  font-family: $an-icons;
+  content: $an-icon-unselected;
+  display: block;
+}
+
+$an-icon-power: "\e906";
+.an-icon--power:before {
+  font-family: $an-icons;
+  content: $an-icon-power;
+  display: block;
+}
+
+$an-icon-percentage-wallet: "\e907";
+.an-icon--percentage-wallet:before {
+  font-family: $an-icons;
+  content: $an-icon-percentage-wallet;
+  display: block;
+}
+
+$an-icon-gas: "\e908";
+.an-icon--gas:before {
+  font-family: $an-icons;
+  content: $an-icon-gas;
+  display: block;
+}
+
+$an-icon-chevron-up: "\e909";
+.an-icon--chevron-up:before {
+  font-family: $an-icons;
+  content: $an-icon-chevron-up;
+  display: block;
+}
+
+$an-icon-hot-water-heat-kitchen: "\e910";
+.an-icon--hot-water-heat-kitchen:before {
+  font-family: $an-icons;
+  content: $an-icon-hot-water-heat-kitchen;
+  display: block;
+}
+
+$an-icon-hot-water-kitchen: "\e911";
+.an-icon--hot-water-kitchen:before {
+  font-family: $an-icons;
+  content: $an-icon-hot-water-kitchen;
+  display: block;
+}
+
+$an-icon-hot-water: "\e912";
+.an-icon--hot-water:before {
+  font-family: $an-icons;
+  content: $an-icon-hot-water;
+  display: block;
+}
+
+$an-icon-saving: "\e913";
+.an-icon--saving:before {
+  font-family: $an-icons;
+  content: $an-icon-saving;
+  display: block;
+}
+
+$an-icon-environment-responsable: "\e914";
+.an-icon--environment-responsable:before {
+  font-family: $an-icons;
+  content: $an-icon-environment-responsable;
+  display: block;
+}
+
+$an-icon-analisis: "\e915";
+.an-icon--analisis:before {
+  font-family: $an-icons;
+  content: $an-icon-analisis;
+  display: block;
+}
+
+$an-icon-leverage-energy: "\e916";
+.an-icon--leverage-energy:before {
+  font-family: $an-icons;
+  content: $an-icon-leverage-energy;
+  display: block;
+}
+
+$an-icon-heating: "\e917";
+.an-icon--heating:before {
+  font-family: $an-icons;
+  content: $an-icon-heating;
+  display: block;
+}
+
+$an-icon-kitchen: "\e918";
+.an-icon--kitchen:before {
+  font-family: $an-icons;
+  content: $an-icon-kitchen;
+  display: block;
+}
+
+$an-icon-enjoy: "\e919";
+.an-icon--enjoy:before {
+  font-family: $an-icons;
+  content: $an-icon-enjoy;
+  display: block;
+}
+
+$an-icon-lightning-borders: "\e920";
+.an-icon--lightning-borders:before {
+  font-family: $an-icons;
+  content: $an-icon-lightning-borders;
+  display: block;
+}
+
+$an-icon-lightning: "\e921";
+.an-icon--lightning:before {
+  font-family: $an-icons;
+  content: $an-icon-lightning;
+  display: block;
+}
+
+$an-icon-business: "\e922";
+.an-icon--business:before {
+  font-family: $an-icons;
+  content: $an-icon-business;
+  display: block;
+}
+
+$an-icon-offer: "\e923";
+.an-icon--offer:before {
+  font-family: $an-icons;
+  content: $an-icon-offer;
+  display: block;
+}
+
+$an-icon-apartments: "\e924";
+.an-icon--apartments:before {
+  font-family: $an-icons;
+  content: $an-icon-apartments;
+  display: block;
+}
+
+$an-icon-respectful: "\e925";
+.an-icon--respectful:before {
+  font-family: $an-icons;
+  content: $an-icon-respectful;
+  display: block;
+}
+
+$an-icon-secure: "\e926";
+.an-icon--secure:before {
+  font-family: $an-icons;
+  content: $an-icon-secure;
+  display: block;
+}
+
+$an-icon-request: "\e927";
+.an-icon--request:before {
+  font-family: $an-icons;
+  content: $an-icon-request;
+  display: block;
+}
+
+$an-icon-living-place: "\e928";
+.an-icon--living-place:before {
+  font-family: $an-icons;
+  content: $an-icon-living-place;
+  display: block;
+}
+
+$an-icon-search: "\e929";
+.an-icon--search:before {
+  font-family: $an-icons;
+  content: $an-icon-search;
+  display: block;
+}
+
+$an-icon-chevron-down: "\e90a";
+.an-icon--chevron-down:before {
+  font-family: $an-icons;
+  content: $an-icon-chevron-down;
+  display: block;
+}
+
+$an-icon-check-simple: "\e90b";
+.an-icon--check-simple:before {
+  font-family: $an-icons;
+  content: $an-icon-check-simple;
+  display: block;
+}
+
+$an-icon-bill: "\e90c";
+.an-icon--bill:before {
+  font-family: $an-icons;
+  content: $an-icon-bill;
+  display: block;
+}
+
+$an-icon-target: "\e90d";
+.an-icon--target:before {
+  font-family: $an-icons;
+  content: $an-icon-target;
+  display: block;
+}
+
+$an-icon-spend: "\e90e";
+.an-icon--spend:before {
+  font-family: $an-icons;
+  content: $an-icon-spend;
+  display: block;
+}
+
+$an-icon-temperature: "\e90f";
+.an-icon--temperature:before {
+  font-family: $an-icons;
+  content: $an-icon-temperature;
+  display: block;
+}
+
+$an-icon-facebook: "\ea90";
+.an-icon--facebook:before {
+  font-family: $an-icons;
+  content: $an-icon-facebook;
+  display: block;
+}
+
+$an-icon-instagram: "\ea92";
+.an-icon--instagram:before {
+  font-family: $an-icons;
+  content: $an-icon-instagram;
+  display: block;
+}
+
+$an-icon-linkedin: "\eaca";
+.an-icon--linkedin:before {
+  font-family: $an-icons;
+  content: $an-icon-linkedin;
+  display: block;
+}
+
+$an-icon-pinterest: "\ead1";
+.an-icon--pinterest:before {
+  font-family: $an-icons;
+  content: $an-icon-pinterest;
+  display: block;
+}
+
+$an-icon-euro-cable: "\e91a";
+.an-icon--euro-cable:before {
+  font-family: $an-icons;
+  content: $an-icon-euro-cable;
+  display: block;
+}
+
+$an-icon-unifamiliar-home: "\e91b";
+.an-icon--unifamiliar-home:before {
+  font-family: $an-icons;
+  content: $an-icon-unifamiliar-home;
+  display: block;
+}
+
+$an-icon-hot-water-two: "\e91c";
+.an-icon--hot-water-two:before {
+  font-family: $an-icons;
+  content: $an-icon-hot-water-two;
+  display: block;
+}
+
+$an-icon-hot-water-three: "\e91d";
+.an-icon--hot-water-three:before {
+  font-family: $an-icons;
+  content: $an-icon-hot-water-three;
+  display: block;
+}
+
+$an-icon-hot-water-four: "\e91e";
+.an-icon--hot-water-four:before {
+  font-family: $an-icons;
+  content: $an-icon-hot-water-four;
+  display: block;
+}
+
+$an-icon-install: "\e91f";
+.an-icon--install:before {
+  font-family: $an-icons;
+  content: $an-icon-install;
+  display: block;
+}
+
+$an-icon-check-paper: "\e92a";
+.an-icon--check-paper:before {
+  font-family: $an-icons;
+  content: $an-icon-check-paper;
+  display: block;
+}
+
+$an-icon-close-cross: "\e92b";
+.an-icon--close-cross:before {
+  font-family: $an-icons;
+  content: $an-icon-close-cross;
+  display: block;
+}
+
+$an-icon-hand-coin: "\e92c";
+.an-icon--hand-coin:before {
+  font-family: $an-icons;
+  content: $an-icon-hand-coin;
+  display: block;
+}
+
+$an-icon-head-phones: "\e92d";
+.an-icon--head-phones:before {
+  font-family: $an-icons;
+  content: $an-icon-head-phones;
+  display: block;
+}
+
+$an-icon-hot-water-and-pot: "\e92e";
+.an-icon--hot-water-and-pot:before {
+  font-family: $an-icons;
+  content: $an-icon-hot-water-and-pot;
+  display: block;
+}
+
+$an-icon-hot-water-thermo-and-pot: "\e92f";
+.an-icon--hot-water-thermo-and-pot:before {
+  font-family: $an-icons;
+  content: $an-icon-hot-water-thermo-and-pot;
+  display: block;
+}
+
+$an-icon-thermometer: "\e932";
+.an-icon--thermometer:before {
+  font-family: $an-icons;
+  content: $an-icon-thermometer;
+  display: block;
+}
+
+$an-icon-thunder-house: "\e933";
+.an-icon--thunder-house:before {
+  font-family: $an-icons;
+  content: $an-icon-thunder-house;
+  display: block;
+}
