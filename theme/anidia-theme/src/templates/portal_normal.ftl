@@ -69,7 +69,7 @@
 
 <@liferay_util["include"] page=body_bottom_include />
 
-<#if is_signed_in >
+<#if is_signed_in || layoutTypePortlet.hasStateMax() >
 	<@liferay_util["include"] page=bottom_include />
 </#if>
 <!-- inject:js -->

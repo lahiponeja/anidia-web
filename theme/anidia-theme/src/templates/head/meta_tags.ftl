@@ -2,7 +2,7 @@
 
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
-  <#if is_signed_in >
+  <#if is_signed_in || layoutTypePortlet.hasStateMax() >
     <@liferay_util["include"] page=top_head_include />
   <#else >
 
