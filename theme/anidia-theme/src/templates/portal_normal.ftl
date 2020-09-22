@@ -5,15 +5,14 @@
 <html class="${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
 
 <head>
-	<title>${the_title} - ${company_name}</title>
 
-	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
+	<#include "${full_templates_path}/head/meta_tags.ftl" />
 
-	<@liferay_util["include"] page=top_head_include />
+	<link rel="stylesheet" href="${css_folder}/anidia.css" charset="utf-8">
+
 </head>
 
 <body class="${css_class}">
-
 <@liferay_ui["quick-access"] contentId="#main-content" />
 
 <@liferay_util["include"] page=body_top_include />
@@ -70,8 +69,9 @@
 
 <@liferay_util["include"] page=body_bottom_include />
 
-<@liferay_util["include"] page=bottom_include />
-
+<#if is_signed_in >
+	<@liferay_util["include"] page=bottom_include />
+</#if>
 <!-- inject:js -->
 <!-- endinject -->
 
