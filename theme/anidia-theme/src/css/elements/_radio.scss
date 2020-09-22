@@ -1,0 +1,65 @@
+.an-radio {
+  $parent: &;
+
+  margin-bottom: rem(25);
+  position: relative;
+
+  &__input {
+    opacity: 0;
+    margin: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+
+    &[disabled] {
+      & + #{ $parent }__label {
+        color: $an-theme-dark-grey-op;
+
+        &:before {
+          background-color: $an-theme-soft-grey;
+          border: 1px solid $an-theme-soft-grey-sec;
+        }
+      }
+    }
+  }
+
+  &__label {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+
+    &:before {
+      content: "";
+      width: rem(20);
+      height: rem(20);
+      border: 2px solid $an-theme;
+      border-radius: 100%;
+    }
+    
+    span {
+      margin-left: rem(10);
+    }
+  }
+
+  &__input {
+    &:focus {
+      &__label {
+        text-decoration: underline;
+      }
+    }
+    
+    &:checked {
+      & + label {
+        &:after {
+          content: "";
+          width: rem(10);
+          height: rem(10);
+          background-color: $an-theme;
+          border-radius: 100%;
+          position: absolute;
+          left: rem(5);
+        }
+      }
+    }
+  }
+}
