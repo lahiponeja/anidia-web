@@ -1,4 +1,9 @@
 
 body {
-  background: pink;
+  &.anidia-green {
+    background: yellowgreen;
+  }
+  &.anidia-white {
+    background: lightblue;
+  }
 }
