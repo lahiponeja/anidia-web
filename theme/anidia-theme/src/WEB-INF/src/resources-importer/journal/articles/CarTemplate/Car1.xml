@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<root available-locales="en_US" default-locale="en_US">
+	<dynamic-element name="Brand" type="text" index-type="keyword" instance-id="kjsm">
+		<dynamic-content language-id="en_US"><![CDATA[The Brand]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="Select2gbm" type="list" index-type="keyword" instance-id="xtbd">
+		<dynamic-content language-id="en_US"><![CDATA[Medium]]></dynamic-content>
+	</dynamic-element>
+</root>
