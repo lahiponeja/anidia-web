@@ -1,23 +1,28 @@
 // FS Emeric
 
+$fsEmeric-font-path: '../assets/fonts/FSEmeric' !default;
+$openSans-font-path: '../assets/fonts/openSans';
+$icons-font-path: '../assets/fonts/icons';
+
 @font-face {
   font-family: 'fsemericbold';
   font-style: normal;
   font-weight: normal;
-  src: 
-    url('../../assets/fonts/FSEmeric/Fontsmith-FSEmeric-Bold.woff2') format('woff2'),
-    url('../../assets/fonts/FSEmeric/Fontsmith-FSEmeric-Bold.woff') format('woff');
+  src:
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-Bold.woff2') format('woff2'),
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-Bold.woff') format('woff');
 }
 
 $fs-emeric-bold-family: 'fsemericbold', sans-serif;
+
 
 @font-face {
   font-family: 'fsemericsemibold';
   font-style: normal;
   font-weight: normal;
-  src: 
-    url('../../assets/fonts/FSEmeric/Fontsmith-FSEmeric-SemiBold.woff2') format('woff2'),
-    url('../../assets/fonts/FSEmeric/Fontsmith-FSEmeric-SemiBold.woff') format('woff');
+  src:
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-SemiBold.woff2') format('woff2'),
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-SemiBold.woff') format('woff');
 }
 
 $fs-emeric-semibold-family: 'fsemericsemibold', sans-serif;
@@ -26,9 +31,9 @@ $fs-emeric-semibold-family: 'fsemericsemibold', sans-serif;
   font-family: 'fsemericmedium';
   font-style: normal;
   font-weight: normal;
-  src: 
-    url('../../assets/fonts/FSEmeric/Fontsmith-FSEmeric-Medium.woff2') format('woff2'),
-    url('../../assets/fonts/FSEmeric/Fontsmith-FSEmeric-Medium.woff') format('woff');
+  src:
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-Medium.woff2') format('woff2'),
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-Medium.woff') format('woff');
 }
 
 $fs-emeric-medium-family: 'fsemericmedium', sans-serif;
@@ -37,9 +42,9 @@ $fs-emeric-medium-family: 'fsemericmedium', sans-serif;
   font-family: 'fsemericregular';
   font-style: normal;
   font-weight: normal;
-  src: 
-    url('../../assets/fonts/FSEmeric/Fontsmith-FSEmeric-Book.woff2') format('woff2'),
-    url('../../assets/fonts/FSEmeric/Fontsmith-FSEmeric-Book.woff') format('woff');
+  src:
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-Book.woff2') format('woff2'),
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-Book.woff') format('woff');
 }
 
 $fs-emeric-regular-family: 'fsemericregular', sans-serif;
@@ -51,9 +56,9 @@ $fs-emeric-regular-family: 'fsemericregular', sans-serif;
   font-family: 'opensansregular';
   font-style: normal;
   font-weight: normal;
-  src: 
-    url('../../assets/fonts/openSans/OpenSans-Regular.woff2') format('woff2'),
-    url('../../assets/fonts/openSans/OpenSans-Regular.woff') format('woff');
+  src:
+    url('#{$openSans-font-path}/OpenSans-Regular.woff2') format('woff2'),
+    url('#{$openSans-font-path}/OpenSans-Regular.woff') format('woff');
 }
 
 $open-sans-regular-family: 'opensansregular', sans-serif;
@@ -62,9 +67,9 @@ $open-sans-regular-family: 'opensansregular', sans-serif;
   font-family: 'opensanssemibold';
   font-style: normal;
   font-weight: normal;
-  src: 
-    url('../../assets/fonts/openSans/OpenSans-SemiBold.woff2') format('woff2'),
-    url('../../assets/fonts/openSans/OpenSans-SemiBold.woff') format('woff');
+  src:
+    url('#{$openSans-font-path}/OpenSans-SemiBold.woff2') format('woff2'),
+    url('#{$openSans-font-path}/OpenSans-SemiBold.woff') format('woff');
 }
 
 $open-sans-semibold-family: 'opensanssemibold', sans-serif;
@@ -73,9 +78,9 @@ $open-sans-semibold-family: 'opensanssemibold', sans-serif;
   font-family: 'opensansbold';
   font-style: normal;
   font-weight: normal;
-  src: 
-    url('../../assets/fonts/openSans/OpenSans-Bold.woff2') format('woff2'),
-    url('../../assets/fonts/openSans/OpenSans-Bold.woff') format('woff');
+  src:
+    url('#{$openSans-font-path}/OpenSans-Bold.woff2') format('woff2'),
+    url('#{$openSans-font-path}/OpenSans-Bold.woff') format('woff');
 }
 
 $open-sans-bold-family: 'opensansbold', sans-serif;
@@ -86,9 +91,9 @@ $open-sans-bold-family: 'opensansbold', sans-serif;
   font-family: 'an-icons';
   font-style: normal;
   font-weight: normal;
-  src: 
-    url('../../assets/fonts/icons/icons.woff2') format('woff2'),
-    url('../../assets/fonts/icons/icons.woff') format('woff');
+  src:
+    url('#{$icons-font-path}/icons.woff2') format('woff2'),
+    url('#{$icons-font-path}/icons.woff') format('woff');
 }
 
 $an-icons: 'an-icons';

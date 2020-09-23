@@ -21,6 +21,9 @@
 <@liferay.control_menu />
 
 <div class="container-fluid" id="wrapper">
+	<h1>Heading 1</h1>
+	<h2>Heading 2</h2>
+	<h3>Heading 3</h3>
 	<header id="banner" role="banner">
 		<div id="heading">
 			<div aria-level="1" class="site-title" role="heading">
