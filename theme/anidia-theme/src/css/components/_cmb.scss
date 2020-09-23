@@ -76,4 +76,34 @@
       line-height: rem(27);
     }
   }
+
+  &--header {
+    height: rem(40);
+    min-width: unset;
+    padding: 0;
+    width: rem(139);
+
+    &::before {
+      color: $an-theme;
+      font-size: rem(27);
+      height: unset;
+      margin-left: rem(-8);
+      width: unset;
+    }
+
+    .cmb__content {
+      margin-left: rem(7);
+    }
+
+    .cmb__text {
+      font-size: rem(10);
+      line-height: rem(14);
+      margin-bottom: rem(2);
+    }
+
+    .cmb__number {
+      font-size: rem(14);
+      line-height: rem(15);
+    }
+  }
 }
