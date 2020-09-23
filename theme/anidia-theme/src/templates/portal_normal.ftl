@@ -22,13 +22,13 @@
 
 <div>
 	<h3>Call me back</h3>
-	<button class="an-btn an-btn--flatter an-btn--white an-icon--call-us-free-svg cmb">
+	<a href="tel:+34900181818" class="an-link an-btn an-btn--flatter an-btn--white an-icon--call-us-free-svg cmb">
 		<div class="cmb__content">
-			<span class="cmb__text mb-xs">Llámanos gratis</span>
-			<a class="an-link cmb__number" href="tel:+34900181818" class="cmb__number">900 18 18 18</a>
+			<span class="cmb__text">Llámanos gratis</span>
+			<span class="an-link cmb__number" class="cmb__number">900 18 18 18</span>
 			<span class="cmb__text-small mobile-hide">Gestionamos por ti lo que necesites</span>
 		</div>
-	</button>
+	</a>
 </div>
 
 <div class="container-fluid" id="wrapper">
