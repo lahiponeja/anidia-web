@@ -1,4 +1,6 @@
-$an-icon-bulb-green: url('../assets/img/icons/bulb-green.svg');
+$icon-img-path: '#{$icon-img-path}';
+
+$an-icon-bulb-green: url('#{$icon-img-path}/bulb-green.svg');
 .an-icon--bulb-green-svg {
   &:before {
     background: $an-icon-bulb-green no-repeat center center;
@@ -10,7 +12,7 @@ $an-icon-bulb-green: url('../assets/img/icons/bulb-green.svg');
   }
 }
 
-$an-icon-bulb-white: url('../assets/img/icons/bulb-white.svg');
+$an-icon-bulb-white: url('#{$icon-img-path}/bulb-white.svg');
 .an-icon--bulb-white-svg {
   &:before {
     background: $an-icon-bulb-white no-repeat center center;
@@ -22,7 +24,7 @@ $an-icon-bulb-white: url('../assets/img/icons/bulb-white.svg');
   }
 }
 
-$an-icon-gas-green: url('../assets/img/icons/gas-green.svg');
+$an-icon-gas-green: url('#{$icon-img-path}/gas-green.svg');
 .an-icon--gas-green-svg {
   &:before {
     background: $an-icon-gas-green no-repeat center center;
@@ -34,7 +36,7 @@ $an-icon-gas-green: url('../assets/img/icons/gas-green.svg');
   }
 }
 
-$an-icon-gas-white: url('../assets/img/icons/gas-white.svg');
+$an-icon-gas-white: url('#{$icon-img-path}/gas-white.svg');
 .an-icon--gas-white-svg {
   &:before {
     background: $an-icon-gas-white no-repeat center center;
@@ -46,7 +48,7 @@ $an-icon-gas-white: url('../assets/img/icons/gas-white.svg');
   }
 }
 
-$an-icon-heater-green: url('../assets/img/icons/heater-green.svg');
+$an-icon-heater-green: url('#{$icon-img-path}/heater-green.svg');
 .an-icon--heater-green-svg {
   &:before {
     background: $an-icon-heater-green no-repeat center center;
@@ -58,7 +60,7 @@ $an-icon-heater-green: url('../assets/img/icons/heater-green.svg');
   }
 }
 
-$an-icon-heater-white: url('../assets/img/icons/heater-white.svg');
+$an-icon-heater-white: url('#{$icon-img-path}/heater-white.svg');
 .an-icon--heater-white-svg {
   &:before {
     background: $an-icon-heater-white no-repeat center center;
@@ -70,7 +72,7 @@ $an-icon-heater-white: url('../assets/img/icons/heater-white.svg');
   }
 }
 
-$an-icon-solar-panel-green: url('../assets/img/icons/solar-panel-green.svg');
+$an-icon-solar-panel-green: url('#{$icon-img-path}/solar-panel-green.svg');
 .an-icon--solar-panel-green-svg {
   &:before {
     background: $an-icon-solar-panel-green no-repeat center center;
@@ -82,7 +84,7 @@ $an-icon-solar-panel-green: url('../assets/img/icons/solar-panel-green.svg');
   }
 }
 
-$an-icon-solar-panel-white: url('../assets/img/icons/solar-panel-white.svg');
+$an-icon-solar-panel-white: url('#{$icon-img-path}/solar-panel-white.svg');
 .an-icon--solar-panel-white-svg {
   &:before {
     background: $an-icon-solar-panel-white no-repeat center center;
@@ -94,7 +96,7 @@ $an-icon-solar-panel-white: url('../assets/img/icons/solar-panel-white.svg');
   }
 }
 
-$an-icon-stove-green: url('../assets/img/icons/stove-green.svg');
+$an-icon-stove-green: url('#{$icon-img-path}/stove-green.svg');
 .an-icon--stove-green-svg {
   &:before {
     background: $an-icon-stove-green no-repeat center center;
@@ -106,7 +108,7 @@ $an-icon-stove-green: url('../assets/img/icons/stove-green.svg');
   }
 }
 
-$an-icon-secure: url('../assets/img/icons/secure.svg');
+$an-icon-secure: url('#{$icon-img-path}/secure.svg');
 .an-icon--secure-svg {
   &:before {
     background: $an-icon-secure no-repeat center center;
@@ -118,7 +120,7 @@ $an-icon-secure: url('../assets/img/icons/secure.svg');
   }
 }
 
-$an-icon-respectful: url('../assets/img/icons/respectful.svg');
+$an-icon-respectful: url('#{$icon-img-path}/respectful.svg');
 .an-icon--respectful-svg {
   &:before {
     background: $an-icon-respectful no-repeat center center;
@@ -130,7 +132,7 @@ $an-icon-respectful: url('../assets/img/icons/respectful.svg');
   }
 }
 
-$an-icon-profitable: url('../assets/img/icons/profitable.svg');
+$an-icon-profitable: url('#{$icon-img-path}/profitable.svg');
 .an-icon--profitable-svg {
   &:before {
     background: $an-icon-profitable no-repeat center center;
@@ -142,7 +144,7 @@ $an-icon-profitable: url('../assets/img/icons/profitable.svg');
   }
 }
 
-$an-icon-flexible: url('../assets/img/icons/flexible.svg');
+$an-icon-flexible: url('#{$icon-img-path}/flexible.svg');
 .an-icon--flexible-svg {
   &:before {
     background: $an-icon-flexible no-repeat center center;
@@ -154,7 +156,7 @@ $an-icon-flexible: url('../assets/img/icons/flexible.svg');
   }
 }
 
-$an-icon-efficiency-responsibility: url('../assets/img/icons/efficiency-responsibility.svg');
+$an-icon-efficiency-responsibility: url('#{$icon-img-path}/efficiency-responsibility.svg');
 .an-icon--efficiency-responsibility-svg {
   &:before {
     background: $an-icon-efficiency-responsibility no-repeat center center;
@@ -166,7 +168,7 @@ $an-icon-efficiency-responsibility: url('../assets/img/icons/efficiency-responsi
   }
 }
 
-$an-icon-efficiency-responsibility: url('../assets/img/icons/efficiency-responsibility.svg');
+$an-icon-efficiency-responsibility: url('#{$icon-img-path}/efficiency-responsibility.svg');
 .an-icon--efficiency-responsibility-svg {
   &:before {
     background: $an-icon-efficiency-responsibility no-repeat center center;
@@ -178,7 +180,7 @@ $an-icon-efficiency-responsibility: url('../assets/img/icons/efficiency-responsi
   }
 }
 
-$an-icon-comfortable: url('../assets/img/icons/comfortable.svg');
+$an-icon-comfortable: url('#{$icon-img-path}/comfortable.svg');
 .an-icon--comfortable-svg {
   &:before {
     background: $an-icon-comfortable no-repeat center center;
@@ -190,7 +192,7 @@ $an-icon-comfortable: url('../assets/img/icons/comfortable.svg');
   }
 }
 
-$an-icon-call-us-free: url('../assets/img/icons/call-us-free.svg');
+$an-icon-call-us-free: url('#{$icon-img-path}/call-us-free.svg');
 .an-icon--call-us-free-svg {
   &:before {
     background: $an-icon-call-us-free no-repeat center center;
@@ -202,7 +204,7 @@ $an-icon-call-us-free: url('../assets/img/icons/call-us-free.svg');
   }
 }
 
-$an-icon-tailor-made: url('../assets/img/icons/tailor-made.svg');
+$an-icon-tailor-made: url('#{$icon-img-path}/tailor-made.svg');
 .an-icon--tailor-made-svg {
   &:before {
     background: $an-icon-tailor-made no-repeat center center;
@@ -214,7 +216,7 @@ $an-icon-tailor-made: url('../assets/img/icons/tailor-made.svg');
   }
 }
 
-$an-icon-euro-coin: url('../assets/img/icons/euro-coin.svg');
+$an-icon-euro-coin: url('#{$icon-img-path}/euro-coin.svg');
 .an-icon--euro-coin-svg {
   &:before {
     background: $an-icon-euro-coin no-repeat center center;
@@ -226,7 +228,7 @@ $an-icon-euro-coin: url('../assets/img/icons/euro-coin.svg');
   }
 }
 
-$an-icon-check-leafs: url('../assets/img/icons/check-leafs.svg');
+$an-icon-check-leafs: url('#{$icon-img-path}/check-leafs.svg');
 .an-icon--check-leafs-svg {
   &:before {
     background: $an-icon-check-leafs no-repeat center center;
@@ -238,7 +240,7 @@ $an-icon-check-leafs: url('../assets/img/icons/check-leafs.svg');
   }
 }
 
-$an-icon-euro-sign: url('../assets/img/icons/euro-sign.svg');
+$an-icon-euro-sign: url('#{$icon-img-path}/euro-sign.svg');
 .an-icon--euro-sign-svg {
   &:before {
     background: $an-icon-euro-sign no-repeat center center;
@@ -250,7 +252,7 @@ $an-icon-euro-sign: url('../assets/img/icons/euro-sign.svg');
   }
 }
 
-$an-icon-leafs-percentage: url('../assets/img/icons/leafs-percentage.svg');
+$an-icon-leafs-percentage: url('#{$icon-img-path}/leafs-percentage.svg');
 .an-icon--leafs-percentage-svg {
   &:before {
     background: $an-icon-leafs-percentage no-repeat center center;
