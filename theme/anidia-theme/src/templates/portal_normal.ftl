@@ -22,19 +22,19 @@
 
 <div>
 	<h3>Call me back</h3>
-	<a href="tel:+34900181818" class="an-link an-btn an-btn--flatter an-btn--white an-icon--call-us-free-svg cmb">
+	<a href="tel:+34${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--call-us-free-svg cmb">
 		<div class="cmb__content">
 			<span class="cmb__text">Llámanos gratis</span>
-			<span class="an-link cmb__number" class="cmb__number">900 18 18 18</span>
+			<span class="an-link cmb__number" class="cmb__number">${call_center_phone}</span>
 			<span class="cmb__text-small mobile-hide">Gestionamos por ti lo que necesites</span>
 		</div>
 	</a>
 
 	<h3>Call me back solo mobile</h3>
-	<a href="tel:+34900181818" class="an-link an-btn an-btn--flatter an-btn--white an-icon--head-phones cmb cmb--header">
+	<a href="tel:+34${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--head-phones cmb cmb--header">
 		<div class="cmb__content">
 			<span class="cmb__text">Llámanos gratis</span>
-			<span class="an-link cmb__number" class="cmb__number">900 18 18 18</span>
+			<span class="an-link cmb__number" class="cmb__number">${call_center_phone}</span>
 		</div>
 	</a>
 
