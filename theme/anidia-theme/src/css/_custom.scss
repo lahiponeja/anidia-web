@@ -9,7 +9,7 @@
 @import './base/mixins';
 @import './base/typography';
 @import './base/utils';
-@import './base/variables';
+@import './base/icons';
 
 // // UI Kit
 
@@ -19,9 +19,9 @@
 @import './elements/input';
 @import './elements/select';
 @import './elements/radio';
-// @import './elements/checkbox';
+@import './elements/checkbox';
 @import './elements/list';
-// @import './elements/selection';
+@import './elements/selection';
 
 // // Components
 @import './components/card';
