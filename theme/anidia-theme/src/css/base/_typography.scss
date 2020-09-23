@@ -1,0 +1,181 @@
+html {
+  color: $font-color-default;
+  font-family: $font-family-default;
+  font-weight: normal;
+}
+
+// // Headings
+
+h1,
+.an-h1 {
+  font-family: $fs-emeric-semibold-family; // reemplazar por FS Emeric
+  font-size: rem(40);
+  font-weight: normal;
+  line-height: rem(56);
+
+  @include tablet {
+    font-size: rem(80);
+    line-height: rem(96);
+  }
+}
+
+h2,
+.an-h2 {
+  font-family: $fs-emeric-semibold-family; // reemplazar por FS Emeric
+  font-size: rem(40);
+  font-weight: normal;
+  line-height: rem(56);
+
+  @include tablet {
+    font-size: rem(60);
+    line-height: rem(74);
+  }
+}
+
+h3,
+.an-h3 {
+  font-family: $fs-emeric-semibold-family; // reemplazar por FS Emeric
+  font-size: rem(24);
+  font-weight: normal;
+  line-height: rem(32);
+
+  @include tablet {
+    font-size: rem(40);
+    line-height: rem(49);
+  }
+}
+
+h4,
+.an-h4 {
+  font-family: $fs-emeric-semibold-family; // reemplazar por FS Emeric
+  font-size: rem(16);
+  font-weight: normal;
+  line-height: rem(28);
+
+  @include tablet {
+    font-size: rem(30);
+    line-height: rem(37);
+  }
+}
+
+h5,
+.an-h5 {
+  font-family: $fs-emeric-semibold-family; // reemplazar por FS Emeric
+  font-size: rem(14);
+  font-weight: normal;
+  line-height: rem(22);
+  letter-spacing: rem(2.29);
+
+  @include tablet {
+    font-size: rem(16);
+    line-height: rem(20);
+  }
+}
+
+h6,
+.an-h6 {
+  font-family: $fs-emeric-bold-family; // reemplazar por FS Emeric
+  font-size: rem(12);
+  font-weight: normal;
+  line-height: rem(20);
+  letter-spacing: rem(1.71);
+
+  @include tablet {
+    font-size: rem(12);
+    line-height: rem(18);
+  }
+}
+
+.an-body-l-bold,
+.an-body-l-semibold,
+.an-body-l-regular {
+  font-size: rem(16);
+  line-height: rem(24);
+
+  @include tablet {
+    font-size: rem(24);
+    line-height: rem(30);
+  }
+}
+
+.an-body-l-bold {
+  font-family: $open-sans-bold-family;
+}
+.an-body-l-semibold {
+  font-family: $open-sans-semibold-family;
+}
+.an-body-l-regular {
+  font-family: $open-sans-regular-family;
+}
+
+.an-body-m-bold,
+.an-body-m-regular {
+  font-size: rem(16);
+  line-height: rem(24);
+
+  @include tablet {
+    font-size: rem(18);
+    line-height: rem(22);
+  }
+}
+
+.an-body-m-bold {
+  font-family: $open-sans-bold-family;
+}
+.an-body-m-regular {
+  font-family: $open-sans-regular-family;
+}
+
+.an-body-s-bold,
+.an-body-s-regular {
+  font-size: rem(12);
+  line-height: rem(20);
+
+  @include tablet {
+    font-size: rem(14);
+    line-height: rem(17);
+  }
+}
+
+.an-body-s-bold {
+  font-family: $open-sans-bold-family;
+}
+.an-body-s-regular {
+  font-family: $open-sans-regular-family;
+}
+
+.an-body-xs-bold,
+.an-body-xs-regular {
+  font-size: rem(10);
+  line-height: rem(18);
+
+  @include tablet {
+    font-size: rem(12);
+    line-height: rem(15);
+  }
+}
+
+.an-body-xs-bold {
+  font-family: $open-sans-bold-family;
+}
+.an-body-xs-regular {
+  font-family: $open-sans-regular-family;
+}
+
+.an-menu-bold,
+.an-menu-semibold {
+  font-size: rem(16);
+  line-height: rem(24);
+
+  @include tablet {
+    font-size: rem(18);
+    line-height: rem(28);
+  }
+}
+
+.an-menu-bold {
+  font-family: $fs-emeric-bold-family;
+}
+.an-menu-semibold {
+  font-family: $fs-emeric-semibold-family;
+}
