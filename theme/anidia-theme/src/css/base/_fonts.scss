@@ -1,0 +1,99 @@
+// FS Emeric
+
+$fsEmeric-font-path: '../assets/fonts/FSEmeric' !default;
+$openSans-font-path: '../assets/fonts/openSans';
+$icons-font-path: '../assets/fonts/icons';
+
+@font-face {
+  font-family: 'fsemericbold';
+  font-style: normal;
+  font-weight: normal;
+  src:
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-Bold.woff2') format('woff2'),
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-Bold.woff') format('woff');
+}
+
+$fs-emeric-bold-family: 'fsemericbold', sans-serif;
+
+
+@font-face {
+  font-family: 'fsemericsemibold';
+  font-style: normal;
+  font-weight: normal;
+  src:
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-SemiBold.woff2') format('woff2'),
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-SemiBold.woff') format('woff');
+}
+
+$fs-emeric-semibold-family: 'fsemericsemibold', sans-serif;
+
+@font-face {
+  font-family: 'fsemericmedium';
+  font-style: normal;
+  font-weight: normal;
+  src:
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-Medium.woff2') format('woff2'),
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-Medium.woff') format('woff');
+}
+
+$fs-emeric-medium-family: 'fsemericmedium', sans-serif;
+
+@font-face {
+  font-family: 'fsemericregular';
+  font-style: normal;
+  font-weight: normal;
+  src:
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-Book.woff2') format('woff2'),
+    url('#{$fsEmeric-font-path}/Fontsmith-FSEmeric-Book.woff') format('woff');
+}
+
+$fs-emeric-regular-family: 'fsemericregular', sans-serif;
+
+
+// Open Sans
+
+@font-face {
+  font-family: 'opensansregular';
+  font-style: normal;
+  font-weight: normal;
+  src:
+    url('#{$openSans-font-path}/OpenSans-Regular.woff2') format('woff2'),
+    url('#{$openSans-font-path}/OpenSans-Regular.woff') format('woff');
+}
+
+$open-sans-regular-family: 'opensansregular', sans-serif;
+
+@font-face {
+  font-family: 'opensanssemibold';
+  font-style: normal;
+  font-weight: normal;
+  src:
+    url('#{$openSans-font-path}/OpenSans-SemiBold.woff2') format('woff2'),
+    url('#{$openSans-font-path}/OpenSans-SemiBold.woff') format('woff');
+}
+
+$open-sans-semibold-family: 'opensanssemibold', sans-serif;
+
+@font-face {
+  font-family: 'opensansbold';
+  font-style: normal;
+  font-weight: normal;
+  src:
+    url('#{$openSans-font-path}/OpenSans-Bold.woff2') format('woff2'),
+    url('#{$openSans-font-path}/OpenSans-Bold.woff') format('woff');
+}
+
+$open-sans-bold-family: 'opensansbold', sans-serif;
+
+
+@font-face {
+  font-display: block;
+  font-family: 'an-icons';
+  font-style: normal;
+  font-weight: normal;
+  src:
+    url('#{$icons-font-path}/icons.woff2') format('woff2'),
+    url('#{$icons-font-path}/icons.woff') format('woff');
+}
+
+$an-icons: 'an-icons';

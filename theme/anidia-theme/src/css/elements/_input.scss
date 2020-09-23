@@ -1,0 +1,82 @@
+.an-input {
+  $parent: &;
+
+  align-items: center;
+  display: flex;
+  margin-bottom: rem(25);
+  position: relative;
+  max-width: 100%;
+  width: rem(496);
+
+  &--icon {
+    #{$parent}__field {
+      padding-right: rem(60);
+    }
+
+    span {
+      color: $an-theme;
+      position: absolute;
+      right: rem(27);
+    }
+
+    &-left {
+      #{$parent}__field {
+        padding-left: rem(55);
+      }
+  
+      span {
+        color: $an-theme;
+        position: absolute;
+        left: rem(27);
+      }
+    }
+  }
+  
+  &__field {
+    background-color: $white;
+    border: 1px solid $an-theme-soft-grey-sec;
+    box-shadow: $an-shadow-two;
+    border-radius: rem(30);
+    color: $an-theme-dark-grey;
+    font-family: $open-sans-regular-family;
+    font-size: rem(18);
+    height: rem(60);
+    width: 100%;
+    padding: 0 rem(25);
+    transition: box-shadow .2s;
+
+    &--textarea {
+      height: rem(250);
+      padding: rem(25);
+      resize: none;
+
+      & + span {
+        align-self: baseline;
+        top: rem(25);
+      }
+    }
+
+    &:focus {
+      box-shadow: none;
+      border: 2px solid $an-theme;
+    }
+
+    &:valid {
+      box-shadow: none;
+      border: 1px solid $an-theme;
+    }
+  }
+
+  &--disabled {
+    #{ $parent }__field {
+      background-color: $an-theme-soft-grey;
+      box-shadow: none;
+      color: $an-theme-dark-grey-op;
+      pointer-events: none;
+    }
+
+    span {
+      color: $an-theme-dark-grey-op;
+    }
+  }
+}

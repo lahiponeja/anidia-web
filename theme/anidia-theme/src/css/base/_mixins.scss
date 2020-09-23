@@ -1,0 +1,51 @@
+// Media queries Mixins
+
+@mixin tablet {
+  @media (min-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+@mixin bigdktp {
+  @media (min-width: #{$bigdktp}) {
+    @content;
+  }
+}
+
+// Properties
+
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin line-clamp($lines) {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  overflow: hidden;
+}
+
+// Functions
+
+@function rem($size, $context: $base-font-size) {
+  @return #{$size / $context}rem;
+}
+
+// Grid width calculator
+// use:
+//  .element {
+//    width: flex-grid(1, 12);
+//   }
+@function flex-grid($columns, $container-columns: $g-max-columns, $gutter-width: $g-gutter) {
+  $width: $columns * $g-column + ($columns - 1) * $gutter-width;
+  $container-width: $container-columns * $g-column + ($container-columns - 1) * $gutter-width;
+  @return percentage($width / $container-width);
+}

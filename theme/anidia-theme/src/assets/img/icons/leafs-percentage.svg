@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="65px" height="74px" viewBox="0 0 65 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icons/line/green/solicito copy 30</title>
+    <defs>
+        <polygon id="path-1" points="0 0.597126591 29.0711597 0.597126591 29.0711597 29.6381677 0 29.6381677"></polygon>
+        <polygon id="path-3" points="0.0659930556 0.719510035 29.1371528 0.719510035 29.1371528 29.7614531 0.0659930556 29.7614531"></polygon>
+    </defs>
+    <g id="UI-Kit---General" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="iconos-en-verde" transform="translate(-602.000000, -137.000000)">
+            <g id="Group" transform="translate(587.000000, 127.000000)">
+                <g id="Group-29" transform="translate(15.000000, 10.000000)">
+                    <polygon id="Fill-1" fill="#F8DA2A" points="52.4301649 1 0 73 11.5689372 73 64 1"></polygon>
+                    <g id="Group-28">
+                        <g id="Group-4">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <g id="Clip-3"></g>
+                            <path d="M14.5355347,0.597126591 C6.50803472,0.597126591 -9.02777778e-05,7.09778883 -9.02777778e-05,15.1180981 C-9.02777778e-05,23.1375055 6.50803472,29.6381677 14.5355347,29.6381677 C22.5630347,29.6381677 29.0711597,23.1375055 29.0711597,15.1180981 C29.0711597,7.09778883 22.5630347,0.597126591 14.5355347,0.597126591" id="Fill-2" fill="#F8DA2A" mask="url(#mask-2)"></path>
+                        </g>
+                        <path d="M22.7958611,7.27221003 C22.7958611,7.27221003 13.3744722,6.59851488 9.556625,10.4116114 C4.75655556,15.2077437 7.31863889,22.9583946 7.31863889,22.9583946 C7.31863889,22.9583946 15.0780139,25.5178951 19.8780833,20.7226646 C24.0010694,16.6038349 22.7958611,7.27221003 22.7958611,7.27221003" id="Fill-5" fill="#76BD21"></path>
+                        <line x1="16.2105486" y1="14.1647338" x2="7.57457639" y2="22.792" id="Stroke-7" stroke="#F8DA2A" stroke-width="0.552" stroke-linecap="round"></line>
+                        <line x1="16.6232083" y1="17.449877" x2="13.0996667" y2="17.4165079" id="Stroke-9" stroke="#F8DA2A" stroke-width="0.552" stroke-linecap="round"></line>
+                        <line x1="14.7977917" y1="15.4867816" x2="15.0776528" y2="12.9128513" id="Stroke-11" stroke="#F8DA2A" stroke-width="0.552" stroke-linecap="round"></line>
+                        <line x1="10.9755208" y1="19.3945743" x2="10.9610764" y2="17.4826148" id="Stroke-13" stroke="#F8DA2A" stroke-width="0.552" stroke-linecap="round"></line>
+                        <g id="Group-17" transform="translate(35.208333, 43.289649)">
+                            <mask id="mask-4" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <g id="Clip-16"></g>
+                            <path d="M14.6016181,0.719510035 C6.57411806,0.719510035 0.0659930556,7.22107414 0.0659930556,15.2413834 C0.0659930556,23.259889 6.57411806,29.7614531 14.6016181,29.7614531 C22.6300208,29.7614531 29.1372431,23.259889 29.1372431,15.2413834 C29.1372431,7.22107414 22.6300208,0.719510035 14.6016181,0.719510035" id="Fill-15" fill="#F8DA2A" mask="url(#mask-4)"></path>
+                        </g>
+                        <path d="M58.0702778,50.685144 C58.0702778,50.685144 48.6488889,50.0114488 44.8319444,53.8245454 C40.0309722,58.6206777 42.5939583,66.3713285 42.5939583,66.3713285 C42.5939583,66.3713285 50.3524306,68.9299271 55.1525,64.1346967 C59.2754861,60.0167689 58.0702778,50.685144 58.0702778,50.685144" id="Fill-18" fill="#76BD21"></path>
+                        <line x1="51.4850556" y1="57.5777579" x2="42.8490833" y2="66.2050241" id="Stroke-20" stroke="#F8DA2A" stroke-width="0.552" stroke-linecap="round"></line>
+                        <line x1="51.897625" y1="60.8619992" x2="48.3740833" y2="60.829532" id="Stroke-22" stroke="#F8DA2A" stroke-width="0.552" stroke-linecap="round"></line>
+                        <line x1="50.0722083" y1="58.8997155" x2="50.3520694" y2="56.3257852" id="Stroke-24" stroke="#F8DA2A" stroke-width="0.552" stroke-linecap="round"></line>
+                        <line x1="46.2500278" y1="62.8075082" x2="46.2355833" y2="60.8955487" id="Stroke-26" stroke="#F8DA2A" stroke-width="0.552" stroke-linecap="round"></line>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
