@@ -1,0 +1,27 @@
+.cmb {
+  display: flex;
+  font-family: $open-sans-bold-family;
+  justify-content: center;
+
+  &::before {
+    height: rem(41);
+    width: rem(41);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    margin-left: rem(10);
+  }
+
+  &__text {
+    color: $an-theme-dark-grey;
+    font-size: rem(12);
+    line-height: rem(17);
+  }
+
+  &__number {
+    font-size: rem(15);
+    line-height: rem(15);
+  }
+}
