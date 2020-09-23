@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="95px" height="95px" viewBox="0 0 95 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icons/color/positive/a tu medida</title>
+    <defs>
+        <path d="M28.066,0 C20.895,0.049 13.739,2.925 8.275,8.626 L8.275,8.626 C2.758,14.384 -0.001,21.929 -0.001,29.474 L-0.001,29.474 C-0.001,37.019 2.758,44.565 8.275,50.322 L8.275,50.322 C8.275,50.322 12.014,54.4 14.199,58.879 L14.199,58.879 C14.8,60.114 16.025,60.883 17.353,60.883 L17.353,60.883 L39.177,60.883 C40.507,60.883 41.732,60.113 42.333,58.876 L42.333,58.876 C44.514,54.4 48.234,50.322 48.234,50.322 L48.234,50.322 C53.732,44.584 56.49,37.07 56.509,29.551 L56.509,29.551 L56.509,29.396 C56.49,21.876 53.733,14.364 48.235,8.626 L48.235,8.626 C42.769,2.925 35.614,0.049 28.443,0 L28.443,0 L28.066,0 Z" id="path-1"></path>
+        <path d="M2.464,0.303 C1.361,0.303 0.464,1.199 0.464,2.303 L0.464,2.303 C0.464,3.407 1.361,4.303 2.464,4.303 L2.464,4.303 L24.045,4.303 C25.151,4.303 26.046,3.407 26.046,2.303 L26.046,2.303 C26.046,1.199 25.151,0.303 24.045,0.303 L24.045,0.303 L2.464,0.303 Z" id="path-3"></path>
+        <path d="M2.464,0.084 C1.361,0.084 0.464,0.984 0.464,2.086 L0.464,2.086 C0.464,3.189 1.361,4.086 2.464,4.086 L2.464,4.086 L24.045,4.086 C25.151,4.086 26.046,3.189 26.046,2.086 L26.046,2.086 C26.046,0.984 25.151,0.084 24.045,0.084 L24.045,0.084 L2.464,0.084 Z" id="path-5"></path>
+        <path d="M2.919,0 C1.815,0 0.919,0.897 0.919,2 L0.919,2 C0.919,3.104 1.815,4 2.919,4 L2.919,4 L12.928,4 C14.032,4 14.928,3.104 14.928,2 L14.928,2 C14.928,0.897 14.032,0 12.928,0 L12.928,0 L2.919,0 Z" id="path-7"></path>
+    </defs>
+    <g id="icons/color/positive/a-tu-medida" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-27" transform="translate(19.000000, 6.000000)">
+            <g id="Group-3">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <polygon id="Fill-1" fill="#FFD900" mask="url(#mask-2)" points="-5 65.883 61.509 65.883 61.509 -5 -5 -5"></polygon>
+            </g>
+            <g id="Group-6" transform="translate(15.000000, 65.000000)">
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <g id="Clip-5"></g>
+                <polygon id="Fill-4" fill="#41BD00" mask="url(#mask-4)" points="-4.536 9.303 31.046 9.303 31.046 -4.697 -4.536 -4.697"></polygon>
+            </g>
+            <g id="Group-9" transform="translate(15.000000, 72.000000)">
+                <mask id="mask-6" fill="white">
+                    <use xlink:href="#path-5"></use>
+                </mask>
+                <g id="Clip-8"></g>
+                <polygon id="Fill-7" fill="#41BD00" mask="url(#mask-6)" points="-4.536 9.086 31.046 9.086 31.046 -4.914 -4.536 -4.914"></polygon>
+            </g>
+            <g id="Group-12" transform="translate(20.000000, 79.000000)">
+                <mask id="mask-8" fill="white">
+                    <use xlink:href="#path-7"></use>
+                </mask>
+                <g id="Clip-11"></g>
+                <polygon id="Fill-10" fill="#000000" mask="url(#mask-8)" points="-4.081 9 19.929 9 19.929 -5 -4.081 -5"></polygon>
+            </g>
+            <polygon id="Fill-13" fill="#000000" points="25.3786 33.5158 25.3806 33.5158 25.3836 33.5158"></polygon>
+            <path d="M20.956,33.5455 L20.963,33.5455 L20.956,33.5455 Z" id="Fill-14" fill="#000000"></path>
+            <polygon id="Fill-15" fill="#000000" points="16.5856 28.5388 16.5856 28.5368 16.5856 28.5348"></polygon>
+            <g id="Group-26" transform="translate(16.000000, 13.000000)">
+                <path d="M11.9951,0.7303 C11.9951,0.7303 0.3691,10.8033 0.3691,19.5953 C0.3691,30.6523 12.2551,36.6353 12.2551,36.6353 C12.2551,36.6353 24.1411,30.6523 24.1411,19.5953 C24.1411,10.0993 11.9951,0.7303 11.9951,0.7303" id="Fill-16" fill="#41BD00"></path>
+                <line x1="12.3583" y1="16.2606" x2="12.3583" y2="36.1516" id="Stroke-18" stroke="#FFDB00" stroke-width="0.811" stroke-linecap="round"></line>
+                <line x1="16.6191" y1="19.5712" x2="12.5231" y2="23.5912" id="Stroke-20" stroke="#FFDB00" stroke-width="0.811" stroke-linecap="round"></line>
+                <line x1="12.2548" y1="19.411" x2="9.6088" y2="16.122" id="Stroke-22" stroke="#FFDB00" stroke-width="0.811" stroke-linecap="round"></line>
+                <line x1="12.3583" y1="28.3182" x2="10.1363" y2="26.1302" id="Stroke-24" stroke="#FFDB00" stroke-width="0.811" stroke-linecap="round"></line>
+            </g>
+        </g>
+    </g>
+</svg>
