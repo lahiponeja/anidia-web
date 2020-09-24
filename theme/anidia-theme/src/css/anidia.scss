@@ -1,7 +1,3 @@
-/* These inject tags are used for dynamically creating imports for themelet styles, you can place them where ever you like in this file. */
-
-/* inject:imports */
-
 // // Common
 @import './base/base';
 @import './base/fonts';
@@ -27,6 +23,12 @@
 // // Components
 @import './components/card';
 
-/* endinject */
-
-/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+// TODO: IMPLEMENT THIS FEATURE IN THE STYLES
+body {
+  &.anidia-green {
+    background: yellowgreen;
+  }
+  &.anidia-white {
+    background: white;
+  }
+}
