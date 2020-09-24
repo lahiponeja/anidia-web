@@ -61,10 +61,20 @@
 		</#if>
 	</section>
 
-	<footer id="footer" role="contentinfo">
-		<p class="powered-by">
-			<@liferay.language key="powered-by" /> <a href="http://www.liferay.com" rel="external">Liferay</a>
-		</p>
+	<footer id="footer" role="contentinfo" class="footer">
+			<img class="mb-l" src="../images/logo-anidia-green.svg" class="footer__img"/>
+      <!-- REFACTOR WITH LINKS ITEMS .an-link-->
+      <div class="footer__links">
+        <a class="an-h6 footer__link mb-m" href="#">Aviso legal</a>
+        <a class="an-h6 footer__link mb-m" href="#">Política de cookies</a>
+        <a class="an-h6 footer__link mb-m" href="#">Política de privacidad</a>
+      </div>
+      <div class="footer__rrss">
+        <a class="footer__rrss__single"><span class="an-icon--pinterest"></span></a>
+        <a class="footer__rrss__single"><span class="an-icon--instagram"></span></a>
+        <a class="footer__rrss__single"><span class="an-icon--linkedin"></span></a>
+        <a class="footer__rrss__single"><span class="an-icon--facebook"></span></a>
+      </div>
 	</footer>
 </div>
 

@@ -18,6 +18,14 @@
     }
   }
 
+  &__img {
+    max-width: rem(108);
+
+    @include desktop {
+      max-width: rem(140);
+    }
+  }
+
   &__links {
     display: flex;
     flex-direction: column;
