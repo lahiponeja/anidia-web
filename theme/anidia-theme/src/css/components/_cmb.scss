@@ -10,7 +10,7 @@
     padding: 0 rem(18);
     position: fixed;
     right: 60px;
-    top: 746px;
+    top: calc(100% - 150px);
     width: rem(221);
 
     &::after {
@@ -81,6 +81,7 @@
     height: rem(40);
     min-width: unset;
     padding: 0;
+    position: static;
     width: rem(139);
 
     &::before {
@@ -104,6 +105,21 @@
     .cmb__number {
       font-size: rem(14);
       line-height: rem(15);
+    }
+  }
+
+  &--header-small {
+    height: rem(40);
+    min-width: unset;
+    padding: 0;
+    position: static;
+    width: rem(40);
+
+    &::before {
+      color: $white;
+      font-size: rem(26);
+      height: unset;
+      width: unset;
     }
   }
 }
