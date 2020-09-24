@@ -64,6 +64,11 @@
 			<img class="mb-l" src="../images/logo-anidia-green.svg" class="footer__img"/>
       <!-- REFACTOR WITH LINKS ITEMS .an-link-->
       <div class="footer__links">
+				<@liferay.navigation_menu
+					default_preferences=
+					freeMarkerPortletPreferences.getPreferences(footerNavigationPreferencesMap)
+					instance_id="anidia-footer-menu-2"
+				/>
         <a class="an-h6 footer__link mb-m" href="#">Aviso legal</a>
         <a class="an-h6 footer__link mb-m" href="#">Política de cookies</a>
         <a class="an-h6 footer__link mb-m" href="#">Política de privacidad</a>
@@ -75,11 +80,7 @@
         <a class="footer__rrss__single"><span class="an-icon--facebook"></span></a>
       </div>
 
-		<@liferay.navigation_menu
-		default_preferences=
-		freeMarkerPortletPreferences.getPreferences(footerNavigationPreferencesMap)
-		instance_id="anidia-footer-menu-2"
-	/>
+
 
 	</footer>
 </div>
