@@ -1,0 +1,62 @@
+$lines-clamp: 2 3 4 !default;
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.hide {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.desktop-hide {
+  @include tablet {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+.mobile-hide {
+  display: none !important;
+  visibility: hidden !important;
+
+  @include tablet {
+    display: initial !important;
+    visibility: visible !important;
+  }
+
+  &--flex {
+    display: none !important;
+    visibility: hidden !important;
+
+    @include tablet {
+      display: flex !important;
+      visibility: visible !important;
+    }
+  }
+
+  &--block {
+    display: none !important;
+    visibility: hidden !important;
+
+    @include tablet {
+      display: block !important;
+      visibility: visible !important;
+    }
+  }
+}
+
+@each $lines in $lines-clamp {
+  .an-line-clamp#{$lines} {
+    @include line-clamp($lines);
+  }
+}
+
+.display-flex {
+  display: flex;
+}
+
+.display-flex-column {
+  display: flex;
+  flex-direction: column;
+}

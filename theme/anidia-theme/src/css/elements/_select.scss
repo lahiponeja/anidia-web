@@ -1,0 +1,147 @@
+.an-select {
+  $an-select: &;
+
+  align-items: center;
+  display: flex;
+  max-width: 100%;
+  position: relative;
+  width: rem(496);
+
+  &__native {
+    appearance: none;
+  }
+
+  &__native,
+  &__custom {
+    height: rem(60);
+    position: relative;
+    width: 100%;
+  }
+
+  &__native,
+  &__custom-trigger {
+    background-color: $white;
+    border: 1px solid $an-theme-soft-grey-sec;
+    box-shadow: $an-shadow-two;
+    border-radius: rem(30);
+    color: $an-theme-dark-grey;
+    font-family: $open-sans-regular-family;
+    font-size: rem(18);
+    height: rem(60);
+    padding: 0 rem(25);
+    width: 100%;
+    transition: box-shadow .2s;
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    color: $an-theme;
+    display: flex;
+    pointer-events: none;
+    position: absolute;
+    right: rem(27);
+    transition: all 0.2s ease;
+    z-index: 4;
+  }
+  
+  &.is-active {
+    z-index: 5;
+
+    #{ $an-select }__icon {
+      transform: rotate(-180deg);
+    }
+  }
+
+  &--disabled {
+    #{ $an-select }__native,
+    #{ $an-select }__custom-trigger {
+      background-color: $an-theme-soft-grey;
+      box-shadow: none;
+      color: $an-theme-dark-grey-op;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    #{ $an-select }__icon {
+      color: $an-theme-dark-grey-op;
+    }
+  }
+
+  &__custom {
+    $custom: &;
+
+    display: none;
+    left: 0;
+    position: absolute;
+    top: 0;
+    z-index: 3;
+
+    &-trigger {
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+    }
+
+    &-options {
+      background: $an-theme-light;
+      border-radius: 0 0 rem(20) rem(20);
+      display: none;
+      padding: rem(45) 0 rem(25) 0;
+      position: relative;
+      top: rem(-28);
+    }
+
+    &-option {
+      color: $an-theme-dark-grey;
+      cursor: pointer;
+      font-family: $open-sans-regular-family;
+      font-size: rem(18);
+      padding: 0 rem(25);
+      position: relative;
+
+      &:not(:last-of-type) {
+        padding-bottom: rem(14);
+      }
+
+      &.is-active {
+        color: $an-theme;
+      }
+
+      &.is-hover {
+        color: $an-theme;
+      }
+    }
+
+    &.is-active {
+      #{ $custom }-trigger {
+        box-shadow: none;
+        border: 2px solid $an-theme;
+      }
+
+      #{ $custom }-options {
+        display: block;
+      }
+    }
+  }
+
+  @media (hover: hover) {
+    &__native {
+      opacity: 0;
+    }
+
+    &__custom {
+      display: block;
+    }
+    
+    &__native:focus + &__custom {
+      pointer-events: none;
+
+      #{ $an-select }__custom-trigger {
+        box-shadow: none;
+        border: 2px solid $an-theme;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,71 @@
+.an-selection {
+  cursor: pointer;
+  width: rem(320);
+  height: rem(370);
+  border-radius: rem(20);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all .3s ease;
+  border: rem(1) solid $an-border;
+  color: $an-theme;
+
+  &:hover,
+  &:active {
+    border-color: $an-theme;
+    background-color: $an-theme-light;
+    transform: translateY(-2px);
+    border-color: $an-theme;
+  }
+
+  &:active {
+    border-width: rem(2);
+  }
+
+  &--disabled {
+    background-color: $an-theme-soft-grey;
+    border-color: $an-boder-light;
+    pointer-events: none;
+
+    p {
+      color: $an-theme-dark-grey;
+    }
+  }
+
+  &--filled {
+    background-color: $an-theme-light;
+    border: rem(2) solid $an-theme;
+    position: relative;
+
+    &::after {
+      font-family: $an-icons;
+      content: $an-icon-check-simple;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      width: rem(73);
+      height: rem(77);
+      padding: rem(17) rem(9);
+      font-size: rem(20);
+      color: $white;
+      position: absolute;
+      background: $an-theme;
+      bottom: 0;
+      right: 0;
+      border-bottom-right-radius: rem(20);
+      transform: translate(rem(1), rem(1));
+      clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+    }
+  }
+
+  &__icon {
+    &::before {
+      font-size: rem(125);
+    }
+  }
+
+  p {
+    margin-bottom: rem(28);
+  }
+}
