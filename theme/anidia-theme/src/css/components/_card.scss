@@ -10,8 +10,9 @@
     text-align: center;
     padding: rem(40);
     align-items: center;
-    max-width: rem(497);
+    // max-width: rem(497);
     min-height: rem(368);
+    scroll-snap-align: start;
 
     > * {
       margin-bottom: rem(6);
