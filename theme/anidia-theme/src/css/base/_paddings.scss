@@ -1,0 +1,46 @@
+// paddings
+$padding-desktop: 8 16 24 32 48 64 104;
+$padding-mobile: 8 16 24 32 48 64 '64'; // Quotes for hack and prevent the duplication remove in sass lists
+$padding-names: 'xs' 's' 'm' 'l' 'xl' 'xxl' 'xxxl';
+
+@each $size in $padding-mobile {
+  $i: index($padding-mobile, $size);
+
+  .pb-#{nth($padding-names, $i)} {
+    padding-bottom: #{$size}px;
+  }
+
+  .pt-#{nth($padding-names, $i)} {
+    padding-top: #{$size}px;
+  }
+
+  .pl-#{nth($padding-names, $i)} {
+    padding-left: #{$size}px;
+  }
+
+  .pr-#{nth($padding-names, $i)} {
+    padding-right: #{$size}px;
+  }
+}
+
+@each $size in $padding-desktop {
+  $i: index($padding-desktop, $size);
+
+  @include tablet {
+    .pb-#{nth($padding-names, $i)} {
+      padding-bottom: #{$size}px;
+    }
+
+    .pt-#{nth($padding-names, $i)} {
+      padding-top: #{$size}px;
+    }
+
+    .pl-#{nth($padding-names, $i)} {
+      padding-left: #{$size}px;
+    }
+  
+    .pr-#{nth($padding-names, $i)} {
+      padding-right: #{$size}px;
+    }
+  }
+}

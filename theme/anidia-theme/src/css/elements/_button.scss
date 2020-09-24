@@ -12,7 +12,11 @@
   line-height: rem(24);
   min-width: rem(252);
   padding: 0 rem(25);
-  
+
+  &:hover {
+    text-decoration: none;
+  }
+
   @include tablet {
     font-size: rem(18);
     line-height: rem(24);
@@ -83,7 +87,11 @@
       z-index: 1;
       @include gradient-yellow-bg;
     }
-        
+    
+    &:hover {
+      color: $white;
+    }
+    
     &:hover:after,
     &:active:after {
       opacity: 1;
