@@ -92,6 +92,10 @@
       width: unset;
     }
 
+    &::after {
+      display: none;
+    }
+
     .cmb__content {
       margin-left: rem(7);
     }
@@ -120,6 +124,10 @@
       font-size: rem(26);
       height: unset;
       width: unset;
+    }
+
+    &::after {
+      display: none;
     }
   }
 }
