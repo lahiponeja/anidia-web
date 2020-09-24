@@ -1,0 +1,10 @@
+$colors: $white $an-theme $an-theme-light;
+$colors-names: 'white' 'an-theme' 'an-theme-light';
+
+@each $color in $colors {
+  $i: index($colors, $color);
+
+  .bg-#{nth($colors-names, $i)} {
+    background-color: #{$color};
+  }
+}

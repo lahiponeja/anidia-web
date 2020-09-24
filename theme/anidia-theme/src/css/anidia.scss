@@ -7,6 +7,8 @@
 @import './base/utils';
 @import './base/icons';
 @import './base/margins';
+@import './base/paddings';
+@import './base/backgrounds';
 
 // // UI Kit
 
@@ -22,6 +24,7 @@
 
 // // Components
 @import './components/card';
+@import './components/featured';
 
 // TODO: IMPLEMENT THIS FEATURE IN THE STYLES
 body {
