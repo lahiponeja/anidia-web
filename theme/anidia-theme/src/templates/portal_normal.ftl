@@ -60,6 +60,12 @@
 		</#if>
 	</section>
 
+	<@liferay.navigation_menu
+		default_preferences=
+		freeMarkerPortletPreferences.getPreferences(footerNavigationPreferencesMap)
+		instance_id="anidia-footer-menu-2"
+	/>
+
 	<footer id="footer" role="contentinfo">
 		<p class="powered-by">
 			<@liferay.language key="powered-by" /> <a href="http://www.liferay.com" rel="external">Liferay</a>
