@@ -17,5 +17,8 @@
 			<default-portlet-decorator>true</default-portlet-decorator>
 			<portlet-decorator-css-class>portlet-decorate</portlet-decorator-css-class>
 		</portlet-decorator>
+		<settings>
+			<setting configurable="true" key="Esquema de colores de cabecera" options="verde,blanco" type="select" value="verde" />
+		</settings>
 	</theme>
 </look-and-feel>
