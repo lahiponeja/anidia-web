@@ -12,6 +12,12 @@
   }
 }
 
+@mixin mediumdktp {
+  @media (min-width: #{$mediumdktp}) {
+    @content;
+  }
+}
+
 @mixin bigdktp {
   @media (min-width: #{$bigdktp}) {
     @content;
