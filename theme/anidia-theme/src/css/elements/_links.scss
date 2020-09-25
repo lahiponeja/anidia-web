@@ -1,0 +1,18 @@
+.an-link {
+  color: $an-theme;
+
+  &:focus,
+  &:hover {
+    color: $an-theme;
+    text-decoration: none;
+  }
+
+  &--white {
+    color: $white;
+
+    &:focus,
+    &:hover {
+      color: $white;
+    }
+  }
+}
