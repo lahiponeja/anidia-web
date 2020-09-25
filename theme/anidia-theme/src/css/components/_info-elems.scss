@@ -1,4 +1,6 @@
 .an-info-elems {
+  $parent: &;
+
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -30,19 +32,33 @@
     }
   }
 
-  @include tablet {
-    &__list {
-      flex-direction: row;
-      justify-content: center;
-      width: flex-grid(3, 3);
-    }
-
+  @include desktop {
     &__item {
       text-align: center;
       margin-bottom: 0;
 
       &:not(:last-of-type) {
         margin-right: rem(62);
+      }
+    }
+
+    &__list {
+      flex-direction: row;
+      justify-content: center;
+      width: flex-grid(3, 3);
+
+      &--two-rows {
+        flex-wrap: wrap;
+        width: flex-grid(2, 3);
+
+        #{ $parent }__item {
+          margin-right: 0;
+          width: 50%;
+
+          &:not(:nth-of-type(2n)) {
+            margin-right: rem(62);
+          }
+        }
       }
     }
   }
