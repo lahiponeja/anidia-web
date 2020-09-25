@@ -1,4 +1,4 @@
-.cmb {
+.an-cmb {
   align-items: center;
   color: $font-color-default;
   display: flex;
@@ -9,9 +9,10 @@
     height: rem(80);
     padding: 0 rem(18);
     position: fixed;
-    right: 60px;
+    right: rem(60);
     top: calc(100% - 150px);
     width: rem(221);
+    z-index: 1;
 
     &::after {
       border: 10px solid transparent;
@@ -21,7 +22,7 @@
       height: 0;
       position: absolute;
       right: 0;
-      top: 67px;
+      top: rem(67);
       transform: rotate(-45deg);
       width: 0;
     }
@@ -52,7 +53,7 @@
     color: $an-theme-dark-grey;
     font-size: rem(12);
     line-height: rem(17);
-    margin-bottom: 8px;
+    margin-bottom: rem(8);
 
     @include tablet {
       font-size: rem(14);
@@ -96,17 +97,17 @@
       display: none;
     }
 
-    .cmb__content {
+    .an-cmb__content {
       margin-left: rem(7);
     }
 
-    .cmb__text {
+    .an-cmb__text {
       font-size: rem(10);
       line-height: rem(14);
       margin-bottom: rem(2);
     }
 
-    .cmb__number {
+    .an-cmb__number {
       font-size: rem(14);
       line-height: rem(15);
     }
