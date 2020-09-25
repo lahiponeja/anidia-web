@@ -57,4 +57,3 @@ docker/db-data
 .gradle
 RemoteSystemsTempFiles
 .metadata
-*/anidia-portlets/*/build
