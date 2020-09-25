@@ -38,23 +38,6 @@ for (AssetEntryResult assetEntryResult : assetPublisherDisplayContext.getAssetEn
 
 			<liferay-util:include page="/view_asset_entries_full_content.jsp" servletContext="<%= application %>" />
 		</c:when>
-		<c:when test='<%= Objects.equals(assetPublisherDisplayContext.getDisplayStyle(), "custom-template") %>'>
-
-			<%
-			request.setAttribute("view.jsp-assetEntryResult", assetEntryResult);
-			%>
-
-			<liferay-util:include page="/view_custom_template.jsp" servletContext="<%= application %>" />
-		</c:when>
-		<c:when test='<%= Objects.equals(assetPublisherDisplayContext.getDisplayStyle(), "another-custom-template") %>'>
-
-			<%
-			request.setAttribute("view.jsp-assetEntryResult", assetEntryResult);
-			%>
-
-			<liferay-util:include page="/view_second_custom_template.jsp" servletContext="<%= application %>" />
-		</c:when>
-		
 		<c:when test='<%= Objects.equals(assetPublisherDisplayContext.getDisplayStyle(), "table") %>'>
 
 			<%
@@ -70,6 +53,14 @@ for (AssetEntryResult assetEntryResult : assetPublisherDisplayContext.getAssetEn
 			%>
 
 			<liferay-util:include page="/view_asset_entries_title_list.jsp" servletContext="<%= application %>" />
+		</c:when>
+				<c:when test='<%= Objects.equals(assetPublisherDisplayContext.getDisplayStyle(), "BasicAP") %>'>
+
+			<%
+			request.setAttribute("view.jsp-assetEntryResult", assetEntryResult);
+			%>
+
+			<liferay-util:include page="/view_basic_ap_template.jsp" servletContext="<%= application %>" />
 		</c:when>
 		<c:when test="<%= StringUtil.startsWith(assetPublisherDisplayContext.getDisplayStyle(), PortletDisplayTemplateManager.DISPLAY_STYLE_PREFIX) %>">
 			<c:if test="<%= Validator.isNotNull(assetEntryResult.getTitle()) %>">
