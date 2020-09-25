@@ -18,6 +18,7 @@
 			<portlet-decorator-css-class>portlet-decorate</portlet-decorator-css-class>
 		</portlet-decorator>
 		<settings>
+			<setting configurable="true" key="Teléfono de Call Center" type="text" value="900181818" />
 			<setting configurable="true" key="Esquema de colores de cabecera" options="verde,blanco" type="select" value="verde" />
 		</settings>
 	</theme>
