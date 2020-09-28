@@ -17,19 +17,62 @@
     position: relative;
     margin-bottom: rem(20);
 
-    &:first-child {
-      margin-left: rem(20);
+    &.active {
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      width: calc(100% - 10px);
+      left: 0;
+      transform: translateX(rem(5));
+      flex-direction: row;
+      justify-content: space-between;
+
+      .an-card__title {
+        white-space: nowrap;
+      }
     }
 
     > * {
       margin-bottom: rem(6);
     }
 
+    &:first-child {
+      margin-left: rem(20);
+
+      @include desktop {
+        margin-left: 0;
+      }
+    }
+
     .an-link {
       text-transform: uppercase;
       font-size: rem(12);
+      margin-top: auto;
+      color: $an-theme;
     }
 
+    .an-icon--bulb-green-svg {
+      &::before {
+        margin: auto;
+        height: rem(97)
+      }
+    }
+
+    .an-icon--close-cross {
+      align-self: baseline;
+      cursor: pointer;
+
+      &::before {
+        color: $an-theme;
+        font-size: rem(33);
+      }
+    }
+
+    &__text-expanded {
+      text-align: left;
+      width: flex-grid(6);
+      margin: auto;
+    }
   }
 
   &--form {
