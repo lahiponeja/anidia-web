@@ -43,3 +43,33 @@ tasks.register("build.fragments") {
     }
   }
 }
+
+tasks.register("build.assetPublisher.ext") {
+  group = 'Anidia'
+  description = 'Builds the ext portlet required for the Asset Publisher and copy it to the deploy folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-portlets/LRWorkspace/ext/APOverride'
+      commandLine 'gradle', 'deploy'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/LRWorkspace/bundles/osgi/marketplace/override/com.liferay.asset.publisher.web.jar', 'liferay/deploy'
+    }
+  }
+}
+
+tasks.register("build.assetPublisher.jsp") {
+  group = 'Anidia'
+  description = 'Builds the jsp override portlet required for the Asset Publisher and copy it to the deploy folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-portlets/module-jsp-override'
+      commandLine 'gradle', 'build'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/module-jsp-override/build/libs/com.liferay.blade.module.jsp.override-1.0.0.jar', 'liferay/deploy'
+    }
+  }
+}
