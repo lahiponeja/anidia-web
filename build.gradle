@@ -16,7 +16,7 @@ tasks.register("build") {
 
 tasks.register("build.theme") {
   group = 'Anidia'
-  description = 'Builds the theme and leave it in deploy folder'
+  description = 'Builds the theme and copy it to the deploy folder'
 
   doLast {
     exec {
@@ -31,7 +31,7 @@ tasks.register("build.theme") {
 
 tasks.register("build.fragments") {
   group = 'Anidia'
-  description = 'Builds the fragments and leave them in deploy folder'
+  description = 'Builds the fragments and copy them to the deploy folder'
 
   doLast {
     exec {
