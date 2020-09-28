@@ -93,7 +93,7 @@
             "name": "LinkToPage1z94",
             "readOnly": false,
             "repeatable": false,
-            "required": true,
+            "required": false,
             "showLabel": true,
             "type": "ddm-link-to-page"
         },
