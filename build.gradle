@@ -9,9 +9,10 @@ tasks.register("build") {
     group = 'Anidia'
     description = 'Builds the whole project and copy all the components to liferay folder'
 
-    doLast {
-        println 'Hello, World!'
-    }
+    dependsOn 'build.theme'
+    dependsOn 'build.fragments'
+    dependsOn 'build.assetPublisher.ext'
+    dependsOn 'build.assetPublisher.jsp'
 }
 
 tasks.register("build.theme") {
