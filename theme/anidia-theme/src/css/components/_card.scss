@@ -30,6 +30,10 @@
       .an-card__title {
         white-space: nowrap;
       }
+
+      .an-menu-bold {
+        color: $an-theme;
+      }
     }
 
     > * {
@@ -54,7 +58,7 @@
     .an-icon--bulb-green-svg {
       &::before {
         margin: auto;
-        height: rem(97)
+        height: rem(97);
       }
     }
 
@@ -70,9 +74,15 @@
 
     &__text-expanded {
       text-align: left;
-      width: flex-grid(6);
       margin: auto;
+      padding-right: flex-grid(1);
     }
+
+    &__intro {
+      padding-right: flex-grid(1);
+      padding-left: flex-grid(1);
+    }
+
   }
 
   &--form {

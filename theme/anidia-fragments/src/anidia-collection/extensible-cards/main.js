@@ -120,8 +120,8 @@ function expandCards() {
     cardsExpand[i].addEventListener("click", function(event){
       event.preventDefault()
       let parent = this.parentElement.querySelectorAll('.hide')
-      let shorText = this.parentElement.querySelector('.an-card--simple__text-short');
-      shorText.classList.add('hide');
+      let shortText = this.parentElement.querySelector('.an-card--simple__text-short');
+      shortText.classList.add('hide');
       for (var j = 0 ; j < parent.length; j++) {
         parent[j].classList.remove('hide');
       }
@@ -133,8 +133,13 @@ function expandCards() {
   for (var i = 0 ; i < cardsClose.length; i++) {
     cardsClose[i].addEventListener("click", function(event){
       event.preventDefault()
-      this.classList.remove('hide')
+      let parent = this.parentElement.querySelectorAll('.hide')
+      for (var j = 0 ; j < parent.length; j++) {
+        parent[j].classList.remove('hide');
+      }
       this.parentElement.classList.remove('active')
+      this.parentElement.querySelector('.an-icon--close-cross').classList.add('hide')
+      this.parentElement.querySelector('.an-card--simple__text-expanded').classList.add('hide')
     });
   }
 }
