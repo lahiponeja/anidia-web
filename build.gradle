@@ -28,3 +28,18 @@ tasks.register("build.theme") {
     }
   }
 }
+
+tasks.register("build.fragments") {
+  group = 'Anidia'
+  description = 'Builds the fragments and leave them in deploy folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-fragments'
+      commandLine 'expect', 'compress.exp'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-fragments/build/liferay-fragments.zip', 'liferay/deploy'
+    }
+  }
+}
