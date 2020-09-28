@@ -10,12 +10,11 @@
     text-align: center;
     padding: rem(40);
     align-items: center;
-    min-width: rem(278);
+    width: rem(278);
     min-height: rem(432);
     background-color: $white;
     margin-right: rem(20);
     position: relative;
-    width: 100%;
     margin-bottom: rem(20);
 
     &:first-child {
@@ -24,6 +23,11 @@
 
     > * {
       margin-bottom: rem(6);
+    }
+
+    .an-link {
+      text-transform: uppercase;
+      font-size: rem(12);
     }
 
   }
