@@ -1,0 +1,134 @@
+.an-cmb {
+  align-items: center;
+  color: $font-color-default;
+  display: flex;
+  font-family: $open-sans-bold-family;
+  justify-content: center;
+
+  @include tablet {
+    height: rem(80);
+    padding: 0 rem(18);
+    position: fixed;
+    right: rem(60);
+    top: calc(100% - 150px);
+    width: rem(221);
+    z-index: 1;
+
+    &::after {
+      border: 10px solid transparent;
+      border-top-color: $white;
+      border-top-width: 20px;
+      content: '';
+      height: 0;
+      position: absolute;
+      right: 0;
+      top: rem(67);
+      transform: rotate(-45deg);
+      width: 0;
+    }
+  }
+
+  &::before {
+    height: rem(41);
+    width: rem(41);
+
+    @include tablet {
+      height: rem(51);
+      width: rem(51);
+    }
+  }
+
+  &__content {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-left: rem(10);
+
+    @include tablet {
+      margin-left: rem(8);
+    }
+  }
+
+  &__text {
+    color: $an-theme-dark-grey;
+    font-size: rem(12);
+    line-height: rem(17);
+    margin-bottom: rem(8);
+
+    @include tablet {
+      font-size: rem(14);
+      line-height: rem(17);
+      margin-bottom: 0;
+    }
+  }
+
+  &__text-small {
+    color: $an-theme-dark-grey;
+    font-size: rem(7);
+    line-height: rem(9);
+  }
+
+  &__number {
+    font-size: rem(15);
+    line-height: rem(15);
+
+    @include tablet {
+      font-size: rem(19.5);
+      line-height: rem(27);
+    }
+  }
+
+  &--header {
+    height: rem(40);
+    min-width: unset;
+    padding: 0;
+    position: static;
+    width: rem(139);
+
+    &::before {
+      color: $an-theme;
+      font-size: rem(27);
+      height: unset;
+      margin-left: rem(-8);
+      width: unset;
+    }
+
+    &::after {
+      display: none;
+    }
+
+    .an-cmb__content {
+      margin-left: rem(7);
+    }
+
+    .an-cmb__text {
+      font-size: rem(10);
+      line-height: rem(14);
+      margin-bottom: rem(2);
+    }
+
+    .an-cmb__number {
+      font-size: rem(14);
+      line-height: rem(15);
+    }
+  }
+
+  &--header-small {
+    height: rem(40);
+    min-width: unset;
+    padding: 0;
+    position: static;
+    width: rem(40);
+
+    &::before {
+      color: $white;
+      font-size: rem(26);
+      height: unset;
+      width: unset;
+    }
+
+    &::after {
+      display: none;
+    }
+  }
+}

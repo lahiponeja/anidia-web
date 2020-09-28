@@ -5,15 +5,14 @@
 <html class="${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
 
 <head>
-	<title>${the_title} - ${company_name}</title>
 
-	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
+	<#include "${full_templates_path}/head/meta_tags.ftl" />
 
-	<@liferay_util["include"] page=top_head_include />
+	<link rel="stylesheet" href="${css_folder}/anidia.css" charset="utf-8">
+
 </head>
 
 <body class="${css_class}">
-
 <@liferay_ui["quick-access"] contentId="#main-content" />
 
 <@liferay_util["include"] page=body_top_include />
@@ -43,6 +42,25 @@
 		<#if has_navigation && is_setup_complete>
 			<#include "${full_templates_path}/navigation.ftl" />
 		</#if>
+
+		<h3>Call me back</h3>
+		<a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--call-us-free-svg an-cmb">
+			<div class="an-cmb__content">
+				<span class="an-cmb__text">Llámanos gratis</span>
+				<span class="an-link an-cmb__number">${call_center_phone[0..*3]} ${call_center_phone[3..*2]} ${call_center_phone[5..*2]} ${call_center_phone[7..*2]}</span>
+				<span class="an-cmb__text-small mobile-hide">Gestionamos por ti lo que necesites</span>
+			</div>
+		</a>
+
+		<a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--head-phones an-cmb an-cmb--header">
+			<div class="an-cmb__content">
+				<span class="an-cmb__text">Llámanos gratis</span>
+				<span class="an-link an-cmb__number">${call_center_phone[0..*3]} ${call_center_phone[3..*2]} ${call_center_phone[5..*2]} ${call_center_phone[7..*2]}</span>
+			</div>
+		</a>
+
+		<a href="tel:+34900181818" class="an-link an-btn an-btn--flatter an-btn--gradient an-icon--head-phones an-cmb an-cmb--header-small"></a>
+
 	</header>
 
 	<section id="content">
@@ -70,8 +88,9 @@
 
 <@liferay_util["include"] page=body_bottom_include />
 
-<@liferay_util["include"] page=bottom_include />
-
+<#if is_signed_in || layoutTypePortlet.hasStateMax() >
+	<@liferay_util["include"] page=bottom_include />
+</#if>
 <!-- inject:js -->
 <!-- endinject -->
 

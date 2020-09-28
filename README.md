@@ -57,6 +57,8 @@ El código fuente de los fragments está en  `theme/anidia-fragments` y dentro s
 
 Para añadir otras colecciones, fragmentos o templates de páginas se pueden seguir las instrucciones situadas en el [repositorio de Liferay](https://github.com/liferay/generator-liferay-fragments).
 
+Además de la tarea `npx gulp import` hay otra manera de poder importar fragmentos al theme. Se puede ejecutar `npx gulp compress` y copiar el zip que se genera en `build/liferay-fragments.zip` a la carpeta `liferay/deploy/`.
+
 ### Editar un fragmento
 
 Cada fragmento es una carpeta separada y autocontenida en la que se encuentran los ficheros:
@@ -71,3 +73,11 @@ Más detalles sobre como desarrollar fragmentos en la documentación de Liferay:
 
 *
 * [Hacer los fragmentos configurables](https://help.liferay.com/hc/en-us/articles/360034857331-Making-a-Fragment-Configurable)
+
+## Desarrollo de portlets
+
+Los portlets son módulos complejos que requieren un comportamiento que se debe programar en Java.
+
+Estos módulos se desarrollan con el Liferay Developer Studio, IDE basado en eclipse, aunque se pueden modificar sus ficheros y realizar el despliegue a docker sin necesidad de ese IDE.
+
+Para ello, dentro de la carpeta del portlet, se ejecuta la tarea `gradle war`. Esto genera el war en la carpeta `build/libs/` dentro de la carpeta del portlet y se copia a la carpeta `liferay/deploy` como todos los war.

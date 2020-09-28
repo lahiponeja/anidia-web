@@ -1,0 +1,89 @@
+/*
+  base-reset
+*/
+
+body {
+  /* Disable horizontal scrollbar */
+  -ms-overflow-x: hidden;
+  overflow-x: hidden;
+
+  /*Disable outline just when user is not tabbing*/
+  &:not(.cp-user-is-tabbing) {
+    button:focus,
+    input:focus,
+    select:focus,
+    textarea:focus,
+    [contenteditable="true"]:focus  {
+      outline: none;
+    }
+  }
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+/* Base reset of margins + paddings */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+hr,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Set block for HTML5 elements */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+hr,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/* Correct display for IE 9 */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}

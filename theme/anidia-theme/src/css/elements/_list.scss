@@ -1,0 +1,16 @@
+.an-list {
+  width: 100%;
+
+  &__item {
+    display: flex;
+    margin-bottom: rem(18);
+  }
+
+  &__icon {
+    margin-right: rem(13);
+
+    &::before {
+      font-size: rem(20);
+    }
+  }
+}

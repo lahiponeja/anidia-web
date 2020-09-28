@@ -1,0 +1,63 @@
+// Colors
+$black:       #000;
+$white:       #fff;
+
+$an-theme:              #78BE21;
+$an-theme-light:        #F3F9EB;
+$an-theme-dark-grey:    #333830;
+$an-theme-dark-grey-op: rgba(51, 56, 48, 0.5);
+$an-theme-soft-grey:    #EFEFEF;
+$an-theme-soft-grey-sec:#DDDDDD;
+
+
+// Special colors
+$an-danger:           #FF6767;
+$an-border:           #CDCDCD;
+$an-boder-light:      #E9E6E6;
+$an-border-shadow:    #F2F2F2;
+
+//Fonts
+$font-family-default: $open-sans-regular-family;
+$font-color-default:  $an-theme-dark-grey;
+
+$base-font-size: 16;
+
+// Shadow elevations
+$an-shadow-one: 0 0 10px 0 rgba(0,0,0,0.20);
+$an-shadow-two: 0 0 20px 0 rgba(0,0,0,0.14);
+
+// Grid vars
+$g-column: 86px; // Column Width
+$g-gutter: 12px; // Gutter Width
+$g-max-columns: 12; // Total Columns For Main Container
+
+// Gradients
+@mixin gradient-green-bg {
+  background: rgb(120,190,33);
+  background: -moz-linear-gradient(143deg, rgba(120,190,33,1) 0%, rgba(255,199,44,1) 100%);
+  background: -webkit-linear-gradient(143deg, rgba(120,190,33,1) 0%, rgba(255,199,44,1) 100%);
+  background: linear-gradient(143deg, rgba(120,190,33,1) 0%, rgba(255,199,44,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#78be21",endColorstr="#ffc72c",GradientType=1);
+}
+
+@mixin gradient-yellow-bg {
+  background: rgb(182,194,38);
+  background: -moz-linear-gradient(145deg, rgba(182,194,38,1) 0%, rgba(255,199,44,1) 100%);
+  background: -webkit-linear-gradient(145deg, rgba(182,194,38,1) 0%, rgba(255,199,44,1) 100%);
+  background: linear-gradient(145deg, rgba(182,194,38,1) 0%, rgba(255,199,44,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b6c226",endColorstr="#ffc72c",GradientType=1);
+}
+
+@mixin gradient-green-card-bg {
+  background: rgb(120,190,33);
+  background: -moz-linear-gradient(226deg, rgba(120,190,33,1) 0%, rgba(255,199,44,1) 100%);
+  background: -webkit-linear-gradient(226deg, rgba(120,190,33,1) 0%, rgba(255,199,44,1) 100%);
+  background: linear-gradient(226deg, rgba(120,190,33,1) 0%, rgba(255,199,44,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#78be21",endColorstr="#ffc72c",GradientType=1);
+}
+
+// Breakpoints
+$tablet:     768px;
+$desktop:    1024px;
+$mediumdktp: 1190px;
+$bigdktp:    1280px;
