@@ -1,4 +1,101 @@
 .extensible-cards {
-  display: flex;
-  scroll-snap-type: x mandatory;
+  width: var(--carousel-width);
+  height: var(--carousel-height);
+
+  &__container {
+    display: flex;
+    scroll-padding: 0 100%;
+    margin-bottom: rem(24);
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
+    -ms-scroll-snap-type: x mandatory;
+  }
+
+  &__dots {
+    align-items: center;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    @include desktop {
+      display: none;
+    }
+  }
+
+  &__dot {
+    cursor: pointer;
+    background: $an-theme;
+    overflow: hidden;
+    display: flex;
+    width: rem(6);
+    height: rem(6);
+    border-radius: 100%;
+    margin-right: rem(20);
+
+    &[aria-pressed=true] {
+      width: rem(15);
+      height: rem(15);
+    }
+  }
+
+  :root {
+    --carousel-width: 40vw;
+    --carousel-height: calc(0.7 * var(--carousel-width));
+    --carousel-padding: 5px;
+  }
+
+  @media (max-width: 479px) {
+    :root {
+      --carousel-width: 95vw;
+    }
+  }
+
+
+  .extensible-cards__container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-item-outer {
+    width: 100%;
+    height: 100%;
+    margin-right: rem(20);
+  }
+
+  .scroll-item {
+    width: var(--carousel-width);
+    height: 100%;
+  }
+
+  @supports (scroll-snap-align: start) {
+    /* modern scroll snap points */
+    .extensible-cards__container {
+      scroll-snap-type: x mandatory;
+    }
+    .scroll-item-outer {
+      scroll-snap-align: center;
+    }
+  }
+
+  @supports not (scroll-snap-align: start) {
+    /* old scroll snap points spec */
+    .extensible-cards__container {
+      -webkit-scroll-snap-type: mandatory;
+              scroll-snap-type: mandatory;
+      -webkit-scroll-snap-destination: 0% center;
+              scroll-snap-destination: 0% center;
+      -webkit-scroll-snap-points-x: repeat(100%);
+              scroll-snap-points-x: repeat(100%);
+    }
+
+    .scroll-item-outer {
+      scroll-snap-coordinate: 0 0;
+    }
+  }
 }

@@ -10,9 +10,17 @@
     text-align: center;
     padding: rem(40);
     align-items: center;
-    // max-width: rem(497);
-    min-height: rem(368);
-    scroll-snap-align: start;
+    min-width: rem(278);
+    min-height: rem(432);
+    background-color: $white;
+    margin-right: rem(20);
+    position: relative;
+    width: 100%;
+    margin-bottom: rem(20);
+
+    &:first-child {
+      margin-left: rem(20);
+    }
 
     > * {
       margin-bottom: rem(6);
