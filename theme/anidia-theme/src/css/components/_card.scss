@@ -16,36 +16,35 @@
     margin-right: rem(20);
     position: relative;
     margin-bottom: rem(20);
+    transition: max-width .2s ease,
+                top .2s ease,
+                z-index .2s ease;
 
     &.active {
-      position: absolute;
-      top: 0;
-      z-index: 1;
-      width: calc(100% - 10px);
-      left: 0;
-      transform: translateX(rem(5));
-      flex-direction: row;
-      justify-content: space-between;
 
-      .an-card__title {
-        white-space: nowrap;
-      }
+      @include desktop {
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        width: 100%;
+        max-width: calc(100% - 10px);
+        left: 0;
+        transform: translateX(rem(5));
+        flex-direction: row;
+        justify-content: space-between;
 
-      .an-menu-bold {
-        color: $an-theme;
+        .an-card__title {
+          white-space: nowrap;
+        }
+
+        .an-menu-bold {
+          color: $an-theme;
+        }
       }
     }
 
     > * {
       margin-bottom: rem(6);
-    }
-
-    &:first-child {
-      margin-left: rem(20);
-
-      @include desktop {
-        margin-left: 0;
-      }
     }
 
     .an-link {
@@ -215,10 +214,10 @@
 
       h5 {
         color: $an-theme-dark-grey;
-      }
 
-      h5:last-child {
-        color: $an-theme;
+        &:last-child {
+          color: $an-theme;
+        }
       }
     }
 

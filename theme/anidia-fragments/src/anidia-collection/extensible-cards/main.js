@@ -1,5 +1,6 @@
 let cardsExpand = document.querySelectorAll('[data-expand-card]');
 let cardsClose = document.querySelectorAll('[data-close-card]');
+const windowWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
 const easingOutQuint = (x, t, b, c, d) =>
   c * ((t = t / d - 1) * t * t * t * t + 1) + b;
 
@@ -116,30 +117,44 @@ function setAriaPressed(index) {
 }
 
 function expandCards() {
-  for (var i = 0 ; i < cardsExpand.length; i++) {
-    cardsExpand[i].addEventListener("click", function(event){
-      event.preventDefault()
-      let parent = this.parentElement.querySelectorAll('.hide')
-      let shortText = this.parentElement.querySelector('.an-card--simple__text-short');
-      shortText.classList.add('hide');
-      for (var j = 0 ; j < parent.length; j++) {
-        parent[j].classList.remove('hide');
-      }
-      this.classList.add('hide');
-      this.parentElement.classList.add('active');
-    });
+
+  if (windowWidth > 798) {
+    for (var i = 0 ; i < cardsExpand.length; i++) {
+      cardsExpand[i].addEventListener("click", function(event){
+        event.preventDefault()
+        let parent = this.parentElement.querySelectorAll('.hide')
+        let shortText = this.parentElement.querySelector('.an-card--simple__text-short');
+        shortText.classList.add('hide');
+        for (var j = 0 ; j < parent.length; j++) {
+          parent[j].classList.remove('hide');
+        }
+        this.classList.add('hide');
+        this.parentElement.classList.add('active');
+      });
+    }
+
+    for (var i = 0 ; i < cardsClose.length; i++) {
+      cardsClose[i].addEventListener("click", function(event){
+        event.preventDefault()
+        let parent = this.parentElement.querySelectorAll('.hide')
+        for (var j = 0 ; j < parent.length; j++) {
+          parent[j].classList.remove('hide');
+        }
+        this.parentElement.classList.remove('active')
+        this.parentElement.querySelector('.an-icon--close-cross').classList.add('hide')
+        this.parentElement.querySelector('.an-card--simple__text-expanded').classList.add('hide')
+      });
+    }
+  } else {
+    for (var i = 0 ; i < cardsExpand.length; i++) {
+      cardsExpand[i].addEventListener("click", function(event){
+        event.preventDefault()
+        this.classList.add('hide');
+        this.parentElement.querySelector('.an-card--simple__text-expanded').classList.remove('hide')
+        this.parentElement.querySelector('.an-card--simple__text-short').classList.add('hide')
+        this.parentElement.classList.add('active');
+      });
+    }
   }
 
-  for (var i = 0 ; i < cardsClose.length; i++) {
-    cardsClose[i].addEventListener("click", function(event){
-      event.preventDefault()
-      let parent = this.parentElement.querySelectorAll('.hide')
-      for (var j = 0 ; j < parent.length; j++) {
-        parent[j].classList.remove('hide');
-      }
-      this.parentElement.classList.remove('active')
-      this.parentElement.querySelector('.an-icon--close-cross').classList.add('hide')
-      this.parentElement.querySelector('.an-card--simple__text-expanded').classList.add('hide')
-    });
-  }
 }
