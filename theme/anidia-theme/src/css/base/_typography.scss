@@ -73,7 +73,8 @@ h5,
 }
 
 h6,
-.an-h6 {
+.an-h6,
+%an-h6 {
   font-family: $fs-emeric-bold-family;
   font-size: rem(12);
   font-weight: normal;

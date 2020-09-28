@@ -1,6 +1,7 @@
+%an-link,
 .an-link {
   color: $an-theme;
-  transition: all .3 ease;
+  transition: all .3s ease;
 
   &:focus,
   &:hover {

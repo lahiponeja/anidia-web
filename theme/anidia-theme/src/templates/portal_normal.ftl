@@ -88,9 +88,6 @@
 					freeMarkerPortletPreferences.getPreferences(footerNavigationPreferencesMap)
 					instance_id="anidia-footer-menu-2"
 				/>
-        <a class="an-h6 an-link mb-m" href="#">Aviso legal</a>
-        <a class="an-h6 an-link mb-m" href="#">Política de cookies</a>
-        <a class="an-h6 an-link mb-m" href="#">Política de privacidad</a>
       </div>
       <div class="footer__rrss">
         <a href="#" class="footer__rrss__single" target="_blank"><span class="an-icon--pinterest"></span></a>

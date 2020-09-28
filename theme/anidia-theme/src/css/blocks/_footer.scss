@@ -7,16 +7,7 @@
   @include desktop {
     flex-direction: row;
     justify-content: space-between;
-    align-items: baseline;
-  }
-
-  .an-h6 {
-    text-transform: uppercase;
-    white-space: nowrap;
-
-    @include desktop {
-      margin-bottom: 0;
-    }
+    align-items: center;
   }
 
   &__img {
@@ -28,7 +19,7 @@
     }
   }
 
-  &__links {
+  ul {
     display: flex;
     flex-direction: column;
 
@@ -37,7 +28,12 @@
     }
   }
 
-  .an-link {
+  li {
+    @extend %an-link;
+    @extend %an-h6;
+    text-transform: uppercase;
+    white-space: nowrap;
+
     @include desktop {
       margin-bottom: 0;
 
