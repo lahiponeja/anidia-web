@@ -1,0 +1,20 @@
+.an-link {
+  color: $an-theme;
+  transition: all .3 ease;
+
+  &:focus,
+  &:hover {
+    color: $an-theme;
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  &--white {
+    color: $white;
+
+    &:focus,
+    &:hover {
+      color: $white;
+    }
+  }
+}
