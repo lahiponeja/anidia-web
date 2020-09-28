@@ -8,6 +8,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: rem(66) rem(60);
   }
 
   &__img {
@@ -22,9 +23,11 @@
   ul {
     display: flex;
     flex-direction: column;
+    margin-bottom: rem(34);
 
     @include desktop {
       flex-direction: row;
+      margin-bottom: 0;
     }
   }
 
@@ -34,10 +37,15 @@
     text-transform: uppercase;
     white-space: nowrap;
 
+    &:not(:last-child) {
+      margin-bottom: rem(29);
+    }
+
     @include desktop {
       margin-bottom: 0;
 
       &:not(:last-child) {
+        margin-bottom: 0;
         margin-right: rem(100);
       }
     }
