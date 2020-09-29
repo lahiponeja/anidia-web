@@ -15,7 +15,6 @@
       max-height: rem(256);
 
       @include desktop {
-        width: auto;
         max-height: 100%;
         max-width: flex-grid(3);
       }
@@ -25,7 +24,6 @@
       max-height: rem(470);
 
       @include desktop {
-        width: auto;
         max-height: 100%;
         max-width: flex-grid(3);
       }
