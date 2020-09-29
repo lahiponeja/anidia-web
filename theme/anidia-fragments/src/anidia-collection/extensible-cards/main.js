@@ -87,3 +87,17 @@ function expandCards() {
     });
   }
 }
+
+
+init();
+
+function init() {
+  document.querySelectorAll('.an-card--simple').forEach(e => {
+    if(e.querySelector('.an-card--simple__text-expanded')) {
+      let dot = document.createElement('p');
+      dot.innerHTML = '...';
+      dot.classList.add('dots');
+      e.querySelector('.an-card--simple__text-short').append(dot);
+    }
+  });
+}

@@ -81,6 +81,13 @@
       padding-left: flex-grid(1);
     }
 
+    &__text-short {
+      .dots {
+        margin-top: rem(31);
+        margin-bottom: rem(17);
+      }
+    }
+
   }
 
   &--form {
