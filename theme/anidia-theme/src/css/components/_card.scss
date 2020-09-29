@@ -193,6 +193,10 @@
 
       .an-list__item {
         margin-bottom: rem(11);
+
+        @include desktop {
+          margin-bottom: rem(20);
+        }
       }
 
       &.featured {
