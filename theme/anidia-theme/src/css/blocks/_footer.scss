@@ -8,6 +8,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: rem(60);
   }
 
   &__img {
@@ -33,6 +34,7 @@
     @extend %an-h6;
     text-transform: uppercase;
     white-space: nowrap;
+    margin-bottom: rem(28);
 
     @include desktop {
       margin-bottom: 0;
