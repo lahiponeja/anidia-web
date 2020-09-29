@@ -10,7 +10,7 @@
     text-align: center;
     padding: rem(40);
     align-items: center;
-    width: rem(278);
+    min-width: rem(278);
     min-height: rem(432);
     background-color: $white;
     margin-right: rem(20);
@@ -21,7 +21,6 @@
                 z-index .2s ease;
 
     &.active {
-
       @include desktop {
         position: absolute;
         top: 0;
