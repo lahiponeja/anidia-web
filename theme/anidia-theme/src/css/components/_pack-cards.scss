@@ -1,0 +1,103 @@
+.an-pack-cards {
+  text-align: center;
+
+  &__intro {
+    background-color: $white;
+    margin-left: rem(-20);
+    margin-right: rem(-20);
+    padding: rem(20);
+
+    h6 {
+      text-transform: uppercase;
+      letter-spacing: 1.71;
+      margin-bottom: rem(20);
+    }
+
+    h2 {
+      color: $an-theme;
+      margin-bottom: rem(20);
+    }
+
+    p {
+      color: $an-theme;
+      font-size: rem(18);
+      margin-bottom: rem(48);
+    }
+  }
+
+  &__content {
+    background-color: $an-theme;
+    margin-left: rem(-20);
+    margin-right: rem(-20);
+    padding: rem(45) rem(20) rem(20);
+  }
+
+  &__content__intro {
+    p {
+      color: $white;
+      font-size: rem(18);
+      font-family: $open-sans-bold-family;
+      margin-bottom: rem(65);
+    }
+
+    .an-btn {
+      margin-bottom: rem(24);
+    }
+  }
+
+  &__dots {
+    align-items: center;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    @include desktop {
+      display: none;
+    }
+  }
+
+  &__dot {
+    cursor: pointer;
+    background: $white;
+    overflow: hidden;
+    display: flex;
+    width: rem(6);
+    height: rem(6);
+    border-radius: 100%;
+    margin-right: rem(20);
+
+    &[aria-pressed=true] {
+      width: rem(15);
+      height: rem(15);
+    }
+  }
+
+  &__cards {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    /* 2018 spec - For Safari 11, Chrome 69+ */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* Needed to work on iOS Safari */
+    /* 2015 spec - For Firefox, Edge, IE */
+    scroll-snap-type: mandatory;
+    -ms-scroll-snap-type: mandatory;
+    scroll-snap-points-x: repeat(100%);
+    -ms-scroll-snap-points-x: repeat(100%);
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .an-card--pack {
+      scroll-snap-align: center;
+      margin-right: rem(20);
+      margin-bottom: rem(24);
+      margin-top: rem(24);
+
+      &:first-child {
+        margin-left: rem(20);
+      }
+    }
+  }
+}
