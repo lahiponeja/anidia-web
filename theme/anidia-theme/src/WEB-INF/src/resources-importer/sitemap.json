@@ -2,26 +2,133 @@
     "layoutTemplateId": "Blank",
     "publicPages": [
         {
-          "friendlyURL": "/welcome-page",
+          "friendlyURL": "/gas-natural",
+          "name": "Gas Natural",
+          "title": "Gas Natural",
           "layouts": [
                 {
-                    "friendlyURL": "/child-page-1",
-                    "name": "Child Page 1",
-                    "title": "Child Page 1"
+                    "friendlyURL": "/instalacion-gas-natural",
+                    "name": "Instalación Gas Natural",
+                    "title": "Instalación Gas Natural",
+                    "layouts": [
+                      {
+                        "friendlyURL": "/caldera",
+                        "name": "Caldera",
+                        "title": "Caldera"
+                      },
+                      {
+                        "friendlyURL": "/calefaccion",
+                        "name": "Calefacción",
+                        "title": "Calefacción"
+                      },
+                      {
+                        "friendlyURL": "/termo-gas",
+                        "name": "Termo Gas",
+                        "title": "Termo Gas"
+                      },
+                      {
+                        "friendlyURL": "/calentador-agua",
+                        "name": "Calentador Agua",
+                        "title": "Calentador Agua"
+                      }
+                    ]
                 },
                 {
-                    "friendlyURL": "/child-page-2",
-                    "name": "Child Page 2",
-                    "title": "Child Page 2"
+                    "friendlyURL": "/sva-gas",
+                    "name": "SVA Gas",
+                    "title": "SVA Gas"
+                },
+                {
+                  "friendlyURL": "/precio-gas",
+                  "name": "Precio Gas",
+                  "title": "Precio Gas"
+                },
+                {
+                  "friendlyURL": "/beneficios-gas-natural",
+                  "name": "Beneficios Gas Natural",
+                  "title": "Beneficios Gas Natural",
+                  "layouts": [
+                    {                    
+                      "friendlyURL": "/ventajas",
+                      "name": "Ventajas",
+                      "title": "Ventajas"                   
+                    }
+                  ]
+                },
+                {
+                  "friendlyURL": "/como-funciona-gas-natural",
+                  "name": "Cómo Funciona Gas Natural",
+                  "title": "Cómo Funciona Gas Natural"
+                },
+                {
+                  "friendlyURL": "/gas-natural-atencion-al-cliente",
+                  "name": "Gas Natural Atención al Cliente",
+                  "title": "Gas Natural Atención al Cliente",
+                  "layouts": [
+                    {                    
+                      "friendlyURL": "/telefono-gas-natural",
+                      "name": "Teléfono Gas Natural",
+                      "title": "Teléfono Gas Natural"                   
+                    }
+                  ]
                 }
-            ],
-          "name": "Custom Layout Page",
-          "title": "Welcome"
+            ]
         },
         {
-          "friendlyURL": "/custom-layout-page",
-          "name": "Custom Layout Page",
-          "title": "Custom Layout Page"
+          "friendlyURL": "/solar",
+          "name": "Solar",
+          "title": "Solar",
+          "layouts": [
+            {
+              "friendlyURL": "/instalacion-energia-solar",
+              "name": "Instalación Energía Solar",
+              "title": "Instalación Energía Solar",
+              "layouts": [
+                {
+                  "friendlyURL": "/autoconsumo",
+                  "name": "Autoconsumo",
+                  "title": "Autoconsumo"
+                },
+                {
+                  "friendlyURL": "/placas-solares",
+                  "name": "Placas Solares",
+                  "title": "Placas Solares",
+                  "layouts": [
+                    {
+                      "friendlyURL": "/termicos",
+                      "name": "Térmicos",
+                      "title": "Térmicos"
+                    },
+                    {
+                      "friendlyURL": "/fotovoltaicos",
+                      "name": "Fotovoltaicos",
+                      "title": "Fotovoltaicos"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "friendlyURL": "/precio-energia-solar",
+              "name": "Precio Energía Solar",
+              "title": "Precio Energía Solar"
+            },
+            {
+              "friendlyURL": "/beneficios-energia-solar",
+              "name": "Beneficios Energía Solar",
+              "title": "Beneficios Energía Solar"
+            },
+            {
+              "friendlyURL": "/como-funciona-energia-solar",
+              "name": "Cómo funciona Energía Solar",
+              "title": "Cómo funciona Energía Solar"
+            },
+            {
+              "friendlyURL": "/energia-solar-atencion-al-cliente",
+              "name": "Energía Solar Atención al Cliente",
+              "title": "Energía Solar Atención al Cliente"
+            }
+          ]
         }
     ]
   }
