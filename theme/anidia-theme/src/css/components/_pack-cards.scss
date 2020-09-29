@@ -16,12 +16,23 @@
     h2 {
       color: $an-theme;
       margin-bottom: rem(20);
+
+      @include desktop {
+        max-width: flex-grid(8);
+        margin-right: auto;
+        margin-left: auto;
+      }
     }
 
     p {
       color: $an-theme;
       font-size: rem(18);
       margin-bottom: rem(48);
+
+      @include desktop {
+        width: flex-grid(6);
+        margin: auto;
+      }
     }
   }
 
@@ -30,6 +41,10 @@
     margin-left: rem(-20);
     margin-right: rem(-20);
     padding: rem(45) rem(20) rem(20);
+
+    @include desktop {
+      background-color: $white;
+    }
   }
 
   &__content__intro {
@@ -38,6 +53,11 @@
       font-size: rem(18);
       font-family: $open-sans-bold-family;
       margin-bottom: rem(65);
+
+      @include desktop {
+        margin-bottom: rem(122);
+        color: $an-theme;
+      }
     }
 
     .an-btn {
@@ -76,6 +96,7 @@
     overflow-x: auto;
     white-space: nowrap;
     display: flex;
+    align-items: center;
     /* 2018 spec - For Safari 11, Chrome 69+ */
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch; /* Needed to work on iOS Safari */
@@ -84,6 +105,24 @@
     -ms-scroll-snap-type: mandatory;
     scroll-snap-points-x: repeat(100%);
     -ms-scroll-snap-points-x: repeat(100%);
+
+    @include desktop {
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      padding-bottom: rem(120);
+
+      &::after {
+        content: '';
+        display: block;
+        background: $an-theme;
+        width: 100%;
+        height: rem(463);
+        z-index: 0;
+        position: absolute;
+        bottom: 0;
+      }
+    }
 
     &::-webkit-scrollbar {
       display: none;
@@ -94,9 +133,19 @@
       margin-right: rem(20);
       margin-bottom: rem(24);
       margin-top: rem(24);
+      z-index: 1;
 
       &:first-child {
         margin-left: rem(20);
+        z-index: 2;
+      }
+
+      @include desktop {
+        margin-right: 0;
+
+        &:last-child {
+          transform: translateX(-20px);
+        }
       }
     }
   }

@@ -134,10 +134,7 @@
     border-radius: rem(30);
     border: 1px solid $an-border-shadow;
     background-color: $white;
-
-    @include desktop {
-      padding: rem(54) rem(74) rem(70);
-    }
+    justify-content: space-between;
 
     .an-list {
       margin-bottom: rem(30);
@@ -153,7 +150,7 @@
       margin-bottom: rem(28);
 
       @include desktop {
-        margin-bottom: rem(34);
+        margin-bottom: 0;
       }
 
       h5 {
@@ -175,11 +172,23 @@
 
       @include desktop {
         width: rem(529);
+        min-height: rem(686);
+        padding: rem(57) rem(47) rem(70);
+
+        h3 {
+          font-size: rem(30);
+          line-height: rem(30);
+        }
       }
 
       h2 {
         font-size: rem(60);
         line-height: rem(60);
+
+        @include desktop {
+          font-size: rem(120);
+          line-height: rem(120);
+        }
       }
 
       .an-list__item {
@@ -189,6 +198,17 @@
       &.featured {
         @include desktop {
           width: rem(560);
+          min-height: rem(733);
+
+          h2 {
+            font-size: rem(150);
+            line-height: rem(150);
+          }
+
+          h3 {
+            font-size: rem(36);
+            line-height: rem(36);
+          }
         }
       }
     }
@@ -211,8 +231,8 @@
       color: $white;
       border: none;
 
-      h3,
-      h2 {
+      h2,
+      h3 {
         color: #C5EF3F;
       }
 
