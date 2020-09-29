@@ -9,6 +9,7 @@
 @import './base/margins';
 @import './base/paddings';
 @import './base/backgrounds';
+@import './base/layout';
 
 // // UI Kit
 
@@ -27,9 +28,11 @@
 @import './components/card';
 @import './components/cmb';
 @import './components/featured';
+@import './components/info-elems';
 
 // // Blocks
 @import './blocks/extensible-cards';
+@import './blocks/footer';
 
 /* endinject */
 

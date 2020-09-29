@@ -79,10 +79,25 @@
 		</#if>
 	</section>
 
-	<footer id="footer" role="contentinfo">
-		<p class="powered-by">
-			<@liferay.language key="powered-by" /> <a href="http://www.liferay.com" rel="external">Liferay</a>
-		</p>
+	<footer id="footer" role="contentinfo" class="footer">
+      <img src="${images_folder}/logo-anidia-green.svg" class="mb-l footer__img"/>
+      <!-- REFACTOR WITH LINKS ITEMS .an-link-->
+      <div class="footer__links">
+				<@liferay.navigation_menu
+					default_preferences=
+					freeMarkerPortletPreferences.getPreferences(footerNavigationPreferencesMap)
+					instance_id="anidia-footer-menu-2"
+				/>
+      </div>
+      <div class="footer__rrss">
+        <a href="#" class="footer__rrss__single" target="_blank"><span class="an-icon--pinterest"></span></a>
+        <a href="#" class="footer__rrss__single" target="_blank"><span class="an-icon--instagram"></span></a>
+        <a href="#" class="footer__rrss__single" target="_blank"><span class="an-icon--linkedin"></span></a>
+        <a href="#" class="footer__rrss__single" target="_blank"><span class="an-icon--facebook"></span></a>
+      </div>
+
+
+
 	</footer>
 </div>
 
