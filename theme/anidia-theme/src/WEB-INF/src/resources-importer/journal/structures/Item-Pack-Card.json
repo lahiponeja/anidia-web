@@ -55,7 +55,7 @@
                 "es_ES": "Título"
             },
             "predefinedValue": {
-                "es_ES": ""
+                "es_ES": " <h3>Instalación</h3><h2>Gratis</h2><h3>xxx€ de ahorro anual</h3>"
             },
             "style": {
                 "es_ES": ""
@@ -79,7 +79,7 @@
                 "es_ES": "Ventajas"
             },
             "predefinedValue": {
-                "es_ES": ""
+                "es_ES": "  <li class=\"an-list__item an-body-m-regular\"><div class=\"an-list__icon an-icon--check-circle\"></div>Lorem ipsum dolor</li>   <li class=\"an-list__item an-body-m-regular\"><div class=\"an-list__icon an-icon--check-circle\"></div>Lorem ipsum dolor</li>   <li class=\"an-list__item an-body-m-regular\"><div class=\"an-list__icon an-icon--check-circle\"></div>Lorem ipsum dolor</li>"
             },
             "style": {
                 "es_ES": ""
@@ -97,6 +97,29 @@
             "required": false,
             "showLabel": true,
             "type": "ddm-text-html"
+        },
+        {
+            "label": {
+                "es_ES": "Botón"
+            },
+            "predefinedValue": {
+                "es_ES": "Más información"
+            },
+            "style": {
+                "es_ES": ""
+            },
+            "tip": {
+                "es_ES": ""
+            },
+            "dataType": "string",
+            "indexType": "keyword",
+            "localizable": true,
+            "name": "Botón",
+            "readOnly": false,
+            "repeatable": false,
+            "required": false,
+            "showLabel": true,
+            "type": "text"
         },
         {
             "label": {

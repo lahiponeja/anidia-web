@@ -1,15 +1,26 @@
-<div class="an-card an-card--pack an-card--pack--big featured">
+<#if Estilo.getData() == "verde">
+   <div class="an-card an-card--pack an-card--pack--big featured">
+   <#else>
+     <div class="an-card an-card--pack an-card--pack--big">
+</#if>
+
 <div class="an-card--pack__intro">
   <h5>${Nombre.getData()}</h5>
   <h5>${Detalle.getData()}</h5>
 </div>
 <div class="an-card--pack__info">
-<html>${Título.getData()}</html>
+  <html>${Título.getData()}</html>
 </div>
 <ul class="an-list">
-  <li class="an-list__item an-body-m-regular"><div class="an-list__icon an-icon--check-circle"></div>Lorem ipsum dolor</li>
-  <li class="an-list__item an-body-m-regular"><div class="an-list__icon an-icon--check-circle"></div>Lorem ipsum dolor</li>
-  <li class="an-list__item an-body-m-regular"><div class="an-list__icon an-icon--check-circle"></div>Lorem ipsum dolor</li>
+  <html>${Ventajas.getData()}</html>
 </ul>
-<button class="an-btn an-btn--flatter an-btn--white">Lorem ipsum dolor</button>
+
+<#if Estilo.getData() == "verde">
+  <button class="an-btn an-btn--flatter an-btn--white">${Botón.getData()}</button>
+   <#else>
+    <button class="an-btn an-btn--flatter an-btn--gradient">
+      <span>${Botón.getData()}</span>
+    </button>
+</#if>
+
 </div>
