@@ -1,7 +1,15 @@
 {
   "fieldSets": [
     {
+      "label": "Botón",
       "fields": [
+        {
+          "name": "Enlace",
+          "label": "Enlace",
+          "description": "Enlace del botón del módulo",
+          "type": "text",
+          "dataType": "string"
+      }
       ]
     }
   ]
