@@ -1,0 +1,192 @@
+{
+  "availableLanguageIds": ["es_ES"],
+  "defaultLanguageId": "es_ES",
+  "fields": [
+    {
+      "label": {
+        "es_ES": "Icono"
+      },
+      "options": [
+        {
+          "value": "an-icon--request",
+          "label": {
+            "es_ES": "Solicitud"
+          }
+        },
+        {
+          "value": "an-icon--install",
+          "label": {
+            "es_ES": "Instalación"
+          }
+        },
+        {
+          "value": "an-icon--enjoy",
+          "label": {
+            "es_ES": "Disfrutar"
+          }
+        },
+        {
+          "value": "an-icon--gas",
+          "label": {
+            "es_ES": "Gas"
+          }
+        },
+        {
+          "value": "an-icon--percentage-wallet",
+          "label": {
+            "es_ES": "Porcentaje y cartera"
+          }
+        },
+        {
+          "value": "an-icon--half-arrow-down",
+          "label": {
+            "es_ES": "Flecha abajo"
+          }
+        },
+        {
+          "value": "an-icon--half-arrow-up",
+          "label": {
+            "es_ES": "Flecha arriba"
+          }
+        },
+        {
+          "value": "an-icon--half-arrow-left",
+          "label": {
+            "es_ES": "Flecha izquierda"
+          }
+        },
+        {
+          "value": "an-icon--half-arrow-right",
+          "label": {
+            "es_ES": "Flecha derecha"
+          }
+        },
+        {
+          "value": "an-icon--check-circle",
+          "label": {
+            "es_ES": "Check círculo"
+          }
+        },
+        {
+          "value": "an-icon--unselected",
+          "label": {
+            "es_ES": "No seleccionado"
+          }
+        },
+        {
+          "value": "an-icon--power",
+          "label": {
+            "es_ES": "Electricidad"
+          }
+        },
+        {
+          "value": "an-icon--chevron-up",
+          "label": {
+            "es_ES": "Chevron arriba"
+          }
+        },
+        {
+          "value": "an-icon--hot-water-heat-kitchen",
+          "label": {
+            "es_ES": "Agua caliente cocina "
+          }
+        },
+        {
+          "value": "an-icon--hot-water-kitchen",
+          "label": {
+            "es_ES": "Agua caliente cocina 2"
+          }
+        },
+        {
+          "value": "an-icon--hot-water",
+          "label": {
+            "es_ES": "Agua caliente"
+          }
+        },
+        {
+          "value": "an-icon--saving",
+          "label": {
+            "es_ES": "Ahorro"
+          }
+        },
+        {
+          "value": "an-icon--environment-responsable",
+          "label": {
+            "es_ES": "Responsable "
+          }
+        },
+        {
+          "value": "an-icon--analisis",
+          "label": {
+            "es_ES": "Análisis"
+          }
+        }
+      ],
+      "predefinedValue": {
+        "es_ES": [""]
+      },
+      "style": {
+        "es_ES": ""
+      },
+      "tip": {
+        "es_ES": ""
+      },
+      "dataType": "string",
+      "indexType": "keyword",
+      "localizable": true,
+      "multiple": false,
+      "name": "Icono",
+      "readOnly": false,
+      "repeatable": false,
+      "required": false,
+      "showLabel": true,
+      "type": "select"
+    },
+    {
+      "label": {
+        "es_ES": "Título"
+      },
+      "predefinedValue": {
+        "es_ES": ""
+      },
+      "style": {
+        "es_ES": ""
+      },
+      "tip": {
+        "es_ES": ""
+      },
+      "dataType": "string",
+      "indexType": "keyword",
+      "localizable": true,
+      "name": "Título",
+      "readOnly": false,
+      "repeatable": false,
+      "required": false,
+      "showLabel": true,
+      "type": "text"
+    },
+    {
+      "label": {
+        "es_ES": "Descripción"
+      },
+      "predefinedValue": {
+        "es_ES": ""
+      },
+      "style": {
+        "es_ES": ""
+      },
+      "tip": {
+        "es_ES": ""
+      },
+      "dataType": "string",
+      "indexType": "text",
+      "localizable": true,
+      "name": "Descripción",
+      "readOnly": false,
+      "repeatable": false,
+      "required": false,
+      "showLabel": true,
+      "type": "textarea"
+    }
+  ]
+}
