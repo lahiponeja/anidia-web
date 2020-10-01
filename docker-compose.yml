@@ -34,7 +34,8 @@ services:
       - "11311:11311"
     volumes:
       - ./liferay:/mnt/liferay:Z
-      - liferay_war:/opt/liferay/osgi/war
+      - liferay_war:/opt/liferay/osgi/war:Z
+      - liferay_document_library:/opt/liferay/data/document_library:Z
     depends_on:
       - db
     links:
@@ -46,3 +47,4 @@ networks:
 volumes:
   db-data: {}
   liferay_war: {}
+  liferay_document_library: {}
