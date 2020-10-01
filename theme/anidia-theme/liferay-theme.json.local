@@ -3,7 +3,7 @@
     "appServerPath": "/opt/liferay/tomcat",
     "deployPath": "/opt/liferay/deploy",
     "deploymentStrategy": "DockerContainer",
-    "dockerContainerName": "docker_portal_1",
+    "dockerContainerName": "liferay_portal",
     "url": "http://localhost:8080"
   }
 }

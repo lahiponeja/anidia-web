@@ -5,8 +5,7 @@
 Para arrancar el Doker solo hay que levantar las imagenes mediante `docker-compose`.
 
 ```bash
-anidia-web/$ cd docker
-anidia-web/docker$ docker-compose up
+anidia-web$ docker-compose up
 ```
 
 Después de eso, hay que acceder a [http://localhost:8080](http://localhost:8080).
@@ -57,7 +56,7 @@ El código fuente de los fragments está en  `theme/anidia-fragments` y dentro s
 
 Para añadir otras colecciones, fragmentos o templates de páginas se pueden seguir las instrucciones situadas en el [repositorio de Liferay](https://github.com/liferay/generator-liferay-fragments).
 
-Además de la tarea `npx gulp import` hay otra manera de poder importar fragmentos al theme. Se puede ejecutar `npx gulp compress` y copiar el zip que se genera en `build/liferay-fragments.zip` a la carpeta `liferay/deploy/`.
+Además de la tarea `npm run import` hay otra manera de poder importar fragmentos al theme. Se puede ejecutar `npm run compress` y copiar el zip que se genera en `build/liferay-fragments.zip` a la carpeta `liferay/deploy/`.
 
 ### Editar un fragmento
 
@@ -126,6 +125,6 @@ A continuación, en el módulo `module-jsp-override` introducimos la nueva vista
 El despliegue tiene dos pasos:
 
 * Primero apagamos Liferay.
-* Luego, desplegamos el modulo `LRWorkspace/ext/APOVerride`. Esto lo hacemos ejecutando `graddle deploy` en su carpeta y copiando el .jar resultante (`LRWorkspace/bundles/osgi/marketplace/override/com.liferay.asset.publisher.web.jar`) a la carpeta `liferay/files/osgi/marketplace/override/`.
+* Luego, desplegamos el modulo `LRWorkspace/ext/APOVerride`. Esto lo hacemos ejecutando `gradle deploy` en su carpeta y copiando el .jar resultante (`LRWorkspace/bundles/osgi/marketplace/override/com.liferay.asset.publisher.web.jar`) a la carpeta `liferay/files/osgi/marketplace/override/`.
 * Iniciamos Liferay, esto debería cargar nuestra nueva versión del módulo.
-* Luego desplegamos el módulo `module-jsp-override`. Para esto ejecutamos graddle build en su carpeta y copiamos el jar resultante (`module-jsp-override/build/libs/com.liferay.blade.module.jsp.override-1.0.0.jar`) en la carpeta de deploys `liferay/deploy`.
+* Luego desplegamos el módulo `module-jsp-override`. Para esto ejecutamos gradle build en su carpeta y copiamos el jar resultante (`module-jsp-override/build/libs/com.liferay.blade.module.jsp.override-1.0.0.jar`) en la carpeta de deploys `liferay/deploy`.
