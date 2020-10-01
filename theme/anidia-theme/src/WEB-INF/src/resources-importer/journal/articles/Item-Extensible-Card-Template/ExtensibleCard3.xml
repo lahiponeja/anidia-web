@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<root available-locales="es_ES" default-locale="es_ES">
+	<dynamic-element name="Título" type="text" index-type="keyword" instance-id="upbt">
+		<dynamic-content language-id="es_ES"><![CDATA[Título3]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="DescripciónCorta" type="text_box" index-type="text" instance-id="aoye">
+		<dynamic-content language-id="es_ES"><![CDATA[Esta es la descripción corta. Lorem ipsum dolor sit amet consectetur adipiscing elit posuere.]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="Subtítulo" type="text" index-type="keyword" instance-id="twpk">
+		<dynamic-content language-id="es_ES"><![CDATA[Subtítulo]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="DescripciónLarga" type="text_box" index-type="text" instance-id="peib">
+		<dynamic-content language-id="es_ES"><![CDATA[Esta es la descripción larga.Lorem ipsum dolor sit amet consectetur adipiscing elit posuere malesuada mollis auctor, condimentum accumsan scelerisque.Nec augue per torquent himenaeos tortor morbi molestie phasellus mauris, fusce tincidunt class libero nisl venenatis nullam pellentesque.]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="Icono" type="list" index-type="keyword" instance-id="fovo">
+		<dynamic-content language-id="es_ES"><![CDATA[value 1]]></dynamic-content>
+	</dynamic-element>
+</root>
