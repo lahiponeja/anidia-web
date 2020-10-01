@@ -14,6 +14,6 @@
 		<dynamic-content language-id="es_ES"><![CDATA[]]></dynamic-content>
 	</dynamic-element>
 	<dynamic-element name="Icono" type="list" index-type="keyword" instance-id="efwd">
-		<dynamic-content language-id="es_ES"><![CDATA[value 1]]></dynamic-content>
+		<dynamic-content language-id="es_ES"><![CDATA[an-icon--check-leafs-svg]]></dynamic-content>
 	</dynamic-element>
 </root>

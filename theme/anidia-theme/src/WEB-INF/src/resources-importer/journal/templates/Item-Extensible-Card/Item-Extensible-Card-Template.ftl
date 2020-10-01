@@ -1,6 +1,6 @@
 <div class="an-card an-card--simple">
     <div class="an-card--simple__intro">
-        <div class="an-icon--bulb-green-svg mb-m"></div>
+        <div class="${Icono.getData()} mb-m"></div>
             <p class="an-body-l-bold an-card__title mb-m">${Título.getData()}</p>
         </div>
         <div class="an-card--simple__text">

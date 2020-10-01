@@ -14,6 +14,6 @@
 		<dynamic-content language-id="es_ES"><![CDATA[Esta es la descripción larga.Lorem ipsum dolor sit amet consectetur adipiscing elit posuere malesuada mollis auctor, condimentum accumsan scelerisque.Nec augue per torquent himenaeos tortor morbi molestie phasellus mauris, fusce tincidunt class libero nisl venenatis nullam pellentesque.]]></dynamic-content>
 	</dynamic-element>
 	<dynamic-element name="Icono" type="list" index-type="keyword" instance-id="fovo">
-		<dynamic-content language-id="es_ES"><![CDATA[value 1]]></dynamic-content>
+		<dynamic-content language-id="es_ES"><![CDATA[an-icon--solar-panel-green-svg]]></dynamic-content>
 	</dynamic-element>
 </root>
