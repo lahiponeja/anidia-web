@@ -2,20 +2,25 @@
   <div class="an-featured">
     <div class="an-featured__inner">
       <h2 class="an-featured__heading">
-        Te presentamos nuestra calculadora de ahorro
+        <lfr-editable id="Título" type="text">Título</lfr-editable>
       </h2>
 
       <p class="an-featured__text">
-        Conecta con la energía que necesitas par redefinir tu energía.
+        <lfr-editable id="Subtítulo" type="text">Subtítulo</lfr-editable>
       </p>
 
       <div class="an-featured__image">
-        <img src="[resources:featured-module.png]" alt="">
+        <lfr-editable id="Imagen1" type="image"
+          ><img src="[resources:featured-module.png]" alt=""
+        /></lfr-editable>
       </div>
 
       <div class="an-featured__btn">
-        <a href="#" class="an-btn an-btn--flatter an-btn--gradient">
-          <span>Lorem ipsum dolor</span>
+        <a
+          href="${htmlUtil.escape(configuration.Enlace)}"
+          class="an-btn an-btn--flatter an-btn--gradient"
+        >
+          <span>${htmlUtil.escape(configuration.Texto)}</span>
         </a>
       </div>
     </div>
