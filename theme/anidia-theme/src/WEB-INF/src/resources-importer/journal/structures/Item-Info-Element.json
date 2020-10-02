@@ -62,15 +62,21 @@
           }
         },
         {
-          "value": "an-icon--check-circle",
+          "value": "an-icon--check-simple",
           "label": {
-            "es_ES": "Check círculo"
+            "es_ES": "Check"
           }
         },
         {
-          "value": "an-icon--unselected",
+          "value": "an-icon--check-paper",
           "label": {
-            "es_ES": "No seleccionado"
+            "es_ES": "Check papel"
+          }
+        },
+        {
+          "value": "an-icon--check-circle",
+          "label": {
+            "es_ES": "Check círculo"
           }
         },
         {
@@ -82,25 +88,61 @@
         {
           "value": "an-icon--chevron-up",
           "label": {
-            "es_ES": "Chevron arriba"
+            "es_ES": "Cheurón arriba"
           }
         },
         {
-          "value": "an-icon--hot-water-heat-kitchen",
+          "value": "an-icon--chevron-down",
           "label": {
-            "es_ES": "Agua caliente cocina "
-          }
-        },
-        {
-          "value": "an-icon--hot-water-kitchen",
-          "label": {
-            "es_ES": "Agua caliente cocina 2"
+            "es_ES": "Cheurón abajo"
           }
         },
         {
           "value": "an-icon--hot-water",
           "label": {
-            "es_ES": "Agua caliente"
+            "es_ES": "Agua caliente 1"
+          }
+        },
+        {
+          "value": "an-icon--hot-water-two",
+          "label": {
+            "es_ES": "Agua caliente 2"
+          }
+        },
+        {
+          "value": "an-icon--hot-water-three",
+          "label": {
+            "es_ES": "Agua caliente 3"
+          }
+        },
+        {
+          "value": "an-icon--hot-water-four",
+          "label": {
+            "es_ES": "Agua caliente 4"
+          }
+        },
+        {
+          "value": "an-icon--hot-water-heat-kitchen",
+          "label": {
+            "es_ES": "Agua caliente con cocina "
+          }
+        },
+        {
+          "value": "an-icon--hot-water-kitchen",
+          "label": {
+            "es_ES": "Agua caliente con cocina 2"
+          }
+        },
+        {
+          "value": "an-icon--hot-water-and-pot",
+          "label": {
+            "es_ES": "Agua caliente con olla"
+          }
+        },
+        {
+          "value": "an-icon--hot-water-thermo-and-pot",
+          "label": {
+            "es_ES": "Agua caliente con termo y olla"
           }
         },
         {
@@ -119,6 +161,174 @@
           "value": "an-icon--analisis",
           "label": {
             "es_ES": "Análisis"
+          }
+        },
+        {
+          "value": "an-icon--leverage-energy",
+          "label": {
+            "es_ES": "Sol"
+          }
+        },
+        {
+          "value": "an-icon--heating",
+          "label": {
+            "es_ES": "Calefacción"
+          }
+        },
+        {
+          "value": "an-icon--kitchen",
+          "label": {
+            "es_ES": "Cocina"
+          }
+        },
+        {
+          "value": "an-icon--lightning",
+          "label": {
+            "es_ES": "Rayo"
+          }
+        },
+        {
+          "value": "an-icon--lightning-borders",
+          "label": {
+            "es_ES": "Rayo con contorno"
+          }
+        },
+        {
+          "value": "an-icon--thunder-house",
+          "label": {
+            "es_ES": "Rayo y casa"
+          }
+        },
+        {
+          "value": "an-icon--business",
+          "label": {
+            "es_ES": "Negocios"
+          }
+        },
+        {
+          "value": "an-icon--offer",
+          "label": {
+            "es_ES": "Oferta "
+          }
+        },
+        {
+          "value": "an-icon--apartments",
+          "label": {
+            "es_ES": "Apartamentos"
+          }
+        },
+        {
+          "value": "an-icon--respectful",
+          "label": {
+            "es_ES": "Respetuoso"
+          }
+        },
+        {
+          "value": "an-icon--secure",
+          "label": {
+            "es_ES": "Seguro"
+          }
+        },
+        {
+          "value": "an-icon--living-place",
+          "label": {
+            "es_ES": "Residencia"
+          }
+        },
+        {
+          "value": "an-icon--search",
+          "label": {
+            "es_ES": "Buscar"
+          }
+        },
+        {
+          "value": "an-icon--bill",
+          "label": {
+            "es_ES": "Billete "
+          }
+        },
+        {
+          "value": "an-icon--target",
+          "label": {
+            "es_ES": "Targeta"
+          }
+        },
+        {
+          "value": "an-icon--spend",
+          "label": {
+            "es_ES": "Gasto"
+          }
+        },
+        {
+          "value": "an-icon--temperature",
+          "label": {
+            "es_ES": "Temperatura"
+          }
+        },
+        {
+          "value": "an-icon--facebook",
+          "label": {
+            "es_ES": "Facebook"
+          }
+        },
+        {
+          "value": "an-icon--instagram",
+          "label": {
+            "es_ES": "Instagram"
+          }
+        },
+        {
+          "value": "an-icon--linkedin",
+          "label": {
+            "es_ES": "LinkedIn"
+          }
+        },
+        {
+          "value": "an-icon--pinterest",
+          "label": {
+            "es_ES": "Pinterest"
+          }
+        },
+        {
+          "value": "an-icon--euro-cable",
+          "label": {
+            "es_ES": "Euro cable"
+          }
+        },
+        {
+          "value": "an-icon--unifamiliar-home",
+          "label": {
+            "es_ES": "Casa unifamiliar"
+          }
+        },
+        {
+          "value": "an-icon--hand-coin",
+          "label": {
+            "es_ES": "Moneda en mano"
+          }
+        },
+        {
+          "value": "an-icon--head-phones",
+          "label": {
+            "es_ES": "Auriculares"
+          }
+        },
+        {
+          "value": "an-icon--thermometer",
+          "label": {
+            "es_ES": "Termómetro"
+          }
+        },
+        {
+          "value": "an-icon--close-cross",
+          "label": {
+            "es_ES": "X"
+          }
+        },
+        {
+          "value": "an-icon--unselected",
+          "label": {
+            "es_ES": "X en círculo"
           }
         }
       ],
