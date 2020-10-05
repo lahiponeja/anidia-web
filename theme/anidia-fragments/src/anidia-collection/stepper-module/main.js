@@ -1,5 +1,5 @@
 const windowWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
-const dots = document.querySelectorAll('.extensible-cards__dot');
+const dots = document.querySelectorAll('.an-stepper__dot');
 const cardContainer = document.querySelector('.an-stepper__tab__container');
 const nCards = document.querySelectorAll('.an-stepper__tab__content').length;
 
