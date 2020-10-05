@@ -1,0 +1,65 @@
+.an-stepper {
+  color: $white;
+
+  h3 {
+    text-align: center;
+    margin-bottom: rem(55);
+  }
+
+  &__tabs {
+    min-height: 500px;
+
+    @include desktop {
+      clear: both;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      margin: 0 auto;
+    }
+  }
+
+  &__tab {
+    float: left;
+
+    label {
+      margin-right: rem(30);
+      position: relative;
+      top: 0;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    [type=radio] {
+      display: none;
+    }
+  }
+
+
+  &__tab__container {
+    transition: opacity .2s cubic-bezier(.42,0,.34,1.01);
+    opacity: 0;
+    margin-top: rem(55);
+
+    @include desktop {
+      position: absolute;
+      top: 40px;
+    }
+
+    h4 {
+      font-size: rem(24);
+      line-height: rem(32);
+      font-family: $fs-emeric-bold-family;
+    }
+  }
+
+
+  [type=radio]:checked ~ label {
+    border-bottom: 2px solid;
+    z-index: 2;
+  }
+
+  [type=radio]:checked ~ label ~ &__tab__container {
+    z-index: 1;
+    opacity: 1;
+  }
+}
