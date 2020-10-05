@@ -1,9 +1,13 @@
 <div class="an-stepper">
   <h3>Tu edificio</h3>
   <div class="an-stepper__tabs">
+    <select class="an-stepper__dropdown an-h5" name="an-select">
+      <option value="1">Tiene gas natural</option>
+      <option value="2">No tiene gas natural</option>
+    </select>
     <!-- AÑADIR CLASE "ACTIVE" PARA INDICAR EL TAB ACTIVO -->
     <div class="an-stepper__tab active">
-      <input type="radio" name="tabgroup" id="tab-1" checked>
+      <input type="radio" name="tabgroup" id="tab-1" checked >
       <label for="tab-1" class="an-h5">Tiene gas natural</label>
       <div class="an-stepper__tab__container">
         <div class="an-stepper__tab__content">
@@ -46,5 +50,5 @@
       <div class="an-stepper__tab__container"></div>
     </div>
   </div>
-  <a href="#" class="an-btn an-btn--white">Contratar ahora</a>
+  <div class="an-stepper__footer"><a href="#" class="an-btn an-btn--white">Contratar ahora</a></div>
 </div>

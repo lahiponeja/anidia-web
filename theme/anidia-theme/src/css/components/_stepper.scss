@@ -6,8 +6,24 @@
     margin-bottom: rem(55);
   }
 
+  &__dropdown {
+    outline: 0;
+    box-shadow: none;
+    border: 0;
+    background: none;
+    color: $white;
+    text-transform: uppercase;
+    display: flex;
+    margin: auto;
+
+    @include desktop {
+      display: none !important;
+      visibility: hidden !important;
+    }
+  }
+
   &__tabs {
-    min-height: 500px;
+    min-height: rem(500);
 
     @include desktop {
       clear: both;
@@ -30,10 +46,18 @@
       top: 0;
       cursor: pointer;
       text-transform: uppercase;
+      display: none !important;
+      visibility: hidden !important;
+
+      @include desktop {
+        display: block !important;
+        visibility: visible !important;
+      }
     }
 
     [type=radio] {
-      display: none;
+      display: none !important;
+      visibility: hidden !important;
     }
   }
 
@@ -66,6 +90,7 @@
       overflow: hidden;
       scroll-snap-type: none;
       scroll-padding: none;
+      left: 0;
     }
 
     h4 {
@@ -73,6 +98,11 @@
       line-height: rem(32);
       font-family: $fs-emeric-bold-family;
       margin-bottom: rem(12);
+
+      @include desktop {
+        margin-right: rem(15);
+        margin-left: rem(15);
+      }
     }
   }
 
@@ -81,9 +111,22 @@
     text-align: center;
     scroll-snap-align: start;
 
+    @include desktop {
+      min-width: auto;
+    }
+
     &:first-child {
       .an-stepper__tab__content__step:after {
         content: none;
+      }
+    }
+
+    p {
+      max-width: rem(234);
+      margin: auto;
+
+      @include desktop {
+        margin: 0 rem(15);
       }
     }
   }
@@ -158,22 +201,7 @@
     }
   }
 
+  &__footer {
+    text-align: center;
+  }
 }
-
-
-// .extensible-cards {
-
-
-//   .an-card--simple {
-//     margin-right: rem(20);
-//     //min-width: 278px;
-
-//     &:first-child {
-//       margin-left: rem(20);
-
-//       @include desktop {
-//         margin-left: 0;
-//       }
-//     }
-//   }
-// }

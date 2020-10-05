@@ -1,4 +1,3 @@
-const windowWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
 const dots = document.querySelectorAll('.an-stepper__dot');
 const cardContainer = document.querySelector('.an-stepper__tab__container');
 const nCards = document.querySelectorAll('.an-stepper__tab__content').length;
@@ -38,3 +37,9 @@ function setAriaPressed(index) {
     dot.setAttribute('aria-pressed', !!(i === index));
   });
 }
+
+
+document.querySelector('.an-stepper__dropdown').addEventListener('change', () => {
+  let id = document.querySelector('.an-stepper__dropdown').value;
+  document.querySelector(`#tab-${id}`).checked = true;
+});
