@@ -5,8 +5,7 @@
 Para arrancar el Doker solo hay que levantar las imagenes mediante `docker-compose`.
 
 ```bash
-anidia-web/$ cd docker
-anidia-web/docker$ docker-compose up
+anidia-web$ docker-compose up
 ```
 
 Después de eso, hay que acceder a [http://localhost:8080](http://localhost:8080).
@@ -57,7 +56,7 @@ El código fuente de los fragments está en  `theme/anidia-fragments` y dentro s
 
 Para añadir otras colecciones, fragmentos o templates de páginas se pueden seguir las instrucciones situadas en el [repositorio de Liferay](https://github.com/liferay/generator-liferay-fragments).
 
-Además de la tarea `npx gulp import` hay otra manera de poder importar fragmentos al theme. Se puede ejecutar `npx gulp compress` y copiar el zip que se genera en `build/liferay-fragments.zip` a la carpeta `liferay/deploy/`.
+Además de la tarea `npm run import` hay otra manera de poder importar fragmentos al theme. Se puede ejecutar `npm run compress` y copiar el zip que se genera en `build/liferay-fragments.zip` a la carpeta `liferay/deploy/`.
 
 ### Editar un fragmento
 
@@ -81,3 +80,51 @@ Los portlets son módulos complejos que requieren un comportamiento que se debe 
 Estos módulos se desarrollan con el Liferay Developer Studio, IDE basado en eclipse, aunque se pueden modificar sus ficheros y realizar el despliegue a docker sin necesidad de ese IDE.
 
 Para ello, dentro de la carpeta del portlet, se ejecuta la tarea `gradle war`. Esto genera el war en la carpeta `build/libs/` dentro de la carpeta del portlet y se copia a la carpeta `liferay/deploy` como todos los war.
+
+## Desarrollo del Asset Publisher
+
+El Asset Publisher es un portlet estándar de Liferay que permite obtener datos de las estructuras definidas y da mucho poder al usuario.
+
+Para desarrollar vistas nuevas en el Asset Publisher hay que tocar dos módulos de extensión de la carpeta `theme/anidia-portlets`:
+
+* El primero está en `LRWorkspace/ext/APOVerride`. Este módulo sobreescribe la configuración del Asset Publisher y le permite incorporar nuevas opcioens de plantillas.
+* El segundo es `module-jsp-override` que permite incorporar las vistas en si.
+
+### Añadir una nueva vista al Asset Publisher
+
+Para incorporar una nueva vista disponible en el selector del Asset Publisher lo tenemos que añadir a la interfaz de configuración (`AssetPublisherPortletInstanceConfiguration`) el nombre de la plantilla en la meta información de la propiedad `displayStyles`.
+
+```java
+	@Meta.AD(
+		deflt = "table|title-list|abstracts|full-content|BasicAP|NUEVA PLANTILLA",
+		description = "display-styles-key-description", name = "display-styles",
+		required = false
+	)
+	public String[] displayStyles();
+```
+
+A continuación, en el módulo `module-jsp-override` introducimos la nueva vista.
+
+* En `view_asset_entry_list.jsp` incorporamos código para gestionar el caso en que la plantilla sea la nueva. EL código será algo parecido a
+
+```jsp
+<c:when test='<%= Objects.equals(assetPublisherDisplayContext.getDisplayStyle(), "NUEVA PLANTILLA") %>'>
+  <%
+  request.setAttribute("view.jsp-assetEntryResult", assetEntryResult);
+  %>
+  <liferay-util:include page="/view_nueva_plantilla_template.jsp" servletContext="<%= application %>" />
+</c:when>
+```
+
+* Un nuevo JSP `view_nueva_plantilla_template.jsp` que será el que englobará toda la colección de assets a rendear. AL final hará referencia a una plantilla para cada asset individual mediante el código `<liferay-util:include page="/view_nueva_plantilla_entry_template.jsp" servletContext="<%= application %>" />`.
+
+* Un nuevo JSP `view_nueva_plantilla_entry_template.jsp` que será la que pinte el asset individual.
+
+### Desplegar Asset Publisher
+
+El despliegue tiene dos pasos:
+
+* Primero apagamos Liferay.
+* Luego, desplegamos el modulo `LRWorkspace/ext/APOVerride`. Esto lo hacemos ejecutando `gradle deploy` en su carpeta y copiando el .jar resultante (`LRWorkspace/bundles/osgi/marketplace/override/com.liferay.asset.publisher.web.jar`) a la carpeta `liferay/files/osgi/marketplace/override/`.
+* Iniciamos Liferay, esto debería cargar nuestra nueva versión del módulo.
+* Luego desplegamos el módulo `module-jsp-override`. Para esto ejecutamos gradle build en su carpeta y copiamos el jar resultante (`module-jsp-override/build/libs/com.liferay.blade.module.jsp.override-1.0.0.jar`) en la carpeta de deploys `liferay/deploy`.

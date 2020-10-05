@@ -3,8 +3,12 @@
   flex-direction: column;
   margin: 0 auto;
   max-width: rem(1440);
-  padding: 0 rem(60);
+  padding: 0 rem(20);
   width: 100%;
+
+  @include tablet {
+    padding: 0 rem(60);
+  }
 
   &--med {
     max-width: rem(1024);
@@ -12,6 +16,10 @@
 
   &--sml {
     max-width: rem(855);
+
+    @include tablet {
+      padding: 0;
+    }
   }
 
   &--row {
