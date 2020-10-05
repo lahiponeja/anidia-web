@@ -1,22 +1,40 @@
-console.group('stepper-module');
-console.log('fragmentElement', fragmentElement);
-console.groupEnd();
+const windowWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
+const dots = document.querySelectorAll('.extensible-cards__dot');
+const cardContainer = document.querySelector('.an-stepper__tab__container');
+const nCards = document.querySelectorAll('.an-stepper__tab__content').length;
 
+dots.forEach((dot, i) => {
+  dot.addEventListener('click', e => {
+    e.preventDefault();
+    e.stopPropagation();
+    setAriaPressed(i);
+    const scrollLeft = Math.floor(cardContainer.scrollWidth * (i / nCards));
+    smoothScroll(cardContainer, scrollLeft);
+  });
+});
 
-let height = -1;
+cardContainer.addEventListener('scroll', () => {
+  let index = Math.round((cardContainer.scrollLeft / cardContainer.scrollWidth) * nCards);
+  setAriaPressed(index);
+}, 200);
 
-// document.querySelectorAll('.an-stepper__tab__container').forEach();
-// (function($, document) {
+setAriaLabels();
 
-//   // get tallest tab__content element
-//   let height = -1;
+function smoothScroll (node, topOrLeft) {
+  return node.scrollTo({
+    ['left']: topOrLeft,
+    behavior: 'smooth'
+  });
+}
 
-// $('.tab__content').each(function() {
-//   height = height > $(this).outerHeight() ? height : $(this).outerHeight();
-//      $(this).css('position', 'absolute');
-// });
+function setAriaLabels() {
+  dots.forEach((dot, i) => {
+    dot.setAttribute('aria-label', `Scroll to item #${i + 1}`);
+  });
+}
 
-//   // set height of tabs + top offset
-// $('[data-tabs]').css('min-height', height + 40 + 'px');
-
-// }(jQuery, document));
+function setAriaPressed(index) {
+  dots.forEach((dot, i) => {
+    dot.setAttribute('aria-pressed', !!(i === index));
+  });
+}
