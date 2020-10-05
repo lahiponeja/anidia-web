@@ -149,6 +149,8 @@
       border-radius: 50%;
       background-color: $an-yellow;
       color: $an-theme;
+      font-family: $fs-emeric-bold-family;
+      font-size: rem(18);
     }
 
     &::after {
@@ -158,7 +160,7 @@
       height: 2px;
       background-color: $an-yellow;
       top: 15px;
-      left: -50%;
+      left: -49%;
       z-index: -1;
     }
   }
