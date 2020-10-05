@@ -14,7 +14,7 @@
     &:first-child {
 
       @include desktop {
-        width: flex-grid(3);
+        width: flex-grid(4);
       }
 
       img {
@@ -30,7 +30,7 @@
     &:last-child {
 
       @include desktop {
-        width: flex-grid(3);
+        width: flex-grid(4);
       }
 
       img {
