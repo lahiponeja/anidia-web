@@ -37,7 +37,15 @@ tasks.register("build.fragments") {
   doLast {
     exec {
       workingDir 'theme/anidia-fragments'
-      commandLine 'expect', 'compress.exp'
+      if( project.hasProperty('env')) {
+        if( env=='production') {
+          commandLine 'expect', 'compress-production.exp'
+        } else {
+          commandLine 'expect', 'compress-dev.exp'
+        }
+      } else {
+        commandLine 'expect', 'compress-dev.exp'
+      }
     }
     exec {
       commandLine 'cp', 'theme/anidia-fragments/build/liferay-fragments.zip', 'liferay/deploy'
