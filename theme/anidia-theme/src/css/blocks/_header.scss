@@ -4,7 +4,12 @@
     color: $white;
     font-size: rem(18);
     font-family: $fs-emeric-medium-family;
-    margin-right: rem(40);
+    width: 100%;
+    border-bottom: 1px solid #D8D8D8;
+
+    @include desktop {
+      margin-right: rem(40);
+    }
 
     .nav-link:hover {
       text-decoration: underline;
@@ -18,31 +23,187 @@
   }
 
   .dropdown-menu {
-    background-color: $white;
     border: none;
-    padding: rem(40) rem(60);
     margin: 0;
     border-radius: 0;
-    max-width: none;
+    max-width: unset;
+    opacity: 1;
+    position: fixed;
+    top: 0;
+    left: 100%;
+    transition: .6s ease-in-out 0s;
+    height: 100%;
+    max-height: unset;
+    background: $an-theme-dark-grey;
+
+    @include desktop {
+      padding: rem(40) rem(60);
+      position: absolute;
+      background-color: $white;
+    }
+
+    &.active {
+      left: 0;
+      z-index: 2;
+      display: block;
+    }
 
     .dropdown-item {
-      @include gradient-yellow-bg;
-      width: rem(188);
-      height: rem(155);
-      margin-right: rem(38);
-      font-size: rem(14);
-      line-height: rem(17);
-      font-family: $open-sans-bold-family;
-      border-radius: rem(10);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: $white;
 
-      &:hover {
-        background-color: transparent;
-        text-decoration: underline;
+      @include desktop {
+        @include gradient-yellow-bg;
+        width: rem(188);
+        height: rem(155);
+        margin-right: rem(38);
+        font-size: rem(14);
+        line-height: rem(17);
+        font-family: $open-sans-bold-family;
+        border-radius: rem(10);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $white;
+
+        &:hover {
+          background-color: transparent;
+          text-decoration: underline;
+        }
       }
+    }
+  }
+
+  .navbar-nav {
+    position: absolute;
+    top: 66px;
+    left: 0;
+    opacity: 0;
+    transition: .25s 0s ease-in-out;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    flex-direction: column;
+  }
+
+  .menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 92px;
+    height: 66px;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+  }
+
+  .hamburger {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 30px;
+    height: 4px;
+    background: $white;
+    display: block;
+    transform-origin: center;
+    transition: .5s ease-in-out;
+    border-radius: rem(20);
+  }
+
+  .hamburger:after,
+  .hamburger:before {
+    transition: .5s ease-in-out;
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: $white;
+    border-radius: rem(20);
+  }
+
+  .hamburger:before {
+    top: -10px;
+  }
+
+  .hamburger:after {
+    bottom: -10px;
+  }
+
+  input {
+    display: none;
+  }
+
+  input:checked + .menu {
+    height: 100vh;
+    width: 100vw;
+    background-color: $an-theme-dark-grey;
+    position: fixed;
+    z-index: 2;
+  }
+
+  input:checked ~ div .navbar-nav {
+    opacity: 1;
+  }
+
+  input:checked + .menu .hamburger {
+    transform: rotate(45deg);
+    background-color: #FFF;
+  }
+
+  input:checked + .menu .hamburger:after {
+    transform: rotate(90deg);
+    bottom: 0;
+    background-color: #FFF;
+  }
+
+  input:checked + .menu .hamburger:before {
+    transform: rotate(90deg);
+    top: 0;
+    background-color: #FFF;
+  }
+
+  ul {
+    position: absolute;
+    top: 66px;
+    left: 0;
+    opacity: 0;
+    transition: .25s 0s ease-in-out;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    a {
+      display: block;
+      box-sizing: border-box;
+      position: relative;
+      color: white;
+      text-decoration: none;
+      line-height: 250%;
+      width: 100%;
+      padding: 0 1.25rem;
+    }
+  }
+
+  .back {
+    a {
+      padding-left: 2.5rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 1.25rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-right: 6px solid white;
+      }
+    }
+  }
+
+  .nav-item.dropdown {
+    & > a {
+      padding-right: 2.5rem;
     }
   }
 }

@@ -9,6 +9,7 @@
 	<#include "${full_templates_path}/head/meta_tags.ftl" />
 
 	<link rel="stylesheet" href="${css_folder}/anidia.css" charset="utf-8">
+  <link rel="text/javascript" href="${javascript_folder}/main.js" charset="utf-8">
 
 </head>
 
@@ -39,12 +40,14 @@
 			<a data-redirect="${is_login_redirect_required?string}" href="${sign_in_url}" id="sign-in" rel="nofollow">${sign_in_text}</a>
 		</#if>
 
-  <div class="anidia-header">
-    <@liferay.navigation_menu
-            instance_id="main_navigation_menu"
-            default_preferences="${freeMarkerPortletPreferences}"
-      />
-  </div>
+  <label id="burger-menu" class="anidia-header">
+    <input type="checkbox" />
+    <span class="menu"><span class="hamburger"></span></span>
+      <@liferay.navigation_menu
+              instance_id="main_navigation_menu"
+              default_preferences="${freeMarkerPortletPreferences}"
+        />
+  </label>
 
 		<h3>Call me back</h3>
 		<a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--call-us-free-svg an-cmb">
