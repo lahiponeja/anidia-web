@@ -46,7 +46,6 @@ set timeout -1
 spawn npm run compress
 match_max 100000
 expect -exact "\r
-> anidia-fragments@1.0.0 compress /home/davidbrenes/workspaces/anidia-web/theme/anidia-fragments\r
 > yo liferay-fragments:compress\r
 \r
 \[32m?\[39m \[1mAdd deployment descriptor?\[22m\[0m \[0m\[2m(Y/n) \[22m\[35D\[35C"
