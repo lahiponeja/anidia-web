@@ -11,8 +11,9 @@ tasks.register("build") {
 
     dependsOn 'build.theme'
     dependsOn 'build.fragments'
-    dependsOn 'build.assetPublisher.ext'
-    dependsOn 'build.assetPublisher.jsp'
+    if( project.hasProperty('buildPublisher') && buildPublisher == "true") {
+      dependsOn 'build.assetPublisher'
+    }
 }
 
 tasks.register("build.theme") {
@@ -51,6 +52,15 @@ tasks.register("build.fragments") {
       commandLine 'cp', 'theme/anidia-fragments/build/liferay-fragments.zip', 'liferay/deploy'
     }
   }
+}
+
+tasks.register("build.assetPublisher") {
+
+  group = 'Anidia'
+  description = 'Builds everything related to Asset Publisher and copy it to the deploy folder'
+
+  dependsOn 'build.assetPublisher.ext'
+  dependsOn 'build.assetPublisher.jsp'
 }
 
 tasks.register("build.assetPublisher.ext") {
