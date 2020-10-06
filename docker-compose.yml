@@ -16,18 +16,6 @@ services:
     volumes:
       - db-data:/var/lib/mysql
 
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.9.1
-    container_name: liferay_es
-    restart: always
-    volumes:
-      - elastic_data:/usr/share/elasticsearch/data
-    environment:
-      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
-      - discovery.type=single-node
-    ports:
-      - "9200:9200"
-
   portal:
     image: liferay/portal:7.3.4-ga5
     user: root
@@ -46,18 +34,17 @@ services:
       - "11311:11311"
     volumes:
       - ./liferay:/mnt/liferay:Z
-      - liferay_war:/opt/liferay/osgi/war
+      - liferay_war:/opt/liferay/osgi/war:Z
+      - liferay_document_library:/opt/liferay/data/document_library:Z
     depends_on:
       - db
-      - elasticsearch
     links:
       - db
-      - elasticsearch
 
 networks:
   default:
 
 volumes:
   db-data: {}
-  elastic_data: {}
   liferay_war: {}
+  liferay_document_library: {}
