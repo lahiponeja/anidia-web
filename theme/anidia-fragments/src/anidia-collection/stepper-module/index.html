@@ -1,13 +1,17 @@
 <div class="an-stepper">
-  <h3>Tu edificio</h3>
+  <h3><lfr-editable id="Título" type="text">Título</lfr-editable></h3>
   <div class="an-stepper__tabs">
     <select class="an-stepper__dropdown an-h5" name="an-select">
       <option value="1">Tiene gas natural</option>
       <option value="2">No tiene gas natural</option>
     </select>
-    <!-- AÑADIR CLASE "ACTIVE" PARA INDICAR EL TAB ACTIVO -->
-    <div class="an-stepper__tab active">
+
+    <div class="an-stepper__tab ">
+      [#if configuration.SelectedTab == 'Izquierdo']
       <input type="radio" name="tabgroup" id="tab-1" checked >
+      [#else]
+      <input type="radio" name="tabgroup" id="tab-1">
+      [/#if]
       <label for="tab-1" class="an-h5">Tiene gas natural</label>
       <div class="an-stepper__tab__container">
         <div class="an-stepper__tab__content">
@@ -44,11 +48,17 @@
         <li class="an-stepper__dot"></li>
        </ul>
     </div>
-    <div class="an-stepper__tab">
+    <div class="an-stepper__tab active">
+      [#if configuration.SelectedTab == 'Derecho']
+      <input type="radio" name="tabgroup" id="tab-2" checked >
+      [#else]
       <input type="radio" name="tabgroup" id="tab-2">
+      [/#if]
       <label for="tab-2" class="an-h5">No tiene gas natural</label>
       <div class="an-stepper__tab__container"></div>
     </div>
   </div>
-  <div class="an-stepper__footer"><a href="#" class="an-btn an-btn--white">Contratar ahora</a></div>
+  <div class="an-stepper__footer"
+  ><a href="${htmlUtil.escape(configuration.Enlace)}" class="an-btn an-btn--white">
+    ${htmlUtil.escape(configuration.Texto)}</a></div>
 </div>
