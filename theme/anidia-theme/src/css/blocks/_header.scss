@@ -1,0 +1,48 @@
+.anidia-header {
+
+  .nav-item {
+    color: $white;
+    font-size: rem(18);
+    font-family: $fs-emeric-medium-family;
+    margin-right: rem(40);
+
+    .nav-link:hover {
+      text-decoration: underline;
+      color: $white;
+    }
+
+    .lfr-nav-child-toggle svg {
+      font-size: rem(10);
+      margin-left: rem(10);
+    }
+  }
+
+  .dropdown-menu {
+    background-color: $white;
+    border: none;
+    padding: rem(40) rem(60);
+    margin: 0;
+    border-radius: 0;
+    max-width: none;
+
+    .dropdown-item {
+      @include gradient-yellow-bg;
+      width: rem(188);
+      height: rem(155);
+      margin-right: rem(38);
+      font-size: rem(14);
+      line-height: rem(17);
+      font-family: $open-sans-bold-family;
+      border-radius: rem(10);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $white;
+
+      &:hover {
+        background-color: transparent;
+        text-decoration: underline;
+      }
+    }
+  }
+}

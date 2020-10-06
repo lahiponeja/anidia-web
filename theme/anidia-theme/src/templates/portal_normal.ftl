@@ -39,9 +39,12 @@
 			<a data-redirect="${is_login_redirect_required?string}" href="${sign_in_url}" id="sign-in" rel="nofollow">${sign_in_text}</a>
 		</#if>
 
-		<#if has_navigation && is_setup_complete>
-			<#include "${full_templates_path}/navigation.ftl" />
-		</#if>
+  <div class="anidia-header">
+    <@liferay.navigation_menu
+            instance_id="main_navigation_menu"
+            default_preferences="${freeMarkerPortletPreferences}"
+      />
+  </div>
 
 		<h3>Call me back</h3>
 		<a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--call-us-free-svg an-cmb">
