@@ -1,43 +1,38 @@
 <div class="an-stepper">
   <h3><lfr-editable id="Título" type="text">Título</lfr-editable></h3>
   <div class="an-stepper__tabs">
-    <select class="an-stepper__dropdown an-h5" name="an-select">
-      <option value="1">Tiene gas natural</option>
-      <option value="2">No tiene gas natural</option>
-    </select>
-
     <div class="an-stepper__tab ">
       [#if configuration.SelectedTab == 'Izquierdo']
       <input type="radio" name="tabgroup" id="tab-1" checked >
       [#else]
       <input type="radio" name="tabgroup" id="tab-1">
       [/#if]
-      <label for="tab-1" class="an-h5">Tiene gas natural</label>
+      <label for="tab-1" class="an-h5"><lfr-editable id="TítuloTab1" type="text">Título Tab 1</lfr-editable></label>
       <div class="an-stepper__tab__container">
         <div class="an-stepper__tab__content">
           <div class="an-stepper__tab__content__step"></div>
-          <h4>Contactamos</h4>
-          <p>Con el presidente de la comunidad para sondear el número de vecinos interesados en instalar gas natural.</p>
+          <h4><lfr-editable id="Título1_1" type="text">Título 1</lfr-editable></h4>
+          <p><lfr-editable id="Descripción1_1" type="text">Descripción 1</lfr-editable></p>
         </div>
         <div class="an-stepper__tab__content">
           <div class="an-stepper__tab__content__step"></div>
-          <h4>Presentamos el proyecto</h4>
-          <p>Al Presidente y/o al Administrador para conseguir su aprobación de la instalación o proceder a su modificación si fuera preciso.</p>
+          <h4><lfr-editable id="Título1_2" type="text">Título 2</lfr-editable></h4>
+          <p><lfr-editable id="Descripción1_2" type="text">Descripción 2</lfr-editable></p>
         </div>
         <div class="an-stepper__tab__content">
           <div class="an-stepper__tab__content__step"></div>
-          <h4>Aprobación del proyecto</h4>
-          <p>Solicitaremos una Junta de Propietarios para presentar y aprobar el proyecto.</p>
+          <h4><lfr-editable id="Título1_3" type="text">Título 3</lfr-editable></h4>
+          <p><lfr-editable id="Descripción1_3" type="text">Descripción 3</lfr-editable></p>
         </div>
         <div class="an-stepper__tab__content">
           <div class="an-stepper__tab__content__step"></div>
-          <h4>Instalamos</h4>
-          <p>Una vez aprobado iniciaremos la construcción de la instalación receptora comunitaria (IRC).</p>
+          <h4><lfr-editable id="Título1_4" type="text">Título 4</lfr-editable></h4>
+          <p><lfr-editable id="Descripción1_4" type="text">Descripción 4</lfr-editable></p>
         </div>
         <div class="an-stepper__tab__content">
           <div class="an-stepper__tab__content__step"></div>
-          <h4>Contáctanos</h4>
-          <p>Al finalizar la instalación del edificio tendrás que realizar la instalación receptora individual (IRI).</p>
+          <h4><lfr-editable id="Título1_5" type="text">Título 5</lfr-editable></h4>
+          <p><lfr-editable id="Descripción1_5" type="text">Descripción 5</lfr-editable></p>
         </div>
       </div>
       <ul class="an-stepper__dots">
@@ -54,8 +49,41 @@
       [#else]
       <input type="radio" name="tabgroup" id="tab-2">
       [/#if]
-      <label for="tab-2" class="an-h5">No tiene gas natural</label>
-      <div class="an-stepper__tab__container"></div>
+      <label for="tab-2" class="an-h5"><lfr-editable id="TítuloTab2" type="text">Título Tab 2</lfr-editable></label>
+      <div class="an-stepper__tab__container">
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título2_1" type="text">Título 1</lfr-editable></h4>
+          <p><lfr-editable id="Descripción2_1" type="text">Descripción 1</lfr-editable></p>
+        </div>
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título2_2" type="text">Título 2</lfr-editable></h4>
+          <p><lfr-editable id="Descripción2_2" type="text">Descripción 2</lfr-editable></p>
+        </div>
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título2_3" type="text">Título 3</lfr-editable></h4>
+          <p><lfr-editable id="Descripción2_3" type="text">Descripción 3</lfr-editable></p>
+        </div>
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título2_4" type="text">Título 4</lfr-editable></h4>
+          <p><lfr-editable id="Descripción2_4" type="text">Descripción 4</lfr-editable></p>
+        </div>
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título2_5" type="text">Título 5</lfr-editable></h4>
+          <p><lfr-editable id="Descripción2_5" type="text">Descripción 5</lfr-editable></p>
+        </div>
+      </div>
+      <ul class="an-stepper__dots">
+        <li class="an-stepper__dot" aria-pressed="true"></li>
+        <li class="an-stepper__dot"></li>
+        <li class="an-stepper__dot"></li>
+        <li class="an-stepper__dot"></li>
+        <li class="an-stepper__dot"></li>
+       </ul>
     </div>
   </div>
   <div class="an-stepper__footer"
