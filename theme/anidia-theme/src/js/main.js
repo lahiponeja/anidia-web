@@ -1,11 +1,11 @@
-let menuItemsWithSubmenu = document.querySelectorAll("ul .dropdown");
+let elementWithSubmenu = document.querySelectorAll("ul .dropdown");
 
-for (let i = 0; i < menuItemsWithSubmenu.length; i++) {
-    _addDrillDown(menuItemsWithSubmenu[i].getElementsByTagName("a")[0]);
-    _insertBackLinks(menuItemsWithSubmenu[i]);
+for (let i = 0; i < elementWithSubmenu.length; i++) {
+    openSubmenu(elementWithSubmenu[i].getElementsByTagName("a")[0]);
+    returnLink(elementWithSubmenu[i]);
 }
 
-function _insertBackLinks(menuItem) {
+function returnLink(menuItem) {
     let link = menuItem.getElementsByTagName("a")[0],
         submenu = menuItem.getElementsByTagName("ul")[0],
         backItem = document.createElement("li"),
@@ -13,13 +13,13 @@ function _insertBackLinks(menuItem) {
 
     backLink.href = link.href;
     backLink.text = link.text;
-    backItem.classList.add("back");
+    backItem.classList.add("anidia-header__back");
     backItem.appendChild(backLink);
     submenu.insertAdjacentElement("afterbegin", backItem);
-    _addDrillUp(backLink);
+    closeSubmenu(backLink);
 }
 
-function _addDrillDown(link) {
+function openSubmenu(link) {
     link.addEventListener("click", (event) => {
       event.preventDefault();
       link.classList.add("active");
@@ -27,7 +27,7 @@ function _addDrillDown(link) {
     });
 }
 
-function _addDrillUp(link) {
+function closeSubmenu(link) {
     link.addEventListener("click", (event) => {
       event.preventDefault();
       let submenu = link.parentElement.parentElement;

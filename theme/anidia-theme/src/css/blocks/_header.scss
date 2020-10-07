@@ -36,7 +36,7 @@
   .nav-item {
     color: $white;
     width: 100%;
-    border-bottom: rem(1) solid #D8D8D8;
+    border-bottom: rem(1) solid $an-border; //REPLACE #D8D8D8 WITH ANIDIA COLOR
 
     @include desktop {
       margin-right: rem(40);
@@ -106,7 +106,7 @@
       left: 0;
       height: auto;
       width: 100vw;
-      transform: translateX(-32px);
+      transform: translateX(rem(-32));
       justify-content: center;
     }
 
@@ -122,7 +122,7 @@
 
     .dropdown-item {
       font-size: rem(18);
-      border-bottom: 1px solid $white;
+      border-bottom: rem(1) solid $white;
       line-height: rem(36);
       padding: rem(13) 0;
 
@@ -173,7 +173,7 @@
 
 
   // BURGER MENU FOR MOBILE
-  .menu {
+  &__menu {
     position: absolute;
     right: 0;
     top: 0;
@@ -185,42 +185,42 @@
     @include desktop {
       display: none;
     }
+  }
 
-    .hamburger {
-      position: absolute;
-      top: rem(30);
-      right: rem(30);
-      width: rem(30);
-      height: rem(4);
-      background: $white;
-      display: block;
-      transform-origin: center;
+  &__hamburger {
+    position: absolute;
+    top: rem(30);
+    right: rem(30);
+    width: rem(30);
+    height: rem(4);
+    background: $white;
+    display: block;
+    transform-origin: center;
+    transition: .5s ease-in-out;
+    border-radius: rem(20);
+
+    &::before,
+    &::after {
       transition: .5s ease-in-out;
+      content: '';
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: $white;
       border-radius: rem(20);
+    }
 
-      &::before,
-      &::after {
-        transition: .5s ease-in-out;
-        content: '';
-        position: absolute;
-        display: block;
-        width: 100%;
-        height: 100%;
-        background: $white;
-        border-radius: rem(20);
-      }
+    &:before {
+      top: rem(-10);
+    }
 
-      &:before {
-        top: rem(-10);
-      }
-
-      &::after {
-        bottom: rem(-10);
-      }
+    &::after {
+      bottom: rem(-10);
     }
   }
 
-  input {
+  &__input {
     display: none;
 
     @include desktop {
@@ -259,7 +259,7 @@
     }
   }
 
-  .back {
+  &__back {
     border-bottom: rem(2) solid $an-theme;
 
     @include desktop {
@@ -322,29 +322,29 @@
   }
 }
 
-.anidia-logo--mobile {
-  height: rem(33);
-  width: rem(40);
-  display: inline;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translate(24px, 20px);
-  z-index: 3;
-}
-
-
+// LIFERAY SITE-TITLE REPLACED STYLES
 .site-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .anidia-logo--mobile {
+    height: rem(33);
+    width: rem(40);
+    display: inline;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(rem(24), rem(20));
+    z-index: 3;
+  }
 
   .an-icon--head-phones {
     height: rem(40);
     min-width: unset;
     width: rem(139);
     margin-right: rem(74);
-    transform: translateY(-20px);
+    transform: translateY(rem(-20));
     padding: 0;
 
     @include desktop {

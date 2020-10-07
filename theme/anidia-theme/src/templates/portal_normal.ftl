@@ -39,10 +39,10 @@
         </a>
 			</div>
 
-    <label id="burger-menu" class="anidia-header">
-      <input type="checkbox"/>
-      <span class="menu">
-        <span class="hamburger"></span>
+    <label class="anidia-header">
+      <input type="checkbox" class="anidia-header__input"/>
+      <span class="anidia-header__menu">
+        <span class="anidia-header__hamburger"></span>
       </span>
         <@liferay.navigation_menu
                 instance_id="main_navigation_menu"
