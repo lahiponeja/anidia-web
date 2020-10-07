@@ -12,6 +12,10 @@ public class AddressDTO implements Serializable {
 	private String MunicipalityName;
 
 
+	public AddressDTO() {
+		super();
+	}
+
 	public AddressDTO(String provinceCode, String municipalityCode, String postalCode, String municipalityName) {
 		super();
 		ProvinceCode = provinceCode;

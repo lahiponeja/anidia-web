@@ -7,6 +7,9 @@ import javax.portlet.RenderResponse;
 import com.liferay.portletmvc4spring.bind.annotation.ActionMapping;
 import com.liferay.portletmvc4spring.bind.annotation.RenderMapping;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.portlet.ActionResponse;
 import javax.portlet.MutableRenderParameters;
 
@@ -24,20 +27,33 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
+import GasBudgetRequestPortlet.dto.AddressDTO;
+import GasBudgetRequestPortlet.services.AddressService;
+
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-
 @Controller
-@RequestMapping(value="VIEW")
+@RequestMapping(value = "VIEW")
 public class MunicipalitiesController {
 
   private Log log = LogFactoryUtil.getLog(MunicipalitiesController.class.getName());
 
-  @RenderMapping
-  public String viewHomePage(RenderRequest request, RenderResponse response){
+  @ModelAttribute("address")
+	public AddressDTO getAddressDTOModelAttribute() {
+		return new AddressDTO();
+  }
 
-    log.info("#############################Calling viewHomePage##################################");
+  @RenderMapping
+  public String viewIndex(ModelMap modelMap) {
+
+    AddressService addressService = new AddressService();
+    log.info("#############################Calling viewIndex##################################");
+    try {
+      modelMap.put("municipalities", addressService.getMunicipalties());
+    } catch (IOException e) {
+      modelMap.put("municipalities", new ArrayList());
+    }
 
     return "index";
 
