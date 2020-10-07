@@ -1,5 +1,7 @@
 .an-featured {
-  background-color: white;
+  $parent: &;
+
+  background-color: $white;
   border-radius: rem(28);
   height: auto;
   display: flex;
@@ -82,6 +84,20 @@
 
       img {
         width: 100%;
+      }
+    }
+
+    &--image-right {
+      justify-content: flex-start;
+
+      #{ $parent }__inner {
+        margin-right: auto;
+        margin-left: rem(90);
+      }
+
+      #{ $parent }__image {
+        left: auto;
+        right: rem(-50);
       }
     }
   }

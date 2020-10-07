@@ -128,3 +128,31 @@ El despliegue tiene dos pasos:
 * Luego, desplegamos el modulo `LRWorkspace/ext/APOVerride`. Esto lo hacemos ejecutando `gradle deploy` en su carpeta y copiando el .jar resultante (`LRWorkspace/bundles/osgi/marketplace/override/com.liferay.asset.publisher.web.jar`) a la carpeta `liferay/files/osgi/marketplace/override/`.
 * Iniciamos Liferay, esto debería cargar nuestra nueva versión del módulo.
 * Luego desplegamos el módulo `module-jsp-override`. Para esto ejecutamos gradle build en su carpeta y copiamos el jar resultante (`module-jsp-override/build/libs/com.liferay.blade.module.jsp.override-1.0.0.jar`) en la carpeta de deploys `liferay/deploy`.
+
+Para producción (donde no se debe apagar Liferay) hay que:
+
+* Entrar por la consola *Gogo Shell*.
+* Buscar el paquete del *Liferay Asset Publisher Web* (`lb | grep "Asset Publisher"`).
+* Hacer `stop` del paquete activo encontrado (puede ser el base o el ext si ya se ha desplegado antes).
+* Hacer el deploy.
+* Hacer `start` del paquete.
+
+## Despliegue con Gradle
+
+Para encapsular los distintos procesos de despliegue usamos un build de gradle que tiene distintas opciones:
+
+* Opción `-Penv`. Indica el entorno en que se despliega y cambia los metadatos de los fragmentos de manera acorde:
+	* `-Penv=production` incorpora los metadatos de Anidia.
+	* `-Penv=dev` u otro valor incorpora los metadatos de Liferay.com.
+* Opción `-PbuildPublisher=true`. Indica si se debe desplegar los portlets correspondientes al `Asset Publisher`.
+  * **OJO**: Aquí aplica lo mismo que lo visto en el punto de Desplegar el Asset Publisher, hay que apagar Liferay antes de hacerlo o bien apagar el módulo.
+
+Así, las opciones que hay son:
+
+* `gradle build`: Te despliega fragmentos y theme en local con metadatos de Liferay.com
+* `gradle build -Penv=production`: Te despliega fragmentosy theme en local con metadatos de Anidia.
+* `gradle build -PbuildPublisher=true`: Te despliega fragmentos, theme y Asset Publisher con metadatos de Liferay.com.
+
+### Tareas individuales
+
+Si se hace `gradle tasks` se verán las tareas individuales de build, de manera que se puede desplegar cada pieza por separado a base de esas tareas pequeñas. Por ejemplo, `gradle build.theme` despliega el theme.
