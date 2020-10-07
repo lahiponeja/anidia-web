@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<root available-locales="es_ES" default-locale="es_ES">
+	<dynamic-element name="Título" type="text" index-type="keyword" instance-id="ezdg">
+		<dynamic-content language-id="es_ES"><![CDATA[Título de ejemplo]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="Subtítulo" type="text_box" index-type="text" instance-id="gwcy">
+		<dynamic-content language-id="es_ES"><![CDATA[Subtítulo de ejemplo, un poco más largo que el título.]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="TextoBotón1" type="text" index-type="keyword" instance-id="jwda">
+		<dynamic-content language-id="es_ES"><![CDATA[Ver más]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="LinkToPage1z94" type="link_to_layout" index-type="keyword" instance-id="iyde">
+		<dynamic-content language-id="es_ES"><![CDATA[13@public@20122]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="ImagenMobile" type="image" index-type="text" instance-id="nkhn">
+		<dynamic-content language-id="es_ES"><![CDATA[]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="ImagenDesktop" type="image" index-type="text" instance-id="jzlo">
+		<dynamic-content language-id="es_ES"><![CDATA[{"classPK":"54510","groupId":"20122","name":"crossed-arms.png","alt":"","title":"crossed-arms.png","type":"journal","uuid":"f477fbce-26ad-4e7d-8101-530c28003ca4","fileEntryId":"54518","resourcePrimKey":"54516"}]]></dynamic-content>
+	</dynamic-element>
+</root>
