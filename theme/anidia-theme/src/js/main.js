@@ -29,6 +29,7 @@ function _addDrillDown(link) {
 
 function _addDrillUp(link) {
     link.addEventListener("click", (event) => {
+      event.preventDefault();
       let submenu = link.parentElement.parentElement;
       submenu.classList.remove("active");
       submenu.previousElementSibling.classList.remove("active");

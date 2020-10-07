@@ -1,24 +1,88 @@
 .anidia-header {
+  width: 100%;
+
+  ul {
+    position: absolute;
+    top: rem(66);
+    left: 0;
+    opacity: 0;
+    transition: .25s 0s ease-in-out;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    a {
+      display: block;
+      color: $white;
+      text-decoration: none;
+      width: 100%;
+    }
+  }
+
+  .navbar-nav {
+    position: relative;
+    opacity: 0;
+    transition: .25s 0s ease-in-out;
+    z-index: 2;
+    flex-direction: column;
+    top: 0;
+
+    @include desktop {
+      flex-direction: row;
+      opacity: 1;
+    }
+  }
 
   .nav-item {
     color: $white;
-    font-size: rem(18);
-    font-family: $fs-emeric-medium-family;
     width: 100%;
     border-bottom: rem(1) solid #D8D8D8;
 
     @include desktop {
       margin-right: rem(40);
-    }
-
-    .nav-link:hover {
-      text-decoration: underline;
-      color: $white;
+      border: none;
     }
 
     .lfr-nav-child-toggle svg {
-      font-size: rem(10);
-      margin-left: rem(10);
+      font-size: rem(12);
+    }
+
+    .nav-link {
+      font-family: $fs-emeric-medium-family;
+      font-size: rem(24);
+      line-height: rem(36);
+      padding: rem(12) 0;
+
+      @include desktop {
+        font-size: rem(18);
+      }
+
+      &:hover {
+        text-decoration: underline;
+        color: $white;
+      }
+
+      .text-truncate {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    &.dropdown:hover {
+      @include desktop {
+        &::before {
+          content: '';
+          width: 0;
+          height: 0;
+          border-left: rem(19) solid transparent;
+          border-right: rem(19) solid transparent;
+          border-bottom: rem(19) solid $white;
+          position: absolute;
+          bottom: 0;
+          transform: translateY(rem(10));
+        }
+      }
     }
   }
 
@@ -29,7 +93,6 @@
     max-width: unset;
     opacity: 1;
     position: fixed;
-    top: 0;
     left: 100%;
     transition: .6s ease-in-out 0s;
     height: 100%;
@@ -40,18 +103,31 @@
       padding: rem(40) rem(60);
       position: absolute;
       background-color: $white;
+      left: 0;
+      height: auto;
+      width: 100vw;
+      transform: translateX(-32px);
+      justify-content: center;
     }
 
     &.active {
       left: 0;
       z-index: 2;
       display: block;
+
+      li {
+        margin: 0 rem(20);
+      }
     }
 
     .dropdown-item {
+      font-size: rem(18);
+      border-bottom: 1px solid $white;
+      line-height: rem(36);
+      padding: rem(13) 0;
 
       @include desktop {
-        @include gradient-yellow-bg;
+        @include gradient-green-bg;
         width: rem(188);
         height: rem(155);
         margin-right: rem(38);
@@ -68,22 +144,35 @@
           background-color: transparent;
           text-decoration: underline;
         }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &::after {
+          content: $an-icon-lightning-borders;
+          display: block;
+          position: absolute;
+          font-family: $an-icons;
+          opacity: .2;
+          font-size: rem(120);
+          color: $yellow;
+        }
       }
     }
   }
 
-  .navbar-nav {
-    position: absolute;
-    top: rem(66);
-    left: 0;
-    opacity: 0;
-    transition: .25s 0s ease-in-out;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    flex-direction: column;
+  .dropdown-item:hover,
+  .dropdown-menu > li > a:hover,
+  .dropdown-menu .link-list > li > a:hover,
+  .dropdown-item:focus, .dropdown-menu > li > a:focus,
+  .dropdown-menu .link-list > li > a:focus {
+    background-color: transparent;
+    color: $white;
   }
 
+
+  // BURGER MENU FOR MOBILE
   .menu {
     position: absolute;
     right: 0;
@@ -92,50 +181,58 @@
     height: rem(66);
     transition: .5s ease-in-out;
     cursor: pointer;
-  }
 
-  .hamburger {
-    position: absolute;
-    top: rem(30);
-    right: rem(30);
-    width: rem(30);
-    height: rem(4);
-    background: $white;
-    display: block;
-    transform-origin: center;
-    transition: .5s ease-in-out;
-    border-radius: rem(20);
+    @include desktop {
+      display: none;
+    }
 
-    &::before,
-    &::after {
-      transition: .5s ease-in-out;
-      content: '';
+    .hamburger {
       position: absolute;
-      display: block;
-      width: 100%;
-      height: 100%;
+      top: rem(30);
+      right: rem(30);
+      width: rem(30);
+      height: rem(4);
       background: $white;
+      display: block;
+      transform-origin: center;
+      transition: .5s ease-in-out;
       border-radius: rem(20);
-    }
 
-    &:before {
-      top: rem(-10);
-    }
+      &::before,
+      &::after {
+        transition: .5s ease-in-out;
+        content: '';
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: $white;
+        border-radius: rem(20);
+      }
 
-    &::after {
-      bottom: rem(-10);
+      &:before {
+        top: rem(-10);
+      }
+
+      &::after {
+        bottom: rem(-10);
+      }
     }
   }
 
   input {
     display: none;
 
+    @include desktop {
+      pointer-events: none;
+    }
+
     &:checked {
       & + .menu {
-        height: 100vh;
+        height: 100%;
         width: 100vw;
         background-color: $an-theme-dark-grey;
-        position: fixed;
+        position: absolute;
         z-index: 2;
       }
 
@@ -162,37 +259,116 @@
     }
   }
 
-  ul {
-    position: absolute;
-    top: rem(66);
-    left: 0;
-    opacity: 0;
-    transition: .25s 0s ease-in-out;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-
-    a {
-      display: block;
-      box-sizing: border-box;
-      position: relative;
-      color: $white;
-      text-decoration: none;
-      line-height: 250%;
-      width: 100%;
-      padding: 0 1.25rem;
-    }
-  }
-
   .back {
+    border-bottom: rem(2) solid $an-theme;
+
+    @include desktop {
+      display: none;
+    }
+
     a {
-      padding-left: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $an-theme;
+      font-size: rem(24);
+      font-family: $fs-emeric-semibold-family;
+
+      &::before {
+        font-family: $an-icons;
+        font-size: rem(28);
+        content: $an-icon-half-arrow-left;
+        position: absolute;
+        left: 0;
+      }
     }
   }
 
-  .nav-item.dropdown {
-    & > a {
-      padding-right: 2.5rem;
+  &__footer {
+    display: none;
+    visibility: hidden;
+    text-align: center;
+    margin-top: rem(40);
+
+    @include desktop {
+      display: none;
+    }
+
+    input:checked ~ & {
+      display: block;
+      visibility: visible;
+    }
+
+    .an-btn {
+      position: relative;
+      z-index: 2;
+
+      &:first-child {
+        margin-bottom: rem(20);
+      }
+
+      &:before {
+        margin: rem(15);
+        font-size: rem(30);
+        z-index: 3;
+      }
+    }
+  }
+
+  .dropdown.open > .dropdown-menu {
+    @include desktop {
+      display: flex;
+    }
+  }
+}
+
+.anidia-logo--mobile {
+  height: rem(33);
+  width: rem(40);
+  display: inline;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(24px, 20px);
+  z-index: 3;
+}
+
+
+.site-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .an-icon--head-phones {
+    height: rem(40);
+    min-width: unset;
+    width: rem(139);
+    margin-right: rem(74);
+    transform: translateY(-20px);
+    padding: 0;
+
+    @include desktop {
+      display: none;
+    }
+
+    .an-cmb__text {
+      font-size: rem(10);
+      line-height: normal;
+      margin-bottom: rem(2);
+    }
+
+    .an-cmb__number {
+      font-size: rem(14);
+      line-height: rem(15);
+    }
+  }
+
+  .an-icon--power {
+
+    &::before {
+      z-index: 2;
+      margin-right: rem(11);
+      font-size: rem(30);
     }
   }
 }

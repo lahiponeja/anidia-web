@@ -25,29 +25,46 @@
 		<div id="heading">
 			<div aria-level="1" class="site-title" role="heading">
 				<a class="${logo_css_class}" href="${site_default_url}" title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">
-					<img alt="${logo_description}" height="${site_logo_height}" src="${site_logo}" width="${site_logo_width}" />
+					<img alt="${logo_description}" src="${images_folder}/logo-anidia-white.svg" class="mobile-hide"/>
+          <img alt="${logo_description}" src="${images_folder}/logo-menu-mobile-white.svg" class="desktop-hide anidia-logo--mobile"/>
 				</a>
-
-				<#if show_site_name>
-					<span class="site-name" title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">
-						${site_name}
-					</span>
-				</#if>
+        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--white an-icon--head-phones">
+          <div class="an-cmb__content">
+            <span class="an-cmb__text">Llámanos gratis</span>
+            <span class="an-link an-cmb__number">${call_center_phone[0..*3]} ${call_center_phone[3..*2]} ${call_center_phone[5..*2]} ${call_center_phone[7..*2]}</span>
+          </div>
+        </a>
+        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--gradient an-icon--power mobile-hide">
+          <span>Área cliente</span>
+        </a>
 			</div>
+
+    <label id="burger-menu" class="anidia-header">
+      <input type="checkbox"/>
+      <span class="menu">
+        <span class="hamburger"></span>
+      </span>
+        <@liferay.navigation_menu
+                instance_id="main_navigation_menu"
+                default_preferences="${freeMarkerPortletPreferences}"
+          />
+      <div class="anidia-header__footer">
+        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--gradient an-icon--power">
+          <span>Área cliente</span>
+        </a>
+        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--white an-icon--call-us-free">
+          <div class="an-cmb__content">
+            <span class="an-cmb__text">Llámanos gratis</span>
+            <span class="an-link an-cmb__number">${call_center_phone[0..*3]} ${call_center_phone[3..*2]} ${call_center_phone[5..*2]} ${call_center_phone[7..*2]}</span>
+          </div>
+        </a>
+      </div>
+    </label>
 		</div>
 
-		<#if !is_signed_in>
+    <#if !is_signed_in>
 			<a data-redirect="${is_login_redirect_required?string}" href="${sign_in_url}" id="sign-in" rel="nofollow">${sign_in_text}</a>
 		</#if>
-
-  <label id="burger-menu" class="anidia-header">
-    <input type="checkbox" />
-    <span class="menu"><span class="hamburger"></span></span>
-      <@liferay.navigation_menu
-              instance_id="main_navigation_menu"
-              default_preferences="${freeMarkerPortletPreferences}"
-        />
-  </label>
 
 		<h3>Call me back</h3>
 		<a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--call-us-free-svg an-cmb">
