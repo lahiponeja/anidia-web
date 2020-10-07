@@ -228,33 +228,34 @@
     }
 
     &:checked {
-      & + .menu {
+
+      & + .anidia-header__menu {
         height: 100%;
         width: 100vw;
         background-color: $an-theme-dark-grey;
         position: absolute;
         z-index: 2;
+
+        .anidia-header__hamburger {
+          transform: rotate(45deg);
+          background-color: $white;
+
+          &::after {
+            transform: rotate(90deg);
+            bottom: 0;
+            background-color: $white;
+          }
+
+          &::before {
+            transform: rotate(90deg);
+            top: 0;
+            background-color: $white;
+          }
+        }
       }
 
       & ~ div .navbar-nav {
         opacity: 1;
-      }
-
-      & + .menu .hamburger {
-        transform: rotate(45deg);
-        background-color: $white;
-      }
-
-      & + .menu .hamburger:after {
-        transform: rotate(90deg);
-        bottom: 0;
-        background-color: $white;
-      }
-
-      & + .menu .hamburger:before {
-        transform: rotate(90deg);
-        top: 0;
-        background-color: $white;
       }
     }
   }
