@@ -1,5 +1,5 @@
-$colors: $white $an-theme $an-theme-light;
-$colors-names: 'white' 'an-theme' 'an-theme-light';
+$colors: $white $an-theme $an-theme-light $yellow $an-theme-dark-grey $an-theme-soft-grey;
+$colors-names: 'white' 'an-theme' 'an-theme-light' 'yellow' 'an-theme-dark-grey' 'an-theme-soft-grey';
 
 @each $color in $colors {
   $i: index($colors, $color);
