@@ -99,7 +99,7 @@
         },
         {
             "label": {
-                "es_ES": "Imagen"
+                "es_ES": "ImagenMobile"
             },
             "predefinedValue": {
                 "es_ES": ""
@@ -114,7 +114,31 @@
             "fieldNamespace": "ddm",
             "indexType": "text",
             "localizable": true,
-            "name": "Imagen",
+            "name": "ImagenMobile",
+            "readOnly": false,
+            "repeatable": false,
+            "required": false,
+            "showLabel": true,
+            "type": "ddm-image"
+        },
+        {
+            "label": {
+                "es_ES": "ImagenDesktop"
+            },
+            "predefinedValue": {
+                "es_ES": ""
+            },
+            "style": {
+                "es_ES": ""
+            },
+            "tip": {
+                "es_ES": ""
+            },
+            "dataType": "image",
+            "fieldNamespace": "ddm",
+            "indexType": "text",
+            "localizable": true,
+            "name": "ImagenDesktop",
             "readOnly": false,
             "repeatable": false,
             "required": false,

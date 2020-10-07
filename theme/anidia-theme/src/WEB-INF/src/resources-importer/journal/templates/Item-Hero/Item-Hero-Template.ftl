@@ -23,7 +23,7 @@
 		</button>
 
 		<div class="an-hero-slider__btn">
-		<a href="${friendlyURLs[themeDisplay.getLanguageId()]}" class="an-btn an-btn--flatter an-btn--white">
+		<a href="${LinkToPage1z94.getFriendlyUrl()}" class="an-btn an-btn--flatter an-btn--white">
 			<span>${TextoBotón1.getData()}</span>
 		</a>
 		</div>
