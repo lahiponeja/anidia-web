@@ -1,5 +1,16 @@
 const sections = gsap.utils.toArray(".an-hero-slider__item");
 const discoverBtn = document.querySelectorAll("[data-discover-btn]");
+const dataSliderLinesList = document.querySelector("[data-slider-lines-list]");
+
+function addLines() {
+  const linesHTML = []
+  for(let i = 0; i < sections.length; i++) {
+    linesHTML.push(`<div class="an-hero-slider__lines-item an-hero-slider__lines-item-${(i + 1)} ${ i === 0 && "an-hero-slider__lines-item--active"}" data-slide-line></div>`)
+  }
+  dataSliderLinesList.innerHTML = linesHTML.join("");
+}
+
+addLines();
 
 function debounce(fn, time) {
   let timeout;
@@ -28,14 +39,16 @@ function checkLeftCollision() {
 
   slideSections.forEach((slide, i) => {
     const slideRect = slide.getBoundingClientRect()
-    if(Math.abs(slideRect.left).toFixed(0) < 300) {
+    if(slideLine.length) {
+      if(Math.abs(slideRect.left).toFixed(0) < 300) {
       const slideLineSiblings = getSiblings(slideLine[i])
 
-      slideLine[i].classList.add('an-hero-slider__lines-item--active')
+        slideLine[i].classList.add('an-hero-slider__lines-item--active')
 
-      slideLineSiblings.forEach((siblingLine) => {
-        siblingLine.classList.remove('an-hero-slider__lines-item--active')
-      })
+        slideLineSiblings.forEach((siblingLine) => {
+          siblingLine.classList.remove('an-hero-slider__lines-item--active')
+        })
+      }
     }
   })
 }
