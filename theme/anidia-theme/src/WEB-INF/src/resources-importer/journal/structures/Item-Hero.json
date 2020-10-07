@@ -52,7 +52,7 @@
         },
         {
             "label": {
-                "es_ES": "Botón"
+                "es_ES": "TextoBotón"
             },
             "predefinedValue": {
                 "es_ES": "Ver más"
@@ -66,7 +66,7 @@
             "dataType": "string",
             "indexType": "keyword",
             "localizable": true,
-            "name": "Botón",
+            "name": "TextoBotón",
             "readOnly": false,
             "repeatable": false,
             "required": false,
