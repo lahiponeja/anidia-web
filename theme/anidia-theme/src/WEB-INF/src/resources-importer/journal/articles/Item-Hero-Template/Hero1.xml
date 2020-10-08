@@ -7,7 +7,7 @@
 	<dynamic-element name="Subtítulo" type="text_box" index-type="text" instance-id="gwcy">
 		<dynamic-content language-id="es_ES"><![CDATA[Subtítulo de ejemplo, un poco más largo que el título.]]></dynamic-content>
 	</dynamic-element>
-	<dynamic-element name="TextoBotón1" type="text" index-type="keyword" instance-id="jwda">
+	<dynamic-element name="TextoBotón" type="text" index-type="keyword" instance-id="jwda">
 		<dynamic-content language-id="es_ES"><![CDATA[Ver más]]></dynamic-content>
 	</dynamic-element>
 	<dynamic-element name="LinkToPage1z94" type="link_to_layout" index-type="keyword" instance-id="iyde">
