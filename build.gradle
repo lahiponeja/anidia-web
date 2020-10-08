@@ -54,6 +54,8 @@ tasks.register("build.fragments") {
       if( project.hasProperty('env')) {
         if( env=='production') {
           commandLine 'expect', 'compress-production.exp'
+        } else if( env=='ci') {
+          commandLine 'expect', 'compress-ci.exp'
         } else {
           commandLine 'expect', 'compress-dev.exp'
         }
