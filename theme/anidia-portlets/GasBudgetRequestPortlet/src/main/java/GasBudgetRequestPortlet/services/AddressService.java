@@ -8,7 +8,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.net.http.HttpRequest.BodyPublisher;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +17,12 @@ import org.json.JSONObject;
 import GasBudgetRequestPortlet.dto.AddressDTO;
 
 public class AddressService {
+
+	static String SALESFORCE_TOKEN_URL = System.getenv().get("SALESFORCE_TOKEN_URL");
+	static String SALESFORCE_PASSWORD = System.getenv().get("SALESFORCE_PASSWORD");
+	static String SALESFORCE_CLIENT_SECRET = System.getenv().get("SALESFORCE_CLIENT_SECRET");
+	static String SALESFORCE_CLIENT_ID = System.getenv().get("SALESFORCE_CLIENT_ID");
+	static String SALESFORCE_USERNAME = System.getenv().get("SALESFORCE_USERNAME");
 
 	public List<AddressDTO> getMunicipalties() throws IOException {
 		InputStream inputStream = getClass().getResourceAsStream("municipalities.csv");
