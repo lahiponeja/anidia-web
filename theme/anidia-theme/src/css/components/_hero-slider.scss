@@ -1,6 +1,22 @@
 .an-hero-slider {
   height: 100%;
 
+  .portlet-body {
+    width: 100vw;
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    height: 100%;
+
+    .journal-content-article {
+      flex-shrink: 0;
+      width: 100%;
+      display: flex;
+      position: relative;
+      align-items: normal;
+    }
+  }
+
   &__inner-wrapper {
     width: 100%;
     display: flex;
