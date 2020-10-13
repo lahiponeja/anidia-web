@@ -30,7 +30,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-
+import ContactFormPortlet.services.SalesforceService;
 /**
  * @author danieldelapena
  */
@@ -53,10 +53,9 @@ public class UserController {
 
 	@RenderMapping(params = "javax.portlet.action=success")
 	public String showData(ModelMap modelMap) {
-		log.info("#############################SEND DATA##################################");
-		_logger.debug("eeeeeeelloo");
-		modelMap.put("testVar","Valooooor");
-		return "greeting";
+		SalesforceService salesforceService = new SalesforceService();
+		modelMap.put("testVar",salesforceService.sendContactData());
+		return "summary";
 	}
 
 	@ActionMapping
