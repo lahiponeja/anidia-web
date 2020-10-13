@@ -1,6 +1,6 @@
 package ContactFormPortlet.controller;
 
-import ContactFormPortlet.dto.User;
+import ContactFormPortlet.dto.UserDTO;
 
 import com.liferay.portletmvc4spring.bind.annotation.ActionMapping;
 import com.liferay.portletmvc4spring.bind.annotation.RenderMapping;
@@ -28,47 +28,50 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 /**
  * @author danieldelapena
  */
 @Controller
 @RequestMapping("VIEW")
 public class UserController {
+	private Log log = LogFactoryUtil.getLog(UserController.class.getName());
 
 	@ModelAttribute("user")
-	public User getUserModelAttribute() {
-		return new User();
+	public UserDTO getUserModelAttribute() {
+		return new UserDTO();
 	}
 
 	@RenderMapping
 	public String prepareView() {
+		log.info("#############################PREPARE VIEW##################################");
+
 		return "user";
 	}
 
 	@RenderMapping(params = "javax.portlet.action=success")
-	public String showGreeting(ModelMap modelMap) {
-
-		DateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d, yyyy G");
-
-		Calendar todayCalendar = Calendar.getInstance();
-
-		modelMap.put("todaysDate", dateFormat.format(todayCalendar.getTime()));
-
+	public String showData(ModelMap modelMap) {
+		log.info("#############################SEND DATA##################################");
+		_logger.debug("eeeeeeelloo");
+		modelMap.put("testVar","Valooooor");
 		return "greeting";
 	}
 
 	@ActionMapping
 	public void submitApplicant(
-		@ModelAttribute("user") User user, BindingResult bindingResult,
+		@ModelAttribute("user") UserDTO user, BindingResult bindingResult,
 		ModelMap modelMap, Locale locale, ActionResponse actionResponse,
 		SessionStatus sessionStatus) {
-
-		_localValidatorFactoryBean.validate(user, bindingResult);
-
+		//_localValidatorFactoryBean.validate(user, bindingResult);
+		log.info("#############################SUBMIT APPLICANT#############################");
+		
 		if (!bindingResult.hasErrors()) {
 			if (_logger.isDebugEnabled()) {
 				_logger.debug("firstName=" + user.getFirstName());
 				_logger.debug("lastName=" + user.getLastName());
+				_logger.debug("email=" + user.getEmail());
 			}
 
 			MutableRenderParameters mutableRenderParameters =

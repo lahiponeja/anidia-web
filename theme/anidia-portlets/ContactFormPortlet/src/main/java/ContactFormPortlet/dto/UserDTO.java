@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * @author danieldelapena
  */
-public class User implements Serializable {
+public class UserDTO implements Serializable {
 
 	public String getFirstName() {
 		return firstName;
@@ -17,12 +17,27 @@ public class User implements Serializable {
 		return lastName;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public void setPhoneNumber(String email) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	private static final long serialVersionUID = 1113488483222411111L;
@@ -32,5 +47,11 @@ public class User implements Serializable {
 
 	@NotBlank
 	private String lastName;
+
+	@NotBlank
+	private String email;
+
+	@NotBlank
+	private String phoneNumber;
 
 }

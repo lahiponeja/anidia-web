@@ -5,10 +5,7 @@
 		  version="2.1">
 	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
 	<portlet:defineObjects/>
-	<p class="user-greeting">
-		<spring:message arguments="${user.firstName},${user.lastName}" code="greetings" />
-	</p>
-	<p>
-		<spring:message arguments="${todaysDate}" argumentSeparator=";" code="todays-date-is" />
-	</p>
+	<p>${user.email}</p>
+	<p>${user.firstName}</p>
+	<p>${user.lastName}</p>
 </jsp:root>

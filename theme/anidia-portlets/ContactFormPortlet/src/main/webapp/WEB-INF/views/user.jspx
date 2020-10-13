@@ -9,9 +9,6 @@
 	<portlet:actionURL var="mainFormActionURL"/>
 	<form:form id="${namespace}mainForm" action="${mainFormActionURL}" class="user-form" method="post" modelAttribute="user">
 		<form:errors cssClass="portlet-msg-error" />
-		<p class="caption">
-			<spring:message code="personal-information" />
-		</p>
 		<fieldset>
 			<div class="form-group">
 				<form:label for="${namespace}firstName" path="firstName">
@@ -26,6 +23,13 @@
 				</form:label>
 				<form:input id="${namespace}lastName" cssClass="form-control" path="lastName"/>
 				<form:errors path="lastName" cssClass="portlet-msg-error"/>
+			</div>
+			<div class="form-group">
+				<form:label for="${namespace}email" path="email">
+					<spring:message code="email" />
+				</form:label>
+				<form:input id="${namespace}email" cssClass="form-control" path="email"/>
+				<form:errors path="email" cssClass="portlet-msg-error"/>
 			</div>
 		</fieldset>
 		<hr />
