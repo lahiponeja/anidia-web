@@ -1,17 +1,28 @@
 package ContactFormPortlet.services;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URI;
+/*import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+*/
 
 public class SalesforceService {
-    private Log log = LogFactoryUtil.getLog(SalesforceService.class.getName());
+	
+	static String SALESFORCE_TOKEN_URL = System.getenv().get("SALESFORCE_TOKEN_URL");
+	static String SALESFORCE_PASSWORD = System.getenv().get("SALESFORCE_PASSWORD");
+	static String SALESFORCE_CLIENT_SECRET = System.getenv().get("SALESFORCE_CLIENT_SECRET");
+	static String SALESFORCE_CLIENT_ID = System.getenv().get("SALESFORCE_CLIENT_ID");
+	static String SALESFORCE_USERNAME = System.getenv().get("SALESFORCE_USERNAME");
 
 	public String sendContactData(){
-        log.info("####Inside service method");
-        return ("Desde dentro!");
+        return (SALESFORCE_TOKEN_URL);
     }
 
-    public String getSalesforceToken() {
+/*    public String getSalesforceToken() {
 
 		StringBuilder urlBuilder = new StringBuilder();
 		urlBuilder.append(SALESFORCE_TOKEN_URL);
@@ -54,5 +65,5 @@ public class SalesforceService {
 			e.printStackTrace();
 			return null;
 		}
-	}
+	}*/
 }
