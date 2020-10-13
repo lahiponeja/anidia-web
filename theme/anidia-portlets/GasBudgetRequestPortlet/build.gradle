@@ -39,6 +39,7 @@ dependencies {
 	cssBuilder group: "com.liferay", name: "com.liferay.css.builder", version: "3.0.2"
 
 	testCompile group: "junit", name: "junit", version: "4.12"
+	compile group: 'org.json', name: 'json', version: '20090211'
 
 	portalCommonCSS group: "com.liferay", name: "com.liferay.frontend.css.common", version: "4.0.0"
 }
