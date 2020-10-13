@@ -8,4 +8,5 @@
 	<p>${user.email}</p>
 	<p>${user.firstName}</p>
 	<p>${user.lastName}</p>
+	<p>${user.phoneNumber}</p>
 </jsp:root>

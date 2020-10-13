@@ -31,6 +31,13 @@
 				<form:input id="${namespace}email" cssClass="form-control" path="email"/>
 				<form:errors path="email" cssClass="portlet-msg-error"/>
 			</div>
+			<div class="form-group">
+				<form:label for="${namespace}phoneNumber" path="phoneNumber">
+					<spring:message code="phone-number" />
+				</form:label>
+				<form:input id="${namespace}phoneNumber" cssClass="form-control" path="phoneNumber"/>
+				<form:errors path="phoneNumber" cssClass="portlet-msg-error"/>
+			</div>
 		</fieldset>
 		<hr />
 		<spring:message code="submit" var="submit" />

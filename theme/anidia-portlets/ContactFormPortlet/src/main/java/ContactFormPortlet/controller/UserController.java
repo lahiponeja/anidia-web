@@ -72,6 +72,7 @@ public class UserController {
 				_logger.debug("firstName=" + user.getFirstName());
 				_logger.debug("lastName=" + user.getLastName());
 				_logger.debug("email=" + user.getEmail());
+				_logger.debug("phoneNumber=" + user.getPhoneNumber());
 			}
 
 			MutableRenderParameters mutableRenderParameters =
