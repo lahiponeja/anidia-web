@@ -5,10 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
-/*import java.net.http.HttpClient;
+import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-*/
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SalesforceService {
 	
@@ -19,10 +23,10 @@ public class SalesforceService {
 	static String SALESFORCE_USERNAME = System.getenv().get("SALESFORCE_USERNAME");
 
 	public String sendContactData(){
-        return (SALESFORCE_TOKEN_URL);
+		return (getSalesforceToken());
     }
 
-/*    public String getSalesforceToken() {
+    public String getSalesforceToken() {
 
 		StringBuilder urlBuilder = new StringBuilder();
 		urlBuilder.append(SALESFORCE_TOKEN_URL);
@@ -65,5 +69,5 @@ public class SalesforceService {
 			e.printStackTrace();
 			return null;
 		}
-	}*/
+	}
 }
