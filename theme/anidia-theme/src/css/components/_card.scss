@@ -46,18 +46,19 @@
       margin-bottom: rem(6);
     }
 
+
+    .an-card__title {
+      font-size: rem(24);
+      line-height: rem(30);
+    }
+
     .an-link {
       text-transform: uppercase;
       font-size: rem(12);
       margin-top: auto;
       color: $an-theme;
-    }
-
-    .an-icon--bulb-green-svg {
-      &::before {
-        margin: auto;
-        height: rem(97);
-      }
+      letter-spacing: rem(1.71);
+      font-family: $fs-emeric-bold-family;
     }
 
     .an-icon--close-cross {
@@ -74,20 +75,39 @@
       text-align: left;
       margin: auto;
       padding-right: flex-grid(1);
+
+      .an-menu-bold {
+        color: $an-theme;
+        font-size: rem(18);
+        text-align: center;
+        font-family: $open-sans-bold-family;
+      }
     }
 
     &__intro {
-      padding-right: flex-grid(1);
-      padding-left: flex-grid(1);
+
+      > div {
+        &::before {
+          margin: auto;
+          height: rem(97);
+        }
+      }
+
+      @include desktop {
+        padding-right: flex-grid(1);
+        padding-left: flex-grid(1);
+      }
     }
 
     &__text-short {
+      font-size: rem(18);
+      line-height: normal;
+
       .dots {
         margin-top: rem(31);
         margin-bottom: rem(17);
       }
     }
-
   }
 
   &--form {

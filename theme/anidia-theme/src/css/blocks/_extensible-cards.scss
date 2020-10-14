@@ -1,5 +1,6 @@
 .extensible-cards {
-  &__container {
+
+  .portlet-body {
     display: flex;
     scroll-padding: 0 100%;
     margin-bottom: rem(24);
@@ -53,7 +54,7 @@
   }
 
 
-  .an-card--simple {
+  .journal-content-article  {
     margin-right: rem(20);
     //min-width: 278px;
 
