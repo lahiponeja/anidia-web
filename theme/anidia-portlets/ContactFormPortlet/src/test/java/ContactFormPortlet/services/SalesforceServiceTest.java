@@ -23,7 +23,7 @@ public class SalesforceServiceTest {
 
 	@Test
 	public void testSalesforceToken() throws IOException  {
-		AddressService service = new AddressService();
+		SalesforceService service = new SalesforceService();
 		Assert.assertNotNull(service.getSalesforceToken());
 	}
 
