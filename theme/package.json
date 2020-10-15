@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "generator-liferay-fragments": "^1.7.0",
+    "generator-liferay-js": "^2.19.4",
     "generator-liferay-theme": "^10.0.0",
     "node-sass": "^4.14.1",
     "yo": "^3.1.1"
