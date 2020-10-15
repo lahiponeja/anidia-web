@@ -24,11 +24,11 @@ public class LeadDTO implements Serializable {
 		return phoneNumber;
 	}
 
-	public String getPrivacyAccepted() {
+	public Boolean getPrivacyAccepted() {
 		return privacyAccepted;
 	}
 
-	public String getCommunicationAccepted() {
+	public Boolean getCommunicationAccepted() {
 		return communicationAccepted;
 	}
 
@@ -47,17 +47,14 @@ public class LeadDTO implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public void setCommunicationAccepted(String communicationAccepted) {
+	public void setCommunicationAccepted(Boolean communicationAccepted) {
 		this.communicationAccepted = communicationAccepted;
 	}
 
-	public void setPrivacyAccepted(String privacyAccepted) {
+	public void setPrivacyAccepted(Boolean privacyAccepted) {
 		this.privacyAccepted = privacyAccepted;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
 
 	private static final long serialVersionUID = 1113488483222411111L;
 
