@@ -53,9 +53,21 @@ public class LeadController {
 
 	@RenderMapping(params = "javax.portlet.action=success")
 	public String showData(ModelMap modelMap) throws JSONException {
+
 		SalesforceService salesforceService = new SalesforceService();
-		modelMap.put("testVar",salesforceService.sendLead((LeadDTO)modelMap.get("lead")));
-		return "summary";
+
+		LeadDTO lead = (LeadDTO) modelMap.get("lead");
+		log.info("Sending Lead" );
+		log.info(" >  firstName=" + lead.getFirstName());
+		log.info(" >  lastName=" + lead.getLastName());
+		log.info(" >  email=" + lead.getEmail());
+		log.info(" >  phoneNumber=" + lead.getPhoneNumber());
+
+		String result = salesforceService.sendLead(lead);
+
+		log.info(" >  Result =" + result);
+
+		return "form";
 	}
 
 	@ActionMapping
@@ -64,7 +76,6 @@ public class LeadController {
 		ModelMap modelMap, Locale locale, ActionResponse actionResponse,
 		SessionStatus sessionStatus) {
 		//_localValidatorFactoryBean.validate(Lead, bindingResult);
-		log.info("#############################SUBMIT APPLICANT#############################");
 
 		if (!bindingResult.hasErrors()) {
 			if (_logger.isDebugEnabled()) {
