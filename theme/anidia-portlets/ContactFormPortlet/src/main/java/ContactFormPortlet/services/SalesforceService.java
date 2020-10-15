@@ -14,7 +14,7 @@ import com.liferay.portal.kernel.json.JSONSerializer;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import ContactFormPortlet.dto.UserDTO;
+import ContactFormPortlet.dto.LeadDTO;
 
 public class SalesforceService {
 
@@ -70,7 +70,7 @@ public class SalesforceService {
 		}
 	}
 
-	public String sendLead(UserDTO lead) throws JSONException{
+	public String sendLead(LeadDTO lead) throws JSONException{
 
 		String token = this.getSalesforceToken();
 

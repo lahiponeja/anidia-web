@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * @author danieldelapena
  */
-public class UserDTO implements Serializable {
+public class LeadDTO implements Serializable {
 
 	public String getFirstName() {
 		return firstName;

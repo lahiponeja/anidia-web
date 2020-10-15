@@ -1,6 +1,6 @@
 package ContactFormPortlet.controller;
 
-import ContactFormPortlet.dto.UserDTO;
+import ContactFormPortlet.dto.LeadDTO;
 
 import com.liferay.portletmvc4spring.bind.annotation.ActionMapping;
 import com.liferay.portletmvc4spring.bind.annotation.RenderMapping;
@@ -38,42 +38,42 @@ import ContactFormPortlet.services.SalesforceService;
  */
 @Controller
 @RequestMapping("VIEW")
-public class UserController {
-	private Log log = LogFactoryUtil.getLog(UserController.class.getName());
+public class LeadController {
+	private Log log = LogFactoryUtil.getLog(LeadController.class.getName());
 
-	@ModelAttribute("user")
-	public UserDTO getUserModelAttribute() {
-		return new UserDTO();
+	@ModelAttribute("Lead")
+	public LeadDTO getLeadModelAttribute() {
+		return new LeadDTO();
 	}
 
 	@RenderMapping
 	public String prepareView() {
 		log.info("#############################PREPARE VIEW##################################");
 
-		return "user";
+		return "Lead";
 	}
 
 	@RenderMapping(params = "javax.portlet.action=success")
 	public String showData(ModelMap modelMap) throws JSONException {
 		SalesforceService salesforceService = new SalesforceService();
-		modelMap.put("testVar",salesforceService.sendLead((UserDTO)modelMap.get("user")));
+		modelMap.put("testVar",salesforceService.sendLead((LeadDTO)modelMap.get("Lead")));
 		return "summary";
 	}
 
 	@ActionMapping
 	public void submitApplicant(
-		@ModelAttribute("user") UserDTO user, BindingResult bindingResult,
+		@ModelAttribute("Lead") LeadDTO Lead, BindingResult bindingResult,
 		ModelMap modelMap, Locale locale, ActionResponse actionResponse,
 		SessionStatus sessionStatus) {
-		//_localValidatorFactoryBean.validate(user, bindingResult);
+		//_localValidatorFactoryBean.validate(Lead, bindingResult);
 		log.info("#############################SUBMIT APPLICANT#############################");
-		
+
 		if (!bindingResult.hasErrors()) {
 			if (_logger.isDebugEnabled()) {
-				_logger.debug("firstName=" + user.getFirstName());
-				_logger.debug("lastName=" + user.getLastName());
-				_logger.debug("email=" + user.getEmail());
-				_logger.debug("phoneNumber=" + user.getPhoneNumber());
+				_logger.debug("firstName=" + Lead.getFirstName());
+				_logger.debug("lastName=" + Lead.getLastName());
+				_logger.debug("email=" + Lead.getEmail());
+				_logger.debug("phoneNumber=" + Lead.getPhoneNumber());
 			}
 
 			MutableRenderParameters mutableRenderParameters =
@@ -86,14 +86,14 @@ public class UserController {
 		else {
 			bindingResult.addError(
 				new ObjectError(
-					"user",
+					"Lead",
 					_messageSource.getMessage(
 						"please-correct-the-following-errors", null, locale)));
 		}
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
-		UserController.class);
+		LeadController.class);
 
 	@Autowired
 	private LocalValidatorFactoryBean _localValidatorFactoryBean;
