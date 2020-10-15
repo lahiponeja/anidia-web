@@ -1,7 +1,10 @@
 
-import './installCompositionApi';
-import './components/funnel';
-import Vue from 'vue/dist/vue.common';
+// import './installCompositionApi';
+// import './components/funnel';
+// import Vue from 'vue/dist/vue.common';
+
+import { createApp } from 'vue'
+import funnel from './components/funnel'
 import global from './store/global'
 
 
@@ -19,9 +22,18 @@ export default function main({portletNamespace, contextPath, portletElementId, c
     const node = document.getElementById(portletElementId);
     
     // Dynamically write markup to portlet's node
-    node.innerHTML = `
-        <div>
-            <funnel />
+    node.innerHTML = /*html*/
+    `<div>
+            <template v-if="(global.state.currentStep === 'funnel')">
+                <Funnel/>
+            </template>
+            <template v-else-if="(global.state.currentStep === 'home') || (global.state.currentStep === 'apartment')">
+                <h2>Home.vue: Tu ahorro empieza aquí...</h2>
+            </template>
+            <template v-else-if="(global.state.currentStep === 'business')">
+                <h2>Business: Te informamos, déjanos tus datos y contactamos contigo...</h2>
+            </template>
+            
             <div>
                 <span class="tag">${Liferay.Language.get('portlet-namespace')}:</span> 
                 <span class="value">{{portletNamespace}}</span>
@@ -52,14 +64,30 @@ export default function main({portletNamespace, contextPath, portletElementId, c
     //
 
 
-    new Vue({
-        el: `#${portletElementId}`,
+    // new Vue({
+    //     el: `#${portletElementId}`,
+    //     provide: {
+    //         global,
+    //     },
+	// 	data: {
+	// 		portletNamespace, contextPath, portletElementId, configuration
+	// 	}
+	// });
+
+    const app = createApp({
         provide: {
             global,
         },
-		data: {
-			portletNamespace, contextPath, portletElementId, configuration
-		}
-	});
+		data() {
+            return {
+                global,
+                portletNamespace, contextPath, portletElementId, configuration
+            }
+        },
+    });
+    
+    app.component('Funnel', funnel);
+
+    app.mount(`#${portletElementId}`);
     
 }

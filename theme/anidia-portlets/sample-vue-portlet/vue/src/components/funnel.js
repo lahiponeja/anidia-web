@@ -1,7 +1,7 @@
-import Vue from 'vue/dist/vue.common';
+import { defineComponent } from 'vue'
 
-Vue.component('funnel', {
-  data: function() {
+const funnel = defineComponent({
+  data() {
     return { 
       optionsArr: [
         {
@@ -62,13 +62,11 @@ Vue.component('funnel', {
         
       </div>
       <div class="an-funnel__footer">
-        <button type="button" @click="continueToForm" :class="{ 'an-btn--disabled': !optionPicked }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple">
+        <button type="button" @click="global.changeStep(optionPicked)" :disabled="!optionPicked" :class="{ 'an-btn--disabled': !optionPicked }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple">
           <span>Continuar</span>
         </button>
       </div>
     </div>`,
-  // <p>Cool: {{ state.formMainData.houseType }}</p>
-  // mounted() {
-  //     console.log(this.global.state.formMainData);
-  // } 
 })
+
+export default funnel;
