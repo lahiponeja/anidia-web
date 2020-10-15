@@ -8,6 +8,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import org.json.JSONException;
+
+import ContactFormPortlet.dto.UserDTO;
+
 public class SalesforceServiceTest {
 	@Before
 	public void loadSalesforceEnvVars() throws IOException  {
@@ -15,6 +19,7 @@ public class SalesforceServiceTest {
 		props.load(getClass().getResourceAsStream("salesforce.properties"));
 
 		SalesforceService.SALESFORCE_TOKEN_URL = props.getProperty("SALESFORCE_TOKEN_URL");
+		SalesforceService.SALESFORCE_LEAD_URL = props.getProperty("SALESFORCE_LEAD_URL");
 		SalesforceService.SALESFORCE_PASSWORD = props.getProperty("SALESFORCE_PASSWORD");
 		SalesforceService.SALESFORCE_CLIENT_SECRET = props.getProperty("SALESFORCE_CLIENT_SECRET");
 		SalesforceService.SALESFORCE_CLIENT_ID = props.getProperty("SALESFORCE_CLIENT_ID");
@@ -25,6 +30,18 @@ public class SalesforceServiceTest {
 	public void testSalesforceToken() throws IOException  {
 		SalesforceService service = new SalesforceService();
 		Assert.assertNotNull(service.getSalesforceToken());
+	}
+
+
+	@Test
+	public void testSendLead() throws IOException, JSONException  {
+		SalesforceService service = new SalesforceService();
+		UserDTO user = new UserDTO();
+		user.setFirstName("Test First Name");
+		user.setLastName("Test Last Name");
+		user.setEmail("email@test.com");
+		user.setPhoneNumber("+34000000000");
+		Assert.assertEquals(service.sendLead(user), "sdsd");
 	}
 
 }
