@@ -1,5 +1,8 @@
 
+import './installCompositionApi';
+import './components/funnel';
 import Vue from 'vue/dist/vue.common';
+import global from './store/global'
 
 
 /**
@@ -18,6 +21,7 @@ export default function main({portletNamespace, contextPath, portletElementId, c
     // Dynamically write markup to portlet's node
     node.innerHTML = `
         <div>
+            <funnel />
             <div>
                 <span class="tag">${Liferay.Language.get('portlet-namespace')}:</span> 
                 <span class="value">{{portletNamespace}}</span>
@@ -46,8 +50,13 @@ export default function main({portletNamespace, contextPath, portletElementId, c
     // See https://vuejs.org/v2/guide/installation.html#Runtime-Compiler-vs-Runtime-only
     // for more information.
     //
+
+
     new Vue({
-		el: `#${portletElementId}`,
+        el: `#${portletElementId}`,
+        provide: {
+            global,
+        },
 		data: {
 			portletNamespace, contextPath, portletElementId, configuration
 		}
