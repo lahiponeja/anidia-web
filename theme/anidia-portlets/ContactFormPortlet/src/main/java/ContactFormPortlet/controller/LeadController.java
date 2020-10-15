@@ -41,7 +41,7 @@ import ContactFormPortlet.services.SalesforceService;
 public class LeadController {
 	private Log log = LogFactoryUtil.getLog(LeadController.class.getName());
 
-	@ModelAttribute("Lead")
+	@ModelAttribute("lead")
 	public LeadDTO getLeadModelAttribute() {
 		return new LeadDTO();
 	}
@@ -54,13 +54,13 @@ public class LeadController {
 	@RenderMapping(params = "javax.portlet.action=success")
 	public String showData(ModelMap modelMap) throws JSONException {
 		SalesforceService salesforceService = new SalesforceService();
-		modelMap.put("testVar",salesforceService.sendLead((LeadDTO)modelMap.get("Lead")));
+		modelMap.put("testVar",salesforceService.sendLead((LeadDTO)modelMap.get("lead")));
 		return "summary";
 	}
 
 	@ActionMapping
 	public void submitApplicant(
-		@ModelAttribute("Lead") LeadDTO Lead, BindingResult bindingResult,
+		@ModelAttribute("lead") LeadDTO Lead, BindingResult bindingResult,
 		ModelMap modelMap, Locale locale, ActionResponse actionResponse,
 		SessionStatus sessionStatus) {
 		//_localValidatorFactoryBean.validate(Lead, bindingResult);
