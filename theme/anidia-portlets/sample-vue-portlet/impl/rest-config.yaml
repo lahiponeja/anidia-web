@@ -4,5 +4,7 @@ application:
     baseURI: "/sample-vue"
     className: "SampleVueApplication"
     name: "Liferay.SampleVue"
+    security:
+        guestAllowed: true
 author: "David Brenes"
 generateGraphQL: false
