@@ -7,3 +7,4 @@ Export-Package:\
 Import-Package: com.liferay.*;version="[1.0.0,99.0.0)",\
 \
 	*
+-noee: true
