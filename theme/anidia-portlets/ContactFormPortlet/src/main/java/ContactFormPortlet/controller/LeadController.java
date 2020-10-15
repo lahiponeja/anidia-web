@@ -48,9 +48,7 @@ public class LeadController {
 
 	@RenderMapping
 	public String prepareView() {
-		log.info("#############################PREPARE VIEW##################################");
-
-		return "Lead";
+		return "form";
 	}
 
 	@RenderMapping(params = "javax.portlet.action=success")
