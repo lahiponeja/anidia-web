@@ -21,6 +21,6 @@ allprojects {
 	}
 
 	liferay {
-		deployDir = "../../../liferay/deploy"
+		deployDir = "../../../../liferay/deploy"
 	}
 }
