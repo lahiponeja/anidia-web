@@ -1,9 +1,23 @@
 package com.liferay.sampleVue.internal.resource.v1_0;
 
 import com.liferay.sampleVue.resource.v1_0.SampleResource;
+import com.liferay.sampleVue.dto.v1_0.Sample;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ServiceScope;
+
+
+import javax.validation.constraints.NotNull;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 /**
  * @author David Brenes
@@ -13,4 +27,18 @@ import org.osgi.service.component.annotations.ServiceScope;
 	scope = ServiceScope.PROTOTYPE, service = SampleResource.class
 )
 public class SampleResourceImpl extends BaseSampleResourceImpl {
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "sampleId")})
+	@Path("/samples/{sampleId}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Sample")})
+	public Sample getSample(@NotNull @Parameter(hidden = true) @PathParam("sampleId") Integer
+	sampleId) {
+
+		Sample sample = new Sample();
+		sample.setName("Test");
+		return sample;
+	}
 }
