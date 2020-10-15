@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import org.json.JSONException;
 
-import ContactFormPortlet.dto.UserDTO;
+import ContactFormPortlet.dto.LeadDTO;
 
 public class SalesforceServiceTest {
 	@Before
@@ -36,12 +36,12 @@ public class SalesforceServiceTest {
 	@Test
 	public void testSendLead() throws IOException, JSONException  {
 		SalesforceService service = new SalesforceService();
-		UserDTO user = new UserDTO();
-		user.setFirstName("Test First Name");
-		user.setLastName("Test Last Name");
-		user.setEmail("email@test.com");
-		user.setPhoneNumber("+34000000000");
-		Assert.assertEquals(service.sendLead(user), "sdsd");
+		LeadDTO lead = new LeadDTO();
+		lead.setFirstName("Test First Name");
+		lead.setLastName("Test Last Name");
+		lead.setEmail("email@test.com");
+		lead.setPhoneNumber("+34000000000");
+		Assert.assertEquals(service.sendLead(lead), "sdsd");
 	}
 
 }
