@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
+import org.json.JSONException;
+
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import ContactFormPortlet.services.SalesforceService;
@@ -52,9 +54,9 @@ public class UserController {
 	}
 
 	@RenderMapping(params = "javax.portlet.action=success")
-	public String showData(ModelMap modelMap) {
+	public String showData(ModelMap modelMap) throws JSONException {
 		SalesforceService salesforceService = new SalesforceService();
-		modelMap.put("testVar",salesforceService.sendContactData());
+		modelMap.put("testVar",salesforceService.sendLead((UserDTO)modelMap.get("user")));
 		return "summary";
 	}
 
