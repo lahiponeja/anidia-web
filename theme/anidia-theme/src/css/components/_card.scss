@@ -10,8 +10,6 @@
     text-align: center;
     padding: rem(40);
     align-items: center;
-    min-width: rem(278);
-    min-height: rem(432);
     background-color: $white;
     margin-right: rem(20);
     position: relative;
@@ -28,9 +26,9 @@
         width: 100%;
         max-width: calc(100% - 10px);
         left: 0;
-        transform: translateX(rem(5));
         flex-direction: row;
         justify-content: space-between;
+        height: 100%;
 
         .an-card__title {
           white-space: nowrap;
@@ -50,6 +48,7 @@
     .an-card__title {
       font-size: rem(24);
       line-height: rem(30);
+      margin-bottom: rem(20);
     }
 
     .an-link {
@@ -75,21 +74,28 @@
       text-align: left;
       margin: auto;
       padding-right: flex-grid(1);
+      color: $an-theme-dark-grey;
 
       .an-menu-bold {
         color: $an-theme;
         font-size: rem(18);
         text-align: center;
         font-family: $open-sans-bold-family;
+
+        @include desktop {
+          text-align: left;
+        }
       }
     }
 
     &__intro {
 
       > div {
+        margin-bottom: rem(12);
+
         &::before {
           margin: auto;
-          height: rem(97);
+          width: rem(80);
         }
       }
 
@@ -102,8 +108,9 @@
     &__text-short {
       font-size: rem(18);
       line-height: normal;
+      color: $an-theme-dark-grey;
 
-      .dots {
+      &__dots {
         margin-top: rem(31);
         margin-bottom: rem(17);
       }

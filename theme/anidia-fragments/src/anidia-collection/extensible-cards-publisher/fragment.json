@@ -2,7 +2,7 @@
   "cssPath": "styles.css",
   "configurationPath": "configuration.json",
   "htmlPath": "index.html",
-  "jsPath": "main.js",
+  "jsPath": "extensible-card.js",
   "name": "extensible-cards-publisher",
   "type": "section"
 }

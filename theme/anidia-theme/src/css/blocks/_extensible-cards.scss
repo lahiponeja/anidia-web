@@ -13,6 +13,7 @@
     -ms-overflow-style: none;
     scroll-snap-type: x mandatory;
     -ms-scroll-snap-type: x mandatory;
+    align-items: baseline;
 
     &::-webkit-scrollbar {
       display: none;
@@ -21,8 +22,10 @@
     @include desktop {
       overflow: hidden;
       scroll-snap-type: none;
-      scroll-padding: none;
+      scroll-padding: 0;
       position: relative;
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 
@@ -56,7 +59,8 @@
 
   .journal-content-article  {
     margin-right: rem(20);
-    //min-width: 278px;
+    min-width: rem(278);
+    max-width: rem(321);
 
     &:first-child {
       margin-left: rem(20);
