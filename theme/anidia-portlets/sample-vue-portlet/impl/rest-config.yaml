@@ -1,0 +1,10 @@
+apiDir: "../api/src/main/java"
+apiPackagePath: "com.liferay.sampleVue"
+application:
+    baseURI: "/sample-vue"
+    className: "SampleVueApplication"
+    name: "Liferay.SampleVue"
+    security:
+        guestAllowed: true
+author: "David Brenes"
+generateGraphQL: false
