@@ -1,0 +1,41 @@
+components:
+  schemas:
+    Sample:
+      description: A sample entity
+      properties:
+        name:
+          description: The sample name.
+          type: string
+        id:
+          description: The sample ID.
+          type: integer
+      type: object
+info:
+  description: "Sample API"
+  license:
+        name: "Apache 2.0"
+        url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+  title: "My Sample API for VUE"
+  version: v1.0
+openapi: 3.0.1
+paths:
+  "/samples/{sampleId}":
+    get:
+      operationId: getSample
+      parameters:
+        - in: path
+          name: sampleId
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Sample"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Sample"
+          description: ""
+      tags: ["Sample"]
