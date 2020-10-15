@@ -5,3 +5,4 @@ application:
     className: "SampleVueApplication"
     name: "Liferay.SampleVue"
 author: "David Brenes"
+generateGraphQL: false
