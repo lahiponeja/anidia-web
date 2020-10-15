@@ -24,6 +24,13 @@ public class LeadDTO implements Serializable {
 		return phoneNumber;
 	}
 
+	public String getPrivacyAccepted() {
+		return privacyAccepted;
+	}
+
+	public String getCommunicationAccepted() {
+		return communicationAccepted;
+	}
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -36,6 +43,18 @@ public class LeadDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public void setCommunicationAccepted(String communicationAccepted) {
+		this.communicationAccepted = communicationAccepted;
+	}
+
+	public void setPrivacyAccepted(String privacyAccepted) {
+		this.privacyAccepted = privacyAccepted;
+	}
+
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
@@ -53,5 +72,12 @@ public class LeadDTO implements Serializable {
 
 	@NotBlank
 	private String phoneNumber;
+
+	@NotBlank
+	private Boolean privacyAccepted;
+
+	@NotBlank
+	private Boolean communicationAccepted;
+
 
 }
