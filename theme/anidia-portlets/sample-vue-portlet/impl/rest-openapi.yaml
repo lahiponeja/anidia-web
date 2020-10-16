@@ -43,6 +43,33 @@ components:
         gateId:
           description: Unique identifier of the gate
           type: string
+    Property:
+      description: All the information about the house in which someone lives
+      properties:
+        address:
+          description: Full address for the property
+          type: string
+        propertyId:
+          description: Property unique identifier
+          type: string
+        block:
+          description: Block of the property (e.g. 2)
+          type: string
+        ladder:
+          description: Ladder of the property (e.g. Izq)
+          type: string
+        floor:
+          description: Floor of the property (e.g. 2º)
+          type: string
+        door:
+          description: Door in the flor of the property (e.g. C)
+          type: string
+        status:
+          description: Status of the property
+          type: string
+        contractStatus:
+          description: Status of the contract for this property
+          type: string
     Sample:
       description: A sample entity
       properties:
@@ -62,6 +89,36 @@ info:
   version: v1.0
 openapi: 3.0.1
 paths:
+  "/properties/{gateId}":
+    get:
+      operationId: getPropertiesGatePage
+      summary: Get all properties for an estate
+      description: Get all the properties for the estate with the gate Id from Anidia CRM
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "gateId"
+        in: "path"
+        description: "Gate Id of the estate in CRM"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Property"
+            application/xml:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Property"
+          description: ""
+      tags: ["Property"]
   "/estates/{municipalityId}/{postalCode}/{addressKind}/{addressName}":
     get:
       operationId: getEstatesAddressNamePage
