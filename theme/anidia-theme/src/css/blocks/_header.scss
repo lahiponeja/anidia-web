@@ -1,0 +1,375 @@
+.anidia-header {
+  width: 100%;
+
+  ul {
+    position: absolute;
+    top: rem(66);
+    left: 0;
+    opacity: 0;
+    transition: .25s 0s ease-in-out;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    a {
+      display: block;
+      color: $white;
+      text-decoration: none;
+      width: 100%;
+    }
+  }
+
+  .navbar-nav {
+    position: relative;
+    opacity: 0;
+    transition: .25s 0s ease-in-out;
+    z-index: 2;
+    flex-direction: column;
+    top: 0;
+
+    @include desktop {
+      flex-direction: row;
+      opacity: 1;
+    }
+  }
+
+  .nav-item {
+    color: $white;
+    width: 100%;
+    border-bottom: rem(1) solid $an-border; //REPLACE #D8D8D8 WITH ANIDIA COLOR
+
+    @include desktop {
+      margin-right: rem(40);
+      border: none;
+    }
+
+    .lfr-nav-child-toggle svg {
+      font-size: rem(12);
+    }
+
+    .nav-link {
+      font-family: $fs-emeric-medium-family;
+      font-size: rem(24);
+      line-height: rem(36);
+      padding: rem(12) 0;
+
+      @include desktop {
+        font-size: rem(18);
+      }
+
+      &:hover {
+        text-decoration: underline;
+        color: $white;
+      }
+
+      .text-truncate {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    &.dropdown:hover {
+      @include desktop {
+        &::before {
+          content: '';
+          width: 0;
+          height: 0;
+          border-left: rem(19) solid transparent;
+          border-right: rem(19) solid transparent;
+          border-bottom: rem(19) solid $white;
+          position: absolute;
+          bottom: 0;
+          transform: translateY(rem(10));
+        }
+      }
+    }
+  }
+
+  .dropdown-menu {
+    border: none;
+    margin: 0;
+    border-radius: 0;
+    max-width: unset;
+    opacity: 1;
+    position: fixed;
+    left: 100%;
+    transition: .6s ease-in-out 0s;
+    height: 100%;
+    max-height: unset;
+    background: $an-theme-dark-grey;
+
+    @include desktop {
+      padding: rem(40) rem(60);
+      position: absolute;
+      background-color: $white;
+      left: 0;
+      height: auto;
+      width: 100vw;
+      transform: translateX(rem(-32));
+      justify-content: center;
+    }
+
+    &.active {
+      left: 0;
+      z-index: 2;
+      display: block;
+
+      li {
+        margin: 0 rem(20);
+      }
+    }
+
+    .dropdown-item {
+      font-size: rem(18);
+      border-bottom: rem(1) solid $white;
+      line-height: rem(36);
+      padding: rem(13) 0;
+
+      @include desktop {
+        @include gradient-green-bg;
+        width: rem(188);
+        height: rem(155);
+        margin-right: rem(38);
+        font-size: rem(14);
+        line-height: rem(17);
+        font-family: $open-sans-bold-family;
+        border-radius: rem(10);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $white;
+
+        &:hover {
+          background-color: transparent;
+          text-decoration: underline;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &::after {
+          content: $an-icon-lightning-borders;
+          display: block;
+          position: absolute;
+          font-family: $an-icons;
+          opacity: .2;
+          font-size: rem(120);
+          color: $yellow;
+        }
+      }
+    }
+  }
+
+  .dropdown-item:hover,
+  .dropdown-menu > li > a:hover,
+  .dropdown-menu .link-list > li > a:hover,
+  .dropdown-item:focus, .dropdown-menu > li > a:focus,
+  .dropdown-menu .link-list > li > a:focus {
+    background-color: transparent;
+    color: $white;
+  }
+
+
+  // BURGER MENU FOR MOBILE
+  &__menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: rem(92);
+    height: rem(66);
+    transition: .5s ease-in-out;
+    cursor: pointer;
+
+    @include desktop {
+      display: none;
+    }
+  }
+
+  &__hamburger {
+    position: absolute;
+    top: rem(30);
+    right: rem(30);
+    width: rem(30);
+    height: rem(4);
+    background: $white;
+    display: block;
+    transform-origin: center;
+    transition: .5s ease-in-out;
+    border-radius: rem(20);
+
+    &::before,
+    &::after {
+      transition: .5s ease-in-out;
+      content: '';
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: $white;
+      border-radius: rem(20);
+    }
+
+    &:before {
+      top: rem(-10);
+    }
+
+    &::after {
+      bottom: rem(-10);
+    }
+  }
+
+  &__input {
+    display: none;
+
+    @include desktop {
+      pointer-events: none;
+    }
+
+    &:checked {
+
+      & + .anidia-header__menu {
+        height: 100%;
+        width: 100vw;
+        background-color: $an-theme-dark-grey;
+        position: absolute;
+        z-index: 2;
+
+        .anidia-header__hamburger {
+          transform: rotate(45deg);
+          background-color: $white;
+
+          &::after {
+            transform: rotate(90deg);
+            bottom: 0;
+            background-color: $white;
+          }
+
+          &::before {
+            transform: rotate(90deg);
+            top: 0;
+            background-color: $white;
+          }
+        }
+      }
+
+      & ~ div .navbar-nav {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__back {
+    border-bottom: rem(2) solid $an-theme;
+
+    @include desktop {
+      display: none;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $an-theme;
+      font-size: rem(24);
+      font-family: $fs-emeric-semibold-family;
+
+      &::before {
+        font-family: $an-icons;
+        font-size: rem(28);
+        content: $an-icon-half-arrow-left;
+        position: absolute;
+        left: 0;
+      }
+    }
+  }
+
+  &__footer {
+    display: none;
+    visibility: hidden;
+    text-align: center;
+    margin-top: rem(40);
+
+    @include desktop {
+      display: none;
+    }
+
+    input:checked ~ & {
+      display: block;
+      visibility: visible;
+    }
+
+    .an-btn {
+      position: relative;
+      z-index: 2;
+
+      &:first-child {
+        margin-bottom: rem(20);
+      }
+
+      &:before {
+        margin: rem(15);
+        font-size: rem(30);
+        z-index: 3;
+      }
+    }
+  }
+
+  .dropdown.open > .dropdown-menu {
+    @include desktop {
+      display: flex;
+    }
+  }
+}
+
+// LIFERAY SITE-TITLE REPLACED STYLES
+.site-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .anidia-logo--mobile {
+    height: rem(33);
+    width: rem(40);
+    display: inline;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(rem(24), rem(20));
+    z-index: 3;
+  }
+
+  .an-icon--head-phones {
+    height: rem(40);
+    min-width: unset;
+    width: rem(139);
+    margin-right: rem(74);
+    transform: translateY(rem(-20));
+    padding: 0;
+
+    @include desktop {
+      display: none;
+    }
+
+    .an-cmb__text {
+      font-size: rem(10);
+      line-height: normal;
+      margin-bottom: rem(2);
+    }
+
+    .an-cmb__number {
+      font-size: rem(14);
+      line-height: rem(15);
+    }
+  }
+
+  .an-icon--power {
+
+    &::before {
+      z-index: 2;
+      margin-right: rem(11);
+      font-size: rem(30);
+    }
+  }
+}
