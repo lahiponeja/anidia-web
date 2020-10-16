@@ -10,7 +10,7 @@ components:
           description: Municipality name
           type: string
         municipalityId:
-          description: Municipality identifier (3 first digits from postal code)
+          description: INE Municipality identifier
           type: string
         provinceId:
           description: Municipality name (2 first digits from postal code)
@@ -52,6 +52,19 @@ paths:
       produces:
       - "application/xml"
       - "application/json"
+      parameters:
+      - name: "municipalityId"
+        in: "path"
+        description: "INE Municipality identifier of the addresses"
+        required: true
+        schema:
+          type: "string"
+      - name: "postalCode"
+        in: "path"
+        description: "Postal Code of the addresses"
+        required: true
+        schema:
+          type: "string"
       responses:
         200:
           content:

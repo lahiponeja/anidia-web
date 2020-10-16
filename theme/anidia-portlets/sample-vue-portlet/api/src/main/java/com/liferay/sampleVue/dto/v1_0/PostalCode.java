@@ -30,9 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "PostalCode")
 public class PostalCode {
 
-	@Schema(
-		description = "Municipality identifier (3 first digits from postal code)"
-	)
+	@Schema(description = "INE Municipality identifier")
 	public String getMunicipalityId() {
 		return municipalityId;
 	}
