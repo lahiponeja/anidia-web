@@ -1,6 +1,6 @@
 const dots = document.querySelectorAll('.an-pack-cards__dot');
-const cardContainer = document.querySelector('.an-pack-cards__cards');
-const nCards = document.querySelectorAll('.an-card--pack').length;
+const cardContainer = document.querySelector('.an-pack-cards__cards .portlet-body');
+const nCards = document.querySelectorAll('.an-pack-cards__cards .journal-content-article').length;
 
 dots.forEach((dot, i) => {
   dot.addEventListener('click', e => {
@@ -37,3 +37,7 @@ function setAriaPressed(index) {
     dot.setAttribute('aria-pressed', !!(i === index));
   });
 }
+
+document.querySelectorAll('.an-pack-cards__cards .journal-content-article').forEach(card => {
+  if (card.querySelector('.an-card.an-card--pack.an-card--pack--big.featured')) card.classList.add('featured');
+});
