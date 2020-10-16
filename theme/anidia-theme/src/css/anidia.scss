@@ -10,6 +10,7 @@
 @import './base/paddings';
 @import './base/backgrounds';
 @import './base/layout';
+@import './base/reset';
 
 // // UI Kit
 
@@ -30,20 +31,23 @@
 @import './components/featured';
 @import './components/info-elems';
 @import './components/pack-cards';
+@import './components/stepper';
 @import './components/centered-featured';
+@import './components/hero-slider';
 
 // // Blocks
+@import './blocks/extensible-cards';
 @import './blocks/footer';
 
 /* endinject */
 
 /* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
 // TODO: IMPLEMENT THIS FEATURE IN THE STYLES
-body {
-  &.anidia-green {
-    background: yellowgreen;
-  }
-  &.anidia-white {
-    background: white;
-  }
-}
+// body {
+//   &.anidia-green {
+//     background: $an-theme;
+//   }
+//   &.anidia-white {
+//     background: $white;
+//   }
+// }
