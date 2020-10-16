@@ -54,6 +54,8 @@ public class OpenAPIResourceImpl {
 
 			add(AddressResourceImpl.class);
 
+			add(EstateResourceImpl.class);
+
 			add(SampleResourceImpl.class);
 
 			add(OpenAPIResourceImpl.class);
