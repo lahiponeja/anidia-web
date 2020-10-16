@@ -81,10 +81,10 @@ public class SalesforceService {
 				estateJson = responseJson.getJSONObject(i);
 				Estate estate = new Estate();
 				estate.setAddressKind(estateJson.getString("Tipo_de_via__c"));
-				estate.setAdressName(estateJson.getString("Nombre_de_via__c"));
+				estate.setAddressName(estateJson.getString("Nombre_de_via__c"));
 				estate.setNumber(estateJson.getString("Numero__c"));
 				estate.setGateId(estateJson.getString("Codigo_unico_portal__c"));
-				estate.setAnnex(estateJson.getString("Segundo_numero_de_policia__c"));
+				estate.setAnnex(estateJson.optString("Segundo_numero_de_policia__c"));
 				estates.add(estate);
 			} catch (JSONException e) {
 				System.out.println("Salesforce response: " + response.body());
