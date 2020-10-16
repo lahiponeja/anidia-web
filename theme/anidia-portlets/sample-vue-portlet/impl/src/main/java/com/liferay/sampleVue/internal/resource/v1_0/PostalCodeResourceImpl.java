@@ -1,5 +1,8 @@
 package com.liferay.sampleVue.internal.resource.v1_0;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -40,14 +43,18 @@ public class PostalCodeResourceImpl extends BasePostalCodeResourceImpl {
 		BufferedReader csvFile = new BufferedReader(new InputStreamReader(inputStream));
 		String line = "";
 
-		List<PostalCode> addresses = new ArrayList<PostalCode>();
+		List<PostalCode> postalCodes = new ArrayList<PostalCode>();
 
 		while ((line = csvFile.readLine()) != null) {
+			// each lines has the following format: CodProvincia;CodMunicipio;CodigoPostal;Municipio
 			String[] columns = line.split(";", -1);
 			PostalCode postalCode = new PostalCode();
-			postalCode.setPostalCode()
-			addresses.add(new AddressDTO(columns[0], columns[1], columns[2], columns[3]));
+			postalCode.setProvinceId(columns[0]);
+			postalCode.setMunicipalityId(columns[1]);
+			postalCode.setPostalCode(columns[2]);
+			postalCode.setMunicipalityName(columns[3]);
+			postalCodes.add(postalCode);
 		}
-		return Page.of(Collections.emptyList());
+		return Page.of(postalCodes);
 	}
 }
