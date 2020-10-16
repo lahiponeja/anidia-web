@@ -10,6 +10,7 @@
 
 	<link rel="stylesheet" href="${css_folder}/anidia.css" charset="utf-8">
   <link rel="text/javascript" href="${javascript_folder}/main.js" charset="utf-8">
+	<#--  <link rel="stylesheet" href="${css_folder}/anidia.css?t=${theme_timestamp}" charset="utf-8">  -->
 
 </head>
 
@@ -20,7 +21,7 @@
 
 <@liferay.control_menu />
 
-<div class="container-fluid" id="wrapper">
+<div class="container-fluid p-0" id="wrapper">
 	<header id="banner" role="banner">
 		<div id="heading">
 			<div aria-level="1" class="site-title" role="heading">

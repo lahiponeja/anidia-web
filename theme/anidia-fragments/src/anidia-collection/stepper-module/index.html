@@ -1,0 +1,92 @@
+<div class="an-stepper">
+  <h3><lfr-editable id="Título" type="text">Título</lfr-editable></h3>
+  <div class="an-stepper__tabs">
+    <div class="an-stepper__tab ">
+      [#if configuration.SelectedTab == 'Izquierdo']
+      <input type="radio" name="tabgroup" id="tab-1" checked >
+      [#else]
+      <input type="radio" name="tabgroup" id="tab-1">
+      [/#if]
+      <label for="tab-1" class="an-h5"><lfr-editable id="TítuloTab1" type="text">Título Tab 1</lfr-editable></label>
+      <div class="an-stepper__tab__container">
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título1_1" type="text">Título 1</lfr-editable></h4>
+          <p><lfr-editable id="Descripción1_1" type="text">Descripción 1</lfr-editable></p>
+        </div>
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título1_2" type="text">Título 2</lfr-editable></h4>
+          <p><lfr-editable id="Descripción1_2" type="text">Descripción 2</lfr-editable></p>
+        </div>
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título1_3" type="text">Título 3</lfr-editable></h4>
+          <p><lfr-editable id="Descripción1_3" type="text">Descripción 3</lfr-editable></p>
+        </div>
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título1_4" type="text">Título 4</lfr-editable></h4>
+          <p><lfr-editable id="Descripción1_4" type="text">Descripción 4</lfr-editable></p>
+        </div>
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título1_5" type="text">Título 5</lfr-editable></h4>
+          <p><lfr-editable id="Descripción1_5" type="text">Descripción 5</lfr-editable></p>
+        </div>
+      </div>
+      <ul class="an-stepper__dots">
+        <li class="an-stepper__dot" aria-pressed="true"></li>
+        <li class="an-stepper__dot"></li>
+        <li class="an-stepper__dot"></li>
+        <li class="an-stepper__dot"></li>
+        <li class="an-stepper__dot"></li>
+       </ul>
+    </div>
+    <div class="an-stepper__tab active">
+      [#if configuration.SelectedTab == 'Derecho']
+      <input type="radio" name="tabgroup" id="tab-2" checked >
+      [#else]
+      <input type="radio" name="tabgroup" id="tab-2">
+      [/#if]
+      <label for="tab-2" class="an-h5"><lfr-editable id="TítuloTab2" type="text">Título Tab 2</lfr-editable></label>
+      <div class="an-stepper__tab__container">
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título2_1" type="text">Título 1</lfr-editable></h4>
+          <p><lfr-editable id="Descripción2_1" type="text">Descripción 1</lfr-editable></p>
+        </div>
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título2_2" type="text">Título 2</lfr-editable></h4>
+          <p><lfr-editable id="Descripción2_2" type="text">Descripción 2</lfr-editable></p>
+        </div>
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título2_3" type="text">Título 3</lfr-editable></h4>
+          <p><lfr-editable id="Descripción2_3" type="text">Descripción 3</lfr-editable></p>
+        </div>
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título2_4" type="text">Título 4</lfr-editable></h4>
+          <p><lfr-editable id="Descripción2_4" type="text">Descripción 4</lfr-editable></p>
+        </div>
+        <div class="an-stepper__tab__content">
+          <div class="an-stepper__tab__content__step"></div>
+          <h4><lfr-editable id="Título2_5" type="text">Título 5</lfr-editable></h4>
+          <p><lfr-editable id="Descripción2_5" type="text">Descripción 5</lfr-editable></p>
+        </div>
+      </div>
+      <ul class="an-stepper__dots">
+        <li class="an-stepper__dot" aria-pressed="true"></li>
+        <li class="an-stepper__dot"></li>
+        <li class="an-stepper__dot"></li>
+        <li class="an-stepper__dot"></li>
+        <li class="an-stepper__dot"></li>
+       </ul>
+    </div>
+  </div>
+  <div class="an-stepper__footer"
+  ><a href="${htmlUtil.escape(configuration.Enlace)}" class="an-btn an-btn--white">
+    ${htmlUtil.escape(configuration.Texto)}</a></div>
+</div>
