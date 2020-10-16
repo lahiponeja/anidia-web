@@ -36,6 +36,7 @@ services:
     volumes:
       - ./liferay:/mnt/liferay:Z
       - liferay_war:/opt/liferay/osgi/war:Z
+      - liferay_modules:/opt/liferay/osgi/modules:Z
       - liferay_document_library:/opt/liferay/data/document_library:Z
     depends_on:
       - db
@@ -48,4 +49,5 @@ networks:
 volumes:
   db-data: {}
   liferay_war: {}
+  liferay_modules: {}
   liferay_document_library: {}
