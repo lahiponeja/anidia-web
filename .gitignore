@@ -67,3 +67,5 @@ liferay/deploy/*
 .settings
 .gradle
 gradle/
+
+.env
