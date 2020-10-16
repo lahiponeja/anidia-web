@@ -10,6 +10,7 @@
 @import './base/paddings';
 @import './base/backgrounds';
 @import './base/layout';
+@import './base/reset';
 
 // // UI Kit
 
@@ -34,6 +35,7 @@
 @import './components/hero-slider';
 
 // // Blocks
+@import './blocks/extensible-cards';
 @import './blocks/footer';
 
 /* endinject */
