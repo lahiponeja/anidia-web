@@ -23,7 +23,7 @@ import org.json.JSONArray;
 public class SalesforceService {
 
 	static String SALESFORCE_TOKEN_URL = System.getenv().get("SALESFORCE_TOKEN_URL");
-	static String SALESFORCE_ADRESSES_URL = System.getenv().get("SALESFORCE_ADDRESSES_URL");
+	static String SALESFORCE_ADDRESSES_URL = System.getenv().get("SALESFORCE_ADDRESSES_URL");
 	static String SALESFORCE_PASSWORD = System.getenv().get("SALESFORCE_PASSWORD");
 	static String SALESFORCE_CLIENT_SECRET = System.getenv().get("SALESFORCE_CLIENT_SECRET");
 	static String SALESFORCE_CLIENT_ID = System.getenv().get("SALESFORCE_CLIENT_ID");
@@ -35,7 +35,7 @@ public class SalesforceService {
 		String token = this.getSalesforceToken();
 
 		StringBuilder urlBuilder = new StringBuilder();
-		urlBuilder.append(SALESFORCE_ADRESSES_URL);
+		urlBuilder.append(SALESFORCE_ADDRESSES_URL);
 		urlBuilder.append("?");
 		urlBuilder.append("municipio_ine=");
 		urlBuilder.append(municipalityId);
