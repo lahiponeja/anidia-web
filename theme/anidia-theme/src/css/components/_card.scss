@@ -207,7 +207,6 @@
       }
 
       .n-body-l-bold {
-        // TODO: ADD MARGIN VAR
         margin-bottom: rem(30);
       }
 
@@ -228,12 +227,14 @@
   }
 
   &--pack {
-    padding: rem(54) rem(74) rem(70);
+    padding: rem(36) rem(24);
     border-radius: rem(30);
     border: 1px solid $an-border-shadow;
+    background-color: $white;
+    justify-content: space-between;
 
     .an-list {
-      margin-bottom: rem(40);
+      margin-bottom: rem(30);
 
       &__icon::before {
         color: $an-theme;
@@ -242,8 +243,12 @@
 
     &__intro {
       text-transform: uppercase;
-      margin-bottom: rem(34);
       text-align: center;
+      margin-bottom: rem(28);
+
+      @include desktop {
+        margin-bottom: 0;
+      }
 
       h5 {
         color: $an-theme-dark-grey;
@@ -255,51 +260,69 @@
     }
 
     &__info {
-      margin-bottom: rem(34);
+      margin-bottom: rem(24);
       color: $an-theme;
       text-align: center;
     }
 
     &--big {
-      width: rem(529);
 
-      h1 {
-        font-size: rem(120);
-        line-height: rem(132);
+      @include desktop {
+        width: rem(529);
+        min-height: rem(686);
+        padding: rem(57) rem(47) rem(70);
+
+        h3 {
+          font-size: rem(30);
+          line-height: rem(30);
+        }
+      }
+
+      h2 {
+        font-size: rem(60);
+        line-height: rem(60);
+
+        @include desktop {
+          font-size: rem(120);
+          line-height: rem(120);
+        }
+      }
+
+      .an-list__item {
+        margin-bottom: rem(11);
+
+        @include desktop {
+          margin-bottom: rem(20);
+        }
       }
 
       &.featured {
-        width: rem(560);
+        @include desktop {
+          width: rem(560);
+          min-height: rem(733);
 
-        h1 {
-          font-size: rem(150);
-          line-height: rem(165);
-        }
+          h2 {
+            font-size: rem(150);
+            line-height: rem(150);
+          }
 
-        h4 {
-          font-size: rem(36);
+          h3 {
+            font-size: rem(36);
+            line-height: rem(36);
+          }
         }
       }
     }
 
     &--small {
-      width: rem(470);
 
-      h1 {
-        font-size: rem(60);
-        line-height: rem(67);
+      @include desktop {
+        width: rem(470);
       }
 
       &.featured {
-        width: rem(500);
-
-        h1 {
-          font-size: rem(80);
-          line-height: rem(89);
-        }
-
-        h4 {
-          font-size: rem(30);
+        @include desktop {
+          width: rem(500);
         }
       }
     }
@@ -308,6 +331,11 @@
       background-color: $an-theme;
       color: $white;
       border: none;
+
+      h2,
+      h3 {
+        color: #C5EF3F;
+      }
 
       h5:last-child,
       .an-list__icon::before,

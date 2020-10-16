@@ -8,7 +8,7 @@
 
 	<#include "${full_templates_path}/head/meta_tags.ftl" />
 
-	<link rel="stylesheet" href="${css_folder}/anidia.css" charset="utf-8">
+	<link rel="stylesheet" href="${css_folder}/anidia.css?t=${theme_timestamp}" charset="utf-8">
 
 </head>
 
