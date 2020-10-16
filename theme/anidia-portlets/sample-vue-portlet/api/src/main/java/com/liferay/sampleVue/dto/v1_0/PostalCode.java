@@ -33,20 +33,20 @@ public class PostalCode {
 	@Schema(
 		description = "Municipality identifier (3 first digits from postal code)"
 	)
-	public String getMunicipalityID() {
-		return municipalityID;
+	public String getMunicipalityId() {
+		return municipalityId;
 	}
 
-	public void setMunicipalityID(String municipalityID) {
-		this.municipalityID = municipalityID;
+	public void setMunicipalityId(String municipalityId) {
+		this.municipalityId = municipalityId;
 	}
 
 	@JsonIgnore
-	public void setMunicipalityID(
-		UnsafeSupplier<String, Exception> municipalityIDUnsafeSupplier) {
+	public void setMunicipalityId(
+		UnsafeSupplier<String, Exception> municipalityIdUnsafeSupplier) {
 
 		try {
-			municipalityID = municipalityIDUnsafeSupplier.get();
+			municipalityId = municipalityIdUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -58,7 +58,7 @@ public class PostalCode {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String municipalityID;
+	protected String municipalityId;
 
 	@Schema(description = "Municipality name")
 	public String getMunicipalityName() {
@@ -89,20 +89,20 @@ public class PostalCode {
 	protected String municipalityName;
 
 	@Schema(description = "Postal Code")
-	public String getPostal_code() {
-		return postal_code;
+	public String getPostalCode() {
+		return postalCode;
 	}
 
-	public void setPostal_code(String postal_code) {
-		this.postal_code = postal_code;
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
 	}
 
 	@JsonIgnore
-	public void setPostal_code(
-		UnsafeSupplier<String, Exception> postal_codeUnsafeSupplier) {
+	public void setPostalCode(
+		UnsafeSupplier<String, Exception> postalCodeUnsafeSupplier) {
 
 		try {
-			postal_code = postal_codeUnsafeSupplier.get();
+			postalCode = postalCodeUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -114,7 +114,7 @@ public class PostalCode {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String postal_code;
+	protected String postalCode;
 
 	@Schema(description = "Municipality name (2 first digits from postal code)")
 	public String getProvinceId() {
@@ -171,16 +171,16 @@ public class PostalCode {
 
 		sb.append("{");
 
-		if (municipalityID != null) {
+		if (municipalityId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"municipalityID\": ");
+			sb.append("\"municipalityId\": ");
 
 			sb.append("\"");
 
-			sb.append(_escape(municipalityID));
+			sb.append(_escape(municipalityId));
 
 			sb.append("\"");
 		}
@@ -199,16 +199,16 @@ public class PostalCode {
 			sb.append("\"");
 		}
 
-		if (postal_code != null) {
+		if (postalCode != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"postal_code\": ");
+			sb.append("\"postalCode\": ");
 
 			sb.append("\"");
 
-			sb.append(_escape(postal_code));
+			sb.append(_escape(postalCode));
 
 			sb.append("\"");
 		}

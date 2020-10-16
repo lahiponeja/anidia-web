@@ -2,6 +2,9 @@ package com.liferay.sampleVue.internal.resource.v1_0;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -9,6 +12,7 @@ import javax.ws.rs.Produces;
 
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.sampleVue.resource.v1_0.PostalCodeResource;
+import com.liferay.sampleVue.dto.v1_0.PostalCode;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ServiceScope;

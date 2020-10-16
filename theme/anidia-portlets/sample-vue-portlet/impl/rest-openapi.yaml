@@ -3,13 +3,13 @@ components:
     PostalCode:
       description: Postal code and name for municipalities covered by Anidia
       properties:
-        postal_code:
+        postalCode:
           description: Postal Code
           type: string
         municipalityName:
           description: Municipality name
           type: string
-        municipalityID:
+        municipalityId:
           description: Municipality identifier (3 first digits from postal code)
           type: string
         provinceId:
