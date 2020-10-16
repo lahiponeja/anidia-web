@@ -1,6 +1,4 @@
-import { defineComponent } from 'vue'
-
-const funnel = defineComponent({
+const funnelView = {
   data() {
     return { 
       optionsArr: [
@@ -25,9 +23,6 @@ const funnel = defineComponent({
   },
   inject: ["global"],
   computed: {
-    state() {
-      return this.global.state
-    },
     classOptionPicked(optionName) {
       return {'an-selection--filled': (this.optionPicked === optionName)}
     },
@@ -36,14 +31,6 @@ const funnel = defineComponent({
     pickOption(option) {
       this.optionPicked = option
     },
-
-    continueToForm() {
-      if(this.optionPicked === 'home' || this.optionPicked === 'apartment') {
-        // hide "funnel component" and show "homeFlow component"
-      } else if(this.optionPicked === 'business') {
-        // hide "funnel component" and show "businessFlow component"
-      }
-    }
   },
   template: /*html*/
     `<div class="an-funnel bg-white pt-xxxl pb-xxxl">
@@ -67,6 +54,6 @@ const funnel = defineComponent({
         </button>
       </div>
     </div>`,
-})
+}
 
-export default funnel;
+export default funnelView;

@@ -104,6 +104,7 @@
     box-shadow: none;
     color: $an-theme-dark-grey-op;
     cursor: not-allowed;
+    pointer-events: none;
   }
 
   &--icon {
