@@ -60,3 +60,10 @@ RemoteSystemsTempFiles
 
 # Liferay
 liferay/deploy/*
+
+#Java projects
+.classpath
+.project
+.settings
+.gradle
+gradle/
