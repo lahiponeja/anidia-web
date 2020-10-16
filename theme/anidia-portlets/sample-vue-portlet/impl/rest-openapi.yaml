@@ -37,8 +37,8 @@ components:
         number:
           description: Number of the gate
           type: string
-        policeNumber:
-          description: Not sure what this is
+        annex:
+          description: Annex to the gate number (e.g BIS in 2 BIS)
           type: string
         gateId:
           description: Unique identifier of the gate

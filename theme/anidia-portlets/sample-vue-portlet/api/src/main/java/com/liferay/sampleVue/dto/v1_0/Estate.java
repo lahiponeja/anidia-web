@@ -86,6 +86,34 @@ public class Estate {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String addressName;
 
+	@Schema(description = "Annex to the gate number (e.g BIS in 2 BIS)")
+	public String getAnnex() {
+		return annex;
+	}
+
+	public void setAnnex(String annex) {
+		this.annex = annex;
+	}
+
+	@JsonIgnore
+	public void setAnnex(
+		UnsafeSupplier<String, Exception> annexUnsafeSupplier) {
+
+		try {
+			annex = annexUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String annex;
+
 	@Schema(description = "Unique identifier of the gate")
 	public String getGateId() {
 		return gateId;
@@ -142,34 +170,6 @@ public class Estate {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String number;
 
-	@Schema(description = "Not sure what this is")
-	public String getPoliceNumber() {
-		return policeNumber;
-	}
-
-	public void setPoliceNumber(String policeNumber) {
-		this.policeNumber = policeNumber;
-	}
-
-	@JsonIgnore
-	public void setPoliceNumber(
-		UnsafeSupplier<String, Exception> policeNumberUnsafeSupplier) {
-
-		try {
-			policeNumber = policeNumberUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String policeNumber;
-
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
@@ -225,6 +225,20 @@ public class Estate {
 			sb.append("\"");
 		}
 
+		if (annex != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"annex\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(annex));
+
+			sb.append("\"");
+		}
+
 		if (gateId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -249,20 +263,6 @@ public class Estate {
 			sb.append("\"");
 
 			sb.append(_escape(number));
-
-			sb.append("\"");
-		}
-
-		if (policeNumber != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"policeNumber\": ");
-
-			sb.append("\"");
-
-			sb.append(_escape(policeNumber));
 
 			sb.append("\"");
 		}
