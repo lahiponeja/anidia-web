@@ -78,10 +78,10 @@ public class SalesforceService {
 				Property property = new Property();
 				property.setAddress(propertyJson.optString("Direccion_completa__c"));
 				property.setPropertyId(propertyJson.optString("Codigo_unico_inmueble__c"));
-				property.setBlock(propertyJson.getString("Bloque__c"));
-				property.setLadder(propertyJson.getString("Escalera__c"));
-				property.setFloor(propertyJson.getString("Planta__c"));
-				property.setDoor(propertyJson.getString("Puerta__c"));
+				property.setBlock(propertyJson.optString("Bloque__c"));
+				property.setLadder(propertyJson.optString("Escalera__c"));
+				property.setFloor(propertyJson.optString("Planta__c"));
+				property.setDoor(propertyJson.optString("Puerta__c"));
 				property.setStatus(propertyJson.getString("Estado__c"));
 				property.setContractStatus(propertyJson.optString("SAP_Estado_contrato_SAP__c"));
 				properties.add(property);
