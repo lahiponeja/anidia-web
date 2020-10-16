@@ -1,12 +1,15 @@
-
-// import './installCompositionApi';
-// import './components/funnel';
-// import Vue from 'vue/dist/vue.common';
-
 import { createApp } from 'vue'
-import funnel from './components/funnel'
-import global from './store/global'
 
+// State Modules
+import global from './store/modules/global'
+import house from './store/modules/house'
+
+// Components
+
+// Views
+import funnelView from './views/funnelView'
+import houseView from './views/houseView'
+import businessView from './views/businessView'
 
 /**
  * This is the main entry point of the portlet.
@@ -25,13 +28,13 @@ export default function main({portletNamespace, contextPath, portletElementId, c
     node.innerHTML = /*html*/
     `<div>
             <template v-if="(global.state.currentStep === 'funnel')">
-                <Funnel/>
+                <funnel-view />
             </template>
             <template v-else-if="(global.state.currentStep === 'home') || (global.state.currentStep === 'apartment')">
-                <h2>Home.vue: Tu ahorro empieza aquí...</h2>
+                <house-view />
             </template>
             <template v-else-if="(global.state.currentStep === 'business')">
-                <h2>Business: Te informamos, déjanos tus datos y contactamos contigo...</h2>
+                <business-view />
             </template>
             
             <div>
@@ -54,29 +57,18 @@ export default function main({portletNamespace, contextPath, portletElementId, c
             
         </div>
     `;
-    
-    //
-    // Use runtime + compiler module in this case so that we don't need to 
-    // process templates during build time.
-    //
-    // See https://vuejs.org/v2/guide/installation.html#Runtime-Compiler-vs-Runtime-only
-    // for more information.
-    //
 
-
-    // new Vue({
-    //     el: `#${portletElementId}`,
-    //     provide: {
-    //         global,
-    //     },
-	// 	data: {
-	// 		portletNamespace, contextPath, portletElementId, configuration
-	// 	}
-	// });
+    // console.log(FunnelView)
 
     const app = createApp({
+        components: {
+            'funnel-view': funnelView,
+            'house-view': houseView,
+            'business-view': businessView,
+        },
         provide: {
             global,
+            house,
         },
 		data() {
             return {
@@ -85,9 +77,6 @@ export default function main({portletNamespace, contextPath, portletElementId, c
             }
         },
     });
-    
-    app.component('Funnel', funnel);
 
     app.mount(`#${portletElementId}`);
-    
 }
