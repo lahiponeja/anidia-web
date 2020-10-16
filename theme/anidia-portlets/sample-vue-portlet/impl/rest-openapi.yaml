@@ -1,5 +1,21 @@
 components:
   schemas:
+    PostalCode:
+      description: Postal code and name for municipalities covered by Anidia
+      properties:
+        postal_code:
+          description: Postal Code
+          type: string
+        municipalityName:
+          description: Municipality name
+          type: string
+        municipalityID:
+          description: Municipality identifier (3 first digits from postal code)
+          type: string
+        provinceId:
+          description: Municipality name (2 first digits from postal code)
+          type: string
+      type: object
     Sample:
       description: A sample entity
       properties:
@@ -19,6 +35,30 @@ info:
   version: v1.0
 openapi: 3.0.1
 paths:
+  "/postal-codes":
+    get:
+      operationId: getPostalCodesPage
+      summary: Get all postal codes
+      description: Get all the postal codes from the Anidia database
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/PostalCode"
+            application/xml:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/PostalCode"
+          description: ""
+      tags: ["PostalCode"]
+
   "/samples/{sampleId}":
     get:
       operationId: getSample
