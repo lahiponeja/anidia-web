@@ -57,12 +57,12 @@ public class SalesforceService {
 		HttpResponse<String> response = null;
 		JSONArray responseJson;
 
-		System.out.println("Requesting addresses to " + urlBuilder.toString());
+		System.out.println("Requesting estates to " + urlBuilder.toString());
 
 		try {
 			response = client.send(request, HttpResponse.BodyHandlers.ofString());
-			responseJson = new JSONArray(response.body());
-//			responseJson = new JSONArray("[{"attributes":{"type":"AggregateResult"},"Tipo_de_via__c":"CL","Nombre_de_via__c":"TEJEDORES","Numero__c":"5","Codigo_unico_portal__c":"22","Segundo_numero_de_policia__c":null}]");
+//			responseJson = new JSONArray(response.body());
+			responseJson = new JSONArray("[{\"attributes\":{\"type\":\"AggregateResult\"},\"Tipo_de_via__c\":\"CL\",\"Nombre_de_via__c\":\"TEJEDORES\",\"Numero__c\":\"5\",\"Codigo_unico_portal__c\":\"22\",\"Segundo_numero_de_policia__c\":null}]");
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 			return estates;
