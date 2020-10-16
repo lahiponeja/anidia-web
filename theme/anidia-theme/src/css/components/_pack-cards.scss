@@ -1,11 +1,13 @@
 .an-pack-cards {
   text-align: center;
+  padding-top: rem(90);
 
   &__intro {
     background-color: $white;
-    margin-left: rem(-20);
-    margin-right: rem(-20);
-    padding: rem(20);
+    // margin-left: rem(-20);
+    // margin-right: rem(-20);
+    // padding: rem(20);
+    padding-top: 0;
 
     h6 {
       text-transform: uppercase;
@@ -52,6 +54,7 @@
 
   &__content__intro {
     p {
+      font-family: $open-sans-bold-family;
       color: $white;
       font-size: rem(18);
       margin-bottom: rem(65);
