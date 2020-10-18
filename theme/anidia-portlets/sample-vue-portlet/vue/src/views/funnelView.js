@@ -41,7 +41,7 @@ const funnelView = {
       <div class="an-funnel__cards">
         <!-- CARD ITEM -->
         <div v-for="(option, index) in optionsArr" :key="index" class="an-funnel__cards-item">
-          <div class="an-selection" :class="{'an-selection--filled': (optionPicked === option.name)}" @click="pickOption(option.name)">
+          <div @click="pickOption(option.name)" class="an-selection" :class="{'an-selection--filled': (optionPicked === option.name)}">
             <p class="an-menu-bold an-card__text">{{ option.title }}</p>
             <div class="an-selection__icon" :class="option.icon"></div>
           </div>

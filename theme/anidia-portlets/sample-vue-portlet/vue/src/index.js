@@ -4,8 +4,6 @@ import { createApp } from 'vue'
 import global from './store/modules/global'
 import house from './store/modules/house'
 
-// Components
-
 // Views
 import funnelView from './views/funnelView'
 import houseView from './views/houseView'
@@ -37,6 +35,7 @@ export default function main({portletNamespace, contextPath, portletElementId, c
                 <business-view />
             </template>
             
+            <!-- 
             <div>
                 <span class="tag">${Liferay.Language.get('portlet-namespace')}:</span> 
                 <span class="value">{{portletNamespace}}</span>
@@ -54,6 +53,7 @@ export default function main({portletNamespace, contextPath, portletElementId, c
                 <span class="tag">${Liferay.Language.get('configuration')}:</span>
                 <span class="value pre">{{JSON.stringify(configuration, null, 2)}}</span>
             </div>
+            -->
             
         </div>
     `;

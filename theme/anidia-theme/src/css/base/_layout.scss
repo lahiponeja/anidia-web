@@ -10,6 +10,10 @@
     padding: 0 rem(60);
   }
 
+  &--center {
+    align-items: center;
+  }
+
   &--med {
     max-width: rem(1024);
   }
@@ -24,5 +28,83 @@
 
   &--row {
     flex-direction: row;
+  }
+}
+
+// FORMS LAYOUT
+.an-form {
+  text-align: left;
+
+  &__flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+    .an-form__item {
+      margin-bottom: rem(45);
+    }
+
+    &--justify-normal {
+      justify-content: normal;
+    }
+
+    &--2-cols {
+      .an-form__item {
+        width: 100%;
+      }
+  
+      @include desktop {
+        .an-form__item {
+          width: 48%;
+        }
+      } 
+    }
+
+    &--3-cols {
+      .an-form__item {
+        width: 100%;
+      }
+  
+      @include desktop {
+        .an-form__item {
+          width: 30%;
+        }
+      } 
+    }
+
+    &--4-cols {
+      .an-form__item {
+        width: 100%;
+      }
+  
+      @include desktop {
+        .an-form__item {
+          width: 23%;
+        }
+      } 
+    }
+
+    &--5-cols {
+      .an-form__item {
+        width: 100%;
+      }
+  
+      @include desktop {
+        .an-form__item {
+          width: 18%;
+        }
+      } 
+    }
+    &--6-cols {
+      .an-form__item {
+        width: 100%;
+      }
+  
+      @include desktop {
+        .an-form__item {
+          width: 14%;
+        }
+      } 
+    }
   }
 }

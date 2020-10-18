@@ -125,23 +125,23 @@
     }
   }
 
-  @media (hover: hover) {
-    &__native {
-      opacity: 0;
-    }
+  // @media (hover: hover) {
+  //   &__native {
+  //     opacity: 0;
+  //   }
 
-    &__custom {
-      display: block;
-    }
+  //   &__custom {
+  //     display: block;
+  //   }
     
-    &__native:focus + &__custom {
-      pointer-events: none;
+  //   &__native:focus + &__custom {
+  //     pointer-events: none;
 
-      #{ $an-select }__custom-trigger {
-        box-shadow: none;
-        border: 2px solid $an-theme;
-      }
-    }
-  }
+  //     #{ $an-select }__custom-trigger {
+  //       box-shadow: none;
+  //       border: 2px solid $an-theme;
+  //     }
+  //   }
+  // }
 }
 

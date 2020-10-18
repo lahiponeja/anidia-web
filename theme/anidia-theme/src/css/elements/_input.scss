@@ -3,10 +3,15 @@
 
   align-items: center;
   display: flex;
-  margin-bottom: rem(25);
+  margin-bottom: rem(40);
   position: relative;
   max-width: 100%;
   width: rem(496);
+
+  &__caption {
+    position: absolute;
+    bottom: rem(-25);
+  }
 
   &--icon {
     #{$parent}__field {
@@ -17,6 +22,8 @@
       color: $an-theme;
       position: absolute;
       right: rem(27);
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     &-left {
@@ -28,6 +35,8 @@
         color: $an-theme;
         position: absolute;
         left: rem(27);
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
   }
