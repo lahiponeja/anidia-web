@@ -70,6 +70,43 @@ components:
         contractStatus:
           description: Status of the contract for this property
           type: string
+    Lead:
+      description: Information about a lead to be sent to CRM
+      properties:
+        personalData:
+          description: Personal information of the Lead
+          $ref: "#/definitions/PersonalData"
+    PersonalData:
+      description: Personal information of the Lead
+      properties:
+        firstName:
+          description: First name of the lead
+          type: string
+        lastName:
+          description: Last name of the lead
+          type: string
+        email:
+          description: Email of the lead
+          type: string
+        phone:
+          description: Phone (including international prefix)
+          type: string
+        prodInterest:
+          description: Product of Interest (gas, solar, mantenimiento)
+          type: string
+          enum: [gas, solar, mantenimiento]
+        acceptNotCom:
+          description: Wether the lead has accepted commercial communications
+          type: boolean
+        postalCode:
+          description: Postal Code of the Lead
+          $ref: "#/definitions/PostalCode"
+        estate:
+          description: Estate of the lead
+          $ref: "#/definitions/Estate"
+        property:
+          description: Full property of the Lead
+          $ref: "#/definitions/Property"
     Sample:
       description: A sample entity
       properties:
@@ -89,6 +126,29 @@ info:
   version: v1.0
 openapi: 3.0.1
 paths:
+  "/leads":
+    post:
+      operationId: postLead
+      summary: Create a Lead in CRM
+      description: Collects the lead information and send it to CRM
+      requestBody:
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lead"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Lead"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lead"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Lead"
+          description: The lead has been saved in CRM
   "/properties/{gateId}":
     get:
       operationId: getPropertiesGatePage
