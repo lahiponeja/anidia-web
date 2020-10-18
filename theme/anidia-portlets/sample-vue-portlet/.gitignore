@@ -9,3 +9,9 @@ dist/*
 node_modules/*
 liferay-npm-bundler-report.html
 .webpack/*
+impl/bin
+api/bin
+
+.classpath
+.project
+.settings

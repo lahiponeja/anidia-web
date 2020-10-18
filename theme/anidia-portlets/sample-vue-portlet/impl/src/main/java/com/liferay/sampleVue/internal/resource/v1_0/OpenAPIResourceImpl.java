@@ -50,6 +50,14 @@ public class OpenAPIResourceImpl {
 
 	private final Set<Class<?>> _resourceClasses = new HashSet<Class<?>>() {
 		{
+			add(PostalCodeResourceImpl.class);
+
+			add(AddressResourceImpl.class);
+
+			add(EstateResourceImpl.class);
+
+			add(PropertyResourceImpl.class);
+
 			add(SampleResourceImpl.class);
 
 			add(OpenAPIResourceImpl.class);

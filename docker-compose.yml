@@ -17,6 +17,7 @@ services:
       - db-data:/var/lib/mysql
 
   portal:
+    env_file: .env
     image: liferay/portal:7.3.4-ga5
     user: root
     container_name: liferay_portal
@@ -35,6 +36,7 @@ services:
     volumes:
       - ./liferay:/mnt/liferay:Z
       - liferay_war:/opt/liferay/osgi/war:Z
+      - liferay_modules:/opt/liferay/osgi/modules:Z
       - liferay_document_library:/opt/liferay/data/document_library:Z
     depends_on:
       - db
@@ -47,4 +49,5 @@ networks:
 volumes:
   db-data: {}
   liferay_war: {}
+  liferay_modules: {}
   liferay_document_library: {}
