@@ -1,10 +1,17 @@
+import businessContactForm from '../components/business/businessContactForm'
+
 const businessView = {
+  components: {
+    businessContactForm,
+  },
   inject: ["global"],
   template: /*html*/`
-    <div>
-      <div @click="global.changeStep('funnel')">← Go back</div>
-      <h2>🏢 businessView: Tu ahorro empieza aquí...</h2>
-      <h3>Cobertura</h3>
+    <div class="an-wrapper">
+      <div class="an-funnel__titles mb-xl">
+        <p class="an-h6 color-an-theme-dark-grey mb-l">TE INFORMAMOS</p>
+        <p class="an-body-l-bold color-an-theme">Déjanos tus datos y contactamos contigo</p>
+      </div>
+      <businessContactForm />
     </div>
   `
 }

@@ -1,12 +1,14 @@
 import coverageForm from '../components/house/coverageForm'
 import houseForm from '../components/house/houseForm'
 import budgetCard from '../components/house/budgetCard'
+import budgetReady from '../components/house/budgetReady'
 
 const homeView = {
   components: {
     'coverage-form': coverageForm,
     'house-form': houseForm,
     'budget-card': budgetCard,
+    'budget-ready': budgetReady,
   },
   inject: ["global", "house"],
   data() {
@@ -27,7 +29,7 @@ const homeView = {
   template: /*html*/`
     <div class="an-house an-funnel__titles bg-white pt-xxxl pb-xxxl">
       <div class="an-house__steps an-wrapper an-wrapper--med">
-        <div class="an-funnel__titles">
+        <div class="an-funnel__titles mb-xl">
           <p class="an-h6 color-an-theme-dark-grey mb-l">{{ houseActiveStep.heading.title }}</p>
           <p class="an-body-l-bold color-an-theme">{{ houseActiveStep.heading.subtitle }}</p>
         </div>
@@ -52,7 +54,7 @@ const homeView = {
         <budget-card />
       </template>
       <template v-else-if="houseActiveStep.name === 'presupuesto-realizado'">
-        <h2>{{ houseActiveStep.heading.title }}</h2>
+        <budget-ready />
       </template>
 
 
