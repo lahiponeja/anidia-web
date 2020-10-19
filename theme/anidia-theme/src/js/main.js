@@ -22,7 +22,9 @@ function returnLink(menuItem) {
 function openSubmenu(link) {
     link.addEventListener("click", (event) => {
       event.preventDefault();
+      link.parentElement.classList.add('hide-border')
       link.classList.add("active");
+      document.querySelector('.nav-item.dropdown:not(.active)').classList.add('hide')
       link.nextElementSibling.classList.add("active");
     });
 }
@@ -33,5 +35,15 @@ function closeSubmenu(link) {
       let submenu = link.parentElement.parentElement;
       submenu.classList.remove("active");
       submenu.previousElementSibling.classList.remove("active");
+      document.querySelectorAll('.nav-item.dropdown').forEach(e => {
+        e.classList.remove('hide');
+        e.classList.remove('hide-border');
+      })
     });
 }
+
+document.querySelector('.anidia-header__input').addEventListener("click", (event) => {
+  document.body.classList.toggle('overflow-hidden');
+  document.querySelector('.anidia-header').classList.toggle('active');
+  document.querySelector('.site-title .anidia-logo--mobile').classList.toggle('hide')
+})

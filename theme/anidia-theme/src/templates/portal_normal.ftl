@@ -19,7 +19,6 @@
 
 <@liferay_util["include"] page=body_top_include />
 
-<@liferay.control_menu />
 
 <div class="container-fluid p-0" id="wrapper">
 	<header id="banner" role="banner">
@@ -43,6 +42,7 @@
     <label class="anidia-header">
       <input type="checkbox" class="anidia-header__input"/>
       <span class="anidia-header__menu">
+        <img alt="${logo_description}" src="${images_folder}/logo-menu-mobile-white.svg" class="desktop-hide anidia-logo--mobile"/>
         <span class="anidia-header__hamburger"></span>
       </span>
         <@liferay.navigation_menu
@@ -88,7 +88,7 @@
 	</header>
 
 	<section id="content">
-		<h2 class="hide-accessible" role="heading" aria-level="1">${the_title}</h2>
+		<#--  <h2 class="hide-accessible" role="heading" aria-level="1">${the_title}</h2>  -->
 
 		<#if selectable>
 			<@liferay_util["include"] page=content_include />

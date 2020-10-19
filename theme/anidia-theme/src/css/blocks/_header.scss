@@ -1,31 +1,34 @@
 .anidia-header {
   width: 100%;
 
-  ul {
-    position: absolute;
-    top: rem(66);
-    left: 0;
-    opacity: 0;
-    transition: .25s 0s ease-in-out;
-    width: 100%;
+  &.active {
+    position: fixed;
+    background: $an-theme-dark-grey;
+    z-index: 2;
     height: 100%;
-    z-index: 1;
+    top: 0;
+    overflow: scroll;
+  }
 
+  .navbar-nav,
+  .dropdown-menu {
     a {
       display: block;
       color: $white;
       text-decoration: none;
       width: 100%;
     }
+
+    > .list-unstyled {
+      display: none;
+    }
   }
 
   .navbar-nav {
-    position: relative;
     opacity: 0;
+    display: none;
     transition: .25s 0s ease-in-out;
-    z-index: 2;
     flex-direction: column;
-    top: 0;
 
     @include desktop {
       flex-direction: row;
@@ -36,11 +39,18 @@
   .nav-item {
     color: $white;
     width: 100%;
-    border-bottom: rem(1) solid $an-border; //REPLACE #D8D8D8 WITH ANIDIA COLOR
+    border-bottom: rem(1) solid $an-border;
+    z-index: 2;
+
+    &.hide-border {
+      border-bottom: 0;
+    }
 
     @include desktop {
       margin-right: rem(40);
       border: none;
+      width: auto;
+      position: initial;
     }
 
     .lfr-nav-child-toggle svg {
@@ -66,6 +76,12 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
+        // white-space: nowrap;
+        padding: 0 rem(20);
+
+        @include desktop {
+          margin-right: rem(10);
+        }
       }
     }
 
@@ -92,12 +108,11 @@
     border-radius: 0;
     max-width: unset;
     opacity: 1;
-    position: fixed;
     left: 100%;
     transition: .6s ease-in-out 0s;
-    height: 100%;
-    max-height: unset;
+    height: auto;
     background: $an-theme-dark-grey;
+    max-height: 100%;
 
     @include desktop {
       padding: rem(40) rem(60);
@@ -106,14 +121,19 @@
       left: 0;
       height: auto;
       width: 100vw;
-      transform: translateX(rem(-32));
       justify-content: center;
+
+      li {
+        margin-right: rem(38);
+      }
     }
 
     &.active {
       left: 0;
       z-index: 2;
       display: block;
+      position: relative;
+      transform: translateY(-60px);
 
       li {
         margin: 0 rem(20);
@@ -139,6 +159,7 @@
         justify-content: center;
         align-items: center;
         color: $white;
+        text-align: center;
 
         &:hover {
           background-color: transparent;
@@ -174,22 +195,21 @@
 
   // BURGER MENU FOR MOBILE
   &__menu {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: rem(92);
-    height: rem(66);
     transition: .5s ease-in-out;
     cursor: pointer;
 
     @include desktop {
       display: none;
     }
+
+    .anidia-logo--mobile {
+      display: none;
+    }
   }
 
   &__hamburger {
     position: absolute;
-    top: rem(30);
+    top: rem(38);
     right: rem(30);
     width: rem(30);
     height: rem(4);
@@ -230,11 +250,13 @@
     &:checked {
 
       & + .anidia-header__menu {
-        height: 100%;
-        width: 100vw;
-        background-color: $an-theme-dark-grey;
-        position: absolute;
-        z-index: 2;
+        display: block;
+        padding: 0 rem(20);
+
+        .anidia-logo--mobile {
+          display: block;
+          padding-top: rem(20);
+        }
 
         .anidia-header__hamburger {
           transform: rotate(45deg);
@@ -256,26 +278,29 @@
 
       & ~ div .navbar-nav {
         opacity: 1;
+        display: flex;
       }
     }
   }
 
   &__back {
     border-bottom: rem(2) solid $an-theme;
+    text-align: center;
+    color: $an-theme;
 
     @include desktop {
       display: none;
     }
 
     a {
-      display: flex;
       align-items: center;
       justify-content: center;
-      color: $an-theme;
+      color: $an-theme !important;
       font-size: rem(24);
       font-family: $fs-emeric-semibold-family;
 
       &::before {
+        color: $an-theme;
         font-family: $an-icons;
         font-size: rem(28);
         content: $an-icon-half-arrow-left;
@@ -289,7 +314,7 @@
     display: none;
     visibility: hidden;
     text-align: center;
-    margin-top: rem(40);
+    margin: rem(32) 0;
 
     @include desktop {
       display: none;
@@ -345,7 +370,7 @@
     min-width: unset;
     width: rem(139);
     margin-right: rem(74);
-    transform: translateY(rem(-20));
+    transform: translateY(rem(20));
     padding: 0;
 
     @include desktop {
@@ -365,6 +390,10 @@
   }
 
   .an-icon--power {
+
+    @include desktop {
+      display: flex !important;
+    }
 
     &::before {
       z-index: 2;
