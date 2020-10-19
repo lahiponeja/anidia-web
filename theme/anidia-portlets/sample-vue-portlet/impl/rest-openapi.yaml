@@ -107,6 +107,130 @@ components:
         property:
           description: Full property of the Lead
           $ref: "#/definitions/Property"
+    GasBudgetRequest:
+      description: The required information to calculate a Gas Budget
+      properties:
+        postalCode:
+          description: Postal Code of the client
+          type: string
+        houseType:
+          description: Kind of house
+          type: string
+          enum: ["Unifamiliar", "Bloque de pisos"]
+        propertyMeters:
+          description: Size of the property in meters
+          type: string
+          enum: [ "Hasta 100m2", "De 100m2 a 180m2", "Mas de 180m2" ]
+        staysNumber:
+          description: Number of rooms
+          type: integer
+        bathroomNumber:
+          description: Number of bathrooms
+          type: integer
+        floorNumber:
+          description: Number of floors in the property
+          type: integer
+        gasNaturalUse:
+          description: Intented use of the gas
+          type: string
+          enum: ["solo ACS", "ACS+Cocina", "ACS+Calefacción", "ACS+Cocina+Calefacción"]
+        acsUse:
+          description: Intended use for ACS
+          type: string
+          enum: ["No Procede", "Termo eléctrico", "Butano", "Propano", "Gasóleo", "Carbón", "Otro"]
+        kitchenUse:
+          description: Intended use for the Kitchen
+          type: string
+          enum:  ["No Procede", "Eléctrico", "Butano", "Propano", "Gasóleo", "Carbón", "Otro"]
+        heatingUse:
+          description: Intended use of heating
+          type: string
+          enum: [ "No Procede", "Radiadores eléctricos", "Butano", "Propano", "Gasóleo", "Carbón", "Otro" ]
+        personsWater:
+          description: Number of persons that use the waters
+          type: string
+          enum: [ "Hasta 2", "Entre 3-4", "Más de 4" ]
+        boilerLocation:
+          description: Location of the boiler
+          type: string
+          enum: [ "Lavadero/Terraza", "Cocina", "Baño" ]
+        metersBoilerToWindow:
+          description: Distance between the boiler and the window
+          type: integer
+        metersWaterIntake:
+          description: Distance to the water intake
+          type: string
+          enum: ["m.0", "m.1", "m.2", "m.3", "m.4"]
+        hasVentilationGrill:
+          description: Has the client a ventilation grill?
+          type: boolean
+        controllHeatingFloor:
+          description: Has the client controlled heating in the whole floor?
+          type: boolean
+        connectDeviceToKitchen:
+          description: Has the client a connect device in the kitchen?
+          type: boolean
+        convertDeviceKitchen:
+          description: Has the client a convert device in the kitchen?
+          type: boolean
+        radiatorsBathroom:
+          description: Number of the radiators in the bathroom.
+          type: integer
+    GasBudget:
+      description: Information about the gas budget sent by Solusoft API
+      properties:
+        proposedPack:
+          description: Title of the pack
+          type: string
+        equipment:
+          description: Equipment included in the budget
+          type: string
+        baseBudget:
+          description: Base price of the budget
+          type: string
+        bonus:
+          description: Discount
+          type: string
+        totalBudget:
+          description: Total Price without VAT.
+          type: string
+        vat:
+          description: VAT amount
+          type: string
+        totalPrice:
+          description: Total price with VAT
+          type: string
+        metersBoilerToWindow:
+          description: Distance between the boiler and the window
+          $ref: "#/definitions/GasBudgetExtra"
+        metersWaterIntake:
+          description: Distance to the water intake
+          $ref: "#/definitions/GasBudgetExtra"
+        hasVentilationGrill:
+          description: Has the client a ventilation grill?
+          $ref: "#/definitions/GasBudgetExtra"
+        controllHeatingFloor:
+          description: Has the client controlled heating in the whole floor?
+          $ref: "#/definitions/GasBudgetExtra"
+        connectDeviceToKitchen:
+          description: Has the client a connect device in the kitchen?
+          $ref: "#/definitions/GasBudgetExtra"
+        convertDeviceKitchen:
+          description: Has the client a convert device in the kitchen?
+          $ref: "#/definitions/GasBudgetExtra"
+        radiatorsBathroom:
+          description: Number of the radiators in the bathroom.
+          $ref: "#/definitions/GasBudgetExtra"
+    GasBudgetExtra:
+      description: Information about some extra from the gas budget
+      properties:
+        value:
+          description: Detail of the extra
+          type: string
+        price:
+          description: Price for the extra
+          type: string
+
     Sample:
       description: A sample entity
       properties:
@@ -126,6 +250,29 @@ info:
   version: v1.0
 openapi: 3.0.1
 paths:
+  "/gas-budgets":
+    post:
+      operationId: postGasBudget
+      summary: Create a Gas Budget using Solusoft API
+      description: Converts all the information into a format usable by Solusoft and returns the response
+      requestBody:
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GasBudgetRequest"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GasBudgetRequest"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GasBudget"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GasBudget"
+          description: The budget has been created
   "/leads":
     post:
       operationId: postLead
