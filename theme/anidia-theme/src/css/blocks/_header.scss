@@ -33,6 +33,7 @@
     @include desktop {
       flex-direction: row;
       opacity: 1;
+      display: flex;
     }
   }
 
@@ -115,16 +116,20 @@
     max-height: 100%;
 
     @include desktop {
-      padding: rem(40) rem(60);
+      padding: rem(40) rem(60) rem(20);
       position: absolute;
       background-color: $white;
       left: 0;
       height: auto;
       width: 100vw;
       justify-content: center;
+      min-height: rem(220);
+      max-height: unset;
+      flex-wrap: wrap;
 
       li {
         margin-right: rem(38);
+        margin-bottom: rem(20);
       }
     }
 
