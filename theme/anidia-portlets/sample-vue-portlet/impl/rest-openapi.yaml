@@ -221,6 +221,9 @@ components:
         radiatorsBathroom:
           description: Number of the radiators in the bathroom.
           $ref: "#/definitions/GasBudgetExtra"
+        extraTotalPrice:
+          description: Total price for all the extras
+          type: string
     GasBudgetExtra:
       description: Information about some extra from the gas budget
       properties:
