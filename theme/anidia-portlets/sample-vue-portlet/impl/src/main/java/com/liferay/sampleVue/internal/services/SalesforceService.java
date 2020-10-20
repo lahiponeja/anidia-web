@@ -57,8 +57,8 @@ public class SalesforceService {
 
 		try {
 			response = client.send(request, HttpResponse.BodyHandlers.ofString());
-//			responseJson = new JSONArray(response.body());
-			responseJson = new JSONArray("[{\"attributes\":{\"type\":\"Account\",\"url\":\"/services/data/v44.0/sobjects/Account/0011p00001hcUC8AAM\"},\"Direccion_completa__c\":\"CM HEREDEROS 7 , B, E, BJ4\",\"Codigo_unico_inmueble__c\":\"I21864951\",\"Tipo_finca__c\":\"SH\",\"CUPS__c\":\"ES123456789012345678\",\"Bloque__c\":\"B\",\"Escalera__c\":\"E\",\"Planta__c\":\"BJ\",\"Puerta__c\":\"4\",\"Estado__c\":\"01\",\"Canon_IRC__c\":6.35,\"Finca__c\":\"0011p00001hcRY7AAM\",\"Id\":\"0011p00001hcUC8AAM\"},{\"attributes\":{\"type\":\"Account\",\"url\":\"/services/data/v44.0/sobjects/Account/0011p00001hcUC9AAM\"},\"Direccion_completa__c\":\"CM HEREDEROS7\",\"Codigo_unico_inmueble__c\":\"I16621155\",\"Tipo_finca__c\":\"SH\",\"Estado__c\":\"01\",\"Finca__c\":\"0011p00001hcRY7AAM\",\"Id\":\"0011p00001hcUC9AAM\"}]");
+			responseJson = new JSONArray(response.body());
+//			responseJson = new JSONArray("[{\"attributes\":{\"type\":\"Account\",\"url\":\"/services/data/v44.0/sobjects/Account/0011p00001hcUC8AAM\"},\"Direccion_completa__c\":\"CM HEREDEROS 7 , B, E, BJ4\",\"Codigo_unico_inmueble__c\":\"I21864951\",\"Tipo_finca__c\":\"SH\",\"CUPS__c\":\"ES123456789012345678\",\"Bloque__c\":\"B\",\"Escalera__c\":\"E\",\"Planta__c\":\"BJ\",\"Puerta__c\":\"4\",\"Estado__c\":\"01\",\"Canon_IRC__c\":6.35,\"Finca__c\":\"0011p00001hcRY7AAM\",\"Id\":\"0011p00001hcUC8AAM\"},{\"attributes\":{\"type\":\"Account\",\"url\":\"/services/data/v44.0/sobjects/Account/0011p00001hcUC9AAM\"},\"Direccion_completa__c\":\"CM HEREDEROS7\",\"Codigo_unico_inmueble__c\":\"I16621155\",\"Tipo_finca__c\":\"SH\",\"Estado__c\":\"01\",\"Finca__c\":\"0011p00001hcRY7AAM\",\"Id\":\"0011p00001hcUC9AAM\"}]");
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 			return properties;
@@ -111,6 +111,8 @@ public class SalesforceService {
 		urlBuilder.append(addressKind);
 		urlBuilder.append("+");
 		urlBuilder.append(addressName);
+		// We have to sent the number as empty
+		urlBuilder.append("&numero=");
 
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder().
@@ -126,8 +128,8 @@ public class SalesforceService {
 
 		try {
 			response = client.send(request, HttpResponse.BodyHandlers.ofString());
-//			responseJson = new JSONArray(response.body());
-			responseJson = new JSONArray("[{\"attributes\":{\"type\":\"AggregateResult\"},\"Tipo_de_via__c\":\"CL\",\"Nombre_de_via__c\":\"TEJEDORES\",\"Numero__c\":\"5\",\"Codigo_unico_portal__c\":\"22\",\"Segundo_numero_de_policia__c\":null}]");
+			responseJson = new JSONArray(response.body());
+//			responseJson = new JSONArray("[{\"attributes\":{\"type\":\"AggregateResult\"},\"Tipo_de_via__c\":\"CL\",\"Nombre_de_via__c\":\"TEJEDORES\",\"Numero__c\":\"5\",\"Codigo_unico_portal__c\":\"22\",\"Segundo_numero_de_policia__c\":null}]");
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 			return estates;
