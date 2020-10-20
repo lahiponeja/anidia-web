@@ -9,12 +9,16 @@
 		"copy-webpack-plugin": "4.6.0",
 		"liferay-npm-build-support": "^2.19.4",
 		"liferay-npm-bundler": "^2.19.4",
+		"vue-loader": "^15.9.3",
+		"vue-template-compiler": "^2.6.12",
 		"webpack": "4.29.6",
 		"webpack-cli": "3.3.0",
 		"webpack-dev-server": "^3.11.0"
 	},
 	"dependencies": {
-		"vue": "^3.0.0"
+		"axios": "^0.20.0",
+		"vue": "^3.0.1",
+		"vuelidate": "^0.7.5"
 	},
 	"scripts": {
 		"build": "babel --source-maps -d build src && npm run copy-assets && liferay-npm-bundler",

@@ -1,7 +1,9 @@
+import { http } from '../../services/http/index'
 import { reactive, readonly } from 'vue'
 
 const state = reactive({
-  homeSteps: [
+  houseType: "",
+  houseSteps: [
     {
       name: "cobertura",
       icon: "an-icon--lightning-borders",
@@ -39,16 +41,64 @@ const state = reactive({
     },
   ],
   currentStep: "cobertura",
+  coverageError: "",
 })
 
 const changeStep = function (step) {
-  const stepToChange = state.homeSteps.find((homeStep) => homeStep.name === step)
-  state.homeSteps.forEach((homeStep) => homeStep.active = false)
+  const stepToChange = state.houseSteps.find((homeStep) => homeStep.name === step)
+  state.houseSteps.forEach((homeStep) => homeStep.active = false)
   stepToChange.active = true
   state.currentStep = step;
+}
+
+const submitCoverageData = function (formData) {
+  const { 
+    postalCode, 
+    municipality,
+    street,
+    number,
+    houseType,
+    privacyPolicy 
+  } = formData;
+
+  http.post('posts', {
+    title: 'foo',
+    body: 'bar',
+    userId: 1,
+  })
+  .then((response) => {
+    // TODO: Handle all the possible responses (there's at least 3).
+    // if response.data === some condition
+    //   coverageError = ""
+    // else 
+      changeStep("vivienda")
+      state.houseType = houseType
+    // console.log(response.data)
+    // state.coverageError = err.message
+  })
+  .catch((err) => {
+    console.error(err)
+  })
+}
+
+const submitHouseData = function () {}
+
+const submitUserContactInfo = function (budgetReadyForm) {
+  const { 
+    name,
+    lastname,
+    phone,
+    email,
+    privacyPolicy,
+    offersAndServices } = budgetReadyForm;
+
+    console.log("budgetReadyForm", budgetReadyForm);
 }
 
 export default { 
   state: readonly(state), 
   changeStep,
+  submitCoverageData,
+  submitHouseData,
+  submitUserContactInfo,
 }

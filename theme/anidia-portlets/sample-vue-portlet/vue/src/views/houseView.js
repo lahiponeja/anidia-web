@@ -20,7 +20,7 @@ const homeView = {
       return this.house.state
     },
     houseActiveStep() {
-      return this.house.state.homeSteps.find((step) => step.active)
+      return this.house.state.houseSteps.find((step) => step.active)
     },
     showSteps() {
       return !(this.houseActiveStep.name === 'presupuesto-realizado')
@@ -35,7 +35,7 @@ const homeView = {
         </div>
 
         <ul v-if="showSteps" class="an-house__steps-list mb-xxxl">
-          <template v-for="(houseStep, index) in houseState.homeSteps" class="an-house__steps-item">
+          <template v-for="(houseStep, index) in houseState.houseSteps" class="an-house__steps-item">
             <div v-if="houseStep.icon" class="an-house__steps-item" :class="{'an-house__steps-item--active': houseStep.active }">
               <span class="an-house__steps-item-icon" :class="houseStep.icon"></span>
               <p class="an-h5">{{ houseStep.name }}</p>

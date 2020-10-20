@@ -24,59 +24,56 @@ export default function main({portletNamespace, contextPath, portletElementId, c
     
     // Dynamically write markup to portlet's node
     node.innerHTML = /*html*/
-    `<div>
-            <template v-if="(global.state.currentStep === 'funnel')">
-                <funnel-view />
-            </template>
-            <template v-else-if="(global.state.currentStep === 'home') || (global.state.currentStep === 'apartment')">
-                <house-view />
-            </template>
-            <template v-else-if="(global.state.currentStep === 'business')">
-                <business-view />
-            </template>
-            
-            <!-- 
-            <div>
-                <span class="tag">${Liferay.Language.get('portlet-namespace')}:</span> 
-                <span class="value">{{portletNamespace}}</span>
-            </div>
-            <div>
-                <span class="tag">${Liferay.Language.get('context-path')}:</span>
-                <span class="value">{{contextPath}}</span>
-            </div>
-            <div>
-                <span class="tag">${Liferay.Language.get('portlet-element-id')}:</span>
-                <span class="value">{{portletElementId}}</span>
-            </div>
-            
-            <div>
-                <span class="tag">${Liferay.Language.get('configuration')}:</span>
-                <span class="value pre">{{JSON.stringify(configuration, null, 2)}}</span>
-            </div>
-            -->
-            
-        </div>
-    `;
+		`<div>
 
-    // console.log(FunnelView)
+			<template v-if="(global.state.currentStep === 'funnel')">
+				<funnel-view />
+			</template>
+			<template v-else-if="(global.state.currentStep === 'home') || (global.state.currentStep === 'apartment')">
+				<house-view />
+			</template>
+			<template v-else-if="(global.state.currentStep === 'business')">
+				<business-view />
+			</template>
+            
+			<!-- 
+			<div>
+				<span class="tag">${Liferay.Language.get('portlet-namespace')}:</span> 
+				<span class="value">{{portletNamespace}}</span>
+			</div>
+			<div>
+				<span class="tag">${Liferay.Language.get('context-path')}:</span>
+				<span class="value">{{contextPath}}</span>
+			</div>
+			<div>
+				<span class="tag">${Liferay.Language.get('portlet-element-id')}:</span>
+				<span class="value">{{portletElementId}}</span>
+			</div>
+			
+			<div>
+				<span class="tag">${Liferay.Language.get('configuration')}:</span>
+				<span class="value pre">{{JSON.stringify(configuration, null, 2)}}</span>
+			</div>
+			-->  
+		</div>`;
 
-    const app = createApp({
-        components: {
-            'funnel-view': funnelView,
-            'house-view': houseView,
-            'business-view': businessView,
-        },
-        provide: {
-            global,
-            house,
-        },
+	const app = createApp({
+		components: {
+			'funnel-view': funnelView,
+			'house-view': houseView,
+			'business-view': businessView,
+		},
+		provide: {
+			global,
+			house,
+		},
 		data() {
-            return {
-                global,
-                portletNamespace, contextPath, portletElementId, configuration
-            }
-        },
-    });
+			return {
+				global,
+				portletNamespace, contextPath, portletElementId, configuration
+			}
+		},
+	});
 
-    app.mount(`#${portletElementId}`);
+	app.mount(`#${portletElementId}`);
 }
