@@ -43,20 +43,17 @@ public class PostalCodeResourceImpl extends BasePostalCodeResourceImpl {
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PostalCode")})
 	public Page<PostalCode> getPostalCodesPage() throws Exception {
-		InputStream inputStream = getClass().getResourceAsStream("municipalities.csv");
+		InputStream inputStream = getClass().getResourceAsStream("postal-codes.csv");
 		BufferedReader csvFile = new BufferedReader(new InputStreamReader(inputStream));
 		String line = "";
 
 		List<PostalCode> postalCodes = new ArrayList<PostalCode>();
 
 		while ((line = csvFile.readLine()) != null) {
-			// each lines has the following format: CodProvincia;CodMunicipio;CodigoPostal;Municipio
+			// each lines has only the postal codes
 			String[] columns = line.split(";", -1);
 			PostalCode postalCode = new PostalCode();
-			postalCode.setProvinceId(columns[0]);
-			postalCode.setMunicipalityId(columns[1]);
-			postalCode.setPostalCode(columns[2]);
-			postalCode.setMunicipalityName(columns[3]);
+			postalCode.setPostalCode(columns[0]);
 			postalCodes.add(postalCode);
 		}
 		return Page.of(postalCodes);
