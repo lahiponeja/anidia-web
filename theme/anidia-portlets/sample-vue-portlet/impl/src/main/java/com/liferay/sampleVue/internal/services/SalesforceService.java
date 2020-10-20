@@ -111,6 +111,8 @@ public class SalesforceService {
 		urlBuilder.append(addressKind);
 		urlBuilder.append("+");
 		urlBuilder.append(addressName);
+		// We have to sent the number as empty
+		urlBuilder.append("&numero=");
 
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder().
