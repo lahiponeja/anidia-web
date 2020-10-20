@@ -221,6 +221,9 @@ components:
         radiatorsBathroom:
           description: Number of the radiators in the bathroom.
           $ref: "#/definitions/GasBudgetExtra"
+        extraTotalPrice:
+          description: Total price for all the extras
+          type: string
     GasBudgetExtra:
       description: Information about some extra from the gas budget
       properties:
@@ -385,7 +388,7 @@ paths:
       parameters:
       - name: "municipalityId"
         in: "path"
-        description: "INE Municipality identifier of the addresses"
+        description: "INE Municipality identifier of the addresses. Build using the municipalityId and proviceId from municipalities service"
         required: true
         schema:
           type: "string"
@@ -411,6 +414,33 @@ paths:
           description: ""
       tags: ["Address"]
 
+  "/municipalities/{postalCode}":
+    get:
+      operationId: getMunicipalityPostalCodePage
+      summary: Get the municipalities for a postal code
+      description: Get all the municipalities for a postal code from the Anidia database
+      parameters:
+        - name: "postalCode"
+          in: "path"
+          description: "Postal Code of the municipalities"
+          required: true
+          schema:
+            type: "string"
+      responses:
+          200:
+            content:
+              application/json:
+                schema:
+                  type: "array"
+                  items:
+                    $ref: "#/components/schemas/PostalCode"
+              application/xml:
+                schema:
+                  type: "array"
+                  items:
+                    $ref: "#/components/schemas/PostalCode"
+            description: ""
+      tags: ["PostalCode"]
   "/postal-codes":
     get:
       operationId: getPostalCodesPage

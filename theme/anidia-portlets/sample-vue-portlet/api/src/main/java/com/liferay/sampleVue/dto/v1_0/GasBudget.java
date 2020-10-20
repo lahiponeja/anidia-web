@@ -210,6 +210,34 @@ public class GasBudget {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String equipment;
 
+	@Schema(description = "Total price for all the extras")
+	public String getExtraTotalPrice() {
+		return extraTotalPrice;
+	}
+
+	public void setExtraTotalPrice(String extraTotalPrice) {
+		this.extraTotalPrice = extraTotalPrice;
+	}
+
+	@JsonIgnore
+	public void setExtraTotalPrice(
+		UnsafeSupplier<String, Exception> extraTotalPriceUnsafeSupplier) {
+
+		try {
+			extraTotalPrice = extraTotalPriceUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String extraTotalPrice;
+
 	@Schema(description = "Has the client a ventilation grill?")
 	@Valid
 	public GasBudgetExtra getHasVentilationGrill() {
@@ -535,6 +563,20 @@ public class GasBudget {
 			sb.append("\"");
 
 			sb.append(_escape(equipment));
+
+			sb.append("\"");
+		}
+
+		if (extraTotalPrice != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"extraTotalPrice\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(extraTotalPrice));
 
 			sb.append("\"");
 		}
