@@ -10,6 +10,9 @@ import com.liferay.sampleVue.dto.v1_0.PostalCode;
 import com.liferay.sampleVue.resource.v1_0.PostalCodeResource;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 
@@ -21,8 +24,11 @@ import javax.annotation.Generated;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.validation.constraints.NotNull;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.UriInfo;
 
@@ -33,6 +39,30 @@ import javax.ws.rs.core.UriInfo;
 @Generated("")
 @Path("/v1.0")
 public abstract class BasePostalCodeResourceImpl implements PostalCodeResource {
+
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'GET' 'http://localhost:8080/o/sample-vue/v1.0/municipalities/{postalCode}'  -u 'test@liferay.com:test'
+	 */
+	@Override
+	@GET
+	@Operation(
+		description = "Get all the municipalities for a postal code from the Anidia database"
+	)
+	@Parameters(
+		value = {@Parameter(in = ParameterIn.PATH, name = "postalCode")}
+	)
+	@Path("/municipalities/{postalCode}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PostalCode")})
+	public Page<PostalCode> getMunicipalityPostalCodePage(
+			@NotNull @Parameter(hidden = true) @PathParam("postalCode") String
+				postalCode)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
 
 	/**
 	 * Invoke this method with the command line:

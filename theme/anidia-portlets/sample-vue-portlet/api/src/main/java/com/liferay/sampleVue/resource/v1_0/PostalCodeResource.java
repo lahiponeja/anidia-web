@@ -27,6 +27,9 @@ import org.osgi.annotation.versioning.ProviderType;
 @ProviderType
 public interface PostalCodeResource {
 
+	public Page<PostalCode> getMunicipalityPostalCodePage(String postalCode)
+		throws Exception;
+
 	public Page<PostalCode> getPostalCodesPage() throws Exception;
 
 	public default void setContextAcceptLanguage(
