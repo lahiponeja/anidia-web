@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const http = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com/',
+  baseURL: '/o/sample-vue/v1.0/',
   headers: {
     'Access-Control-Allow-Origin': '*'
   }

@@ -6,11 +6,12 @@ const coverageForm = {
   },
   data() {
     return {
+      // municipalityNameID = provinceCode + municipalityNameID
       formData: {
-        postalCode: "",
-        municipality: "",
-        street: "",
-        number: "",
+        postalCode: "", // http://localhost:8080/o/sample-vue/v1.0/postal-codes
+        municipality: "", // http://localhost:8080/o/sample-vue/v1.0/municipalities/01191
+        street: "", // Adresses: municipalityNameID/
+        number: "", // Estate: municipalityNameID/postalCode/addressKind/addressName
         houseType: "",
         privacyPolicy: false
       }

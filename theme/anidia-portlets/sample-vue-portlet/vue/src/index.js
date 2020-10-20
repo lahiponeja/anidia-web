@@ -73,6 +73,10 @@ export default function main({portletNamespace, contextPath, portletElementId, c
 				portletNamespace, contextPath, portletElementId, configuration
 			}
 		},
+		async created() {
+			const res = await house.getPostalCodes()
+			console.log(res)
+		},
 	});
 
 	app.mount(`#${portletElementId}`);

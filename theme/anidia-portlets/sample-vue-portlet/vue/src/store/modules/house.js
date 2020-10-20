@@ -1,5 +1,6 @@
 import { http } from '../../services/http/index'
 import { reactive, readonly } from 'vue'
+import coverageService from '../../services/coverageServices'
 
 const state = reactive({
   houseType: "",
@@ -41,6 +42,13 @@ const state = reactive({
     },
   ],
   currentStep: "cobertura",
+  autocompData: {
+    postalCodes: [],
+    municipalities: [],
+    addresses: [],
+    estates: [],
+    properties: [],
+  },
   coverageError: "",
 })
 
@@ -95,10 +103,19 @@ const submitUserContactInfo = function (budgetReadyForm) {
     console.log("budgetReadyForm", budgetReadyForm);
 }
 
+const getPostalCodes = function () {
+  return new Promise(resolve => {
+    coverageService.getPostalCodes().then((data) => {
+      resolve(data)
+    })
+  })
+}
+
 export default { 
   state: readonly(state), 
   changeStep,
   submitCoverageData,
   submitHouseData,
   submitUserContactInfo,
+  getPostalCodes,
 }
