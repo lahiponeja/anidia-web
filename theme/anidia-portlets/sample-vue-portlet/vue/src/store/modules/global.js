@@ -1,4 +1,5 @@
-import { reactive, readonly } from 'vue'
+// import { reactive, readonly } from 'vue'
+import { reactive, shallowReadonly } from '@vue/composition-api'
 
 const state = reactive({
   currentStep: "funnel",
@@ -9,6 +10,6 @@ const changeStep = function (step) {
 }
 
 export default {
-  state: readonly(state), 
+  state: shallowReadonly(state), 
   changeStep,
 }

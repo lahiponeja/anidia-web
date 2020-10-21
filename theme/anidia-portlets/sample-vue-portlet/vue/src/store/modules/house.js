@@ -1,6 +1,8 @@
 import { http } from '../../services/http/index'
-import { reactive, readonly } from 'vue'
+// import { reactive, readonly } from 'vue'
+import { reactive, shallowReadonly } from '@vue/composition-api'
 import coverageService from '../../services/coverageServices'
+import xmlToJson from '../../helpers/xmlToJson'
 
 const state = reactive({
   houseType: "",
@@ -51,6 +53,18 @@ const state = reactive({
   },
   coverageError: "",
 })
+
+const getPostalCodes = function () {
+  coverageService.getPostalCodes().then((res) => {
+    // const json = xmlToJson(JSON.stringify(res.data))
+    const XmlString = res.data
+    const XmlNode = new DOMParser().parseFromString(XmlString, 'text/xml');
+    const json = xmlToJson(XmlNode);
+    state.autocompData.postalCodes = json.Page.items.items;
+  }).catch((err) => {
+    console.error(err);
+  })
+}
 
 const changeStep = function (step) {
   const stepToChange = state.houseSteps.find((homeStep) => homeStep.name === step)
@@ -103,16 +117,8 @@ const submitUserContactInfo = function (budgetReadyForm) {
     console.log("budgetReadyForm", budgetReadyForm);
 }
 
-const getPostalCodes = function () {
-  return new Promise(resolve => {
-    coverageService.getPostalCodes().then((data) => {
-      resolve(data)
-    })
-  })
-}
-
 export default { 
-  state: readonly(state), 
+  state: shallowReadonly(state), 
   changeStep,
   submitCoverageData,
   submitHouseData,

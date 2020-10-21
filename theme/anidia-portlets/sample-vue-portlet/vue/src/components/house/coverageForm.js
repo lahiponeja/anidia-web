@@ -23,13 +23,21 @@ const coverageForm = {
       // TODO: add validation
       this.house.submitCoverageData(this.formData)
     },
+    // setError(error) {
+      
+    // }
   },
-  updated() {
-    console.log(this.formData)
+  computed: {
+    postalCodesArr() {
+      return this.house.state.autocompData.postalCodes;
+    }
+  },
+  mounted() {
+    console.log(this.house.state.autocompData.postalCodes);
   },
   template: /*html*/
-    `
-    <template v-if="!house.state.coverageError">
+    `<div>
+    <div v-if="!house.state.coverageError">
       <div class="an-form an-wrapper">
         <p class="an-body-l-bold mb-xl">Rellena tu dirección para saber si tenemos cobertura en tu zona</p>
         <form @submit.prevent="submitRequest">
@@ -64,12 +72,13 @@ const coverageForm = {
           
         </form>
       </div>
-    </template>
-    <template v-else>
+    </div>
+    <div v-else>
       <coverage-error :msg="house.state.coverageError" />
-    </template>
+    </div>
     <div @click="setError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.')">Trigger First error</div>
     <div @click="setError('Hemos detectado que ya tienes gas natural instalado y mantenimiento contratado.')">Trigger Second error</div>
+    </div>
     `
   }
 
