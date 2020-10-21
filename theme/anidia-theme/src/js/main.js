@@ -48,6 +48,6 @@ if (windowWidth < 768){
   document.querySelector('.anidia-header__input').addEventListener("click", (event) => {
     document.body.classList.toggle('overflow-hidden');
     document.querySelector('.anidia-header').classList.toggle('active');
-    document.querySelector('.site-title .anidia-logo--mobile').classList.toggle('hide')
+    document.querySelector('.site-title .anidia-logo-header--mobile').classList.toggle('hide')
   })
 }

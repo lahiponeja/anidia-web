@@ -26,16 +26,33 @@
 		<div id="heading">
 			<div aria-level="1" class="site-title" role="heading">
 				<a class="${logo_css_class}" href="${site_default_url}" title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">
-					<img alt="${logo_description}" src="${images_folder}/logo-anidia-white.svg" class="mobile-hide anidia-logo-header anidia-logo-header--white"/>
-          <img alt="${logo_description}" src="${images_folder}/logo-anidia-green.svg" class="mobile-hide anidia-logo-header anidia-logo-header--green"/>
-          <img alt="${logo_description}" src="${images_folder}/logo-menu-mobile-white.svg" class="desktop-hide anidia-logo--mobile"/>
+          <div class="mobile-hide">
+          	<img alt="${logo_description}" src="${images_folder}/logo-anidia-white.svg" class="anidia-logo-header anidia-logo-header--white"/>
+            <img alt="${logo_description}" src="${images_folder}/logo-anidia-green.svg" class="anidia-logo-header anidia-logo-header--green"/>
+          </div>
+          <div class="desktop-hide">
+            <img alt="${logo_description}" src="${images_folder}/logo-menu-mobile-white.svg" class="anidia-logo-header--mobile anidia-logo-header--mobile--white"/>
+            <img alt="${logo_description}" src="${images_folder}/logo-menu-mobile-green.svg" class="anidia-logo-header--mobile anidia-logo-header--mobile--green"/>
+          </div>
 				</a>
+        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--head-phones an-cmb an-cmb--header desktop-hide">
+          <div class="an-cmb__content">
+            <span class="an-cmb__text">Llámanos gratis</span>
+            <span class="an-link an-cmb__number">${call_center_phone[0..*3]} ${call_center_phone[3..*2]} ${call_center_phone[5..*2]} ${call_center_phone[7..*2]}</span>
+          </div>
+        </a>
+
+		    <a href="tel:+34900181818" class="an-link an-btn an-btn--flatter an-btn--gradient an-icon--head-phones an-cmb an-cmb--header-small desktop-hide"></a>
+
+        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--gradient an-icon--power mobile-hide">
+          <span>Área cliente</span>
+        </a>
 			</div>
 
     <label class="anidia-header">
       <input type="checkbox" class="anidia-header__input"/>
       <span class="anidia-header__menu">
-        <img alt="${logo_description}" src="${images_folder}/logo-menu-mobile-white.svg" class="desktop-hide anidia-logo--mobile"/>
+        <img alt="${logo_description}" src="${images_folder}/logo-menu-mobile-white.svg" class="hide anidia-logo--menu"/>
         <span class="anidia-header__hamburger"></span>
       </span>
         <@liferay.navigation_menu
@@ -43,14 +60,15 @@
                 default_preferences="${freeMarkerPortletPreferences}"
           />
       <div class="anidia-header__footer desktop-hide">
-        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--head-phones an-cmb an-cmb--header">
+       <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--gradient an-icon--power">
+          <span>Área cliente</span>
+        </a>
+        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--white an-icon--call-us-free">
           <div class="an-cmb__content">
             <span class="an-cmb__text">Llámanos gratis</span>
             <span class="an-link an-cmb__number">${call_center_phone[0..*3]} ${call_center_phone[3..*2]} ${call_center_phone[5..*2]} ${call_center_phone[7..*2]}</span>
           </div>
         </a>
-
-		    <a href="tel:+34900181818" class="an-link an-btn an-btn--flatter an-btn--gradient an-icon--head-phones an-cmb an-cmb--header-small"></a>
       </div>
     </label>
 		</div>
