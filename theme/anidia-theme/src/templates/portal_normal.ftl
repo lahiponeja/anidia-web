@@ -9,8 +9,8 @@
 	<#include "${full_templates_path}/head/meta_tags.ftl" />
 
 	<link rel="stylesheet" href="${css_folder}/anidia.css" charset="utf-8">
-  <link rel="text/javascript" href="${javascript_folder}/main.js" charset="utf-8">
-	<#--  <link rel="stylesheet" href="${css_folder}/anidia.css?t=${theme_timestamp}" charset="utf-8">  -->
+  <#--  <link rel="text/javascript" href="${javascript_folder}/main.js" charset="utf-8">  -->
+	<link rel="stylesheet" href="${css_folder}/anidia.css?t=${theme_timestamp}" charset="utf-8">
 
 </head>
 
@@ -26,18 +26,10 @@
 		<div id="heading">
 			<div aria-level="1" class="site-title" role="heading">
 				<a class="${logo_css_class}" href="${site_default_url}" title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">
-					<img alt="${logo_description}" src="${images_folder}/logo-anidia-white.svg" class="mobile-hide"/>
+					<img alt="${logo_description}" src="${images_folder}/logo-anidia-white.svg" class="mobile-hide anidia-logo-header--white"/>
+          <img alt="${logo_description}" src="${images_folder}/logo-anidia-green.svg" class="mobile-hide anidia-logo-header--green"/>
           <img alt="${logo_description}" src="${images_folder}/logo-menu-mobile-white.svg" class="desktop-hide anidia-logo--mobile"/>
 				</a>
-        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--white an-icon--head-phones">
-          <div class="an-cmb__content">
-            <span class="an-cmb__text">Llámanos gratis</span>
-            <span class="an-link an-cmb__number">${call_center_phone[0..*3]} ${call_center_phone[3..*2]} ${call_center_phone[5..*2]} ${call_center_phone[7..*2]}</span>
-          </div>
-        </a>
-        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--gradient an-icon--power mobile-hide">
-          <span>Área cliente</span>
-        </a>
 			</div>
 
     <label class="anidia-header">

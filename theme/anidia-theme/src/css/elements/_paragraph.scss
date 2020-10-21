@@ -1,0 +1,36 @@
+.component-paragraph {
+  h3 {
+    margin-top: rem(20);
+    margin-bottom: rem(10);
+  }
+
+  ul {
+    margin: rem(20);
+
+    li {
+      margin-bottom: rem(10);
+
+      &:before {
+        content: '';
+        display: inline-block;
+        width: rem(10);
+        height: rem(10);
+        border-radius: 100%;
+        background-color: $white;
+        margin-right: rem(10);
+
+        body.anidia-white & {
+          background-color: $an-theme;
+        }
+      }
+    }
+  }
+
+  body.anidia-white & {
+    h1,
+    h2,
+    h3 {
+      color: $an-theme;
+    }
+  }
+}

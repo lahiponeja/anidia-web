@@ -28,5 +28,15 @@
 }
 
 #content {
-  margin: rem(20);
+  margin: 0 rem(20);
+
+  @include desktop {
+    margin: 0 rem(60);
+  }
+}
+
+#banner {
+  @include desktop {
+    margin: rem(44) rem(60);
+  }
 }
