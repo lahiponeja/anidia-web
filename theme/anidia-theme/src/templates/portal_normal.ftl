@@ -19,7 +19,7 @@
 
 <@liferay_util["include"] page=body_top_include />
 
-<#--  <@liferay.control_menu />  -->
+<@liferay.control_menu />
 
 <div class="container-fluid p-0" id="wrapper">
 	<header id="banner" role="banner">
@@ -51,14 +51,14 @@
                 default_preferences="${freeMarkerPortletPreferences}"
           />
       <div class="anidia-header__footer desktop-hide">
-        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--gradient an-icon--power">
-          <span>Área cliente</span>
-        </a>
-        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--white an-icon--call-us-free">
+        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--white an-icon--head-phones">
           <div class="an-cmb__content">
             <span class="an-cmb__text">Llámanos gratis</span>
             <span class="an-link an-cmb__number">${call_center_phone[0..*3]} ${call_center_phone[3..*2]} ${call_center_phone[5..*2]} ${call_center_phone[7..*2]}</span>
           </div>
+        </a>
+        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--gradient an-icon--power mobile-hide">
+          <span>Área cliente</span>
         </a>
       </div>
     </label>
