@@ -85,6 +85,7 @@
 
         @include desktop {
           margin-right: rem(10);
+          padding-left: 0;
         }
       }
     }
@@ -129,6 +130,7 @@
       min-height: rem(220);
       max-height: unset;
       flex-wrap: wrap;
+      transform: translateX(rem(-60));
 
       li {
         margin-right: rem(38);
