@@ -19,7 +19,7 @@
 
 <@liferay_util["include"] page=body_top_include />
 
-<#--  <@liferay.control_menu />  -->
+<@liferay.control_menu />
 
 <div class="container-fluid p-0" id="wrapper">
 	<header id="banner" role="banner">
