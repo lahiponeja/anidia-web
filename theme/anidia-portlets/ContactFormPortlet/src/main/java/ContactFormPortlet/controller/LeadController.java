@@ -1,38 +1,22 @@
 package ContactFormPortlet.controller;
 
-import ContactFormPortlet.dto.LeadDTO;
-
-import com.liferay.portletmvc4spring.bind.annotation.ActionMapping;
-import com.liferay.portletmvc4spring.bind.annotation.RenderMapping;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
-import java.util.Calendar;
-import java.util.Locale;
-
-import javax.portlet.ActionResponse;
-import javax.portlet.MutableRenderParameters;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.support.SessionStatus;
-
-import org.json.JSONException;
-
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import ContactFormPortlet.services.SalesforceService;
+import ContactFormPortlet.dto.*;
+import ContactFormPortlet.exception.PortletException;
+import ContactFormPortlet.exception.*;
+import ContactFormPortlet.services.*;
+import com.liferay.portal.kernel.log.*;
+import com.liferay.portletmvc4spring.bind.annotation.*;
+import java.util.*;
+import javax.portlet.*;
+import org.slf4j.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.context.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.validation.*;
+import org.springframework.validation.beanvalidation.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.*;
 /**
  * @author danieldelapena
  */
@@ -52,7 +36,7 @@ public class LeadController {
 	}
 
 	@RenderMapping(params = "javax.portlet.action=success")
-	public String showData(ModelMap modelMap) throws JSONException {
+	public String showData(ModelMap modelMap) throws ValidationException, PortletException {
 
 		SalesforceService salesforceService = new SalesforceService();
 
@@ -63,9 +47,9 @@ public class LeadController {
 		log.info(" >  email=" + lead.getEmail());
 		log.info(" >  phoneNumber=" + lead.getPhoneNumber());
 
-		String result = salesforceService.sendLead(lead);
+		salesforceService.sendLead(lead);
 
-		log.info(" >  Result =" + result);
+		//log.info(" >  Result =" + result);
 
 		return "form";
 	}

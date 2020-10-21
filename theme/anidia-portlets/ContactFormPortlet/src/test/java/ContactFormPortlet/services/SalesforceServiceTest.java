@@ -1,22 +1,17 @@
 package ContactFormPortlet.services;
 
 
-import java.io.IOException;
-import java.util.Properties;
-
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
-import org.json.JSONException;
-
-import ContactFormPortlet.dto.LeadDTO;
+import ContactFormPortlet.dto.*;
+import ContactFormPortlet.exception.*;
+import java.io.*;
+import java.util.*;
+import org.junit.*;
 
 public class SalesforceServiceTest {
 	@Before
 	public void loadSalesforceEnvVars() throws IOException  {
 		Properties props = new Properties();
-		props.load(getClass().getResourceAsStream("salesforce.properties"));
+		props.load(getClass().getResourceAsStream("portlet.properties"));
 
 		SalesforceService.SALESFORCE_TOKEN_URL = props.getProperty("SALESFORCE_TOKEN_URL");
 		SalesforceService.SALESFORCE_LEAD_URL = props.getProperty("SALESFORCE_LEAD_URL");
@@ -27,21 +22,31 @@ public class SalesforceServiceTest {
 	}
 
 	@Test
-	public void testSalesforceToken() throws IOException  {
+	public void testSalesforceToken() {
 		SalesforceService service = new SalesforceService();
-		Assert.assertNotNull(service.getSalesforceToken());
+		try {
+			Assert.assertNotNull(service.getSalesforceToken());
+		} catch (PortletException e) {
+			e.printStackTrace();
+		}
 	}
 
 
 	@Test
-	public void testSendLead() throws IOException, JSONException  {
-		SalesforceService service = new SalesforceService();
-		LeadDTO lead = new LeadDTO();
-		lead.setFirstName("Test First Name");
-		lead.setLastName("Test Last Name");
-		lead.setEmail("email@test.com");
-		lead.setPhoneNumber("+34000000000");
-		Assert.assertEquals(service.sendLead(lead), "sdsd");
+	public void testSendLead()   {
+		try {
+			SalesforceService service = new SalesforceService();
+			LeadDTO lead = new LeadDTO();
+			lead.setFirstName("Test First Name");
+			lead.setLastName("Test Last Name");
+			lead.setEmail("email@test.com");
+			lead.setPhonePrefix("+34");
+			lead.setPhoneNumber("665443212");
+			lead.setProductType("Gas");
+			service.sendLead(lead);
+		} catch (ValidationException | PortletException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

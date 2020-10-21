@@ -1,13 +1,38 @@
 package ContactFormPortlet.dto;
 
-import java.io.Serializable;
-
-import javax.validation.constraints.NotBlank;
+import java.io.*;
+import javax.validation.constraints.*;
 
 /**
  * @author danieldelapena
  */
 public class LeadDTO implements Serializable {
+
+	@NotBlank
+	private String firstName;
+
+	@NotBlank
+	private String lastName;
+
+	@NotBlank
+	private String email;
+
+	@NotBlank
+	private String phoneNumber;
+
+	@NotBlank
+	private Boolean privacyAccepted;
+
+	@NotBlank
+	private Boolean communicationAccepted;
+
+	@NotBlank
+	private String productType;
+
+	@NotBlank
+	private String phonePrefix;
+
+	private static final long serialVersionUID = 1113488483222411111L;
 
 	public String getFirstName() {
 		return firstName;
@@ -20,6 +45,7 @@ public class LeadDTO implements Serializable {
 	public String getEmail() {
 		return email;
 	}
+
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -43,6 +69,7 @@ public class LeadDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
@@ -55,26 +82,20 @@ public class LeadDTO implements Serializable {
 		this.privacyAccepted = privacyAccepted;
 	}
 
+	public String getProductType() {
+		return productType;
+	}
 
-	private static final long serialVersionUID = 1113488483222411111L;
+	public void setProductType(String productType) {
+		this.productType = productType;
+	}
 
-	@NotBlank
-	private String firstName;
+	public String getPhonePrefix() {
+		return phonePrefix;
+	}
 
-	@NotBlank
-	private String lastName;
-
-	@NotBlank
-	private String email;
-
-	@NotBlank
-	private String phoneNumber;
-
-	@NotBlank
-	private Boolean privacyAccepted;
-
-	@NotBlank
-	private Boolean communicationAccepted;
-
+	public void setPhonePrefix(String phonePrefix) {
+		this.phonePrefix = phonePrefix;
+	}
 
 }

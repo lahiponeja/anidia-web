@@ -1,103 +1,89 @@
 package ContactFormPortlet.services;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
-import com.liferay.portal.kernel.json.JSONSerializer;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import ContactFormPortlet.dto.LeadDTO;
+import ContactFormPortlet.dto.*;
+import ContactFormPortlet.exception.*;
+import org.apache.commons.lang3.*;
+import org.apache.commons.validator.routines.*;
+import org.springframework.http.*;
+import org.springframework.web.client.*;
 
 public class SalesforceService {
 
-	static String SALESFORCE_TOKEN_URL = System.getenv().get("SALESFORCE_TOKEN_URL");
-	static String SALESFORCE_LEAD_URL = System.getenv().get("SALESFORCE_LEAD_URL");
-	static String SALESFORCE_PASSWORD = System.getenv().get("SALESFORCE_PASSWORD");
-	static String SALESFORCE_CLIENT_SECRET = System.getenv().get("SALESFORCE_CLIENT_SECRET");
-	static String SALESFORCE_CLIENT_ID = System.getenv().get("SALESFORCE_CLIENT_ID");
-	static String SALESFORCE_USERNAME = System.getenv().get("SALESFORCE_USERNAME");
+    static String SALESFORCE_TOKEN_URL = System.getenv().get("SALESFORCE_TOKEN_URL");
+    static String SALESFORCE_LEAD_URL = System.getenv().get("SALESFORCE_LEAD_URL");
+    static String SALESFORCE_PASSWORD = System.getenv().get("SALESFORCE_PASSWORD");
+    static String SALESFORCE_CLIENT_SECRET = System.getenv().get("SALESFORCE_CLIENT_SECRET");
+    static String SALESFORCE_CLIENT_ID = System.getenv().get("SALESFORCE_CLIENT_ID");
+    static String SALESFORCE_USERNAME = System.getenv().get("SALESFORCE_USERNAME");
 
-  public String getSalesforceToken() {
+    public String getSalesforceToken() throws PortletException {
 
-		StringBuilder urlBuilder = new StringBuilder();
-		urlBuilder.append(SALESFORCE_TOKEN_URL);
-		urlBuilder.append("?");
-		urlBuilder.append("grant_type=password");
-		urlBuilder.append("&client_id=");
-		urlBuilder.append(SALESFORCE_CLIENT_ID);
-		urlBuilder.append("&client_secret=");
-		urlBuilder.append(SALESFORCE_CLIENT_SECRET);
-		urlBuilder.append("&username=");
-		urlBuilder.append(SALESFORCE_USERNAME);
-		urlBuilder.append("&password=");
-		urlBuilder.append(SALESFORCE_PASSWORD);
+        RestTemplate restTemplate = new RestTemplate();
 
-		HttpClient client = HttpClient.newHttpClient();
-		HttpRequest request = HttpRequest.newBuilder().
-			uri(URI.create(urlBuilder.toString())).
-			POST(HttpRequest.BodyPublishers.noBody()).
-			build();
+        AccessTokenResponse response = restTemplate.postForObject(
+            getTokenUrl(), null, AccessTokenResponse.class);
 
-		HttpResponse<String> response;
-		try {
-			response = client.send(request, HttpResponse.BodyHandlers.ofString());
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
-			return null;
-		}
+        if (response != null && StringUtils.isNotEmpty(response.getAccessToken())) {
+            return response.getAccessToken();
+        } else {
+            throw new PortletException(2, "Can not retrieve the access token");
+        }
+    }
 
-	    JSONObject json;
-		try {
-			json = new JSONObject(response.body());
-		} catch (JSONException e) {
-			e.printStackTrace();
-			return null;
-		}
+    public void sendLead(LeadDTO lead) throws ValidationException, PortletException {
+        RestTemplate restTemplate = new RestTemplate();
 
-		try {
-			return json.getString("access_token");
-		} catch (JSONException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+        try {
+            String accessToken = getSalesforceToken();
+            validateSendLeadRequest(lead);
 
-	public String sendLead(LeadDTO lead) throws JSONException{
+            SendLeadRequest sendLeadRequest = mapToSendLeadRequest(lead);
+            HttpEntity<SendLeadRequest> entity = new HttpEntity<>(sendLeadRequest,
+                getHeaderToken(accessToken));
 
-		String token = this.getSalesforceToken();
+            String url = getSendLeadUrl();
+            restTemplate.exchange(url, HttpMethod.POST, entity, Void.class);
+        } catch (ValidationException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new PortletException(1, "There is a problem saving data");
+        }
+    }
 
-		JSONObject jsonLead = new JSONObject();
-		jsonLead.put("PersonalData", new JSONObject());
-		jsonLead.getJSONObject("PersonalData").put("FirstName", lead.getFirstName());
-		jsonLead.getJSONObject("PersonalData").put("LastName", lead.getLastName());
-		jsonLead.getJSONObject("PersonalData").put("Email", lead.getEmail());
-		jsonLead.getJSONObject("PersonalData").put("Phone", lead.getPhoneNumber());
+    private void validateSendLeadRequest(LeadDTO leadDTO) throws ValidationException {
+        boolean validEmail = EmailValidator.getInstance().isValid(leadDTO.getEmail());
+        if (!validEmail) {
+            throw new ValidationException(1, "Email lead is invalid");
+        }
+    }
 
-		HttpClient client = HttpClient.newHttpClient();
-		HttpRequest request = HttpRequest.newBuilder().
-			uri(URI.create(SalesforceService.SALESFORCE_LEAD_URL)).
-			header("Authorization", "Bearer " + token).
-			POST(HttpRequest.BodyPublishers.ofString(jsonLead.toString())).
-			build();
+    private SendLeadRequest mapToSendLeadRequest(LeadDTO leadDTO) {
+        SendLeadRequest sendLeadRequest = new SendLeadRequest();
+        PersonalData personalData = new PersonalData();
 
-		HttpResponse<String> response;
-		try {
-			response = client.send(request, HttpResponse.BodyHandlers.ofString());
-			return response.body();
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
-		}
+        personalData.setFirstName(leadDTO.getFirstName());
+        personalData.setLastName(leadDTO.getLastName());
+        personalData.setPhone(leadDTO.getPhonePrefix() + leadDTO.getPhoneNumber());
+        personalData.setEmail(leadDTO.getEmail());
+        personalData.setProdInterest(leadDTO.getProductType());
 
-		return null;
+        sendLeadRequest.setPersonalData(personalData);
 
-	}
+        return sendLeadRequest;
+    }
 
+    private HttpHeaders getHeaderToken(String authToken) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.setBearerAuth(authToken);
+        return httpHeaders;
+    }
+
+    private String getTokenUrl() {
+        return SALESFORCE_TOKEN_URL + "?grant_type=password&client_id=" + SALESFORCE_CLIENT_ID + "&client_secret=" + SALESFORCE_CLIENT_SECRET + "&username=" + SALESFORCE_USERNAME + "&password=" + SALESFORCE_PASSWORD;
+    }
+
+    private String getSendLeadUrl(){
+        return SALESFORCE_LEAD_URL;
+    }
 }
