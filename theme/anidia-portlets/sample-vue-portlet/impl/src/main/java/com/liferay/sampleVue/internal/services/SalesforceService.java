@@ -246,10 +246,13 @@ public class SalesforceService {
 			POST(HttpRequest.BodyPublishers.noBody()).
 			build();
 
-		HttpResponse<String> response;
+		HttpResponse<String> response = null;
 		try {
 			response = client.send(request, HttpResponse.BodyHandlers.ofString());
 		} catch (IOException | InterruptedException e) {
+			if(response != null) {
+				System.out.println(response.body());
+			}
 			e.printStackTrace();
 			return null;
 		}
@@ -258,6 +261,7 @@ public class SalesforceService {
 		try {
 			json = new JSONObject(response.body());
 		} catch (JSONException e) {
+			System.out.println(response.body());
 			e.printStackTrace();
 			return null;
 		}
@@ -265,7 +269,8 @@ public class SalesforceService {
 		try {
 			return json.getString("access_token");
 		} catch (JSONException e) {
-			e.printStackTrace();
+				System.out.println(json.toString());
+				e.printStackTrace();
 			return null;
 		}
 	}
