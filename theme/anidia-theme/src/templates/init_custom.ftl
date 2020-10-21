@@ -20,6 +20,7 @@ This file allows you to override and define new FreeMarker variables.
 </#if>
 
 <#assign gtm_id = themeDisplay.getThemeSetting("GTM-ID") />
+<#assign oneTrustEnvironment = themeDisplay.getThemeSetting("Entorno OneTrust") />
 
 
 <#-- ---------- Footer -------------  -->

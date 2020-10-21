@@ -6,6 +6,9 @@
 
 <head>
 <!-- OneTrust Cookies Consent Notice start for www.anidia.es -->
+<#if oneTrustEnvironment == "production" >
+	<script type="text/javascript" src="https://cdn.cookielaw.org/consent/ad62ccc3-73b7-4fa0-8939-185357e3f2a7/OtAutoBlock.js" ></script>
+</#if>
 <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="ad62ccc3-73b7-4fa0-8939-185357e3f2a7" ></script>
 <script type="text/javascript">
 function OptanonWrapper() { }
