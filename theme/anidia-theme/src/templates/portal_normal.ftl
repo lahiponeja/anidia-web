@@ -19,7 +19,7 @@
 
 <@liferay_util["include"] page=body_top_include />
 
-<@liferay.control_menu />
+<#--  <@liferay.control_menu />  -->
 
 <div class="container-fluid p-0" id="wrapper">
 	<header id="banner" role="banner">
@@ -50,7 +50,7 @@
                 instance_id="main_navigation_menu"
                 default_preferences="${freeMarkerPortletPreferences}"
           />
-      <div class="anidia-header__footer">
+      <div class="anidia-header__footer desktop-hide">
         <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--gradient an-icon--power">
           <span>Área cliente</span>
         </a>
@@ -68,7 +68,6 @@
 			<a data-redirect="${is_login_redirect_required?string}" href="${sign_in_url}" id="sign-in" rel="nofollow">${sign_in_text}</a>
 		</#if>
 
-		<h3>Call me back</h3>
 		<a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--call-us-free-svg an-cmb">
 			<div class="an-cmb__content">
 				<span class="an-cmb__text">Llámanos gratis</span>
