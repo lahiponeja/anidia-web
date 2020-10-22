@@ -1,5 +1,7 @@
 // import { createApp } from 'vue'
 import './installCompositionApi'
+// import Autocomplete from '@trevoreyre/autocomplete-vue'
+// import '@trevoreyre/autocomplete-vue/dist/style.css'
 
 // State Modules
 import global from './store/modules/global'
@@ -11,6 +13,7 @@ import houseView from './views/houseView'
 import businessView from './views/businessView'
 
 import Vue from 'vue/dist/vue.common';
+
 
 /**
  * This is the main entry point of the portlet.
@@ -79,7 +82,7 @@ export default function main({portletNamespace, contextPath, portletElementId, c
 				portletNamespace, contextPath, portletElementId, configuration
 			}
 		},
-		mounted() {
+		created() {
 			console.log("Loading...");
 			console.log("GET: /postal-codes");
 			house.getPostalCodes();

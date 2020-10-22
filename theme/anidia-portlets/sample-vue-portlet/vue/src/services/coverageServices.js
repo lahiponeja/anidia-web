@@ -25,7 +25,7 @@ const coverageService = {
    * @param { string } id
    */
   getAddresses: function(municipalityId, postalCode) {
-    return http.get(`municipalities/${municipalityId}/${postalCode}`)
+    return http.get(`addresses/${municipalityId}/${postalCode}`)
   },
 
   /**
@@ -34,7 +34,7 @@ const coverageService = {
    * @param { string } id
    */
   getEstates: function(municipalityId, postalCode, addressKind, addressName) {
-    return http.get(`municipalities/${municipalityId}/${postalCode}/${addressKind}/${addressName}`)
+    return http.get(`estates/${municipalityId}/${postalCode}/${addressKind}/${addressName}`)
   },
 
   /**

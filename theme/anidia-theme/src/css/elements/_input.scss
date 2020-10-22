@@ -41,7 +41,8 @@
     }
   }
   
-  &__field {
+  &__field,
+  &__field input {
     background-color: $white;
     border: 1px solid $an-theme-soft-grey-sec;
     box-shadow: $an-shadow-two;

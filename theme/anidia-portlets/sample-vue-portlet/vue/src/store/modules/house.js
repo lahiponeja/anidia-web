@@ -2,7 +2,7 @@ import { http } from '../../services/http/index'
 // import { reactive, readonly } from 'vue'
 import { reactive, shallowReadonly } from '@vue/composition-api'
 import coverageService from '../../services/coverageServices'
-import xmlToJson from '../../helpers/xmlToJson'
+import xmlToJsonImp from '../../helpers/xmlToJsonImp'
 
 const state = reactive({
   houseType: "",
@@ -56,11 +56,46 @@ const state = reactive({
 
 const getPostalCodes = function () {
   coverageService.getPostalCodes().then((res) => {
-    // const json = xmlToJson(JSON.stringify(res.data))
-    const XmlString = res.data
-    const XmlNode = new DOMParser().parseFromString(XmlString, 'text/xml');
-    const json = xmlToJson(XmlNode);
-    state.autocompData.postalCodes = json.Page.items.items;
+    state.autocompData.postalCodes = xmlToJsonImp(res);
+  }).catch((err) => {
+    console.error(err);
+  })
+}
+
+const getMunicipalities = function(pc) {
+  coverageService.getMunicipalities(pc).then((res) => {
+    state.autocompData.municipalities = [xmlToJsonImp(res)];
+  }).catch((err) => {
+    console.error(err);
+  })
+}
+
+const getAddresses = function(municipalityId, postalCode) {
+  coverageService.getAddresses(municipalityId, postalCode).then((res) => {
+    const result = xmlToJsonImp(res)
+    if(result.length) {
+      state.autocompData.addresses = result
+    }
+  }).catch((err) => {
+    console.error(err);
+  })
+}
+
+const getEstates = function(municipalityId, postalCode, addressKind, addressName) {
+  coverageService.getEstates(municipalityId, postalCode, addressKind, addressName).then((res) => {
+    const result = xmlToJsonImp(res)
+    state.autocompData.estates = [result]
+  }).catch((err) => {
+    console.error(err);
+  })
+}
+
+const getProperties = function(gateId) {
+  coverageService.getProperties(gateId).then((res) => {
+    const result = xmlToJsonImp(res)
+    console.log(result)
+    state.autocompData.properties = result
+    
   }).catch((err) => {
     console.error(err);
   })
@@ -124,4 +159,8 @@ export default {
   submitHouseData,
   submitUserContactInfo,
   getPostalCodes,
+  getMunicipalities,
+  getAddresses,
+  getEstates,
+  getProperties,
 }
