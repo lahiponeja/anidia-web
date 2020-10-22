@@ -5,6 +5,18 @@
 <html class="${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
 
 <head>
+<!-- OneTrust Cookies Consent Notice start for www.anidia.es -->
+<#if oneTrustEnvironment == "production" >
+	<script type="text/javascript" src="https://cdn.cookielaw.org/consent/ad62ccc3-73b7-4fa0-8939-185357e3f2a7/OtAutoBlock.js" ></script>
+</#if>
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="ad62ccc3-73b7-4fa0-8939-185357e3f2a7" ></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for www.anidia.es -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtm_id}');</script>
+<!-- End Google Tag Manager -->
 
 	<#include "${full_templates_path}/head/meta_tags.ftl" />
 
@@ -15,6 +27,10 @@
 </head>
 
 <body class="${css_class}">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${gtm_id}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 <@liferay_ui["quick-access"] contentId="#main-content" />
 
 <@liferay_util["include"] page=body_top_include />
@@ -132,7 +148,19 @@
 </#if>
 <!-- inject:js -->
 <!-- endinject -->
-
+<script>
+window.dataLayer.push({
+	"event": "anidiapageview",
+	"content": {
+		"category" :"",
+		"contenthierarchy": [
+			{
+				"0": "home"
+			}
+		]
+	}
+})
+</script>
 </body>
 
 </html>
