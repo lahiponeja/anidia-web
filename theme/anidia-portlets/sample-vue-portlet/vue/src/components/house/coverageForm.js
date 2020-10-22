@@ -136,6 +136,7 @@ const coverageForm = {
     },
 
   },
+  
   mounted() {
     console.log(this.house.state.autocompData.postalCodes);
   },
@@ -165,23 +166,217 @@ const coverageForm = {
           <div class="an-form__flex an-form__flex--2-cols">
             <div class="an-input an-form__item">
               <!-- <input v-model="formData.postalCode" type="text" class="an-input__field" placeholder="Código Postal" required=""> -->
-              <autocomplete @click="setActiveField('postalCodesArr', 'postalCode')" :debounce-time="700" @submit="onSubmitPostalCode" :search="searchPostalCodes" :get-result-value="getResultValue" class="an-input__field" placeholder="Código Postal"></autocomplete>
+              <autocomplete 
+                :debounce-time="700" 
+                @submit="onSubmitPostalCode" 
+                :search="searchPostalCodes" 
+                :get-result-value="getResultValue" 
+                placeholder="Código Postal"
+                style="width: 100%;"
+                >
+                <template
+                  #default="{
+                    rootProps,
+                    inputProps,
+                    inputListeners,
+                    resultListProps,
+                    resultListListeners,
+                    results,
+                    resultProps
+                  }"
+                >
+                  <div v-bind="rootProps">
+                    <input
+                      v-model="formData.postalCode"
+                      v-bind="inputProps"
+                      v-on="inputListeners"
+                      class="an-input__field"
+                      @focus="setActiveField('postalCodesArr', 'postalCode')" 
+                    >
+                    <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
+                      <li
+                        class="an-select__custom-option"
+                        v-for="(result, index) in results"
+                        :key="result.postalCode"
+                        v-bind="resultProps[index]"
+                      >
+                        {{ result.postalCode }}
+                      </li>
+                    </ul>
+                  </div>
+                </template>
+              </autocomplete>
             </div>
             <div class="an-input an-form__item">
               <!-- <input v-model="formData.municipality" type="text" class="an-input__field" placeholder="Municipio" required=""> -->
-              <autocomplete @click="setActiveField('municipalitiesArr', 'municipalityName')" @submit="onSubmitMunicipalities" :search="search" :get-result-value="getResultValue" class="an-input__field" placeholder="Municipios"></autocomplete>
+              <autocomplete                 
+                @submit="onSubmitMunicipalities"
+                :search="search" 
+                :get-result-value="getResultValue" 
+                placeholder="Municipios"
+                style="width: 100%;"
+                >
+                <template
+                  #default="{
+                    rootProps,
+                    inputProps,
+                    inputListeners,
+                    resultListProps,
+                    resultListListeners,
+                    results,
+                    resultProps
+                  }"
+                >
+                  <div v-bind="rootProps">
+                    <input
+                      v-model="formData.municipalityName"
+                      v-bind="inputProps"
+                      v-on="inputListeners"
+                      class="an-input__field"
+                      @focus="setActiveField('municipalitiesArr', 'municipalityName')" 
+                    >
+                    <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
+                      <li
+                        class="an-select__custom-option"
+                        v-for="(result, index) in results"
+                        :key="result.municipalityName"
+                        v-bind="resultProps[index]"
+                      >
+                        {{ result.municipalityName }}
+                      </li>
+                    </ul>
+                  </div>
+                </template>
+              </autocomplete>
               </div>
               <div class="an-input an-form__item">
               <!-- <input v-model="formData.street" type="text" class="an-input__field" placeholder="Calle" required=""> -->
-              <autocomplete @click="setActiveField('addressesArr', 'name')" @submit="onSubmitAddresses" :search="search" :get-result-value="getResultValue" class="an-input__field" placeholder="Calle"></autocomplete>
+              
+              <autocomplete                 
+                @submit="onSubmitAddresses"
+                :search="search" 
+                :get-result-value="getResultValue" 
+                placeholder="Calle"
+                style="width: 100%;"
+                >
+                <template
+                  #default="{
+                    rootProps,
+                    inputProps,
+                    inputListeners,
+                    resultListProps,
+                    resultListListeners,
+                    results,
+                    resultProps
+                  }"
+                >
+                  <div v-bind="rootProps">
+                    <input
+                      v-model="formData.addressName"
+                      v-bind="inputProps"
+                      v-on="inputListeners"
+                      class="an-input__field"
+                      @focus="setActiveField('addressesArr', 'name')"
+                    >
+                    <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
+                      <li
+                        class="an-select__custom-option"
+                        v-for="(result, index) in results"
+                        :key="result.name"
+                        v-bind="resultProps[index]"
+                      >
+                        {{ result.name }}
+                      </li>
+                    </ul>
+                  </div>
+                </template>
+              </autocomplete>
+              
               </div>
               <div class="an-input an-form__item">
               <!-- <input v-model="formData.number" type="text" class="an-input__field" placeholder="Número" required=""> -->
-              <autocomplete @click="setActiveField('estatesArr', 'gateId')" @submit="onSubmitEstates" :search="search" :get-result-value="getResultValue" class="an-input__field" placeholder="Número"></autocomplete>
+              <autocomplete                 
+                @submit="onSubmitEstates"
+                :search="search" 
+                :get-result-value="getResultValue" 
+                placeholder="Número"
+                style="width: 100%;"
+                >
+                <template
+                  #default="{
+                    rootProps,
+                    inputProps,
+                    inputListeners,
+                    resultListProps,
+                    resultListListeners,
+                    results,
+                    resultProps
+                  }"
+                >
+                  <div v-bind="rootProps">
+                    <input
+                      v-model="formData.gateId"
+                      v-bind="inputProps"
+                      v-on="inputListeners"
+                      class="an-input__field"
+                      @focus="setActiveField('estatesArr', 'gateId')"
+                    >
+                    <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
+                      <li
+                        class="an-select__custom-option"
+                        v-for="(result, index) in results"
+                        :key="result.gateId"
+                        v-bind="resultProps[index]"
+                      >
+                        {{ result.gateId }}
+                      </li>
+                    </ul>
+                  </div>
+                </template>
+              </autocomplete>
+              
               </div>
               <div class="an-input an-form__item">
               <!-- <input v-model="formData.houseType" type="text" class="an-input__field" placeholder="Vivienda (bloque, escalera, piso, puerta)" required=""> -->
-              <autocomplete @click="setActiveField('propertiesArr', 'address')" @submit="onSubmitProperties" :search="search" :get-result-value="getResultValue" class="an-input__field" placeholder="Vivienda (bloque, escalera, piso, puerta)"></autocomplete>
+              <autocomplete                 
+                @submit="onSubmitProperties"
+                :search="search" 
+                :get-result-value="getResultValue" 
+                placeholder="Vivienda (bloque, escalera, piso, puerta)"
+                style="width: 100%;"
+                >
+                <template
+                  #default="{
+                    rootProps,
+                    inputProps,
+                    inputListeners,
+                    resultListProps,
+                    resultListListeners,
+                    results,
+                    resultProps
+                  }"
+                >
+                  <div v-bind="rootProps">
+                    <input
+                      v-model="formData.houseType"
+                      v-bind="inputProps"
+                      v-on="inputListeners"
+                      class="an-input__field"
+                      @focus="setActiveField('propertiesArr', 'address')"
+                    >
+                    <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
+                      <li
+                        class="an-select__custom-option"
+                        v-for="(result, index) in results"
+                        :key="result.address"
+                        v-bind="resultProps[index]"
+                      >
+                        {{ result.address }}
+                      </li>
+                    </ul>
+                  </div>
+                </template>
+              </autocomplete>
             </div>
           </div>
 

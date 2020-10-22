@@ -90,6 +90,8 @@
       padding: rem(45) 0 rem(25) 0;
       position: relative;
       top: rem(-28);
+      max-height: 300px;
+      overflow: auto;
     }
 
     &-option {
@@ -109,6 +111,10 @@
       }
 
       &.is-hover {
+        color: $an-theme;
+      }
+
+      &[aria-selected="true"] {
         color: $an-theme;
       }
     }
