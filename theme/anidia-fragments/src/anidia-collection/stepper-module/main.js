@@ -39,7 +39,9 @@ function setAriaPressed(index) {
 }
 
 
-document.querySelector('.an-stepper__dropdown').addEventListener('change', () => {
-  let id = document.querySelector('.an-stepper__dropdown').value;
-  document.querySelector(`#tab-${id}`).checked = true;
-});
+if (document.querySelector('.an-stepper__dropdown')) {
+  document.querySelector('.an-stepper__dropdown').addEventListener('change', () => {
+    let id = document.querySelector('.an-stepper__dropdown').value;
+    document.querySelector(`#tab-${id}`).checked = true;
+  });
+}
