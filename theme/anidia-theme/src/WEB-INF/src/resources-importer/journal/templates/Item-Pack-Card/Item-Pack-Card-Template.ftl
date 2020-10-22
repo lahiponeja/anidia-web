@@ -9,17 +9,17 @@
   <h5>${Detalle.getData()}</h5>
 </div>
 <div class="an-card--pack__info">
-  <html>${Título.getData()}</html>
+  <html>${Titulo.getData()}</html>
 </div>
 <ul class="an-list">
   <html>${Ventajas.getData()}</html>
 </ul>
 
 <#if Estilo.getData() == "verde">
-  <button class="an-btn an-btn--flatter an-btn--white">${Botón.getData()}</button>
+  <button class="an-btn an-btn--flatter an-btn--white">${Boton.getData()}</button>
    <#else>
     <button class="an-btn an-btn--flatter an-btn--gradient">
-      <span>${Botón.getData()}</span>
+      <span>${Boton.getData()}</span>
     </button>
 </#if>
 
