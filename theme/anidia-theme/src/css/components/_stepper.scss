@@ -91,6 +91,7 @@
       scroll-snap-type: none;
       scroll-padding: none;
       left: 0;
+      justify-content: center;
     }
 
     h4 {
@@ -113,6 +114,7 @@
 
     @include desktop {
       min-width: auto;
+      max-width: rem(234);
     }
 
     &:first-child {

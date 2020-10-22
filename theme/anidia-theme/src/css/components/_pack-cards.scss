@@ -146,6 +146,7 @@
 
       @include desktop {
         margin-right: 0;
+        width: auto;
 
         .an-card--pack:not(.featured) {
           transform: translateX(-20px);
