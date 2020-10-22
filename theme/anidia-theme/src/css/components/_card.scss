@@ -118,8 +118,13 @@
   }
 
   &--form {
-    padding: rem(55) rem(51) rem(52);
+    padding: rem(40) rem(20);
     max-width: rem(497);
+    background-color: $white;
+
+    @include desktop {
+      padding: rem(55) rem(51) rem(52);
+    }
 
     .an-checkbox {
       width: 100%;
@@ -132,8 +137,11 @@
     }
 
     > * {
-      // TODO: ADD MARGIN VAR
-      margin-bottom: rem(24);
+      margin-bottom: rem(20);
+
+      @include desktop {
+        margin-bottom: rem(24);
+      }
     }
   }
 
