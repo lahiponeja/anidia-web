@@ -27,14 +27,6 @@
   }
 }
 
-#content {
-  margin: 0 rem(20);
-
-  @include tablet {
-    margin: 0 rem(60);
-  }
-}
-
 #banner {
   @include tablet {
     margin: rem(44) rem(60);
