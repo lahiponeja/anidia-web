@@ -95,7 +95,6 @@ const getEstates = function(municipalityId, postalCode, addressKind, addressName
 const getProperties = function(gateId) {
   coverageService.getProperties(gateId).then((res) => {
     const result = xmlToJsonImp(res)
-    console.log(result)
     state.autocompData.properties = [result]
     
   }).catch((err) => {
@@ -110,37 +109,9 @@ const changeStep = function (step) {
   state.currentStep = step;
 }
 
-const submitCoverageData = function (formData) {
-  const { 
-    postalCode, 
-    municipality,
-    street,
-    number,
-    houseType,
-    privacyPolicy 
-  } = formData;
-
-  http.post('posts', {
-    title: 'foo',
-    body: 'bar',
-    userId: 1,
-  })
-  .then((response) => {
-    // TODO: Handle all the possible responses (there's at least 3).
-    // if response.data === some condition
-    //   coverageError = ""
-    // else 
-      changeStep("vivienda")
-      state.houseType = houseType
-    // console.log(response.data)
-    // state.coverageError = err.message
-  })
-  .catch((err) => {
-    console.error(err)
-  })
+const setCoverageError = function(msg) {
+  state.coverageError = msg
 }
-
-const submitHouseData = function () {}
 
 const submitUserContactInfo = function (budgetReadyForm) {
   const { 
@@ -157,12 +128,11 @@ const submitUserContactInfo = function (budgetReadyForm) {
 export default { 
   state: shallowReadonly(state), 
   changeStep,
-  submitCoverageData,
-  submitHouseData,
   submitUserContactInfo,
   getPostalCodes,
   getMunicipalities,
   getAddresses,
   getEstates,
   getProperties,
+  setCoverageError,
 }
