@@ -38,7 +38,7 @@ public class SalesforceService {
 		String token = this.getSalesforceToken();
 
 		StringBuilder urlBuilder = new StringBuilder();
-		urlBuilder.append(SALESFORCE_ESTATES_URL);
+		urlBuilder.append(SALESFORCE_PROPERTIES_URL);
 		urlBuilder.append("?");
 		urlBuilder.append("codigo_unico_portal=");
 		urlBuilder.append(gateId);
