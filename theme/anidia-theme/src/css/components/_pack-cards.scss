@@ -4,9 +4,6 @@
 
   &__intro {
     background-color: $white;
-    // margin-left: rem(-20);
-    // margin-right: rem(-20);
-    // padding: rem(20);
     padding-top: 0;
 
     h6 {
@@ -141,6 +138,7 @@
       margin-top: rem(24);
       z-index: 1;
       order: 1;
+      width: 100%;
 
       &.featured {
         order: 0;
