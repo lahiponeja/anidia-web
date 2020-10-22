@@ -1,0 +1,8 @@
+{
+  "cssPath": "styles.css",
+  "configurationPath": "configuration.json",
+  "htmlPath": "index.html",
+  "jsPath": "extensible-card.js",
+  "name": "extensible-cards-publisher",
+  "type": "section"
+}

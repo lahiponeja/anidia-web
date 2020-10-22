@@ -10,6 +10,7 @@
 @import './base/paddings';
 @import './base/backgrounds';
 @import './base/layout';
+@import './base/reset';
 
 // // UI Kit
 
@@ -23,6 +24,7 @@
 @import './elements/list';
 @import './elements/selection';
 @import './elements/links';
+@import './elements/paragraph';
 
 // // Components
 @import './components/card';
@@ -31,9 +33,14 @@
 @import './components/info-elems';
 @import './components/centered-featured';
 @import './components/form';
+@import './components/pack-cards';
+@import './components/stepper';
+@import './components/hero-slider';
 
 // // Blocks
+@import './blocks/extensible-cards';
 @import './blocks/footer';
+@import './blocks/header';
 
 /* endinject */
 
@@ -41,9 +48,10 @@
 // TODO: IMPLEMENT THIS FEATURE IN THE STYLES
 body {
   &.anidia-green {
-    background: yellowgreen;
+    background: $an-theme;
   }
+
   &.anidia-white {
-    background: white;
+    background: $white;
   }
 }

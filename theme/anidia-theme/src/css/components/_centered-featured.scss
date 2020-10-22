@@ -3,6 +3,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: rem(-20);
+  margin-left: rem(-20);
+
+  body.anidia-white & {
+    background-color: $an-theme;
+  }
 
   @include desktop {
     flex-direction: row;
