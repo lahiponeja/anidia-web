@@ -448,10 +448,13 @@
     //   }
     // }
 
-    // &--white {
-    //   body.anidia-white & {
-    //     display: none !important;
-    //   }
-    // }
+    &--white {
+      body.anidia-white & {
+
+        @include tablet {
+          display: none !important;
+        }
+      }
+    }
   }
 }

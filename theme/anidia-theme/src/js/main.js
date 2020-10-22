@@ -1,6 +1,4 @@
-const windowWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
-
-if (windowWidth < 768){
+if (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 768){
   let elementWithSubmenu = document.querySelectorAll("ul .dropdown");
 
   for (let i = 0; i < elementWithSubmenu.length; i++) {
@@ -48,6 +46,7 @@ if (windowWidth < 768){
   document.querySelector('.anidia-header__input').addEventListener("click", (event) => {
     document.body.classList.toggle('overflow-hidden');
     document.querySelector('.anidia-header').classList.toggle('active');
-    document.querySelector('.site-title .anidia-logo-header--mobile').classList.toggle('hide')
+    document.querySelector('.site-title .anidia-logo-header--mobile--white').classList.toggle('hide')
+    document.querySelector('.site-title .anidia-logo-header--mobile--green').classList.toggle('hide')
   })
 }

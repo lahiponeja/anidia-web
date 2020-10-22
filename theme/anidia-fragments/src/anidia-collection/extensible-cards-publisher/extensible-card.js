@@ -1,4 +1,3 @@
-const windowWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
 let cardsContainer = document.querySelectorAll('.extensible-cards');
 
 cardsContainer.forEach(singleContainer => {
