@@ -121,6 +121,7 @@
 					freeMarkerPortletPreferences.getPreferences(footerNavigationPreferencesMap)
 					instance_id="anidia-footer-menu-2"
 				/>
+				<button id="ot-sdk-btn" class="ot-sdk-show-settings">Gestionar cookies</button>
       </div>
       <div class="footer__rrss">
         <a href="#" class="footer__rrss__single" target="_blank"><span class="an-icon--pinterest"></span></a>
