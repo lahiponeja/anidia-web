@@ -5,8 +5,7 @@
 Para arrancar el Doker solo hay que levantar las imagenes mediante `docker-compose`.
 
 ```bash
-anidia-web/$ cd docker
-anidia-web/docker$ docker-compose up
+anidia-web$ docker-compose up
 ```
 
 Después de eso, hay que acceder a [http://localhost:8080](http://localhost:8080).
@@ -57,7 +56,7 @@ El código fuente de los fragments está en  `theme/anidia-fragments` y dentro s
 
 Para añadir otras colecciones, fragmentos o templates de páginas se pueden seguir las instrucciones situadas en el [repositorio de Liferay](https://github.com/liferay/generator-liferay-fragments).
 
-Además de la tarea `npx gulp import` hay otra manera de poder importar fragmentos al theme. Se puede ejecutar `npx gulp compress` y copiar el zip que se genera en `build/liferay-fragments.zip` a la carpeta `liferay/deploy/`.
+Además de la tarea `npm run import` hay otra manera de poder importar fragmentos al theme. Se puede ejecutar `npm run compress` y copiar el zip que se genera en `build/liferay-fragments.zip` a la carpeta `liferay/deploy/`.
 
 ### Editar un fragmento
 
@@ -126,6 +125,34 @@ A continuación, en el módulo `module-jsp-override` introducimos la nueva vista
 El despliegue tiene dos pasos:
 
 * Primero apagamos Liferay.
-* Luego, desplegamos el modulo `LRWorkspace/ext/APOVerride`. Esto lo hacemos ejecutando `graddle deploy` en su carpeta y copiando el .jar resultante (`LRWorkspace/bundles/osgi/marketplace/override/com.liferay.asset.publisher.web.jar`) a la carpeta `liferay/files/osgi/marketplace/override/`.
+* Luego, desplegamos el modulo `LRWorkspace/ext/APOVerride`. Esto lo hacemos ejecutando `gradle deploy` en su carpeta y copiando el .jar resultante (`LRWorkspace/bundles/osgi/marketplace/override/com.liferay.asset.publisher.web.jar`) a la carpeta `liferay/files/osgi/marketplace/override/`.
 * Iniciamos Liferay, esto debería cargar nuestra nueva versión del módulo.
-* Luego desplegamos el módulo `module-jsp-override`. Para esto ejecutamos graddle build en su carpeta y copiamos el jar resultante (`module-jsp-override/build/libs/com.liferay.blade.module.jsp.override-1.0.0.jar`) en la carpeta de deploys `liferay/deploy`.
+* Luego desplegamos el módulo `module-jsp-override`. Para esto ejecutamos gradle build en su carpeta y copiamos el jar resultante (`module-jsp-override/build/libs/com.liferay.blade.module.jsp.override-1.0.0.jar`) en la carpeta de deploys `liferay/deploy`.
+
+Para producción (donde no se debe apagar Liferay) hay que:
+
+* Entrar por la consola *Gogo Shell*.
+* Buscar el paquete del *Liferay Asset Publisher Web* (`lb | grep "Asset Publisher"`).
+* Hacer `stop` del paquete activo encontrado (puede ser el base o el ext si ya se ha desplegado antes).
+* Hacer el deploy.
+* Hacer `start` del paquete.
+
+## Despliegue con Gradle
+
+Para encapsular los distintos procesos de despliegue usamos un build de gradle que tiene distintas opciones:
+
+* Opción `-Penv`. Indica el entorno en que se despliega y cambia los metadatos de los fragmentos de manera acorde:
+	* `-Penv=production` incorpora los metadatos de Anidia.
+	* `-Penv=dev` u otro valor incorpora los metadatos de Liferay.com.
+* Opción `-PbuildPublisher=true`. Indica si se debe desplegar los portlets correspondientes al `Asset Publisher`.
+  * **OJO**: Aquí aplica lo mismo que lo visto en el punto de Desplegar el Asset Publisher, hay que apagar Liferay antes de hacerlo o bien apagar el módulo.
+
+Así, las opciones que hay son:
+
+* `gradle build`: Te despliega fragmentos y theme en local con metadatos de Liferay.com
+* `gradle build -Penv=production`: Te despliega fragmentosy theme en local con metadatos de Anidia.
+* `gradle build -PbuildPublisher=true`: Te despliega fragmentos, theme y Asset Publisher con metadatos de Liferay.com.
+
+### Tareas individuales
+
+Si se hace `gradle tasks` se verán las tareas individuales de build, de manera que se puede desplegar cada pieza por separado a base de esas tareas pequeñas. Por ejemplo, `gradle build.theme` despliega el theme.

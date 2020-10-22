@@ -1,0 +1,25 @@
+<div class="bg-an-theme pl-s pr-s pt-xxxl pb-xxxl">
+  <div class="an-info-elems">
+    <div class="an-info-elems__headings mb-xxl">
+      <lfr-editable id="Pre-Título" class="an-h6 mb-m" type="text"
+        >PRE-TÍTULO</lfr-editable
+      >
+      <lfr-editable id="Título" class="an-h2" type="text"
+        >SUBTÍTULO</lfr-editable
+      >
+    </div>
+
+    <!-- TODO: Integración con widget. Cuando se tengan 4 items, incluir la clase "an-info-elems__list--two-rows"
+      <div class="an-info-elems__list an-info-elems__list--two-rows">
+    -->
+    <div class="an-info-elems__list mb-xxl">
+      <lfr-widget-asset-list> </lfr-widget-asset-list>
+    </div>
+
+    <a
+      href="${htmlUtil.escape(configuration.Enlace)}"
+      class="an-btn an-btn--white"
+      ><span>${htmlUtil.escape(configuration.Texto)}</span></a
+    >
+  </div>
+</div>

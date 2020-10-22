@@ -5,45 +5,94 @@
 <html class="${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
 
 <head>
+<!-- OneTrust Cookies Consent Notice start for www.anidia.es -->
+<#if oneTrustEnvironment == "production" >
+	<script type="text/javascript" src="https://cdn.cookielaw.org/consent/ad62ccc3-73b7-4fa0-8939-185357e3f2a7/OtAutoBlock.js" ></script>
+</#if>
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="ad62ccc3-73b7-4fa0-8939-185357e3f2a7" ></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for www.anidia.es -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtm_id}');</script>
+<!-- End Google Tag Manager -->
 
 	<#include "${full_templates_path}/head/meta_tags.ftl" />
 
 	<link rel="stylesheet" href="${css_folder}/anidia.css" charset="utf-8">
+  <#--  <link rel="text/javascript" href="${javascript_folder}/main.js" charset="utf-8">  -->
+	<link rel="stylesheet" href="${css_folder}/anidia.css?t=${theme_timestamp}" charset="utf-8">
 
 </head>
 
 <body class="${css_class}">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${gtm_id}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 <@liferay_ui["quick-access"] contentId="#main-content" />
 
 <@liferay_util["include"] page=body_top_include />
 
 <@liferay.control_menu />
 
-<div class="container-fluid" id="wrapper">
+<div class="container-fluid p-0" id="wrapper">
 	<header id="banner" role="banner">
 		<div id="heading">
 			<div aria-level="1" class="site-title" role="heading">
 				<a class="${logo_css_class}" href="${site_default_url}" title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">
-					<img alt="${logo_description}" height="${site_logo_height}" src="${site_logo}" width="${site_logo_width}" />
+          <div class="mobile-hide">
+          	<img alt="${logo_description}" src="${images_folder}/logo-anidia-white.svg" class="anidia-logo-header anidia-logo-header--white"/>
+            <img alt="${logo_description}" src="${images_folder}/logo-anidia-green.svg" class="anidia-logo-header anidia-logo-header--green"/>
+          </div>
+          <div class="desktop-hide">
+            <img alt="${logo_description}" src="${images_folder}/logo-menu-mobile-white.svg" class="anidia-logo-header--mobile anidia-logo-header--mobile--white"/>
+            <img alt="${logo_description}" src="${images_folder}/logo-menu-mobile-green.svg" class="anidia-logo-header--mobile anidia-logo-header--mobile--green"/>
+          </div>
 				</a>
+        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--head-phones an-cmb an-cmb--header desktop-hide">
+          <div class="an-cmb__content">
+            <span class="an-cmb__text">Llámanos gratis</span>
+            <span class="an-link an-cmb__number">${call_center_phone[0..*3]} ${call_center_phone[3..*2]} ${call_center_phone[5..*2]} ${call_center_phone[7..*2]}</span>
+          </div>
+        </a>
 
-				<#if show_site_name>
-					<span class="site-name" title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">
-						${site_name}
-					</span>
-				</#if>
+		    <a href="tel:+34900181818" class="an-link an-btn an-btn--flatter an-btn--gradient an-icon--head-phones an-cmb an-cmb--header-small desktop-hide"></a>
+
+        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--gradient an-icon--power mobile-hide">
+          <span>Área cliente</span>
+        </a>
 			</div>
+
+    <label class="anidia-header">
+      <input type="checkbox" class="anidia-header__input"/>
+      <span class="anidia-header__menu">
+        <img alt="${logo_description}" src="${images_folder}/logo-menu-mobile-white.svg" class="hide anidia-logo--menu"/>
+        <span class="anidia-header__hamburger"></span>
+      </span>
+        <@liferay.navigation_menu
+                instance_id="main_navigation_menu"
+                default_preferences="${freeMarkerPortletPreferences}"
+          />
+      <div class="anidia-header__footer desktop-hide">
+       <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--gradient an-icon--power">
+          <span>Área cliente</span>
+        </a>
+        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--white an-icon--call-us-free">
+          <div class="an-cmb__content">
+            <span class="an-cmb__text">Llámanos gratis</span>
+            <span class="an-link an-cmb__number">${call_center_phone[0..*3]} ${call_center_phone[3..*2]} ${call_center_phone[5..*2]} ${call_center_phone[7..*2]}</span>
+          </div>
+        </a>
+      </div>
+    </label>
 		</div>
 
-		<#if !is_signed_in>
+    <#if !is_signed_in>
 			<a data-redirect="${is_login_redirect_required?string}" href="${sign_in_url}" id="sign-in" rel="nofollow">${sign_in_text}</a>
 		</#if>
 
-		<#if has_navigation && is_setup_complete>
-			<#include "${full_templates_path}/navigation.ftl" />
-		</#if>
-
-		<h3>Call me back</h3>
 		<a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--call-us-free-svg an-cmb">
 			<div class="an-cmb__content">
 				<span class="an-cmb__text">Llámanos gratis</span>
@@ -52,19 +101,10 @@
 			</div>
 		</a>
 
-		<a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--head-phones an-cmb an-cmb--header">
-			<div class="an-cmb__content">
-				<span class="an-cmb__text">Llámanos gratis</span>
-				<span class="an-link an-cmb__number">${call_center_phone[0..*3]} ${call_center_phone[3..*2]} ${call_center_phone[5..*2]} ${call_center_phone[7..*2]}</span>
-			</div>
-		</a>
-
-		<a href="tel:+34900181818" class="an-link an-btn an-btn--flatter an-btn--gradient an-icon--head-phones an-cmb an-cmb--header-small"></a>
-
 	</header>
 
 	<section id="content">
-		<h2 class="hide-accessible" role="heading" aria-level="1">${the_title}</h2>
+		<#--  <h2 class="hide-accessible" role="heading" aria-level="1">${the_title}</h2>  -->
 
 		<#if selectable>
 			<@liferay_util["include"] page=content_include />
@@ -108,7 +148,19 @@
 </#if>
 <!-- inject:js -->
 <!-- endinject -->
-
+<script>
+window.dataLayer.push({
+	"event": "anidiapageview",
+	"content": {
+		"category" :"",
+		"contenthierarchy": [
+			{
+				"0": "home"
+			}
+		]
+	}
+})
+</script>
 </body>
 
 </html>

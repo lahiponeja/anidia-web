@@ -1,5 +1,7 @@
 .an-featured {
-  background-color: white;
+  $parent: &;
+
+  background-color: $white;
   border-radius: rem(28);
   height: auto;
   display: flex;
@@ -24,7 +26,7 @@
 
   &__text {
     font-family: $open-sans-regular-family;
-    font-size: rem(16);
+    font-size: rem(18);
     line-height: rem(24);
     margin-bottom: rem(33);
   }
@@ -55,7 +57,7 @@
       width: auto;
     }
   }
-  
+
   @include mediumdktp {
     height: rem(600);
     max-width: rem(1239);
@@ -82,6 +84,20 @@
 
       img {
         width: 100%;
+      }
+    }
+
+    &--image-right {
+      justify-content: flex-start;
+
+      #{ $parent }__inner {
+        margin-right: auto;
+        margin-left: rem(90);
+      }
+
+      #{ $parent }__image {
+        left: auto;
+        right: rem(-50);
       }
     }
   }

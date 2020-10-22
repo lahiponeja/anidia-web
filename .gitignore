@@ -57,3 +57,6 @@ docker/db-data
 .gradle
 RemoteSystemsTempFiles
 .metadata
+
+# Liferay
+liferay/deploy/*
