@@ -75,6 +75,8 @@ const getAddresses = function(municipalityId, postalCode) {
     const result = xmlToJsonImp(res)
     if(result.length) {
       state.autocompData.addresses = result
+    } else {
+      state.autocompData.addresses = []
     }
   }).catch((err) => {
     console.error(err);
@@ -84,7 +86,7 @@ const getAddresses = function(municipalityId, postalCode) {
 const getEstates = function(municipalityId, postalCode, addressKind, addressName) {
   coverageService.getEstates(municipalityId, postalCode, addressKind, addressName).then((res) => {
     const result = xmlToJsonImp(res)
-    state.autocompData.estates = [result]
+    state.autocompData.estates = result
   }).catch((err) => {
     console.error(err);
   })
@@ -94,7 +96,7 @@ const getProperties = function(gateId) {
   coverageService.getProperties(gateId).then((res) => {
     const result = xmlToJsonImp(res)
     console.log(result)
-    state.autocompData.properties = result
+    state.autocompData.properties = [result]
     
   }).catch((err) => {
     console.error(err);

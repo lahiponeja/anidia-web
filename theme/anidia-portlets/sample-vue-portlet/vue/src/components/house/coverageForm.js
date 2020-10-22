@@ -18,7 +18,7 @@ const coverageForm = {
         addressKind: "",
         addressName: "",
         street: "",
-        gateId: "",
+        name: "",
         houseType: "",
         privacyPolicy: false
       },
@@ -104,9 +104,16 @@ const coverageForm = {
     /*************************************
      * ESTATES
     *************************************/
+    searchEstates(index) {
+      if (index.length < 1) { return [] }
+      return this.estatesArr.filter(pc => {
+        return pc.number.startsWith(index)
+      })
+    },
+
     onSubmitEstates(result) {
-      const { gateId } = result
-      this.formData.gateId = gateId
+      const { gateId, number } = result
+      this.formData.number = number
       this.house.getProperties(gateId)
     },
 
@@ -154,7 +161,7 @@ const coverageForm = {
       <li>Postal Code: {{ formData.postalCode }}</li>
       <li>Municipio: {{ formData.municipalityName }}</li>
       <li>Calle: {{ formData.addressName }}</li>
-      <li>Número: {{ formData.gateId }}</li>
+      <li>Número: {{ formData.number }}</li>
       <li>Vivienda: {{ formData.houseType }}</li>
       <li>Acepto la política de privacidad: {{ formData.privacyPolicy }}</li>
     </ul>
@@ -297,7 +304,7 @@ const coverageForm = {
               <!-- <input v-model="formData.number" type="text" class="an-input__field" placeholder="Número" required=""> -->
               <autocomplete                 
                 @submit="onSubmitEstates"
-                :search="search" 
+                :search="searchEstates" 
                 :get-result-value="getResultValue" 
                 placeholder="Número"
                 style="width: 100%;"
@@ -315,20 +322,20 @@ const coverageForm = {
                 >
                   <div v-bind="rootProps">
                     <input
-                      v-model="formData.gateId"
+                      v-model="formData.number"
                       v-bind="inputProps"
                       v-on="inputListeners"
                       class="an-input__field"
-                      @focus="setActiveField('estatesArr', 'gateId')"
+                      @focus="setActiveField('estatesArr', 'number')"
                     >
                     <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
-                        :key="result.gateId"
+                        :key="result.number"
                         v-bind="resultProps[index]"
                       >
-                        {{ result.gateId }}
+                        {{ result.number }}
                       </li>
                     </ul>
                   </div>
