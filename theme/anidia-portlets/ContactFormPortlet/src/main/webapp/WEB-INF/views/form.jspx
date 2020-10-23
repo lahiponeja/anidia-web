@@ -23,7 +23,13 @@
 				<form:input id="${namespace}lastName" cssClass="an-input__field" path="lastName" placeholder="${lastNamePlaceholder}" required="required"/>
 				<form:input id="${namespace}email" cssClass="an-input__field" path="email" placeholder="${emailPlaceholder}" type="email"/>
 				<form:select id="${namespace}phonePrefix" cssClass="an-input__field" path="phonePrefix" items="${prefixes}"/>
-				<form:input id="${namespace}phoneNumber" cssClass="an-input__field" path="phoneNumber" placeholder="${phonePlaceholder}"/>
+				<form:input id="${namespace}phoneNumber" cssClass="an-input__field" path="phoneNumber" placeholder="${phonePlaceholder}" />
+				<form:select id="${namespace}productType" cssClass="an-input__field" path="productType">
+					<form:option value=""><spring:message code="product-type-placeholder" /></form:option>
+					<form:option value="gas"><spring:message code="product-type-gas"/></form:option>
+					<form:option value="solar"><spring:message code="product-type-solar"/></form:option>
+					<form:option value="mantenimiento"><spring:message code="product-type-mantenimiento"/></form:option>
+				</form:select>
 
 				<div class="an-checkbox">
 					<form:input id="${namespace}privacyAccepted" cssClass="an-checkbox__input" path="privacyAccepted"  required="required"/>

@@ -42,7 +42,6 @@ public class LeadController {
 		return prefixes;
 	}
 
-
 	@RenderMapping
 	public String prepareView() {
 		return "form";
