@@ -40,10 +40,10 @@ export default function main({portletNamespace, contextPath, portletElementId, c
 			<template v-if="(global.state.currentStep === 'funnel')">
 				<funnel-view />
 			</template>
-			<template v-else-if="(global.state.currentStep === 'home') || (global.state.currentStep === 'apartment')">
+			<template v-else-if="(global.state.currentStep === 'Unifamiliar') || (global.state.currentStep === 'Bloque de pisos')">
 				<house-view />
 			</template>
-			<template v-else-if="(global.state.currentStep === 'business')">
+			<template v-else-if="(global.state.currentStep === 'Negocio')">
 				<business-view />
 			</template>
             

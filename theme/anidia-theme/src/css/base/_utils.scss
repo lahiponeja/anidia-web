@@ -60,3 +60,7 @@ $lines-clamp: 2 3 4 !default;
   display: flex;
   flex-direction: column;
 }
+
+.w-full {
+  width: 100%;
+}

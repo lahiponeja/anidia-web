@@ -68,6 +68,10 @@
     }
   }
 
+  &--full-width {
+    width: 100%;
+  }
+
   &__custom {
     $custom: &;
 

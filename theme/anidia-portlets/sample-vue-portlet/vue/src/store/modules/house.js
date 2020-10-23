@@ -44,7 +44,8 @@ const state = reactive({
       active: false
     },
   ],
-  currentStep: "cobertura",
+  // currentStep: "cobertura",
+  currentStep: "vivienda",
   autocompData: {
     postalCodes: [],
     municipalities: [],
