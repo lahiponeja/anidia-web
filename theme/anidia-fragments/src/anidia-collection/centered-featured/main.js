@@ -1,10 +1,10 @@
-function centeredFeatured() {
-  const container = document.querySelector(".an-centered-featured");
-  const src = document.querySelector("#ImagenFondo img").src;
+function centeredFeatured(fragmentElement) {
+  const container = fragmentElement.querySelector(".an-centered-featured");
+  const src = fragmentElement.querySelector(".background-image").src;
   container.style.backgroundImage = 'url(' + src + ')';
 }
 
 
-if (document.querySelector(".an-centered-featured")) {
-  centeredFeatured();
+if (fragmentElement.querySelector(".an-centered-featured")) {
+  centeredFeatured(fragmentElement);
 }
