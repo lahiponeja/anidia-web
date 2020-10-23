@@ -27,27 +27,27 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("Lead")
+@GraphQLName("CalculatorGas")
 @JsonFilter("Liferay.Vulcan")
-@XmlRootElement(name = "Lead")
-public class Lead {
+@XmlRootElement(name = "CalculatorGas")
+public class CalculatorGas {
 
-	@Schema(description = "Calculator gas of the Lead")
+	@Schema(description = "Input object")
 	@Valid
-	public CalculatorGas getCalculatorGas() {
-		return calculatorGas;
+	public CalculatorGasInput getInput() {
+		return input;
 	}
 
-	public void setCalculatorGas(CalculatorGas calculatorGas) {
-		this.calculatorGas = calculatorGas;
+	public void setInput(CalculatorGasInput input) {
+		this.input = input;
 	}
 
 	@JsonIgnore
-	public void setCalculatorGas(
-		UnsafeSupplier<CalculatorGas, Exception> calculatorGasUnsafeSupplier) {
+	public void setInput(
+		UnsafeSupplier<CalculatorGasInput, Exception> inputUnsafeSupplier) {
 
 		try {
-			calculatorGas = calculatorGasUnsafeSupplier.get();
+			input = inputUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -59,24 +59,24 @@ public class Lead {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected CalculatorGas calculatorGas;
+	protected CalculatorGasInput input;
 
-	@Schema(description = "Personal information of the Lead")
+	@Schema(description = "Output object")
 	@Valid
-	public PersonalData getPersonalData() {
-		return personalData;
+	public CalculatorGasOutput getOutput() {
+		return output;
 	}
 
-	public void setPersonalData(PersonalData personalData) {
-		this.personalData = personalData;
+	public void setOutput(CalculatorGasOutput output) {
+		this.output = output;
 	}
 
 	@JsonIgnore
-	public void setPersonalData(
-		UnsafeSupplier<PersonalData, Exception> personalDataUnsafeSupplier) {
+	public void setOutput(
+		UnsafeSupplier<CalculatorGasOutput, Exception> outputUnsafeSupplier) {
 
 		try {
-			personalData = personalDataUnsafeSupplier.get();
+			output = outputUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -88,7 +88,7 @@ public class Lead {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected PersonalData personalData;
+	protected CalculatorGasOutput output;
 
 	@Override
 	public boolean equals(Object object) {
@@ -96,13 +96,13 @@ public class Lead {
 			return true;
 		}
 
-		if (!(object instanceof Lead)) {
+		if (!(object instanceof CalculatorGas)) {
 			return false;
 		}
 
-		Lead lead = (Lead)object;
+		CalculatorGas calculatorGas = (CalculatorGas)object;
 
-		return Objects.equals(toString(), lead.toString());
+		return Objects.equals(toString(), calculatorGas.toString());
 	}
 
 	@Override
@@ -117,24 +117,24 @@ public class Lead {
 
 		sb.append("{");
 
-		if (calculatorGas != null) {
+		if (input != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"calculatorGas\": ");
+			sb.append("\"input\": ");
 
-			sb.append(String.valueOf(calculatorGas));
+			sb.append(String.valueOf(input));
 		}
 
-		if (personalData != null) {
+		if (output != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"personalData\": ");
+			sb.append("\"output\": ");
 
-			sb.append(String.valueOf(personalData));
+			sb.append(String.valueOf(output));
 		}
 
 		sb.append("}");
