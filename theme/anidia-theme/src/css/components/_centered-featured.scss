@@ -52,7 +52,11 @@
 
   h2 {
     margin-bottom: rem(19);
-    white-space: nowrap;
+    white-space: normal;
+
+    div {
+      width: 100%;
+    }
   }
 
   p {

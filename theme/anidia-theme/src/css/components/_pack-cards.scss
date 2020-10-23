@@ -1,10 +1,9 @@
 .an-pack-cards {
   text-align: center;
-  padding-top: rem(90);
 
   &__intro {
     background-color: $white;
-    padding-top: 0;
+    padding-top: rem(90);
 
     h6 {
       text-transform: uppercase;
@@ -142,6 +141,11 @@
 
       &.featured {
         order: 0;
+        z-index: 2;
+
+        .portlet-body.small & {
+          order: 1;
+        }
       }
 
       @include desktop {
@@ -150,11 +154,20 @@
 
         .an-card--pack:not(.featured) {
           transform: translateX(-20px);
+
+          .portlet-body.small & {
+            &:first-child {
+              transform: translateX(20px);
+            }
+          }
         }
 
         .an-card--pack.featured {
           margin-left: rem(20);
-          z-index: 2;
+
+          .portlet-body.small & {
+            margin-left: 0;
+          }
         }
       }
     }

@@ -156,7 +156,6 @@
     h2,
     .an-pill,
     .an-icon--half-arrow-right {
-      // TODO: ADD MARGIN VAR
       margin-bottom: rem(24);
       color: $white;
       z-index: 1;
@@ -326,6 +325,11 @@
 
       @include desktop {
         width: rem(470);
+
+        h3 {
+          font-size: rem(24);
+          line-height: normal;
+        }
       }
 
       &.featured {

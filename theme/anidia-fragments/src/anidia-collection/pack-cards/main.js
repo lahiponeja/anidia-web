@@ -1,39 +1,53 @@
-const dots = document.querySelectorAll('.an-pack-cards__dot');
-const cardContainer = document.querySelector('.an-pack-cards__cards');
-const nCards = document.querySelectorAll('.an-card--pack').length;
+function packCards() {
+  const dots = document.querySelectorAll('.an-pack-cards__dot');
+  const cardContainer = document.querySelector('.an-pack-cards__cards');
+  const nCards = document.querySelectorAll('.an-card--pack').length;
 
-dots.forEach((dot, i) => {
-  dot.addEventListener('click', e => {
-    e.preventDefault();
-    e.stopPropagation();
-    setAriaPressed(i);
-    const scrollLeft = Math.floor(cardContainer.scrollWidth * (i / nCards));
-    smoothScroll(cardContainer, scrollLeft);
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      setAriaPressed(i);
+      const scrollLeft = Math.floor(cardContainer.scrollWidth * (i / nCards));
+      smoothScroll(cardContainer, scrollLeft);
+    });
   });
-});
 
-cardContainer.addEventListener('scroll', () => {
-  let index = Math.round((cardContainer.scrollLeft / cardContainer.scrollWidth) * nCards);
-  setAriaPressed(index);
-}, 200);
+  cardContainer.addEventListener('scroll', () => {
+    let index = Math.round((cardContainer.scrollLeft / cardContainer.scrollWidth) * nCards);
+    setAriaPressed(index);
+  }, 200);
 
-setAriaLabels();
+  setAriaLabels();
 
-function smoothScroll (node, topOrLeft) {
-  return node.scrollTo({
-    ['left']: topOrLeft,
-    behavior: 'smooth'
-  });
+  function smoothScroll (node, topOrLeft) {
+    return node.scrollTo({
+      ['left']: topOrLeft,
+      behavior: 'smooth'
+    });
+  }
+
+  function setAriaLabels() {
+    dots.forEach((dot, i) => {
+      dot.setAttribute('aria-label', `Scroll to item #${i + 1}`);
+    });
+  }
+
+  function setAriaPressed(index) {
+    dots.forEach((dot, i) => {
+      dot.setAttribute('aria-pressed', !!(i === index));
+    });
+  }
+
+  if (nCards === 3) {
+    document.querySelectorAll('.an-card--pack').forEach(card => {
+      card.classList.remove('an-card--pack--big');
+      card.classList.add('an-card--pack--small');
+    })
+    document.querySelector('.an-pack-cards__cards .portlet-body').classList.add('small');
+  }
 }
 
-function setAriaLabels() {
-  dots.forEach((dot, i) => {
-    dot.setAttribute('aria-label', `Scroll to item #${i + 1}`);
-  });
-}
-
-function setAriaPressed(index) {
-  dots.forEach((dot, i) => {
-    dot.setAttribute('aria-pressed', !!(i === index));
-  });
+if (document.querySelector(".an-pack-cards")) {
+  packCards();
 }
