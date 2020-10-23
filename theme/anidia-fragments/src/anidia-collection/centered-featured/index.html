@@ -1,12 +1,21 @@
 <div class="bg-an-theme pl-s pr-s pt-xxxl pb-xxxl">
   <div class="an-centered-featured">
+    [#if !configuration.hideBackgroundImage]
     <lfr-editable id="ImagenFondo" type="image"><img class="hide" src="[resources:background.png]" alt=""></lfr-editable>
+    [/#if]
+
+    [#if !configuration.hideLeftImage]
     <lfr-editable id="Imagen1" type="image"><img src="[resources:centered-featured1.png]" alt=""></lfr-editable>
+		[/#if]
     <div class="an-centered-featured__content">
       <h2><lfr-editable id="Título" type="text">Mantenimiento gas</lfr-editable></h2>
       <p><lfr-editable id="Subtítulo" type="text">Tranquilidad y ahorro por sólo 6,50€/mes</lfr-editable></p>
-      <a href="${htmlUtil.escape(configuration.Enlace)}" class="an-btn an-btn--flatter an-btn--white"><span>${htmlUtil.escape(configuration.Texto)}</span></a>
+      [#if !configuration.hideLink]
+        <a href="${htmlUtil.escape(configuration.Enlace)}" class="an-btn an-btn--flatter an-btn--white"><span>${htmlUtil.escape(configuration.Texto)}</span></a>
+		  [/#if]
     </div>
-    <lfr-editable id="Imagen2" type="image"><img src="[resources:centered-featured2.png]" alt=""></lfr-editable>
+    [#if !configuration.hideRightImage]
+    	<lfr-editable id="Imagen2" type="image"><img src="[resources:centered-featured2.png]" alt=""></lfr-editable>
+		[/#if]
   </div>
 </div>

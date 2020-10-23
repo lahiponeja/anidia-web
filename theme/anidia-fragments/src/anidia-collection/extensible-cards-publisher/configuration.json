@@ -9,6 +9,13 @@
           "description": "Enlace del botón del módulo",
           "type": "text",
           "dataType": "string"
+        },
+        {
+          "name": "hideLink",
+          "label": "Ocultar enlace",
+          "description": "Oculta enlace",
+					"type": "checkbox",
+          "defaultValue": false
         }
       ]
     }

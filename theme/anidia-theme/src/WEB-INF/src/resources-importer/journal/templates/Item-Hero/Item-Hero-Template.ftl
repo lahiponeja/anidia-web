@@ -22,11 +22,13 @@
 		<span class="an-icon--half-arrow-right"></span>
 		</button>
 
-		<div class="an-hero-slider__btn">
-		<a href="${LinkToPage1z94.getFriendlyUrl()}" class="an-btn an-btn--flatter an-btn--white">
-			<span>${TextoBotón.getData()}</span>
-		</a>
-		</div>
+		<#if TextoBotón.getData?? && TextoBotón.getData() != "">
+			<div class="an-hero-slider__btn">
+			<a href="${LinkToPage1z94.getFriendlyUrl()}" class="an-btn an-btn--flatter an-btn--white">
+				<span>${TextoBotón.getData()}</span>
+			</a>
+			</div>
+		</#if>
 	</div>
 	</div>
 </section>
