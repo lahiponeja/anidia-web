@@ -55,9 +55,6 @@
 		    	<a href="tel:+34900181818" class="an-link an-btn an-btn--flatter an-btn--gradient an-icon--head-phones an-cmb an-cmb--header-small desktop-hide"></a>
 				</#if>
 
-        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--gradient an-icon--power mobile-hide">
-          <span>Área cliente</span>
-        </a>
 			</div>
 
     <label class="anidia-header">
@@ -71,10 +68,6 @@
                 default_preferences="${freeMarkerPortletPreferences}"
           />
       <div class="anidia-header__footer desktop-hide">
-
-       <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--gradient an-icon--power">
-          <span>Área cliente</span>
-        </a>
 				<#if (call_center_phone_mobile_version == "icono + texto")>
 					<a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--head-phones an-cmb an-cmb--header">
 						<div class="an-cmb__content">
