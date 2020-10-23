@@ -2,7 +2,9 @@ import { http } from '../../services/http/index'
 // import { reactive, readonly } from 'vue'
 import { reactive, shallowReadonly } from '@vue/composition-api'
 import coverageService from '../../services/coverageServices'
+import houseFormService from '../../services/houseFormService'
 import xmlToJsonImp from '../../helpers/xmlToJsonImp'
+import objToXml from '../../helpers/objToXml'
 
 const state = reactive({
   postalCode: "",
@@ -124,6 +126,30 @@ const setCoverageError = function(msg) {
   state.coverageError = msg
 }
 
+const submitHouseData = function(gasBudgetRequest) {
+  
+  const options = {
+    rootName: 'GasBudgetRequest', // defaults to 'root'
+    attributes: false
+  }
+
+  const dataObj = Object.assign(gasBudgetRequest, {
+    postalCode: state.postalCode,
+    houseType: state.houseType,
+  })
+
+  const xml = objToXml(dataObj, options)
+
+  houseFormService.postHouseForm(xml).then((res)=> {
+    console.log("SERVICIO houseFormService 🌮: ", res)
+  })
+  .catch((err)=>{
+    console.error(err)
+  })
+
+  console.log(xml)
+}
+
 const submitUserContactInfo = function (budgetReadyForm) {
   const { 
     name,
@@ -148,4 +174,5 @@ export default {
   getEstates,
   getProperties,
   setCoverageError,
+  submitHouseData,
 }

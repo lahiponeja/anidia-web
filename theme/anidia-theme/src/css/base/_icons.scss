@@ -343,10 +343,10 @@ $an-icon-hot-water-heat-kitchen: "\e910";
   display: block;
 }
 
-$an-icon-hot-water-kitchen: "\e911";
-.an-icon--hot-water-kitchen:before {
+$an-icon-hot-water-thermo: "\e911";
+.an-icon--hot-water-thermo:before {
   font-family: $an-icons;
-  content: $an-icon-hot-water-kitchen;
+  content: $an-icon-hot-water-thermo;
   display: block;
 }
 
