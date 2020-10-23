@@ -38,6 +38,13 @@
           "description": "Oculta la imagen derecha",
 					"type": "checkbox",
           "defaultValue": false
+        },
+        {
+          "name": "hideLink",
+          "label": "Ocultar enlace",
+          "description": "Oculta el enlace de más información",
+					"type": "checkbox",
+          "defaultValue": false
         }
       ]
     }
