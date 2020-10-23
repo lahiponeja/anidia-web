@@ -51,7 +51,9 @@
           </div>
         </a>
 
-		    <a href="tel:+34900181818" class="an-link an-btn an-btn--flatter an-btn--gradient an-icon--head-phones an-cmb an-cmb--header-small desktop-hide"></a>
+				<#if (call_center_phone_mobile_version != "icono + texto")>
+		    	<a href="tel:+34900181818" class="an-link an-btn an-btn--flatter an-btn--gradient an-icon--head-phones an-cmb an-cmb--header-small desktop-hide"></a>
+				</#if>
 
         <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--gradient an-icon--power mobile-hide">
           <span>Área cliente</span>
@@ -69,15 +71,18 @@
                 default_preferences="${freeMarkerPortletPreferences}"
           />
       <div class="anidia-header__footer desktop-hide">
+
        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--gradient an-icon--power">
           <span>Área cliente</span>
         </a>
-        <a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-btn an-btn--flatter an-btn--white an-icon--call-us-free">
-          <div class="an-cmb__content">
-            <span class="an-cmb__text">Llámanos gratis</span>
-            <span class="an-link an-cmb__number">${call_center_phone[0..*3]} ${call_center_phone[3..*2]} ${call_center_phone[5..*2]} ${call_center_phone[7..*2]}</span>
-          </div>
-        </a>
+				<#if (call_center_phone_mobile_version == "icono + texto")>
+					<a href="tel:${call_center_phone_prefix}${call_center_phone}" class="an-link an-btn an-btn--flatter an-btn--white an-icon--head-phones an-cmb an-cmb--header">
+						<div class="an-cmb__content">
+							<span class="an-cmb__text">Llámanos gratis</span>
+							<span class="an-link an-cmb__number">${call_center_phone[0..*3]} ${call_center_phone[3..*2]} ${call_center_phone[5..*2]} ${call_center_phone[7..*2]}</span>
+						</div>
+					</a>
+				</#if>
       </div>
     </label>
 		</div>
@@ -93,6 +98,8 @@
 				<span class="an-cmb__text-small mobile-hide">Gestionamos por ti lo que necesites</span>
 			</div>
 		</a>
+
+
 
 	</header>
 
