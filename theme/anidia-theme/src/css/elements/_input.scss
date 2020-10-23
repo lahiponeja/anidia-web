@@ -1,3 +1,4 @@
+%an-input,
 .an-input {
   $parent: &;
 
@@ -23,7 +24,7 @@
       #{$parent}__field {
         padding-left: rem(55);
       }
-  
+
       span {
         color: $an-theme;
         position: absolute;
@@ -31,7 +32,7 @@
       }
     }
   }
-  
+
   &__field {
     background-color: $white;
     border: 1px solid $an-theme-soft-grey-sec;

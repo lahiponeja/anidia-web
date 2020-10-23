@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+		  xmlns:portlet="http://xmlns.jcp.org/portlet_3_0"
+		  xmlns:spring="http://www.springframework.org/tags"
+		  xmlns:form="http://www.springframework.org/tags/form"
+		  version="2.1">
+	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
+  Hola!
+
+  <form:form id="${namespace}mainForm" action="${mainFormActionURL}" class="address-form" method="post" modelAttribute="address">
+
+    <form:select path="postalCode">
+          <form:options items="${municipalities}" itemValue="postalCode" itemLabel="postalCode"/>
+    </form:select>
+
+    <form:select path="municipalityCode">
+          <form:options items="${municipalities}" itemValue="municipalityCode" itemLabel="municipalityName" />
+    </form:select>
+  </form:form>
+</jsp:root>
