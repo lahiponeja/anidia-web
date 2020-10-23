@@ -62,8 +62,6 @@ public class OpenAPIResourceImpl {
 
 			add(GasBudgetResourceImpl.class);
 
-			add(ConsumptionSavingResourceImpl.class);
-
 			add(SampleResourceImpl.class);
 
 			add(OpenAPIResourceImpl.class);
