@@ -1,12 +1,6 @@
-.portlet-forms {
-  background: $an-theme-light;
+.an-form {
 
-  @include desktop {
-    padding-top: rem(156);
-    padding-bottom: rem(116);
-  }
-
-  .form {
+  &__container {
     padding: rem(20);
 
     @include desktop {
@@ -18,81 +12,27 @@
     }
   }
 
-  .ddm-form-basic-info {
+  h2 {
+    color: $an-theme;
+    margin-bottom: rem(18);
+    font-size: rem(30);
+    line-height: normal;
 
     @include desktop {
       width: flex-grid(6);
-      padding-right: flex-grid(1) !important;
-    }
-
-    .ddm-form-name {
-      color: $an-theme !important;
-      margin-bottom: rem(18) !important;
-      font-size: rem(30) !important;
-      line-height: normal !important;
-
-      @include desktop {
-        font-size: rem(60) !important;
-      }
+      padding-right: flex-grid(1);
+      margin-top: rem(40);
+      font-size: rem(60);
     }
   }
 
-  button.float-right.lfr-ddm-form-submit.btn.btn-primary {
-    @extend %an-btn;
-    height: rem(60);
-    width: 100%;
-    color: $white;
-    overflow: hidden;
-    position: relative;
-    @include gradient-green-bg;
-
+  .an-card--form {
     @include desktop {
-      height: rem(80);
-    }
-
-    &:after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity .2s ease;
-      z-index: 1;
-      @include gradient-yellow-bg;
-    }
-
-    &:hover {
-      color: $white;
-    }
-
-    &:hover:after,
-    &:active:after {
-      opacity: 1;
-    }
-  }
-
-
-  .ddm-form-builder-app {
-    @extend %an-card;
-    padding: rem(40) rem(20);
-    max-width: rem(497);
-    background-color: $white;
-
-    @include desktop {
-      padding: rem(55) rem(51) rem(52);
       width: flex-grid(6);
     }
+  }
 
-    input.form-control.ddm-field-text {
-      @extend %an-input__field;
-    }
-
-    > * {
-      margin-bottom: rem(20);
-
-      @include desktop {
-        margin-bottom: rem(24);
-      }
-    }
+  label a {
+    text-decoration: underline;
   }
 }
