@@ -15,10 +15,14 @@
 			<form:form id="${namespace}mainForm" action="${mainFormActionURL}" class="an-card an-card--form" method="post" modelAttribute="lead">
 				<form:errors cssClass="portlet-msg-error" />
 
-				<form:input id="${namespace}firstName" cssClass="an-input__field" path="firstName" placeholder="Text"/>
-				<form:input id="${namespace}lastName" cssClass="an-input__field" path="lastName" placeholder="Text"/>
-				<form:input id="${namespace}email" cssClass="an-input__field" path="email" placeholder="Text"/>
-				<form:input id="${namespace}phoneNumber" cssClass="an-input__field" path="phoneNumber" placeholder="Text"/>
+				<spring:message code="first-name-placeholder" var="firstNamePlaceholder" />
+				<spring:message code="last-name-placeholder" var="lastNamePlaceholder" />
+				<spring:message code="email-placeholder" var="emailPlaceholder" />
+				<spring:message code="phone-placeholder" var="phonePlaceholder" />
+				<form:input id="${namespace}firstName" cssClass="an-input__field" path="firstName" placeholder="${firstNamePlaceholder}"/>
+				<form:input id="${namespace}lastName" cssClass="an-input__field" path="lastName" placeholder="${lastNamePlaceholder}"/>
+				<form:input id="${namespace}email" cssClass="an-input__field" path="email" placeholder="${emailPlaceholder}"/>
+				<form:input id="${namespace}phoneNumber" cssClass="an-input__field" path="phoneNumber" placeholder="${phonePlaceholder}"/>
 
 				<div class="an-checkbox">
 					<form:input id="${namespace}privacyAccepted" cssClass="an-checkbox__input" path="privacyAccepted"/>
