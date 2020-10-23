@@ -1,5 +1,35 @@
 components:
   schemas:
+    GasCalculatedConsumption:
+      description: Info about gas consumption directly calculated by a user
+      properties:
+        electricityConsumption:
+          description: Kwh/year consumed
+          type: integer
+        acsUse:
+          description: Wether it's used for water heating.
+          type: boolean
+        heatingUse:
+          description: Wether it's used for house heating.
+          type: boolean
+        kitchenUse:
+          description: Wether it's used for the kitchen.
+          type: boolean
+    GasConsumptionComparison:
+      description: Details of the Gas comparison
+      properties:
+        consumptionRequired:
+          description: Real consumption by the user
+          type: string
+        currentCost:
+          description: Current cost for the user
+          type: string
+        futureCost:
+          description: Future cost with GN
+          type: string
+        savings:
+          description: Saving with GN
+          type: string
     Sample:
       description: A sample entity
       properties:
@@ -19,6 +49,25 @@ info:
   version: v1.0
 openapi: 3.0.1
 paths:
+  "/savings-by-use":
+    post:
+      operationId: postSavingsByUse
+      summary: Calculates the savings when the user knows the amount of energy spent,
+      description: Calculates the savings when the user knows the amount of energy spent,
+      requestBody:
+        content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GasCalculatedConsumption"
+      responses:
+        200:
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GasConsumptionComparison"
+          description: The saving has been calculated
+
+
   "/samples/{sampleId}":
     get:
       operationId: getSample

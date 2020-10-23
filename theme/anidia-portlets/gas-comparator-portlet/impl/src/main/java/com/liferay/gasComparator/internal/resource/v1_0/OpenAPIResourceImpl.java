@@ -50,6 +50,8 @@ public class OpenAPIResourceImpl {
 
 	private final Set<Class<?>> _resourceClasses = new HashSet<Class<?>>() {
 		{
+			add(GasConsumptionComparisonResourceImpl.class);
+
 			add(SampleResourceImpl.class);
 
 			add(OpenAPIResourceImpl.class);
