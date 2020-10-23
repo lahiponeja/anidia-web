@@ -17,6 +17,9 @@ import org.springframework.validation.*;
 import org.springframework.validation.beanvalidation.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author danieldelapena
  */
@@ -29,6 +32,16 @@ public class LeadController {
 	public LeadDTO getLeadModelAttribute() {
 		return new LeadDTO();
 	}
+
+	@ModelAttribute("prefixes")
+	public List<String> getPrefixesList() {
+		List<String> prefixes = new ArrayList<String>();
+		prefixes.add("+34");
+		prefixes.add("+49");
+		prefixes.add("+44");
+		return prefixes;
+	}
+
 
 	@RenderMapping
 	public String prepareView() {
