@@ -40,6 +40,7 @@ const coverageForm = {
     submitRequest() {
       if(this.isValidStatusCode) {
         console.log("submited")
+        this.house.setPostalCode(this.formData.postalCode);
         this.house.changeStep('vivienda');
       } else {
         this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.')
@@ -162,7 +163,7 @@ const coverageForm = {
   },
   template: /*html*/
   `<div>
-<!--
+
     <h3>isValidStatusCode: {{ isValidStatusCode }}</h3>
     
 
@@ -172,7 +173,7 @@ const coverageForm = {
     <h5>Addresses {{ house.state.autocompData.addresses }}</h5>
     <h5>Estates {{ house.state.autocompData.estates }}</h5>
     <h5>Properties {{ house.state.autocompData.properties }}</h5>
-
+<!--
     <ul>
       <li>Postal Code: {{ formData.postalCode }}</li>
       <li>Municipio: {{ formData.municipalityName }}</li>

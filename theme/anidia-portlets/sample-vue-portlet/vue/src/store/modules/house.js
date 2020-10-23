@@ -5,6 +5,7 @@ import coverageService from '../../services/coverageServices'
 import xmlToJsonImp from '../../helpers/xmlToJsonImp'
 
 const state = reactive({
+  postalCode: "",
   houseType: "",
   houseSteps: [
     {
@@ -53,6 +54,15 @@ const state = reactive({
   },
   coverageError: "",
 })
+
+const setPostalCode = function(payload) {
+  state.postalCode = payload
+}
+
+const setHouseType = function(payload) {
+  console.log("house.js", payload)
+  state.houseType = payload
+}
 
 const getPostalCodes = function () {
   coverageService.getPostalCodes().then((res) => {
@@ -127,6 +137,8 @@ const submitUserContactInfo = function (budgetReadyForm) {
 
 export default { 
   state: shallowReadonly(state), 
+  setPostalCode,
+  setHouseType,
   changeStep,
   submitUserContactInfo,
   getPostalCodes,

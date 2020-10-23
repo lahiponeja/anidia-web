@@ -3,17 +3,17 @@ const funnelView = {
     return { 
       optionsArr: [
         {
-          name: 'home',
+          name: 'Unifamiliar',
           title: 'Hogar unifamiliar',
           icon: 'an-icon--unifamiliar-home',
         },
         {
-          name: 'apartment',
+          name: 'Bloque de pisos',
           title: 'Piso en bloque de viviendas',
           icon: 'an-icon--apartments',
         },
         {
-          name: 'business',
+          name: 'Negocio',
           title: 'Negocio',
           icon: 'an-icon--business',
         },
@@ -35,6 +35,8 @@ const funnelView = {
   methods: {
     pickOption(option) {
       this.optionPicked = option
+      console.log(option)
+      this.house.setHouseType(option);
     },
   },
   template: /*html*/

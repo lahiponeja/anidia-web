@@ -21,16 +21,16 @@ const houseForm = {
         GasNaturalUse: "", 
 
         // Corresponde con el campo “Agua caliente” del paso de Vivienda. Aparece siempre.
-        ACSUse: "", 
+        ACSUse: "", // no procede
 
         // Corresponde con el campo “Cocina” del paso de Vivienda. Aparece sólo si se selecciona cocina en la pregunta de “qué necesitas”.
-        KitchenUse: "", 
+        KitchenUse: "", // no procede
 
         // Corresponde con el campo “Calefacción” del paso de Vivienda. Aparece sólo si se selecciona calefacción en la pregunta de “qué necesitas”.
-        HeatingUse: "", 
+        HeatingUse: "", // no procede
 
         // Corresponde con el campo “¿Dónde está la caldera?” del paso de Vivienda. Aparece sólo si se selecciona calefacción en la pregunta de “qué necesitas”.
-        BoilerLocation: "", 
+        BoilerLocation: "",
 
         // Corresponde con la pregunta “¿Qué uso haces del agua caliente?”.
         PersonsWater: "",
@@ -77,11 +77,11 @@ const houseForm = {
             <div class="an-input an-form__item">
               <input v-model="houseFormData.PropertyMeters" type="text" class="an-input__field" placeholder="Metros cuadrados" required="">
             </div>
-            <div v-model="houseFormData.FloorNumber" class="an-input an-form__item">
-              <input type="text" class="an-input__field" placeholder="Plantas" required="">
+            <div class="an-input an-form__item">
+              <input v-model="houseFormData.FloorNumber" type="text" class="an-input__field" placeholder="Plantas" required="">
             </div>
-            <div v-model="houseFormData.BathroomNumber" class="an-input an-form__item">
-              <input type="text" class="an-input__field" placeholder="Baños" required="">
+            <div class="an-input an-form__item">
+              <input v-model="houseFormData.BathroomNumber" type="text" class="an-input__field" placeholder="Baños" required="">
             </div>
             <div class="an-input an-form__item">
               <input v-model="houseFormData.StaysNumber" type="text" class="an-input__field" placeholder="Número de estancias" required="">
@@ -223,7 +223,7 @@ const houseForm = {
                 </div>
               </div> -->
             </div>
-
+          </div>
 
           <p class="an-body-l-bold mb-xl">¿Tienes rejilla de ventilación superior?</p>
           <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
