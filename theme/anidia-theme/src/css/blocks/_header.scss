@@ -425,6 +425,7 @@
 
     @include tablet {
       display: flex !important;
+      z-index: 1;
     }
 
     &::before {
@@ -434,19 +435,25 @@
     }
   }
 
+  .logo {
+    @include tablet {
+      z-index: 1;
+    }
+  }
+
   .anidia-logo-header {
     @include tablet {
       height: rem(47);
       margin-bottom: rem(55);
     }
 
-    // &--green {
-    //   display: none !important;
+    &--green {
+      display: none !important;
 
-    //   body.anidia-white & {
-    //     display: block !important;
-    //   }
-    // }
+      body.anidia-white & {
+        display: block !important;
+      }
+    }
 
     &--white {
       body.anidia-white & {
@@ -456,5 +463,14 @@
         }
       }
     }
+  }
+}
+
+
+#banner {
+  @include tablet {
+    padding: rem(44) rem(60);
+    position: absolute;
+    width: 100%;
   }
 }
