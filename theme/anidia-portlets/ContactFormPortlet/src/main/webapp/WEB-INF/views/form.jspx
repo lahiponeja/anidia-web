@@ -19,13 +19,13 @@
 				<spring:message code="last-name-placeholder" var="lastNamePlaceholder" />
 				<spring:message code="email-placeholder" var="emailPlaceholder" />
 				<spring:message code="phone-placeholder" var="phonePlaceholder" />
-				<form:input id="${namespace}firstName" cssClass="an-input__field" path="firstName" placeholder="${firstNamePlaceholder}"/>
-				<form:input id="${namespace}lastName" cssClass="an-input__field" path="lastName" placeholder="${lastNamePlaceholder}"/>
-				<form:input id="${namespace}email" cssClass="an-input__field" path="email" placeholder="${emailPlaceholder}"/>
+				<form:input id="${namespace}firstName" cssClass="an-input__field" path="firstName" placeholder="${firstNamePlaceholder}" required="required"/>
+				<form:input id="${namespace}lastName" cssClass="an-input__field" path="lastName" placeholder="${lastNamePlaceholder}" required="required"/>
+				<form:input id="${namespace}email" cssClass="an-input__field" path="email" placeholder="${emailPlaceholder}" type="email"/>
 				<form:input id="${namespace}phoneNumber" cssClass="an-input__field" path="phoneNumber" placeholder="${phonePlaceholder}"/>
 
 				<div class="an-checkbox">
-					<form:input id="${namespace}privacyAccepted" cssClass="an-checkbox__input" path="privacyAccepted"/>
+					<form:input id="${namespace}privacyAccepted" cssClass="an-checkbox__input" path="privacyAccepted"  required="required"/>
 					<form:label for="${namespace}privacyAccepted" cssClass="an-checkbox__label an-body-s-regular" path="privacyAccepted">
 						<span>
 							<a href="/política-de-privacidad">
