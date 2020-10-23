@@ -17,6 +17,27 @@
           "description": "Enlace del botón del módulo",
           "type": "text",
           "dataType": "string"
+        },
+        {
+          "name": "hideBackgroundImage",
+          "label": "Ocultar imagen de fondo",
+          "description": "Oculta la imagen de fondo si no se quiere tener ninguna",
+					"type": "checkbox",
+          "defaultValue": false
+        },
+        {
+          "name": "hideLeftImage",
+          "label": "Ocultar imagen izquierda",
+          "description": "Oculta la imagen izquierda",
+					"type": "checkbox",
+          "defaultValue": false
+        },
+        {
+          "name": "hideRightImage",
+          "label": "Ocultar imagen derecha",
+          "description": "Oculta la imagen derecha",
+					"type": "checkbox",
+          "defaultValue": false
         }
       ]
     }
