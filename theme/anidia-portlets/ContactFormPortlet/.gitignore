@@ -3,6 +3,6 @@
 build/
 target/
 .vscode/
-salesforce.properties
+portlet.properties
 .settings
 gradle/
