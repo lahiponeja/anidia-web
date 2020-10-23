@@ -362,37 +362,6 @@ components:
         price:
           description: Price for the extra
           type: string
-    CalculatedConsumption:
-      description: Consumption calculated by the user
-      properties:
-        electricityConsumption:
-          description: KWh/year consumed
-          type: string
-        acsUse:
-          description: Wether it's used for water heating.
-          type: boolean
-        heatingUse:
-          description: Wether it's used for house heating.
-          type: boolean
-        kitchenUse:
-          description: Wether it's used for the kitchen.
-          type: boolean
-      type: object
-    ConsumptionSaving:
-      description: Information about how much is saved comparing the original consumption
-      properties:
-        requriedConsumption:
-          description: The required consumption as calculated by the service
-          type: string
-        currentCost:
-          description: The current cost paid by the client as estimated by the service
-          type: string
-        futureCost:
-          description: The future cost paid by the client with natural gas
-          type: string
-        saving:
-          description: Amount of money saved
-          type: string
     Sample:
       description: A sample entity
       properties:
@@ -412,23 +381,6 @@ info:
   version: v1.0
 openapi: 3.0.1
 paths:
-  "/consumption-saving-user":
-    post:
-      operationId: postConsumptionSavingUser
-      summary: Calculates the savings when the user knows the amount of energy spent,
-      description: Calculates the savings when the user knows the amount of energy spent,
-      requestBody:
-        content:
-          application/xml:
-            schema:
-              $ref: "#/components/schemas/CalculatedConsumption"
-      responses:
-        200:
-          content:
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ConsumptionSaving"
-          description: The saving has been calculated
   "/gas-budgets":
     post:
       operationId: postGasBudget
