@@ -1,6 +1,9 @@
 package com.liferay.gasComparator.internal.resource.v1_0;
 
 import com.liferay.gasComparator.resource.v1_0.GasConsumptionComparisonResource;
+import com.liferay.gasComparator.dto.v1_0.GasConsumptionComparison;
+import com.liferay.gasComparator.dto.v1_0.GasCalculatedConsumption;
+import com.liferay.gasComparator.internal.services.GasComparator;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ServiceScope;
@@ -15,4 +18,12 @@ import org.osgi.service.component.annotations.ServiceScope;
 )
 public class GasConsumptionComparisonResourceImpl
 	extends BaseGasConsumptionComparisonResourceImpl {
+
+		@Override
+		public GasConsumptionComparison postSavingsByConsumption(
+			GasCalculatedConsumption gasCalculatedConsumption)
+		throws Exception {
+			GasComparator gasComparator = new GasComparator();
+			return gasComparator.compareByDirectConsumption(gasCalculatedConsumption);
+	}
 }
