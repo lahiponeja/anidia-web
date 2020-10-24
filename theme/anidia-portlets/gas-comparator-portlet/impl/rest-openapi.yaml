@@ -79,6 +79,8 @@ components:
           description: The sample ID.
           type: integer
       type: object
+servers:
+  - url: http://localhost:8080/o/gas-comparator/v1.0
 info:
   description: "API for gas price comparison"
   license:
