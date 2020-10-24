@@ -64,12 +64,7 @@ public class GasComparator {
       throw new PortletException(2, "Error sending request");
     }
 
-    try {
-      return this.mapJsonResponseToComparison(new JSONObject(response.body()));
-    } catch (JSONException e) {
-      e.printStackTrace();
-      throw new PortletException(3, "Error in the response");
-    }
+    return this.mapJsonResponseToComparison(response);
 
   }
 
@@ -116,26 +111,34 @@ public class GasComparator {
       throw new PortletException(2, "Error sending request");
     }
 
+    return this.mapJsonResponseToComparison(response);
+
+  }
+
+  private GasConsumptionComparison mapJsonResponseToComparison(HttpResponse<String> response) throws PortletException{
+
     try {
-      return this.mapJsonResponseToComparison(new JSONObject(response.body()));
+
+      JSONObject jsonResponse = new JSONObject(response.body());
+      JSONObject jsonBudget = jsonResponse.getJSONObject("data").getJSONArray("items").getJSONObject(0);
+
+      if(jsonBudget.getString("CurrentEnergyCost").equals("#VALUE!")) {
+        throw new PortletException(4, "No hay servicio");
+      }
+
+      GasConsumptionComparison gasConsumptionComparison = new GasConsumptionComparison();
+
+      gasConsumptionComparison.setConsumptionRequired(jsonBudget.getString("HouseConsumptionRequired"));
+      gasConsumptionComparison.setCurrentCost(jsonBudget.getString("CurrentEnergyCost"));
+      gasConsumptionComparison.setFutureCost(jsonBudget.getString("GNCost"));
+      gasConsumptionComparison.setSavings(jsonBudget.getString("GNSaving"));
+
+      return gasConsumptionComparison;
     } catch (JSONException e) {
       e.printStackTrace();
       throw new PortletException(3, "Error in the response");
     }
 
-  }
-
-  private GasConsumptionComparison mapJsonResponseToComparison(JSONObject jsonResponse) throws JSONException{
-
-    GasConsumptionComparison gasConsumptionComparison = new GasConsumptionComparison();
-    JSONObject jsonBudget = jsonResponse.getJSONObject("data").getJSONArray("items").getJSONObject(0);
-
-    gasConsumptionComparison.setConsumptionRequired(jsonBudget.getString("HouseConsumptionRequired"));
-    gasConsumptionComparison.setCurrentCost(jsonBudget.getString("CurrentEnergyCost"));
-    gasConsumptionComparison.setFutureCost(jsonBudget.getString("GNCost"));
-    gasConsumptionComparison.setSavings(jsonBudget.getString("GNSaving"));
-
-    return gasConsumptionComparison;
   }
 
 }
