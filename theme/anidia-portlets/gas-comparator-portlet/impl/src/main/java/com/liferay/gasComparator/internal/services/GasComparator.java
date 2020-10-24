@@ -80,4 +80,5 @@ public class GasComparator {
     return gasConsumptionComparison;
 
   }
+
 }

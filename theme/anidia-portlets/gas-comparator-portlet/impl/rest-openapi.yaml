@@ -15,6 +15,45 @@ components:
         kitchenUse:
           description: Wether it's used for the kitchen.
           type: boolean
+    GasConsumptionByUse:
+      description: Info about gas consumption according to the answers of the user
+      properties:
+        province:
+          description: Province of the user
+          type: string
+        aCSIndividual:
+          description: Water heating is individual, not collective from the building
+          type: boolean
+        aCSUse:
+          description: Kind of energy used for water heating
+          type: string
+          enum: [Butano, GLP, GOC, Electricidad]
+        numberOfPeople:
+          description: Number of people living in the house
+          type: integer
+        heatingIndividual:
+          description: Heating is individual, not collective from the building
+          type: boolean
+        heatingUse:
+          description: Kind of energy used for heating
+          type: string
+          enum: [Butano, GLP, GOC, Electricidad]
+        singleFamilyHouse:
+          description: There's only a family in the house
+          type: boolean
+        lastFloor:
+          description: Wether the house is in the last floor
+          type: boolean
+        surfaceHouse:
+          description: Area of the house in m2
+          type: string
+        kitchenUse:
+          description: Kind of energy used for the kitchen
+          type: string
+          enum: [Butano, GLP, GOC, Electricidad]
+        weeklyKitchenUse:
+          description: Number of times the kitcheen is used in a week
+          type: integer
     GasConsumptionComparison:
       description: Details of the Gas comparison
       properties:
@@ -59,6 +98,23 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/GasCalculatedConsumption"
+      responses:
+        200:
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GasConsumptionComparison"
+          description: The saving has been calculated
+  "/savings-by-use":
+    post:
+      operationId: postSavingsByUse
+      summary: Calculates the savings inferred from the user habits
+      description: Calculates the savings inferred from the user habits
+      requestBody:
+        content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GasConsumptionByUse"
       responses:
         200:
           content:

@@ -1,6 +1,7 @@
 package com.liferay.gasComparator.internal.resource.v1_0;
 
 import com.liferay.gasComparator.dto.v1_0.GasCalculatedConsumption;
+import com.liferay.gasComparator.dto.v1_0.GasConsumptionByUse;
 import com.liferay.gasComparator.dto.v1_0.GasConsumptionComparison;
 import com.liferay.gasComparator.resource.v1_0.GasConsumptionComparisonResource;
 import com.liferay.petra.function.UnsafeFunction;
@@ -50,6 +51,27 @@ public abstract class BaseGasConsumptionComparisonResourceImpl
 	@Tags(value = {})
 	public GasConsumptionComparison postSavingsByConsumption(
 			GasCalculatedConsumption gasCalculatedConsumption)
+		throws Exception {
+
+		return new GasConsumptionComparison();
+	}
+
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'POST' 'http://localhost:8080/o/gas-comparator/v1.0/savings-by-use' -d $'{"aCSIndividual": ___, "aCSUse": ___, "heatingIndividual": ___, "heatingUse": ___, "kitchenUse": ___, "lastFloor": ___, "numberOfPeople": ___, "province": ___, "singleFamilyHouse": ___, "surfaceHouse": ___, "weeklyKitchenUse": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
+	 */
+	@Override
+	@Consumes("application/xml")
+	@Operation(
+		description = "Calculates the savings inferred from the user habits"
+	)
+	@POST
+	@Path("/savings-by-use")
+	@Produces("application/xml")
+	@Tags(value = {})
+	public GasConsumptionComparison postSavingsByUse(
+			GasConsumptionByUse gasConsumptionByUse)
 		throws Exception {
 
 		return new GasConsumptionComparison();

@@ -1,6 +1,7 @@
 package com.liferay.gasComparator.resource.v1_0;
 
 import com.liferay.gasComparator.dto.v1_0.GasCalculatedConsumption;
+import com.liferay.gasComparator.dto.v1_0.GasConsumptionByUse;
 import com.liferay.gasComparator.dto.v1_0.GasConsumptionComparison;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
@@ -29,6 +30,10 @@ public interface GasConsumptionComparisonResource {
 
 	public GasConsumptionComparison postSavingsByConsumption(
 			GasCalculatedConsumption gasCalculatedConsumption)
+		throws Exception;
+
+	public GasConsumptionComparison postSavingsByUse(
+			GasConsumptionByUse gasConsumptionByUse)
 		throws Exception;
 
 	public default void setContextAcceptLanguage(
