@@ -49,9 +49,9 @@ info:
   version: v1.0
 openapi: 3.0.1
 paths:
-  "/savings-by-use":
+  "/savings-by-consumption":
     post:
-      operationId: postSavingsByUse
+      operationId: postSavingsByConsumption
       summary: Calculates the savings when the user knows the amount of energy spent,
       description: Calculates the savings when the user knows the amount of energy spent,
       requestBody:

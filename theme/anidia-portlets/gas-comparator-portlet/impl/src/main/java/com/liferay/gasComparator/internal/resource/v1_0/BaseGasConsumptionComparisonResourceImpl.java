@@ -37,7 +37,7 @@ public abstract class BaseGasConsumptionComparisonResourceImpl
 	/**
 	 * Invoke this method with the command line:
 	 *
-	 * curl -X 'POST' 'http://localhost:8080/o/gas-comparator/v1.0/savings-by-use' -d $'{"acsUse": ___, "electricityConsumption": ___, "heatingUse": ___, "kitchenUse": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
+	 * curl -X 'POST' 'http://localhost:8080/o/gas-comparator/v1.0/savings-by-consumption' -d $'{"acsUse": ___, "electricityConsumption": ___, "heatingUse": ___, "kitchenUse": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
 	 */
 	@Override
 	@Consumes("application/xml")
@@ -45,10 +45,10 @@ public abstract class BaseGasConsumptionComparisonResourceImpl
 		description = "Calculates the savings when the user knows the amount of energy spent,"
 	)
 	@POST
-	@Path("/savings-by-use")
+	@Path("/savings-by-consumption")
 	@Produces("application/xml")
 	@Tags(value = {})
-	public GasConsumptionComparison postSavingsByUse(
+	public GasConsumptionComparison postSavingsByConsumption(
 			GasCalculatedConsumption gasCalculatedConsumption)
 		throws Exception {
 

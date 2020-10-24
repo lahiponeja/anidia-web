@@ -27,7 +27,7 @@ import org.osgi.annotation.versioning.ProviderType;
 @ProviderType
 public interface GasConsumptionComparisonResource {
 
-	public GasConsumptionComparison postSavingsByUse(
+	public GasConsumptionComparison postSavingsByConsumption(
 			GasCalculatedConsumption gasCalculatedConsumption)
 		throws Exception;
 
