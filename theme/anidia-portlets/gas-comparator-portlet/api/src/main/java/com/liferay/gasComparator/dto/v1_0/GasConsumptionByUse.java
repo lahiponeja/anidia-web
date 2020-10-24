@@ -34,14 +34,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "GasConsumptionByUse")
 public class GasConsumptionByUse {
 
-	@GraphQLName("ACSUse")
-	public static enum ACSUse {
+	@GraphQLName("AcsUse")
+	public static enum AcsUse {
 
 		BUTANO("Butano"), GLP("GLP"), GOC("GOC"), ELECTRICIDAD("Electricidad");
 
 		@JsonCreator
-		public static ACSUse create(String value) {
-			for (ACSUse acsUse : values()) {
+		public static AcsUse create(String value) {
+			for (AcsUse acsUse : values()) {
 				if (Objects.equals(acsUse.getValue(), value)) {
 					return acsUse;
 				}
@@ -60,7 +60,7 @@ public class GasConsumptionByUse {
 			return _value;
 		}
 
-		private ACSUse(String value) {
+		private AcsUse(String value) {
 			_value = value;
 		}
 
@@ -139,20 +139,20 @@ public class GasConsumptionByUse {
 	@Schema(
 		description = "Water heating is individual, not collective from the building"
 	)
-	public Boolean getACSIndividual() {
-		return aCSIndividual;
+	public Boolean getAcsIndividual() {
+		return acsIndividual;
 	}
 
-	public void setACSIndividual(Boolean aCSIndividual) {
-		this.aCSIndividual = aCSIndividual;
+	public void setAcsIndividual(Boolean acsIndividual) {
+		this.acsIndividual = acsIndividual;
 	}
 
 	@JsonIgnore
-	public void setACSIndividual(
-		UnsafeSupplier<Boolean, Exception> aCSIndividualUnsafeSupplier) {
+	public void setAcsIndividual(
+		UnsafeSupplier<Boolean, Exception> acsIndividualUnsafeSupplier) {
 
 		try {
-			aCSIndividual = aCSIndividualUnsafeSupplier.get();
+			acsIndividual = acsIndividualUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -164,33 +164,33 @@ public class GasConsumptionByUse {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Boolean aCSIndividual;
+	protected Boolean acsIndividual;
 
 	@Schema(description = "Kind of energy used for water heating")
 	@Valid
-	public ACSUse getACSUse() {
-		return aCSUse;
+	public AcsUse getAcsUse() {
+		return acsUse;
 	}
 
 	@JsonIgnore
-	public String getACSUseAsString() {
-		if (aCSUse == null) {
+	public String getAcsUseAsString() {
+		if (acsUse == null) {
 			return null;
 		}
 
-		return aCSUse.toString();
+		return acsUse.toString();
 	}
 
-	public void setACSUse(ACSUse aCSUse) {
-		this.aCSUse = aCSUse;
+	public void setAcsUse(AcsUse acsUse) {
+		this.acsUse = acsUse;
 	}
 
 	@JsonIgnore
-	public void setACSUse(
-		UnsafeSupplier<ACSUse, Exception> aCSUseUnsafeSupplier) {
+	public void setAcsUse(
+		UnsafeSupplier<AcsUse, Exception> acsUseUnsafeSupplier) {
 
 		try {
-			aCSUse = aCSUseUnsafeSupplier.get();
+			acsUse = acsUseUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -202,7 +202,7 @@ public class GasConsumptionByUse {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected ACSUse aCSUse;
+	protected AcsUse acsUse;
 
 	@Schema(
 		description = "Heating is individual, not collective from the building"
@@ -505,26 +505,26 @@ public class GasConsumptionByUse {
 
 		sb.append("{");
 
-		if (aCSIndividual != null) {
+		if (acsIndividual != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"aCSIndividual\": ");
+			sb.append("\"acsIndividual\": ");
 
-			sb.append(aCSIndividual);
+			sb.append(acsIndividual);
 		}
 
-		if (aCSUse != null) {
+		if (acsUse != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"aCSUse\": ");
+			sb.append("\"acsUse\": ");
 
 			sb.append("\"");
 
-			sb.append(aCSUse);
+			sb.append(acsUse);
 
 			sb.append("\"");
 		}

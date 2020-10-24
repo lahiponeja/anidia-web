@@ -59,7 +59,7 @@ public abstract class BaseGasConsumptionComparisonResourceImpl
 	/**
 	 * Invoke this method with the command line:
 	 *
-	 * curl -X 'POST' 'http://localhost:8080/o/gas-comparator/v1.0/savings-by-use' -d $'{"aCSIndividual": ___, "aCSUse": ___, "heatingIndividual": ___, "heatingUse": ___, "kitchenUse": ___, "lastFloor": ___, "numberOfPeople": ___, "province": ___, "singleFamilyHouse": ___, "surfaceHouse": ___, "weeklyKitchenUse": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
+	 * curl -X 'POST' 'http://localhost:8080/o/gas-comparator/v1.0/savings-by-use' -d $'{"acsIndividual": ___, "acsUse": ___, "heatingIndividual": ___, "heatingUse": ___, "kitchenUse": ___, "lastFloor": ___, "numberOfPeople": ___, "province": ___, "singleFamilyHouse": ___, "surfaceHouse": ___, "weeklyKitchenUse": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
 	 */
 	@Override
 	@Consumes("application/xml")

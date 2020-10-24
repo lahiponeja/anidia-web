@@ -3,6 +3,7 @@ package com.liferay.gasComparator.internal.resource.v1_0;
 import com.liferay.gasComparator.resource.v1_0.GasConsumptionComparisonResource;
 import com.liferay.gasComparator.dto.v1_0.GasConsumptionComparison;
 import com.liferay.gasComparator.dto.v1_0.GasCalculatedConsumption;
+import com.liferay.gasComparator.dto.v1_0.GasConsumptionByUse;
 import com.liferay.gasComparator.internal.services.GasComparator;
 
 import org.osgi.service.component.annotations.Component;
@@ -26,4 +27,11 @@ public class GasConsumptionComparisonResourceImpl
 			GasComparator gasComparator = new GasComparator();
 			return gasComparator.compareByDirectConsumption(gasCalculatedConsumption);
 	}
+
+	public GasConsumptionComparison postSavingsByUse(
+		GasConsumptionByUse gasConsumptionByUse)
+	throws Exception {
+		GasComparator gasComparator = new GasComparator();
+		return gasComparator.compareByUse(gasConsumptionByUse);
+}
 }

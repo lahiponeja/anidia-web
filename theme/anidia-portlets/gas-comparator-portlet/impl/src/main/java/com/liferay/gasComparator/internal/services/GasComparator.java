@@ -2,6 +2,7 @@ package com.liferay.gasComparator.internal.services;
 
 import com.liferay.gasComparator.dto.v1_0.GasConsumptionComparison;
 import com.liferay.gasComparator.dto.v1_0.GasCalculatedConsumption;
+import com.liferay.gasComparator.dto.v1_0.GasConsumptionByUse;
 
 import com.liferay.gasComparator.internal.exception.PortletException;
 
@@ -27,7 +28,6 @@ public class GasComparator {
   public GasConsumptionComparison compareByDirectConsumption(GasCalculatedConsumption gasCalculatedConsumption) throws PortletException {
 
     JSONObject jsonRequest = new JSONObject();
-    GasConsumptionComparison gasConsumptionComparison = new GasConsumptionComparison();
 
     try {
 
@@ -65,20 +65,77 @@ public class GasComparator {
     }
 
     try {
-      JSONObject jsonResponse =  new JSONObject(response.body());
-      JSONObject jsonBudget = jsonResponse.getJSONObject("data").getJSONArray("items").getJSONObject(0);
-
-      gasConsumptionComparison.setConsumptionRequired(jsonBudget.getString("HouseConsumptionRequired"));
-      gasConsumptionComparison.setCurrentCost(jsonBudget.getString("CurrentEnergyCost"));
-      gasConsumptionComparison.setFutureCost(jsonBudget.getString("GNCost"));
-      gasConsumptionComparison.setSavings(jsonBudget.getString("GNSaving"));
+      return this.mapJsonResponseToComparison(new JSONObject(response.body()));
     } catch (JSONException e) {
       e.printStackTrace();
       throw new PortletException(3, "Error in the response");
     }
 
-    return gasConsumptionComparison;
+  }
 
+  public GasConsumptionComparison compareByUse(GasConsumptionByUse gasConsumptionByUse) throws PortletException {
+
+    JSONObject jsonRequest = new JSONObject();
+
+    try {
+
+      jsonRequest.put("Province", gasConsumptionByUse.getProvince());
+      jsonRequest.put("ACSIndividual", gasConsumptionByUse.getAcsIndividual() ? "Si" : "No");
+      jsonRequest.put("ACSUse", gasConsumptionByUse.getAcsUse());
+      jsonRequest.put("NumberOfPeople", gasConsumptionByUse.getNumberOfPeople());
+      jsonRequest.put("HeatingIndividual", gasConsumptionByUse.getHeatingIndividual() ? "Si" : "No");
+      jsonRequest.put("HeatingUse", gasConsumptionByUse.getHeatingUse());
+      jsonRequest.put("SingleFamilyHouse", gasConsumptionByUse.getSingleFamilyHouse() ? "Si" : "No");
+      jsonRequest.put("LastFloor", gasConsumptionByUse.getLastFloor() ? "Si" : "No");
+      jsonRequest.put("SurfaceHouse", gasConsumptionByUse.getSurfaceHouse());
+      jsonRequest.put("KitchenUse", gasConsumptionByUse.getKitchenUse());
+      jsonRequest.put("WeeklyKitchenUse", gasConsumptionByUse.getWeeklyKitchenUse());
+
+    } catch (JSONException e) {
+      e.printStackTrace();
+      throw new PortletException(1, "Error creating request");
+    }
+
+    HttpClient client = HttpClient.newHttpClient();
+    HttpRequest request = HttpRequest.newBuilder().
+      uri(URI.create(GAS_COMPARATOR_USE_REQUEST_URL)).
+      header("x-auth-token", SOLUSOFT_SECRET).
+      header("Content-Type", "application/json").
+      POST(HttpRequest.BodyPublishers.ofString(jsonRequest.toString())).
+      build();
+
+    System.out.println("Solicitando comaprativa a " + GAS_COMPARATOR_USE_REQUEST_URL);
+    System.out.println(">    Detalle de comparativa " + jsonRequest.toString());
+
+    HttpResponse<String> response;
+    try {
+      response = client.send(request, HttpResponse.BodyHandlers.ofString());
+      System.out.println(">    Respuesta " + response.body());
+    } catch (IOException | InterruptedException e) {
+      e.printStackTrace();
+      throw new PortletException(2, "Error sending request");
+    }
+
+    try {
+      return this.mapJsonResponseToComparison(new JSONObject(response.body()));
+    } catch (JSONException e) {
+      e.printStackTrace();
+      throw new PortletException(3, "Error in the response");
+    }
+
+  }
+
+  private GasConsumptionComparison mapJsonResponseToComparison(JSONObject jsonResponse) throws JSONException{
+
+    GasConsumptionComparison gasConsumptionComparison = new GasConsumptionComparison();
+    JSONObject jsonBudget = jsonResponse.getJSONObject("data").getJSONArray("items").getJSONObject(0);
+
+    gasConsumptionComparison.setConsumptionRequired(jsonBudget.getString("HouseConsumptionRequired"));
+    gasConsumptionComparison.setCurrentCost(jsonBudget.getString("CurrentEnergyCost"));
+    gasConsumptionComparison.setFutureCost(jsonBudget.getString("GNCost"));
+    gasConsumptionComparison.setSavings(jsonBudget.getString("GNSaving"));
+
+    return gasConsumptionComparison;
   }
 
 }

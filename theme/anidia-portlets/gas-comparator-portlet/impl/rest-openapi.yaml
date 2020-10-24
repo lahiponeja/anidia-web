@@ -21,10 +21,10 @@ components:
         province:
           description: Province of the user
           type: string
-        aCSIndividual:
+        acsIndividual:
           description: Water heating is individual, not collective from the building
           type: boolean
-        aCSUse:
+        acsUse:
           description: Kind of energy used for water heating
           type: string
           enum: [Butano, GLP, GOC, Electricidad]
