@@ -1,8 +1,8 @@
-import xmlToJson from './xmlToJson'
+import xmlToJson from './xmlToJson';
 
 export default function xmlToJsonImp(res) {
-  const XmlString = res.data
+  const XmlString = res;
   const XmlNode = new DOMParser().parseFromString(XmlString, 'text/xml');
   const json = xmlToJson(XmlNode);
-  return json.Page.items.items;
+  return json;
 }

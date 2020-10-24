@@ -7,8 +7,8 @@ import xmlToJsonImp from '../../helpers/xmlToJsonImp'
 import objToXml from '../../helpers/objToXml'
 
 const state = reactive({
-  postalCode: "",
-  houseType: "",
+  postalCode: "05500", // JUST FOR DEBBUGGING
+  houseType: "Unifamiliar", // JUST FOR DEBBUGGING
   houseSteps: [
     {
       name: "cobertura",
@@ -47,7 +47,7 @@ const state = reactive({
     },
   ],
   // currentStep: "cobertura",
-  currentStep: "vivienda",
+  // currentStep: "vivienda",
   autocompData: {
     postalCodes: [],
     municipalities: [],
@@ -56,6 +56,7 @@ const state = reactive({
     properties: [],
   },
   coverageError: "",
+  gasBudget: {}
 })
 
 const setPostalCode = function(payload) {
@@ -69,7 +70,9 @@ const setHouseType = function(payload) {
 
 const getPostalCodes = function () {
   coverageService.getPostalCodes().then((res) => {
-    state.autocompData.postalCodes = xmlToJsonImp(res);
+    const resJson = xmlToJsonImp(res.data);
+    const { items } = resJson.Page.items
+    state.autocompData.postalCodes = items
   }).catch((err) => {
     console.error(err);
   })
@@ -77,7 +80,9 @@ const getPostalCodes = function () {
 
 const getMunicipalities = function(pc) {
   coverageService.getMunicipalities(pc).then((res) => {
-    state.autocompData.municipalities = [xmlToJsonImp(res)];
+    const resJson = xmlToJsonImp(res.data);
+    const { items } = resJson.Page.items
+    state.autocompData.municipalities = [items];
   }).catch((err) => {
     console.error(err);
   })
@@ -85,7 +90,9 @@ const getMunicipalities = function(pc) {
 
 const getAddresses = function(municipalityId, postalCode) {
   coverageService.getAddresses(municipalityId, postalCode).then((res) => {
-    const result = xmlToJsonImp(res)
+    const resJson = xmlToJsonImp(res.data);
+    const { items } = resJson.Page.items
+    const result = items
     if(result.length) {
       state.autocompData.addresses = result
     } else {
@@ -98,7 +105,9 @@ const getAddresses = function(municipalityId, postalCode) {
 
 const getEstates = function(municipalityId, postalCode, addressKind, addressName) {
   coverageService.getEstates(municipalityId, postalCode, addressKind, addressName).then((res) => {
-    const result = xmlToJsonImp(res)
+    const resJson = xmlToJsonImp(res.data);
+    const { items } = resJson.Page.items
+    const result = items
     state.autocompData.estates = result
   }).catch((err) => {
     console.error(err);
@@ -107,7 +116,9 @@ const getEstates = function(municipalityId, postalCode, addressKind, addressName
 
 const getProperties = function(gateId) {
   coverageService.getProperties(gateId).then((res) => {
-    const result = xmlToJsonImp(res)
+    const resJson = xmlToJsonImp(res.data);
+    const { items } = resJson.Page.items
+    const result = items
     state.autocompData.properties = [result]
     
   }).catch((err) => {
@@ -141,7 +152,10 @@ const submitHouseData = function(gasBudgetRequest) {
   const xml = objToXml(dataObj, options)
 
   houseFormService.postHouseForm(xml).then((res)=> {
-    console.log("SERVICIO houseFormService 🌮: ", res)
+    const jsonData = xmlToJsonImp(res.data);
+    Object.assign(state.gasBudget, jsonData.GasBudget);
+    console.log("state.gasBudget", state.gasBudget);
+    changeStep("presupuesto");
   })
   .catch((err)=>{
     console.error(err)
