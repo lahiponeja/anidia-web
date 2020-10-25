@@ -1,4 +1,4 @@
-import { http } from './http/index'
+import { http } from './index'
 
 const coverageService = {
   /**

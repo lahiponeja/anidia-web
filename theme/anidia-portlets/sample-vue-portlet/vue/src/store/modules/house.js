@@ -1,5 +1,3 @@
-import { http } from '../../services/http/index'
-// import { reactive, readonly } from 'vue'
 import { reactive, shallowReadonly } from '@vue/composition-api'
 import coverageService from '../../services/coverageServices'
 import houseFormService from '../../services/houseFormService'
@@ -7,8 +5,33 @@ import xmlToJsonImp from '../../helpers/xmlToJsonImp'
 import objToXml from '../../helpers/objToXml'
 
 const state = reactive({
-  postalCode: "05500", // JUST FOR DEBBUGGING
   houseType: "Unifamiliar", // JUST FOR DEBBUGGING
+  postalCode: "05500", // JUST FOR DEBBUGGING
+  coverageData: {
+    postalCode: {
+      postalCode: "",
+      municipalityName: "",
+      municipalityId: "",
+      provinceId: ""
+    },
+    estate: {
+      addressKind: "",
+      addressName: "",
+      number: "",
+      annex: "",
+      gateId: "",
+    },
+    property: {
+      address: "",
+      propertyId: "",
+      block: "",
+      ladder: "",
+      floor: "",
+      door: "",
+      status: "",
+      contractStatus: ""
+    }
+  },
   houseSteps: [
     {
       name: "cobertura",
@@ -46,8 +69,6 @@ const state = reactive({
       active: false
     },
   ],
-  // currentStep: "cobertura",
-  // currentStep: "vivienda",
   autocompData: {
     postalCodes: [],
     municipalities: [],
@@ -56,8 +77,92 @@ const state = reactive({
     properties: [],
   },
   coverageError: "",
+  houseFormData: {},
   gasBudget: {}
 })
+
+const setCoverageData = function(key, payloadObj) {
+  Object.assign(state.coverageData[key], payloadObj)
+}
+
+const submitUserContactInfo = function (budgetReadyForm) {
+  const { 
+    name,
+    lastname,
+    phone,
+    email,
+    privacyPolicy,
+    offersAndServices } = budgetReadyForm;
+
+  const requestBody = {
+    "personalData": {
+      "firstName": name,
+      "lastName": lastname,
+      "email": email,
+      "phone": phone,
+      "prodInterest": "gas",
+      "acceptNotCom": offersAndServices,
+      "postalCode": state.coverageData.postalCode,
+      "estate": state.coverageData.estate,
+      "property": state.coverageData.property
+    },
+    "calculatorGas": {
+      "input": {
+        "zipCode": "",
+        "houseType": state.houseType,
+        "propertyMeters": state.houseFormData.propertyMeters,
+        "staysNumber": state.houseFormData.staysNumber,
+        "bathroomNumber": state.houseFormData.bathroomNumber,
+        "floorNumber": state.houseFormData.floorNumber,
+        "gasNaturalUse": state.houseFormData.gasNaturalUse,
+        "acsUse": state.houseFormData.acsUse,
+        "kitchenUse": state.houseFormData.kitchenUse,
+        "heatingUse": state.houseFormData.heatingUse,
+        "personsWater": state.houseFormData.personsWater,
+        "boilerLocation": state.houseFormData.boilerLocation,
+        "extras": {
+          "metersBoilerToWindow": state.houseFormData.metersBoilerToWindow,
+          "metersWaterIntake": state.houseFormData.metersWaterIntake,
+          "hasVentilationGrill": state.houseFormData.hasVentilationGrill,
+          "controllHeatingFloor": state.houseFormData.controllHeatingFloor,
+          "connectDeviceToKitchen": state.houseFormData.connectDeviceToKitchen,
+          "convertDeviceKitchen": state.houseFormData.convertDeviceKitchen,
+          "radiatorsBathroom": state.houseFormData.radiatorsBathroom
+        }
+      },
+      "output": {
+        "proposedPack": state.gasBudget.proposedPack,
+        "equipment": state.gasBudget.equipment,
+        "baseBadget": state.gasBudget.baseBudget,
+        "bonus": state.gasBudget.bonus,
+        "totalBudget": state.gasBudget.totalBudget,
+        "iva21": state.gasBudget.vat,
+        "totalPVP": state.gasBudget.totalPrice,
+        "extras": {
+          "MetersBoilerToWindow": state.houseFormData.metersBoilerToWindow,
+          "MetersWaterIntake": state.houseFormData.metersWaterIntake,
+          "HasVentilationGrill": state.houseFormData.hasVentilationGrill,
+          "ControllHeatingFloor": state.houseFormData.controllHeatingFloor,
+          "ConvertDeviceKitchen": state.houseFormData.convertDeviceKitchen,
+          "RadiatorsBathroom": state.houseFormData.radiatorsBathroom,
+          "ExtraTotalPrice": state.gasBudget.extraTotalPrice
+        }
+      }
+    }
+  }
+
+  const options = {
+    rootName: 'Lead', // defaults to 'root'
+    attributes: false
+  }
+
+  const xml = objToXml(requestBody, options)
+
+  console.log("🔥 submitUserContactInfo 🔥")
+  console.log(xml)
+
+  console.log("requestBody", requestBody);
+}
 
 const setPostalCode = function(payload) {
   state.postalCode = payload
@@ -119,7 +224,7 @@ const getProperties = function(gateId) {
     const resJson = xmlToJsonImp(res.data);
     const { items } = resJson.Page.items
     const result = items
-    state.autocompData.properties = [result]
+    state.autocompData.properties = result.length ? result : [result]
     
   }).catch((err) => {
     console.error(err);
@@ -130,11 +235,14 @@ const changeStep = function (step) {
   const stepToChange = state.houseSteps.find((homeStep) => homeStep.name === step)
   state.houseSteps.forEach((homeStep) => homeStep.active = false)
   stepToChange.active = true
-  state.currentStep = step;
 }
 
 const setCoverageError = function(msg) {
   state.coverageError = msg
+}
+
+const setHouseFormData = function(payload) {
+  state.houseFormData = payload
 }
 
 const submitHouseData = function(gasBudgetRequest) {
@@ -143,13 +251,13 @@ const submitHouseData = function(gasBudgetRequest) {
     rootName: 'GasBudgetRequest', // defaults to 'root'
     attributes: false
   }
-
   const dataObj = Object.assign(gasBudgetRequest, {
     postalCode: state.postalCode,
     houseType: state.houseType,
   })
-
   const xml = objToXml(dataObj, options)
+  
+  setHouseFormData(dataObj)
 
   houseFormService.postHouseForm(xml).then((res)=> {
     const jsonData = xmlToJsonImp(res.data);
@@ -162,18 +270,6 @@ const submitHouseData = function(gasBudgetRequest) {
   })
 
   console.log(xml)
-}
-
-const submitUserContactInfo = function (budgetReadyForm) {
-  const { 
-    name,
-    lastname,
-    phone,
-    email,
-    privacyPolicy,
-    offersAndServices } = budgetReadyForm;
-
-    console.log("budgetReadyForm", budgetReadyForm);
 }
 
 export default { 
@@ -189,4 +285,5 @@ export default {
   getProperties,
   setCoverageError,
   submitHouseData,
+  setCoverageData,
 }

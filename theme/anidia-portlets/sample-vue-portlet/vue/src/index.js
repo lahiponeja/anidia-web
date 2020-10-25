@@ -1,19 +1,13 @@
-// import { createApp } from 'vue'
 import './installCompositionApi'
-// import Autocomplete from '@trevoreyre/autocomplete-vue'
-// import '@trevoreyre/autocomplete-vue/dist/style.css'
-
 // State Modules
 import global from './store/modules/global'
 import house from './store/modules/house'
-
 // Views
 import funnelView from './views/funnelView'
 import houseView from './views/houseView'
 import businessView from './views/businessView'
 
 import Vue from 'vue/dist/vue.common';
-
 
 /**
  * This is the main entry point of the portlet.
@@ -46,29 +40,7 @@ export default function main({portletNamespace, contextPath, portletElementId, c
 			<template v-else-if="(global.state.currentStep === 'Negocio')">
 				<business-view />
 			</template>
-            
-			<!-- 
-			<div>
-				<span class="tag">${Liferay.Language.get('portlet-namespace')}:</span> 
-				<span class="value">{{portletNamespace}}</span>
-			</div>
-			<div>
-				<span class="tag">${Liferay.Language.get('context-path')}:</span>
-				<span class="value">{{contextPath}}</span>
-			</div>
-			<div>
-				<span class="tag">${Liferay.Language.get('portlet-element-id')}:</span>
-				<span class="value">{{portletElementId}}</span>
-			</div>
-			
-			<div>
-				<span class="tag">${Liferay.Language.get('configuration')}:</span>
-				<span class="value pre">{{JSON.stringify(configuration, null, 2)}}</span>
-			</div>
-			--> 
 		</div>`;
-
-	// console.log(vuetify)
 
 	new Vue({
 		el: `#${portletElementId}`,

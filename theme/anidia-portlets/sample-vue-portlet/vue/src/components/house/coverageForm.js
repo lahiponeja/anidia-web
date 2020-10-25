@@ -78,6 +78,8 @@ const coverageForm = {
     onSubmitPostalCode(result) {
       const { postalCode } = result
       this.formData.postalCode = postalCode
+      // Save object in the store
+      this.house.setCoverageData("postalCode", { postalCode })
       // Get municipalities
       this.house.getMunicipalities(postalCode)
     },
@@ -89,6 +91,9 @@ const coverageForm = {
     onSubmitMunicipalities(result) {
       const { municipalityId, municipalityName, provinceId } = result
       this.formData.provMunId =  provinceId + municipalityId
+
+      // Save object in the store
+      this.house.setCoverageData("postalCode", { municipalityId, municipalityName, provinceId })
 
       this.formData.municipalityName = municipalityName
       this.formData.municipalityId = municipalityId
@@ -102,6 +107,12 @@ const coverageForm = {
     *************************************/
     onSubmitAddresses(result) {
       const { kind, name } = result
+
+      // Save object in the store
+      this.house.setCoverageData("estate", { 
+        addressKind: kind,
+        addressName: name
+      })
 
       this.formData.addressKind = kind
       this.formData.addressName = name
@@ -121,6 +132,10 @@ const coverageForm = {
 
     onSubmitEstates(result) {
       const { gateId, number } = result
+
+      // Save object in the store
+      this.house.setCoverageData("estate", { gateId, number })
+
       this.formData.number = number
       this.house.getProperties(gateId)
     },
@@ -129,8 +144,28 @@ const coverageForm = {
      * PROPERTIES
     *************************************/
     onSubmitProperties(result) {
-      const { address, status } = result
-      console.log("onSubmitProperties: ", address, status)
+      const { 
+        address, 
+        propertyId, 
+        status, 
+        contractStatus, 
+        floor,
+        block,
+        ladder,
+        door} = result
+
+      // Save object in the store
+      this.house.setCoverageData("property", { 
+        address: address || "", 
+        propertyId: propertyId || "", 
+        status: status || "", 
+        contractStatus: contractStatus || "", 
+        floor: floor || "",
+        block: block || "",
+        ladder: ladder || "",
+        door: door || ""
+      })
+
       this.formData.houseType = address
       this.formData.status = status
     },
@@ -164,16 +199,22 @@ const coverageForm = {
   template: /*html*/
   `<div>
 
-    <h3>isValidStatusCode: {{ isValidStatusCode }}</h3>
-    
 
+    <div>{{ house.state.coverageData.postalCode }}</div>
+    <div>{{ house.state.coverageData.estate }}</div>
+    <div>{{ house.state.coverageData.property }}</div>
+
+
+    <br /><br /><br />
+
+    <h3>isValidStatusCode: {{ isValidStatusCode }}</h3>
     <h3>Selected field {{ selected.fieldKey }}</h3>
 
     <h5>Municipalities {{ house.state.autocompData.municipalities }}</h5>
     <h5>Addresses {{ house.state.autocompData.addresses }}</h5>
     <h5>Estates {{ house.state.autocompData.estates }}</h5>
     <h5>Properties {{ house.state.autocompData.properties }}</h5>
-<!--
+<!-- 
     <ul>
       <li>Postal Code: {{ formData.postalCode }}</li>
       <li>Municipio: {{ formData.municipalityName }}</li>

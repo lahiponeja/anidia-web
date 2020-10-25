@@ -1,5 +1,4 @@
-import { http } from './http/index'
-import qs from 'qs'
+import { http } from './index'
 
 const houseFormService = {
   /**
