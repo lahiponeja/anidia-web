@@ -25,7 +25,9 @@ const funnelView = {
   },
   template: /*html*/
     `<div>
-    <div v-if="!postalCodesLoaded" style="z-index: 20; position: absolute; left: 0; top: 0; background-color: rgba(255,255,255, 0.6); width: 100%; height: 100%;"></div>
+    <div v-if="!postalCodesLoaded" class="an-funnel__white-overlay">
+      <p class="an-h3">Cargando...</p>
+    </div>
     
     <div class="an-funnel bg-white pt-xxxl pb-xxxl">
       <div class="an-funnel__titles an-wrapper--sml">

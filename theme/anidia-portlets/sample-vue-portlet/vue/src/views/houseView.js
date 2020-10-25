@@ -59,12 +59,14 @@ const homeView = {
 
 
       <!-- START TESTING -->
+      <!--
       <div class="mt-xxl mb-xxl">
         <div @click="house.changeStep('cobertura')">Cobertura</div>
         <div @click="house.changeStep('vivienda')">Vivienda</div>
         <div @click="house.changeStep('presupuesto')">Presupuesto</div>
         <div @click="house.changeStep('presupuesto-realizado')">Presupuesto Realizado</div>
       </div>
+      -->
       <!-- END TESTING -->
 
     </div>

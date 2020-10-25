@@ -199,7 +199,7 @@ const coverageForm = {
   template: /*html*/
   `<div>
 
-
+<!-- 
     <div>{{ house.state.coverageData.postalCode }}</div>
     <div>{{ house.state.coverageData.estate }}</div>
     <div>{{ house.state.coverageData.property }}</div>
@@ -214,7 +214,7 @@ const coverageForm = {
     <h5>Addresses {{ house.state.autocompData.addresses }}</h5>
     <h5>Estates {{ house.state.autocompData.estates }}</h5>
     <h5>Properties {{ house.state.autocompData.properties }}</h5>
-<!-- 
+
     <ul>
       <li>Postal Code: {{ formData.postalCode }}</li>
       <li>Municipio: {{ formData.municipalityName }}</li>
@@ -468,8 +468,6 @@ const coverageForm = {
     <template v-else>
       <coverage-error :msg="house.state.coverageError" />
     </template>
-    <div @click="setError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.')">Trigger First error</div>
-    <div @click="setError('Hemos detectado que ya tienes gas natural instalado y mantenimiento contratado.')">Trigger Second error</div>
   </div>`
   }
 

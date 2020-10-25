@@ -26,10 +26,10 @@ export default function main({portletNamespace, contextPath, portletElementId, c
     node.innerHTML = /*html*/
 		`<div>
 
-			<ul>
+			<!-- <ul>
 				<li> House postalCode {{ house.state.postalCode }}</li>
 				<li> House houseType {{ house.state.houseType }}</li>
-			</ul>
+			</ul> -->
 
 			<template v-if="(global.state.currentStep === 'funnel')">
 				<funnel-view />
