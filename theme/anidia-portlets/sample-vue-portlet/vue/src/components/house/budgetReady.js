@@ -1,5 +1,5 @@
 const budgetReady = {
-  inject: ["global", "house"],
+  inject: ["house"],
   data() {
     return {
       budgetReadyForm: {

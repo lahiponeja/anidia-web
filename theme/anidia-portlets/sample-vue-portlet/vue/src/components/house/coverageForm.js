@@ -35,13 +35,13 @@ const coverageForm = {
       },
     }
   },
-  inject: ["global", "house"],
+  inject: ["house"],
   methods: {
     submitRequest() {
       if(this.isValidStatusCode) {
         console.log("submited")
         this.house.setPostalCode(this.formData.postalCode);
-        this.house.changeStep('vivienda');
+        this.house.changeHouseStep('vivienda');
       } else {
         this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.')
       }

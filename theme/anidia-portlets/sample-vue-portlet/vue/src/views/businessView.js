@@ -4,7 +4,7 @@ const businessView = {
   components: {
     businessContactForm,
   },
-  inject: ["global"],
+  inject: ["global"], // TODO: refactor once I tackle this business form.
   template: /*html*/`
     <div class="an-wrapper">
       <div class="an-funnel__titles mb-xl">

@@ -1,5 +1,5 @@
 const houseForm = {
-  inject: ["global", "house"],
+  inject: ["house"],
   data() {
     return {
       gasBudgetRequest: {
@@ -22,7 +22,7 @@ const houseForm = {
         radiatorsBathroom: "",
       },
 
-      submitFormError: false,
+      submitFormError: false, // TODO
     }
   },
   methods: {
@@ -383,6 +383,7 @@ const houseForm = {
             <span>Continuar</span>
           </button>
 
+          <!-- TODO -->
           <p v-if="submitFormError" class="color-danger">Ups, parece que hubo un problema. Por favor intente nuevamente.</p>
           
         </form>

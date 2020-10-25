@@ -22,6 +22,13 @@ const state = reactive({
   currentStep: "funnel",
 })
 
+/*
+Possible steps:
+  'funnel': <funnel-view />
+  'Unifamiliar': <house-view />
+  'Bloque de pisos': <house-view />
+  'Negocio': <business-view />
+*/
 const changeStep = function (step) {
   state.currentStep = step
 }

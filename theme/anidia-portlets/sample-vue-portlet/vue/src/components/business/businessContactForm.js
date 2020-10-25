@@ -1,5 +1,5 @@
 const businessContactForm = {
-  inject: ["global", "house"],
+  inject: ["global", "house"], // TODO: refactor once I tackle this business form.
   methods: {
     submitRequest() {
       // TODO

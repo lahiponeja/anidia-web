@@ -5,33 +5,6 @@ import xmlToJsonImp from '../../helpers/xmlToJsonImp'
 import objToXml from '../../helpers/objToXml'
 
 const state = reactive({
-  houseType: "Unifamiliar", // JUST FOR DEBBUGGING
-  postalCode: "05500", // JUST FOR DEBBUGGING
-  coverageData: {
-    postalCode: {
-      postalCode: "",
-      municipalityName: "",
-      municipalityId: "",
-      provinceId: ""
-    },
-    estate: {
-      addressKind: "",
-      addressName: "",
-      number: "",
-      annex: "",
-      gateId: "",
-    },
-    property: {
-      address: "",
-      propertyId: "",
-      block: "",
-      ladder: "",
-      floor: "",
-      door: "",
-      status: "",
-      contractStatus: ""
-    }
-  },
   houseSteps: [
     {
       name: "cobertura",
@@ -69,6 +42,31 @@ const state = reactive({
       active: false
     },
   ],
+  coverageData: {
+    postalCode: {
+      postalCode: "",
+      municipalityName: "",
+      municipalityId: "",
+      provinceId: ""
+    },
+    estate: {
+      addressKind: "",
+      addressName: "",
+      number: "",
+      annex: "",
+      gateId: "",
+    },
+    property: {
+      address: "",
+      propertyId: "",
+      block: "",
+      ladder: "",
+      floor: "",
+      door: "",
+      status: "",
+      contractStatus: ""
+    }
+  },
   autocompData: {
     postalCodes: [],
     municipalities: [],
@@ -76,9 +74,11 @@ const state = reactive({
     estates: [],
     properties: [],
   },
-  coverageError: "",
   houseFormData: {},
-  gasBudget: {}
+  gasBudget: {},
+  coverageError: "",
+  houseType: "",
+  postalCode: "",
 })
 
 const setCoverageData = function(key, payloadObj) {
@@ -231,7 +231,7 @@ const getProperties = function(gateId) {
   })
 }
 
-const changeStep = function (step) {
+const changeHouseStep = function (step) {
   const stepToChange = state.houseSteps.find((homeStep) => homeStep.name === step)
   state.houseSteps.forEach((homeStep) => homeStep.active = false)
   stepToChange.active = true
@@ -263,7 +263,7 @@ const submitHouseData = function(gasBudgetRequest) {
     const jsonData = xmlToJsonImp(res.data);
     Object.assign(state.gasBudget, jsonData.GasBudget);
     console.log("state.gasBudget", state.gasBudget);
-    changeStep("presupuesto");
+    changeHouseStep("presupuesto");
   })
   .catch((err)=>{
     console.error(err)
@@ -276,7 +276,7 @@ export default {
   state: shallowReadonly(state), 
   setPostalCode,
   setHouseType,
-  changeStep,
+  changeHouseStep,
   submitUserContactInfo,
   getPostalCodes,
   getMunicipalities,

@@ -1,5 +1,5 @@
 const budgetCard = {
-  inject: ["global", "house"],
+  inject: ["house"],
   data() {
     return {}
   },
@@ -61,7 +61,7 @@ const budgetCard = {
           Ahorro medio de 700€/año
         </li> -->
       </ul>
-      <button @click="house.changeStep('presupuesto-realizado')" class="an-btn an-btn--flatter an-btn--white">
+      <button @click="house.changeHouseStep('presupuesto-realizado')" class="an-btn an-btn--flatter an-btn--white">
         <span>Recibir presupuesto detallado</span>
       </button>
     </div>

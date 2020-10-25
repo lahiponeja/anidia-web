@@ -1,4 +1,4 @@
-import './installCompositionApi'
+import './plugins/compositionApi'
 // State Modules
 import global from './store/modules/global'
 import house from './store/modules/house'
