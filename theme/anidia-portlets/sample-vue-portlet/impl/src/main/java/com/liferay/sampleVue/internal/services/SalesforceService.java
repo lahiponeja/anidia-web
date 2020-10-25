@@ -2,9 +2,7 @@ package com.liferay.sampleVue.internal.services;
 
 import com.liferay.sampleVue.dto.v1_0.*;
 import com.liferay.sampleVue.internal.dto.*;
-import com.liferay.sampleVue.internal.dto.CalculatorGasRequest;
 import com.liferay.sampleVue.internal.exception.*;
-import java.net.http.*;
 import java.util.*;
 import org.apache.commons.lang3.*;
 import org.springframework.http.*;
@@ -23,37 +21,64 @@ public class SalesforceService {
 	static String SALESFORCE_CLIENT_ID = System.getenv().get("SALESFORCE_CLIENT_ID");
 	static String SALESFORCE_USERNAME = System.getenv().get("SALESFORCE_USERNAME");
 
+	/**
+	 *
+	 * @param gateId
+	 * @return
+	 * @throws PortletException
+	 */
 	public List<Property> getProperties(String gateId) throws PortletException {
 
-		List<Property> properties = new ArrayList<>();
-
 		RestTemplate restTemplate = new RestTemplate();
-		String accessToken = getSalesforceToken();
+		List<Property> properties;
 
-		String propertiesEndPoint = getPropertiesUrl(gateId);
-		HttpEntity<?> httpEntity = new HttpEntity(getHeaderToken(accessToken));
+		try {
+			String accessToken = getSalesforceToken();
 
-		ResponseEntity<PropertiesResponse> responseEntity = restTemplate.exchange(propertiesEndPoint,
-			HttpMethod.GET, httpEntity, PropertiesResponse.class);
+			String propertiesEndPoint = getPropertiesUrl(gateId);
+			HttpEntity<?> httpEntity = new HttpEntity(getHeaderToken(accessToken));
 
-		properties = mapPropertiesResponseToPropertyList(
-			Objects.requireNonNull(responseEntity.getBody()));
+			ResponseEntity<PropertiesResponse> responseEntity = restTemplate.exchange(propertiesEndPoint,
+				HttpMethod.GET, httpEntity, PropertiesResponse.class);
+
+			properties = mapPropertiesResponseToPropertyList(
+				Objects.requireNonNull(responseEntity.getBody()));
+
+		} catch (HttpClientErrorException e) {
+			throw new PortletException(1, e.getMessage());
+		}
 
 		return properties;
 	}
 
+	/**
+	 *
+	 * @param municipalityId
+	 * @param postalCode
+	 * @param addressKind
+	 * @param addressName
+	 * @return
+	 * @throws PortletException
+	 */
 	public List<Estate> getEstates(String municipalityId, String postalCode, String addressKind,
 		String addressName) throws PortletException {
 
 		RestTemplate restTemplate = new RestTemplate();
 		List<Estate> estates;
 
-		String accessToken = getSalesforceToken();
+		try {
+			String accessToken = getSalesforceToken();
+			String estatesEndPoint = getEstatesUrl(municipalityId, postalCode, addressKind,
+				addressName);
+			HttpEntity<?> httpEntity = new HttpEntity<>(getHeaderToken(accessToken));
 
-		//TODO: Hay que incluir el campo numero??
-		EstatesResponse response = restTemplate.getForObject(getEstatesUrl(municipalityId,
-			postalCode, addressKind, addressName), EstatesResponse.class);
-		estates = mapEstatesResponseToEstateList(response);
+			ResponseEntity<EstatesResponse> responseEntity = restTemplate.exchange(estatesEndPoint,
+				HttpMethod.GET, httpEntity, EstatesResponse.class);
+			estates = mapEstatesResponseToEstateList(Objects.requireNonNull(responseEntity.getBody()));
+
+		} catch (HttpClientErrorException e) {
+			throw new PortletException(1, e.getMessage());
+		}
 
 		return estates;
 	}
@@ -71,15 +96,20 @@ public class SalesforceService {
 		RestTemplate restTemplate = new RestTemplate();
 		List<Address> addresses;
 
-		String accessToken = getSalesforceToken();
-		String addressesEndPoint = getAddressesUrl(municipalityId, postalCode);
-		HttpEntity<?> httpEntity = new HttpEntity(getHeaderToken(accessToken));
+		try {
+			String accessToken = getSalesforceToken();
+			String addressesEndPoint = getAddressesUrl(municipalityId, postalCode);
+			HttpEntity<?> httpEntity = new HttpEntity(getHeaderToken(accessToken));
 
-		ResponseEntity<AddressesResponse> responseEntity = restTemplate.exchange(addressesEndPoint,
-			HttpMethod.GET, httpEntity, AddressesResponse.class);
+			ResponseEntity<AddressesResponse> responseEntity = restTemplate.exchange(addressesEndPoint,
+				HttpMethod.GET, httpEntity, AddressesResponse.class);
 
-		addresses = mapAddressesResponseToAddressList(
-			Objects.requireNonNull(responseEntity.getBody()));
+			addresses = mapAddressesResponseToAddressList(
+				Objects.requireNonNull(responseEntity.getBody()));
+
+		} catch (HttpClientErrorException e) {
+			throw new PortletException(1, e.getMessage());
+		}
 
 		return addresses;
 	}
@@ -335,12 +365,13 @@ public class SalesforceService {
 	 * @return
 	 * @throws PortletException
 	 */
-	private String getSalesforceToken() throws PortletException {
+	public String getSalesforceToken() throws PortletException {
 
 		RestTemplate restTemplate = new RestTemplate();
 
+		String tokenUrl = getTokenUrl();
 		AccessTokenResponse response = restTemplate.postForObject(
-			getTokenUrl(), null, AccessTokenResponse.class);
+			tokenUrl, null, AccessTokenResponse.class);
 
 		if (response != null && StringUtils.isNotEmpty(response.getAccessToken())) {
 			return response.getAccessToken();
@@ -381,7 +412,8 @@ public class SalesforceService {
 	private String getEstatesUrl(String municipalityId, String postalCode, String addressKind,
 		String addressName) {
 
-		return SALESFORCE_ESTATES_URL + "?municipio_ine=" + municipalityId + "&codigo_postal=" + postalCode + "&tipo_y_nombre_de_via=" + addressKind + "+" + addressName;
+		//Param numero must be empty
+		return SALESFORCE_ESTATES_URL + "?municipio_ine=" + municipalityId + "&codigo_postal=" + postalCode + "&tipo_y_nombre_de_via=" + addressKind + "+" + addressName + "&numero=";
 	}
 
 	/**
