@@ -4,6 +4,7 @@ import com.liferay.sampleVue.dto.v1_0.*;
 import com.liferay.sampleVue.internal.dto.*;
 import com.liferay.sampleVue.internal.exception.*;
 import java.util.*;
+import org.springframework.core.*;
 import org.springframework.http.*;
 import org.springframework.http.converter.*;
 import org.springframework.http.converter.json.*;
@@ -95,18 +96,18 @@ public class SalesforceService {
 		throws PortletException {
 
 		RestTemplate restTemplate = new RestTemplate();
-		List<Address> addresses;
+		List<Address> addresses = new ArrayList<>();
 
 		try {
 			String accessToken = getSalesforceToken();
 			String addressesEndPoint = getAddressesUrl(municipalityId, postalCode);
 			HttpEntity<?> httpEntity = new HttpEntity(getHeaderToken(accessToken));
 
-			ResponseEntity<AddressesResponse> responseEntity = restTemplate.exchange(addressesEndPoint,
-				HttpMethod.GET, httpEntity, AddressesResponse.class);
+			ResponseEntity<List<AddressResponse>> responseEntity = restTemplate.exchange(
+				addressesEndPoint, HttpMethod.GET, httpEntity,
+				new ParameterizedTypeReference<List<AddressResponse>>() {});
 
-			addresses = mapAddressesResponseToAddressList(
-				Objects.requireNonNull(responseEntity.getBody()));
+			addresses = mapAddressesResponseToAddressList(Objects.requireNonNull(responseEntity.getBody()));
 
 		} catch (HttpClientErrorException e) {
 			throw new PortletException(1, e.getMessage());
@@ -335,12 +336,12 @@ public class SalesforceService {
 	/**
 	 * Map AddressesResponse object to Address list object
 	 *
-	 * @param addressesResponse
+	 * @param addressResponses
 	 * @return
 	 */
-	private List<Address> mapAddressesResponseToAddressList(AddressesResponse addressesResponse) {
+	private List<Address> mapAddressesResponseToAddressList(List<AddressResponse> addressResponses) {
 		List<Address> addresses = new ArrayList<>();
-		for (AddressResponse addressResponse : addressesResponse.getAddressResponses()) {
+		for (AddressResponse addressResponse : addressResponses) {
 			addresses.add(mapAddressResponseToAddress(addressResponse));
 		}
 		return addresses;
