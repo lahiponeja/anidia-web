@@ -1,45 +1,44 @@
 
 package com.liferay.sampleVue.internal.dto;
 
-import com.fasterxml.jackson.annotation.*;
 import javax.annotation.*;
 
 @Generated("net.hexar.json2pojo")
 @SuppressWarnings("unused")
 public class InputRequest {
 
-    @JsonProperty("ACSUse")
+    //@JsonProperty("ACSUse")
     private String aCSUse;
-    @JsonProperty("BathroomNumber")
+    //@JsonProperty("BathroomNumber")
     private String bathroomNumber;
-    @JsonProperty("BoilerLocation")
+    //@JsonProperty("BoilerLocation")
     private String boilerLocation;
-    @JsonProperty("Extras")
+    //@JsonProperty("Extras")
     private ExtrasInput extras;
-    @JsonProperty("FloorNumber")
+    //@JsonProperty("FloorNumber")
     private String floorNumber;
-    @JsonProperty("GasNaturalUse")
+    //@JsonProperty("GasNaturalUse")
     private String gasNaturalUse;
-    @JsonProperty("HeatingUse")
+    //@JsonProperty("HeatingUse")
     private String heatingUse;
-    @JsonProperty("HouseType")
+    //@JsonProperty("HouseType")
     private String houseType;
-    @JsonProperty("KitchenUse")
+    //@JsonProperty("KitchenUse")
     private String kitchenUse;
-    @JsonProperty("PersonsWater")
+    //@JsonProperty("PersonsWater")
     private String personsWater;
-    @JsonProperty("PropertyMeters")
+    //@JsonProperty("PropertyMeters")
     private String propertyMeters;
-    @JsonProperty("StaysNumber")
+    //@JsonProperty("StaysNumber")
     private Long staysNumber;
-    @JsonProperty("ZipCode")
+    //@JsonProperty("ZipCode")
     private String zipCode;
 
-    public String getACSUse() {
+    public String getaCSUse() {
         return aCSUse;
     }
 
-    public void setACSUse(String aCSUse) {
+    public void setaCSUse(String aCSUse) {
         this.aCSUse = aCSUse;
     }
 
@@ -59,11 +58,11 @@ public class InputRequest {
         this.boilerLocation = boilerLocation;
     }
 
-    public ExtrasInput getExtrasInput() {
+    public ExtrasInput getExtras() {
         return extras;
     }
 
-    public void setExtrasInput(ExtrasInput extras) {
+    public void setExtras(ExtrasInput extras) {
         this.extras = extras;
     }
 
@@ -138,5 +137,4 @@ public class InputRequest {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
-
 }

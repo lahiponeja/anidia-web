@@ -1,14 +1,14 @@
 package com.liferay.sampleVue.internal.services;
 
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
 import com.liferay.sampleVue.dto.v1_0.*;
 import com.liferay.sampleVue.internal.dto.*;
-import com.liferay.sampleVue.internal.exception.*;
+import java.io.*;
+import java.net.*;
+import java.net.http.*;
 import java.util.*;
-import org.springframework.core.*;
-import org.springframework.http.*;
-import org.springframework.http.converter.*;
-import org.springframework.http.converter.json.*;
-import org.springframework.web.client.*;
+import org.json.*;
 
 
 public class SalesforceService {
@@ -23,118 +23,289 @@ public class SalesforceService {
 	static String SALESFORCE_CLIENT_ID = System.getenv().get("SALESFORCE_CLIENT_ID");
 	static String SALESFORCE_USERNAME = System.getenv().get("SALESFORCE_USERNAME");
 
-	/**
-	 *
-	 * @param gateId
-	 * @return
-	 * @throws PortletException
-	 */
-	public List<Property> getProperties(String gateId) throws PortletException {
+	public List<Property> getProperties(String gateId) {
+		List<Property> properties = new ArrayList<Property>();
+		String token = this.getSalesforceToken();
 
-		RestTemplate restTemplate = new RestTemplate();
-		List<Property> properties;
+		StringBuilder urlBuilder = new StringBuilder();
+		urlBuilder.append(SALESFORCE_PROPERTIES_URL);
+		urlBuilder.append("?");
+		urlBuilder.append("codigo_unico_portal=");
+		urlBuilder.append(gateId);
+
+		HttpClient client = HttpClient.newHttpClient();
+		HttpRequest request = HttpRequest.newBuilder().
+			uri(URI.create(urlBuilder.toString())).
+			header("Authorization", "Bearer " + token).
+			GET().
+			build();
+
+		HttpResponse<String> response = null;
+		JSONArray responseJson;
+
+		System.out.println("Requesting properties to " + urlBuilder.toString());
 
 		try {
-			String accessToken = getSalesforceToken();
-
-			String propertiesEndPoint = getPropertiesUrl(gateId);
-			HttpEntity<?> httpEntity = new HttpEntity(getHeaderToken(accessToken));
-
-			ResponseEntity<List<PropertyResponse>> responseEntity = restTemplate.exchange(propertiesEndPoint,
-				HttpMethod.GET, httpEntity, new ParameterizedTypeReference<List<PropertyResponse>>() {});
-
-			properties = mapPropertiesResponseToPropertyList(
-				Objects.requireNonNull(responseEntity.getBody()));
-
-		} catch (HttpClientErrorException e) {
-			throw new PortletException(1, e.getMessage());
+			response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			responseJson = new JSONArray(response.body());
+//			responseJson = new JSONArray("[{\"attributes\":{\"type\":\"Account\",\"url\":\"/services/data/v44.0/sobjects/Account/0011p00001hcUC8AAM\"},\"Direccion_completa__c\":\"CM HEREDEROS 7 , B, E, BJ4\",\"Codigo_unico_inmueble__c\":\"I21864951\",\"Tipo_finca__c\":\"SH\",\"CUPS__c\":\"ES123456789012345678\",\"Bloque__c\":\"B\",\"Escalera__c\":\"E\",\"Planta__c\":\"BJ\",\"Puerta__c\":\"4\",\"Estado__c\":\"01\",\"Canon_IRC__c\":6.35,\"Finca__c\":\"0011p00001hcRY7AAM\",\"Id\":\"0011p00001hcUC8AAM\"},{\"attributes\":{\"type\":\"Account\",\"url\":\"/services/data/v44.0/sobjects/Account/0011p00001hcUC9AAM\"},\"Direccion_completa__c\":\"CM HEREDEROS7\",\"Codigo_unico_inmueble__c\":\"I16621155\",\"Tipo_finca__c\":\"SH\",\"Estado__c\":\"01\",\"Finca__c\":\"0011p00001hcRY7AAM\",\"Id\":\"0011p00001hcUC9AAM\"}]");
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+			return properties;
+		} catch (JSONException e) {
+			if(response != null) {
+				System.out.println("Salesforce response: " + response.body());
+			}
+			e.printStackTrace();
+			return properties;
 		}
 
+		// The response format is [{\"attributes\":{\"type\":\"Account\",\"url\":\"/services/data/v44.0/sobjects/Account/0011p00001hcUC8AAM\"},\"Direccion_completa__c\":\"CM HEREDEROS 7 , B, E, BJ4\",\"Codigo_unico_inmueble__c\":\"I21864951\",\"Tipo_finca__c\":\"SH\",\"CUPS__c\":\"ES123456789012345678\",\"Bloque__c\":\"B\",\"Escalera__c\":\"E\",\"Planta__c\":\"BJ\",\"Puerta__c\":\"4\",\"Estado__c\":\"01\",\"Canon_IRC__c\":6.35,\"Finca__c\":\"0011p00001hcRY7AAM\",\"Id\":\"0011p00001hcUC8AAM\"},{\"attributes\":{\"type\":\"Account\",\"url\":\"/services/data/v44.0/sobjects/Account/0011p00001hcUC9AAM\"},\"Direccion_completa__c\":\"CM HEREDEROS7\",\"Codigo_unico_inmueble__c\":\"I16621155\",\"Tipo_finca__c\":\"SH\",\"Estado__c\":\"01\",\"Finca__c\":\"0011p00001hcRY7AAM\",\"Id\":\"0011p00001hcUC9AAM\"}]
+		for (int i = 0; i < responseJson.length(); i++) {
+			JSONObject propertyJson = null;
+			try {
+				propertyJson = responseJson.getJSONObject(i);
+				Property property = new Property();
+				property.setAddress(propertyJson.optString("Direccion_completa__c"));
+				property.setPropertyId(propertyJson.optString("Codigo_unico_inmueble__c"));
+				property.setBlock(propertyJson.optString("Bloque__c"));
+				property.setLadder(propertyJson.optString("Escalera__c"));
+				property.setFloor(propertyJson.optString("Planta__c"));
+				property.setDoor(propertyJson.optString("Puerta__c"));
+				property.setStatus(propertyJson.getString("Estado__c"));
+				property.setContractStatus(propertyJson.optString("SAP_Estado_contrato_SAP__c"));
+				properties.add(property);
+			} catch (JSONException e) {
+				System.out.println("Salesforce response: " + response.body());
+				if(propertyJson != null) {
+					System.out.println("Json Object with error: " + propertyJson.toString());
+				}
+				e.printStackTrace();
+			}
+		}
 		return properties;
 	}
 
-	/**
-	 *
-	 * @param municipalityId
-	 * @param postalCode
-	 * @param addressKind
-	 * @param addressName
-	 * @return
-	 * @throws PortletException
-	 */
-	public List<Estate> getEstates(String municipalityId, String postalCode, String addressKind,
-		String addressName) throws PortletException {
+	public List<Estate> getEstates(String municipalityId, String postalCode, String addressKind, String addressName) {
+		List<Estate> estates = new ArrayList<Estate>();
+		String token = this.getSalesforceToken();
 
-		RestTemplate restTemplate = new RestTemplate();
-		List<Estate> estates;
+		StringBuilder urlBuilder = new StringBuilder();
+		urlBuilder.append(SALESFORCE_ESTATES_URL);
+		urlBuilder.append("?");
+		urlBuilder.append("municipio_ine=");
+		urlBuilder.append(municipalityId);
+		urlBuilder.append("&codigo_postal=");
+		urlBuilder.append(postalCode);
+		urlBuilder.append("&tipo_y_nombre_de_via=");
+		urlBuilder.append(addressKind);
+		urlBuilder.append("+");
+		urlBuilder.append(addressName);
+		// We have to sent the number as empty
+		urlBuilder.append("&numero=");
+
+		HttpClient client = HttpClient.newHttpClient();
+		HttpRequest request = HttpRequest.newBuilder().
+			uri(URI.create(urlBuilder.toString())).
+			header("Authorization", "Bearer " + token).
+			GET().
+			build();
+
+		HttpResponse<String> response = null;
+		JSONArray responseJson;
+
+		System.out.println("Requesting estates to " + urlBuilder.toString());
 
 		try {
-			String accessToken = getSalesforceToken();
-			String estatesEndPoint = getEstatesUrl(municipalityId, postalCode, addressKind,
-				addressName);
-			HttpEntity<?> httpEntity = new HttpEntity<>(getHeaderToken(accessToken));
-
-			ResponseEntity<List<EstateResponse>> responseEntity = restTemplate.exchange(estatesEndPoint,
-				HttpMethod.GET, httpEntity, new ParameterizedTypeReference<List<EstateResponse>>() {});
-			estates = mapEstatesResponseToEstateList(Objects.requireNonNull(responseEntity.getBody()));
-
-		} catch (HttpClientErrorException e) {
-			throw new PortletException(1, e.getMessage());
+			response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			responseJson = new JSONArray(response.body());
+//			responseJson = new JSONArray("[{\"attributes\":{\"type\":\"AggregateResult\"},\"Tipo_de_via__c\":\"CL\",\"Nombre_de_via__c\":\"TEJEDORES\",\"Numero__c\":\"5\",\"Codigo_unico_portal__c\":\"22\",\"Segundo_numero_de_policia__c\":null}]");
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+			return estates;
+		} catch (JSONException e) {
+			if(response != null) {
+				System.out.println("Salesforce response: " + response.body());
+			}
+			e.printStackTrace();
+			return estates;
 		}
 
+		// The response format is [{"attributes":{"type":"AggregateResult"},"Tipo_de_via__c":"CL","Nombre_de_via__c":"TEJEDORES","Numero__c":"5","Codigo_unico_portal__c":"22","Segundo_numero_de_policia__c":null}]
+		for (int i = 0; i < responseJson.length(); i++) {
+			JSONObject estateJson = null;
+			try {
+				estateJson = responseJson.getJSONObject(i);
+				Estate estate = new Estate();
+				estate.setAddressKind(estateJson.getString("Tipo_de_via__c"));
+				estate.setAddressName(estateJson.getString("Nombre_de_via__c"));
+				estate.setNumber(estateJson.getString("Numero__c"));
+				estate.setGateId(estateJson.getString("Codigo_unico_portal__c"));
+				estate.setAnnex(estateJson.optString("Segundo_numero_de_policia__c"));
+				estates.add(estate);
+			} catch (JSONException e) {
+				System.out.println("Salesforce response: " + response.body());
+				if(estateJson != null) {
+					System.out.println("Json Object with error: " + estateJson.toString());
+				}
+				e.printStackTrace();
+			}
+		}
 		return estates;
 	}
 
-	/**
-	 *
-	 * @param municipalityId
-	 * @param postalCode
-	 * @return
-	 * @throws PortletException
-	 */
-	public List<Address> getAddresses(String municipalityId, String postalCode)
-		throws PortletException {
 
-		RestTemplate restTemplate = new RestTemplate();
-		List<Address> addresses = new ArrayList<>();
+	public List<Address> getAddresses(String municipalityId, String postalCode) {
+
+		List<Address> addresses = new ArrayList<Address>();
+		String token = this.getSalesforceToken();
+
+		StringBuilder urlBuilder = new StringBuilder();
+		urlBuilder.append(SALESFORCE_ADDRESSES_URL);
+		urlBuilder.append("?");
+		urlBuilder.append("municipio_ine=");
+		urlBuilder.append(municipalityId);
+		urlBuilder.append("&codigo_postal=");
+		urlBuilder.append(postalCode);
+
+		HttpClient client = HttpClient.newHttpClient();
+		HttpRequest request = HttpRequest.newBuilder().
+			uri(URI.create(urlBuilder.toString())).
+			header("Authorization", "Bearer " + token).
+			GET().
+			build();
+
+		HttpResponse<String> response = null;
+		JSONArray responseJson;
+
+		System.out.println("Requesting addresses to " + urlBuilder.toString());
 
 		try {
-			String accessToken = getSalesforceToken();
-			String addressesEndPoint = getAddressesUrl(municipalityId, postalCode);
-			HttpEntity<?> httpEntity = new HttpEntity(getHeaderToken(accessToken));
-
-			ResponseEntity<List<AddressResponse>> responseEntity = restTemplate.exchange(
-				addressesEndPoint, HttpMethod.GET, httpEntity,
-				new ParameterizedTypeReference<List<AddressResponse>>() {});
-
-			addresses = mapAddressesResponseToAddressList(Objects.requireNonNull(responseEntity.getBody()));
-
-		} catch (HttpClientErrorException e) {
-			throw new PortletException(1, e.getMessage());
+			response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			responseJson = new JSONArray(response.body());
+//			responseJson = new JSONArray("[{\"attributes\":{\"type\":\"AggregateResult\"},\"Tipo_de_via__c\":\"CL\",\"Nombre_de_via__c\":\"TEJEDORES\"},{\"attributes\":{\"type\":\"AggregateResult\"},\"Tipo_de_via__c\":\"CL\",\"Nombre_de_via__c\":\"TEJEDORES 2\"}]");
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+			return addresses;
+		} catch (JSONException e) {
+			if(response != null) {
+				System.out.println("Salesforce response: " + response.body());
+			}
+			e.printStackTrace();
+			return addresses;
 		}
 
+		// The response format is [{"attributes":{"type":"AggregateResult"},"Tipo_de_via__c":"CL","Nombre_de_via__c":"TEJEDORES"}]
+		for (int i = 0; i < responseJson.length(); i++) {
+			JSONObject addressJson = null;
+			try {
+				addressJson = responseJson.getJSONObject(i);
+				Address address = new Address();
+				address.setKind(addressJson.getString("Tipo_de_via__c"));
+				address.setName(addressJson.getString("Nombre_de_via__c"));
+				addresses.add(address);
+			} catch (JSONException e) {
+				System.out.println("Salesforce response: " + response.body());
+				if(addressJson != null) {
+					System.out.println("Json Object with error: " + addressJson.toString());
+				}
+				e.printStackTrace();
+			}
+		}
 		return addresses;
 	}
 
-	/**
-	 *
-	 * @param lead
-	 */
-	public Lead createLead(Lead lead) throws PortletException {
+	private String getSalesforceToken() {
 
-		RestTemplate restTemplate = new RestTemplate();
+		StringBuilder urlBuilder = new StringBuilder();
+		urlBuilder.append(SALESFORCE_TOKEN_URL);
+		urlBuilder.append("?");
+		urlBuilder.append("grant_type=password");
+		urlBuilder.append("&client_id=");
+		urlBuilder.append(SALESFORCE_CLIENT_ID);
+		urlBuilder.append("&client_secret=");
+		urlBuilder.append(SALESFORCE_CLIENT_SECRET);
+		urlBuilder.append("&username=");
+		urlBuilder.append(SALESFORCE_USERNAME);
+		urlBuilder.append("&password=");
+		urlBuilder.append(SALESFORCE_PASSWORD);
 
-		String accessToken = getSalesforceToken();
-		//validateSendLeadRequest(lead);
+		HttpClient client = HttpClient.newHttpClient();
+		HttpRequest request = HttpRequest.newBuilder().
+			uri(URI.create(urlBuilder.toString())).
+			POST(HttpRequest.BodyPublishers.noBody()).
+			build();
 
-		SendLeadRequest sendLeadRequest = mapToSendLeadRequest(lead);
-		HttpEntity<SendLeadRequest> entity = new HttpEntity<>(sendLeadRequest,
-			getHeaderToken(accessToken));
+		HttpResponse<String> response = null;
+		try {
+			response = client.send(request, HttpResponse.BodyHandlers.ofString());
+		} catch (IOException | InterruptedException e) {
+			if(response != null) {
+				System.out.println(response.body());
+			}
+			e.printStackTrace();
+			return null;
+		}
 
-		String url = getSendLeadUrl();
-		restTemplate.exchange(url, HttpMethod.POST, entity, Void.class);
+		JSONObject json;
+		try {
+			json = new JSONObject(response.body());
+		} catch (JSONException e) {
+			System.out.println(response.body());
+			e.printStackTrace();
+			return null;
+		}
 
+		try {
+			return json.getString("access_token");
+		} catch (JSONException e) {
+			System.out.println(json.toString());
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public Lead createLead(Lead lead) {
+		String token = this.getSalesforceToken();
+
+		StringBuilder urlBuilder = new StringBuilder();
+		urlBuilder.append(SALESFORCE_LEAD_URL);
+
+		System.out.println("URL Crear lead: " + urlBuilder.toString());
+		HttpClient client = HttpClient.newHttpClient();
+		HttpRequest request = HttpRequest.newBuilder().
+			uri(URI.create(urlBuilder.toString())).
+			header("Authorization", "Bearer " + token).
+			POST(HttpRequest.BodyPublishers.ofString(mapRequestBody(lead))).
+			build();
+
+		HttpResponse<String> response = null;
+		try {
+			response = client.send(request, HttpResponse.BodyHandlers.ofString());
+		} catch (IOException | InterruptedException e) {
+			if(response != null) {
+				System.out.println(response.body());
+			}
+			e.printStackTrace();
+			return null;
+		}
+
+		System.out.println("** Lead creado correctamente ** " + response.statusCode());
+		System.out.println("** Respuesta creado lead ** " + response.body());
 		return lead;
+	}
+
+	private String mapRequestBody(Lead lead){
+
+		ObjectMapper mapper = new ObjectMapper();
+		String mapperString = "";
+		try {
+			mapperString = mapper.writeValueAsString(mapToSendLeadRequest(lead));
+			System.out.println("** String lead request: " + mapperString);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return mapperString;
 	}
 
 	/**
@@ -145,8 +316,8 @@ public class SalesforceService {
 	private SendLeadRequest mapToSendLeadRequest(Lead lead) {
 
 		SendLeadRequest sendLeadRequest = new SendLeadRequest();
-		sendLeadRequest.setCalculatorGasRequest(mapToCalculatorGas(lead.getCalculatorGas()));
-		sendLeadRequest.setPersonalDataRequest(mapToPersonalDataRequest(lead.getPersonalData()));
+		sendLeadRequest.setCalculatorGas(mapToCalculatorGas(lead.getCalculatorGas()));
+		sendLeadRequest.setPersonalData(mapToPersonalDataRequest(lead.getPersonalData()));
 
 		return sendLeadRequest;
 	}
@@ -158,8 +329,8 @@ public class SalesforceService {
 	 */
 	private CalculatorGasRequest mapToCalculatorGas(CalculatorGas calculatorGas) {
 		CalculatorGasRequest calculatorGasRequest = new CalculatorGasRequest();
-		calculatorGasRequest.setInputRequest(mapToInputRequest(calculatorGas.getInput()));
-		calculatorGasRequest.setOutputRequest(mapToOutputRequest(calculatorGas.getOutput()));
+		calculatorGasRequest.setInput(mapToInputRequest(calculatorGas.getInput()));
+		calculatorGasRequest.setOutput(mapToOutputRequest(calculatorGas.getOutput()));
 
 		return calculatorGasRequest;
 	}
@@ -196,10 +367,10 @@ public class SalesforceService {
 	 */
 	private InputRequest mapToInputRequest(CalculatorGasInput calculatorGasInput) {
 		InputRequest inputRequest = new InputRequest();
-		inputRequest.setACSUse(calculatorGasInput.getAcsUse());
+		inputRequest.setaCSUse(calculatorGasInput.getAcsUse());
 		inputRequest.setBathroomNumber(calculatorGasInput.getBathroomNumber());
 		inputRequest.setBoilerLocation(calculatorGasInput.getBoilerLocation());
-		inputRequest.setExtrasInput(mapToExtrasInput(calculatorGasInput.getExtras()));
+		inputRequest.setExtras(mapToExtrasInput(calculatorGasInput.getExtras()));
 		inputRequest.setFloorNumber(calculatorGasInput.getFloorNumber());
 		inputRequest.setGasNaturalUse(calculatorGasInput.getGasNaturalUse());
 		inputRequest.setHeatingUse(calculatorGasInput.getHeatingUse());
@@ -224,7 +395,9 @@ public class SalesforceService {
 		extrasInput.setConvertDeviceKitchen(calculatorGasInputExtras.getConvertDeviceKitchen());
 		extrasInput.setHasVentilationGrill(calculatorGasInputExtras.getHasVentilationGrill());
 		extrasInput.setMetersBoilerToWindow(calculatorGasInputExtras.getMetersBoilerToWindow());
-		extrasInput.setMetersWaterIntake(calculatorGasInputExtras.getMetersWaterIntake());
+		String replaceMetersWaterIntake = calculatorGasInputExtras.getMetersWaterIntake().substring(2);
+		System.out.println("ReplaceMetersWaterIntake input: " + replaceMetersWaterIntake);
+		extrasInput.setMetersWaterIntake(replaceMetersWaterIntake);
 		extrasInput.setRadiatorsBathroom(calculatorGasInputExtras.getRadiatorsBathroom());
 
 		return extrasInput;
@@ -240,7 +413,7 @@ public class SalesforceService {
 		outputRequest.setBaseBadget(calculatorGasOutput.getBaseBadget());
 		outputRequest.setBonus(calculatorGasOutput.getBonus());
 		outputRequest.setEquipment(calculatorGasOutput.getEquipment());
-		outputRequest.setExtrasOutput(mapToExtrasOutput(calculatorGasOutput.getExtras()));
+		outputRequest.setExtras(mapToExtrasOutput(calculatorGasOutput.getExtras()));
 		outputRequest.setIva21(calculatorGasOutput.getIva21());
 		outputRequest.setProposedPack(calculatorGasOutput.getProposedPack());
 		outputRequest.setTotalBudget(calculatorGasOutput.getTotalBudget());
@@ -261,195 +434,11 @@ public class SalesforceService {
 		extrasOutput.setExtraTotalPrice(calculatorGasOutputExtras.getExtraTotalPrice());
 		extrasOutput.setHasVentilationGrill(calculatorGasOutputExtras.getHasVentilationGrill());
 		extrasOutput.setMetersBoilerToWindow(calculatorGasOutputExtras.getMetersBoilerToWindow());
-		extrasOutput.setMetersWaterIntake(calculatorGasOutputExtras.getMetersWaterIntake());
+		String replaceMetersWaterIntake = calculatorGasOutputExtras.getMetersWaterIntake().substring(2);
+		System.out.println("ReplaceMetersWaterIntake output: " + replaceMetersWaterIntake);
+		extrasOutput.setMetersWaterIntake(replaceMetersWaterIntake);
 		extrasOutput.setRadiatorsBathroom(calculatorGasOutputExtras.getRadiatorsBathroom());
 
 		return extrasOutput;
-	}
-
-	/**
-	 *
-	 * @param propertiesResponse
-	 * @return
-	 */
-	private List<Property> mapPropertiesResponseToPropertyList(
-		List<PropertyResponse> propertiesResponse) {
-
-		List<Property> properties = new ArrayList<>();
-		for (PropertyResponse propertyResponse : propertiesResponse) {
-			properties.add(mapPropertyResponseToProperty(propertyResponse));
-		}
-
-		return properties;
-	}
-
-	/**
-	 *
-	 * @param propertyResponse
-	 * @return
-	 */
-	private Property mapPropertyResponseToProperty(PropertyResponse propertyResponse) {
-		Property property = new Property();
-		property.setAddress(propertyResponse.getDireccionCompletaC());
-		property.setPropertyId(propertyResponse.getCodigoUnicoInmuebleC());
-		property.setBlock(propertyResponse.getBloqueC());
-		property.setLadder(propertyResponse.getEscaleraC());
-		property.setFloor(propertyResponse.getPlantaC());
-		property.setDoor(propertyResponse.getPuertaC());
-		property.setStatus(propertyResponse.getEstadoC());
-		//property.setContractStatus(property.); //TODO: Qué campo mapeamos aquí??
-
-		return property;
-	}
-
-	/**
-	 * Map EstatesResponse object to Estate list object
-	 *
-	 * @param estatesResponse
-	 * @return
-	 */
-	private List<Estate> mapEstatesResponseToEstateList(List<EstateResponse> estatesResponse) {
-		List<Estate> estates = new ArrayList<>();
-		for (EstateResponse estateResponse : estatesResponse){
-			estates.add(mapEstateResponseToEstate(estateResponse));
-		}
-		return estates;
-	}
-
-	/**
-	 * Map EstateResponse object to Estate object
-	 *
-	 * @param estateResponse
-	 * @return
-	 */
-	private Estate mapEstateResponseToEstate(EstateResponse estateResponse) {
-		Estate estate = new Estate();
-		estate.setAddressKind(estateResponse.getTipoDeViaC());
-		estate.setAddressName(estateResponse.getNombreDeViaC());
-		estate.setNumber(estateResponse.getNumeroC());
-		estate.setGateId(estateResponse.getCodigoUnicoPortalC());
-		estate.setAnnex(estateResponse.getSegundoNumeroDePoliciaC());
-
-		return estate;
-	}
-
-	/**
-	 * Map AddressesResponse object to Address list object
-	 *
-	 * @param addressResponses
-	 * @return
-	 */
-	private List<Address> mapAddressesResponseToAddressList(List<AddressResponse> addressResponses) {
-		List<Address> addresses = new ArrayList<>();
-		for (AddressResponse addressResponse : addressResponses) {
-			addresses.add(mapAddressResponseToAddress(addressResponse));
-		}
-		return addresses;
-	}
-
-	/**
-	 * Map AddressResponse object to Address object
-	 *
-	 * @param addressResponse
-	 * @return
-	 */
-	private Address mapAddressResponseToAddress(AddressResponse addressResponse) {
-		Address address = new Address();
-		address.setKind(addressResponse.getTipoDeViaC());
-		address.setName(addressResponse.getNombreDeViaC());
-
-		return address;
-	}
-
-	/**
-	 * Method that returns the access token
-	 *
-	 * @return
-	 * @throws PortletException
-	 */
-	public String getSalesforceToken() throws PortletException {
-
-		RestTemplate restTemplate = new RestTemplate();
-
-		String tokenUrl = getTokenUrl();
-		System.out.println("Token URL" + tokenUrl);
-
-		restTemplate.setMessageConverters(httpMessageConverters());
-		AccessTokenResponse response = restTemplate.postForObject(
-			tokenUrl, null, AccessTokenResponse.class);
-
-		if (response != null) {
-			return response.getAccessToken();
-		} else {
-			throw new PortletException(2, "Can not retrieve the access token");
-		}
-	}
-
-	/**
-	 *
-	 * @param authToken
-	 * @return
-	 */
-	private HttpHeaders getHeaderToken(String authToken) {
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-		httpHeaders.setBearerAuth(authToken);
-		return httpHeaders;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	private String getTokenUrl() {
-		return SALESFORCE_TOKEN_URL + "?grant_type=password&client_id=" + SALESFORCE_CLIENT_ID + "&client_secret=" + SALESFORCE_CLIENT_SECRET + "&username=" + SALESFORCE_USERNAME + "&password=" + SALESFORCE_PASSWORD;
-	}
-
-	/**
-	 *
-	 * @param gateId
-	 * @return
-	 */
-	private String getPropertiesUrl(String gateId) {
-		return SALESFORCE_PROPERTIES_URL + "?codigo_unico_portal=" + gateId;
-	}
-
-	private String getEstatesUrl(String municipalityId, String postalCode, String addressKind,
-		String addressName) {
-
-		//Param numero must be empty
-		return SALESFORCE_ESTATES_URL + "?municipio_ine=" + municipalityId + "&codigo_postal=" + postalCode + "&tipo_y_nombre_de_via=" + addressKind + "+" + addressName + "&numero=";
-	}
-
-	/**
-	 *
-	 * @param municipalityId
-	 * @param postalCode
-	 * @return
-	 */
-	private String getAddressesUrl(String municipalityId, String postalCode) {
-		return SALESFORCE_ADDRESSES_URL + "?municipio_ine=" + municipalityId + "&codigo_postal=" + postalCode;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	private String getSendLeadUrl(){
-		return SALESFORCE_LEAD_URL;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	private List<HttpMessageConverter<?>> httpMessageConverters() {
-		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-
-
-		converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
-		messageConverters.add(converter);
-		return messageConverters;
 	}
 }
