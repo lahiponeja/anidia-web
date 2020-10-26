@@ -4,8 +4,10 @@ import com.liferay.sampleVue.dto.v1_0.*;
 import com.liferay.sampleVue.internal.dto.*;
 import com.liferay.sampleVue.internal.exception.*;
 import java.util.*;
-import org.apache.commons.lang3.*;
+import org.springframework.core.*;
 import org.springframework.http.*;
+import org.springframework.http.converter.*;
+import org.springframework.http.converter.json.*;
 import org.springframework.web.client.*;
 
 
@@ -94,18 +96,18 @@ public class SalesforceService {
 		throws PortletException {
 
 		RestTemplate restTemplate = new RestTemplate();
-		List<Address> addresses;
+		List<Address> addresses = new ArrayList<>();
 
 		try {
 			String accessToken = getSalesforceToken();
 			String addressesEndPoint = getAddressesUrl(municipalityId, postalCode);
 			HttpEntity<?> httpEntity = new HttpEntity(getHeaderToken(accessToken));
 
-			ResponseEntity<AddressesResponse> responseEntity = restTemplate.exchange(addressesEndPoint,
-				HttpMethod.GET, httpEntity, AddressesResponse.class);
+			ResponseEntity<List<AddressResponse>> responseEntity = restTemplate.exchange(
+				addressesEndPoint, HttpMethod.GET, httpEntity,
+				new ParameterizedTypeReference<List<AddressResponse>>() {});
 
-			addresses = mapAddressesResponseToAddressList(
-				Objects.requireNonNull(responseEntity.getBody()));
+			addresses = mapAddressesResponseToAddressList(Objects.requireNonNull(responseEntity.getBody()));
 
 		} catch (HttpClientErrorException e) {
 			throw new PortletException(1, e.getMessage());
@@ -334,12 +336,12 @@ public class SalesforceService {
 	/**
 	 * Map AddressesResponse object to Address list object
 	 *
-	 * @param addressesResponse
+	 * @param addressResponses
 	 * @return
 	 */
-	private List<Address> mapAddressesResponseToAddressList(AddressesResponse addressesResponse) {
+	private List<Address> mapAddressesResponseToAddressList(List<AddressResponse> addressResponses) {
 		List<Address> addresses = new ArrayList<>();
-		for (AddressResponse addressResponse : addressesResponse.getAddressResponses()) {
+		for (AddressResponse addressResponse : addressResponses) {
 			addresses.add(mapAddressResponseToAddress(addressResponse));
 		}
 		return addresses;
@@ -370,10 +372,13 @@ public class SalesforceService {
 		RestTemplate restTemplate = new RestTemplate();
 
 		String tokenUrl = getTokenUrl();
+		System.out.println("Token URL" + tokenUrl);
+
+		restTemplate.setMessageConverters(httpMessageConverters());
 		AccessTokenResponse response = restTemplate.postForObject(
 			tokenUrl, null, AccessTokenResponse.class);
 
-		if (response != null && StringUtils.isNotEmpty(response.getAccessToken())) {
+		if (response != null) {
 			return response.getAccessToken();
 		} else {
 			throw new PortletException(2, "Can not retrieve the access token");
@@ -432,5 +437,19 @@ public class SalesforceService {
 	 */
 	private String getSendLeadUrl(){
 		return SALESFORCE_LEAD_URL;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	private List<HttpMessageConverter<?>> httpMessageConverters() {
+		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
+		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+
+
+		converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+		messageConverters.add(converter);
+		return messageConverters;
 	}
 }

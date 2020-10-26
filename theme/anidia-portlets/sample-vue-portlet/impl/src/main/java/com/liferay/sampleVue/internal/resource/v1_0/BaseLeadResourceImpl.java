@@ -1,28 +1,19 @@
 package com.liferay.sampleVue.internal.resource.v1_0;
 
-import com.liferay.petra.function.UnsafeFunction;
-import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
-import com.liferay.portal.vulcan.util.TransformUtil;
-import com.liferay.sampleVue.dto.v1_0.Lead;
-import com.liferay.sampleVue.resource.v1_0.LeadResource;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tags;
-
-import java.util.List;
-
-import javax.annotation.Generated;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.UriInfo;
+import com.liferay.petra.function.*;
+import com.liferay.portal.kernel.model.*;
+import com.liferay.portal.vulcan.accept.language.*;
+import com.liferay.portal.vulcan.util.*;
+import com.liferay.sampleVue.dto.v1_0.*;
+import com.liferay.sampleVue.internal.services.*;
+import com.liferay.sampleVue.resource.v1_0.*;
+import io.swagger.v3.oas.annotations.*;
+import io.swagger.v3.oas.annotations.tags.*;
+import java.util.*;
+import javax.annotation.*;
+import javax.servlet.http.*;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
 
 /**
  * @author David Brenes
@@ -45,7 +36,8 @@ public abstract class BaseLeadResourceImpl implements LeadResource {
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {})
 	public Lead postLead(Lead lead) throws Exception {
-		return new Lead();
+		SalesforceService service = new SalesforceService();
+		return service.createLead(lead);
 	}
 
 	public void setContextAcceptLanguage(AcceptLanguage contextAcceptLanguage) {
