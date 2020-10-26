@@ -1,14 +1,8 @@
 package com.liferay.sampleVue.internal.services;
 
-import com.liferay.sampleVue.dto.v1_0.*;
-import com.liferay.sampleVue.internal.exception.*;
-import java.io.*;
-import java.util.*;
-import org.junit.*;
-
 public class SalesforceServiceTest {
 
-    @Before
+    /*@Before
     public void loadSalesforceEnvVars() throws IOException {
         Properties props = new Properties();
         props.load(getClass().getResourceAsStream(
@@ -200,5 +194,5 @@ public class SalesforceServiceTest {
         //property.setAddress(); //String
 
         return property;
-    }
+    }*/
 }
