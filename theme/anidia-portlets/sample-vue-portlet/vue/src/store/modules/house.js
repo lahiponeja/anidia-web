@@ -1,6 +1,7 @@
 import { reactive, shallowReadonly } from '@vue/composition-api'
 import coverageService from '../../services/coverageServices'
 import houseFormService from '../../services/houseFormService'
+import contactInfoService from '../../services/contactInfoService'
 import xmlToJsonImp from '../../helpers/xmlToJsonImp'
 import objToXml from '../../helpers/objToXml'
 
@@ -76,6 +77,8 @@ const state = reactive({
   },
   houseFormData: {},
   gasBudget: {},
+  userContactInfo: {},
+  userFullName: "",
   coverageError: "",
   houseType: "",
   postalCode: "",
@@ -151,17 +154,28 @@ const submitUserContactInfo = function (budgetReadyForm) {
     }
   }
 
+  state.userFullName = `${name} ${lastname} `
+
   const options = {
     rootName: 'Lead', // defaults to 'root'
     attributes: false
   }
-
   const xml = objToXml(requestBody, options)
 
   console.log("🔥 submitUserContactInfo 🔥")
   console.log(xml)
 
   console.log("requestBody", requestBody);
+
+  const result = new Promise((resolve, reject) => {
+    contactInfoService.postLeads(xml).then((res) => {
+      resolve(res)
+    }).catch((err) => {
+      console.error(err)
+    })
+  })
+
+  return result
 }
 
 const setPostalCode = function(payload) {
@@ -198,11 +212,7 @@ const getAddresses = function(municipalityId, postalCode) {
     const resJson = xmlToJsonImp(res.data);
     const { items } = resJson.Page.items
     const result = items
-    if(result.length) {
-      state.autocompData.addresses = result
-    } else {
-      state.autocompData.addresses = []
-    }
+    state.autocompData.addresses = result.length ? result : [result]
   }).catch((err) => {
     console.error(err);
   })
@@ -259,17 +269,22 @@ const submitHouseData = function(gasBudgetRequest) {
   
   setHouseFormData(dataObj)
 
-  houseFormService.postHouseForm(xml).then((res)=> {
-    const jsonData = xmlToJsonImp(res.data);
-    Object.assign(state.gasBudget, jsonData.GasBudget);
-    console.log("state.gasBudget", state.gasBudget);
-    changeHouseStep("presupuesto");
-  })
-  .catch((err)=>{
-    console.error(err)
+  const results = new Promise((resolve, reject) => {
+    houseFormService.postHouseForm(xml).then((res)=> {
+      const jsonData = xmlToJsonImp(res.data);
+      Object.assign(state.gasBudget, jsonData.GasBudget);
+      console.log("state.gasBudget", state.gasBudget);
+      resolve(state.gasBudget)
+      changeHouseStep("presupuesto");
+    })
+    .catch((err)=>{
+      console.error(reject(err))
+    })
   })
 
-  console.log(xml)
+
+  // console.log(xml)
+  return results;
 }
 
 export default { 

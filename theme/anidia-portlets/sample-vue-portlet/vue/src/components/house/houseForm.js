@@ -22,6 +22,7 @@ const houseForm = {
         radiatorsBathroom: "",
       },
 
+      sendingForm: false,
       submitFormError: false, // TODO
     }
   },
@@ -29,7 +30,14 @@ const houseForm = {
     submitRequest() {
       // console.log("Vivienda, enviar data...")
       // TODO
-      this.house.submitHouseData(this.gasBudgetRequest)
+      this.sendingForm = true
+
+      this.house.submitHouseData(this.gasBudgetRequest).then((res) => {
+        this.sendingForm = false
+      }).catch((err) => {
+        this.sendingForm = false
+        console.log(err)
+      })
     }
   },
   computed: {
@@ -51,45 +59,6 @@ const houseForm = {
   },
   template: /*html*/
     `<div class="an-form an-wrapper">
-      <!--  <ul>
-          <li>propertyMeters: {{ gasBudgetRequest.propertyMeters }}</li>
-          <li>floorNumber: {{ gasBudgetRequest.floorNumber }}</li>
-          <li>bathroomNumber: {{ gasBudgetRequest.bathroomNumber }}</li>
-          <li>staysNumber: {{ gasBudgetRequest.staysNumber }}</li>
-          <li>gasNaturalUse: {{ gasBudgetRequest.gasNaturalUse }}</li>
-
-          <h4>Selecciona todo lo que tienes ahora mismo</h4>
-          <li>acsUse: {{gasBudgetRequest.acsUse}}</li>
-          <li>kitchenUse: {{gasBudgetRequest.kitchenUse}}</li>
-          <li>heatingUse: {{gasBudgetRequest.heatingUse}}</li>
-          <li>boilerLocation: {{gasBudgetRequest.boilerLocation}}</li>
-
-          <h4>¿Tienes rejilla de ventilación superior?</h4>
-          <li>hasVentilationGrill: {{gasBudgetRequest.hasVentilationGrill}}</li>
-
-          <h4>¿Qué uso haces del agua caliente?</h4>
-          <li>personsWater: {{gasBudgetRequest.personsWater}}</li>
-          
-          <h4>¿Qué uso haces del agua caliente?</h4>
-          <li>metersBoilerToWindow: {{gasBudgetRequest.metersBoilerToWindow}}</li>
-
-          <h4>¿Cuántos metros es necesario desplazar las tomas de agua para conectarlas al aparato?</h4>
-          <li>metersWaterIntake: {{gasBudgetRequest.metersWaterIntake}}</li>
-
-          <h4>¿Necesita que conectemos el aparato de cocina actual?</h4>
-          <li>connectDeviceToKitchen: {{gasBudgetRequest.connectDeviceToKitchen}}</li>
-
-          <h4>¿Necesita conversión del aparato de cocina actual?</h4>
-          <li>convertDeviceKitchen: {{gasBudgetRequest.convertDeviceKitchen}}</li>
-
-          <h4>¿Quiere controlar la calefacción por planta?</h4>
-          <li>controllHeatingFloor: {{gasBudgetRequest.controllHeatingFloor}}</li>
-
-          <h4>¿Cuántos radiadores toalleros quiere en el baño?</h4>
-          <li>radiatorsBathroom: {{gasBudgetRequest.radiatorsBathroom}}</li>
-
-        </ul> -->
-
         <form @submit.prevent="submitRequest">
           <p class="an-body-l-bold mb-xl">Rellena los datos de tu vivienda para poderte hacer un presupuesto lo más ajustado posible</p>
           <div class="an-form__flex an-form__flex--2-cols mb-xxl">
@@ -380,7 +349,8 @@ const houseForm = {
           </template>
 
           <button type="submit" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
-            <span>Continuar</span>
+            <span v-if="!sendingForm">Continuar</span>
+            <span v-else>Enviando...</span>
           </button>
 
           <!-- TODO -->

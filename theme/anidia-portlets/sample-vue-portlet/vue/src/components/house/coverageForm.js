@@ -241,6 +241,7 @@ const coverageForm = {
                 :get-result-value="getResultValue" 
                 placeholder="Código Postal"
                 style="width: 100%;"
+                auto-select
                 >
                 <template
                   #default="{
@@ -285,6 +286,7 @@ const coverageForm = {
                 :get-result-value="getResultValue" 
                 placeholder="Municipios"
                 style="width: 100%;"
+                auto-select
                 >
                 <template
                   #default="{
@@ -330,6 +332,7 @@ const coverageForm = {
                   :get-result-value="getResultValue" 
                   placeholder="Calle"
                   style="width: 100%;"
+                  auto-select
                   >
                   <template
                     #default="{
@@ -375,6 +378,7 @@ const coverageForm = {
                   :get-result-value="getResultValue" 
                   placeholder="Número"
                   style="width: 100%;"
+                  auto-select
                   >
                   <template
                     #default="{
@@ -420,6 +424,7 @@ const coverageForm = {
                 :get-result-value="getResultValue" 
                 placeholder="Vivienda (bloque, escalera, piso, puerta)"
                 style="width: 100%;"
+                auto-select
                 >
                 <template
                   #default="{

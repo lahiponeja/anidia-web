@@ -9,13 +9,24 @@ const budgetReady = {
         email: "",
         privacyPolicy: false,
         offersAndServices: false,
-      }
+      },
+
+      sendingForm: false,
     }
   },
   methods: {
     submitRequest() {
       // TODO: add validation
-      this.house.submitUserContactInfo(this.budgetReadyForm)
+      this.sendingForm = true
+      this.house.submitUserContactInfo(this.budgetReadyForm).then((res) => {
+        console.log("😀¡Éxito!😀")
+        this.$emit("form-success")
+        this.sendingForm = false
+        console.log(res)
+      }).catch((err)=>{
+        console.error(err)
+        this.sendingForm = false
+      })
     }
   },
   template: /*html*/`
@@ -53,7 +64,8 @@ const budgetReady = {
       </div>
 
       <button type="submit" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--check-simple mt-xl">
-        <span>Continuar</span>
+        <span v-if="!sendingForm">Continuar</span>
+        <span v-else>Enviando...</span>
       </button>
       
     </form>
