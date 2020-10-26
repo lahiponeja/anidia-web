@@ -235,7 +235,7 @@ components:
           type: string
         ExtraTotalPrice:
           description: ExtraTotalPrice gas output
-          type: number
+          type: string
     GasBudgetRequest:
       description: The required information to calculate a Gas Budget
       properties:

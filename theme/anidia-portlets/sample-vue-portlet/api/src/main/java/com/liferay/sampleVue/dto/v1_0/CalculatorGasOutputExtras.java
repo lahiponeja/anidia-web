@@ -18,8 +18,6 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
-import javax.validation.Valid;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -89,18 +87,17 @@ public class CalculatorGasOutputExtras {
 	protected String ConvertDeviceKitchen;
 
 	@Schema(description = "ExtraTotalPrice gas output")
-	@Valid
-	public Number getExtraTotalPrice() {
+	public String getExtraTotalPrice() {
 		return ExtraTotalPrice;
 	}
 
-	public void setExtraTotalPrice(Number ExtraTotalPrice) {
+	public void setExtraTotalPrice(String ExtraTotalPrice) {
 		this.ExtraTotalPrice = ExtraTotalPrice;
 	}
 
 	@JsonIgnore
 	public void setExtraTotalPrice(
-		UnsafeSupplier<Number, Exception> ExtraTotalPriceUnsafeSupplier) {
+		UnsafeSupplier<String, Exception> ExtraTotalPriceUnsafeSupplier) {
 
 		try {
 			ExtraTotalPrice = ExtraTotalPriceUnsafeSupplier.get();
@@ -115,7 +112,7 @@ public class CalculatorGasOutputExtras {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Number ExtraTotalPrice;
+	protected String ExtraTotalPrice;
 
 	@Schema(description = "HasVentilationGrill gas output")
 	public String getHasVentilationGrill() {
@@ -292,7 +289,11 @@ public class CalculatorGasOutputExtras {
 
 			sb.append("\"ExtraTotalPrice\": ");
 
-			sb.append(ExtraTotalPrice);
+			sb.append("\"");
+
+			sb.append(_escape(ExtraTotalPrice));
+
+			sb.append("\"");
 		}
 
 		if (HasVentilationGrill != null) {

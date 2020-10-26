@@ -17,7 +17,7 @@ public class ExtrasOutput {
     @JsonProperty("RadiatorsBathroom")
     private String radiatorsBathroom;
     @JsonProperty("ExtraTotalPrice")
-    private Double extraTotalPrice;
+    private String extraTotalPrice;
 
     public String getMetersBoilerToWindow() {
         return metersBoilerToWindow;
@@ -67,11 +67,11 @@ public class ExtrasOutput {
         this.radiatorsBathroom = radiatorsBathroom;
     }
 
-    public Double getExtraTotalPrice() {
+    public String getExtraTotalPrice() {
         return extraTotalPrice;
     }
 
-    public void setExtraTotalPrice(Double extraTotalPrice) {
+    public void setExtraTotalPrice(String extraTotalPrice) {
         this.extraTotalPrice = extraTotalPrice;
     }
 }
