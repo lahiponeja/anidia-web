@@ -55,6 +55,7 @@
         &:nth-last-child(n+4),
         &:nth-last-child(n+4) ~ * {
           width: 50%;
+          margin-bottom: rem(32);
         }
 
         #{ $parent }__item {

@@ -164,7 +164,7 @@
       background-color: $an-yellow;
       top: 15px;
       left: -50%;
-      z-index: -1;
+      z-index: 0;
     }
   }
 
@@ -203,5 +203,9 @@
 
   &__footer {
     text-align: center;
+
+    @include desktop {
+      margin-top: rem(100);
+    }
   }
 }
