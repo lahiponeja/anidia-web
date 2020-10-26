@@ -40,8 +40,8 @@ public class SalesforceService {
 			String propertiesEndPoint = getPropertiesUrl(gateId);
 			HttpEntity<?> httpEntity = new HttpEntity(getHeaderToken(accessToken));
 
-			ResponseEntity<PropertiesResponse> responseEntity = restTemplate.exchange(propertiesEndPoint,
-				HttpMethod.GET, httpEntity, PropertiesResponse.class);
+			ResponseEntity<List<PropertyResponse>> responseEntity = restTemplate.exchange(propertiesEndPoint,
+				HttpMethod.GET, httpEntity, new ParameterizedTypeReference<List<PropertyResponse>>() {});
 
 			properties = mapPropertiesResponseToPropertyList(
 				Objects.requireNonNull(responseEntity.getBody()));
@@ -74,8 +74,8 @@ public class SalesforceService {
 				addressName);
 			HttpEntity<?> httpEntity = new HttpEntity<>(getHeaderToken(accessToken));
 
-			ResponseEntity<EstatesResponse> responseEntity = restTemplate.exchange(estatesEndPoint,
-				HttpMethod.GET, httpEntity, EstatesResponse.class);
+			ResponseEntity<List<EstateResponse>> responseEntity = restTemplate.exchange(estatesEndPoint,
+				HttpMethod.GET, httpEntity, new ParameterizedTypeReference<List<EstateResponse>>() {});
 			estates = mapEstatesResponseToEstateList(Objects.requireNonNull(responseEntity.getBody()));
 
 		} catch (HttpClientErrorException e) {
@@ -273,10 +273,10 @@ public class SalesforceService {
 	 * @return
 	 */
 	private List<Property> mapPropertiesResponseToPropertyList(
-		PropertiesResponse propertiesResponse) {
+		List<PropertyResponse> propertiesResponse) {
 
 		List<Property> properties = new ArrayList<>();
-		for (PropertyResponse propertyResponse : propertiesResponse.getPropertyResponses()) {
+		for (PropertyResponse propertyResponse : propertiesResponse) {
 			properties.add(mapPropertyResponseToProperty(propertyResponse));
 		}
 
@@ -308,9 +308,9 @@ public class SalesforceService {
 	 * @param estatesResponse
 	 * @return
 	 */
-	private List<Estate> mapEstatesResponseToEstateList(EstatesResponse estatesResponse) {
+	private List<Estate> mapEstatesResponseToEstateList(List<EstateResponse> estatesResponse) {
 		List<Estate> estates = new ArrayList<>();
-		for (EstateResponse estateResponse : estatesResponse.getEstateResponses()){
+		for (EstateResponse estateResponse : estatesResponse){
 			estates.add(mapEstateResponseToEstate(estateResponse));
 		}
 		return estates;
