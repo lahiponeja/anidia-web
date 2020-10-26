@@ -1,5 +1,5 @@
 .anidia-header {
-  width: 100vh;
+  width: 100%;
 
   &.active {
     position: fixed;
@@ -429,7 +429,7 @@
   .an-icon--head-phones.an-cmb--header-small {
     display: flex;
     margin-left: auto;
-    transform: translate(rem(-74), rem(20));
+    transform: translate(rem(-74), rem(-5));
 
     @include desktop {
       display: none !important;
@@ -496,7 +496,6 @@
 
 
 #banner {
-  position: absolute;
 
   @include desktop {
     padding: rem(44) rem(60);
