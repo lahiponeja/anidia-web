@@ -45,8 +45,7 @@
       -webkit-appearance: none; /* Safari and Chrome */
       appearance: none;
       background-color: $white;
-      border: 1px solid $an-theme-soft-grey-sec;
-      box-shadow: $an-shadow-two;
+      border: 1px solid $an-theme;
       border-radius: rem(30);
       color: $an-theme-dark-grey;
       font-family: $open-sans-regular-family;
@@ -57,6 +56,7 @@
       transition: box-shadow .2s;
       display: flex;
       align-items: center;
+
     }
 
     &:after {

@@ -9,7 +9,12 @@
       <a href="#" class="an-btn an-btn--flatter an-btn--gradient"><span>Calcular presupuesto</span></a>
       <p>O selecciona uno de nuestros packs estrella</p>
     </div>
-    <div class="an-pack-cards__cards">
+    [#if configuration.CardSize == 'Small']
+    <div class="an-pack-cards__cards small">
+    [/#if]
+    [#if configuration.CardSize == 'Big']
+    <div class="an-pack-cards__cards big">
+    [/#if]
       <lfr-widget-asset-list>
       </lfr-widget-asset-list>
     </div>
