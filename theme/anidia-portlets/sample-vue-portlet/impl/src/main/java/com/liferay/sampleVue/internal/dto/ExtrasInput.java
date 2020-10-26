@@ -7,11 +7,13 @@ public class ExtrasInput {
     //@JsonProperty("MetersWaterIntake")
     private String metersWaterIntake;
     //@JsonProperty("HasVentilationGrill")
-    private String hasVentilationGrill;
+    private Boolean hasVentilationGrill;
     //@JsonProperty("ControllHeatingFloor")
-    private String controllHeatingFloor;
+    private Boolean controllHeatingFloor;
     //@JsonProperty("ConvertDeviceKitchen")
-    private String convertDeviceKitchen;
+    private Boolean convertDeviceKitchen;
+
+    private Boolean connectDeviceToKitchen;
     //@JsonProperty("RadiatorsBathroom")
     private String radiatorsBathroom;
 
@@ -31,28 +33,36 @@ public class ExtrasInput {
         this.metersWaterIntake = metersWaterIntake;
     }
 
-    public String getHasVentilationGrill() {
+    public Boolean getHasVentilationGrill() {
         return hasVentilationGrill;
     }
 
-    public void setHasVentilationGrill(String hasVentilationGrill) {
+    public void setHasVentilationGrill(Boolean hasVentilationGrill) {
         this.hasVentilationGrill = hasVentilationGrill;
     }
 
-    public String getControllHeatingFloor() {
+    public Boolean getControllHeatingFloor() {
         return controllHeatingFloor;
     }
 
-    public void setControllHeatingFloor(String controllHeatingFloor) {
+    public void setControllHeatingFloor(Boolean controllHeatingFloor) {
         this.controllHeatingFloor = controllHeatingFloor;
     }
 
-    public String getConvertDeviceKitchen() {
+    public Boolean getConvertDeviceKitchen() {
         return convertDeviceKitchen;
     }
 
-    public void setConvertDeviceKitchen(String convertDeviceKitchen) {
+    public void setConvertDeviceKitchen(Boolean convertDeviceKitchen) {
         this.convertDeviceKitchen = convertDeviceKitchen;
+    }
+
+    public Boolean getConnectDeviceToKitchen() {
+        return connectDeviceToKitchen;
+    }
+
+    public void setConnectDeviceToKitchen(Boolean connectDeviceToKitchen) {
+        this.connectDeviceToKitchen = connectDeviceToKitchen;
     }
 
     public String getRadiatorsBathroom() {

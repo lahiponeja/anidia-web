@@ -5,7 +5,6 @@ import com.liferay.portal.kernel.model.*;
 import com.liferay.portal.vulcan.accept.language.*;
 import com.liferay.portal.vulcan.util.*;
 import com.liferay.sampleVue.dto.v1_0.*;
-import com.liferay.sampleVue.internal.services.*;
 import com.liferay.sampleVue.resource.v1_0.*;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
@@ -36,8 +35,7 @@ public abstract class BaseLeadResourceImpl implements LeadResource {
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {})
 	public Lead postLead(Lead lead) throws Exception {
-		SalesforceService service = new SalesforceService();
-		return service.createLead(lead);
+		return new Lead();
 	}
 
 	public void setContextAcceptLanguage(AcceptLanguage contextAcceptLanguage) {

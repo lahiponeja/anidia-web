@@ -230,6 +230,9 @@ components:
         ConvertDeviceKitchen:
           description: ConvertDeviceKitchen gas output
           type: string
+        ConnectDeviceToKitchen:
+          description: ConnectDeviceToKitchen calculator gas
+          type: string
         RadiatorsBathroom:
           description: RadiatorsBathroom gas output
           type: string

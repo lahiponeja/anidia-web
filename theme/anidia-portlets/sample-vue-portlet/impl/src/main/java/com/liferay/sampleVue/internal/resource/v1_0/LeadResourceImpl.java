@@ -1,9 +1,9 @@
 package com.liferay.sampleVue.internal.resource.v1_0;
 
-import com.liferay.sampleVue.resource.v1_0.LeadResource;
-
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.ServiceScope;
+import com.liferay.sampleVue.dto.v1_0.*;
+import com.liferay.sampleVue.internal.services.*;
+import com.liferay.sampleVue.resource.v1_0.*;
+import org.osgi.service.component.annotations.*;
 
 /**
  * @author David Brenes
@@ -13,4 +13,10 @@ import org.osgi.service.component.annotations.ServiceScope;
 	scope = ServiceScope.PROTOTYPE, service = LeadResource.class
 )
 public class LeadResourceImpl extends BaseLeadResourceImpl {
+
+	@Override
+	public Lead postLead(Lead lead) throws Exception {
+		SalesforceService service = new SalesforceService();
+		return service.createLead(lead);
+	}
 }
