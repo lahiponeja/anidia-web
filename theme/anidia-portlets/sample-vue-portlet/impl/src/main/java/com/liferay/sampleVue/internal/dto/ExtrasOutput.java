@@ -12,6 +12,9 @@ public class ExtrasOutput {
     private String controllHeatingFloor;
     //@JsonProperty("ConvertDeviceKitchen")
     private String convertDeviceKitchen;
+
+    private String connectDeviceToKitchen;
+
     //@JsonProperty("RadiatorsBathroom")
     private String radiatorsBathroom;
     //@JsonProperty("ExtraTotalPrice")
@@ -55,6 +58,14 @@ public class ExtrasOutput {
 
     public void setConvertDeviceKitchen(String convertDeviceKitchen) {
         this.convertDeviceKitchen = convertDeviceKitchen;
+    }
+
+    public String getConnectDeviceToKitchen() {
+        return connectDeviceToKitchen;
+    }
+
+    public void setConnectDeviceToKitchen(String connectDeviceToKitchen) {
+        this.connectDeviceToKitchen = connectDeviceToKitchen;
     }
 
     public String getRadiatorsBathroom() {

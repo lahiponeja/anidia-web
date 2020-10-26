@@ -1,24 +1,13 @@
 package com.liferay.sampleVue.dto.v1_0;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import com.liferay.petra.function.UnsafeSupplier;
-import com.liferay.petra.string.StringBundler;
-import com.liferay.portal.vulcan.graphql.annotation.GraphQLField;
-import com.liferay.portal.vulcan.graphql.annotation.GraphQLName;
-
-import io.swagger.v3.oas.annotations.media.Schema;
-
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-
-import javax.annotation.Generated;
-
-import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.annotation.*;
+import com.liferay.petra.function.*;
+import com.liferay.petra.string.*;
+import com.liferay.portal.vulcan.graphql.annotation.*;
+import io.swagger.v3.oas.annotations.media.*;
+import java.util.*;
+import javax.annotation.*;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author David Brenes
@@ -29,6 +18,35 @@ import javax.xml.bind.annotation.XmlRootElement;
 @JsonFilter("Liferay.Vulcan")
 @XmlRootElement(name = "CalculatorGasOutputExtras")
 public class CalculatorGasOutputExtras {
+
+	@Schema(description = "ConnectDeviceToKitchen calculator gas")
+	public String getConnectDeviceToKitchen() {
+		return ConnectDeviceToKitchen;
+	}
+
+	public void setConnectDeviceToKitchen(String ConnectDeviceToKitchen) {
+		this.ConnectDeviceToKitchen = ConnectDeviceToKitchen;
+	}
+
+	@JsonIgnore
+	public void setConnectDeviceToKitchen(
+		UnsafeSupplier<String, Exception>
+			ConnectDeviceToKitchenUnsafeSupplier) {
+
+		try {
+			ConnectDeviceToKitchen = ConnectDeviceToKitchenUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String ConnectDeviceToKitchen;
 
 	@Schema(description = "ControllHeatingFloor gas output")
 	public String getControllHeatingFloor() {
@@ -253,6 +271,20 @@ public class CalculatorGasOutputExtras {
 		StringBundler sb = new StringBundler();
 
 		sb.append("{");
+
+		if (ConnectDeviceToKitchen != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"ConnectDeviceToKitchen\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(ConnectDeviceToKitchen));
+
+			sb.append("\"");
+		}
 
 		if (ControllHeatingFloor != null) {
 			if (sb.length() > 1) {

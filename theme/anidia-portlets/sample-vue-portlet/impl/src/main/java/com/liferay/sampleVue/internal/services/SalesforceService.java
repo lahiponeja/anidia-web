@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import com.liferay.sampleVue.dto.v1_0.*;
 import com.liferay.sampleVue.internal.dto.*;
+import com.liferay.sampleVue.internal.exception.*;
 import java.io.*;
 import java.net.*;
 import java.net.http.*;
@@ -282,7 +283,10 @@ public class SalesforceService {
 		HttpResponse<String> response = null;
 		try {
 			response = client.send(request, HttpResponse.BodyHandlers.ofString());
-		} catch (IOException | InterruptedException e) {
+			if (response.statusCode() != 200 && response.statusCode() != 201) {
+				throw new PortletException(2, "Error creating lead");
+			}
+		} catch (IOException | InterruptedException | PortletException e) {
 			if(response != null) {
 				System.out.println(response.body());
 			}
@@ -316,7 +320,9 @@ public class SalesforceService {
 	private SendLeadRequest mapToSendLeadRequest(Lead lead) {
 
 		SendLeadRequest sendLeadRequest = new SendLeadRequest();
-		sendLeadRequest.setCalculatorGas(mapToCalculatorGas(lead.getCalculatorGas()));
+		if (lead.getCalculatorGas() != null){
+			sendLeadRequest.setCalculatorGas(mapToCalculatorGas(lead.getCalculatorGas()));
+		}
 		sendLeadRequest.setPersonalData(mapToPersonalDataRequest(lead.getPersonalData()));
 
 		return sendLeadRequest;
@@ -391,10 +397,11 @@ public class SalesforceService {
 	 */
 	private ExtrasInput mapToExtrasInput(CalculatorGasInputExtras calculatorGasInputExtras) {
 		ExtrasInput extrasInput = new ExtrasInput();
-		extrasInput.setControllHeatingFloor(calculatorGasInputExtras.getControllHeatingFloor());
-		extrasInput.setConvertDeviceKitchen(calculatorGasInputExtras.getConvertDeviceKitchen());
-		extrasInput.setHasVentilationGrill(calculatorGasInputExtras.getHasVentilationGrill());
+		extrasInput.setControllHeatingFloor(Boolean.valueOf(calculatorGasInputExtras.getControllHeatingFloor()));
+		extrasInput.setConvertDeviceKitchen(Boolean.valueOf(calculatorGasInputExtras.getConvertDeviceKitchen()));
+		extrasInput.setHasVentilationGrill(Boolean.valueOf(calculatorGasInputExtras.getHasVentilationGrill()));
 		extrasInput.setMetersBoilerToWindow(calculatorGasInputExtras.getMetersBoilerToWindow());
+		extrasInput.setConnectDeviceToKitchen(Boolean.valueOf(calculatorGasInputExtras.getConnectDeviceToKitchen()));
 		String replaceMetersWaterIntake = calculatorGasInputExtras.getMetersWaterIntake().substring(2);
 		System.out.println("ReplaceMetersWaterIntake input: " + replaceMetersWaterIntake);
 		extrasInput.setMetersWaterIntake(replaceMetersWaterIntake);
@@ -433,6 +440,7 @@ public class SalesforceService {
 		extrasOutput.setConvertDeviceKitchen(calculatorGasOutputExtras.getConvertDeviceKitchen());
 		extrasOutput.setExtraTotalPrice(calculatorGasOutputExtras.getExtraTotalPrice());
 		extrasOutput.setHasVentilationGrill(calculatorGasOutputExtras.getHasVentilationGrill());
+		extrasOutput.setConnectDeviceToKitchen(calculatorGasOutputExtras.getConnectDeviceToKitchen());
 		extrasOutput.setMetersBoilerToWindow(calculatorGasOutputExtras.getMetersBoilerToWindow());
 		String replaceMetersWaterIntake = calculatorGasOutputExtras.getMetersWaterIntake().substring(2);
 		System.out.println("ReplaceMetersWaterIntake output: " + replaceMetersWaterIntake);
