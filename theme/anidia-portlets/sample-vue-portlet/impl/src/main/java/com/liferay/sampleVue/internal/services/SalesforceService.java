@@ -4,8 +4,9 @@ import com.liferay.sampleVue.dto.v1_0.*;
 import com.liferay.sampleVue.internal.dto.*;
 import com.liferay.sampleVue.internal.exception.*;
 import java.util.*;
-import org.apache.commons.lang3.*;
 import org.springframework.http.*;
+import org.springframework.http.converter.*;
+import org.springframework.http.converter.json.*;
 import org.springframework.web.client.*;
 
 
@@ -370,10 +371,13 @@ public class SalesforceService {
 		RestTemplate restTemplate = new RestTemplate();
 
 		String tokenUrl = getTokenUrl();
+		System.out.println("Token URL" + tokenUrl);
+
+		restTemplate.setMessageConverters(httpMessageConverters());
 		AccessTokenResponse response = restTemplate.postForObject(
 			tokenUrl, null, AccessTokenResponse.class);
 
-		if (response != null && StringUtils.isNotEmpty(response.getAccessToken())) {
+		if (response != null) {
 			return response.getAccessToken();
 		} else {
 			throw new PortletException(2, "Can not retrieve the access token");
@@ -432,5 +436,19 @@ public class SalesforceService {
 	 */
 	private String getSendLeadUrl(){
 		return SALESFORCE_LEAD_URL;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	private List<HttpMessageConverter<?>> httpMessageConverters() {
+		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
+		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+
+
+		converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+		messageConverters.add(converter);
+		return messageConverters;
 	}
 }
