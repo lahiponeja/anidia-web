@@ -1,5 +1,5 @@
 .anidia-header {
-  width: 100%;
+  width: 100vh;
 
   &.active {
     position: fixed;
@@ -19,7 +19,9 @@
       width: 100%;
 
       body.anidia-white & {
-        color: $an-theme;
+        @include desktop {
+          color: $an-theme;
+        }
       }
     }
 
@@ -144,10 +146,6 @@
       display: block;
       position: relative;
       transform: translateY(-60px);
-
-      li {
-        margin: 0 rem(20);
-      }
     }
 
     .dropdown-item {
@@ -199,6 +197,12 @@
   .dropdown-menu .link-list > li > a:focus {
     background-color: transparent;
     color: $white;
+  }
+
+  .dropdown-item:hover,
+  .dropdown-menu > li > a:hover,
+  .dropdown-menu .link-list > li > a:hover {
+    background-color: transparent;
   }
 
   // BURGER MENU FOR MOBILE
@@ -297,6 +301,12 @@
       & ~ div .navbar-nav {
         opacity: 1;
         display: flex;
+        margin-top: rem(28);
+        padding: 0 rem(20);
+
+        @include desktop {
+          margin-top: 0;
+        }
       }
     }
   }
@@ -332,7 +342,7 @@
     display: none;
     visibility: hidden;
     text-align: center;
-    margin: rem(32) 0;
+    margin: rem(32) rem(20);
 
     @include desktop {
       display: none;
@@ -346,6 +356,7 @@
     .an-btn {
       position: relative;
       z-index: 2;
+      width: 100%;
 
       &:first-child {
         margin-bottom: rem(20);

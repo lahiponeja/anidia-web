@@ -23,7 +23,7 @@
     flex-wrap: nowrap;
     height: 100%;
   }
-  
+
   &__item {
     align-items: normal;
     display: flex;
@@ -32,6 +32,18 @@
     padding: 0 rem(20);
     position: relative;
     width: 100%;
+
+    .an-hero-slider.green & {
+      background: $an-theme;
+    }
+
+    .an-hero-slider.white & {
+      background: $white;
+    }
+
+    .an-hero-slider.light-green & {
+      background: $an-theme-light;
+    }
 
     &-inner-wrapper {
       width: 100%;
@@ -52,11 +64,21 @@
     right: rem(-100);
     bottom: rem(190);
 
+    .an-hero-slider.white &,
+    .an-hero-slider.light-green & {
+      color: $an-theme-dark-grey;
+    }
+
     span {
       display: block;
       margin-left: rem(20);
       font-size: rem(40);
       position: relative;
+
+      .an-hero-slider.white &,
+      .an-hero-slider.light-green & {
+        color: $an-theme;
+      }
     }
   }
 
@@ -94,11 +116,21 @@
     color: $white;
     margin-bottom: rem(20);
     padding-top: rem(117.5);
+
+    .an-hero-slider.white &,
+    .an-hero-slider.light-green & {
+      color: $an-theme;
+    }
   }
-  
+
   &__text {
     color: $white;
     margin-bottom: rem(33);
+
+    .an-hero-slider.white &,
+    .an-hero-slider.light-green & {
+      color: $an-theme;
+    }
   }
 
   &__btn {
@@ -106,8 +138,13 @@
     position: absolute;
     width: 100%;
 
-    & > .an-btn { 
+    & > .an-btn {
       width: 100%;
+
+      .an-hero-slider.white &,
+      .an-hero-slider.light-green & {
+        @extend %an-btn--gradient;
+      }
     }
   }
 
@@ -187,7 +224,7 @@
     &__heading {
       margin-bottom: rem(20);
     }
-    
+
     &__text {
       margin-bottom: rem(33);
     }
@@ -195,8 +232,8 @@
     &__btn {
       bottom: auto;
       position: relative;
-      
-      & > .an-btn { 
+
+      & > .an-btn {
         width: auto;
       }
     }

@@ -1,4 +1,12 @@
-<div class="an-hero-slider">
+[#if configuration.BackgroundColor == 'Verde']
+<div class="an-hero-slider green">
+[/#if]
+[#if configuration.BackgroundColor == 'Blanco']
+<div class="an-hero-slider white">
+[/#if]
+[#if configuration.BackgroundColor == 'Verde Claro']
+<div class="an-hero-slider light-green">
+[/#if]
   <div class="an-hero-slider__inner-wrapper">
     <div class="an-hero-slider__lines">
       <div class="an-hero-slider__lines-list" data-slider-lines-list>
