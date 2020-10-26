@@ -1,6 +1,6 @@
 function packCards() {
   const dots = document.querySelectorAll('.an-pack-cards__dot');
-  const cardContainer = document.querySelector('.an-pack-cards__cards');
+  const cardContainer = document.querySelector('.an-pack-cards .portlet-body');
   const nCards = document.querySelectorAll('.an-card--pack').length;
 
   dots.forEach((dot, i) => {
@@ -50,4 +50,7 @@ function packCards() {
 
 if (document.querySelector(".an-pack-cards")) {
   packCards();
+  document.querySelectorAll('.an-card--pack').forEach(card => {
+    if (card.classList.contains('featured')) card.parentElement.classList.add('featured');
+  })
 }

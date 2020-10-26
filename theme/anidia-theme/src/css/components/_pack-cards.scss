@@ -138,6 +138,15 @@
       z-index: 1;
       order: 1;
       width: 100%;
+      min-width: calc(100% - 40px);
+
+      &:first-child {
+        margin-left: rem(20);
+
+        @include desktop {
+          margin-left: 0;
+        }
+      }
 
       &.featured {
         order: 0;
@@ -151,6 +160,7 @@
       @include desktop {
         margin-right: 0;
         width: auto;
+        min-width: unset;
 
         .an-card--pack:not(.featured) {
           transform: translateX(-20px);

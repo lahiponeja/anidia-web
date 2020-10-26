@@ -32,8 +32,12 @@
 
   .journal-content-article  {
     margin-right: rem(20);
-    min-width: rem(278);
-    max-width: rem(321);
+    min-width:  calc(100% - 40px);
+
+    @include desktop {
+      min-width: rem(278);
+      max-width: rem(321);
+    }
 
     &:first-child {
       margin-left: rem(20);
