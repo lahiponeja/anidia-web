@@ -1,5 +1,5 @@
 function header() {
-  if (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 768){
+  if (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 1024){
     let elementWithSubmenu = document.querySelectorAll("ul .dropdown");
 
     for (let i = 0; i < elementWithSubmenu.length; i++) {

@@ -2,6 +2,7 @@
 
   &__container {
     padding: rem(20);
+    max-width: 100%;
 
     @include desktop {
       max-width: rem(1024);

@@ -15,40 +15,40 @@
     justify-content: space-between;
   }
 
-  div:not(.an-centered-featured__content) {
 
-    &:first-child {
 
-      @include desktop {
-        width: flex-grid(4);
-      }
+  &__left-img {
 
-      img {
-        max-height: rem(256);
-
-        @include desktop {
-          max-height: 100%;
-          width: 100%;
-        }
-      }
+    @include desktop {
+      width: flex-grid(4);
     }
 
-    &:last-child {
+    img {
+      max-height: rem(256);
 
       @include desktop {
-        width: flex-grid(4);
-      }
-
-      img {
-        max-height: rem(470);
-
-        @include desktop {
-          max-height: 100%;
-          width: 100%;
-        }
+        max-height: 100%;
+        width: 100%;
       }
     }
   }
+
+  &__right-img {
+
+    @include desktop {
+      width: flex-grid(4);
+    }
+
+    img {
+      max-height: rem(470);
+
+      @include desktop {
+        max-height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
 
   h2 {
     margin-bottom: rem(19);
