@@ -44,7 +44,7 @@ function header() {
         });
     }
 
-    document.querySelector('.anidia-header__input').addEventListener("click", (event) => {
+    document.querySelector('.anidia-header__input').addEventListener("change", () => {
       document.body.classList.toggle('overflow-hidden');
       document.querySelector('.anidia-header').classList.toggle('active');
       document.querySelector('.site-title .anidia-logo-header--mobile--white').classList.toggle('hide')
