@@ -23,9 +23,10 @@
   }
 
   &__tabs {
-    min-height: rem(500);
+    margin-bottom: rem(99);
 
     @include desktop {
+      min-height: rem(285);
       clear: both;
       position: relative;
       display: flex;
@@ -35,6 +36,11 @@
   }
 
   &__tab {
+    display: none;
+
+    &.active {
+      display: block;
+    }
 
     @include desktop {
       float: left;
@@ -63,8 +69,6 @@
 
 
   &__tab__container {
-    transition: opacity .2s cubic-bezier(.42,0,.34,1.01);
-    opacity: 0;
     margin-top: rem(55);
     display: flex;
     scroll-padding: 0 100%;
@@ -91,7 +95,6 @@
       scroll-snap-type: none;
       scroll-padding: none;
       left: 0;
-      justify-content: center;
     }
 
     h4 {
@@ -114,7 +117,6 @@
 
     @include desktop {
       min-width: auto;
-      max-width: rem(234);
     }
 
     &:first-child {
@@ -151,8 +153,6 @@
       border-radius: 50%;
       background-color: $an-yellow;
       color: $an-theme;
-      font-family: $fs-emeric-bold-family;
-      font-size: rem(18);
     }
 
     &::after {
@@ -162,7 +162,7 @@
       height: 2px;
       background-color: $an-yellow;
       top: 15px;
-      left: -49%;
+      left: -50%;
       z-index: -1;
     }
   }
@@ -171,11 +171,6 @@
   [type=radio]:checked ~ label {
     border-bottom: 2px solid;
     z-index: 2;
-  }
-
-  [type=radio]:checked ~ label ~ &__tab__container {
-    z-index: 1;
-    opacity: 1;
   }
 
     &__dots {
