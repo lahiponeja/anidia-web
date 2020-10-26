@@ -33,6 +33,11 @@ const coverageForm = {
         validArr: ["01", "02", "03", "04", "05", "10", "10a", "10b"],
         invalidArr: ["06", "07", "08ª", "08b", "09"],
       },
+
+      loadingMunicipalities: false,
+      loadingAddressess: false,
+      loadingEstates: false,
+      loadingProperties: false,
     }
   },
   inject: ["house"],
@@ -81,7 +86,10 @@ const coverageForm = {
       // Save object in the store
       this.house.setCoverageData("postalCode", { postalCode })
       // Get municipalities
+      this.loadingMunicipalities = true,
       this.house.getMunicipalities(postalCode)
+        .then((res) => { this.loadingMunicipalities = false })
+        .catch((err) => { this.loadingMunicipalities = false })
     },
 
 
@@ -99,7 +107,11 @@ const coverageForm = {
       this.formData.municipalityId = municipalityId
       this.formData.provinceId = provinceId
 
+      this.loadingAddressess = true
       this.house.getAddresses(this.formData.provMunId, this.formData.postalCode)
+        .then((res) => { this.loadingAddressess = false })
+        .catch((err) => { this.loadingAddressess = false })
+      
     },
 
     /*************************************
@@ -116,8 +128,11 @@ const coverageForm = {
 
       this.formData.addressKind = kind
       this.formData.addressName = name
-
+      
+      this.loadingEstates = true
       this.house.getEstates(this.formData.provMunId, this.formData.postalCode, kind, name)
+        .then((res) => { this.loadingEstates = false })
+        .catch((err) => { this.loadingEstates = false })
     },
 
     /*************************************
@@ -137,7 +152,11 @@ const coverageForm = {
       this.house.setCoverageData("estate", { gateId, number })
 
       this.formData.number = number
+
+      this.loadingProperties = true
       this.house.getProperties(gateId)
+        .then((res) => { this.loadingProperties = false })
+        .catch((err) => { this.loadingProperties = false })
     },
 
     /*************************************
@@ -280,6 +299,7 @@ const coverageForm = {
 
             <!--INPUT FIELD: formData.municipalityName -->
             <div class="an-input an-form__item" :class="{ 'an-input--disabled': !!!municipalitiesArr.length }">
+              <small v-show="loadingMunicipalities" style="position: absolute;z-index: 1;right: 30px;">Cargando municipios...</small>
               <autocomplete                 
                 @submit="onSubmitMunicipalities"
                 :search="search" 
@@ -326,6 +346,7 @@ const coverageForm = {
 
               <!--INPUT FIELD: formData.addressName -->
               <div class="an-input an-form__item" :class="{ 'an-input--disabled': !!!addressesArr.length }">
+              <small v-show="loadingAddressess" style="position: absolute;z-index: 1;right: 30px;">Cargando calles...</small>
                 <autocomplete                 
                   @submit="onSubmitAddresses"
                   :search="search" 
@@ -372,6 +393,7 @@ const coverageForm = {
               
               <!-- INPUT FIELD: formData.number -->
               <div class="an-input an-form__item" :class="{ 'an-input--disabled': !!!estatesArr.length }">
+                <small v-show="loadingEstates" style="position: absolute;z-index: 1;right: 30px;">Cargando numeros...</small>    
                 <autocomplete                 
                   @submit="onSubmitEstates"
                   :search="searchEstates" 
@@ -418,6 +440,7 @@ const coverageForm = {
 
               <!--INPUT FIELD: formData.houseType -->
               <div class="an-input an-form__item" :class="{ 'an-input--disabled': !!!propertiesArr.length }">
+              <small v-show="loadingProperties" style="position: absolute;z-index: 1;right: 30px;">Cargando viviendas...</small>
               <autocomplete                 
                 @submit="onSubmitProperties"
                 :search="search" 
@@ -463,7 +486,7 @@ const coverageForm = {
             </div>
           </div>
 
-          <button type="submit" :disabled="!formData.status" :class="{ 'an-btn--disabled': !formData.status  }" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
+          <button type="submit" :disabled="!formData.status" :class="{ 'an-btn--disabled': !formData.status  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Comprobar</span>
           </button>
           

@@ -198,46 +198,61 @@ const getPostalCodes = function () {
 }
 
 const getMunicipalities = function(pc) {
-  coverageService.getMunicipalities(pc).then((res) => {
-    const resJson = xmlToJsonImp(res.data);
-    const { items } = resJson.Page.items
-    state.autocompData.municipalities = [items];
-  }).catch((err) => {
-    console.error(err);
+  return new Promise((resolve, reject) =>{
+    coverageService.getMunicipalities(pc).then((res) => {
+      const resJson = xmlToJsonImp(res.data);
+      const { items } = resJson.Page.items
+      state.autocompData.municipalities = [items];
+      resolve(items)
+    }).catch((err) => {
+      reject(err)
+      console.error(err);
+    })
   })
 }
 
 const getAddresses = function(municipalityId, postalCode) {
-  coverageService.getAddresses(municipalityId, postalCode).then((res) => {
-    const resJson = xmlToJsonImp(res.data);
-    const { items } = resJson.Page.items
-    const result = items
-    state.autocompData.addresses = result.length ? result : [result]
-  }).catch((err) => {
-    console.error(err);
+  return new Promise((resolve, reject) =>{
+    coverageService.getAddresses(municipalityId, postalCode).then((res) => {
+      const resJson = xmlToJsonImp(res.data);
+      const { items } = resJson.Page.items
+      const result = items
+      state.autocompData.addresses = result.length ? result : [result]
+      resolve(items)
+    }).catch((err) => {
+      reject(err)
+      console.error(err);
+    })
   })
 }
 
 const getEstates = function(municipalityId, postalCode, addressKind, addressName) {
-  coverageService.getEstates(municipalityId, postalCode, addressKind, addressName).then((res) => {
-    const resJson = xmlToJsonImp(res.data);
-    const { items } = resJson.Page.items
-    const result = items
-    state.autocompData.estates = result
-  }).catch((err) => {
-    console.error(err);
+  return new Promise((resolve, reject) =>{
+    coverageService.getEstates(municipalityId, postalCode, addressKind, addressName).then((res) => {
+      const resJson = xmlToJsonImp(res.data);
+      const { items } = resJson.Page.items
+      const result = items
+      state.autocompData.estates = result
+      resolve(items)
+    }).catch((err) => {
+      reject(err)
+      console.error(err);
+    })
   })
 }
 
 const getProperties = function(gateId) {
-  coverageService.getProperties(gateId).then((res) => {
-    const resJson = xmlToJsonImp(res.data);
-    const { items } = resJson.Page.items
-    const result = items
-    state.autocompData.properties = result.length ? result : [result]
-    
-  }).catch((err) => {
-    console.error(err);
+  return new Promise((resolve, reject) =>{
+    coverageService.getProperties(gateId).then((res) => {
+      const resJson = xmlToJsonImp(res.data);
+      const { items } = resJson.Page.items
+      const result = items
+      state.autocompData.properties = result.length ? result : [result]
+      resolve(items)
+    }).catch((err) => {
+      reject(err)
+      console.error(err);
+    })
   })
 }
 
