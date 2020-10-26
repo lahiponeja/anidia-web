@@ -1,25 +1,23 @@
 
 package com.liferay.sampleVue.internal.dto;
 
-import com.fasterxml.jackson.annotation.*;
-
 public class OutputRequest {
 
-    @JsonProperty("BaseBadget")
+    //@JsonProperty("BaseBadget")
     private String baseBadget;
-    @JsonProperty("Bonus")
+    //@JsonProperty("Bonus")
     private String bonus;
-    @JsonProperty("Equipment")
+    //@JsonProperty("Equipment")
     private String equipment;
-    @JsonProperty("Extras")
-    private ExtrasOutput extrasOutput;
-    @JsonProperty("Iva21")
+    //@JsonProperty("Extras")
+    private ExtrasOutput extras;
+    //@JsonProperty("Iva21")
     private String iva21;
-    @JsonProperty("ProposedPack")
+    //@JsonProperty("ProposedPack")
     private String proposedPack;
-    @JsonProperty("TotalBudget")
+    //@JsonProperty("TotalBudget")
     private String totalBudget;
-    @JsonProperty("TotalPVP")
+    //@JsonProperty("TotalPVP")
     private String totalPVP;
 
     public String getBaseBadget() {
@@ -46,12 +44,12 @@ public class OutputRequest {
         this.equipment = equipment;
     }
 
-    public ExtrasOutput getExtrasOutput() {
-        return extrasOutput;
+    public ExtrasOutput getExtras() {
+        return extras;
     }
 
-    public void setExtrasOutput(ExtrasOutput extrasOutput) {
-        this.extrasOutput = extrasOutput;
+    public void setExtras(ExtrasOutput extras) {
+        this.extras = extras;
     }
 
     public String getIva21() {

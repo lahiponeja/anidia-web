@@ -1,20 +1,18 @@
 package com.liferay.sampleVue.internal.dto;
 
-import com.fasterxml.jackson.annotation.*;
-
 public class ExtrasInput {
 
-    @JsonProperty("MetersBoilerToWindow")
+    //@JsonProperty("MetersBoilerToWindow")
     private Integer metersBoilerToWindow;
-    @JsonProperty("MetersWaterIntake")
+    //@JsonProperty("MetersWaterIntake")
     private String metersWaterIntake;
-    @JsonProperty("HasVentilationGrill")
+    //@JsonProperty("HasVentilationGrill")
     private String hasVentilationGrill;
-    @JsonProperty("ControllHeatingFloor")
+    //@JsonProperty("ControllHeatingFloor")
     private String controllHeatingFloor;
-    @JsonProperty("ConvertDeviceKitchen")
+    //@JsonProperty("ConvertDeviceKitchen")
     private String convertDeviceKitchen;
-    @JsonProperty("RadiatorsBathroom")
+    //@JsonProperty("RadiatorsBathroom")
     private String radiatorsBathroom;
 
     public Integer getMetersBoilerToWindow() {

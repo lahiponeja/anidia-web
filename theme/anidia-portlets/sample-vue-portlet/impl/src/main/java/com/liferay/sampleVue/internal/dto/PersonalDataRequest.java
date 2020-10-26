@@ -1,37 +1,35 @@
 
 package com.liferay.sampleVue.internal.dto;
 
-import com.fasterxml.jackson.annotation.*;
-
 public class PersonalDataRequest {
 
-    @JsonProperty("AcceptNotCom")
+    //@JsonProperty("AcceptNotCom")
     private Boolean acceptNotCom;
-    @JsonProperty("AddressBloq")
+    //@JsonProperty("AddressBloq")
     private String addressBloq;
-    @JsonProperty("AddressDoor")
+    //@JsonProperty("AddressDoor")
     private String addressDoor;
-    @JsonProperty("AddressNumber")
+    //@JsonProperty("AddressNumber")
     private String addressNumber;
-    @JsonProperty("AddressPlant")
+    //@JsonProperty("AddressPlant")
     private String addressPlant;
-    @JsonProperty("AddressPostalCode")
+    //@JsonProperty("AddressPostalCode")
     private String addressPostalCode;
-    @JsonProperty("AddressStair")
+    //@JsonProperty("AddressStair")
     private String addressStair;
-    @JsonProperty("AddressStreet")
+    //@JsonProperty("AddressStreet")
     private String addressStreet;
-    @JsonProperty("AddressTown")
+    //@JsonProperty("AddressTown")
     private String addressTown;
-    @JsonProperty("Email")
+    //@JsonProperty("Email")
     private String email;
-    @JsonProperty("FirstName")
+    //@JsonProperty("FirstName")
     private String firstName;
-    @JsonProperty("LastName")
+    //@JsonProperty("LastName")
     private String lastName;
-    @JsonProperty("Phone")
+    //@JsonProperty("Phone")
     private String phone;
-    @JsonProperty("ProdInterest")
+    //@JsonProperty("ProdInterest")
     private String prodInterest;
 
     public Boolean getAcceptNotCom() {

@@ -1,30 +1,26 @@
 
 package com.liferay.sampleVue.internal.dto;
 
-import com.fasterxml.jackson.annotation.*;
-
 public class SendLeadRequest {
 
-    @JsonProperty("calculatorGas")
-    private CalculatorGasRequest calculatorGasRequest;
-    @JsonProperty("personalData")
-    private PersonalDataRequest personalDataRequest;
+    //@JsonProperty("calculatorGas")
+    private CalculatorGasRequest calculatorGas;
+    //@JsonProperty("personalData")
+    private PersonalDataRequest personalData;
 
-    public CalculatorGasRequest getCalculatorGasRequest() {
-        return calculatorGasRequest;
+    public CalculatorGasRequest getCalculatorGas() {
+        return calculatorGas;
     }
 
-    public void setCalculatorGasRequest(
-        CalculatorGasRequest calculatorGasRequest) {
-        this.calculatorGasRequest = calculatorGasRequest;
+    public void setCalculatorGas(CalculatorGasRequest calculatorGas) {
+        this.calculatorGas = calculatorGas;
     }
 
-    public PersonalDataRequest getPersonalDataRequest() {
-        return personalDataRequest;
+    public PersonalDataRequest getPersonalData() {
+        return personalData;
     }
 
-    public void setPersonalDataRequest(
-        PersonalDataRequest personalDataRequest) {
-        this.personalDataRequest = personalDataRequest;
+    public void setPersonalData(PersonalDataRequest personalData) {
+        this.personalData = personalData;
     }
 }

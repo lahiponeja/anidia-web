@@ -1,28 +1,26 @@
 
 package com.liferay.sampleVue.internal.dto;
 
-import com.fasterxml.jackson.annotation.*;
-
 public class CalculatorGasRequest {
 
-    @JsonProperty("input")
-    private InputRequest inputRequest;
-    @JsonProperty("output")
-    private OutputRequest outputRequest;
+    //@JsonProperty("input")
+    private InputRequest input;
+    //@JsonProperty("output")
+    private OutputRequest output;
 
-    public InputRequest getInputRequest() {
-        return inputRequest;
+    public InputRequest getInput() {
+        return input;
     }
 
-    public void setInputRequest(InputRequest inputRequest) {
-        this.inputRequest = inputRequest;
+    public void setInput(InputRequest input) {
+        this.input = input;
     }
 
-    public OutputRequest getOutputRequest() {
-        return outputRequest;
+    public OutputRequest getOutput() {
+        return output;
     }
 
-    public void setOutputRequest(OutputRequest outputRequest) {
-        this.outputRequest = outputRequest;
+    public void setOutput(OutputRequest output) {
+        this.output = output;
     }
 }
