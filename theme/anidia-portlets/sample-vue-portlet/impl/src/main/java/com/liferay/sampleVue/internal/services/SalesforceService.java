@@ -256,7 +256,7 @@ public class SalesforceService {
 		ExtrasOutput extrasOutput = new ExtrasOutput();
 		extrasOutput.setControllHeatingFloor(calculatorGasOutputExtras.getControllHeatingFloor());
 		extrasOutput.setConvertDeviceKitchen(calculatorGasOutputExtras.getConvertDeviceKitchen());
-		extrasOutput.setExtraTotalPrice(calculatorGasOutputExtras.getExtraTotalPrice().doubleValue());
+		extrasOutput.setExtraTotalPrice(calculatorGasOutputExtras.getExtraTotalPrice());
 		extrasOutput.setHasVentilationGrill(calculatorGasOutputExtras.getHasVentilationGrill());
 		extrasOutput.setMetersBoilerToWindow(calculatorGasOutputExtras.getMetersBoilerToWindow());
 		extrasOutput.setMetersWaterIntake(calculatorGasOutputExtras.getMetersWaterIntake());
