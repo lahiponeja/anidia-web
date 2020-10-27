@@ -494,14 +494,6 @@
   }
 }
 
-#banner {
-  @include desktop {
-    position: absolute;
-    padding: rem(44) rem(60);
-    width: 100%;
-  }
-}
-
 #sign-in {
   display: none;
 }
