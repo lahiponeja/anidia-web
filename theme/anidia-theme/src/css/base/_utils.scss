@@ -61,6 +61,10 @@ $lines-clamp: 2 3 4 !default;
   flex-direction: column;
 }
 
+.w-full {
+  width: 100%;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }

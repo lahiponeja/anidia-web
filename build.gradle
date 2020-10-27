@@ -100,12 +100,13 @@ tasks.register("build.portlets") {
   description = 'Builds all the portlets and copy them to the deploy folder'
 
     dependsOn 'build.portlets.contact_form'
+    dependsOn 'build.portlets.gas_budget'
 
 }
 
 tasks.register("build.portlets.contact_form") {
   group = 'Anidia'
-  description = 'Builds all the portlets and copy them to the deploy folder'
+  description = 'Builds the Contact Form portlet and copy them to the deploy folder'
 
   doLast {
     exec {
@@ -114,6 +115,27 @@ tasks.register("build.portlets.contact_form") {
     }
     exec {
       commandLine 'cp', 'theme/anidia-portlets/ContactFormPortlet/build/libs/ContactFormPortlet.war', 'liferay/deploy'
+    }
+  }
+}
+
+tasks.register("build.portlets.gas_budget") {
+  group = 'Anidia'
+  description = 'Builds the Gas Budget portlet and copy them to the deploy folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-portlets/GasBudgetPortlet'
+      commandLine 'gradle', 'build'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/GasBudgetPortlet/api/build/libs/gas-budget-api-1.0.0.jar', 'liferay/deploy'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/GasBudgetPortlet/impl/build/libs/gas-budget-impl-1.0.0.jar', 'liferay/deploy'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/GasBudgetPortlet/vue/dist/gas-budget-portlet-1.0.0.jar', 'liferay/deploy'
     }
   }
 }

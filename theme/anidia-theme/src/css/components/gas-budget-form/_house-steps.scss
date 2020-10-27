@@ -1,0 +1,73 @@
+.an-house {
+  &__steps {
+    &-list {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-item {
+      width: 120px;
+
+      &:not(:first-of-type) {
+        margin-left: 106px;
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          width: 106px;
+          height: 1px;
+          background-color: $black;
+          top: 50%;
+          transform: translateY(-50%);
+          left: -106px;
+        }
+      }
+
+      &--active {
+        color: $an-theme;
+        &:not(:first-of-type) {
+          &::before {
+            content: "";
+            position: absolute;
+            width: 106px;
+            height: 1px;
+            background-color: $an-theme;
+            top: 50%;
+            transform: translateY(-50%);
+            left: -106px;
+          }
+        }
+      }
+      &-icon {
+        font-size: 55px;
+      }
+    }
+  }
+
+  @include tablet {
+    &__steps {
+      &-list {
+      }
+  
+      &-item {
+
+        &:not(:first-of-type) {
+          margin-left: 106px;
+          position: relative;
+
+          &::before {
+            content: "";
+            position: absolute;
+            width: 106px;
+            height: 1px;
+            top: 50%;
+            transform: translateY(-50%);
+            left: -106px;
+          }
+        }
+      }
+    }
+  }
+}

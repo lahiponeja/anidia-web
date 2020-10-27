@@ -137,6 +137,54 @@ Para producción (donde no se debe apagar Liferay) hay que:
 * Hacer el deploy.
 * Hacer `start` del paquete.
 
+## Desarrollo de módulos Vue
+
+Para desarrollar un portlet Vue se necesitan 2 partes, por un lado el portlet Vue que se arrastrará en el administrador y por otra parte las APIs que han de alimentar a Vue.
+
+En los portlets Vue hay entonces 3 módulos a tener en cuenta:
+
+* carpeta `vue`: Se trata de un módulo en el que va toda el código frontal.
+* carpeta `api`: Define los modelos de datos e interfaces de la API.
+* carpeta `impl`: Define la implementación final de la API, así como la configuración de swagger del servicio para la autogeneración de código.
+
+### Despliegue de la API
+
+Para el despliegue de la API se ha de hacer `build` de las carpetas `api` e `impl`. Esto genera dos ficheros .jar que se han de copiar a la carpeta deploy de Liferay de la manera acostumbrada.
+
+Un ejemplo de las órdenes para hacer este despliegue sería:
+
+```
+carpeta-de-portlet > gradle build
+carpeta-de-portlet > cp {api,impl}/build/libs/*.jar ../../../liferay/deploy/
+```
+
+Una vez desplegado, cada vez que generemos una nueva API tendremos que dar permisos para poder atacarla.
+
+Para ello, en el Admin de Liferay, vamos a la sección Panel de Control > Service Access Policy.
+
+Aquí generamos una policy propia para lo que le damos un nombre y título con el criterio que queramos. Una vez creada podemos dar acceso, en el campo `Allowed Service Signatures`, a cada clase y método a ejecutarse desde la API.
+
+Por ejemplo, el campo si activamos el modo avanzado puede tener el valor:
+
+```
+com.liferay.sampleVue.internal.resource.v1_0.AddressResourceImpl#getAddressesPostalCodePage
+com.liferay.sampleVue.internal.resource.v1_0.EstateResourceImpl#getEstatesAddressNamePage
+com.liferay.sampleVue.internal.resource.v1_0.PostalCodeResourceImpl#getMunicipalityPostalCodePage
+com.liferay.sampleVue.internal.resource.v1_0.PostalCodeResourceImpl#getPostalCodesPage
+com.liferay.sampleVue.internal.resource.v1_0.PropertyResourceImpl#getPropertiesGatePage
+com.liferay.sampleVue.internal.resource.v1_0.SampleResourceImpl
+```
+
+Estas cadenas se obtienen al intentar acceder a la API y recibir el error correspondiente:
+
+```
+<ForbiddenEntity>
+<message>Access denied to com.liferay.sampleVue.internal.resource.v1_0.PostalCodeResourceImpl#getMunicipalityPostalCodePage</message>
+</ForbiddenEntity>
+```
+
+A partir de aquí la API está disponible en la URL indicada. Por ejemplo: http://localhost:8080/o/sample-vue/v1.0/municipalities/52006.
+
 ## Despliegue con Gradle
 
 Para encapsular los distintos procesos de despliegue usamos un build de gradle que tiene distintas opciones:

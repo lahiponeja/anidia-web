@@ -104,6 +104,10 @@
     }
   }
 
+  &--full-width {
+    width: 100%;
+  }
+
   &__custom {
     $custom: &;
 
@@ -126,6 +130,8 @@
       padding: rem(45) 0 rem(25) 0;
       position: relative;
       top: rem(-28);
+      max-height: 300px;
+      overflow: auto;
     }
 
     &-option {
@@ -147,6 +153,10 @@
       &.is-hover {
         color: $an-theme;
       }
+
+      &[aria-selected="true"] {
+        color: $an-theme;
+      }
     }
 
     &.is-active {
@@ -161,23 +171,22 @@
     }
   }
 
-  @media (hover: hover) {
-    &__native {
-      opacity: 0;
-    }
+  // @media (hover: hover) {
+  //   &__native {
+  //     opacity: 0;
+  //   }
 
-    &__custom {
-      display: block;
-    }
+  //   &__custom {
+  //     display: block;
+  //   }
 
-    &__native:focus + &__custom {
-      pointer-events: none;
+  //   &__native:focus + &__custom {
+  //     pointer-events: none;
 
-      #{ $an-select }__custom-trigger {
-        box-shadow: none;
-        border: 2px solid $an-theme;
-      }
-    }
-  }
+  //     #{ $an-select }__custom-trigger {
+  //       box-shadow: none;
+  //       border: 2px solid $an-theme;
+  //     }
+  //   }
+  // }
 }
-

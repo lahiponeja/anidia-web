@@ -8,11 +8,13 @@
 @import './base/icons';
 @import './base/margins';
 @import './base/paddings';
+@import './base/colors';
 @import './base/backgrounds';
 @import './base/layout';
 @import './base/reset';
 
-// // UI Kit
+// // Plugins
+
 
 // // Elements
 @import './elements/pill';
@@ -32,6 +34,8 @@
 @import './components/featured';
 @import './components/info-elems';
 @import './components/centered-featured';
+@import './components/funnel';
+@import './components/gas-budget-form/house-steps';
 @import './components/form';
 @import './components/pack-cards';
 @import './components/stepper';
