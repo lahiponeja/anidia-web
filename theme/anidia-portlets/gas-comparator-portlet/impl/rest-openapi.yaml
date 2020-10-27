@@ -15,6 +15,9 @@ components:
         kitchenUse:
           description: Wether it's used for the kitchen.
           type: boolean
+        energyType:
+          description: Select Butane, GLP, GOC or Electricity
+          type: string
     GasConsumptionByUse:
       description: Info about gas consumption according to the answers of the user
       properties:
@@ -97,9 +100,9 @@ paths:
       description: Calculates the savings when the user knows the amount of energy spent,
       requestBody:
         content:
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/GasCalculatedConsumption"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/GasCalculatedConsumption"
       responses:
         200:
           content:
@@ -114,9 +117,9 @@ paths:
       description: Calculates the savings inferred from the user habits
       requestBody:
         content:
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/GasConsumptionByUse"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/GasConsumptionByUse"
       responses:
         200:
           content:

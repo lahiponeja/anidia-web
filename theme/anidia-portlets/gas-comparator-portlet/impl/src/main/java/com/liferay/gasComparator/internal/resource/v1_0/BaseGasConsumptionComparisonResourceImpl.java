@@ -1,30 +1,18 @@
 package com.liferay.gasComparator.internal.resource.v1_0;
 
-import com.liferay.gasComparator.dto.v1_0.GasCalculatedConsumption;
-import com.liferay.gasComparator.dto.v1_0.GasConsumptionByUse;
-import com.liferay.gasComparator.dto.v1_0.GasConsumptionComparison;
-import com.liferay.gasComparator.resource.v1_0.GasConsumptionComparisonResource;
-import com.liferay.petra.function.UnsafeFunction;
-import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
-import com.liferay.portal.vulcan.util.TransformUtil;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tags;
-
-import java.util.List;
-
-import javax.annotation.Generated;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.UriInfo;
+import com.liferay.gasComparator.dto.v1_0.*;
+import com.liferay.gasComparator.resource.v1_0.*;
+import com.liferay.petra.function.*;
+import com.liferay.portal.kernel.model.*;
+import com.liferay.portal.vulcan.accept.language.*;
+import com.liferay.portal.vulcan.util.*;
+import io.swagger.v3.oas.annotations.*;
+import io.swagger.v3.oas.annotations.tags.*;
+import java.util.*;
+import javax.annotation.*;
+import javax.servlet.http.*;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
 
 /**
  * @author David Brenes
@@ -38,7 +26,7 @@ public abstract class BaseGasConsumptionComparisonResourceImpl
 	/**
 	 * Invoke this method with the command line:
 	 *
-	 * curl -X 'POST' 'http://localhost:8080/o/gas-comparator/v1.0/savings-by-consumption' -d $'{"acsUse": ___, "electricityConsumption": ___, "heatingUse": ___, "kitchenUse": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
+	 * curl -X 'POST' 'http://localhost:8080/o/gas-comparator/v1.0/savings-by-consumption' -d $'{"acsUse": ___, "electricityConsumption": ___, "energyType": ___, "heatingUse": ___, "kitchenUse": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
 	 */
 	@Override
 	@Consumes("application/xml")

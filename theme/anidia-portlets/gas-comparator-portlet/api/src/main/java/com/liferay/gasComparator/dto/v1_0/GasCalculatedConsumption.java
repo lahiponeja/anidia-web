@@ -1,24 +1,13 @@
 package com.liferay.gasComparator.dto.v1_0;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import com.liferay.petra.function.UnsafeSupplier;
-import com.liferay.petra.string.StringBundler;
-import com.liferay.portal.vulcan.graphql.annotation.GraphQLField;
-import com.liferay.portal.vulcan.graphql.annotation.GraphQLName;
-
-import io.swagger.v3.oas.annotations.media.Schema;
-
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-
-import javax.annotation.Generated;
-
-import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.annotation.*;
+import com.liferay.petra.function.*;
+import com.liferay.petra.string.*;
+import com.liferay.portal.vulcan.graphql.annotation.*;
+import io.swagger.v3.oas.annotations.media.*;
+import java.util.*;
+import javax.annotation.*;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author David Brenes
@@ -86,6 +75,34 @@ public class GasCalculatedConsumption {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer electricityConsumption;
+
+	@Schema(description = "Select Butane, GLP, GOC or Electricity")
+	public String getEnergyType() {
+		return energyType;
+	}
+
+	public void setEnergyType(String energyType) {
+		this.energyType = energyType;
+	}
+
+	@JsonIgnore
+	public void setEnergyType(
+		UnsafeSupplier<String, Exception> energyTypeUnsafeSupplier) {
+
+		try {
+			energyType = energyTypeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String energyType;
 
 	@Schema(description = "Wether it's used for house heating.")
 	public Boolean getHeatingUse() {
@@ -189,6 +206,20 @@ public class GasCalculatedConsumption {
 			sb.append("\"electricityConsumption\": ");
 
 			sb.append(electricityConsumption);
+		}
+
+		if (energyType != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"energyType\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(energyType));
+
+			sb.append("\"");
 		}
 
 		if (heatingUse != null) {

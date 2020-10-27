@@ -1,144 +1,179 @@
 package com.liferay.gasComparator.internal.services;
 
-import com.liferay.gasComparator.dto.v1_0.GasConsumptionComparison;
-import com.liferay.gasComparator.dto.v1_0.GasCalculatedConsumption;
-import com.liferay.gasComparator.dto.v1_0.GasConsumptionByUse;
-
-import com.liferay.gasComparator.internal.exception.PortletException;
-
-import java.util.*;
-
-import com.liferay.portal.kernel.json.JSON;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.liferay.gasComparator.dto.v1_0.*;
+import com.liferay.gasComparator.internal.dto.*;
+import com.liferay.gasComparator.internal.exception.*;
+import java.io.*;
+import java.net.*;
+import java.net.http.*;
+import org.json.*;
 
 
 public class GasComparator {
-  static String GAS_COMPARATOR_CONSUMPTION_REQUEST_URL = System.getenv().get("GAS_COMPARATOR_CONSUMPTION_REQUEST_URL");
-  static String GAS_COMPARATOR_USE_REQUEST_URL = System.getenv().get("GAS_COMPARATOR_USE_REQUEST_URL");
-  static String SOLUSOFT_SECRET = System.getenv().get("SOLUSOFT_SECRET");
 
-  public GasConsumptionComparison compareByDirectConsumption(GasCalculatedConsumption gasCalculatedConsumption) throws PortletException {
+    static String GAS_COMPARATOR_CONSUMPTION_REQUEST_URL = System.getenv()
+        .get("GAS_COMPARATOR_CONSUMPTION_REQUEST_URL");
+    static String GAS_COMPARATOR_USE_REQUEST_URL = System.getenv()
+        .get("GAS_COMPARATOR_USE_REQUEST_URL");
+    static String SOLUSOFT_SECRET = System.getenv().get("SOLUSOFT_SECRET");
 
-    JSONObject jsonRequest = new JSONObject();
+    public GasConsumptionComparison compareByDirectConsumption(
+        GasCalculatedConsumption gasCalculatedConsumption) throws PortletException {
 
-    try {
+        GasConsumptionComparison gasConsumptionComparison = new GasConsumptionComparison();
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonRequest = mapper.writeValueAsString(mapGasComparationRequest(
+                gasCalculatedConsumption));
 
-      jsonRequest.put("AnualConsumptionButane", 0);
-      jsonRequest.put("AnualConsumptionGLP", 0);
-      jsonRequest.put("AnualConsumptionGOC", 0);
-      jsonRequest.put("AnualConsuptionElectricity", gasCalculatedConsumption.getElectricityConsumption());
-      jsonRequest.put("AcsUse", gasCalculatedConsumption.getAcsUse() ? "Si" : "No");
-      jsonRequest.put("HeatingUse", gasCalculatedConsumption.getHeatingUse() ? "Si" : "No");
-      jsonRequest.put("KitchenUse", gasCalculatedConsumption.getKitchenUse() ? "Si" : "No");
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder().
+                uri(URI.create(GAS_COMPARATOR_CONSUMPTION_REQUEST_URL)).
+                header("x-auth-token", SOLUSOFT_SECRET).
+                header("Content-Type", "application/json").
+                POST(HttpRequest.BodyPublishers.ofString(jsonRequest)).
+                build();
 
-    } catch (JSONException e) {
-      e.printStackTrace();
-      throw new PortletException(1, "Error creating request");
+            System.out.println("Solicitando comaprativa a " + GAS_COMPARATOR_CONSUMPTION_REQUEST_URL);
+            System.out.println(">    Detalle de comparativa " + jsonRequest);
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println(">    Respuesta " + response.body());
+
+            gasConsumptionComparison = mapJsonResponseToComparison(response);
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new PortletException(1, "Error creating request");
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            throw new PortletException(2, "Error sending request");
+        }
+
+        return gasConsumptionComparison;
     }
 
-    HttpClient client = HttpClient.newHttpClient();
-    HttpRequest request = HttpRequest.newBuilder().
-      uri(URI.create(GAS_COMPARATOR_CONSUMPTION_REQUEST_URL)).
-      header("x-auth-token", SOLUSOFT_SECRET).
-      header("Content-Type", "application/json").
-      POST(HttpRequest.BodyPublishers.ofString(jsonRequest.toString())).
-      build();
+    private GasComparationRequest mapGasComparationRequest(
+        GasCalculatedConsumption gasCalculatedConsumption) {
 
-    System.out.println("Solicitando comaprativa a " + GAS_COMPARATOR_CONSUMPTION_REQUEST_URL);
-    System.out.println(">    Detalle de comparativa " + jsonRequest.toString());
+        GasComparationRequest gasComparationRequest = new GasComparationRequest();
+        gasComparationRequest.setAcsUse(gasCalculatedConsumption.getAcsUse() ? "Si" : "No");
+        switch (gasCalculatedConsumption.getEnergyType()) {
+            case "glp":
+                gasComparationRequest.setAnualConsumptionGLP(
+                    gasCalculatedConsumption.getElectricityConsumption());
+                gasComparationRequest.setAnualConsumptionButane(0);
+                gasComparationRequest.setAnualConsumptionGOC(0);
+                gasComparationRequest.setAnualConsuptionElectricity(0);
+                break;
+            case "goc":
+                gasComparationRequest.setAnualConsumptionGLP(0);
+                gasComparationRequest.setAnualConsumptionButane(0);
+                gasComparationRequest.setAnualConsumptionGOC(
+                    gasCalculatedConsumption.getElectricityConsumption());
+                gasComparationRequest.setAnualConsuptionElectricity(0);
+                break;
+            case "electricity":
+                gasComparationRequest.setAnualConsumptionGLP(0);
+                gasComparationRequest.setAnualConsumptionButane(0);
+                gasComparationRequest.setAnualConsumptionGOC(0);
+                gasComparationRequest.setAnualConsuptionElectricity(
+                    gasCalculatedConsumption.getElectricityConsumption());
+                break;
+            case "butane":
+                gasComparationRequest.setAnualConsumptionGLP(0);
+                gasComparationRequest.setAnualConsumptionButane(
+                    gasCalculatedConsumption.getElectricityConsumption());
+                gasComparationRequest.setAnualConsumptionGOC(0);
+                gasComparationRequest.setAnualConsuptionElectricity(0);
+                break;
+        }
+        gasComparationRequest.setHeatingUse(gasCalculatedConsumption.getHeatingUse() ? "Si" : "No");
+        gasComparationRequest.setKitchenUse(gasCalculatedConsumption.getKitchenUse() ? "Si" : "No");
 
-    HttpResponse<String> response;
-    try {
-      response = client.send(request, HttpResponse.BodyHandlers.ofString());
-      System.out.println(">    Respuesta " + response.body());
-    } catch (IOException | InterruptedException e) {
-      e.printStackTrace();
-      throw new PortletException(2, "Error sending request");
+        return gasComparationRequest;
     }
 
-    return this.mapJsonResponseToComparison(response);
+    public GasConsumptionComparison compareByUse(GasConsumptionByUse gasConsumptionByUse)
+        throws PortletException {
 
-  }
+        JSONObject jsonRequest = new JSONObject();
 
-  public GasConsumptionComparison compareByUse(GasConsumptionByUse gasConsumptionByUse) throws PortletException {
+        try {
 
-    JSONObject jsonRequest = new JSONObject();
+            jsonRequest.put("Province", gasConsumptionByUse.getProvince());
+            jsonRequest.put("ACSIndividual", gasConsumptionByUse.getAcsIndividual() ? "Si" : "No");
+            jsonRequest.put("ACSUse", gasConsumptionByUse.getAcsUse());
+            jsonRequest.put("NumberOfPeople", gasConsumptionByUse.getNumberOfPeople());
+            jsonRequest
+                .put("HeatingIndividual", gasConsumptionByUse.getHeatingIndividual() ? "Si" : "No");
+            jsonRequest.put("HeatingUse", gasConsumptionByUse.getHeatingUse());
+            jsonRequest
+                .put("SingleFamilyHouse", gasConsumptionByUse.getSingleFamilyHouse() ? "Si" : "No");
+            jsonRequest.put("LastFloor", gasConsumptionByUse.getLastFloor() ? "Si" : "No");
+            jsonRequest.put("SurfaceHouse", gasConsumptionByUse.getSurfaceHouse());
+            jsonRequest.put("KitchenUse", gasConsumptionByUse.getKitchenUse());
+            jsonRequest.put("WeeklyKitchenUse", gasConsumptionByUse.getWeeklyKitchenUse());
 
-    try {
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new PortletException(1, "Error creating request");
+        }
 
-      jsonRequest.put("Province", gasConsumptionByUse.getProvince());
-      jsonRequest.put("ACSIndividual", gasConsumptionByUse.getAcsIndividual() ? "Si" : "No");
-      jsonRequest.put("ACSUse", gasConsumptionByUse.getAcsUse());
-      jsonRequest.put("NumberOfPeople", gasConsumptionByUse.getNumberOfPeople());
-      jsonRequest.put("HeatingIndividual", gasConsumptionByUse.getHeatingIndividual() ? "Si" : "No");
-      jsonRequest.put("HeatingUse", gasConsumptionByUse.getHeatingUse());
-      jsonRequest.put("SingleFamilyHouse", gasConsumptionByUse.getSingleFamilyHouse() ? "Si" : "No");
-      jsonRequest.put("LastFloor", gasConsumptionByUse.getLastFloor() ? "Si" : "No");
-      jsonRequest.put("SurfaceHouse", gasConsumptionByUse.getSurfaceHouse());
-      jsonRequest.put("KitchenUse", gasConsumptionByUse.getKitchenUse());
-      jsonRequest.put("WeeklyKitchenUse", gasConsumptionByUse.getWeeklyKitchenUse());
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder().
+            uri(URI.create(GAS_COMPARATOR_USE_REQUEST_URL)).
+            header("x-auth-token", SOLUSOFT_SECRET).
+            header("Content-Type", "application/json").
+            POST(HttpRequest.BodyPublishers.ofString(jsonRequest.toString())).
+            build();
 
-    } catch (JSONException e) {
-      e.printStackTrace();
-      throw new PortletException(1, "Error creating request");
+        System.out.println("Solicitando comaprativa a " + GAS_COMPARATOR_USE_REQUEST_URL);
+        System.out.println(">    Detalle de comparativa " + jsonRequest.toString());
+
+        HttpResponse<String> response;
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println(">    Respuesta " + response.body());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            throw new PortletException(2, "Error sending request");
+        }
+
+        return this.mapJsonResponseToComparison(response);
+
     }
 
-    HttpClient client = HttpClient.newHttpClient();
-    HttpRequest request = HttpRequest.newBuilder().
-      uri(URI.create(GAS_COMPARATOR_USE_REQUEST_URL)).
-      header("x-auth-token", SOLUSOFT_SECRET).
-      header("Content-Type", "application/json").
-      POST(HttpRequest.BodyPublishers.ofString(jsonRequest.toString())).
-      build();
+    private GasConsumptionComparison mapJsonResponseToComparison(HttpResponse<String> response)
+        throws PortletException {
 
-    System.out.println("Solicitando comaprativa a " + GAS_COMPARATOR_USE_REQUEST_URL);
-    System.out.println(">    Detalle de comparativa " + jsonRequest.toString());
+        try {
 
-    HttpResponse<String> response;
-    try {
-      response = client.send(request, HttpResponse.BodyHandlers.ofString());
-      System.out.println(">    Respuesta " + response.body());
-    } catch (IOException | InterruptedException e) {
-      e.printStackTrace();
-      throw new PortletException(2, "Error sending request");
+            JSONObject jsonResponse = new JSONObject(response.body());
+            JSONObject jsonBudget = jsonResponse.getJSONObject("data").getJSONArray("items")
+                .getJSONObject(0);
+
+            if (jsonBudget.getString("CurrentEnergyCost").equals("#VALUE!")) {
+                throw new PortletException(4, "No hay servicio");
+            }
+
+            GasConsumptionComparison gasConsumptionComparison = new GasConsumptionComparison();
+
+            gasConsumptionComparison
+                .setConsumptionRequired(jsonBudget.getString("HouseConsumptionRequired"));
+            gasConsumptionComparison.setCurrentCost(jsonBudget.getString("CurrentEnergyCost"));
+            gasConsumptionComparison.setFutureCost(jsonBudget.getString("GNCost"));
+            gasConsumptionComparison.setSavings(jsonBudget.getString("GNSaving"));
+
+            return gasConsumptionComparison;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new PortletException(3, "Error in the response");
+        }
+
     }
-
-    return this.mapJsonResponseToComparison(response);
-
-  }
-
-  private GasConsumptionComparison mapJsonResponseToComparison(HttpResponse<String> response) throws PortletException{
-
-    try {
-
-      JSONObject jsonResponse = new JSONObject(response.body());
-      JSONObject jsonBudget = jsonResponse.getJSONObject("data").getJSONArray("items").getJSONObject(0);
-
-      if(jsonBudget.getString("CurrentEnergyCost").equals("#VALUE!")) {
-        throw new PortletException(4, "No hay servicio");
-      }
-
-      GasConsumptionComparison gasConsumptionComparison = new GasConsumptionComparison();
-
-      gasConsumptionComparison.setConsumptionRequired(jsonBudget.getString("HouseConsumptionRequired"));
-      gasConsumptionComparison.setCurrentCost(jsonBudget.getString("CurrentEnergyCost"));
-      gasConsumptionComparison.setFutureCost(jsonBudget.getString("GNCost"));
-      gasConsumptionComparison.setSavings(jsonBudget.getString("GNSaving"));
-
-      return gasConsumptionComparison;
-    } catch (JSONException e) {
-      e.printStackTrace();
-      throw new PortletException(3, "Error in the response");
-    }
-
-  }
 
 }
