@@ -55,7 +55,7 @@
 					</form:label>
 				</div>
 
-				<button class="an-btn an-btn--gradient an-btn--flatter">
+				<button class="an-btn an-btn--gradient">
 					<span><spring:message code="submit" /></span>
 				</button>
 

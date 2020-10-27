@@ -1,5 +1,12 @@
 .an-stepper {
   color: $white;
+  margin-right: rem(-20);
+  margin-left: rem(-20);
+
+  @include desktop {
+    margin-right: unset;
+    margin-left: unset;
+  }
 
   h3 {
     text-align: center;
@@ -117,7 +124,6 @@
     min-width: 100%;
     text-align: center;
     scroll-snap-align: start;
-    padding: 0 rem(20);
 
     @include desktop {
       min-width: auto;
@@ -144,10 +150,7 @@
     margin: auto;
     margin-bottom: rem(9);
     position: relative;
-
-    @include desktop {
-      height: rem(35);
-    }
+    height: rem(35);
 
     &::before {
       /* CSS for creating steper block before the li item*/
