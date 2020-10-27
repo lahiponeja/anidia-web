@@ -1,0 +1,268 @@
+.an-hero-slider {
+  height: 100%;
+
+  .portlet-body {
+    width: 100vw;
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    height: 100%;
+
+    .journal-content-article {
+      flex-shrink: 0;
+      width: 100%;
+      display: flex;
+      position: relative;
+      align-items: normal;
+    }
+  }
+
+  &__inner-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100%;
+  }
+
+  &__item {
+    align-items: normal;
+    display: flex;
+    flex-shrink: 0;
+    height: 100vh;
+    padding: 0 rem(20);
+    position: relative;
+    width: 100%;
+
+    .an-hero-slider.green & {
+      background: $an-theme;
+    }
+
+    .an-hero-slider.white & {
+      background: $white;
+    }
+
+    .an-hero-slider.light-green & {
+      background: $an-theme-light;
+    }
+
+    &-inner-wrapper {
+      width: 100%;
+      max-width: rem(1440);
+      margin: auto;
+      height: 100%;
+    }
+  }
+
+  &__discover-btn {
+    text-transform: uppercase;
+    color: $white;
+    display: flex;
+    transform: rotate(90deg);
+    position: absolute;
+    padding: rem(20);
+    z-index: 5;
+    right: rem(-100);
+    bottom: rem(190);
+
+    .an-hero-slider.white &,
+    .an-hero-slider.light-green & {
+      color: $an-theme-dark-grey;
+    }
+
+    span {
+      display: block;
+      margin-left: rem(20);
+      font-size: rem(40);
+      position: relative;
+
+      .an-hero-slider.white &,
+      .an-hero-slider.light-green & {
+        color: $an-theme;
+      }
+    }
+  }
+
+  &__image {
+    width: 100%;
+    max-width: rem(500);
+    position: absolute;
+    bottom: rem(-70);
+    left: 50%;
+    transform: translateX(-50%);
+
+    &-desktop {
+      display: none;
+    }
+
+    &-mobile {
+      width: 100%;
+    }
+  }
+
+  &__info-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__heading,
+  &__text {
+    position: relative;
+    z-index: 1;
+    padding-right: rem(30);
+  }
+
+  &__heading {
+    color: $white;
+    margin-bottom: rem(20);
+
+    @include desktop {
+      padding-top: rem(117.5);
+    }
+
+    .an-hero-slider.white &,
+    .an-hero-slider.light-green & {
+      color: $an-theme;
+    }
+  }
+
+  &__text {
+    color: $white;
+    margin-bottom: rem(33);
+
+    .an-hero-slider.white &,
+    .an-hero-slider.light-green & {
+      color: $an-theme;
+    }
+  }
+
+  &__btn {
+    bottom: rem(43);
+    position: absolute;
+    width: 100%;
+
+    & > .an-btn {
+      width: 100%;
+
+      .an-hero-slider.white &,
+      .an-hero-slider.light-green & {
+        @extend %an-btn--gradient;
+      }
+    }
+  }
+
+  &__lines {
+    position: fixed;
+    bottom: rem(164);
+    left: 0;
+    z-index: 100;
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-item {
+      width: rem(15);
+      height: 1px;
+      margin-bottom: rem(18);
+      background-color: $white;
+      transition: all 0.3s ease;
+
+      .an-hero-slider.white &,
+      .an-hero-slider.light-green & {
+        background-color: $an-theme;
+      }
+
+      &--active {
+        width: rem(30);
+        height: 3px;
+      }
+    }
+  }
+
+  @include desktop {
+    &__item {
+      align-items: center;
+      padding: 0 rem(120);
+      overflow: hidden;
+
+      &-inner-wrapper {
+        align-items: center;
+        display: flex;
+      }
+    }
+
+    &__info-container {
+      height: auto;
+      max-width: 100%;
+      position: static;
+      width: rem(660);
+    }
+
+    &__image {
+      top: 50%;
+      transform: translateY(-50%);
+      right: rem(-300);
+      position: absolute;
+      height: rem(1286);
+
+      &-desktop {
+        display: block;
+        height: 100%;
+      }
+
+      &-mobile {
+        display: none;
+      }
+    }
+
+    &__heading,
+    &__text {
+      padding-right: 0;
+    }
+
+    &__heading,
+    &__text,
+    &__btn {
+      position: relative;
+      z-index: 1;
+    }
+
+    &__heading {
+      margin-bottom: rem(20);
+    }
+
+    &__text {
+      margin-bottom: rem(33);
+    }
+
+    &__btn {
+      bottom: auto;
+      position: relative;
+
+      & > .an-btn {
+        width: auto;
+      }
+    }
+
+    &__discover-btn {
+      right: 40%;
+      bottom: auto;
+
+      span {
+        transition: all 0.3s ease;
+      }
+
+      &:hover > span {
+        animation: discoverArrow 0.8s infinite;
+      }
+    }
+  }
+}
+
+@keyframes discoverArrow {
+  0% {transform: translateX(0px);}
+  50% {transform: translateX(10px);}
+  100% {transform: translateX(0px);}
+}

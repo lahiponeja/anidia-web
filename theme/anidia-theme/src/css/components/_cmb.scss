@@ -1,7 +1,7 @@
 .an-cmb {
   align-items: center;
   color: $font-color-default;
-  display: flex;
+  display: flex !important;
   font-family: $open-sans-bold-family;
   justify-content: center;
 
@@ -12,7 +12,7 @@
     right: rem(60);
     top: calc(100% - 150px);
     width: rem(221);
-    z-index: 1;
+    z-index: 2;
 
     &::after {
       border: 10px solid transparent;

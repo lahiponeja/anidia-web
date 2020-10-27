@@ -1,0 +1,183 @@
+.an-pack-cards {
+  text-align: center;
+
+  &__intro {
+    background-color: $white;
+    padding-top: rem(90);
+
+    h6 {
+      text-transform: uppercase;
+      letter-spacing: 1.71;
+      margin-bottom: rem(20);
+    }
+
+    h2 {
+      color: $an-theme;
+      margin-bottom: rem(20);
+
+      @include desktop {
+        max-width: flex-grid(8);
+        margin-right: auto;
+        margin-left: auto;
+      }
+    }
+
+    & > div {
+      font-family: $open-sans-regular-family;
+      color: $an-theme;
+      font-size: rem(18);
+      margin-bottom: rem(48);
+
+      @include desktop {
+        width: flex-grid(6);
+        margin: auto;
+        font-size: rem(24);
+      }
+    }
+  }
+
+  &__content {
+    background-color: $an-theme;
+    margin-left: rem(-20);
+    margin-right: rem(-20);
+    padding: rem(45) rem(20) rem(20);
+
+    @include desktop {
+      background-color: $white;
+      margin-bottom: rem(-20);
+    }
+  }
+
+  &__content__intro {
+    p {
+      font-family: $open-sans-bold-family;
+      color: $white;
+      font-size: rem(18);
+      margin-bottom: rem(65);
+
+      @include desktop {
+        margin-bottom: rem(122);
+        color: $an-theme;
+        font-size: rem(24);
+      }
+    }
+
+    .an-btn {
+      margin-bottom: rem(24);
+    }
+  }
+
+  &__dots {
+    align-items: center;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    @include desktop {
+      display: none;
+    }
+  }
+
+  &__dot {
+    cursor: pointer;
+    background: $white;
+    overflow: hidden;
+    display: flex;
+    width: rem(6);
+    height: rem(6);
+    border-radius: 100%;
+    margin-right: rem(20);
+
+    &[aria-pressed=true] {
+      width: rem(15);
+      height: rem(15);
+    }
+  }
+
+  .portlet-body {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    /* 2018 spec - For Safari 11, Chrome 69+ */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* Needed to work on iOS Safari */
+    /* 2015 spec - For Firefox, Edge, IE */
+    scroll-snap-type: mandatory;
+    -ms-scroll-snap-type: mandatory;
+    scroll-snap-points-x: repeat(100%);
+    -ms-scroll-snap-points-x: repeat(100%);
+
+    @include desktop {
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      padding-bottom: rem(120);
+
+      &::after {
+        content: '';
+        display: block;
+        background: $an-theme;
+        width: 100%;
+        height: rem(463);
+        z-index: 0;
+        position: absolute;
+        bottom: 0;
+      }
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .journal-content-article {
+      scroll-snap-align: center;
+      margin-right: rem(20);
+      margin-bottom: rem(24);
+      margin-top: rem(24);
+      z-index: 1;
+      order: 1;
+      width: 100%;
+      min-width: calc(100% - 40px);
+
+      &:first-child {
+        margin-left: rem(20);
+
+        @include desktop {
+          margin-left: 0;
+        }
+      }
+
+      &.featured {
+        order: 0;
+        z-index: 2;
+
+        .portlet-body.small & {
+          order: 1;
+        }
+      }
+
+      @include desktop {
+        margin-right: 0;
+        width: auto;
+        min-width: unset;
+
+        .an-card--pack:not(.featured) {
+          transform: translateX(-20px);
+        }
+
+        .portlet-body.small .an-card--pack:first-child {
+          transform: translateX(20px);
+        }
+
+        .an-card--pack.featured {
+          margin-left: rem(20);
+
+          .portlet-body.small & {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+}

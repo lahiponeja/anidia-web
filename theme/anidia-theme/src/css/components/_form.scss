@@ -1,0 +1,37 @@
+.an-form {
+
+  &__container {
+    max-width: 100%;
+
+    @include desktop {
+      max-width: rem(1024);
+      display: flex;
+      justify-content: space-between;
+      margin: auto;
+    }
+  }
+
+  h2 {
+    color: $an-theme;
+    margin-bottom: rem(18);
+    font-size: rem(30);
+    line-height: normal;
+
+    @include desktop {
+      width: flex-grid(6);
+      padding-right: flex-grid(1);
+      margin-top: rem(40);
+      font-size: rem(60);
+    }
+  }
+
+  .an-card--form {
+    @include desktop {
+      width: flex-grid(6);
+    }
+  }
+
+  label a {
+    text-decoration: underline;
+  }
+}

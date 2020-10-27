@@ -3,6 +3,7 @@ This file allows you to override and define new FreeMarker variables.
 -->
 
 <#-- ---------- Call Center Phone ---------- -->
+
 <#-- We use slicing to split the phone and the prefix if it's needed -->
 
 <#assign call_center_phone = themeDisplay.getThemeSetting("Teléfono de Call Center") />
@@ -19,6 +20,10 @@ This file allows you to override and define new FreeMarker variables.
 	<#assign css_class = css_class + " anidia-white" />
 </#if>
 
+<#assign gtm_id = themeDisplay.getThemeSetting("GTM-ID") />
+<#assign oneTrustEnvironment = themeDisplay.getThemeSetting("Entorno OneTrust") />
+
+
 <#-- ---------- Footer -------------  -->
 <#-- Settings for the footer menu  -->
 
@@ -32,3 +37,6 @@ This file allows you to override and define new FreeMarker variables.
     "expandedLevels": "all"
   }
 />
+<#-- We get the style of the movile call center link -->
+
+<#assign call_center_phone_mobile_version = themeDisplay.getThemeSetting("Versión de Call Center en móvil") />

@@ -1,0 +1,47 @@
+{
+  "fieldSets": [
+    {
+      "label": "Tabs",
+      "fields": [
+        {
+          "name": "SelectedTab",
+          "label": "Tab seleccionado",
+          "description": "Tab seleccionado",
+          "type": "select",
+          "dataType": "string",
+          "defaultValue": "Izquierdo",
+          "typeOptions": {
+            "validValues": [
+              {
+                "value": "Izquierdo"
+              },
+              {
+                "value": "Derecho"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Botón",
+      "fields": [
+        {
+          "name": "Texto",
+          "label": "Texto",
+          "description": "Texto del botón del módulo",
+          "type": "text",
+          "dataType": "string",
+          "defaultValue": "Contratar ahora"
+        },
+        {
+          "name": "Enlace",
+          "label": "Enlace",
+          "description": "Enlace del botón del módulo",
+          "type": "text",
+          "dataType": "string"
+        }
+      ]
+    }
+  ]
+}

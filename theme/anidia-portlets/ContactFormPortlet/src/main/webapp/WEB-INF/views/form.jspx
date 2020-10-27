@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+		  xmlns:portlet="http://xmlns.jcp.org/portlet_3_0"
+		  xmlns:spring="http://www.springframework.org/tags"
+		  xmlns:form="http://www.springframework.org/tags/form"
+		  version="2.1">
+	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
+
+<div class="bg-an-theme-light pl-s pr-s pt-xxxl pb-xxxl">
+	<div class="an-form">
+		<div class="an-form__container">
+			<h2>¿Prefieres que nos pongamos en contacto contigo?</h2>
+			<portlet:defineObjects/>
+			<portlet:actionURL var="mainFormActionURL"/>
+			<form:form id="${namespace}mainForm" action="${mainFormActionURL}" class="an-card an-card--form" method="post" modelAttribute="lead">
+				<form:errors cssClass="portlet-msg-error" />
+
+				<spring:message code="first-name-placeholder" var="firstNamePlaceholder" />
+				<spring:message code="last-name-placeholder" var="lastNamePlaceholder" />
+				<spring:message code="email-placeholder" var="emailPlaceholder" />
+				<spring:message code="phone-placeholder" var="phonePlaceholder" />
+				<form:input id="${namespace}firstName" cssClass="an-input__field" path="firstName" placeholder="${firstNamePlaceholder}" required="required"/>
+				<form:input id="${namespace}lastName" cssClass="an-input__field" path="lastName" placeholder="${lastNamePlaceholder}" required="required"/>
+				<form:input id="${namespace}email" cssClass="an-input__field" path="email" placeholder="${emailPlaceholder}" type="email"/>
+				<div class="an-select__form"><form:select id="${namespace}phonePrefix" path="phonePrefix" items="${prefixes}"/></div>
+				<form:input id="${namespace}phoneNumber" cssClass="an-input__field" path="phoneNumber" placeholder="${phonePlaceholder}" />
+        <div class="an-select__form">
+          <form:select id="${namespace}productType" path="productType">
+            <form:option value=""><spring:message code="product-type-placeholder" /></form:option>
+            <form:option value="gas"><spring:message code="product-type-gas"/></form:option>
+            <form:option value="solar"><spring:message code="product-type-solar"/></form:option>
+            <form:option value="mantenimiento"><spring:message code="product-type-mantenimiento"/></form:option>
+          </form:select>
+        </div>
+
+				<div class="an-checkbox">
+					<form:input id="${namespace}privacyAccepted" cssClass="an-checkbox__input" path="privacyAccepted"  required="required"/>
+					<form:label for="${namespace}privacyAccepted" cssClass="an-checkbox__label an-body-s-regular" path="privacyAccepted">
+						<span>
+							<a href="/política-de-privacidad">
+								<spring:message code="privacy-accepted" />
+							</a>
+						</span>
+					</form:label>
+				</div>
+
+				<div class="an-checkbox">
+					<form:input id="${namespace}communicationAccepted" cssClass="an-checkbox__input" path="communicationAccepted"/>
+					<form:label for="${namespace}communicationAccepted" cssClass="an-checkbox__label an-body-s-regular" path="communicationAccepted">
+						<span>
+							<a href="/política-de-privacidad">
+								<spring:message code="communication-accepted" />
+							</a>
+						</span>
+					</form:label>
+				</div>
+
+				<button class="an-btn an-btn--gradient an-btn--flatter">
+					<span><spring:message code="submit" /></span>
+				</button>
+
+			</form:form>
+		</div>
+	</div>
+</div>
+
+</jsp:root>

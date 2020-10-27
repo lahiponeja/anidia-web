@@ -51,6 +51,7 @@ Thumbs.db
 # Docker
 
 docker/db-data
+.env
 
 # Portlets
 
