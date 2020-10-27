@@ -164,12 +164,10 @@
 
         .an-card--pack:not(.featured) {
           transform: translateX(-20px);
+        }
 
-          .portlet-body.small & {
-            &:first-child {
-              transform: translateX(20px);
-            }
-          }
+        .portlet-body.small .an-card--pack:first-child {
+          transform: translateX(20px);
         }
 
         .an-card--pack.featured {

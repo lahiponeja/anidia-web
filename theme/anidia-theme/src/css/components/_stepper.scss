@@ -44,6 +44,7 @@
 
     @include desktop {
       float: left;
+      display: block;
     }
 
     label {
@@ -95,6 +96,8 @@
       scroll-snap-type: none;
       scroll-padding: none;
       left: 0;
+      transition: opacity .2s cubic-bezier(.42,0,.34,1.01);
+      opacity: 0;
     }
 
     h4 {
@@ -168,6 +171,12 @@
     }
   }
 
+  [type=radio]:checked ~ label ~ &__tab__container {
+    @include desktop {
+      z-index: 1;
+      opacity: 1;
+    }
+  }
 
   [type=radio]:checked ~ label {
     border-bottom: 2px solid;
