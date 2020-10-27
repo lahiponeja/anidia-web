@@ -6,7 +6,7 @@
   </div>
   <div class="an-pack-cards__content">
     <div class="an-pack-cards__content__intro">
-      <lfr-editable id="Enlace" type="link"><a href="#" class="an-btn an-btn--flatter an-btn--gradient"><span>Calcular presupuesto</span></a></lfr-editable>
+      <a href="${htmlUtil.escape(configuration.Enlace)}" class="an-btn an-btn--flatter an-btn--gradient"><span>${htmlUtil.escape(configuration.TextoEnlace)}</span></a>
       <p><lfr-editable id="TituloPreCard" type="text">O selecciona uno de nuestros packs estrella</lfr-editable></p>
     </div>
     [#if configuration.CardSize == 'Small']
