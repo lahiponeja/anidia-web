@@ -136,7 +136,7 @@
       margin-bottom: rem(24);
       margin-top: rem(24);
       z-index: 1;
-      order: 1;
+      order: 0;
       width: 100%;
       min-width: calc(100% - 40px);
 
@@ -166,16 +166,8 @@
           transform: translateX(-20px);
         }
 
-        .portlet-body.small .an-card--pack:first-child {
+        .portlet-body.small & .an-card--pack:first-child {
           transform: translateX(20px);
-        }
-
-        .an-card--pack.featured {
-          margin-left: rem(20);
-
-          .portlet-body.small & {
-            margin-left: 0;
-          }
         }
       }
     }
