@@ -5,6 +5,9 @@
 <html class="${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
 
 <head>
+  <#if !is_signed_in && !layoutTypePortlet.hasStateMax()>
+    <script src="${javascript_folder}/loader-min.js" type="text/javascript"></script>
+  </#if>
 	<#include "${full_templates_path}/head/one_trust.ftl" />
 
 <!-- Google Tag Manager -->

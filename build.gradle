@@ -99,7 +99,7 @@ tasks.register("build.portlets") {
   group = 'Anidia'
   description = 'Builds all the portlets and copy them to the deploy folder'
 
-    dependsOn 'build.portlets.contact_form'
+    //dependsOn 'build.portlets.contact_form'
     dependsOn 'build.portlets.gas_budget'
 
 }
