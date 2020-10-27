@@ -1,0 +1,10 @@
+apiDir: "../api/src/main/java"
+apiPackagePath: "com.liferay.gasBudget"
+application:
+    baseURI: "/gas-budget"
+    className: "GasBudgetApplication"
+    name: "Liferay.GasBudget"
+    security:
+        guestAllowed: true
+author: "David Brenes"
+generateGraphQL: false

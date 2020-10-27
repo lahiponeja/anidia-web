@@ -10,6 +10,7 @@
   transition: all .3s ease;
   border: rem(1) solid $an-border;
   color: $an-theme;
+  padding: rem(20);
 
   &:hover,
   &:active {
@@ -51,8 +52,8 @@
       color: $white;
       position: absolute;
       background: $an-theme;
-      bottom: 0;
-      right: 0;
+      bottom: -1px;
+      right: -1px;
       border-bottom-right-radius: rem(20);
       transform: translate(rem(1), rem(1));
       clip-path: polygon(100% 0, 0% 100%, 100% 100%);
@@ -67,5 +68,39 @@
 
   p {
     margin-bottom: rem(28);
+  }
+
+  &__radio {
+    display: none;
+
+    & + .an-selection {
+      width: 100%;
+    }
+
+    &:checked + .an-selection {
+      background-color: $an-theme-light;
+      border: rem(2) solid $an-theme;
+      position: relative;
+
+      &::after {
+        font-family: $an-icons;
+        content: $an-icon-check-simple;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        width: rem(73);
+        height: rem(77);
+        padding: rem(17) rem(9);
+        font-size: rem(20);
+        color: $white;
+        position: absolute;
+        background: $an-theme;
+        bottom: -1px;
+        right: -1px;
+        border-bottom-right-radius: rem(20);
+        transform: translate(rem(1), rem(1));
+        clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+      }
+    }
   }
 }

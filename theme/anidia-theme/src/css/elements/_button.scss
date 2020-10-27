@@ -105,13 +105,14 @@
     box-shadow: none;
     color: $an-theme-dark-grey-op;
     cursor: not-allowed;
+    pointer-events: none;
   }
 
   &--icon {
     &:before {
       font-size: rem(18);
       position: relative;
-      z-index: 2;
+      // z-index: 2;
     }
 
     span {
