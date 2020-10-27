@@ -140,11 +140,27 @@
       width: 100%;
       min-width: calc(100% - 40px);
 
+      @include desktop {
+        margin-right: 0;
+        width: auto;
+        min-width: unset;
+
+        .an-card--pack:not(.featured) {
+          transform: translateX(-20px);
+        }
+      }
+
       &:first-child {
         margin-left: rem(20);
 
         @include desktop {
           margin-left: 0;
+
+          .portlet-body.small & {
+            .an-card--pack {
+              transform: translateX(20px);
+            }
+          }
         }
       }
 
@@ -154,24 +170,6 @@
 
         .portlet-body.small & {
           order: 1;
-        }
-      }
-
-      @include desktop {
-        margin-right: 0;
-        width: auto;
-        min-width: unset;
-
-        .an-card--pack:not(.featured) {
-          transform: translateX(-20px);
-        }
-
-        &:first-child {
-          .portlet-body.small & {
-            .an-card--pack {
-              transform: translateX(20px);
-            }
-          }
         }
       }
     }
