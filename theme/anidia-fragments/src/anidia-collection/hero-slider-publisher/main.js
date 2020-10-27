@@ -82,6 +82,6 @@ function heroSlider() {
   });
 }
 
-if (document.querySelector(".an-hero-slider__item")) {
+if (document.querySelectorAll(".an-hero-slider__item").length > 1) {
   heroSlider();
 }
