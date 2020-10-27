@@ -34,7 +34,7 @@
         </div>
 
 				<div class="an-checkbox">
-					<form:input id="${namespace}privacyAccepted" cssClass="an-checkbox__input" path="privacyAccepted"  required="required" type="checkbox"/>
+					<form:checkbox id="${namespace}privacyAccepted" cssClass="an-checkbox__input" path="privacyAccepted"  required="required"/>
 					<form:label for="${namespace}privacyAccepted" cssClass="an-checkbox__label an-body-s-regular" path="privacyAccepted">
 						<span>
 							<a href="/política-de-privacidad">
@@ -45,7 +45,7 @@
 				</div>
 
 				<div class="an-checkbox">
-					<form:input id="${namespace}communicationAccepted" cssClass="an-checkbox__input" path="communicationAccepted" type="checkbox"/>
+					<form:checkbox id="${namespace}communicationAccepted" cssClass="an-checkbox__input" path="communicationAccepted"/>
 					<form:label for="${namespace}communicationAccepted" cssClass="an-checkbox__label an-body-s-regular" path="communicationAccepted">
 						<span>
 							<a href="/política-de-privacidad">
