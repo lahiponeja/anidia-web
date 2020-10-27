@@ -1,5 +1,6 @@
 .an-hero-slider {
   height: 100%;
+  transform: translateY(-200px);
 
   .portlet-body {
     width: 100vw;
@@ -185,7 +186,6 @@
     &__item {
       align-items: center;
       padding: 0 rem(120);
-      overflow: hidden;
 
       &-inner-wrapper {
         align-items: center;
