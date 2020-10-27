@@ -26,8 +26,8 @@
       max-height: rem(256);
 
       @include desktop {
-        max-height: 100%;
-        width: auto;
+        max-height: unset;
+        width: 100%;
       }
     }
   }
@@ -42,8 +42,8 @@
       max-height: rem(470);
 
       @include desktop {
-        max-height: 100%;
-        width: auto;
+        max-height: unset;
+        width: 100%;
       }
     }
   }

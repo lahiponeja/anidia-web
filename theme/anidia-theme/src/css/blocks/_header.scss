@@ -429,7 +429,7 @@
   .an-icon--head-phones.an-cmb--header-small {
     display: flex;
     margin-left: auto;
-    transform: translate(rem(-74), rem(-5));
+    transform: translate(rem(-74), rem(20));
 
     @include desktop {
       display: none !important;
@@ -495,9 +495,15 @@
 }
 
 #banner {
+
   @include desktop {
-    padding: rem(44) rem(60);
+    padding: rem(19) rem(60);
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    background-color: $white;
+    z-index: 2;
   }
 }
 
