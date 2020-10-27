@@ -166,8 +166,12 @@
           transform: translateX(-20px);
         }
 
-        .portlet-body.small & .an-card--pack:first-child {
-          transform: translateX(20px);
+        &:first-child {
+          .portlet-body.small & {
+            .an-card--pack {
+              transform: translateX(20px);
+            }
+          }
         }
       }
     }

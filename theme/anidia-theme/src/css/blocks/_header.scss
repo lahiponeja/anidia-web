@@ -69,6 +69,7 @@
       font-size: rem(24);
       line-height: rem(36);
       padding: rem(12) 0;
+      outline: none;
 
       @include desktop {
         font-size: rem(18);

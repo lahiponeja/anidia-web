@@ -1,14 +1,44 @@
-<div class="extensible-cards">
-  <div class="extensible-cards__container">
-    <lfr-widget-asset-list> </lfr-widget-asset-list>
-    <ul class="extensible-cards__dots">
-      <li class="extensible-cards__dot" aria-pressed="true"></li>
-      <li class="extensible-cards__dot"></li>
-      <li class="extensible-cards__dot"></li>
-      <li class="extensible-cards__dot"></li>
-    </ul>
+[#switch configuration.Color]
+  [#case 'Verde']
+  <div class="bg-an-theme pl-s pr-s pb-s">
+  [#break]
+
+  [#case 'Verde claro']
+  <div class="bg-an-theme-light pl-s pr-s pb-s">
+  [#break]
+
+  [#case 'Blanco']
+  <div class="bg-white pl-s pr-s pb-s">
+  [#break]
+
+  [#case 'Amarillo']
+  <div class="bg-yellow pl-s pr-spb-s">
+  [#break]
+
+  [#case 'Gris oscuro']
+  <div class="bg-an-theme-dark-grey pl-s pr-s pb-s">
+  [#break]
+
+  [#case 'Gris claro']
+    <div class="bg-an-theme-soft-grey pl-s pr-s pb-s">
+  [#break]
+
+  [default]
+  <div class="bg-an-theme pl-s pr-s pb-s">
+[/#switch]
+
+  <div class="extensible-cards">
+    <div class="extensible-cards__container">
+      <lfr-widget-asset-list> </lfr-widget-asset-list>
+      <ul class="extensible-cards__dots">
+        <li class="extensible-cards__dot" aria-pressed="true"></li>
+        <li class="extensible-cards__dot"></li>
+        <li class="extensible-cards__dot"></li>
+        <li class="extensible-cards__dot"></li>
+      </ul>
+    </div>
+    [#if !configuration.hideLink]
+      <div class="extensible-cards__footer"><a href="${htmlUtil.escape(configuration.Enlace)}" class="an-btn an-btn--flatter an-btn--gradient"><span><lfr-editable id="TextoEnlace" type="text">Calcular presupuesto</lfr-editable></span></a></div>
+    [/#if]
   </div>
-  [#if !configuration.hideLink]
-  	<div class="extensible-cards__footer"><a href="${htmlUtil.escape(configuration.Enlace)}" class="an-btn an-btn--flatter an-btn--gradient"><span><lfr-editable id="TextoEnlace" type="text">Calcular presupuesto</lfr-editable></span></a></div>
-	[/#if]
 </div>

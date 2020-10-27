@@ -1,4 +1,32 @@
-<div class="bg-an-theme pl-s pr-s pt-xxxl pb-xxxl">
+[#switch configuration.Color]
+  [#case 'Verde']
+  <div class="bg-an-theme pl-s pr-s bg-an-theme--centered-featured">
+  [#break]
+
+  [#case 'Verde claro']
+  <div class="bg-an-theme-light pl-s pr-s bg-an-theme--centered-featured">
+  [#break]
+
+  [#case 'Blanco']
+  <div class="bg-white pl-s pr-s bg-an-theme--centered-featured">
+  [#break]
+
+  [#case 'Amarillo']
+  <div class="bg-yellow pl-s pr-s bg-an-theme--centered-featured">
+  [#break]
+
+  [#case 'Gris oscuro']
+  <div class="bg-an-theme-dark-grey pl-s pr-s bg-an-theme--centered-featured">
+  [#break]
+
+  [#case 'Gris claro']
+    <div class="bg-an-theme-soft-grey pl-s pr-s bg-an-theme--centered-featured">
+  [#break]
+
+  [default]
+  <div class="bg-an-theme pl-s pr-s bg-an-theme--centered-featured">
+[/#switch]
+
   <div class="an-centered-featured">
     [#if !configuration.hideBackgroundImage]
     <lfr-editable id="ImagenFondo" type="image"><img class="hide background-image" src="[resources:background.png]" alt=""></lfr-editable>
