@@ -74,5 +74,6 @@
 .bg-an-theme--centered-featured {
   @include desktop {
     transform: translateY(-120px);
+    margin-bottom: rem(-120);
   }
 }
