@@ -20,6 +20,14 @@
     }
   }
 
+  &__links {
+    @include desktop {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+  }
+
   ul {
     display: flex;
     flex-direction: column;
@@ -47,10 +55,10 @@
 
     @include desktop {
       margin-bottom: 0;
+      margin-right: rem(50);
 
       &:not(:last-child) {
         margin-bottom: 0;
-        margin-right: rem(100);
       }
     }
   }

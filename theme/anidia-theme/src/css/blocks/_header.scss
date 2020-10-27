@@ -494,6 +494,13 @@
   }
 }
 
+#banner {
+  @include desktop {
+    padding: rem(44) rem(60);
+    width: 100%;
+  }
+}
+
 #sign-in {
   display: none;
 }
