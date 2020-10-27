@@ -14,7 +14,12 @@
 	<#include "${full_templates_path}/head/meta_tags.ftl" />
 
 	<#--  <link rel="stylesheet" href="${css_folder}/anidia.css" charset="utf-8">  -->
-  <script rel="text/javascript" href="${javascript_folder}/main.js" charset="utf-8"></script>
+  <script src="${javascript_folder}/main.js" type="text/javascript"></script>
+
+  <#if !is_signed_in && !layoutTypePortlet.hasStateMax()>
+    <script src="${javascript_folder}/loader-min.js" type="text/javascript"></script>
+  </#if>
+
 	<link rel="stylesheet" href="${css_folder}/anidia.css?t=${theme_timestamp}" charset="utf-8">
 
 </head>
