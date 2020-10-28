@@ -1,13 +1,28 @@
 package com.liferay.gasComparator.dto.v1_0;
 
-import com.fasterxml.jackson.annotation.*;
-import com.liferay.petra.function.*;
-import com.liferay.petra.string.*;
-import com.liferay.portal.vulcan.graphql.annotation.*;
-import io.swagger.v3.oas.annotations.media.*;
-import java.util.*;
-import javax.annotation.*;
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import com.liferay.petra.function.UnsafeSupplier;
+import com.liferay.petra.string.StringBundler;
+import com.liferay.portal.vulcan.graphql.annotation.GraphQLField;
+import com.liferay.portal.vulcan.graphql.annotation.GraphQLName;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
+import javax.annotation.Generated;
+
+import javax.validation.Valid;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author David Brenes
@@ -18,6 +33,40 @@ import javax.xml.bind.annotation.*;
 @JsonFilter("Liferay.Vulcan")
 @XmlRootElement(name = "GasCalculatedConsumption")
 public class GasCalculatedConsumption {
+
+	@GraphQLName("EnergyType")
+	public static enum EnergyType {
+
+		BUTANE("butane"), GLP("glp"), GOC("goc"), ELECTRICITY("electricity");
+
+		@JsonCreator
+		public static EnergyType create(String value) {
+			for (EnergyType energyType : values()) {
+				if (Objects.equals(energyType.getValue(), value)) {
+					return energyType;
+				}
+			}
+
+			return null;
+		}
+
+		@JsonValue
+		public String getValue() {
+			return _value;
+		}
+
+		@Override
+		public String toString() {
+			return _value;
+		}
+
+		private EnergyType(String value) {
+			_value = value;
+		}
+
+		private final String _value;
+
+	}
 
 	@Schema(description = "Wether it's used for water heating.")
 	public Boolean getAcsUse() {
@@ -77,17 +126,27 @@ public class GasCalculatedConsumption {
 	protected Integer electricityConsumption;
 
 	@Schema(description = "Select Butane, GLP, GOC or Electricity")
-	public String getEnergyType() {
+	@Valid
+	public EnergyType getEnergyType() {
 		return energyType;
 	}
 
-	public void setEnergyType(String energyType) {
+	@JsonIgnore
+	public String getEnergyTypeAsString() {
+		if (energyType == null) {
+			return null;
+		}
+
+		return energyType.toString();
+	}
+
+	public void setEnergyType(EnergyType energyType) {
 		this.energyType = energyType;
 	}
 
 	@JsonIgnore
 	public void setEnergyType(
-		UnsafeSupplier<String, Exception> energyTypeUnsafeSupplier) {
+		UnsafeSupplier<EnergyType, Exception> energyTypeUnsafeSupplier) {
 
 		try {
 			energyType = energyTypeUnsafeSupplier.get();
@@ -102,7 +161,7 @@ public class GasCalculatedConsumption {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String energyType;
+	protected EnergyType energyType;
 
 	@Schema(description = "Wether it's used for house heating.")
 	public Boolean getHeatingUse() {
@@ -217,7 +276,7 @@ public class GasCalculatedConsumption {
 
 			sb.append("\"");
 
-			sb.append(_escape(energyType));
+			sb.append(energyType);
 
 			sb.append("\"");
 		}

@@ -61,7 +61,7 @@ public class GasComparator {
 
         GasComparationRequest gasComparationRequest = new GasComparationRequest();
         gasComparationRequest.setAcsUse(gasCalculatedConsumption.getAcsUse() ? "Si" : "No");
-        switch (gasCalculatedConsumption.getEnergyType()) {
+        switch (gasCalculatedConsumption.getEnergyType().getValue()) {
             case "glp":
                 gasComparationRequest.setAnualConsumptionGLP(
                     gasCalculatedConsumption.getElectricityConsumption());
