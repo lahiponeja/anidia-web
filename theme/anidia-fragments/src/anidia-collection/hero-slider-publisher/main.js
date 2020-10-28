@@ -71,11 +71,15 @@ function heroSlider() {
     xPercent: -100 * (sections.length - 1),
     ease: "none",
     scrollTrigger: {
-      trigger: ".an-hero-slider",
+      trigger: ".an-hero-slider__inner-wrapper",
       pin: true,
       scrub: 1,
+      snap: 1 / (sections.length - 1),
       // base vertical scrolling on how wide the container is so it feels more natural.
-      end: () =>  "+=" + (document.querySelector(".an-hero-slider__item").offsetWidth * sections.length),
+      end: () =>  {
+        "+=" + (document.querySelector(".an-hero-slider__item").offsetWidth * sections.length);
+        document.getElementById('banner').style.position = 'relatives';
+      },
       onUpdate: debounce(checkLeftCollision, 500)
     }
   });
@@ -83,4 +87,5 @@ function heroSlider() {
 
 if (document.querySelectorAll(".an-hero-slider__item").length > 1) {
   heroSlider();
+  document.getElementById('banner').style.position = 'fixed';
 }
