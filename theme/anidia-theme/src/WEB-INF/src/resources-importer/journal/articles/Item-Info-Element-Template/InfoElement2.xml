@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<root available-locales="es_ES" default-locale="es_ES">
+	<dynamic-element name="Icono" type="list" index-type="keyword" instance-id="hjqm">
+		<dynamic-content language-id="es_ES"><![CDATA[an-icon--chevron-up]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="Título" type="text" index-type="keyword" instance-id="jqcg">
+		<dynamic-content language-id="es_ES"><![CDATA[Título2]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="Descripción" type="text_box" index-type="text" instance-id="tjkh">
+		<dynamic-content language-id="es_ES"><![CDATA[Descripción. Pulvinar praesent blandit nisl nam erat pretium est duis, sodales maecenas gravida a leo tortor litora, natoque.]]></dynamic-content>
+	</dynamic-element>
+</root>

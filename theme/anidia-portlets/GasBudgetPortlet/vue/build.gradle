@@ -1,0 +1,10 @@
+tasks.register("build") {
+
+    group = 'Anidia'
+    description = 'Builds the vue module of the project'
+
+    exec {
+      commandLine 'npm', 'run', 'build'
+    }
+
+}

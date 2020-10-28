@@ -1,0 +1,507 @@
+.anidia-header {
+  width: 100%;
+
+  &.active {
+    position: fixed;
+    background: $an-theme-dark-grey;
+    z-index: 2;
+    height: 100%;
+    top: 0;
+    overflow: scroll;
+  }
+
+  .navbar-nav,
+  .dropdown-menu {
+    .nav-link {
+      display: block;
+      color: $white;
+      text-decoration: none;
+      width: 100%;
+
+      body.anidia-white & {
+        @include desktop {
+          color: $an-theme;
+        }
+      }
+    }
+
+    > .list-unstyled {
+      display: none;
+    }
+  }
+
+  .navbar-nav {
+    opacity: 0;
+    display: none;
+    transition: .25s 0s ease-in-out;
+    flex-direction: column;
+
+    @include desktop {
+      flex-direction: row;
+      opacity: 1;
+      display: flex;
+    }
+  }
+
+  .nav-item {
+    width: 100%;
+    border-bottom: rem(1) solid $an-border;
+    z-index: 2;
+
+    &.hide-border {
+      border-bottom: 0;
+    }
+
+    @include desktop {
+      margin-right: rem(40);
+      border: none;
+      width: auto;
+      position: initial;
+
+    }
+
+    .lfr-nav-child-toggle svg {
+      font-size: rem(12);
+    }
+
+    .nav-link {
+      font-family: $fs-emeric-medium-family;
+      font-size: rem(24);
+      line-height: rem(36);
+      padding: rem(12) 0;
+
+      @include desktop {
+        font-size: rem(18);
+      }
+
+      &:hover {
+        text-decoration: underline;
+        color: $white;
+      }
+
+      .text-truncate {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 rem(20);
+
+        @include desktop {
+          margin-right: rem(10);
+          padding-left: 0;
+        }
+      }
+    }
+
+    &.dropdown:hover {
+      @include desktop {
+        &::before {
+          content: '';
+          width: 0;
+          height: 0;
+          border-left: rem(19) solid transparent;
+          border-right: rem(19) solid transparent;
+          border-bottom: rem(19) solid $white;
+          position: absolute;
+          bottom: 0;
+          transform: translateY(rem(10));
+        }
+      }
+    }
+  }
+
+  .dropdown-menu {
+    border: none;
+    margin: 0;
+    border-radius: 0;
+    max-width: unset;
+    opacity: 1;
+    left: 100%;
+    transition: .6s ease-in-out 0s;
+    height: auto;
+    background: $an-theme-dark-grey;
+    max-height: 100%;
+
+    @include desktop {
+      padding: rem(40) rem(60) rem(20);
+      position: absolute;
+      background-color: $white;
+      left: 0;
+      height: auto;
+      width: 100vw;
+      justify-content: center;
+      min-height: rem(220);
+      max-height: unset;
+      flex-wrap: wrap;
+      transform: translateX(rem(-60));
+
+      li {
+        margin-right: rem(38);
+        margin-bottom: rem(20);
+      }
+    }
+
+    &.active {
+      left: 0;
+      z-index: 2;
+      display: block;
+      position: relative;
+      transform: translateY(-60px);
+    }
+
+    .dropdown-item {
+      font-size: rem(18);
+      border-bottom: rem(1) solid $white;
+      line-height: rem(36);
+      padding: rem(13) 0;
+      color: $white;
+
+      @include desktop {
+        @include gradient-green-bg;
+        width: rem(188);
+        height: rem(155);
+        margin-right: rem(38);
+        font-size: rem(14);
+        line-height: rem(17);
+        font-family: $open-sans-bold-family;
+        border-radius: rem(10);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $white;
+        text-align: center;
+
+        &:hover {
+          background-color: transparent;
+          text-decoration: underline;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &::after {
+          content: $an-icon-lightning-borders;
+          display: block;
+          position: absolute;
+          font-family: $an-icons;
+          opacity: .2;
+          font-size: rem(120);
+          color: $yellow;
+        }
+      }
+    }
+  }
+
+  .dropdown-item:focus,
+  .dropdown-menu > li > a:focus,
+  .dropdown-menu .link-list > li > a:focus {
+    background-color: transparent;
+    color: $white;
+  }
+
+  .dropdown-item:hover,
+  .dropdown-menu > li > a:hover,
+  .dropdown-menu .link-list > li > a:hover {
+    background-color: transparent;
+  }
+
+  // BURGER MENU FOR MOBILE
+  &__menu {
+    transition: .5s ease-in-out;
+    cursor: pointer;
+
+    @include desktop {
+      display: none;
+    }
+  }
+
+  &__hamburger {
+    position: absolute;
+    top: rem(38);
+    right: rem(30);
+    width: rem(30);
+    height: rem(4);
+    background: $white;
+    display: block;
+    transform-origin: center;
+    transition: .5s ease-in-out;
+    border-radius: rem(20);
+
+    body.anidia-white & {
+      background: $an-theme;
+    }
+
+    &::before,
+    &::after {
+      transition: .5s ease-in-out;
+      content: '';
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: $white;
+      border-radius: rem(20);
+
+      body.anidia-white & {
+        background: $an-theme;
+      }
+
+    }
+
+    &:before {
+      top: rem(-10);
+    }
+
+    &::after {
+      bottom: rem(-10);
+    }
+  }
+
+  &__input {
+    display: none;
+
+    @include desktop {
+      pointer-events: none;
+    }
+
+    .anidia-logo--menu {
+      display: none;
+    }
+
+    &:checked {
+
+      & + .anidia-header__menu {
+        display: block;
+        padding: 0 rem(20);
+
+        .anidia-logo--menu {
+          display: block !important;
+          visibility: visible !important;
+          padding-top: rem(20);
+        }
+
+        .anidia-header__hamburger {
+          transform: rotate(45deg);
+          background-color: $white;
+
+          &::after {
+            transform: rotate(90deg);
+            bottom: 0;
+            background-color: $white;
+          }
+
+          &::before {
+            transform: rotate(90deg);
+            top: 0;
+            background-color: $white;
+          }
+        }
+      }
+
+      & ~ div .navbar-nav {
+        opacity: 1;
+        display: flex;
+        margin-top: rem(28);
+        padding: 0 rem(20);
+
+        @include desktop {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  &__back {
+    border-bottom: rem(2) solid $an-theme;
+    text-align: center;
+    color: $an-theme;
+
+    @include desktop {
+      display: none;
+    }
+
+    a {
+      align-items: center;
+      justify-content: center;
+      color: $an-theme !important;
+      font-size: rem(24);
+      font-family: $fs-emeric-semibold-family;
+
+      &::before {
+        color: $an-theme;
+        font-family: $an-icons;
+        font-size: rem(28);
+        content: $an-icon-half-arrow-left;
+        position: absolute;
+        left: 0;
+      }
+    }
+  }
+
+  &__footer {
+    display: none;
+    visibility: hidden;
+    text-align: center;
+    margin: rem(32) rem(20);
+
+    @include desktop {
+      display: none;
+    }
+
+    input:checked ~ & {
+      display: block;
+      visibility: visible;
+    }
+
+    .an-btn {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+
+      &:first-child {
+        margin-bottom: rem(20);
+      }
+
+      &:before {
+        margin: rem(15);
+        font-size: rem(30);
+        z-index: 3;
+      }
+    }
+  }
+
+  .dropdown.open > .dropdown-menu {
+    @include desktop {
+      display: flex;
+    }
+  }
+}
+
+// LIFERAY SITE-TITLE REPLACED STYLES
+.site-title {
+
+  @include desktop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &--mobile-hide {
+    display: none;
+
+    @include desktop {
+      display: inline;
+    }
+  }
+
+  &--desktop-hide {
+    @include desktop {
+      display: none;
+    }
+  }
+
+  .anidia-logo-header--mobile {
+    height: rem(33);
+    width: rem(40);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(rem(24), rem(20));
+    z-index: 3;
+
+    &--green {
+      display: none;
+
+      body.anidia-white & {
+        display: inline;
+      }
+    }
+
+    &--white {
+      display: inline;
+
+      body.anidia-white & {
+        display: none;
+      }
+    }
+  }
+
+  .an-icon--head-phones.an-cmb--header-small {
+    display: flex;
+    margin-left: auto;
+    transform: translate(rem(-74), rem(20));
+
+    @include desktop {
+      display: none !important;
+    }
+  }
+
+  .an-btn--white.an-icon--head-phones.an-cmb--header {
+    transform: translate(rem(-74), rem(-5));
+    margin-left: auto;
+
+    body.anidia-white & {
+      display: none;
+    }
+
+    @include desktop {
+      display: none;
+    }
+  }
+
+  .an-icon--power {
+
+    @include desktop {
+      display: flex !important;
+      z-index: 1;
+    }
+
+    &::before {
+      z-index: 2;
+      margin-right: rem(11);
+      font-size: rem(30);
+    }
+  }
+
+  .logo {
+    @include tablet {
+      z-index: 1;
+    }
+  }
+
+  .anidia-logo-header {
+    @include desktop {
+      height: rem(47);
+      margin-bottom: rem(55);
+    }
+
+    &--green {
+      display: none !important;
+
+      body.anidia-white & {
+        display: block !important;
+      }
+    }
+
+    &--white {
+      body.anidia-white & {
+
+        @include desktop {
+          display: none !important;
+        }
+      }
+    }
+  }
+}
+
+#banner {
+
+  @include desktop {
+    padding: rem(19) rem(60);
+    z-index: 2;
+  }
+}
+
+#sign-in {
+  display: none;
+}

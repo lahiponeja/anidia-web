@@ -1,0 +1,27 @@
+{
+  "fieldSets": [
+    {
+      "label": "Tamaño cards",
+      "fields": [
+        {
+          "name": "CardSize",
+          "label": "Tamaño cards",
+          "description": "Tamaño de las cards",
+          "type": "select",
+          "dataType": "string",
+          "defaultValue": "Small",
+          "typeOptions": {
+            "validValues": [
+              {
+                "value": "Big"
+              },
+              {
+                "value": "Small"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

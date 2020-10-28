@@ -1,3 +1,4 @@
+%an-card,
 .an-card {
   border-radius: rem(20);
   display: flex;
@@ -5,23 +6,127 @@
   justify-content: center;
   box-shadow: $an-shadow-two;
   width: 100%;
+  max-width: 100%;
 
   &--simple {
     text-align: center;
     padding: rem(40);
     align-items: center;
-    max-width: rem(497);
-    min-height: rem(368);
+    background-color: $white;
+    margin-right: rem(20);
+    position: relative;
+    margin-bottom: rem(20);
+    transition: max-width .2s ease,
+                top .2s ease,
+                z-index .2s ease;
+
+    &.active {
+      @include desktop {
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        width: 100%;
+        max-width: calc(100% - 40px);
+        left: 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 100%;
+
+        .an-card__title {
+          white-space: nowrap;
+        }
+
+        .an-menu-bold {
+          color: $an-theme;
+        }
+      }
+    }
 
     > * {
       margin-bottom: rem(6);
     }
 
+
+    .an-card__title {
+      font-size: rem(24);
+      line-height: rem(30);
+      margin-bottom: rem(20);
+    }
+
+    .an-link {
+      text-transform: uppercase;
+      font-size: rem(12);
+      margin-top: auto;
+      color: $an-theme;
+      letter-spacing: rem(1.71);
+      font-family: $fs-emeric-bold-family;
+    }
+
+    .an-icon--close-cross {
+      align-self: baseline;
+      cursor: pointer;
+
+      &::before {
+        color: $an-theme;
+        font-size: rem(33);
+      }
+    }
+
+    &__text-expanded {
+      text-align: left;
+      margin: auto;
+      padding-right: flex-grid(1);
+      color: $an-theme-dark-grey;
+
+      .an-menu-bold {
+        color: $an-theme;
+        font-size: rem(18);
+        text-align: center;
+        font-family: $open-sans-bold-family;
+
+        @include desktop {
+          text-align: left;
+        }
+      }
+    }
+
+    &__intro {
+
+      > div {
+        margin-bottom: rem(12);
+
+        &::before {
+          margin: auto;
+          width: rem(80);
+        }
+      }
+
+      @include desktop {
+        padding-right: flex-grid(1);
+        padding-left: flex-grid(1);
+      }
+    }
+
+    &__text-short {
+      font-size: rem(18);
+      line-height: normal;
+      color: $an-theme-dark-grey;
+
+      &__dots {
+        margin-top: rem(31);
+        margin-bottom: rem(17);
+      }
+    }
   }
 
   &--form {
-    padding: rem(55) rem(51) rem(52);
+    padding: rem(40) rem(20);
     max-width: rem(497);
+    background-color: $white;
+
+    @include desktop {
+      padding: rem(55) rem(51) rem(52);
+    }
 
     .an-checkbox {
       width: 100%;
@@ -34,10 +139,14 @@
     }
 
     > * {
-      // TODO: ADD MARGIN VAR
-      margin-bottom: rem(24);
+      margin-bottom: rem(20);
+
+      @include desktop {
+        margin-bottom: rem(24);
+      }
     }
   }
+
 
   &--banner {
     text-align: left;
@@ -50,7 +159,6 @@
     h2,
     .an-pill,
     .an-icon--half-arrow-right {
-      // TODO: ADD MARGIN VAR
       margin-bottom: rem(24);
       color: $white;
       z-index: 1;
@@ -99,17 +207,14 @@
       border-radius: rem(20);
 
       .an-pill {
-        // TODO: ADD MARGIN VAR
         margin-bottom: rem(20);
       }
 
       &__date {
-        // TODO: ADD MARGIN VAR
         margin-bottom: rem(14);
       }
 
       .n-body-l-bold {
-        // TODO: ADD MARGIN VAR
         margin-bottom: rem(30);
       }
 
@@ -130,12 +235,14 @@
   }
 
   &--pack {
-    padding: rem(54) rem(74) rem(70);
+    padding: rem(36) rem(24);
     border-radius: rem(30);
     border: 1px solid $an-border-shadow;
+    background-color: $white;
+    justify-content: space-between;
 
     .an-list {
-      margin-bottom: rem(40);
+      margin-bottom: rem(30);
 
       &__icon::before {
         color: $an-theme;
@@ -144,64 +251,91 @@
 
     &__intro {
       text-transform: uppercase;
-      margin-bottom: rem(34);
       text-align: center;
+      margin-bottom: rem(28);
+
+      @include desktop {
+        margin-bottom: 0;
+      }
 
       h5 {
         color: $an-theme-dark-grey;
-      }
 
-      h5:last-child {
-        color: $an-theme;
+        &:last-child {
+          color: $an-theme;
+        }
       }
     }
 
     &__info {
-      margin-bottom: rem(34);
+      margin-bottom: rem(24);
       color: $an-theme;
       text-align: center;
     }
 
     &--big {
-      width: rem(529);
 
-      h1 {
-        font-size: rem(120);
-        line-height: rem(132);
+      @include desktop {
+        max-width: rem(529);
+        min-height: rem(686);
+        padding: rem(57) rem(47) rem(70);
+
+        h3 {
+          font-size: rem(30);
+          line-height: rem(30);
+        }
+      }
+
+      h2 {
+        font-size: rem(60);
+        line-height: rem(60);
+
+        @include desktop {
+          font-size: rem(120);
+          line-height: rem(120);
+        }
+      }
+
+      .an-list__item {
+        margin-bottom: rem(11);
+
+        @include desktop {
+          margin-bottom: rem(20);
+        }
       }
 
       &.featured {
-        width: rem(560);
+        @include desktop {
+          max-width: rem(560);
+          min-height: rem(733);
 
-        h1 {
-          font-size: rem(150);
-          line-height: rem(165);
-        }
+          h2 {
+            font-size: rem(150);
+            line-height: rem(150);
+          }
 
-        h4 {
-          font-size: rem(36);
+          h3 {
+            font-size: rem(36);
+            line-height: rem(36);
+          }
         }
       }
     }
 
     &--small {
-      width: rem(470);
 
-      h1 {
-        font-size: rem(60);
-        line-height: rem(67);
+      @include desktop {
+        max-width: rem(470);
+
+        h3 {
+          font-size: rem(24);
+          line-height: normal;
+        }
       }
 
       &.featured {
-        width: rem(500);
-
-        h1 {
-          font-size: rem(80);
-          line-height: rem(89);
-        }
-
-        h4 {
-          font-size: rem(30);
+        @include desktop {
+          max-width: rem(500);
         }
       }
     }
@@ -210,6 +344,11 @@
       background-color: $an-theme;
       color: $white;
       border: none;
+
+      h2,
+      h3 {
+        color: #C5EF3F;
+      }
 
       h5:last-child,
       .an-list__icon::before,

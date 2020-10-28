@@ -1,0 +1,162 @@
+{
+    "availableLanguageIds": [
+        "es_ES"
+    ],
+    "defaultLanguageId": "es_ES",
+    "fields": [
+        {
+            "label": {
+                "es_ES": "Nombre"
+            },
+            "predefinedValue": {
+                "es_ES": ""
+            },
+            "style": {
+                "es_ES": ""
+            },
+            "tip": {
+                "es_ES": ""
+            },
+            "dataType": "string",
+            "indexType": "keyword",
+            "localizable": true,
+            "name": "Nombre",
+            "readOnly": false,
+            "repeatable": false,
+            "required": false,
+            "showLabel": true,
+            "type": "text"
+        },
+        {
+            "label": {
+                "es_ES": "Detalle"
+            },
+            "predefinedValue": {
+                "es_ES": ""
+            },
+            "style": {
+                "es_ES": ""
+            },
+            "tip": {
+                "es_ES": ""
+            },
+            "dataType": "string",
+            "indexType": "keyword",
+            "localizable": true,
+            "name": "Detalle",
+            "readOnly": false,
+            "repeatable": false,
+            "required": false,
+            "showLabel": true,
+            "type": "text"
+        },
+        {
+            "label": {
+                "es_ES": "Título"
+            },
+            "predefinedValue": {
+                "es_ES": " <h3>Instalación</h3><h2>Gratis</h2><h3>xxx€ de ahorro anual</h3>"
+            },
+            "style": {
+                "es_ES": ""
+            },
+            "tip": {
+                "es_ES": ""
+            },
+            "dataType": "html",
+            "fieldNamespace": "ddm",
+            "indexType": "text",
+            "localizable": true,
+            "name": "Titulo",
+            "readOnly": false,
+            "repeatable": false,
+            "required": false,
+            "showLabel": true,
+            "type": "ddm-text-html"
+        },
+        {
+            "label": {
+                "es_ES": "Ventajas"
+            },
+            "predefinedValue": {
+                "es_ES": "  <li class=\"an-list__item an-body-m-regular\"><div class=\"an-list__icon an-icon--check-circle\"></div>Lorem ipsum dolor</li>   <li class=\"an-list__item an-body-m-regular\"><div class=\"an-list__icon an-icon--check-circle\"></div>Lorem ipsum dolor</li>   <li class=\"an-list__item an-body-m-regular\"><div class=\"an-list__icon an-icon--check-circle\"></div>Lorem ipsum dolor</li>"
+            },
+            "style": {
+                "es_ES": ""
+            },
+            "tip": {
+                "es_ES": ""
+            },
+            "dataType": "html",
+            "fieldNamespace": "ddm",
+            "indexType": "text",
+            "localizable": true,
+            "name": "Ventajas",
+            "readOnly": false,
+            "repeatable": false,
+            "required": false,
+            "showLabel": true,
+            "type": "ddm-text-html"
+        },
+        {
+            "label": {
+                "es_ES": "Botón"
+            },
+            "predefinedValue": {
+                "es_ES": "Más información"
+            },
+            "style": {
+                "es_ES": ""
+            },
+            "tip": {
+                "es_ES": ""
+            },
+            "dataType": "string",
+            "indexType": "keyword",
+            "localizable": true,
+            "name": "Boton",
+            "readOnly": false,
+            "repeatable": false,
+            "required": false,
+            "showLabel": true,
+            "type": "text"
+        },
+        {
+            "label": {
+                "es_ES": "Estilo"
+            },
+            "options": [
+                {
+                    "value": "verde",
+                    "label": {
+                        "es_ES": "Verde"
+                    }
+                },
+                {
+                    "value": "blanco",
+                    "label": {
+                        "es_ES": "Blanco"
+                    }
+                }
+            ],
+            "predefinedValue": {
+                "es_ES": "verde"
+            },
+            "style": {
+                "es_ES": ""
+            },
+            "tip": {
+                "es_ES": ""
+            },
+            "dataType": "radio",
+            "indexType": "keyword",
+            "localizable": true,
+            "name": "Estilo",
+            "readOnly": false,
+            "repeatable": false,
+            "required": false,
+            "showLabel": true,
+            "type": "radio"
+        }
+    ]
+}

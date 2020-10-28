@@ -64,3 +64,11 @@ $lines-clamp: 2 3 4 !default;
 .w-full {
   width: 100%;
 }
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.quick-access-nav {
+  display: none;
+}

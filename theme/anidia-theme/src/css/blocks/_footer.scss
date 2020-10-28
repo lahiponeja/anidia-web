@@ -20,14 +20,20 @@
     }
   }
 
+  &__links {
+    @include desktop {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+  }
+
   ul {
     display: flex;
     flex-direction: column;
-    margin-bottom: rem(34);
 
     @include desktop {
       flex-direction: row;
-      margin-bottom: 0;
     }
   }
 
@@ -42,12 +48,17 @@
       margin-bottom: rem(29);
     }
 
+    a:hover {
+      color: $white;
+      text-decoration: none;
+    }
+
     @include desktop {
       margin-bottom: 0;
+      margin-right: rem(50);
 
       &:not(:last-child) {
         margin-bottom: 0;
-        margin-right: rem(100);
       }
     }
   }
@@ -72,6 +83,23 @@
         color: $white;
         text-decoration: none;
       }
+    }
+  }
+
+  #ot-sdk-btn.ot-sdk-show-settings,
+  #ot-sdk-btn.optanon-show-settings {
+    @extend %an-h6;
+    margin-bottom: rem(32);
+    text-transform: uppercase;
+    border: none;
+    padding: 0;
+
+    &:hover {
+      background: none;
+    }
+
+    @include desktop {
+      margin-bottom: 0;
     }
   }
 }
