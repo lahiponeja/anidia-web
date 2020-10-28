@@ -142,12 +142,12 @@ const submitUserContactInfo = function (budgetReadyForm) {
         "iva21": state.gasBudget.vat,
         "totalPVP": state.gasBudget.totalPrice,
         "extras": {
-          "MetersBoilerToWindow": state.houseFormData.metersBoilerToWindow,
-          "MetersWaterIntake": state.houseFormData.metersWaterIntake,
-          "HasVentilationGrill": state.houseFormData.hasVentilationGrill,
-          "ControllHeatingFloor": state.houseFormData.controllHeatingFloor,
-          "ConvertDeviceKitchen": state.houseFormData.convertDeviceKitchen,
-          "RadiatorsBathroom": state.houseFormData.radiatorsBathroom,
+          "MetersBoilerToWindow": state.gasBudget.metersBoilerToWindow.price,
+          "MetersWaterIntake": state.gasBudget.metersWaterIntake.price,
+          "HasVentilationGrill": state.gasBudget.hasVentilationGrill.price,
+          "ControllHeatingFloor": state.gasBudget.controllHeatingFloor.price,
+          "ConvertDeviceKitchen": state.gasBudget.convertDeviceKitchen.price,
+          "RadiatorsBathroom": state.gasBudget.radiatorsBathroom.price,
           "ExtraTotalPrice": state.gasBudget.extraTotalPrice
         }
       }
