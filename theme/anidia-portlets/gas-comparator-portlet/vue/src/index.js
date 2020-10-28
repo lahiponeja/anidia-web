@@ -1,3 +1,10 @@
+import './plugins/compositionApi'
+// State Modules
+import global from './store/modules/global'
+import comparator from './store/modules/comparator'
+// Views
+import funnelView from './views/funnelView'
+import comparatorView from './views/comparatorView'
 
 import Vue from 'vue/dist/vue.common';
 
@@ -16,26 +23,34 @@ export default function main({portletNamespace, contextPath, portletElementId, c
     const node = document.getElementById(portletElementId);
     
     // Dynamically write markup to portlet's node
-    node.innerHTML = `
-        <div>
-            <div>
-                <span class="tag">${Liferay.Language.get('portlet-namespace')}:</span> 
-                <span class="value">{{portletNamespace}}</span>
+    node.innerHTML = /*html*/`
+    <div class="an-funnel bg-white pt-xxxl pb-xxxl">
+            <div class="an-funnel__titles an-wrapper--sml">
+                <p class="an-h6 color-an-theme-dark-grey mb-l">CALCULADORA DE AHORRO</p>
+                <p class="an-body-l-bold color-an-theme">Calcula todo lo que podrías ahorrarte instalando gas natural</p>
             </div>
-            <div>
-                <span class="tag">${Liferay.Language.get('context-path')}:</span>
-                <span class="value">{{contextPath}}</span>
-            </div>
-            <div>
-                <span class="tag">${Liferay.Language.get('portlet-element-id')}:</span>
-                <span class="value">{{portletElementId}}</span>
-            </div>
-            
-            <div>
-                <span class="tag">${Liferay.Language.get('configuration')}:</span>
-                <span class="value pre">{{JSON.stringify(configuration, null, 2)}}</span>
-            </div>
-            
+
+            <keep-alive>
+                <component :is="global.activeView().component"></component>
+            </keep-alive>
+
+            <button @click="global.changeView('funnel')">funnel-view</button>
+            <button @click="global.changeView('comparator')">comparator-view</button> 
+
+            <!-- <template v-for="(view, index) of global.state.mainViewsArr">
+                <template v-if="view.active">
+                    <keep-alive>
+                        <component :is="view.component">
+                    </keep-alive>
+                </template>
+            </template> -->
+
+            <!-- <template v-if="(global.state.currentView === 'funnel')">
+                <funnel-view />
+            </template>
+            <template v-else-if="(global.state.currentView === 'comparator')">
+                <comparator-view />
+            </template> -->
         </div>
     `;
     
@@ -47,9 +62,18 @@ export default function main({portletNamespace, contextPath, portletElementId, c
     // for more information.
     //
     new Vue({
-		el: `#${portletElementId}`,
+        el: `#${portletElementId}`,
+        provide: {
+            global,
+            comparator,
+        },
+        components: {
+			'funnel-view': funnelView,
+			'comparator-view': comparatorView,
+        },
 		data: {
-			portletNamespace, contextPath, portletElementId, configuration
+            global,
+            comparator,
 		}
 	});
     
