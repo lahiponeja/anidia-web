@@ -40,3 +40,5 @@ This file allows you to override and define new FreeMarker variables.
 <#-- We get the style of the movile call center link -->
 
 <#assign call_center_phone_mobile_version = themeDisplay.getThemeSetting("Versión de Call Center en móvil") />
+
+<#assign page_ancestors = layout.getAncestors() />
