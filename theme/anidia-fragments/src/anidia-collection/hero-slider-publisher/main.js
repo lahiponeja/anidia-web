@@ -87,7 +87,5 @@ function heroSlider() {
 
 if (document.querySelectorAll(".an-hero-slider__item").length > 1) {
   heroSlider();
-  document.getElementById('banner').style.position = 'fixed';
-} else {
-  document.querySelectorAll('.an-hero-slider').classList.add('one-elem');
+  document.getElementById('banner').classList.add('more-elem');
 }

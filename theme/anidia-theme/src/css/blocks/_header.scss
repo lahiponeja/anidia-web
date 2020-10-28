@@ -500,6 +500,10 @@
   @include desktop {
     padding: rem(19) rem(60);
     z-index: 2;
+
+    &.more-elem {
+      position: fixed;
+    }
   }
 }
 

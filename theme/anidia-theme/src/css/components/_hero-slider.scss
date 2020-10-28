@@ -1,11 +1,9 @@
 .an-hero-slider {
   height: 100%;
 
-  &.one-elem {
-    @include desktop {
-      transform: translateY(-200px);
-      margin-bottom: rem(-200);
-    }
+  @include desktop {
+    transform: translateY(-200px);
+    margin-bottom: rem(-200);
   }
 
   .portlet-body {
