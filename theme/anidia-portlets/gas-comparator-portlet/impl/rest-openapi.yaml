@@ -18,6 +18,7 @@ components:
         energyType:
           description: Select Butane, GLP, GOC or Electricity
           type: string
+          enum: [butane, glp, goc, electricity]
     GasConsumptionByUse:
       description: Info about gas consumption according to the answers of the user
       properties:
