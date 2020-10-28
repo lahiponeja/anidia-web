@@ -78,7 +78,7 @@ function heroSlider() {
       // base vertical scrolling on how wide the container is so it feels more natural.
       end: () =>  {
         "+=" + (document.querySelector(".an-hero-slider__item").offsetWidth * sections.length);
-        document.getElementById('banner').style.position = 'relatives';
+        document.getElementById('banner').style.position = 'relative';
       },
       onUpdate: debounce(checkLeftCollision, 500)
     }
