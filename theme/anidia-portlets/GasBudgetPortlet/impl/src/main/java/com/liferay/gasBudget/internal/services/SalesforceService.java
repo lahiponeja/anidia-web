@@ -442,9 +442,7 @@ public class SalesforceService {
 		extrasOutput.setHasVentilationGrill(calculatorGasOutputExtras.getHasVentilationGrill());
 		extrasOutput.setConnectDeviceToKitchen(calculatorGasOutputExtras.getConnectDeviceToKitchen());
 		extrasOutput.setMetersBoilerToWindow(calculatorGasOutputExtras.getMetersBoilerToWindow());
-		String replaceMetersWaterIntake = calculatorGasOutputExtras.getMetersWaterIntake().substring(2);
-		System.out.println("ReplaceMetersWaterIntake output: " + replaceMetersWaterIntake);
-		extrasOutput.setMetersWaterIntake(replaceMetersWaterIntake);
+		extrasOutput.setMetersWaterIntake(calculatorGasOutputExtras.getMetersWaterIntake());
 		extrasOutput.setRadiatorsBathroom(calculatorGasOutputExtras.getRadiatorsBathroom());
 
 		return extrasOutput;
