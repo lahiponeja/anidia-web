@@ -382,7 +382,7 @@ public class SalesforceService {
 		inputRequest.setHeatingUse(calculatorGasInput.getHeatingUse());
 		inputRequest.setHouseType(calculatorGasInput.getHouseType());
 		inputRequest.setKitchenUse(calculatorGasInput.getKitchenUse());
-		inputRequest.setPersonsWater(calculatorGasInput.getPersonsWater());
+		inputRequest.setPersonsWater(this.translatePersonsWater(calculatorGasInput.getPersonsWater()));
 		inputRequest.setPropertyMeters(calculatorGasInput.getPropertyMeters());
 		inputRequest.setStaysNumber(Long.valueOf(calculatorGasInput.getStaysNumber()));
 		inputRequest.setZipCode(calculatorGasInput.getZipCode());
@@ -449,4 +449,17 @@ public class SalesforceService {
 
 		return extrasOutput;
 	}
+
+	private String translatePersonsWater(String original) {
+    switch (original) {
+      case "Hasta 2":
+        return "Hasta 2 personas";
+      case "Entre 3-4":
+        return "De 3-4 personas";
+      case "Más de 4":
+        return "5 o más personas";
+    }
+    return null;
+  }
+
 }
