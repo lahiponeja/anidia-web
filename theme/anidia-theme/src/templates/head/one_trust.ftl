@@ -3,7 +3,7 @@
   <script type="text/javascript" src="https://cdn.cookielaw.org/consent/ad62ccc3-73b7-4fa0-8939-185357e3f2a7/OtAutoBlock.js" ></script>
   <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="ad62ccc3-73b7-4fa0-8939-185357e3f2a7" ></script>
 <#else >
-  <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="03ffa015-1e00-44a0-b354-002e2d1a6c60" ></script>
+  <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="1c7f3cf8-4176-4959-9dd0-e730622d8ccc" ></script>
 </#if>
 <script type="text/javascript">
   function OptanonWrapper() {
