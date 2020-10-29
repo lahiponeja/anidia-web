@@ -6,6 +6,7 @@ import com.liferay.gasBudget.dto.v1_0.*;
 import com.liferay.gasBudget.internal.dto.*;
 import com.liferay.gasBudget.internal.exception.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.net.*;
 import java.net.http.*;
 import java.util.*;
@@ -92,19 +93,25 @@ public class SalesforceService {
 		String token = this.getSalesforceToken();
 
 		StringBuilder urlBuilder = new StringBuilder();
-		urlBuilder.append(SALESFORCE_ESTATES_URL);
-		urlBuilder.append("?");
-		urlBuilder.append("municipio_ine=");
-		urlBuilder.append(municipalityId);
-		urlBuilder.append("&codigo_postal=");
-		urlBuilder.append(postalCode);
-		urlBuilder.append("&tipo_y_nombre_de_via=");
-		urlBuilder.append(URLEncoder.encode(addressName, StandardCharsets.UTF_8.toString()));
-		urlBuilder.append("+");
-		urlBuilder.append(URLEncoder.encode(addressName, StandardCharsets.UTF_8.toString()));
-		// We have to sent the number as empty
-		urlBuilder.append("&numero=");
-		urlBuilder.append("&limit=500");
+
+		try {
+			urlBuilder.append(SALESFORCE_ESTATES_URL);
+			urlBuilder.append("?");
+			urlBuilder.append("municipio_ine=");
+			urlBuilder.append(municipalityId);
+			urlBuilder.append("&codigo_postal=");
+			urlBuilder.append(postalCode);
+			urlBuilder.append("&tipo_y_nombre_de_via=");
+			urlBuilder.append(URLEncoder.encode(addressKind, StandardCharsets.UTF_8.toString()));
+			urlBuilder.append("+");
+			urlBuilder.append(URLEncoder.encode(addressName, StandardCharsets.UTF_8.toString()));
+			// We have to sent the number as empty
+			urlBuilder.append("&numero=");
+			urlBuilder.append("&limit=500");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return estates;
+		}
 
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder().
