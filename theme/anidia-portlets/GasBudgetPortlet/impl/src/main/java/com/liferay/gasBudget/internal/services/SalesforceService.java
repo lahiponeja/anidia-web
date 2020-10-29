@@ -104,6 +104,7 @@ public class SalesforceService {
 		urlBuilder.append(addressName);
 		// We have to sent the number as empty
 		urlBuilder.append("&numero=");
+		urlBuilder.append("&limit=500");
 
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder().
@@ -168,6 +169,7 @@ public class SalesforceService {
 		urlBuilder.append(municipalityId);
 		urlBuilder.append("&codigo_postal=");
 		urlBuilder.append(postalCode);
+		urlBuilder.append("&limit=500");
 
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder().
