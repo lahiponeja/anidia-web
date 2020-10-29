@@ -1,4 +1,9 @@
+import results from "./results";
+
 const compSaving = {
+  components: {
+    results,
+  },
   inject: ["comparator"],
   data() {
     return {
@@ -12,7 +17,7 @@ const compSaving = {
       },
 
       sendingForm: false,
-      leadSent: false,
+      leadSent: false, // CHANGE TO false 🔥
     }
   },
   methods: {
@@ -75,7 +80,7 @@ const compSaving = {
       </div>
     </template>
     <template v-else>
-      <h2>Instalando gas natural ahorrarías...</h2>
+      <results />
     </template>
   </div>
   `,

@@ -30,7 +30,7 @@ const compHotWater = {
       if(operation === "add") {
         ++this.savingsData.numberOfPeople
       } else if("substract") {
-        if(this.savingsData.numberOfPeople > 0) {
+        if(this.savingsData.numberOfPeople > 1) {
           --this.savingsData.numberOfPeople
         }
       }
@@ -40,8 +40,8 @@ const compHotWater = {
     <div class="an-form an-wrapper">
       <form @submit.prevent="submitRequest">
 
-        <!-- 🚧 ¿Dispones de agua caliente? 🚧 -->
-        <p class="an-body-l-bold mb-xl">¿Dispones de agua caliente?</p>
+        <!-- 🚧 ¿Haces uso individual del agua caliente? 🚧 -->
+        <p class="an-body-l-bold mb-xl">¿Haces uso individual del agua caliente?</p>
         <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
           <div class="an-radio an-form__item">
             <input v-model="savingsData.acsIndividual" :value="true" class="an-radio__input" checked="" type="radio" name="hot-water" id="hot-water-si">
@@ -106,13 +106,13 @@ const compHotWater = {
         <p class="an-body-l-bold mb-xl">¿Cuántas personas vivís en casa?</p>
         <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
           <div class="an-counter">
-            <button @click="setNumberOfPeople('substract')" type="button"> - </button>
-            <span>{{ savingsData.numberOfPeople }}</span>
-            <button @click="setNumberOfPeople('add')" type="button"> + </button>
+            <button class="an-counter__btn" @click="setNumberOfPeople('substract')" type="button"> - </button>
+            <span class="an-body-m-regular">{{ savingsData.numberOfPeople }}</span>
+            <button class="an-counter__btn an-counter__btn--green" @click="setNumberOfPeople('add')" type="button"> + </button>
           </div>
         </div>
 
-        <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
+        <div class="an-form__flex an-form__flex--6-cols mb-xxl">
           <button @click="startOver" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Volver a empezar</span>
           </button>

@@ -13,9 +13,14 @@
   margin: 0 auto;
   position: relative;
 
+  &--border {
+    border: 1px solid $an-theme;
+  }
+
   &__inner {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 100%;
   }
 

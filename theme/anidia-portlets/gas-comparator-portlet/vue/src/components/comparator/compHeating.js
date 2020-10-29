@@ -105,7 +105,7 @@ const compHeating = {
           </div>
         </div>
 
-        <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
+        <div class="an-form__flex an-form__flex--6-cols mb-xxl">
           <button @click="goBack" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Anterior</span>
           </button>
