@@ -68,7 +68,6 @@ public class SalesforceService {
 			try {
 				propertyJson = responseJson.getJSONObject(i);
 				Property property = new Property();
-				property.setAddress(propertyJson.optString("Direccion_completa__c"));
 				property.setPropertyId(propertyJson.optString("Codigo_unico_inmueble__c"));
 				property.setBlock(propertyJson.optString("Bloque__c"));
 				property.setLadder(propertyJson.optString("Escalera__c"));
@@ -76,6 +75,29 @@ public class SalesforceService {
 				property.setDoor(propertyJson.optString("Puerta__c"));
 				property.setStatus(propertyJson.getString("Estado__c"));
 				property.setContractStatus(propertyJson.optString("SAP_Estado_contrato_SAP__c"));
+
+				StringBuilder completeAddress = new StringBuilder();
+				if(property.getBlock() != null && !property.getBlock().equals("")) {
+					completeAddress.append("Bloque ");
+					completeAddress.append(property.getBlock());
+					completeAddress.append(" ");
+				}
+				if(property.getLadder() != null && !property.getLadder().equals("")) {
+					completeAddress.append("Escalera ");
+					completeAddress.append(property.getLadder());
+					completeAddress.append(" ");
+				}
+				if(property.getFloor() != null && !property.getFloor().equals("")) {
+					completeAddress.append("Piso ");
+					completeAddress.append(property.getFloor());
+					completeAddress.append(" ");
+				}
+				if(property.getDoor() != null && !property.getDoor().equals("")) {
+					completeAddress.append("Puerta ");
+					completeAddress.append(property.getDoor());
+				}
+				property.setAddress(completeAddress.toString());
+
 				properties.add(property);
 			} catch (JSONException e) {
 				System.out.println("Salesforce response: " + response.body());
