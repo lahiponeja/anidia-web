@@ -251,7 +251,7 @@ const coverageForm = {
       <li>Calle: {{ formData.addressName }}</li>
       <li>Número: {{ formData.number }}</li>
       <li>Vivienda: {{ formData.houseType }}</li>
-      <li>Acepto la política de privacidad: {{ formData.privacyPolicy }}</li>
+      <li>He leído y acepto la política de privacidad: {{ formData.privacyPolicy }}</li>
       <li>--------------</li>
       <li>Status: {{ formData.status }}</li>
     </ul>
