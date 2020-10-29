@@ -1,7 +1,7 @@
 import provincias from '../../enums/provincias'
 
 const funnelForm = {
-  inject: ["comparator"],
+  inject: ["global", "comparator"],
   data() {
     return {
       energyConsumption: {
@@ -20,24 +20,40 @@ const funnelForm = {
   methods: {
     submitRequest() {
       if(this.known) {
+        this.sendingForm = true
         this.comparator.setSavingsByConsumption(this.energyConsumption)
+          .then((res) => { this.sendingForm = false })
+          .catch((err) => { this.sendingForm = false })
       } else {
-        this.comparator.setSavingsByUse(this.province)
+        this.comparator.setSavingByUse({
+          province: this.province
+        })
+
+        this.global.changeView('comparator')
+        this.comparator.changeStepComponent('comp-hot-water')
       }
     }
   },
   template: /*html*/`
     <div class="an-form an-wrapper">
 
-      <h3>known: {{ known }}</h3>
+      <!-- <h3>known: {{ known }}</h3>
       <h3>energyConsumption.energyType: {{ energyConsumption.energyType }}</h3>
       <h3>energyConsumption.electricityConsumption: {{ energyConsumption.electricityConsumption }}</h3>
       <h3>energyConsumption.acsUse: {{ energyConsumption.acsUse }}</h3>
       <h3>energyConsumption.heatingUse: {{ energyConsumption.heatingUse }}</h3>
       <h3>energyConsumption.kitchenUse: {{ energyConsumption.kitchenUse }}</h3>
 
+      <div>
+      gasConsumptionComparison: {
+        <div>consumptionRequired: {{ comparator.state.gasConsumptionComparison.consumptionRequired }},</div>
+        <div>currentCost: {{ comparator.state.gasConsumptionComparison.currentCost }},</div>
+        <div>futureCost: {{ comparator.state.gasConsumptionComparison.futureCost }},</div>
+        <div>savings: {{ comparator.state.gasConsumptionComparison.savings }},</div>
+      }
+      </div> -->
+
       <form @submit.prevent="submitRequest">
-        
         <!-- 🚧 ¿Sabes cuánto consumes en energía al año? 🚧 -->
         <p class="an-body-l-bold mb-xl">¿Sabes cuánto consumes en energía al año?</p>
         <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">

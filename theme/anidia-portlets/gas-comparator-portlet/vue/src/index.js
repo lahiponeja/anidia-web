@@ -25,6 +25,22 @@ export default function main({portletNamespace, contextPath, portletElementId, c
     // Dynamically write markup to portlet's node
     node.innerHTML = /*html*/`
     <div class="an-funnel bg-white pt-xxxl pb-xxxl">
+
+        <!-- <div class="text-left">
+        GasConsumptionByUse: {
+            <div>province: {{ comparator.state.savingsByUse.province }}</div>
+            <div>acsIndividual: {{ comparator.state.savingsByUse.acsIndividual }}</div>
+            <div>acsUse: {{ comparator.state.savingsByUse.acsUse }}</div>
+            <div>numberOfPeople: {{ comparator.state.savingsByUse.numberOfPeople }}</div>
+            <div>heatingIndividual: {{ comparator.state.savingsByUse.heatingIndividual }}</div>
+            <div>heatingUse: {{ comparator.state.savingsByUse.heatingUse }}</div>
+            <div>singleFamilyHouse: {{ comparator.state.savingsByUse.singleFamilyHouse }}</div>
+            <div>lastFloor: {{ comparator.state.savingsByUse.lastFloor }}</div>
+            <div>surfaceHouse: {{ comparator.state.savingsByUse.surfaceHouse }}</div>
+            <div>kitchenUse: {{ comparator.state.savingsByUse.kitchenUse }}</div>
+            <div>weeklyKitchenUse: {{ comparator.state.savingsByUse.weeklyKitchenUse }}</div>
+        }
+        </div> -->
             <div class="an-funnel__titles an-wrapper--sml">
                 <p class="an-h6 color-an-theme-dark-grey mb-l">CALCULADORA DE AHORRO</p>
                 <p class="an-body-l-bold color-an-theme">Calcula todo lo que podrías ahorrarte instalando gas natural</p>

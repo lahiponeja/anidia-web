@@ -35,6 +35,7 @@ const comparatorView = {
         <component :is="comparator.activeComponent().component"></component>
       </keep-alive>
 
+      <!--
       <button @click="comparator.changeStepComponent('comp-hot-water')">comp-hot-water</button>
       <br />
       <button @click="comparator.changeStepComponent('comp-heating')">comp-heating</button>
@@ -42,24 +43,6 @@ const comparatorView = {
       <button @click="comparator.changeStepComponent('comp-kitchen')">comp-kitchen</button>
       <br />
       <button @click="comparator.changeStepComponent('comp-saving')">comp-saving</button>
-
-      <!--
-      <comp-hot-water />
-
-      <br />
-      <br />
-
-      <comp-heating />
-
-      <br />
-      <br />
-
-      <comp-kitchen />
-
-      <br />
-      <br />
-
-      <comp-saving />
       -->
       
     </div>

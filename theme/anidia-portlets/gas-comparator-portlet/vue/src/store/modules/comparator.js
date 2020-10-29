@@ -1,5 +1,8 @@
-// import { reactive, readonly } from 'vue'
 import { reactive, shallowReadonly } from '@vue/composition-api'
+import objToXml from '../../helpers/objToXml'
+import xmlToJsonImp from '../../helpers/xmlToJsonImp'
+import savingsService from '../../services/savingsService'
+import global from './global'
 
 const state = reactive({
   savingsByConsumption: {
@@ -10,25 +13,26 @@ const state = reactive({
     electricityConsumption: 0,
   },
 
-  savingsByUse: {
-    /* 
-    	<province>string</province>
-	<acsIndividual>true</acsIndividual>
-	<acsUse>Butano</acsUse>
-	<numberOfPeople>0</numberOfPeople>
-	<heatingIndividual>true</heatingIndividual>
-	<heatingUse>Butano</heatingUse>
-	<singleFamilyHouse>true</singleFamilyHouse>
-	<lastFloor>true</lastFloor>
-	<surfaceHouse>string</surfaceHouse>
-	<kitchenUse>Butano</kitchenUse>
-	<weeklyKitchenUse>0</weeklyKitchenUse>
-    */
-
-  
+  gasConsumptionComparison: {
+    consumptionRequired: "",
+    currentCost: "",
+    futureCost: "",
+    savings: "",
   },
 
-  province: "",
+  savingsByUse: {
+    province: "",
+    acsIndividual: true,
+    acsUse: "",
+    numberOfPeople: 1,
+    heatingIndividual: true,
+    heatingUse: "",
+    singleFamilyHouse: true,
+    lastFloor: true,
+    surfaceHouse: 0,
+    kitchenUse: "",
+    weeklyKitchenUse: 0,
+  },
 
   comparatorStepsArr: [
     {
@@ -58,22 +62,61 @@ const state = reactive({
   ],
 })
 
+const setGasConsumptionComparison = function (payload) {
+  Object.assign(state.gasConsumptionComparison, payload.GasConsumptionComparison)
+  console.log("👾state.gasConsumptionComparison")
+  console.log(state.gasConsumptionComparison)
+}
+
 const setSavingsByConsumption = function(obj) {
   Object.assign(state.savingsByConsumption, obj)
 
-  console.log("🔥 state.savingsByConsumption 🔥")
-  console.log(state.savingsByConsumption)
+  const options = {
+    rootName: 'GasCalculatedConsumption', // defaults to 'root'
+    attributes: false
+  }
+  const xml = objToXml(obj, options)
+  console.log(xml)
+  
+  return new Promise((resolve, reject) => {
+    savingsService.postSavingsByConsumption(xml)
+      .then((res) => {
+        const json = xmlToJsonImp(res.data)
+        setGasConsumptionComparison(json)
+        global.changeView('comparator')
+        changeStepComponent('comp-saving')
+        resolve(res)
+      })
+      .catch((err) => {
+        console.log("setSavingsByConsumption", err)
+        reject(err)
+      })
+  })
 }
 
-const setProvince = function(province) {
-  state.province = province
-
-  console.log("🌮 state.province 🌮")
-  console.log(state.province)
+const setSavingByUse = function (obj) {
+  Object.assign(state.savingsByUse, obj)
 }
 
-const setSavingsByUse = function(obj) {
- // TODO
+const sendSavingByUseService = function(obj) {
+  const options = {
+    rootName: 'GasConsumptionByUse', // defaults to 'root'
+    attributes: false
+  }
+  const xml = objToXml(obj, options)
+  console.log(xml)
+  return new Promise((resolve, reject) => {
+    savingsService.postSavingsByUse(xml)
+      .then((res) => {
+        const json = xmlToJsonImp(res.data)
+        setGasConsumptionComparison(json)
+        resolve(res)
+      })
+      .catch((err) => {
+        console.log("setSavingsByConsumption", err)
+        reject(err)
+      })
+  })
 }
 
 const changeStepComponent = function (componentName) {
@@ -87,10 +130,109 @@ const activeComponent = function() {
   return state.comparatorStepsArr.find((compItem) => compItem.active)
 }
 
+const submitUserContactInfo = function (budgetReadyForm) {
+  const { 
+    name,
+    lastname,
+    phone,
+    email,
+    privacyPolicy,
+    offersAndServices } = budgetReadyForm;
+
+  const requestBody = {
+    "personalData": {
+      "firstName": name,
+      "lastName": lastname,
+      "email": email,
+      "phone": phone,
+      "acceptNotCom": offersAndServices,
+    }
+  }
+/*   const requestBody = {
+    "personalData": {
+      "firstName": name,
+      "lastName": lastname,
+      "email": email,
+      "phone": phone,
+      "prodInterest": "",
+      "acceptNotCom": offersAndServices,
+      "postalCode": "",
+      "estate": "",
+      "property": ""
+    },
+    "calculatorGas": {
+      "input": {
+        "zipCode": "",
+        "houseType": "",
+        "propertyMeters": "",
+        "staysNumber": "",
+        "bathroomNumber": "",
+        "floorNumber": "",
+        "gasNaturalUse": "",
+        "acsUse": "",
+        "kitchenUse": "",
+        "heatingUse": "",
+        "personsWater": "",
+        "boilerLocation": "",
+        "extras": {
+          "metersBoilerToWindow": "",
+          "metersWaterIntake": "",
+          "hasVentilationGrill": "",
+          "controllHeatingFloor": "",
+          "connectDeviceToKitchen": "",
+          "convertDeviceKitchen": "",
+          "radiatorsBathroom": ""
+        }
+      },
+      "output": {
+        "proposedPack": "",
+        "equipment": "",
+        "baseBadget": "",
+        "bonus": "",
+        "totalBudget": "",
+        "iva21": "",
+        "totalPVP": "",
+        "extras": {
+          "MetersBoilerToWindow": "",
+          "MetersWaterIntake": "",
+          "HasVentilationGrill": "",
+          "ControllHeatingFloor": "",
+          "ConvertDeviceKitchen": "",
+          "RadiatorsBathroom": "",
+          "ExtraTotalPrice": ""
+        }
+      }
+    }
+  } */
+
+  const options = {
+    rootName: 'Lead', // defaults to 'root'
+    attributes: false
+  }
+  const xml = objToXml(requestBody, options)
+
+  console.log("🔥 submitUserContactInfo 🔥")
+  console.log(xml)
+
+  console.log("requestBody", requestBody);
+
+  const result = new Promise((resolve, reject) => {
+    savingsService.postLeads(xml).then((res) => {
+      resolve(res)
+    }).catch((err) => {
+      console.error(err)
+    })
+  })
+
+  return result
+}
+
 export default {
   state: shallowReadonly(state),
   setSavingsByConsumption,
-  setProvince,
+  setSavingByUse,
   changeStepComponent,
   activeComponent,
+  submitUserContactInfo,
+  sendSavingByUseService,
 }
