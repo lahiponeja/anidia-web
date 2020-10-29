@@ -39,7 +39,7 @@
     width: 100%;
 
     .an-hero-slider.green & {
-      background: $an-theme;
+      @include gradient-green-bg;
     }
 
     .an-hero-slider.white & {
@@ -205,11 +205,11 @@
     }
 
     &__image {
-      top: 50%;
+      top: 45%;
       transform: translateY(-50%);
       right: rem(-300);
       position: absolute;
-      height: rem(1286);
+      height: rem(1586);
 
       &-desktop {
         display: block;
@@ -251,7 +251,7 @@
     }
 
     &__discover-btn {
-      right: 40%;
+      right: 25%;
       bottom: auto;
 
       span {
