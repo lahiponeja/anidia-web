@@ -151,14 +151,16 @@ window.dataLayer.push({
 	"content": {
 		"category" :"",
 		"contenthierarchy": [
+			{
+			<#assign hierarchy_counter = 0 />
 			<#list page_ancestors>
-				<#assign hierarchy_counter = 0 />
-				{
 				<#items as ancestor>
-					"${hierarchy_counter}": "{ancestor.getHTMLTitle()}",
+					"${hierarchy_counter}": "${ancestor.getHTMLTitle(locale)}",
+					<#assign hierarchy_counter += 1 />
 				</#items>
-				}
 			</#list>
+				"${hierarchy_counter}": "${layout.getHTMLTitle(locale)}"
+			}
 		]
 	}
 })
