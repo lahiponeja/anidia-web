@@ -39,7 +39,7 @@
     width: 100%;
 
     .an-hero-slider.green & {
-      background: $an-theme;
+      @include gradient-green-bg;
     }
 
     .an-hero-slider.white & {
