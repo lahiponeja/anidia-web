@@ -64,8 +64,6 @@ const state = reactive({
 
 const setGasConsumptionComparison = function (payload) {
   Object.assign(state.gasConsumptionComparison, payload.GasConsumptionComparison)
-  console.log("👾state.gasConsumptionComparison")
-  console.log(state.gasConsumptionComparison)
 }
 
 const setSavingsByConsumption = function(obj) {
@@ -154,11 +152,6 @@ const submitUserContactInfo = function (compSavingForm) {
     attributes: false
   }
   const xml = objToXml(requestBody, options)
-
-  console.log("🔥 XML 🔥")
-  console.log(xml)
-
-  // console.log("requestBody", requestBody);
 
   const result = new Promise((resolve, reject) => {
     savingsService.postLeads(xml).then((res) => {

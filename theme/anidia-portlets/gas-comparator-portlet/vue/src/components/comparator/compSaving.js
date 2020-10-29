@@ -17,7 +17,7 @@ const compSaving = {
       },
 
       sendingForm: false,
-      leadSent: false, // CHANGE TO false 🔥
+      leadSent: false,
     }
   },
   methods: {
@@ -25,7 +25,6 @@ const compSaving = {
       // TODO: add validation
       this.sendingForm = true
       this.comparator.submitUserContactInfo(this.compSavingForm).then((res) => {
-        console.log("😀¡Éxito!😀")
         this.sendingForm = false
         this.leadSent = true
         console.log(res)

@@ -10,7 +10,7 @@ const featuredBanner = {
         </h3>
 
         <div class="an-featured__image">
-          <img src="https://lh3.google.com/u/3/d/13A3ELnt8bO1z6DYDgdyMXuldHId7M4Qc=w2880-h1530-iv1" alt="">
+          <img src="https://firebasestorage.googleapis.com/v0/b/sample-images-9b733.appspot.com/o/featured-module.png?alt=media&token=dd83e563-c465-461b-8f8d-5876d97ed256" alt="">
         </div>
 
         <div class="an-featured__btn mt-xl">
