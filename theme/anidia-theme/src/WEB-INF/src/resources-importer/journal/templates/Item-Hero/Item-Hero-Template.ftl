@@ -24,11 +24,20 @@
 
 		<#if TextoBotón.getData?? && TextoBotón.getData() != "">
 			<div class="an-hero-slider__btn">
-			<a href="${LinkToPage1z94.getFriendlyUrl()}" class="an-btn an-btn--white">
+			<#if LinkToPage1z94.getFriendlyUrl() != "">
+			<a href="${LinkToPage1z94.getFriendlyUrl()}" class="an-btn an-btn--flatter an-btn--white">
 				<span>${TextoBotón.getData()}</span>
 			</a>
+			<#else>
+			    <#if LinkToUrl.getData??>
+        			<a href="${LinkToUrl.getData()}" class="an-btn an-btn--flatter an-btn--white">
+        				<span>${TextoBotón.getData()}</span>
+        			</a>
+    			</#if>
+			</#if>
 			</div>
 		</#if>
+
 	</div>
 	</div>
 </section>

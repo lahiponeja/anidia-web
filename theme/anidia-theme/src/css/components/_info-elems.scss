@@ -69,6 +69,13 @@
       margin-bottom: 0;
       width: 33.3333%;
 
+      .an-h3 {
+        font-size: rem(24);
+        line-height: rem(30);
+        margin-bottom: rem(5);
+        font-family: $fs-emeric-bold-family;
+      }
+
       &:nth-last-child(n+4),
       &:nth-last-child(n+4) ~ * {
         width: 50%;

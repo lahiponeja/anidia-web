@@ -47,6 +47,41 @@
           "defaultValue": false
         }
       ]
+    },
+    {
+      "label": "Fondo",
+      "fields": [
+        {
+          "name": "Color",
+          "label": "Color",
+          "description": "Color del fondo del módulo",
+          "type": "select",
+          "dataType": "string",
+          "defaultValue": "Verde",
+          "typeOptions": {
+            "validValues": [
+              {
+                "value": "Verde"
+              },
+              {
+                "value": "Verde claro"
+              },
+              {
+                "value": "Blanco"
+              },
+              {
+                "value": "Amarillo"
+              },
+              {
+                "value": "Gris oscuro"
+              },
+              {
+                "value": "Gris claro"
+              }
+            ]
+          }
+        }
+      ]
     }
   ]
 }

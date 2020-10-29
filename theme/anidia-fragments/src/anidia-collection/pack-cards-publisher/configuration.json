@@ -1,6 +1,25 @@
 {
   "fieldSets": [
     {
+      "label": "Botón",
+      "fields": [
+        {
+          "name": "TextoEnlace",
+          "label": "Texto",
+          "description": "Texto del botón del módulo",
+          "type": "text",
+          "dataType": "string"
+        },
+        {
+          "name": "Enlace",
+          "label": "Enlace",
+          "description": "Enlace del botón del módulo",
+          "type": "text",
+          "dataType": "string"
+        }
+      ]
+    },
+    {
       "label": "Tamaño cards",
       "fields": [
         {
