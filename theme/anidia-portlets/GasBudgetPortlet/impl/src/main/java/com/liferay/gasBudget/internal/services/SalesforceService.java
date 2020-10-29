@@ -348,20 +348,36 @@ public class SalesforceService {
 	 */
 	private PersonalDataRequest mapToPersonalDataRequest(PersonalData personalData) {
 		PersonalDataRequest personalDataRequest = new PersonalDataRequest();
+
 		personalDataRequest.setAcceptNotCom(personalData.getAcceptNotCom());
-		personalDataRequest.setAddressBloq(personalData.getProperty().getBlock());
-		personalDataRequest.setAddressDoor(personalData.getProperty().getDoor());
-		personalDataRequest.setAddressNumber(personalData.getEstate().getNumber());
-		personalDataRequest.setAddressPlant(personalData.getProperty().getFloor());
-		personalDataRequest.setAddressPostalCode(personalData.getPostalCode().getPostalCode());
-		personalDataRequest.setAddressStair(personalData.getProperty().getLadder());
-		personalDataRequest.setAddressStreet(personalData.getEstate().getAddressName());
-		personalDataRequest.setAddressTown(personalData.getPostalCode().getMunicipalityName());
 		personalDataRequest.setEmail(personalData.getEmail());
 		personalDataRequest.setFirstName(personalData.getFirstName());
 		personalDataRequest.setLastName(personalData.getLastName());
 		personalDataRequest.setPhone(personalData.getPhone());
-		personalDataRequest.setProdInterest(personalData.getProdInterest().getValue());
+
+		if (personalData.getProperty() != null) {
+			personalDataRequest.setAddressBloq(personalData.getProperty().getBlock());
+			personalDataRequest.setAddressDoor(personalData.getProperty().getDoor());
+			personalDataRequest.setAddressPlant(personalData.getProperty().getFloor());
+			personalDataRequest.setAddressStair(personalData.getProperty().getLadder());
+			personalDataRequest.setCodInmueble(personalData.getProperty().getPropertyId());
+		}
+
+		if (personalData.getEstate() != null) {
+			personalDataRequest.setAddressNumber(personalData.getEstate().getNumber());
+			personalDataRequest.setAddressStreet(personalData.getEstate().getAddressName());
+			personalDataRequest.setCodFinca(personalData.getEstate().getGateId());
+		}
+
+		if (personalData.getPostalCode() != null) {
+			personalDataRequest.setAddressPostalCode(personalData.getPostalCode().getPostalCode());
+			personalDataRequest.setAddressTown(personalData.getPostalCode().getMunicipalityName());
+			personalDataRequest.setCodMunicipio(personalData.getPostalCode().getProvinceId() + personalData.getPostalCode().getMunicipalityId());
+		}
+
+		if (personalData.getProdInterest() != null) {
+			personalDataRequest.setProdInterest(personalData.getProdInterest().getValue());
+		}
 
 		return personalDataRequest;
 	}
@@ -403,7 +419,6 @@ public class SalesforceService {
 		extrasInput.setMetersBoilerToWindow(calculatorGasInputExtras.getMetersBoilerToWindow());
 		extrasInput.setConnectDeviceToKitchen(Boolean.valueOf(calculatorGasInputExtras.getConnectDeviceToKitchen()));
 		String replaceMetersWaterIntake = calculatorGasInputExtras.getMetersWaterIntake().substring(2);
-		System.out.println("ReplaceMetersWaterIntake input: " + replaceMetersWaterIntake);
 		extrasInput.setMetersWaterIntake(replaceMetersWaterIntake);
 		extrasInput.setRadiatorsBathroom(calculatorGasInputExtras.getRadiatorsBathroom());
 
@@ -442,7 +457,8 @@ public class SalesforceService {
 		extrasOutput.setHasVentilationGrill(calculatorGasOutputExtras.getHasVentilationGrill());
 		extrasOutput.setConnectDeviceToKitchen(calculatorGasOutputExtras.getConnectDeviceToKitchen());
 		extrasOutput.setMetersBoilerToWindow(calculatorGasOutputExtras.getMetersBoilerToWindow());
-		extrasOutput.setMetersWaterIntake(calculatorGasOutputExtras.getMetersWaterIntake());
+		String replaceMetersWaterIntake = calculatorGasOutputExtras.getMetersWaterIntake().substring(2);
+		extrasOutput.setMetersWaterIntake(replaceMetersWaterIntake);
 		extrasOutput.setRadiatorsBathroom(calculatorGasOutputExtras.getRadiatorsBathroom());
 
 		return extrasOutput;

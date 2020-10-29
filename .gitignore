@@ -70,3 +70,4 @@ liferay/deploy/*
 gradle/
 
 .env
+.tool-versions
