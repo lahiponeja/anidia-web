@@ -49,24 +49,6 @@ export default function main({portletNamespace, contextPath, portletElementId, c
             <keep-alive>
                 <component :is="global.activeView().component"></component>
             </keep-alive>
-
-            <button @click="global.changeView('funnel')">funnel-view</button>
-            <button @click="global.changeView('comparator')">comparator-view</button> 
-
-            <!-- <template v-for="(view, index) of global.state.mainViewsArr">
-                <template v-if="view.active">
-                    <keep-alive>
-                        <component :is="view.component">
-                    </keep-alive>
-                </template>
-            </template> -->
-
-            <!-- <template v-if="(global.state.currentView === 'funnel')">
-                <funnel-view />
-            </template>
-            <template v-else-if="(global.state.currentView === 'comparator')">
-                <comparator-view />
-            </template> -->
         </div>
     `;
     
