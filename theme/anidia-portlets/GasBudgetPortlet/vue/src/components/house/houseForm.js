@@ -42,28 +42,16 @@ const houseForm = {
       staysNumber: {
         required
       },
-      staysNumber: {
-        required
-      },
       gasNaturalUse: {
         required
       },
       acsUse: {
         required
       },
-      kitchenUse: {
-        required
-      },
-      heatingUse: {
-        required
-      },
-      boilerLocation: {
+      personsWater: {
         required
       },
       hasVentilationGrill: {
-        required
-      },
-      personsWater: {
         required
       },
       metersBoilerToWindow: {
@@ -71,19 +59,7 @@ const houseForm = {
       },
       metersWaterIntake: {
         required
-      },
-      connectDeviceToKitchen: {
-        required
-      },
-      convertDeviceKitchen: {
-        required
-      },
-      controllHeatingFloor: {
-        required
-      },
-      radiatorsBathroom: {
-        required
-      },
+      }
     }
   },
   methods: {
@@ -151,7 +127,7 @@ const houseForm = {
             </div>
           </div>
 
-          <p class="an-body-l-bold mb-xl">¿Que necesitas?</p>
+          <p class="an-body-l-bold mb-xl">¿Qué necesitas?</p>
           <div class="an-form__flex an-form__flex--4-cols mb-xxl">
             <label for="agua-caliente" class="an-form__item">
               <input v-model="gasBudgetRequest.gasNaturalUse" type="radio" class="an-selection__radio" id="agua-caliente" name="que-necesitas" value="solo ACS" checked>
