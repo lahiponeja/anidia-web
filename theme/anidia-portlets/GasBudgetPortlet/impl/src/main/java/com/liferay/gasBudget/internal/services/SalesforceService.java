@@ -99,9 +99,9 @@ public class SalesforceService {
 		urlBuilder.append("&codigo_postal=");
 		urlBuilder.append(postalCode);
 		urlBuilder.append("&tipo_y_nombre_de_via=");
-		urlBuilder.append(addressKind);
+		urlBuilder.append(URLEncoder.encode(addressName, StandardCharsets.UTF_8.toString()));
 		urlBuilder.append("+");
-		urlBuilder.append(addressName);
+		urlBuilder.append(URLEncoder.encode(addressName, StandardCharsets.UTF_8.toString()));
 		// We have to sent the number as empty
 		urlBuilder.append("&numero=");
 		urlBuilder.append("&limit=500");
