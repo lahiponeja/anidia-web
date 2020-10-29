@@ -115,6 +115,10 @@ const houseForm = {
         ||
         this.gasBudgetRequest.gasNaturalUse === "ACS+Cocina+Calefacción"
       )
+    },
+
+    btnDisabled () {
+      return this.$v.$invalid
     }
   },
   template: /*html*/
@@ -408,7 +412,7 @@ const houseForm = {
             </div>
           </template>
 
-          <button type="submit" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
+          <button :disabled="btnDisabled===true" type="submit" :class="{ 'an-btn--disabled': btnDisabled }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
             <span v-if="!sendingForm">Continuar</span>
             <span v-else>Enviando...</span>
           </button>

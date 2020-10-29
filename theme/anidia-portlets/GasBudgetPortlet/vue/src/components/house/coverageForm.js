@@ -65,9 +65,6 @@ const coverageForm = {
       addressName: {
         required
       },
-      name: {
-        required
-      },
       number: {
         required
       },
@@ -263,6 +260,10 @@ const coverageForm = {
     isValidStatusCode() {
       return this.statusCodes.validArr.indexOf(this.formData.status) != -1
     },
+
+    btnDisabled () {
+      return this.$v.$invalid
+    }
 
   },
 
@@ -544,7 +545,7 @@ const coverageForm = {
             </div>
           </div>
 
-          <button type="submit" :disabled="!formData.status" :class="{ 'an-btn--disabled': !formData.status  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
+          <button type="submit" :disabled="!formData.status || btnDisabled===true" :class="{ 'an-btn--disabled': !formData.status || btnDisabled  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Comprobar</span>
           </button>
 
