@@ -80,6 +80,17 @@ const coverageForm = {
         return pc.postalCode.startsWith(index)
       })
     },
+    // onSubmitPostalCode(e) {
+    //   const postalCode = e.target.value
+    //   this.formData.postalCode = postalCode
+    //   // Save object in the store
+    //   this.house.setCoverageData("postalCode", { postalCode })
+    //   // Get municipalities
+    //   this.loadingMunicipalities = true,
+    //   this.house.getMunicipalities(postalCode)
+    //     .then((res) => { this.loadingMunicipalities = false })
+    //     .catch((err) => { this.loadingMunicipalities = false })
+    // },
     onSubmitPostalCode(result) {
       const { postalCode } = result
       this.formData.postalCode = postalCode
@@ -250,9 +261,13 @@ const coverageForm = {
         <p class="an-body-l-bold mb-xl">Rellena tu dirección para saber si tenemos cobertura en tu zona</p>
         <form @submit.prevent="submitRequest">
           <div class="an-form__flex an-form__flex--2-cols">
-            
+          
+         <!-- <div class="an-input an-form__item">
+            <input @blur="onSubmitPostalCode($event)" class="an-input__field">
+          </div> -->
+
             <!--INPUT FIELD: formData.postalCode -->
-            <div class="an-input an-form__item">
+           <div class="an-input an-form__item">
               <autocomplete 
                 :debounce-time="700" 
                 @submit="onSubmitPostalCode" 
