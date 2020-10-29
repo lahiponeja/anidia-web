@@ -1,4 +1,4 @@
-import { reactive, shallowReadonly } from '@vue/composition-api'
+import {reactive, shallowReadonly} from '@vue/composition-api'
 import coverageService from '../../services/coverageServices'
 import houseFormService from '../../services/houseFormService'
 import contactInfoService from '../../services/contactInfoService'
