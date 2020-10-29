@@ -88,4 +88,16 @@ function heroSlider() {
 if (document.querySelectorAll(".an-hero-slider__item").length > 1) {
   heroSlider();
   document.getElementById('banner').classList.add('more-elem');
+} else {
+  const discoverBtn = document.querySelectorAll("[data-discover-btn]");
+  discoverBtn.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: document.querySelector(".an-hero-slider__item").offsetWidth - 300,
+        behavior: 'smooth',
+      });
+    });
+  });
 }
+
