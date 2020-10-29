@@ -36,6 +36,10 @@ import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleResource;
 import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.journal.service.JournalArticleResourceLocalServiceUtil;
+import com.liferay.portal.kernel.json.JSONException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.xml.*;
 
 /**
  * @author danieldelapena
@@ -56,104 +60,25 @@ import com.liferay.journal.service.JournalArticleResourceLocalServiceUtil;
 	service = Portlet.class
 )
 public class APCustomPortlet extends MVCPortlet {
+	
+	
 	@ProcessAction(name="actionMethod1")
 	public void sampleActionMethod(ActionRequest request, ActionResponse response)
 			throws IOException, PortletException, PortalException, SystemException{
-		System.out.println("Inside my dear portlet logic controller");
-		
-		
-		
-		List<JournalArticle> journalArticleList = new ArrayList<JournalArticle>();
+		List<JournalArticle> journalArticles = JournalArticleLocalServiceUtil.getArticles();
 
-		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
-		assetEntryQuery.setAnyCategoryIds(new long[] { 12704 }); //category Id
-		assetEntryQuery.setOrderByCol1("modifiedDate");
-		assetEntryQuery.setEnd(5);
-		List<AssetEntry> assetEntryList = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
-		
-		System.out.println(assetEntryList.get(0));
-		
-	}/*
-	public static List<JournalArticle> getSelectedWebContents(List<AssetEntry> assetEntries) {
-		List<JournalArticle> journalArticles = new ArrayList<JournalArticle>();
-		JournalArticleResource journalArticleResource = null;
-		JournalArticle journalArticle = null;
-		for (AssetEntry entry : assetEntries) {
-			try {
-				journalArticleResource = JournalArticleResourceLocalServiceUtil.getJournalArticleResource(entry.getClassPK());
-				journalArticle = JournalArticleLocalServiceUtil.getLatestArticle(journalArticleResource.getResourcePrimKey());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			journalArticles.add(journalArticle);
+        String json = "[";
+		for (JournalArticle entry : journalArticles) {
+			json = json.concat(toJson(entry.getContent()) + ",");		
 		}
-		return journalArticles;
+		json = json.concat("]");
+		System.out.println(json);
 	}
 
-       public static List<AssetEntry> getSelectedAssetEntry(List<String> categoryName){
-		   List<AssetEntry>assetEntry = new ArrayList<AssetEntry>();
-		try {
-			AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
-			//assetEntryQuery.setAnyCategoryIds(getCategoryIdByName(categoryName));// Represent Any ie OR
-			assetEntryQuery.setAllCategoryIds(getCategoryIdByName(categoryName)); // Represent Both ie AND
-			assetEntryQuery.setClassName(JournalArticle.class.getName());
-			List<String>structureNames = new ArrayList<String>();
-			structureNames.add("MOBILE_STRUCTURE");
-			long [] structureIds= getStructureIdByName(structureNames);
-			assetEntryQuery.setClassTypeIds(structureIds);
-			assetEntry = AssetEntryServiceUtil.getEntries(assetEntryQuery);	
-			
-		} catch (Exception exc) {
-			exc.printStackTrace();
-		} 
-		return assetEntry;
+	public String toJson(String content) throws JSONException {
+		 return (JSONFactoryUtil.convertXMLtoJSONMLArray(content));	
 	}
-		
-	public static long[] getCategoryIdByName(List<String> categoryName) {
-		long[] allCategoryIds = null;
-		List<Long> allCategoriesList = new ArrayList<Long>();
-		try {
-
-			List<AssetCategory> assetCategory = AssetCategoryLocalServiceUtil.getAssetCategories(0, AssetCategoryLocalServiceUtil.getAssetCategoriesCount());
-			for (AssetCategory asset : assetCategory) {
-				for (String name : categoryName) {
-					if (asset.getName().equalsIgnoreCase(name)) {
-						allCategoriesList.add(asset.getCategoryId());
-						continue;
-					}
-				}
-			}
-		} catch (SystemException e) {
-			e.printStackTrace();
-		}
-		if ((allCategoriesList != null) && (allCategoriesList.size() > 0)) {
-			allCategoryIds = new long[allCategoriesList.size()];
-			for (int i = 0; i < allCategoriesList.size(); i++) {
-				allCategoryIds[i] = allCategoriesList.get(i);
-			}
-		}
-		return allCategoryIds;
-	}
-	
-	public static long[] getStructureIdByName(List<String> structureNames) {
-		long[] allStructureIds = new long[structureNames.size()];
-		try {
-			List<DDMStructure> ddmStructures = DDMStructureLocalServiceUtil.getDDMStructures(0, DDMStructureLocalServiceUtil.getDDMStructuresCount());
-			int counter = 0;
-			for (DDMStructure structure : ddmStructures) {
-				for (String name : structureNames) {
-					if (structure.getName(Locale.ENGLISH)
-							.equalsIgnoreCase(name)) {
-						allStructureIds[counter] = structure.getStructureId();
-						counter++;
-						continue;
-					}
-				}
-			}
-		} catch (SystemException e) {
-			e.printStackTrace();
-		}
-		return allStructureIds;
-	}
-	*/
 }
+
+
+

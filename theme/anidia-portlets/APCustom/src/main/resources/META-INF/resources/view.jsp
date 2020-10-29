@@ -3,11 +3,11 @@
 
 <portlet:defineObjects />
 
-<h3>This portlet whas created by the mighty Dani!</h3>
+<h3>FAQS</h3>
 
 
 <portlet:actionURL name="actionMethod1" var="sampleActionMethodURL">
 </portlet:actionURL>
 <form action="${sampleActionMethodURL}" method="post">
-	<input type="submit" value="Submit"> 
+	<input type="submit" value="Get FAQS"> 
 </form>
