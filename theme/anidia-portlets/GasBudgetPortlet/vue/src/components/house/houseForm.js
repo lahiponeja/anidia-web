@@ -1,4 +1,4 @@
-import { required } from 'vuelidate/lib/validators';
+import { required, numeric, minValue } from 'vuelidate/lib/validators';
 
 const houseForm = {
   inject: ["house"],
@@ -34,13 +34,19 @@ const houseForm = {
         required
       },
       floorNumber: {
-        required
+        required,
+        numeric,
+        minValue: minValue(0)
       },
       bathroomNumber: {
-        required
+        required,
+        numeric,
+        minValue: minValue(0)
       },
       staysNumber: {
-        required
+        required,
+        numeric,
+        minValue: minValue(0)
       },
       gasNaturalUse: {
         required
@@ -55,10 +61,14 @@ const houseForm = {
         required
       },
       metersBoilerToWindow: {
-        required
+        required,
+        minValue: minValue(0)
       },
       metersWaterIntake: {
         required
+      },
+      radiatorsBathroom: {
+        minValue: minValue(0)
       }
     }
   },
@@ -115,14 +125,17 @@ const houseForm = {
               </div>
             </div>
 
-            <div class="an-input an-form__item">
+            <div class="an-input an-form__item" :class="{ 'form-group--error': $v.gasBudgetRequest.floorNumber.$invalid && gasBudgetRequest.floorNumber.length }">
               <input v-model="gasBudgetRequest.floorNumber" type="text" class="an-input__field" placeholder="Plantas" required="">
+              <h6 class="form-error" v-if="$v.gasBudgetRequest.floorNumber.$invalid && gasBudgetRequest.floorNumber.length">Hay un error en el campo introducido</h6>
             </div>
-            <div class="an-input an-form__item">
+            <div class="an-input an-form__item" :class="{ 'form-group--error': $v.gasBudgetRequest.bathroomNumber.$invalid && gasBudgetRequest.bathroomNumber.length }">
               <input v-model="gasBudgetRequest.bathroomNumber" type="text" class="an-input__field" placeholder="Baños" required="">
+              <h6 class="form-error" v-if="$v.gasBudgetRequest.bathroomNumber.$invalid && gasBudgetRequest.bathroomNumber.length">Hay un error en el campo introducido</h6>
             </div>
-            <div class="an-input an-form__item">
+            <div class="an-input an-form__item" :class="{ 'form-group--error': $v.gasBudgetRequest.staysNumber.$invalid && gasBudgetRequest.staysNumber.length }">
               <input v-model="gasBudgetRequest.staysNumber" type="text" class="an-input__field" placeholder="Número de estancias" required="">
+              <h6 class="form-error" v-if="$v.gasBudgetRequest.staysNumber.$invalid && gasBudgetRequest.staysNumber.length">Hay un error en el campo introducido</h6>
             <p class="an-input__caption an-body-s-regular">*(Incluye cocina y salón y excluye baños)</p>
             </div>
           </div>
@@ -291,8 +304,9 @@ const houseForm = {
 
           <p class="an-body-l-bold mb-xl">¿Cuántos metros hay de la caldera/calentador a la ventana?</p>
           <div class="an-form__flex an-form__flex--2-cols mb-xxl">
-            <div class="an-input an-form__item">
+            <div class="an-input an-form__item"  :class="{ 'form-group--error': $v.gasBudgetRequest.metersBoilerToWindow.$invalid && gasBudgetRequest.metersBoilerToWindow.length }">
               <input v-model="gasBudgetRequest.metersBoilerToWindow" type="number" class="an-input__field" required="">
+              <h6 class="form-error" v-if="$v.gasBudgetRequest.metersBoilerToWindow.$invalid && gasBudgetRequest.metersBoilerToWindow.length">El valor debe ser mayor que 0</h6>
             </div>
           </div>
 
@@ -381,9 +395,10 @@ const houseForm = {
 
 
             <p class="an-body-l-bold mb-xl">¿Cuántos radiadores toalleros quiere en el baño?</p>
-            <div class="an-form__flex an-form__flex--2-cols mb-xxl">
+            <div class="an-form__flex an-form__flex--2-cols mb-xxl" :class="{ 'form-group--error': $v.gasBudgetRequest.radiatorsBathroom.$invalid && gasBudgetRequest.radiatorsBathroom.length }">
               <div class="an-input an-form__item">
                 <input v-model="gasBudgetRequest.radiatorsBathroom" type="number" class="an-input__field" required="">
+                <h6 class="form-error" v-if="$v.gasBudgetRequest.radiatorsBathroom.$invalid && gasBudgetRequest.radiatorsBathroom.length">El valor debe ser mayor que 0</h6>
               </div>
             </div>
           </template>
