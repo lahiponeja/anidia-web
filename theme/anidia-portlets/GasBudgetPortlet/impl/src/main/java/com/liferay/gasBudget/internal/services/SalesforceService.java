@@ -96,7 +96,12 @@ public class SalesforceService {
 					completeAddress.append("Puerta ");
 					completeAddress.append(property.getDoor());
 				}
-				property.setAddress(completeAddress.toString());
+
+				if(completeAddress.toString().equals("")) {
+					property.setAddress(propertyJson.optString("Direccion_completa__c"));
+				} else {
+					property.setAddress(completeAddress.toString());
+				}
 
 				properties.add(property);
 			} catch (JSONException e) {
