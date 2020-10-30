@@ -10,6 +10,9 @@ const results = {
       return this.comparator.state.gasConsumptionComparison
     }
   },
+  mounted() {
+    document.querySelector('.an-featured').classList.remove('hide');
+  },
   template: /*html*/`
   <div>
     <div class="an-wrapper an-wrapper--med">
