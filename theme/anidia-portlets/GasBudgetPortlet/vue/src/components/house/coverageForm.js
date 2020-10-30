@@ -284,6 +284,10 @@ const coverageForm = {
   },
   mounted() {
     if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.add('hide');
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   },
   template: /*html*/
   `<div>
