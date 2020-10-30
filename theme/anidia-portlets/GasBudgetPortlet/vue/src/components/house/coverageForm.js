@@ -152,7 +152,10 @@ const coverageForm = {
       this.loadingMunicipalities = true,
       this.house.getMunicipalities(postalCode)
         .then((res) => { this.loadingMunicipalities = false })
-        .catch((err) => { this.loadingMunicipalities = false })
+        .catch((err) => { 
+          this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+          this.loadingMunicipalities = false 
+        })
     },
 
 
@@ -173,7 +176,10 @@ const coverageForm = {
       this.loadingAddressess = true
       this.house.getAddresses(this.formData.provMunId, this.formData.postalCode)
         .then((res) => { this.loadingAddressess = false })
-        .catch((err) => { this.loadingAddressess = false })
+        .catch((err) => { 
+          this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+          this.loadingAddressess = false 
+        })
 
     },
 
@@ -195,7 +201,10 @@ const coverageForm = {
       this.loadingEstates = true
       this.house.getEstates(this.formData.provMunId, this.formData.postalCode, kind, name)
         .then((res) => { this.loadingEstates = false })
-        .catch((err) => { this.loadingEstates = false })
+        .catch((err) => { 
+          this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+          this.loadingEstates = false 
+        })
     },
 
     /*************************************
@@ -219,7 +228,10 @@ const coverageForm = {
       this.loadingProperties = true
       this.house.getProperties(gateId)
         .then((res) => { this.loadingProperties = false })
-        .catch((err) => { this.loadingProperties = false })
+        .catch((err) => { 
+          this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+          this.loadingProperties = false 
+        })
     },
 
     /*************************************
