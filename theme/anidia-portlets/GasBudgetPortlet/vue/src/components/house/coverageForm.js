@@ -89,7 +89,7 @@ const coverageForm = {
   methods: {
     submitRequest() {
       if(this.isValidStatusCode) {
-        console.log("submited")
+        // console.log("submited")
         this.house.setPostalCode(this.formData.postalCode);
         this.house.changeHouseStep('vivienda');
       } else {
@@ -120,7 +120,7 @@ const coverageForm = {
     showHelperDropdown(elemId) {
       const elem = document.querySelector(elemId)
       if(elem) {
-        console.log("showHelperDropdown", elem)
+        // console.log("showHelperDropdown", elem)
         elem.classList.add('d-block');
       }
     },
@@ -128,7 +128,7 @@ const coverageForm = {
     hideHelperDropdown(elemId) {
       const elem = document.querySelector(elemId)
       if(elem) {
-        console.log("hideHelperDropdown", elem)
+        // console.log("hideHelperDropdown", elem)
         elem.classList.remove('d-block');
       }
     },
@@ -140,10 +140,6 @@ const coverageForm = {
       } else {
         elem.classList.add('d-block');
       }
-    },
-
-    clickOutsideFormInput() {
-      console.log('clickout')
     },
 
     // setValue(municipality.municipalityName, 'municipalityName')
@@ -604,7 +600,7 @@ const coverageForm = {
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
-                        :key="result.status"
+                        :key="'propertyResult'+index"
                         v-bind="resultProps[index]"
                       >
                         {{ result.address }}
@@ -612,7 +608,7 @@ const coverageForm = {
                     </ul>
 
                     <ul id="propertiescustomul" v-show="house.state.autocompData.properties.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
-                      <li @click="[setValue(property.address, 'address', '#propertiescustomul'), onSubmitProperties(property)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(property, index) in house.state.autocompData.properties" :key="property.status">
+                      <li @click="[setValue(property.address, 'address', '#propertiescustomul'), onSubmitProperties(property)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(property, index) in house.state.autocompData.properties" :key="'property'+index">
                         {{ property.address }}
                       </li>
                     </ul>
