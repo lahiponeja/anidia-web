@@ -14,18 +14,20 @@ const houseForm = {
         kitchenUse: "",
         heatingUse: "",
         boilerLocation: "",
-        hasVentilationGrill: "",
+        hasVentilationGrill: true,
         personsWater: "",
         metersBoilerToWindow: "",
         metersWaterIntake: "",
-        connectDeviceToKitchen: "false",
-        convertDeviceKitchen: "false",
-        controllHeatingFloor: "false",
+        connectDeviceToKitchen: false,
+        convertDeviceKitchen: false,
+        controllHeatingFloor: false,
         radiatorsBathroom: "",
       },
 
       sendingForm: false,
       submitFormError: false, // TODO
+      showVentilationGrillRadios: false,
+      showConnectConvertDeviceToKitchen: false
     }
   },
   validations: {
@@ -84,7 +86,37 @@ const houseForm = {
         this.sendingForm = false
         console.log(err)
       })
-    }
+    },
+    showVentilationGrillFn(){
+      if (this.gasBudgetRequest.boilerLocation === "Lavadero/Terraza") {
+        this.gasBudgetRequest.hasVentilationGrill = true
+        this.showVentilationGrillRadios = false
+        return false
+      } else if(this.gasBudgetRequest.boilerLocation === "Cocina") {
+        this.showVentilationGrillRadios = true
+        return true
+      } else if(this.gasBudgetRequest.boilerLocation === "Baño") {
+        this.gasBudgetRequest.hasVentilationGrill = true
+        this.showVentilationGrillRadios = false
+        return false
+      }
+    },
+    showConnectConvertDeviceToKitchenFn(){
+      if (this.gasBudgetRequest.boilerLocation === "Lavadero/Terraza") {
+        this.gasBudgetRequest.connectDeviceToKitchen = false
+        this.gasBudgetRequest.convertDeviceKitchen = false
+        this.showConnectConvertDeviceToKitchen = false
+        return false
+      } else if(this.gasBudgetRequest.boilerLocation === "Cocina") {
+        this.showConnectConvertDeviceToKitchen = true
+        return true
+      } else if(this.gasBudgetRequest.boilerLocation === "Baño") {
+        this.gasBudgetRequest.connectDeviceToKitchen = false
+        this.gasBudgetRequest.convertDeviceKitchen = false
+        this.showConnectConvertDeviceToKitchen = false
+        return false
+      }
+    },
   },
   computed: {
     kitchenSelected() {
@@ -105,7 +137,7 @@ const houseForm = {
 
     btnDisabled () {
       return this.$v.$invalid
-    }
+    },
   },
   mounted () {
     window.scrollTo({
@@ -243,9 +275,9 @@ const houseForm = {
 
             <div class="an-form__item">
               <p class="an-body-m-bold color-an-theme mb-m">¿Dónde está la caldera?</p>
-              <div class="an-select an-select--full-width" :class="{ 'an-select--disabled': !heatingSelected }">
+              <div class="an-select an-select--full-width">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="gasBudgetRequest.boilerLocation" :disabled="!heatingSelected" class="an-select__native">
+                <select v-model="gasBudgetRequest.boilerLocation" class="an-select__native" @change="[showVentilationGrillFn(), showConnectConvertDeviceToKitchenFn()]">
                   <option disabled value="">Seleccione una opción...</option>
                   <option value="Lavadero/Terraza">Lavadero/Terraza</option>
                   <option value="Cocina">Cocina</option>
@@ -256,27 +288,28 @@ const houseForm = {
 
           </div>
 
-          <p class="an-body-l-bold mb-xl">¿Tienes rejilla de ventilación superior?</p>
-          <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
-            <div class="an-radio an-form__item">
-              <input v-model="gasBudgetRequest.hasVentilationGrill" value="true" class="an-radio__input" checked="" type="radio" name="rejilla-ventilacion-superior" id="vent-si">
-              <label class="an-radio__label" for="vent-si">
-                <span>
-                  Si
-                </span>
-              </label>
-            </div>
+          <template v-if="showVentilationGrillRadios">
+            <p class="an-body-l-bold mb-xl">¿Tienes rejilla de ventilación superior?</p>
+            <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
+              <div class="an-radio an-form__item">
+                <input v-model="gasBudgetRequest.hasVentilationGrill" :value="true" class="an-radio__input" checked="" type="radio" name="rejilla-ventilacion-superior" id="vent-si">
+                <label class="an-radio__label" for="vent-si">
+                  <span>
+                    Si
+                  </span>
+                </label>
+              </div>
 
-            <div class="an-radio an-form__item">
-              <input v-model="gasBudgetRequest.hasVentilationGrill" value="false" class="an-radio__input" type="radio" name="rejilla-ventilacion-superior" id="vent-no">
-              <label class="an-radio__label" for="vent-no">
-                <span>
-                  No
-                </span>
-              </label>
+              <div class="an-radio an-form__item">
+                <input v-model="gasBudgetRequest.hasVentilationGrill" :value="false" class="an-radio__input" type="radio" name="rejilla-ventilacion-superior" id="vent-no">
+                <label class="an-radio__label" for="vent-no">
+                  <span>
+                    No
+                  </span>
+                </label>
+              </div>
             </div>
-          </div>
-
+          </template>
 
           <p class="an-body-l-bold mb-xl">¿Qué uso haces del agua caliente?</p>
           <div class="an-form__flex an-form__flex--3-cols mb-xxl">
@@ -333,11 +366,11 @@ const houseForm = {
             </div>
           </div>
 
-          <template v-if="kitchenSelected">
+          <template v-if="showConnectConvertDeviceToKitchen">
             <p class="an-body-l-bold mb-xl">¿Necesita que conectemos el aparato de cocina actual?</p>
             <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
               <div class="an-radio an-form__item">
-                <input v-model="gasBudgetRequest.connectDeviceToKitchen" value="true" class="an-radio__input" checked="" type="radio" name="connect-kitchen-device" id="connect-kitchen-device-si">
+                <input v-model="gasBudgetRequest.connectDeviceToKitchen" :value="true" class="an-radio__input" checked="" type="radio" name="connect-kitchen-device" id="connect-kitchen-device-si">
                 <label class="an-radio__label" for="connect-kitchen-device-si">
                   <span>
                     Si
@@ -346,7 +379,7 @@ const houseForm = {
               </div>
 
               <div class="an-radio an-form__item">
-                <input v-model="gasBudgetRequest.connectDeviceToKitchen" value="false" class="an-radio__input" type="radio" name="connect-kitchen-device" id="connect-kitchen-device-no">
+                <input v-model="gasBudgetRequest.connectDeviceToKitchen" :value="false" class="an-radio__input" type="radio" name="connect-kitchen-device" id="connect-kitchen-device-no">
                 <label class="an-radio__label" for="connect-kitchen-device-no">
                   <span>
                     No
@@ -358,7 +391,7 @@ const houseForm = {
             <p class="an-body-l-bold mb-xl">¿Necesita conversión del aparato de cocina actual?</p>
             <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
               <div class="an-radio an-form__item">
-                <input v-model="gasBudgetRequest.convertDeviceKitchen" value="true" class="an-radio__input" checked="" type="radio" name="convert-kitchen-device" id="convert-kitchen-device-si">
+                <input v-model="gasBudgetRequest.convertDeviceKitchen" :value="true" class="an-radio__input" checked="" type="radio" name="convert-kitchen-device" id="convert-kitchen-device-si">
                 <label class="an-radio__label" for="convert-kitchen-device-si">
                   <span>
                     Si
@@ -367,7 +400,7 @@ const houseForm = {
               </div>
 
               <div class="an-radio an-form__item">
-                <input v-model="gasBudgetRequest.convertDeviceKitchen" value="false" class="an-radio__input" type="radio" name="convert-kitchen-device" id="convert-kitchen-device-no">
+                <input v-model="gasBudgetRequest.convertDeviceKitchen" :value="false" class="an-radio__input" type="radio" name="convert-kitchen-device" id="convert-kitchen-device-no">
                 <label class="an-radio__label" for="convert-kitchen-device-no">
                   <span>
                     No
@@ -378,7 +411,7 @@ const houseForm = {
           </template>
 
           <template v-if="heatingSelected">
-            <p class="an-body-l-bold mb-xl">¿Quiere controlar la calefacción por planta?</p>
+            <p class="an-body-l-bold mb-xl">¿Quiere controlar la calefacción por zona?</p>
             <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
               <div class="an-radio an-form__item">
                 <input v-model="gasBudgetRequest.controllHeatingFloor" value="true" class="an-radio__input" checked="" type="radio" name="constrol-heating-floor" id="constrol-heating-floor-si">
