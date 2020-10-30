@@ -66,6 +66,7 @@ public class SalesforceService {
         personalData.setPhone(leadDTO.getPhonePrefix() + leadDTO.getPhoneNumber());
         personalData.setEmail(leadDTO.getEmail());
         personalData.setProdInterest(leadDTO.getProductType());
+        personalData.setPrivacyPolicy("GasServicios");
 
         sendLeadRequest.setPersonalData(personalData);
 
