@@ -35,6 +35,7 @@
     @include desktop {
       min-width: rem(278);
       max-width: rem(321);
+      margin-bottom: rem(20);
     }
 
     &:first-child {
