@@ -96,7 +96,12 @@ public class SalesforceService {
 					completeAddress.append("Puerta ");
 					completeAddress.append(property.getDoor());
 				}
-				property.setAddress(completeAddress.toString());
+
+				if(completeAddress.toString().equals("")) {
+					property.setAddress(propertyJson.optString("Direccion_completa__c"));
+				} else {
+					property.setAddress(completeAddress.toString());
+				}
 
 				properties.add(property);
 			} catch (JSONException e) {
@@ -233,7 +238,10 @@ public class SalesforceService {
 			try {
 				addressJson = responseJson.getJSONObject(i);
 				Address address = new Address();
-				address.setKind(addressJson.getString("Tipo_de_via__c"));
+				address.setKind(addressJson.optString("Tipo_de_via__c"));
+				if(address.getKind() == null) {
+					address.setKind("");
+				}
 				address.setName(addressJson.getString("Nombre_de_via__c"));
 				addresses.add(address);
 			} catch (JSONException e) {

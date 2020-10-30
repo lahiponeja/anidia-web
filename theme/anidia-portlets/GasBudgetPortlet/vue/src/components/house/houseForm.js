@@ -409,10 +409,16 @@ const houseForm = {
             </div>
           </template>
 
-          <button :disabled="btnDisabled===true" type="submit" :class="{ 'an-btn--disabled': btnDisabled }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
-            <span v-if="!sendingForm">Continuar</span>
-            <span v-else>Enviando...</span>
-          </button>
+          <div class="an-form__flex an-form__flex--6-cols mb-xxl">
+            <button @click="house.changeHouseStep('cobertura')" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
+              <span>Anterior</span>
+            </button> 
+
+            <button :disabled="btnDisabled===true" type="submit" :class="{ 'an-btn--disabled': btnDisabled }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
+              <span v-if="!sendingForm">Continuar</span>
+              <span v-else>Enviando...</span>
+            </button>
+          </div>
 
           <!-- TODO -->
           <p v-if="submitFormError" class="color-danger">Ups, parece que hubo un problema. Por favor intente nuevamente.</p>

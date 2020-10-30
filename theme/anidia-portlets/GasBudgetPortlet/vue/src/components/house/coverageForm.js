@@ -74,7 +74,7 @@ const coverageForm = {
   methods: {
     submitRequest() {
       if(this.isValidStatusCode) {
-        console.log("submited")
+        // console.log("submited")
         this.house.setPostalCode(this.formData.postalCode);
         this.house.changeHouseStep('vivienda');
       } else {
@@ -105,7 +105,7 @@ const coverageForm = {
     showHelperDropdown(elemId) {
       const elem = document.querySelector(elemId)
       if(elem) {
-        console.log("showHelperDropdown", elem)
+        // console.log("showHelperDropdown", elem)
         elem.classList.add('d-block');
       }
     },
@@ -113,7 +113,7 @@ const coverageForm = {
     hideHelperDropdown(elemId) {
       const elem = document.querySelector(elemId)
       if(elem) {
-        console.log("hideHelperDropdown", elem)
+        // console.log("hideHelperDropdown", elem)
         elem.classList.remove('d-block');
       }
     },
@@ -125,10 +125,6 @@ const coverageForm = {
       } else {
         elem.classList.add('d-block');
       }
-    },
-
-    clickOutsideFormInput() {
-      console.log('clickout')
     },
 
     // setValue(municipality.municipalityName, 'municipalityName')
@@ -156,7 +152,10 @@ const coverageForm = {
       this.loadingMunicipalities = true,
       this.house.getMunicipalities(postalCode)
         .then((res) => { this.loadingMunicipalities = false })
-        .catch((err) => { this.loadingMunicipalities = false })
+        .catch((err) => { 
+          this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+          this.loadingMunicipalities = false 
+        })
     },
 
 
@@ -177,7 +176,10 @@ const coverageForm = {
       this.loadingAddressess = true
       this.house.getAddresses(this.formData.provMunId, this.formData.postalCode)
         .then((res) => { this.loadingAddressess = false })
-        .catch((err) => { this.loadingAddressess = false })
+        .catch((err) => { 
+          this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+          this.loadingAddressess = false 
+        })
 
     },
 
@@ -199,7 +201,10 @@ const coverageForm = {
       this.loadingEstates = true
       this.house.getEstates(this.formData.provMunId, this.formData.postalCode, kind, name)
         .then((res) => { this.loadingEstates = false })
-        .catch((err) => { this.loadingEstates = false })
+        .catch((err) => { 
+          this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+          this.loadingEstates = false 
+        })
     },
 
     /*************************************
@@ -223,7 +228,10 @@ const coverageForm = {
       this.loadingProperties = true
       this.house.getProperties(gateId)
         .then((res) => { this.loadingProperties = false })
-        .catch((err) => { this.loadingProperties = false })
+        .catch((err) => { 
+          this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+          this.loadingProperties = false 
+        })
     },
 
     /*************************************
@@ -299,6 +307,7 @@ const coverageForm = {
 
 
     <br /><br /><br />
+
 
     <h3>isValidStatusCode: {{ isValidStatusCode }}</h3>
     <h3>Selected field {{ selected.fieldKey }}</h3>
@@ -477,7 +486,7 @@ const coverageForm = {
                         <li
                           class="an-select__custom-option"
                           v-for="(result, index) in results"
-                          :key="result.name"
+                          :key="'street-'+index"
                           v-bind="resultProps[index]"
                         >
                           {{ result.name }}
@@ -595,7 +604,7 @@ const coverageForm = {
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
-                        :key="result.status"
+                        :key="'propertyResult'+index"
                         v-bind="resultProps[index]"
                       >
                         {{ result.address }}
@@ -603,7 +612,7 @@ const coverageForm = {
                     </ul>
 
                     <ul id="propertiescustomul" v-show="house.state.autocompData.properties.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
-                      <li @click="[setValue(property.address, 'address', '#propertiescustomul'), onSubmitProperties(property)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(property, index) in house.state.autocompData.properties" :key="property.status">
+                      <li @click="[setValue(property.address, 'address', '#propertiescustomul'), onSubmitProperties(property)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(property, index) in house.state.autocompData.properties" :key="'property'+index">
                         {{ property.address }}
                       </li>
                     </ul>
