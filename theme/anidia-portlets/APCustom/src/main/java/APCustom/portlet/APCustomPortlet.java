@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,6 +48,8 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.xml.*;
 
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+
 /**
  * @author danieldelapena
  */
@@ -65,38 +68,26 @@ import com.liferay.portal.kernel.xml.*;
 	},
 	service = Portlet.class
 )
+//TO DO: Remove unused imports
 public class APCustomPortlet extends MVCPortlet {
 	
 	@ProcessAction(name="actionMethod1")
 	public void sampleActionMethod(ActionRequest request, ActionResponse response)
 			throws IOException, PortletException, PortalException, SystemException{
 		
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+        		WebKeys.THEME_DISPLAY);
+		
 		List<JournalArticle> journalArticles =  new ArrayList<JournalArticle>();
         String structureName = "FAQ";
-        String structureKey = getStructureKey(structureName);
-		long groupId = 20122;
+        String structureKey = getStructureKey(structureName);  
+		long groupId = themeDisplay.getScopeGroupId();
 		
+		//TO DO: Does this fetch expired webcontents too?
 		journalArticles = JournalArticleLocalServiceUtil.getStructureArticles(groupId, structureKey);
 
 		System.out.println(toJson(journalArticles));
 	}
-
-
-	public String toJson(List<JournalArticle> Articles)throws JSONException {
-		//TO DO : Obtain current languaje to retrieve content 
-		String json = "[";
-		for (JournalArticle entry : Articles) {
-			System.out.println(entry.getDDMStructureKey() +" -> estructure key del content");
-			json = json.concat(toJsonAux(entry.getContentByLocale("en_US")) + ",");		
-		}
-		json = json.concat("]");
-		return json;
-	}
-	
-	public String toJsonAux(String content) throws JSONException {
-		 return (JSONFactoryUtil.convertXMLtoJSONMLArray(content));	
-	}
-	
 	
 	public String getStructureKey(String strucName) {
 		DynamicQuery queryForStructure =DDMStructureLocalServiceUtil.dynamicQuery().add(PropertyFactoryUtil
@@ -105,12 +96,25 @@ public class APCustomPortlet extends MVCPortlet {
 		DDMStructure specifiedStructure = null;
 		if(structures != null && structures.size() != 0){
 			specifiedStructure = (DDMStructure) structures.get(0);		
-			System.out.println("Estructure Id of "+ strucName + " is " + specifiedStructure.getStructureKey());
 			return specifiedStructure.getStructureKey();
 			
 		}else{
 			System.out.println(strucName +" structure not found");
 			return null;
 		}	
+	}
+	
+	public String toJson(List<JournalArticle> Articles)throws JSONException {
+		//TO DO : Obtain current languaje to retrieve content: maybe with  themeDisplay.getLocale().toLanguageTag() 
+
+		for (JournalArticle entry : Articles) {
+			json = json.concat(toJsonAux(entry.getContentByLocale("en")) + ",");		
+		}
+
+		return ("[" + json + "]");;
+	}
+	
+	public String toJsonAux(String content) throws JSONException {
+		 return (JSONFactoryUtil.convertXMLtoJSONMLArray(content));	
 	}
 }
