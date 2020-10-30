@@ -64,22 +64,7 @@ const coverageForm = {
       provMunId: {
         required
       },
-      addressKind: {
-        required
-      },
-      addressName: {
-        required
-      },
       number: {
-        required
-      },
-      houseType: {
-        required
-      },
-      status: {
-        required
-      },
-      privacyPolicy: {
         required
       }
     }
@@ -124,7 +109,7 @@ const coverageForm = {
         elem.classList.add('d-block');
       }
     },
-    
+
     hideHelperDropdown(elemId) {
       const elem = document.querySelector(elemId)
       if(elem) {
@@ -293,6 +278,9 @@ const coverageForm = {
     },
 
   },
+  mounted() {
+    if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.add('hide');
+  },
   template: /*html*/
   `<div>
 
@@ -415,7 +403,7 @@ const coverageForm = {
                       @focus="[
                         setActiveField('municipalitiesArr', 'municipalityName'),
                         showHelperDropdown('#municustomul')
-                      ]" 
+                      ]"
                       @keyup="checkResultsLength('#municustomul', results)"
                       required=""
                       >
@@ -430,7 +418,7 @@ const coverageForm = {
                         {{ result.municipalityName }}
                       </li>
                     </ul>
-                    
+
                     <ul id="municustomul" v-show="house.state.autocompData.municipalities.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li @click="[setValue(municipality.municipalityName, 'municipalityName', '#municustomul'), onSubmitMunicipalities(municipality)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(municipality, index) in house.state.autocompData.municipalities" :key="municipality.municipalityId">
                         {{ municipality.municipalityName }}
@@ -561,10 +549,10 @@ const coverageForm = {
               <!--INPUT FIELD: formData.houseType -->
               <div class="an-input an-form__item" :class="{ 'an-input--disabled': !!!propertiesArr.length }">
               <small v-show="loadingProperties" style="position: absolute;z-index: 1;right: 30px;">Cargando viviendas...</small>
-              
-              <!-- <input :disabled="!!!propertiesArr.length" v-model="formData.houseType" class="an-input__field" required="" placeholder="Vivienda (bloque, escalera, piso, puerta)" style="width: 100%;"> -->
-              
-              <autocomplete                 
+
+              <!-- <input :disabled="!!!propertiesArr.length" v-model="formData.houseType" class="an-input__field" placeholder="Vivienda (bloque, escalera, piso, puerta)" style="width: 100%;"> -->
+
+              <autocomplete
                 @submit="onSubmitProperties"
                 :search="search"
                 :get-result-value="getResultValue"
@@ -595,7 +583,6 @@ const coverageForm = {
                         showHelperDropdown('#propertiescustomul')
                       ]"
                       @keyup="checkResultsLength('#propertiescustomul', results)"
-                      required=""
                     >
                     <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                       <li
@@ -619,12 +606,13 @@ const coverageForm = {
             </div>
           </div>
 
-          <button type="submit" :disabled="!formData.status || btnDisabled===true" :class="{ 'an-btn--disabled': !formData.status || btnDisabled  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
+          <button type="submit" :disabled="!formData.status && btnDisabled===true" :class="{ 'an-btn--disabled': !formData.status && btnDisabled  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Comprobar</span>
           </button>
 
         </form>
       </div>
+      <h5 class="mt-xl">¿No encuentras tu dirección? Llama al <a href="tel:+34900922203" class="an-link">900 92 22 03 </a>y te atendemos</h5>
     </template>
     <template v-else>
       <coverage-error :msg="house.state.coverageError" />
