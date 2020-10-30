@@ -41,22 +41,22 @@ const compSaving = {
         <form @submit.prevent="submitRequest">
           <div class="an-form__flex an-form__flex--2-cols">
             <div class="an-input an-form__item">
-              <input v-model="compSavingForm.name" type="text" class="an-input__field" placeholder="Nombre" required="">
+              <input v-model="compSavingForm.name" type="text" class="an-input__field" placeholder="Nombre*" required="">
             </div>
             <div class="an-input an-form__item">
-              <input v-model="compSavingForm.lastname" type="text" class="an-input__field" placeholder="Apellidos" required="">
+              <input v-model="compSavingForm.lastname" type="text" class="an-input__field" placeholder="Apellidos*" required="">
             </div>
             <div class="an-input an-form__item">
-              <input v-model="compSavingForm.phone" type="text" class="an-input__field" placeholder="Teléfono" required="">
+              <input v-model="compSavingForm.phone" type="text" class="an-input__field" placeholder="Teléfono*" required="">
             </div>
             <div class="an-input an-form__item">
-              <input v-model="compSavingForm.email" type="text" class="an-input__field" placeholder="Email" required="">
+              <input v-model="compSavingForm.email" type="text" class="an-input__field" placeholder="Email">
             </div>
             <div class="an-input an-form__item">
               <div class="an-checkbox mt-xl">
                 <input v-model="compSavingForm.privacyPolicy" class="an-checkbox__input" type="checkbox" name="privacy-policy" id="privacy-policy">
                 <label class="an-checkbox__label" for="privacy-policy">
-                  <span> He leído y acepto la política de privacidad </span>
+                  <span> He leído y acepto la política de privacidad*</span>
                 </label>
               </div>
             </div>
@@ -74,7 +74,7 @@ const compSaving = {
             <span v-if="!sendingForm">Continuar</span>
             <span v-else>Enviando...</span>
           </button>
-          
+
         </form>
       </div>
     </template>
