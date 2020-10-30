@@ -13,7 +13,6 @@
     -ms-overflow-style: none;
     scroll-snap-type: x mandatory;
     -ms-scroll-snap-type: x mandatory;
-    align-items: baseline;
     padding-top: rem(96);
 
     &::-webkit-scrollbar {
@@ -44,6 +43,10 @@
       @include desktop {
         margin-left: 0;
       }
+    }
+
+    .an-card {
+      height: 100%;
     }
   }
 
