@@ -11,7 +11,7 @@ const results = {
     }
   },
   mounted() {
-    document.querySelector('.an-featured').classList.remove('hide');
+    if(document.querySelector('.an-featured')) document.querySelector('.an-featured').classList.remove('hide');
   },
   template: /*html*/`
   <div>
