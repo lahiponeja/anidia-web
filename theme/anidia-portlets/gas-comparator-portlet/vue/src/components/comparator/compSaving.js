@@ -1,4 +1,9 @@
+import results from "./results";
+
 const compSaving = {
+  components: {
+    results,
+  },
   inject: ["comparator"],
   data() {
     return {
@@ -20,7 +25,6 @@ const compSaving = {
       // TODO: add validation
       this.sendingForm = true
       this.comparator.submitUserContactInfo(this.compSavingForm).then((res) => {
-        console.log("😀¡Éxito!😀")
         this.sendingForm = false
         this.leadSent = true
         console.log(res)
@@ -52,7 +56,7 @@ const compSaving = {
               <div class="an-checkbox mt-xl">
                 <input v-model="compSavingForm.privacyPolicy" class="an-checkbox__input" type="checkbox" name="privacy-policy" id="privacy-policy">
                 <label class="an-checkbox__label" for="privacy-policy">
-                  <span> Acepto la política de privacidad </span>
+                  <span> He leído y acepto la política de privacidad </span>
                 </label>
               </div>
             </div>
@@ -60,7 +64,7 @@ const compSaving = {
               <div class="an-checkbox mt-xl">
                 <input v-model="compSavingForm.offersAndServices" class="an-checkbox__input" type="checkbox" name="offers-and-services" id="offers-and-services">
                 <label class="an-checkbox__label" for="offers-and-services">
-                  <span> Quiero recibir publicidad con nuevas ofertas y servicios </span>
+                  <span> Acepto recibir comunicaciones comerciales </span>
                 </label>
               </div>
             </div>
@@ -75,7 +79,7 @@ const compSaving = {
       </div>
     </template>
     <template v-else>
-      <h2>Instalando gas natural ahorrarías...</h2>
+      <results />
     </template>
   </div>
   `,

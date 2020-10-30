@@ -64,8 +64,6 @@ const state = reactive({
 
 const setGasConsumptionComparison = function (payload) {
   Object.assign(state.gasConsumptionComparison, payload.GasConsumptionComparison)
-  console.log("👾state.gasConsumptionComparison")
-  console.log(state.gasConsumptionComparison)
 }
 
 const setSavingsByConsumption = function(obj) {
@@ -130,14 +128,14 @@ const activeComponent = function() {
   return state.comparatorStepsArr.find((compItem) => compItem.active)
 }
 
-const submitUserContactInfo = function (budgetReadyForm) {
+const submitUserContactInfo = function (compSavingForm) {
   const { 
     name,
     lastname,
     phone,
     email,
     privacyPolicy,
-    offersAndServices } = budgetReadyForm;
+    offersAndServices } = compSavingForm;
 
   const requestBody = {
     "personalData": {
@@ -148,73 +146,12 @@ const submitUserContactInfo = function (budgetReadyForm) {
       "acceptNotCom": offersAndServices,
     }
   }
-/*   const requestBody = {
-    "personalData": {
-      "firstName": name,
-      "lastName": lastname,
-      "email": email,
-      "phone": phone,
-      "prodInterest": "",
-      "acceptNotCom": offersAndServices,
-      "postalCode": "",
-      "estate": "",
-      "property": ""
-    },
-    "calculatorGas": {
-      "input": {
-        "zipCode": "",
-        "houseType": "",
-        "propertyMeters": "",
-        "staysNumber": "",
-        "bathroomNumber": "",
-        "floorNumber": "",
-        "gasNaturalUse": "",
-        "acsUse": "",
-        "kitchenUse": "",
-        "heatingUse": "",
-        "personsWater": "",
-        "boilerLocation": "",
-        "extras": {
-          "metersBoilerToWindow": "",
-          "metersWaterIntake": "",
-          "hasVentilationGrill": "",
-          "controllHeatingFloor": "",
-          "connectDeviceToKitchen": "",
-          "convertDeviceKitchen": "",
-          "radiatorsBathroom": ""
-        }
-      },
-      "output": {
-        "proposedPack": "",
-        "equipment": "",
-        "baseBadget": "",
-        "bonus": "",
-        "totalBudget": "",
-        "iva21": "",
-        "totalPVP": "",
-        "extras": {
-          "MetersBoilerToWindow": "",
-          "MetersWaterIntake": "",
-          "HasVentilationGrill": "",
-          "ControllHeatingFloor": "",
-          "ConvertDeviceKitchen": "",
-          "RadiatorsBathroom": "",
-          "ExtraTotalPrice": ""
-        }
-      }
-    }
-  } */
 
   const options = {
     rootName: 'Lead', // defaults to 'root'
     attributes: false
   }
   const xml = objToXml(requestBody, options)
-
-  console.log("🔥 submitUserContactInfo 🔥")
-  console.log(xml)
-
-  console.log("requestBody", requestBody);
 
   const result = new Promise((resolve, reject) => {
     savingsService.postLeads(xml).then((res) => {
