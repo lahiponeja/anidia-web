@@ -11,6 +11,12 @@ const budgetCard = {
       return this.house.state.houseFormData
     }
   },
+  mounted() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  },
   template:/*html*/`
   <div class="an-wrapper an-wrapper--center">
     <div class="an-card an-card--pack an-card--pack--big featured">
@@ -33,7 +39,7 @@ const budgetCard = {
           Zona Norte de España
         </li> -->
         <li class="an-list__item an-body-m-regular">
-          <div class="an-list__icon an-icon--check-circle"></div> 
+          <div class="an-list__icon an-icon--check-circle"></div>
           Tipo de vivienda: {{ house.state.houseType }}
         </li>
         <li class="an-list__item an-body-m-regular">
