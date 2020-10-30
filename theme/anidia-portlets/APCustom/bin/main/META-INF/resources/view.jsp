@@ -1,5 +1,13 @@
 <%@ include file="/init.jsp" %>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
 
-<p>
-	<b><liferay-ui:message key="apcustom.caption"/></b>
-</p>
+<portlet:defineObjects />
+
+<h3>FAQS</h3>
+
+
+<portlet:actionURL name="actionMethod1" var="sampleActionMethodURL">
+</portlet:actionURL>
+<form action="${sampleActionMethodURL}" method="post">
+	<input type="submit" value="Get FAQS"> 
+</form>

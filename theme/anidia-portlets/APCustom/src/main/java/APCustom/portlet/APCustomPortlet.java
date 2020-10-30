@@ -9,13 +9,19 @@ import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
 import javax.portlet.PortletException;
 import javax.portlet.ProcessAction;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.LocaleUtil;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +33,8 @@ import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetEntryServiceUtil;
 import com.liferay.asset.kernel.service.persistence.AssetEntryQuery;
-
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
+import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
 
 
@@ -61,24 +67,50 @@ import com.liferay.portal.kernel.xml.*;
 )
 public class APCustomPortlet extends MVCPortlet {
 	
-	
 	@ProcessAction(name="actionMethod1")
 	public void sampleActionMethod(ActionRequest request, ActionResponse response)
 			throws IOException, PortletException, PortalException, SystemException{
-		List<JournalArticle> journalArticles = JournalArticleLocalServiceUtil.getArticles();
+		
+		List<JournalArticle> journalArticles =  new ArrayList<JournalArticle>();
+        String structureName = "FAQ";
+        String structureKey = getStructureKey(structureName);
+		long groupId = 20122;
+		
+		journalArticles = JournalArticleLocalServiceUtil.getStructureArticles(groupId, structureKey);
 
-        String json = "[";
-		for (JournalArticle entry : journalArticles) {
-			json = json.concat(toJson(entry.getContent()) + ",");		
+		System.out.println(toJson(journalArticles));
+	}
+
+
+	public String toJson(List<JournalArticle> Articles)throws JSONException {
+		//TO DO : Obtain current languaje to retrieve content 
+		String json = "[";
+		for (JournalArticle entry : Articles) {
+			System.out.println(entry.getDDMStructureKey() +" -> estructure key del content");
+			json = json.concat(toJsonAux(entry.getContentByLocale("en_US")) + ",");		
 		}
 		json = json.concat("]");
-		System.out.println(json);
+		return json;
 	}
-
-	public String toJson(String content) throws JSONException {
+	
+	public String toJsonAux(String content) throws JSONException {
 		 return (JSONFactoryUtil.convertXMLtoJSONMLArray(content));	
 	}
+	
+	
+	public String getStructureKey(String strucName) {
+		DynamicQuery queryForStructure =DDMStructureLocalServiceUtil.dynamicQuery().add(PropertyFactoryUtil
+				.forName("name").like("%" + strucName + "%"));
+		List structures = DDMStructureLocalServiceUtil.dynamicQuery(queryForStructure, 0, 1); 
+		DDMStructure specifiedStructure = null;
+		if(structures != null && structures.size() != 0){
+			specifiedStructure = (DDMStructure) structures.get(0);		
+			System.out.println("Estructure Id of "+ strucName + " is " + specifiedStructure.getStructureKey());
+			return specifiedStructure.getStructureKey();
+			
+		}else{
+			System.out.println(strucName +" structure not found");
+			return null;
+		}	
+	}
 }
-
-
-
