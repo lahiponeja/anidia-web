@@ -89,7 +89,7 @@ const setCoverageData = function(key, payloadObj) {
 }
 
 const submitUserContactInfo = function (budgetReadyForm) {
-  const { 
+  const {
     name,
     lastname,
     phone,
@@ -232,7 +232,7 @@ const getEstates = function(municipalityId, postalCode, addressKind, addressName
       const resJson = xmlToJsonImp(res.data);
       const { items } = resJson.Page.items
       const result = items
-      state.autocompData.estates = result
+      state.autocompData.estates = result.length ? result : [result]
       resolve(items)
     }).catch((err) => {
       reject(err)
@@ -271,7 +271,7 @@ const setHouseFormData = function(payload) {
 }
 
 const submitHouseData = function(gasBudgetRequest) {
-  
+
   const options = {
     rootName: 'GasBudgetRequest', // defaults to 'root'
     attributes: false
@@ -281,7 +281,7 @@ const submitHouseData = function(gasBudgetRequest) {
     houseType: state.houseType,
   })
   const xml = objToXml(dataObj, options)
-  
+
   setHouseFormData(dataObj)
 
   const results = new Promise((resolve, reject) => {
@@ -302,8 +302,8 @@ const submitHouseData = function(gasBudgetRequest) {
   return results;
 }
 
-export default { 
-  state: shallowReadonly(state), 
+export default {
+  state: shallowReadonly(state),
   setPostalCode,
   setHouseType,
   changeHouseStep,

@@ -3,7 +3,7 @@
   .portlet-body {
     display: flex;
     scroll-padding: 0 100%;
-    margin-bottom: rem(24);
+    padding-bottom: rem(24);
     overflow-x: auto;
     overflow-y: hidden;
     width: 100%;
@@ -47,6 +47,7 @@
 
     .an-card {
       height: 100%;
+      justify-content: end;
     }
   }
 
