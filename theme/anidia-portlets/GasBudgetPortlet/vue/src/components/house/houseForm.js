@@ -305,8 +305,8 @@ const houseForm = {
           <p class="an-body-l-bold mb-xl">¿Cuántos metros hay de la caldera/calentador a la ventana?</p>
           <div class="an-form__flex an-form__flex--2-cols mb-xxl">
             <div class="an-input an-form__item"  :class="{ 'form-group--error': $v.gasBudgetRequest.metersBoilerToWindow.$invalid && gasBudgetRequest.metersBoilerToWindow.length }">
-              <input v-model="gasBudgetRequest.metersBoilerToWindow" type="number" class="an-input__field" required="">
-              <h6 class="form-error" v-if="$v.gasBudgetRequest.metersBoilerToWindow.$invalid && gasBudgetRequest.metersBoilerToWindow.length">El valor debe ser mayor que 0</h6>
+              <input v-model="gasBudgetRequest.metersBoilerToWindow" placeholder="Metros" type="text" class="an-input__field" required="">
+              <h6 class="form-error" v-if="$v.gasBudgetRequest.metersBoilerToWindow.$invalid && gasBudgetRequest.metersBoilerToWindow.length">Hay un error en el campo introducido</h6>
             </div>
           </div>
 
@@ -397,8 +397,8 @@ const houseForm = {
             <p class="an-body-l-bold mb-xl">¿Cuántos radiadores toalleros quiere en el baño?</p>
             <div class="an-form__flex an-form__flex--2-cols mb-xxl" :class="{ 'form-group--error': $v.gasBudgetRequest.radiatorsBathroom.$invalid && gasBudgetRequest.radiatorsBathroom.length }">
               <div class="an-input an-form__item">
-                <input v-model="gasBudgetRequest.radiatorsBathroom" type="number" class="an-input__field" required="">
-                <h6 class="form-error" v-if="$v.gasBudgetRequest.radiatorsBathroom.$invalid && gasBudgetRequest.radiatorsBathroom.length">El valor debe ser mayor que 0</h6>
+                <input v-model="gasBudgetRequest.radiatorsBathroom" type="text" placeholder="Radiadores" class="an-input__field" required="">
+                <h6 class="form-error" v-if="$v.gasBudgetRequest.radiatorsBathroom.$invalid && gasBudgetRequest.radiatorsBathroom.length">Hay un error en el campo introducido</h6>
               </div>
             </div>
           </template>
