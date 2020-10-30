@@ -31,6 +31,8 @@ public class PersonalDataRequest {
     private String phone;
     //@JsonProperty("ProdInterest")
     private String prodInterest;
+    //@JsonProperty("PrivacyPolicy")
+    private String privacyPolicy;
 
     private String codMunicipio;
 
@@ -172,5 +174,13 @@ public class PersonalDataRequest {
 
     public void setCodInmueble(String codInmueble) {
         this.codInmueble = codInmueble;
+    }
+
+    public String getPrivacyPolicy() {
+        return privacyPolicy;
+    }
+
+    public void setPrivacyPolicy(String privacyPolicy) {
+        this.privacyPolicy = privacyPolicy;
     }
 }

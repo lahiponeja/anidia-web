@@ -363,7 +363,7 @@ public class SalesforceService {
 			sendLeadRequest.setCalculatorGas(mapToCalculatorGas(lead.getCalculatorGas()));
 		}
 		sendLeadRequest.setPersonalData(mapToPersonalDataRequest(lead.getPersonalData()));
-
+		sendLeadRequest.getPersonalData().setPrivacyPolicy("GasServicios");
 		return sendLeadRequest;
 	}
 
