@@ -63,7 +63,7 @@ public class LeadController {
 
 		//log.info(" >  Result =" + result);
 
-		return "form";
+		return "success";
 	}
 
 	@ActionMapping

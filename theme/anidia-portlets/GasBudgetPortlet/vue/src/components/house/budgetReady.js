@@ -72,7 +72,7 @@ const budgetReady = {
           <div class="an-checkbox mt-xl">
             <input v-model="budgetReadyForm.privacyPolicy" class="an-checkbox__input" type="checkbox" name="privacy-policy" id="privacy-policy">
             <label class="an-checkbox__label" for="privacy-policy">
-              <span> Acepto la política de privacidad* </span>
+              <span> He leído y acepto la política de privacidad *</span>
             </label>
           </div>
         </div>s
@@ -80,7 +80,7 @@ const budgetReady = {
           <div class="an-checkbox mt-xl">
             <input v-model="budgetReadyForm.offersAndServices" class="an-checkbox__input" type="checkbox" name="offers-and-services" id="offers-and-services">
             <label class="an-checkbox__label" for="offers-and-services">
-              <span> Quiero recibir publicidad con nuevas ofertas y servicios </span>
+              <span> Acepto recibir comunicaciones comerciales </span>
             </label>
           </div>
         </div>
