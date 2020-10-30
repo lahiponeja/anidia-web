@@ -12,14 +12,8 @@ const comparatorView = {
     'comp-saving': compSaving,
   },
   template: /*html*/`
-    <div>
-
-      <div class="an-house__steps an-wrapper an-wrapper--med">
-        <!-- <div class="an-funnel__titles mb-xl">
-          <p class="an-h6 color-an-theme-dark-grey mb-l">{{ houseActiveStep.heading.title }}</p>
-          <p class="an-body-l-bold color-an-theme">{{ houseActiveStep.heading.subtitle }}</p>
-        </div> -->
-  
+    <div class="w-full">
+      <div class="an-house__steps an-wrapper an-wrapper--med">  
         <ul class="an-house__steps-list mb-xxxl">
           <template v-for="(compStep, index) in comparator.state.comparatorStepsArr" class="an-house__steps-item">
             <div v-if="compStep.icon" class="an-house__steps-item" :class="{'an-house__steps-item--active': compStep.active }">
@@ -30,21 +24,9 @@ const comparatorView = {
         </ul>
       </div>
 
-
       <keep-alive>
         <component :is="comparator.activeComponent().component"></component>
-      </keep-alive>
-
-      <!--
-      <button @click="comparator.changeStepComponent('comp-hot-water')">comp-hot-water</button>
-      <br />
-      <button @click="comparator.changeStepComponent('comp-heating')">comp-heating</button>
-      <br />
-      <button @click="comparator.changeStepComponent('comp-kitchen')">comp-kitchen</button>
-      <br />
-      <button @click="comparator.changeStepComponent('comp-saving')">comp-saving</button>
-      -->
-      
+      </keep-alive>      
     </div>
   `
 }

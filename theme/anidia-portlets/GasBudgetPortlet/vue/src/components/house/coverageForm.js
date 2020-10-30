@@ -1,5 +1,6 @@
 import coverageError from './coverageError';
 import Autocomplete from '@trevoreyre/autocomplete-vue';
+import { required, numeric } from 'vuelidate/lib/validators';
 
 const coverageForm = {
   components: {
@@ -40,6 +41,46 @@ const coverageForm = {
       loadingProperties: false,
     }
   },
+
+  validations: {
+    formData: {
+      postalCode: {
+        required,
+        numeric
+      },
+      municipalityName: {
+        required
+      },
+      municipalityId: {
+        required
+      },
+      provinceId: {
+        required
+      },
+      provMunId: {
+        required
+      },
+      addressKind: {
+        required
+      },
+      addressName: {
+        required
+      },
+      number: {
+        required
+      },
+      houseType: {
+        required
+      },
+      status: {
+        required
+      },
+      privacyPolicy: {
+        required
+      }
+    }
+  },
+
   inject: ["house"],
   methods: {
     submitRequest() {
@@ -48,7 +89,8 @@ const coverageForm = {
         this.house.setPostalCode(this.formData.postalCode);
         this.house.changeHouseStep('vivienda');
       } else {
-        this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.')
+        this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+        document.querySelector('.an-centered-featured').classList.remove('hide');
       }
     },
 
@@ -80,17 +122,7 @@ const coverageForm = {
         return pc.postalCode.startsWith(index)
       })
     },
-    // onSubmitPostalCode(e) {
-    //   const postalCode = e.target.value
-    //   this.formData.postalCode = postalCode
-    //   // Save object in the store
-    //   this.house.setCoverageData("postalCode", { postalCode })
-    //   // Get municipalities
-    //   this.loadingMunicipalities = true,
-    //   this.house.getMunicipalities(postalCode)
-    //     .then((res) => { this.loadingMunicipalities = false })
-    //     .catch((err) => { this.loadingMunicipalities = false })
-    // },
+
     onSubmitPostalCode(result) {
       const { postalCode } = result
       this.formData.postalCode = postalCode
@@ -122,7 +154,7 @@ const coverageForm = {
       this.house.getAddresses(this.formData.provMunId, this.formData.postalCode)
         .then((res) => { this.loadingAddressess = false })
         .catch((err) => { this.loadingAddressess = false })
-      
+
     },
 
     /*************************************
@@ -132,14 +164,14 @@ const coverageForm = {
       const { kind, name } = result
 
       // Save object in the store
-      this.house.setCoverageData("estate", { 
+      this.house.setCoverageData("estate", {
         addressKind: kind,
         addressName: name
       })
 
       this.formData.addressKind = kind
       this.formData.addressName = name
-      
+
       this.loadingEstates = true
       this.house.getEstates(this.formData.provMunId, this.formData.postalCode, kind, name)
         .then((res) => { this.loadingEstates = false })
@@ -174,22 +206,22 @@ const coverageForm = {
      * PROPERTIES
     *************************************/
     onSubmitProperties(result) {
-      const { 
-        address, 
-        propertyId, 
-        status, 
-        contractStatus, 
+      const {
+        address,
+        propertyId,
+        status,
+        contractStatus,
         floor,
         block,
         ladder,
         door} = result
 
       // Save object in the store
-      this.house.setCoverageData("property", { 
-        address: address || "", 
-        propertyId: propertyId || "", 
-        status: status || "", 
-        contractStatus: contractStatus || "", 
+      this.house.setCoverageData("property", {
+        address: address || "",
+        propertyId: propertyId || "",
+        status: status || "",
+        contractStatus: contractStatus || "",
         floor: floor || "",
         block: block || "",
         ladder: ladder || "",
@@ -221,15 +253,15 @@ const coverageForm = {
       return this.statusCodes.validArr.indexOf(this.formData.status) != -1
     },
 
-  },
-  
-  mounted() {
-    console.log(this.house.state.autocompData.postalCodes);
+    btnDisabled () {
+      return this.$v.$invalid
+    },
+
   },
   template: /*html*/
   `<div>
 
-<!-- 
+<!--
     <div>{{ house.state.coverageData.postalCode }}</div>
     <div>{{ house.state.coverageData.estate }}</div>
     <div>{{ house.state.coverageData.property }}</div>
@@ -261,18 +293,18 @@ const coverageForm = {
         <p class="an-body-l-bold mb-xl">Rellena tu dirección para saber si tenemos cobertura en tu zona</p>
         <form @submit.prevent="submitRequest">
           <div class="an-form__flex an-form__flex--2-cols">
-          
+
          <!-- <div class="an-input an-form__item">
             <input @blur="onSubmitPostalCode($event)" class="an-input__field">
           </div> -->
 
             <!--INPUT FIELD: formData.postalCode -->
            <div class="an-input an-form__item">
-              <autocomplete 
-                :debounce-time="700" 
-                @submit="onSubmitPostalCode" 
-                :search="searchPostalCodes" 
-                :get-result-value="getResultValue" 
+              <autocomplete
+                :debounce-time="700"
+                @submit="onSubmitPostalCode"
+                :search="searchPostalCodes"
+                :get-result-value="getResultValue"
                 placeholder="Código Postal"
                 style="width: 100%;"
                 auto-select
@@ -290,11 +322,12 @@ const coverageForm = {
                 >
                   <div v-bind="rootProps">
                     <input
+                      :class="{ 'form-group--error': $v.formData.postalCode.$invalid && formData.postalCode.length }"
                       v-model="formData.postalCode"
                       v-bind="inputProps"
                       v-on="inputListeners"
                       class="an-input__field"
-                      @focus="setActiveField('postalCodesArr', 'postalCode')" 
+                      @focus="setActiveField('postalCodesArr', 'postalCode')"
                       required=""
                     >
                     <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
@@ -307,6 +340,7 @@ const coverageForm = {
                         {{ result.postalCode }}
                       </li>
                     </ul>
+                    <h6 class="form-error" v-if="$v.formData.postalCode.$invalid && formData.postalCode.length">Hay un error en el campo introducido</h6>
                   </div>
                 </template>
               </autocomplete>
@@ -315,10 +349,10 @@ const coverageForm = {
             <!--INPUT FIELD: formData.municipalityName -->
             <div class="an-input an-form__item" :class="{ 'an-input--disabled': !!!municipalitiesArr.length }">
               <small v-show="loadingMunicipalities" style="position: absolute;z-index: 1;right: 30px;">Cargando municipios...</small>
-              <autocomplete                 
+              <autocomplete
                 @submit="onSubmitMunicipalities"
-                :search="search" 
-                :get-result-value="getResultValue" 
+                :search="search"
+                :get-result-value="getResultValue"
                 placeholder="Municipios"
                 style="width: 100%;"
                 auto-select
@@ -341,7 +375,7 @@ const coverageForm = {
                       v-bind="inputProps"
                       v-on="inputListeners"
                       class="an-input__field"
-                      @focus="setActiveField('municipalitiesArr', 'municipalityName')" 
+                      @focus="setActiveField('municipalitiesArr', 'municipalityName')"
                       required=""
                     >
                     <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
@@ -362,10 +396,10 @@ const coverageForm = {
               <!--INPUT FIELD: formData.addressName -->
               <div class="an-input an-form__item" :class="{ 'an-input--disabled': !!!addressesArr.length }">
               <small v-show="loadingAddressess" style="position: absolute;z-index: 1;right: 30px;">Cargando calles...</small>
-                <autocomplete                 
+                <autocomplete
                   @submit="onSubmitAddresses"
-                  :search="search" 
-                  :get-result-value="getResultValue" 
+                  :search="search"
+                  :get-result-value="getResultValue"
                   placeholder="Calle"
                   style="width: 100%;"
                   auto-select
@@ -405,14 +439,14 @@ const coverageForm = {
                   </template>
                 </autocomplete>
               </div>
-              
+
               <!-- INPUT FIELD: formData.number -->
               <div class="an-input an-form__item" :class="{ 'an-input--disabled': !!!estatesArr.length }">
-                <small v-show="loadingEstates" style="position: absolute;z-index: 1;right: 30px;">Cargando numeros...</small>    
-                <autocomplete                 
+                <small v-show="loadingEstates" style="position: absolute;z-index: 1;right: 30px;">Cargando numeros...</small>
+                <autocomplete
                   @submit="onSubmitEstates"
-                  :search="searchEstates" 
-                  :get-result-value="getResultValue" 
+                  :search="searchEstates"
+                  :get-result-value="getResultValue"
                   placeholder="Número"
                   style="width: 100%;"
                   auto-select
@@ -456,10 +490,10 @@ const coverageForm = {
               <!--INPUT FIELD: formData.houseType -->
               <div class="an-input an-form__item" :class="{ 'an-input--disabled': !!!propertiesArr.length }">
               <small v-show="loadingProperties" style="position: absolute;z-index: 1;right: 30px;">Cargando viviendas...</small>
-              <autocomplete                 
+              <autocomplete
                 @submit="onSubmitProperties"
-                :search="search" 
-                :get-result-value="getResultValue" 
+                :search="search"
+                :get-result-value="getResultValue"
                 placeholder="Vivienda (bloque, escalera, piso, puerta)"
                 style="width: 100%;"
                 auto-select
@@ -501,10 +535,10 @@ const coverageForm = {
             </div>
           </div>
 
-          <button type="submit" :disabled="!formData.status" :class="{ 'an-btn--disabled': !formData.status  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
+          <button type="submit" :disabled="!formData.status || btnDisabled===true" :class="{ 'an-btn--disabled': !formData.status || btnDisabled  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Comprobar</span>
           </button>
-          
+
         </form>
       </div>
     </template>

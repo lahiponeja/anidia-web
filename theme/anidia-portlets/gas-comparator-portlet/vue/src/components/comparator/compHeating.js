@@ -1,3 +1,5 @@
+import { required, numeric, minValue } from 'vuelidate/lib/validators';
+
 const compHeating = {
   inject: ["global", "comparator"],
   data() {
@@ -7,6 +9,15 @@ const compHeating = {
         singleFamilyHouse: true,
         lastFloor: true,
         surfaceHouse: 0,
+      }
+    }
+  },
+  validations: {
+    savingsData: {
+      surfaceHouse: {
+        required,
+        numeric,
+        minValue: minValue(0)
       }
     }
   },
@@ -98,14 +109,15 @@ const compHeating = {
         <!-- 🚧 ¿Cual es su superficie? 🚧 -->
         <p class="an-body-l-bold mb-xl">¿Cual es su superficie?</p>
         <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal mb-xxl">
-          <div class="an-form__item">
+          <div class="an-form__item" :class="{ 'form-group--error': $v.savingsData.surfaceHouse.$invalid && savingsData.surfaceHouse.length }">
             <div class="an-input">
-              <input v-model="savingsData.surfaceHouse" type="number" class="an-input__field" placeholder="Metros cuadrados" required="">
+              <input v-model="savingsData.surfaceHouse" type="text" class="an-input__field" placeholder="Metros cuadrados" required="">
             </div>
+            <h6 class="form-error" v-if="$v.savingsData.surfaceHouse.$invalid && savingsData.surfaceHouse.length">Hay un error en el campo introducido</h6>
           </div>
         </div>
 
-        <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
+        <div class="an-form__flex an-form__flex--6-cols mb-xxl">
           <button @click="goBack" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Anterior</span>
           </button>

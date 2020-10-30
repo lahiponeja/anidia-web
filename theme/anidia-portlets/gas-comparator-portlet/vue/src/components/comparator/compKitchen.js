@@ -27,14 +27,14 @@ const compKitchen = {
     },
 
     goBack() {
-      this.comparator.changeStepComponent('comp-kitchen')
+      this.comparator.changeStepComponent('comp-heating')
     },
 
     setWeeklyKitchenUse(operation) {
       if(operation === "add") {
         ++this.savingsData.weeklyKitchenUse
       } else if("substract") {
-        if(this.savingsData.weeklyKitchenUse > 0) {
+        if(this.savingsData.weeklyKitchenUse > 1) {
           --this.savingsData.weeklyKitchenUse
         }
       }
@@ -68,13 +68,13 @@ const compKitchen = {
         <p class="an-body-l-bold mb-xl">¿Cuántas veces a la semana?</p>
         <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
           <div class="an-counter">
-            <button @click="setWeeklyKitchenUse('substract')" type="button"> - </button>
-            <span>{{ savingsData.weeklyKitchenUse }}</span>
-            <button @click="setWeeklyKitchenUse('add')" type="button"> + </button>
+            <button class="an-counter__btn" @click="setWeeklyKitchenUse('substract')" type="button"> - </button>
+            <span class="an-body-m-regular">{{ savingsData.weeklyKitchenUse }}</span>
+            <button class="an-counter__btn an-counter__btn--green" @click="setWeeklyKitchenUse('add')" type="button"> + </button>
           </div>
         </div>
 
-        <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
+        <div class="an-form__flex an-form__flex--6-cols mb-xxl">
           <button @click="goBack" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Anterior</span>
           </button>
