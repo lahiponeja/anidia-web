@@ -75,7 +75,7 @@ const budgetReady = {
               <span> He leído y acepto la política de privacidad *</span>
             </label>
           </div>
-        </div>s
+        </div>
         <div class="an-input an-form__item">
           <div class="an-checkbox mt-xl">
             <input v-model="budgetReadyForm.offersAndServices" class="an-checkbox__input" type="checkbox" name="offers-and-services" id="offers-and-services">
