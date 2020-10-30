@@ -14,7 +14,8 @@
 	<#include "${full_templates_path}/head/meta_tags.ftl" />
 
 	<#--  <link rel="stylesheet" href="${css_folder}/anidia.css" charset="utf-8">  -->
-  <link rel="text/javascript" href="${javascript_folder}/main.js" charset="utf-8">
+  <script src="${javascript_folder}/main.js" type="text/javascript"></script>
+
 	<link rel="stylesheet" href="${css_folder}/anidia.css?t=${theme_timestamp}" charset="utf-8">
 
 </head>
@@ -123,7 +124,7 @@
 					freeMarkerPortletPreferences.getPreferences(footerNavigationPreferencesMap)
 					instance_id="anidia-footer-menu-2"
 				/>
-				<button id="ot-sdk-btn" class="ot-sdk-show-settings">Gestionar cookies</button>
+				<button id="ot-sdk-btn" class="ot-sdk-show-settings">Configurar cookies</button>
       </div>
       <div class="footer__rrss">
         <a href="#" class="footer__rrss__single" target="_blank"><span class="an-icon--pinterest"></span></a>
@@ -201,17 +202,17 @@ function header() {
           })
         });
     }
+    document.querySelector('.anidia-header__input').addEventListener('change', () => {
+      document.body.classList.toggle('overflow-hidden');
+      document.querySelector('.anidia-header').classList.toggle('active');
+      document.querySelector('.site-title .anidia-logo-header--mobile--white').classList.toggle('hide');
+      document.querySelector('.site-title .anidia-logo-header--mobile--green').classList.toggle('hide');
+    });
   }
 }
 
 if (document.querySelector('.anidia-header__input')) {
   header();
-  document.querySelector('.anidia-header__input').addEventListener('change', () => {
-    document.body.classList.toggle('overflow-hidden');
-    document.querySelector('.anidia-header').classList.toggle('active');
-    document.querySelector('.site-title .anidia-logo-header--mobile--white').classList.toggle('hide');
-    document.querySelector('.site-title .anidia-logo-header--mobile--green').classList.toggle('hide');
-  });
 }
 
 </script>

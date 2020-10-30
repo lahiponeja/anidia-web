@@ -99,6 +99,29 @@
         },
         {
             "label": {
+                "es_ES": "Enlace directo"
+            },
+            "predefinedValue": {
+                "es_ES": ""
+            },
+            "style": {
+                "es_ES": ""
+            },
+            "tip": {
+                "es_ES": "Si no se trata de una página se puede introducir la URL en este campo"
+            },
+            "dataType": "text",
+            "indexType": "keyword",
+            "localizable": true,
+            "name": "LinkToUrl",
+            "readOnly": false,
+            "repeatable": false,
+            "required": false,
+            "showLabel": true,
+            "type": "text"
+        },
+        {
+            "label": {
                 "es_ES": "ImagenMobile"
             },
             "predefinedValue": {

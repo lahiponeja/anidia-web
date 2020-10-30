@@ -1,0 +1,7 @@
+Bundle-Name: gas-comparator-impl
+Bundle-SymbolicName: gas-comparator-impl
+Bundle-Version: 1.0.0
+Import-Package: com.liferay.*;version="[1.0.0,99.0.0)",\
+\
+		*
+-noee: true

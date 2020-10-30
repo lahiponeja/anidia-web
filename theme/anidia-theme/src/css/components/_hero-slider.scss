@@ -1,6 +1,11 @@
 .an-hero-slider {
   height: 100%;
 
+  @include desktop {
+    transform: translateY(-200px);
+    margin-bottom: rem(-200);
+  }
+
   .portlet-body {
     width: 100vw;
     display: flex;
@@ -34,7 +39,7 @@
     width: 100%;
 
     .an-hero-slider.green & {
-      background: $an-theme;
+      @include gradient-green-bg;
     }
 
     .an-hero-slider.white & {
@@ -185,7 +190,6 @@
     &__item {
       align-items: center;
       padding: 0 rem(120);
-      overflow: hidden;
 
       &-inner-wrapper {
         align-items: center;
@@ -201,11 +205,11 @@
     }
 
     &__image {
-      top: 50%;
+      top: 45%;
       transform: translateY(-50%);
       right: rem(-300);
       position: absolute;
-      height: rem(1286);
+      height: rem(1586);
 
       &-desktop {
         display: block;
@@ -247,7 +251,7 @@
     }
 
     &__discover-btn {
-      right: 40%;
+      right: 25%;
       bottom: auto;
 
       span {
