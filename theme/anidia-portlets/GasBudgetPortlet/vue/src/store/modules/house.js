@@ -178,6 +178,50 @@ const submitUserContactInfo = function (budgetReadyForm) {
   return result
 }
 
+const submitBusinessContactInfo = function (budgetReadyForm) {
+  const {
+    name,
+    lastname,
+    phone,
+    email,
+    privacyPolicy,
+    offersAndServices } = budgetReadyForm;
+
+  const requestBody = {
+    "personalData": {
+      "firstName": name,
+      "lastName": lastname,
+      "email": email,
+      "phone": phone,
+      "prodInterest": "gas",
+      "acceptNotCom": offersAndServices,
+    },
+  }
+
+  state.userFullName = `${name} ${lastname} `
+
+  const options = {
+    rootName: 'Lead', // defaults to 'root'
+    attributes: false
+  }
+  const xml = objToXml(requestBody, options)
+
+  console.log("🔥 submitBusinessContactInfo 🔥")
+  console.log(xml)
+
+  console.log("requestBody", requestBody);
+
+  const result = new Promise((resolve, reject) => {
+    contactInfoService.postLeads(xml).then((res) => {
+      resolve(res)
+    }).catch((err) => {
+      console.error(err)
+    })
+  })
+
+  return result
+}
+
 const setPostalCode = function(payload) {
   state.postalCode = payload
 }
@@ -316,4 +360,5 @@ export default {
   setCoverageError,
   submitHouseData,
   setCoverageData,
+  submitBusinessContactInfo,
 }
