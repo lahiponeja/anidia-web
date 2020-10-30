@@ -107,6 +107,12 @@ const houseForm = {
       return this.$v.$invalid
     }
   },
+  mounted () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  },
   template: /*html*/
     `<div class="an-form an-wrapper">
         <form @submit.prevent="submitRequest">
