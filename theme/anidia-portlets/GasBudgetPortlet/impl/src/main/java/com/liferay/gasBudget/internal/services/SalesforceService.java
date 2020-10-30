@@ -238,7 +238,10 @@ public class SalesforceService {
 			try {
 				addressJson = responseJson.getJSONObject(i);
 				Address address = new Address();
-				address.setKind(addressJson.getString("Tipo_de_via__c"));
+				address.setKind(addressJson.optString("Tipo_de_via__c"));
+				if(address.getKind() == null) {
+					address.setKind("");
+				}
 				address.setName(addressJson.getString("Nombre_de_via__c"));
 				addresses.add(address);
 			} catch (JSONException e) {
