@@ -1,0 +1,48 @@
+.an-result-lines {
+  width: 100%;
+
+  &__row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 48px;
+
+    &--big {
+      .an-result-lines__left {
+        flex-grow: 1;
+        &-line {
+          background-color: $yellow;
+        }
+      }
+    }
+
+    &--small {
+      .an-result-lines__left {
+        flex-grow: 1;
+        &-line {
+          @include gradient-green-bg;
+        }
+      }
+      .an-result-lines__right {
+        flex-grow: 1;
+        &-line {
+          @include gradient-green-bg;
+        }
+      }
+    }
+  }
+
+  &__left {
+    &-line {
+      height: rem(30);
+      border-radius: 6px;
+      margin-top: 8px;
+      margin-right: 30px;
+    }
+
+  }
+
+  &__right {
+
+  }
+  
+}
