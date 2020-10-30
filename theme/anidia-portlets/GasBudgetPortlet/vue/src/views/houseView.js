@@ -33,7 +33,7 @@ const homeView = {
     }
   },
   mounted() {
-    document.querySelector('.an-centered-featured').classList.remove('hide');
+    if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.remove('hide');
   },
   template: /*html*/`
     <div class="an-house an-funnel__titles bg-white pt-xxxl pb-xxxl">

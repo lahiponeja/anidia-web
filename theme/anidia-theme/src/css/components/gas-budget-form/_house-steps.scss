@@ -7,22 +7,22 @@
     }
 
     &-item {
-      width: 120px;
+      width: auto;
       text-align: center;
 
       &:not(:first-of-type) {
-        margin-left: 106px;
+        margin-left: rem(50);
         position: relative;
 
         &::before {
           content: "";
           position: absolute;
-          width: 106px;
+          width: rem(30);
           height: 1px;
           background-color: $black;
           top: 50%;
           transform: translateY(-50%);
-          left: -106px;
+          left: rem(-30);
         }
       }
 
@@ -49,10 +49,9 @@
 
   @include tablet {
     &__steps {
-      &-list {
-      }
-  
+
       &-item {
+        width: 120px;
 
         &:not(:first-of-type) {
           margin-left: 106px;

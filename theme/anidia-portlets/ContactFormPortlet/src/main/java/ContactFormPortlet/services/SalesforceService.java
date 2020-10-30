@@ -35,7 +35,7 @@ public class SalesforceService {
 
         try {
             String accessToken = getSalesforceToken();
-            validateSendLeadRequest(lead);
+            //validateSendLeadRequest(lead);
 
             SendLeadRequest sendLeadRequest = mapToSendLeadRequest(lead);
             HttpEntity<SendLeadRequest> entity = new HttpEntity<>(sendLeadRequest,
@@ -43,8 +43,8 @@ public class SalesforceService {
 
             String url = getSendLeadUrl();
             restTemplate.exchange(url, HttpMethod.POST, entity, Void.class);
-        } catch (ValidationException ex) {
-            throw ex;
+        //} catch (ValidationException ex) {
+        //    throw ex;
         } catch (Exception ex) {
             throw new PortletException(1, "There is a problem saving data");
         }

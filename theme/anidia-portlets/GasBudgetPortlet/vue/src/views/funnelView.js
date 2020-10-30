@@ -24,7 +24,7 @@ const funnelView = {
     },
   },
   mounted() {
-    document.querySelector('.an-centered-featured').classList.add('hide');
+    if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.add('hide');
   },
   template: /*html*/
     `<div>

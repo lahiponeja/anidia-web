@@ -1,8 +1,12 @@
 import coverageError from './coverageError';
 import Autocomplete from '@trevoreyre/autocomplete-vue';
+import clickOutside from '../directives/clickoutDirective'
 import { required, numeric } from 'vuelidate/lib/validators';
 
 const coverageForm = {
+  directives: {
+    clickOutside: clickOutside
+  },
   components: {
     'coverage-error': coverageError,
     Autocomplete
@@ -90,7 +94,7 @@ const coverageForm = {
         this.house.changeHouseStep('vivienda');
       } else {
         this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-        document.querySelector('.an-centered-featured').classList.remove('hide');
+        if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.remove('hide');
       }
     },
 
@@ -111,6 +115,41 @@ const coverageForm = {
     setActiveField(arr, key) {
       this.selected.fieldArr = arr
       this.selected.fieldKey = key
+    },
+
+    showHelperDropdown(elemId) {
+      const elem = document.querySelector(elemId)
+      if(elem) {
+        console.log("showHelperDropdown", elem)
+        elem.classList.add('d-block');
+      }
+    },
+    
+    hideHelperDropdown(elemId) {
+      const elem = document.querySelector(elemId)
+      if(elem) {
+        console.log("hideHelperDropdown", elem)
+        elem.classList.remove('d-block');
+      }
+    },
+
+    checkResultsLength(elemId, results) {
+      const elem = document.querySelector(elemId)
+      if(results.length) {
+        elem.classList.remove('d-block');
+      } else {
+        elem.classList.add('d-block');
+      }
+    },
+
+    clickOutsideFormInput() {
+      console.log('clickout')
+    },
+
+    // setValue(municipality.municipalityName, 'municipalityName')
+    setValue(resultItemName, formDataKey, elemId) {
+      this.formData[formDataKey] = resultItemName
+      this.hideHelperDropdown(elemId)
     },
 
     /*************************************
@@ -287,7 +326,8 @@ const coverageForm = {
       <li>--------------</li>
       <li>Status: {{ formData.status }}</li>
     </ul>
--->
+  -->
+
     <template v-if="!house.state.coverageError">
       <div class="an-form an-wrapper">
         <p class="an-body-l-bold mb-xl">Rellena tu dirección para saber si tenemos cobertura en tu zona</p>
@@ -368,16 +408,21 @@ const coverageForm = {
                     resultProps
                   }"
                 >
-                  <div v-bind="rootProps">
+                  <div v-bind="rootProps" v-click-outside:municustomul="hideHelperDropdown">
                     <input
                       :disabled="!!!municipalitiesArr.length"
                       v-model="formData.municipalityName"
                       v-bind="inputProps"
                       v-on="inputListeners"
                       class="an-input__field"
-                      @focus="setActiveField('municipalitiesArr', 'municipalityName')"
+                      @focus="[
+                        setActiveField('municipalitiesArr', 'municipalityName'),
+                        showHelperDropdown('#municustomul')
+                      ]" 
+                      @keyup="checkResultsLength('#municustomul', results)"
                       required=""
-                    >
+                      >
+                      <!-- @blur="hideHelperDropdown('#municustomul')" -->
                     <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                       <li
                         class="an-select__custom-option"
@@ -386,6 +431,12 @@ const coverageForm = {
                         v-bind="resultProps[index]"
                       >
                         {{ result.municipalityName }}
+                      </li>
+                    </ul>
+                    
+                    <ul id="municustomul" v-show="house.state.autocompData.municipalities.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
+                      <li @click="[setValue(municipality.municipalityName, 'municipalityName', '#municustomul'), onSubmitMunicipalities(municipality)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(municipality, index) in house.state.autocompData.municipalities" :key="municipality.municipalityId">
+                        {{ municipality.municipalityName }}
                       </li>
                     </ul>
                   </div>
@@ -415,16 +466,21 @@ const coverageForm = {
                       resultProps
                     }"
                   >
-                    <div v-bind="rootProps">
+                    <div v-bind="rootProps" v-click-outside:addresscustomul="hideHelperDropdown">
                       <input
                         :disabled="!!!addressesArr.length"
                         v-model="formData.addressName"
                         v-bind="inputProps"
                         v-on="inputListeners"
                         class="an-input__field"
-                        @focus="setActiveField('addressesArr', 'name')"
+                        @focus="[
+                          setActiveField('addressesArr', 'name'),
+                          showHelperDropdown('#addresscustomul')
+                        ]"
+                        @keyup="checkResultsLength('#addresscustomul', results)"
                         required=""
-                      >
+                        >
+                        <!-- @blur="hideHelperDropdown('#addresscustomul')" -->
                       <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                         <li
                           class="an-select__custom-option"
@@ -433,6 +489,12 @@ const coverageForm = {
                           v-bind="resultProps[index]"
                         >
                           {{ result.name }}
+                        </li>
+                      </ul>
+
+                      <ul id="addresscustomul" v-show="house.state.autocompData.addresses.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
+                        <li @click="[setValue(address.name, 'name', '#addresscustomul'), onSubmitAddresses(address)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(address, index) in house.state.autocompData.addresses" :key="address.name">
+                          {{ address.name }}
                         </li>
                       </ul>
                     </div>
@@ -462,16 +524,22 @@ const coverageForm = {
                       resultProps
                     }"
                   >
-                    <div v-bind="rootProps">
+                    <div v-bind="rootProps" v-click-outside:estatescustomul="hideHelperDropdown">
+                    <!-- <div v-bind="rootProps"> -->
                       <input
                         :disabled="!!!estatesArr.length"
                         v-model="formData.number"
                         v-bind="inputProps"
                         v-on="inputListeners"
                         class="an-input__field"
-                        @focus="setActiveField('estatesArr', 'number')"
+                        @focus="[
+                          setActiveField('estatesArr', 'number'),
+                          showHelperDropdown('#estatescustomul')
+                        ]"
+                        @keyup="checkResultsLength('#estatescustomul', results)"
                         required=""
-                      >
+                        >
+                        <!-- @blur="hideHelperDropdown('#estatescustomul')" -->
                       <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                         <li
                           class="an-select__custom-option"
@@ -482,6 +550,12 @@ const coverageForm = {
                           {{ result.number }}
                         </li>
                       </ul>
+
+                      <ul id="estatescustomul" v-show="house.state.autocompData.estates.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
+                        <li @click="[setValue(estate.number, 'number', '#estatescustomul'), onSubmitEstates(estate)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(estate, index) in house.state.autocompData.estates" :key="estate.gateId">
+                          {{ estate.number }}
+                        </li>
+                      </ul>
                     </div>
                   </template>
                 </autocomplete>
@@ -490,7 +564,10 @@ const coverageForm = {
               <!--INPUT FIELD: formData.houseType -->
               <div class="an-input an-form__item" :class="{ 'an-input--disabled': !!!propertiesArr.length }">
               <small v-show="loadingProperties" style="position: absolute;z-index: 1;right: 30px;">Cargando viviendas...</small>
-              <autocomplete
+              
+              <!-- <input :disabled="!!!propertiesArr.length" v-model="formData.houseType" class="an-input__field" required="" placeholder="Vivienda (bloque, escalera, piso, puerta)" style="width: 100%;"> -->
+              
+              <autocomplete                 
                 @submit="onSubmitProperties"
                 :search="search"
                 :get-result-value="getResultValue"
@@ -509,24 +586,34 @@ const coverageForm = {
                     resultProps
                   }"
                 >
-                  <div v-bind="rootProps">
+                  <div v-bind="rootProps" v-click-outside:propertiescustomul="hideHelperDropdown">
                     <input
                       :disabled="!!!propertiesArr.length"
                       v-model="formData.houseType"
                       v-bind="inputProps"
                       v-on="inputListeners"
                       class="an-input__field"
-                      @focus="setActiveField('propertiesArr', 'address')"
+                      @focus="[
+                        setActiveField('propertiesArr', 'address'),
+                        showHelperDropdown('#propertiescustomul')
+                      ]"
+                      @keyup="checkResultsLength('#propertiescustomul', results)"
                       required=""
                     >
                     <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
-                        :key="result.address"
+                        :key="result.status"
                         v-bind="resultProps[index]"
                       >
                         {{ result.address }}
+                      </li>
+                    </ul>
+
+                    <ul id="propertiescustomul" v-show="house.state.autocompData.properties.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
+                      <li @click="[setValue(property.address, 'address', '#propertiescustomul'), onSubmitProperties(property)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(property, index) in house.state.autocompData.properties" :key="property.status">
+                        {{ property.address }}
                       </li>
                     </ul>
                   </div>
