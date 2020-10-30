@@ -2,7 +2,6 @@ const businessContactForm = {
   inject: ["global", "house"], // TODO: refactor once I tackle this business form.
   data() {
     return {
-
       businessFormData: {
         name: "",
         lastname: "",
@@ -11,17 +10,22 @@ const businessContactForm = {
         privacyPolicy: false,
         offersAndServices: false,
       },
+
+      sendingForm: false,
     }
   },
   methods: {
     submitRequest() {
       // TODO
-      this.house.submitUserContactInfo(this.businessFormData).then((res) => {
+      this.sendingForm = true
+      this.house.submitBusinessContactInfo(this.businessFormData).then((res) => {
         console.log("😀¡Éxito!😀")
         this.$emit("form-success")
+        this.sendingForm = false
         console.log(res)
       }).catch((err)=>{
         console.error(err)
+        this.sendingForm = false
       })
     }
   },
@@ -60,7 +64,8 @@ const businessContactForm = {
       </div>
 
       <button type="submit" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--check-simple mt-xl">
-        <span>Continuar</span>
+        <span v-if="!sendingForm">Continuar</span>
+        <span v-else>Enviando...</span>
       </button>
     </form>
   </div>`,

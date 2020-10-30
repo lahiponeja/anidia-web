@@ -67,14 +67,15 @@ const homeView = {
           <budget-ready @form-success="setFormSuccess" />
         </template>
 
-
         <!-- START TESTING -->
+        <!-- 
         <div class="mt-xxl mb-xxl">
           <div @click="house.changeHouseStep('cobertura')">Cobertura</div>
           <div @click="house.changeHouseStep('vivienda')">Vivienda</div>
           <div @click="house.changeHouseStep('presupuesto')">Presupuesto</div>
           <div @click="house.changeHouseStep('presupuesto-realizado')">Presupuesto Realizado</div>
         </div>
+        -->
         <!-- END TESTING -->
 
       </template>
