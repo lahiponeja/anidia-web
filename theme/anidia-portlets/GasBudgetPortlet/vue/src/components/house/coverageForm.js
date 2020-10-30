@@ -612,6 +612,7 @@ const coverageForm = {
 
         </form>
       </div>
+      <h5>¿No encuentras tu dirección? Llama al <a href="tel:+34900922203" class="an-link">900 92 22 03 </a>y te atendemos</h5>
     </template>
     <template v-else>
       <coverage-error :msg="house.state.coverageError" />
