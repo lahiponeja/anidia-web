@@ -486,7 +486,7 @@ const coverageForm = {
                         <li
                           class="an-select__custom-option"
                           v-for="(result, index) in results"
-                          :key="result.name"
+                          :key="'street-'+index"
                           v-bind="resultProps[index]"
                         >
                           {{ result.name }}
