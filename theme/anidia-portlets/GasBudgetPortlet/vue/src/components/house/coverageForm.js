@@ -94,7 +94,7 @@ const coverageForm = {
         this.house.changeHouseStep('vivienda');
       } else {
         this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-        document.querySelector('.an-centered-featured').classList.remove('hide');
+        if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.remove('hide');
       }
     },
 

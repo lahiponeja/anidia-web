@@ -15,7 +15,7 @@ const businessView = {
     }
   },
   mounted() {
-    document.querySelector('.an-centered-featured').classList.remove('hide');
+    if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.remove('hide');
   },
   inject: ["global", "house"], // TODO: refactor once I tackle this business form.
   template: /*html*/`

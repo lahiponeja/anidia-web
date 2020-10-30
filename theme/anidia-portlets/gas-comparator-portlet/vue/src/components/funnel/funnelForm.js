@@ -48,7 +48,7 @@ const funnelForm = {
     }
   },
   mounted() {
-    document.querySelector('.an-featured').classList.add('hide');
+    if(document.querySelector('.an-featured')) document.querySelector('.an-featured').classList.add('hide');
   },
   template: /*html*/`
     <div class="an-form an-wrapper">
