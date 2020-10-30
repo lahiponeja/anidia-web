@@ -16,6 +16,13 @@ const funnelForm = {
       provincesArr: provincias,
       province: "",
       sendingForm: false,
+      energyTypeKind: {
+        glp: "(Kg/Año)",
+        goc: "(L/Año)",
+        electricity: "(kWh/Año)",
+        butane: "(Bombonas/Año)",
+        
+      }
     }
   },
   validations: {
@@ -28,6 +35,11 @@ const funnelForm = {
       acsUse: {
         required
       }
+    }
+  },
+  computed: {
+    energyUnit() {
+      return this.energyTypeKind[this.energyConsumption.energyType]
     }
   },
   methods: {
@@ -93,8 +105,8 @@ const funnelForm = {
         </div>
 
         <template v-if="known">
-          <!-- 🚧 ¡Genial! indícanos tu consumo anual (kWh/Año) 🚧 -->
-          <p class="an-body-l-bold mb-xl">¡Genial! indícanos tu consumo anual (kWh/Año)</p>
+          <!-- 🚧 ¡Genial! indícanos tu consumo anual 🚧 -->
+          <p class="an-body-l-bold mb-xl">¡Genial! indícanos tu consumo anual {{ energyUnit }} </p>
           <div class="an-form__flex an-form__flex--2-cols mb-xxl">
 
             <div class="an-form__item">
