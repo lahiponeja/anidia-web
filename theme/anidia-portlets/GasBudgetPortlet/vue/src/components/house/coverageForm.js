@@ -89,7 +89,8 @@ const coverageForm = {
         this.house.setPostalCode(this.formData.postalCode);
         this.house.changeHouseStep('vivienda');
       } else {
-        this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.')
+        this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+        document.querySelector('.an-centered-featured').classList.remove('hide');
       }
     },
 
@@ -256,10 +257,6 @@ const coverageForm = {
       return this.$v.$invalid
     },
 
-  },
-
-  mounted() {
-    console.log(this.house.state.autocompData.postalCodes);
   },
   template: /*html*/
   `<div>
