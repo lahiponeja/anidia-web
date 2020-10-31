@@ -29,7 +29,7 @@
             <form:option value=""><spring:message code="product-type-placeholder" /></form:option>
             <form:option value="gas"><spring:message code="product-type-gas"/></form:option>
             <form:option value="solar"><spring:message code="product-type-solar"/></form:option>
-            <form:option value="mantenimiento"><spring:message code="product-type-mantenimiento"/></form:option>
+            <form:option value="sva"><spring:message code="product-type-mantenimiento"/></form:option>
           </form:select>
         </div>
 
