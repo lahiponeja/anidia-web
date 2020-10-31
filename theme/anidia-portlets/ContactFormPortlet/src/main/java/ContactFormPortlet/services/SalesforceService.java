@@ -46,6 +46,7 @@ public class SalesforceService {
         //} catch (ValidationException ex) {
         //    throw ex;
         } catch (Exception ex) {
+            ex.printStackTrace();
             throw new PortletException(1, "There is a problem saving data");
         }
     }
