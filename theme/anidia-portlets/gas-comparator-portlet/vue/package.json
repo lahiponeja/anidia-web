@@ -16,8 +16,7 @@
 	"dependencies": {
 		"@vue/composition-api": "^1.0.0-beta.18",
 		"vue": "2.6.7",
-		"axios": "^0.20.0",
-		"vuelidate": "^0.7.6"
+		"axios": "^0.20.0"
 	},
 	"scripts": {
 		"build": "babel --source-maps -d build src && npm run copy-assets && liferay-npm-bundler",

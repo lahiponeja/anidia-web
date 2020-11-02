@@ -1,5 +1,4 @@
 import provincias from '../../enums/provincias'
-import { required, numeric, minValue } from 'vuelidate/lib/validators';
 
 const funnelForm = {
   inject: ["global", "comparator"],
@@ -21,19 +20,7 @@ const funnelForm = {
         goc: "(L/Año)",
         electricity: "(kWh/Año)",
         butane: "(Bombonas/Año)",
-        
-      }
-    }
-  },
-  validations: {
-    energyConsumption: {
-      electricityConsumption: {
-        required,
-        numeric,
-        minValue: minValue(0)
-      },
-      acsUse: {
-        required
+
       }
     }
   },
@@ -122,11 +109,10 @@ const funnelForm = {
               </div>
             </div>
 
-            <div class="an-form__item" :class="{ 'form-group--error': $v.energyConsumption.electricityConsumption.$invalid && energyConsumption.electricityConsumption.length }">
+            <div class="an-form__item">
               <div class="an-input">
                 <input v-model="energyConsumption.electricityConsumption" type="text" class="an-input__field" required="">
               </div>
-              <h6 class="form-error" v-if="$v.energyConsumption.electricityConsumption.$invalid && energyConsumption.electricityConsumption.length">Hay un error en el campo introducido</h6>
             </div>
           </div>
 

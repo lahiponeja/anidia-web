@@ -7,22 +7,21 @@ import funnelView from './views/funnelView'
 import comparatorView from './views/comparatorView'
 
 import Vue from 'vue/dist/vue.common';
-import Vuelidate from 'vuelidate'
-Vue.use(Vuelidate)
+
 
 /**
  * This is the main entry point of the portlet.
  *
- * See https://tinyurl.com/js-ext-portlet-entry-point for the most recent
+ * See https://tinyurl.com/js-ext-portlet-entry-point for the most recent 
  * information on the signature of this function.
  *
  * @param  {Object} params a hash with values of interest to the portlet
  * @return {void}
  */
 export default function main({portletNamespace, contextPath, portletElementId, configuration}) {
-
+    
     const node = document.getElementById(portletElementId);
-
+    
     // Dynamically write markup to portlet's node
     node.innerHTML = /*html*/`
     <div class="an-funnel bg-white pt-xxxl pb-xxxl">
@@ -30,15 +29,15 @@ export default function main({portletNamespace, contextPath, portletElementId, c
                 <p class="an-h6 color-an-theme-dark-grey mb-l">CALCULADORA DE AHORRO</p>
                 <p class="an-body-l-bold color-an-theme">Calcula todo lo que podrías ahorrarte instalando gas natural</p>
             </div>
-
+            
             <keep-alive>
                 <component :is="global.activeView().component"></component>
             </keep-alive>
         </div>
     `;
-
+    
     //
-    // Use runtime + compiler module in this case so that we don't need to
+    // Use runtime + compiler module in this case so that we don't need to 
     // process templates during build time.
     //
     // See https://vuejs.org/v2/guide/installation.html#Runtime-Compiler-vs-Runtime-only
@@ -59,5 +58,5 @@ export default function main({portletNamespace, contextPath, portletElementId, c
             comparator,
 		}
 	});
-
+    
 }
