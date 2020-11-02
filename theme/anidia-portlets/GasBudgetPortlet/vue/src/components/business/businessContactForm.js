@@ -43,7 +43,7 @@ const businessContactForm = {
           <input v-model="businessFormData.phone" type="text" class="an-input__field" placeholder="Teléfono" required="">
         </div>
         <div class="an-input an-form__item">
-          <input v-model="businessFormData.email" type="text" class="an-input__field" placeholder="Email" required="">
+          <input v-model="businessFormData.email" type="text" class="an-input__field" placeholder="Email*" required="">
         </div>
         <div class="an-input an-form__item">
           <div class="an-checkbox mt-xl">
