@@ -54,7 +54,7 @@ const compSaving = {
             </div>
             <div class="an-input an-form__item">
               <div class="an-checkbox mt-xl">
-                <input v-model="compSavingForm.privacyPolicy" class="an-checkbox__input" type="checkbox" name="privacy-policy" id="privacy-policy">
+                <input v-model="compSavingForm.privacyPolicy" class="an-checkbox__input privacy" type="checkbox" name="privacy-policy" id="privacy-policy" required="">
                 <label class="an-checkbox__label" for="privacy-policy">
                   <span> He leído y acepto la política de privacidad*</span>
                 </label>
