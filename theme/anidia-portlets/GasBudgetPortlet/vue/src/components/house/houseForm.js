@@ -113,17 +113,14 @@ const houseForm = {
               </div>
             </div>
 
-            <div class="an-input an-form__item" :class="{ 'form-group--error': $v.gasBudgetRequest.floorNumber.$invalid && gasBudgetRequest.floorNumber.length }">
+            <div class="an-input an-form__item">
               <input v-model="gasBudgetRequest.floorNumber" type="text" class="an-input__field" placeholder="Plantas" required="">
-              <h6 class="form-error" v-if="$v.gasBudgetRequest.floorNumber.$invalid && gasBudgetRequest.floorNumber.length">Hay un error en el campo introducido</h6>
             </div>
-            <div class="an-input an-form__item" :class="{ 'form-group--error': $v.gasBudgetRequest.bathroomNumber.$invalid && gasBudgetRequest.bathroomNumber.length }">
+            <div class="an-input an-form__item">
               <input v-model="gasBudgetRequest.bathroomNumber" type="text" class="an-input__field" placeholder="Baños" required="">
-              <h6 class="form-error" v-if="$v.gasBudgetRequest.bathroomNumber.$invalid && gasBudgetRequest.bathroomNumber.length">Hay un error en el campo introducido</h6>
             </div>
-            <div class="an-input an-form__item" :class="{ 'form-group--error': $v.gasBudgetRequest.staysNumber.$invalid && gasBudgetRequest.staysNumber.length }">
+            <div class="an-input an-form__item">
               <input v-model="gasBudgetRequest.staysNumber" type="text" class="an-input__field" placeholder="Número de estancias" required="">
-              <h6 class="form-error" v-if="$v.gasBudgetRequest.staysNumber.$invalid && gasBudgetRequest.staysNumber.length">Hay un error en el campo introducido</h6>
             <p class="an-input__caption an-body-s-regular">*(Incluye cocina y salón y excluye baños)</p>
             </div>
           </div>
@@ -293,9 +290,8 @@ const houseForm = {
 
           <p class="an-body-l-bold mb-xl">¿Cuántos metros hay de la caldera/calentador a la ventana?</p>
           <div class="an-form__flex an-form__flex--2-cols mb-xxl">
-            <div class="an-input an-form__item"  :class="{ 'form-group--error': $v.gasBudgetRequest.metersBoilerToWindow.$invalid && gasBudgetRequest.metersBoilerToWindow.length }">
-              <input v-model="gasBudgetRequest.metersBoilerToWindow" placeholder="Metros" type="text" class="an-input__field" required="">
-              <h6 class="form-error" v-if="$v.gasBudgetRequest.metersBoilerToWindow.$invalid && gasBudgetRequest.metersBoilerToWindow.length">Hay un error en el campo introducido</h6>
+            <div class="an-input an-form__item">
+              <input v-model="gasBudgetRequest.metersBoilerToWindow" type="number" class="an-input__field" required="">
             </div>
           </div>
 
@@ -384,7 +380,7 @@ const houseForm = {
 
 
             <p class="an-body-l-bold mb-xl">¿Cuántos radiadores toalleros quiere en el baño?</p>
-            <div class="an-form__flex an-form__flex--2-cols mb-xxl" :class="{ 'form-group--error': $v.gasBudgetRequest.radiatorsBathroom.$invalid && gasBudgetRequest.radiatorsBathroom.length }">
+            <div class="an-form__flex an-form__flex--2-cols mb-xxl">
               <div class="an-input an-form__item">
                 <input v-model="gasBudgetRequest.radiatorsBathroom" type="text" placeholder="Radiadores" class="an-input__field" required="">
                 <h6 class="form-error" v-if="$v.gasBudgetRequest.radiatorsBathroom.$invalid && gasBudgetRequest.radiatorsBathroom.length">Hay un error en el campo introducido</h6>
