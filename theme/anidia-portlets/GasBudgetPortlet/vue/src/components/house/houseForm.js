@@ -87,11 +87,7 @@ const houseForm = {
         ||
         this.gasBudgetRequest.gasNaturalUse === "ACS+Cocina+Calefacción"
       )
-    },
-
-    btnDisabled () {
-      return this.$v.$invalid
-    },
+    }
   },
   mounted () {
     window.scrollTo({
@@ -401,7 +397,7 @@ const houseForm = {
               <span>Anterior</span>
             </button>
 
-            <button :disabled="btnDisabled===true" type="submit" :class="{ 'an-btn--disabled': btnDisabled }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
+            <button type="submit" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
               <span v-if="!sendingForm">Continuar</span>
               <span v-else>Enviando...</span>
             </button>
