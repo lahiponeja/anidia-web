@@ -1,5 +1,3 @@
-import { required } from 'vuelidate/lib/validators';
-
 const budgetReady = {
   inject: ["house"],
   data() {
@@ -14,27 +12,6 @@ const budgetReady = {
       },
 
       sendingForm: false,
-    }
-  },
-  validations: {
-    gasBudgetRequest: {
-      name: {
-        required
-      },
-      lastname: {
-        required
-      },
-      phone: {
-        required
-      },
-      privacyPolicy: {
-        required
-      },
-    }
-  },
-  computed: {
-    btnDisabled () {
-      return this.$v.$invalid
     }
   },
   methods: {
@@ -92,7 +69,7 @@ const budgetReady = {
         </div>
       </div>
 
-      <button :disabled="btnDisabled===true" type="submit" :class="{ 'an-btn--disabled': btnDisabled }" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--check-simple mt-xl">
+      <button type="submit" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--check-simple mt-xl">
         <span v-if="!sendingForm">Continuar</span>
         <span v-else>Enviando...</span>
       </button>

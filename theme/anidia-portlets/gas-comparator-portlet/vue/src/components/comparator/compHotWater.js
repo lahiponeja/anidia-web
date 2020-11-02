@@ -91,7 +91,7 @@ const compHotWater = {
           <div class="an-form__item">
             <div class="an-select an-select--full-width">
               <span class="an-select__icon an-icon--chevron-down"></span>
-              <select v-model="savingsData.acsUse" class="an-select__native">
+              <select v-model="savingsData.acsUse" class="an-select__native" required>
                 <option disabled value="">Seleccione energía...</option>
                 <option value="GLP">GLP</option>
                 <option value="GOC">GOC</option>
