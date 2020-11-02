@@ -1,7 +1,6 @@
 import coverageError from './coverageError';
 import Autocomplete from '@trevoreyre/autocomplete-vue';
 import clickOutside from '../directives/clickoutDirective'
-import { required, numeric } from 'vuelidate/lib/validators';
 
 const coverageForm = {
   directives: {
@@ -45,31 +44,6 @@ const coverageForm = {
       loadingProperties: false,
     }
   },
-
-  validations: {
-    formData: {
-      postalCode: {
-        required,
-        numeric
-      },
-      municipalityName: {
-        required
-      },
-      municipalityId: {
-        required
-      },
-      provinceId: {
-        required
-      },
-      provMunId: {
-        required
-      },
-      number: {
-        required
-      }
-    }
-  },
-
   inject: ["house"],
   methods: {
     submitRequest() {
@@ -152,9 +126,9 @@ const coverageForm = {
       this.loadingMunicipalities = true,
       this.house.getMunicipalities(postalCode)
         .then((res) => { this.loadingMunicipalities = false })
-        .catch((err) => { 
+        .catch((err) => {
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-          this.loadingMunicipalities = false 
+          this.loadingMunicipalities = false
         })
     },
 
@@ -176,9 +150,9 @@ const coverageForm = {
       this.loadingAddressess = true
       this.house.getAddresses(this.formData.provMunId, this.formData.postalCode)
         .then((res) => { this.loadingAddressess = false })
-        .catch((err) => { 
+        .catch((err) => {
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-          this.loadingAddressess = false 
+          this.loadingAddressess = false
         })
 
     },
@@ -201,9 +175,9 @@ const coverageForm = {
       this.loadingEstates = true
       this.house.getEstates(this.formData.provMunId, this.formData.postalCode, kind, name)
         .then((res) => { this.loadingEstates = false })
-        .catch((err) => { 
+        .catch((err) => {
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-          this.loadingEstates = false 
+          this.loadingEstates = false
         })
     },
 
@@ -228,9 +202,9 @@ const coverageForm = {
       this.loadingProperties = true
       this.house.getProperties(gateId)
         .then((res) => { this.loadingProperties = false })
-        .catch((err) => { 
+        .catch((err) => {
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-          this.loadingProperties = false 
+          this.loadingProperties = false
         })
     },
 
@@ -285,11 +259,8 @@ const coverageForm = {
       return this.statusCodes.validArr.indexOf(this.formData.status) != -1
     },
 
-    btnDisabled () {
-      return this.$v.$invalid
-    },
-
   },
+
   mounted() {
     if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.add('hide');
     window.scrollTo({

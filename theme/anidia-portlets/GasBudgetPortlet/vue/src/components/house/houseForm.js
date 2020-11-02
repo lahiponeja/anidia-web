@@ -1,5 +1,3 @@
-import { required, numeric, minValue } from 'vuelidate/lib/validators';
-
 const houseForm = {
   inject: ["house"],
   data() {
@@ -28,50 +26,6 @@ const houseForm = {
       submitFormError: false, // TODO
       showVentilationGrillRadios: false,
       showConnectConvertDeviceToKitchen: false
-    }
-  },
-  validations: {
-    gasBudgetRequest: {
-      propertyMeters: {
-        required
-      },
-      floorNumber: {
-        required,
-        numeric,
-        minValue: minValue(0)
-      },
-      bathroomNumber: {
-        required,
-        numeric,
-        minValue: minValue(0)
-      },
-      staysNumber: {
-        required,
-        numeric,
-        minValue: minValue(0)
-      },
-      gasNaturalUse: {
-        required
-      },
-      acsUse: {
-        required
-      },
-      personsWater: {
-        required
-      },
-      hasVentilationGrill: {
-        required
-      },
-      metersBoilerToWindow: {
-        required,
-        minValue: minValue(0)
-      },
-      metersWaterIntake: {
-        required
-      },
-      radiatorsBathroom: {
-        minValue: minValue(0)
-      }
     }
   },
   methods: {
@@ -445,7 +399,7 @@ const houseForm = {
           <div class="an-form__flex an-form__flex--6-cols mb-xxl">
             <button @click="house.changeHouseStep('cobertura')" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
               <span>Anterior</span>
-            </button> 
+            </button>
 
             <button :disabled="btnDisabled===true" type="submit" :class="{ 'an-btn--disabled': btnDisabled }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
               <span v-if="!sendingForm">Continuar</span>
