@@ -99,7 +99,7 @@ const funnelForm = {
             <div class="an-form__item">
               <div class="an-select an-select--full-width">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="energyConsumption.energyType" class="an-select__native">
+                <select v-model="energyConsumption.energyType" class="an-select__native" required>
                   <option disabled value="">Seleccione una opción...</option>
                   <option value="glp">GLP</option>
                   <option value="goc">GOC</option>
@@ -159,7 +159,7 @@ const funnelForm = {
               <p class="an-body-m-bold color-an-theme mb-m">Agua Caliente</p>
               <div class="an-select an-select--full-width">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="province" class="an-select__native">
+                <select v-model="province" class="an-select__native" required>
                   <option disabled value="">¿En qué provincia vives?</option>
                   <option v-for="(province, index) in provincesArr" :key="index">
                     {{ province }}
