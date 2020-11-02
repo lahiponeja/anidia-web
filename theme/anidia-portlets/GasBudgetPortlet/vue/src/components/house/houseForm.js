@@ -383,7 +383,6 @@ const houseForm = {
             <div class="an-form__flex an-form__flex--2-cols mb-xxl">
               <div class="an-input an-form__item">
                 <input v-model="gasBudgetRequest.radiatorsBathroom" type="text" placeholder="Radiadores" class="an-input__field" required="">
-                <h6 class="form-error" v-if="$v.gasBudgetRequest.radiatorsBathroom.$invalid && gasBudgetRequest.radiatorsBathroom.length">Hay un error en el campo introducido</h6>
               </div>
             </div>
           </template>
