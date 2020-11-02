@@ -116,7 +116,17 @@ const coverageForm = {
         return pc.postalCode.startsWith(index)
       })
     },
-
+    // onSubmitPostalCode(e) {
+    //   const postalCode = e.target.value
+    //   this.formData.postalCode = postalCode
+    //   // Save object in the store
+    //   this.house.setCoverageData("postalCode", { postalCode })
+    //   // Get municipalities
+    //   this.loadingMunicipalities = true,
+    //   this.house.getMunicipalities(postalCode)
+    //     .then((res) => { this.loadingMunicipalities = false })
+    //     .catch((err) => { this.loadingMunicipalities = false })
+    // },
     onSubmitPostalCode(result) {
       const { postalCode } = result
       this.formData.postalCode = postalCode
@@ -334,7 +344,6 @@ const coverageForm = {
                 >
                   <div v-bind="rootProps">
                     <input
-                      :class="{ 'form-group--error': $v.formData.postalCode.$invalid && formData.postalCode.length }"
                       v-model="formData.postalCode"
                       v-bind="inputProps"
                       v-on="inputListeners"
@@ -352,7 +361,6 @@ const coverageForm = {
                         {{ result.postalCode }}
                       </li>
                     </ul>
-                    <h6 class="form-error" v-if="$v.formData.postalCode.$invalid && formData.postalCode.length">Hay un error en el campo introducido</h6>
                   </div>
                 </template>
               </autocomplete>
