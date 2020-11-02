@@ -49,7 +49,7 @@ const budgetReady = {
           <input v-model="budgetReadyForm.phone" type="text" class="an-input__field" placeholder="Teléfono*" required="">
         </div>
         <div class="an-input an-form__item">
-          <input v-model="budgetReadyForm.email" type="text" class="an-input__field" placeholder="Email">
+          <input v-model="budgetReadyForm.email" type="text" class="an-input__field" placeholder="Email*" required="">
         </div>
         <div class="an-input an-form__item">
           <div class="an-checkbox mt-xl">
