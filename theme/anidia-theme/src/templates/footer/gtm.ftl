@@ -17,8 +17,15 @@ window.dataLayer.push({
         "country": "spain",
         "aset": "anidiamainweb",
         "host": "${theme_display.getHost()}",
+        "language": "${locale.getLanguage()}",
         "mode": "${theme_display.IsMobile()?then('mobile','desktop')}",
-        "pagetype": "${gtm_pagetype}"
+        "pagetype": "${gtm_pagetype}",
+        "pagename": "${gtm_pagename}",
+        "referrer": "${request.getHeader("Referer")",
+        "subcategory1:" "instalationtype"
+        "subcategory2:" ""
+        "subcategory3:" ""
+        "subcategory4:" ""
 
 			}
 		]
