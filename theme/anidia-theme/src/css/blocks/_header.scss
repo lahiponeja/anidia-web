@@ -88,11 +88,6 @@
         font-size: rem(18);
       }
 
-      &:hover {
-        text-decoration: underline;
-        color: $white;
-      }
-
       .text-truncate {
         width: 100%;
         display: flex;
@@ -365,6 +360,11 @@
     input:checked ~ & {
       display: block;
       visibility: visible;
+
+      @include desktop {
+        display: none;
+        visibility: hidden;
+      }
     }
 
     .an-btn {

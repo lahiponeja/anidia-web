@@ -1,10 +1,7 @@
 .an-hero-slider {
   height: 100%;
-
-  @include desktop {
-    transform: translateY(-140px);
-    margin-bottom: rem(-140);
-  }
+  transform: translateY(-140px);
+  margin-bottom: rem(-140);
 
   .portlet-body {
     width: 100vw;
@@ -12,6 +9,20 @@
     flex-wrap: nowrap;
     position: relative;
     height: 100%;
+
+    .an-hero-slider.green &,
+    .an-hero-slider.light-green & {
+      &:after {
+        content: '';
+        background-image: url('../../assets/img/circles-bg.svg');
+        background-size: cover;
+        background-position-x: center;
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        right: 0;
+      }
+    }
 
     .journal-content-article {
       flex-shrink: 0;
@@ -201,7 +212,7 @@
       height: auto;
       max-width: 100%;
       position: static;
-      width: rem(660);
+      width: flex-grid(6)
     }
 
     &__image {
@@ -209,7 +220,7 @@
       transform: translateY(-50%);
       right: rem(-300);
       position: absolute;
-      height: rem(1586);
+      height: 120%;
 
       &-desktop {
         display: block;
@@ -251,7 +262,7 @@
     }
 
     &__discover-btn {
-      right: 25%;
+      right: 30%;
       bottom: auto;
 
       span {
