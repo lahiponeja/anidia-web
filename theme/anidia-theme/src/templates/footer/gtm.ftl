@@ -18,6 +18,7 @@ window.dataLayer.push({
         "aset": "anidiamainweb",
         "host": "${theme_display.getHost()}",
         "mode": "${theme_display.IsMobile()?then('mobile','desktop')}",
+        "pagetype": "${gtm_pagetype}"
 
 			}
 		]
