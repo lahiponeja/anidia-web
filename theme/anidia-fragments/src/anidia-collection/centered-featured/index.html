@@ -27,7 +27,10 @@
   <div class="bg-an-theme pl-s pr-s bg-an-theme--centered-featured">
 [/#switch]
 
-  <div class="an-centered-featured">
+  <div class="an-centered-featured
+[#if configuration.Esconder]
+hide
+[/#if]">
     [#if !configuration.hideBackgroundImage]
     <lfr-editable id="ImagenFondo" type="image"><img class="hide background-image" src="[resources:background.png]" alt=""></lfr-editable>
     [/#if]

@@ -1,5 +1,3 @@
-import { required, numeric, minValue } from 'vuelidate/lib/validators';
-
 const houseForm = {
   inject: ["house"],
   data() {
@@ -28,50 +26,6 @@ const houseForm = {
       submitFormError: false, // TODO
       showVentilationGrillRadios: false,
       showConnectConvertDeviceToKitchen: false
-    }
-  },
-  validations: {
-    gasBudgetRequest: {
-      propertyMeters: {
-        required
-      },
-      floorNumber: {
-        required,
-        numeric,
-        minValue: minValue(0)
-      },
-      bathroomNumber: {
-        required,
-        numeric,
-        minValue: minValue(0)
-      },
-      staysNumber: {
-        required,
-        numeric,
-        minValue: minValue(0)
-      },
-      gasNaturalUse: {
-        required
-      },
-      acsUse: {
-        required
-      },
-      personsWater: {
-        required
-      },
-      hasVentilationGrill: {
-        required
-      },
-      metersBoilerToWindow: {
-        required,
-        minValue: minValue(0)
-      },
-      metersWaterIntake: {
-        required
-      },
-      radiatorsBathroom: {
-        minValue: minValue(0)
-      }
     }
   },
   methods: {
@@ -133,11 +87,7 @@ const houseForm = {
         ||
         this.gasBudgetRequest.gasNaturalUse === "ACS+Cocina+Calefacción"
       )
-    },
-
-    btnDisabled () {
-      return this.$v.$invalid
-    },
+    }
   },
   mounted () {
     window.scrollTo({
@@ -154,7 +104,7 @@ const houseForm = {
             <div class="an-input an-form__item">
               <div class="an-select an-select--full-width mb-none">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="gasBudgetRequest.propertyMeters" class="an-select__native">
+                <select v-model="gasBudgetRequest.propertyMeters" class="an-select__native" required>
                   <option disabled value="">Metros cuadrados</option>
                   <option value="Hasta 100m2">Hasta 100m2</option>
                   <option value="De 100m2 a 180m2">De 100m2 a 180m2</option>
@@ -163,17 +113,14 @@ const houseForm = {
               </div>
             </div>
 
-            <div class="an-input an-form__item" :class="{ 'form-group--error': $v.gasBudgetRequest.floorNumber.$invalid && gasBudgetRequest.floorNumber.length }">
+            <div class="an-input an-form__item">
               <input v-model="gasBudgetRequest.floorNumber" type="text" class="an-input__field" placeholder="Plantas" required="">
-              <h6 class="form-error" v-if="$v.gasBudgetRequest.floorNumber.$invalid && gasBudgetRequest.floorNumber.length">Hay un error en el campo introducido</h6>
             </div>
-            <div class="an-input an-form__item" :class="{ 'form-group--error': $v.gasBudgetRequest.bathroomNumber.$invalid && gasBudgetRequest.bathroomNumber.length }">
+            <div class="an-input an-form__item">
               <input v-model="gasBudgetRequest.bathroomNumber" type="text" class="an-input__field" placeholder="Baños" required="">
-              <h6 class="form-error" v-if="$v.gasBudgetRequest.bathroomNumber.$invalid && gasBudgetRequest.bathroomNumber.length">Hay un error en el campo introducido</h6>
             </div>
-            <div class="an-input an-form__item" :class="{ 'form-group--error': $v.gasBudgetRequest.staysNumber.$invalid && gasBudgetRequest.staysNumber.length }">
+            <div class="an-input an-form__item">
               <input v-model="gasBudgetRequest.staysNumber" type="text" class="an-input__field" placeholder="Número de estancias" required="">
-              <h6 class="form-error" v-if="$v.gasBudgetRequest.staysNumber.$invalid && gasBudgetRequest.staysNumber.length">Hay un error en el campo introducido</h6>
             <p class="an-input__caption an-body-s-regular">*(Incluye cocina y salón y excluye baños)</p>
             </div>
           </div>
@@ -225,7 +172,7 @@ const houseForm = {
               <p class="an-body-m-bold color-an-theme mb-m">Agua Caliente</p>
               <div class="an-select an-select--full-width">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="gasBudgetRequest.acsUse" class="an-select__native">
+                <select v-model="gasBudgetRequest.acsUse" class="an-select__native" required>
                   <option disabled value="">Seleccione una opción...</option>
                   <option value="No Procede">No procede</option>
                   <option value="Termo eléctrico">Termo eléctrico</option>
@@ -243,7 +190,7 @@ const houseForm = {
               <p class="an-body-m-bold color-an-theme mb-m">Cocina</p>
               <div class="an-select an-select--full-width" :class="{ 'an-select--disabled': !kitchenSelected }">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="gasBudgetRequest.kitchenUse" :disabled="!kitchenSelected" class="an-select__native">
+                <select v-model="gasBudgetRequest.kitchenUse" :disabled="!kitchenSelected" class="an-select__native" required>
                   <option disabled value="">Seleccione una opción...</option>
                   <option value="No Procede">No procede</option>
                   <option value="Eléctrico">Eléctrico</option>
@@ -260,7 +207,7 @@ const houseForm = {
               <p class="an-body-m-bold color-an-theme mb-m">Calefacción</p>
               <div class="an-select an-select--full-width" :class="{ 'an-select--disabled': !heatingSelected }">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="gasBudgetRequest.heatingUse" :disabled="!heatingSelected" class="an-select__native">
+                <select v-model="gasBudgetRequest.heatingUse" :disabled="!heatingSelected" class="an-select__native" required>
                   <option disabled value="">Seleccione una opción...</option>
                   <option value="No Procede">No procede</option>
                   <option value="Radiadores eléctricos">Radiadores eléctricos</option>
@@ -277,7 +224,7 @@ const houseForm = {
               <p class="an-body-m-bold color-an-theme mb-m">¿Dónde está la caldera?</p>
               <div class="an-select an-select--full-width">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="gasBudgetRequest.boilerLocation" class="an-select__native" @change="[showVentilationGrillFn(), showConnectConvertDeviceToKitchenFn()]">
+                <select v-model="gasBudgetRequest.boilerLocation" class="an-select__native" @change="[showVentilationGrillFn(), showConnectConvertDeviceToKitchenFn()]" required>
                   <option disabled value="">Seleccione una opción...</option>
                   <option value="Lavadero/Terraza">Lavadero/Terraza</option>
                   <option value="Cocina">Cocina</option>
@@ -343,9 +290,8 @@ const houseForm = {
 
           <p class="an-body-l-bold mb-xl">¿Cuántos metros hay de la caldera/calentador a la ventana?</p>
           <div class="an-form__flex an-form__flex--2-cols mb-xxl">
-            <div class="an-input an-form__item"  :class="{ 'form-group--error': $v.gasBudgetRequest.metersBoilerToWindow.$invalid && gasBudgetRequest.metersBoilerToWindow.length }">
-              <input v-model="gasBudgetRequest.metersBoilerToWindow" placeholder="Metros" type="text" class="an-input__field" required="">
-              <h6 class="form-error" v-if="$v.gasBudgetRequest.metersBoilerToWindow.$invalid && gasBudgetRequest.metersBoilerToWindow.length">Hay un error en el campo introducido</h6>
+            <div class="an-input an-form__item">
+              <input v-model="gasBudgetRequest.metersBoilerToWindow" type="number" class="an-input__field" required="">
             </div>
           </div>
 
@@ -354,7 +300,7 @@ const houseForm = {
             <div class="an-input an-form__item">
               <div class="an-select an-select--full-width mb-none">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="gasBudgetRequest.metersWaterIntake" class="an-select__native">
+                <select v-model="gasBudgetRequest.metersWaterIntake" class="an-select__native" required>
                   <option disabled value="">Seleccione una opción...</option>
                   <option value="m.0">0</option>
                   <option value="m.1">1</option>
@@ -434,10 +380,9 @@ const houseForm = {
 
 
             <p class="an-body-l-bold mb-xl">¿Cuántos radiadores toalleros quiere en el baño?</p>
-            <div class="an-form__flex an-form__flex--2-cols mb-xxl" :class="{ 'form-group--error': $v.gasBudgetRequest.radiatorsBathroom.$invalid && gasBudgetRequest.radiatorsBathroom.length }">
+            <div class="an-form__flex an-form__flex--2-cols mb-xxl">
               <div class="an-input an-form__item">
                 <input v-model="gasBudgetRequest.radiatorsBathroom" type="text" placeholder="Radiadores" class="an-input__field" required="">
-                <h6 class="form-error" v-if="$v.gasBudgetRequest.radiatorsBathroom.$invalid && gasBudgetRequest.radiatorsBathroom.length">Hay un error en el campo introducido</h6>
               </div>
             </div>
           </template>
@@ -445,9 +390,9 @@ const houseForm = {
           <div class="an-form__flex an-form__flex--6-cols mb-xxl">
             <button @click="house.changeHouseStep('cobertura')" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
               <span>Anterior</span>
-            </button> 
+            </button>
 
-            <button :disabled="btnDisabled===true" type="submit" :class="{ 'an-btn--disabled': btnDisabled }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
+            <button type="submit" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
               <span v-if="!sendingForm">Continuar</span>
               <span v-else>Enviando...</span>
             </button>

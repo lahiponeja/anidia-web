@@ -1,3 +1,4 @@
+/*
 function heroSlider() {
   const sections = gsap.utils.toArray(".an-hero-slider__item");
   const discoverBtn = document.querySelectorAll("[data-discover-btn]");
@@ -100,4 +101,4 @@ if (document.querySelectorAll(".an-hero-slider__item").length > 1) {
     });
   });
 }
-
+*/
