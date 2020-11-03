@@ -73,7 +73,7 @@ public class APCustomPortlet extends MVCPortlet {
 	
 	@ProcessAction(name="actionMethod1")
 	public void sampleActionMethod(ActionRequest request, ActionResponse response)
-			throws IOException, PortletException, PortalException, SystemException{
+			throws IOException, PortletException, PortalException, SystemException, DocumentException{
 		
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
         		WebKeys.THEME_DISPLAY);
@@ -82,11 +82,15 @@ public class APCustomPortlet extends MVCPortlet {
         String structureName = "FAQ";
         String structureKey = getStructureKey(structureName);  
 		long groupId = themeDisplay.getScopeGroupId();
+		String languaje = themeDisplay.getLanguageId();
 		
+		System.out.println("El lenguaje esss " + themeDisplay.getLanguageId());
 		//TO DO: Does this fetch expired webcontents too?
+		
 		journalArticles = JournalArticleLocalServiceUtil.getStructureArticles(groupId, structureKey);
 
-		System.out.println(toJson(journalArticles));
+		System.out.println(toJson(journalArticles, languaje));	
+			
 	}
 	
 	public String getStructureKey(String strucName) {
@@ -104,17 +108,21 @@ public class APCustomPortlet extends MVCPortlet {
 		}	
 	}
 	
-	public String toJson(List<JournalArticle> Articles)throws JSONException {
-		//TO DO : Obtain current languaje to retrieve content: maybe with  themeDisplay.getLocale().toLanguageTag() 
-
+	public String toJson(List<JournalArticle> Articles, String language)throws JSONException, DocumentException {
+		String json = "";
 		for (JournalArticle entry : Articles) {
-			json = json.concat(toJsonAux(entry.getContentByLocale("en")) + ",");		
+			 Document document = SAXReaderUtil.read(entry.getContentByLocale(language));
+			 
+			 Node QuestionNode = document.selectSingleNode("/root/dynamic-element[@name='Question']/dynamic-content");
+			 String Question = QuestionNode.getText();
+			 
+			 Node AnswerNode = document.selectSingleNode("/root/dynamic-element[@name='Answer']/dynamic-content");
+			 String Answer = AnswerNode.getText();
+			
+			 json = json.concat("{\"question\":" + Question + ", \"answer\": " + Answer + "},");
 		}
 
-		return ("[" + json + "]");;
+		return ("[" + json + "]");
 	}
 	
-	public String toJsonAux(String content) throws JSONException {
-		 return (JSONFactoryUtil.convertXMLtoJSONMLArray(content));	
-	}
 }
