@@ -61,6 +61,7 @@ RemoteSystemsTempFiles
 
 # Liferay
 liferay/deploy/*
+logs/*
 
 #Java projects
 .classpath

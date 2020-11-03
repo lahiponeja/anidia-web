@@ -35,6 +35,7 @@ services:
       - "11311:11311"
     volumes:
       - ./liferay:/mnt/liferay:Z
+      - ./logs:/opt/liferay/logs:Z
       - liferay_war:/opt/liferay/osgi/war:Z
       - liferay_modules:/opt/liferay/osgi/modules:Z
       - liferay_document_library:/opt/liferay/data/document_library:Z
