@@ -1,10 +1,5 @@
-import featuredBanner from '../static/featuredBanner'
-
 const results = {
   inject: ["comparator"],
-  components: {
-    'featured-banner': featuredBanner,
-  },
   computed: {
     gasConsumption() {
       return this.comparator.state.gasConsumptionComparison
@@ -46,9 +41,6 @@ const results = {
         </div>
       </div>
     </div>
-
-    <featured-banner />
-
   </div>
   `,
 
