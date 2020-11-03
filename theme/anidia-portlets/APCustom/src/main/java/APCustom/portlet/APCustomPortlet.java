@@ -81,15 +81,15 @@ public class APCustomPortlet extends MVCPortlet {
 		List<JournalArticle> journalArticles =  new ArrayList<JournalArticle>();
         String structureName = "FAQ";
         String structureKey = getStructureKey(structureName);  
+        
 		long groupId = themeDisplay.getScopeGroupId();
 		String languaje = themeDisplay.getLanguageId();
-		
-		System.out.println("El lenguaje esss " + themeDisplay.getLanguageId());
-		//TO DO: Does this fetch expired webcontents too?
-		
-		journalArticles = JournalArticleLocalServiceUtil.getStructureArticles(groupId, structureKey);
 
-		System.out.println(toJson(journalArticles, languaje));	
+		//TO DO: Does this fetch expired webcontents too?
+		journalArticles = JournalArticleLocalServiceUtil.getStructureArticles(groupId, structureKey);
+		
+		JSONObject contentsJson = toJson(journalArticles, languaje);
+		System.out.println(contentsJson.get("data"));	
 			
 	}
 	
@@ -108,7 +108,7 @@ public class APCustomPortlet extends MVCPortlet {
 		}	
 	}
 	
-	public String toJson(List<JournalArticle> Articles, String language)throws JSONException, DocumentException {
+	public JSONObject toJson(List<JournalArticle> Articles, String language)throws JSONException, DocumentException {
 		String json = "";
 		for (JournalArticle entry : Articles) {
 			 Document document = SAXReaderUtil.read(entry.getContentByLocale(language));
@@ -119,10 +119,12 @@ public class APCustomPortlet extends MVCPortlet {
 			 Node AnswerNode = document.selectSingleNode("/root/dynamic-element[@name='Answer']/dynamic-content");
 			 String Answer = AnswerNode.getText();
 			
-			 json = json.concat("{\"question\":" + Question + ", \"answer\": " + Answer + "},");
+			 json = json.concat("{ \"question\": \"" + Question + "\", \"answer\": \"" + Answer + "\" },");
 		}
-
-		return ("[" + json + "]");
+		json = ("{ \"data\": [" + json + "]}");
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(json);
+		return (jsonObject);
+	
 	}
 	
 }
