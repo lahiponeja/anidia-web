@@ -22,7 +22,7 @@ window.dataLayer.push({
         "pagetype": "${gtm_pagetype}",
         "pagename": "${gtm_pagename}",
         "referrer": "${request.getHeader("referer")!""}",
-        "subcategory1:" "instalationtype"
+        "subcategory1:" "${gtm_subcategory}"
         "subcategory2:" ""
         "subcategory3:" ""
         "subcategory4:" ""
