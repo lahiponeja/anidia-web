@@ -3,6 +3,11 @@ const results = {
   computed: {
     gasConsumption() {
       return this.comparator.state.gasConsumptionComparison
+    },
+    isSavingsNegative() {
+      const savings = this.comparator.state.gasConsumptionComparison.savings
+      const parsedNun = parseInt(savings)
+      return Math.sign(parsedNun) !== 1
     }
   },
   mounted() {
@@ -11,10 +16,18 @@ const results = {
   template: /*html*/`
   <div>
     <div class="an-wrapper an-wrapper--med">
-      <div class="text-center mb-xxl">
-        <h2 class="color-an-theme">Instalando gas natural ahorrarías {{ gasConsumption.savings }} cada año.</h2>
-        <p class="an-body-l-bold color-an-theme">Consumo anual estimado: {{ gasConsumption.consumptionRequired }}</p>
-      </div>
+
+      <template v-if="isSavingsNegative">
+        <div class="text-center mb-xxl">
+          <h2 class="color-an-theme">¡Enhorabuena! Con tu instalación actual ya tienes el mejor precio</h2>
+        </div>
+      </template>
+      <template v-else>
+        <div class="text-center mb-xxl">
+          <h2 class="color-an-theme">Instalando gas natural ahorrarías {{ gasConsumption.savings }} cada año.</h2>
+          <p class="an-body-l-bold color-an-theme">Consumo anual estimado: {{ gasConsumption.consumptionRequired }}</p>
+        </div>
+      </template>
 
       <div class="an-result-lines">
 
