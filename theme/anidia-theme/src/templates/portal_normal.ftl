@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 
 <#include init />
+<#include init_gtm />
 
 <html class="${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
 
 <head>
 	<#include "${full_templates_path}/head/one_trust.ftl" />
+	<#include "${full_templates_path}/head/gtm.ftl" />
 
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtm_id}');</script>
-<!-- End Google Tag Manager -->
 
 	<#include "${full_templates_path}/head/meta_tags.ftl" />
 
@@ -145,26 +144,9 @@
 </#if>
 <!-- inject:js -->
 <!-- endinject -->
-<script>
-window.dataLayer.push({
-	"event": "anidiapageview",
-	"content": {
-		"category" :"",
-		"contenthierarchy": [
-			{
-			<#assign hierarchy_counter = 0 />
-			<#list page_ancestors>
-				<#items as ancestor>
-					"${hierarchy_counter}": "${ancestor.getHTMLTitle(locale)}",
-					<#assign hierarchy_counter += 1 />
-				</#items>
-			</#list>
-				"${hierarchy_counter}": "${layout.getHTMLTitle(locale)}"
-			}
-		]
-	}
-})
-</script>
+
+<#include "${full_templates_path}/footer/gtm.ftl" />
+
 </body>
 
 </html>
