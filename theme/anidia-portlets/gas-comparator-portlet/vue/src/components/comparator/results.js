@@ -1,10 +1,5 @@
-import featuredBanner from '../static/featuredBanner'
-
 const results = {
   inject: ["comparator"],
-  components: {
-    'featured-banner': featuredBanner,
-  },
   computed: {
     gasConsumption() {
       return this.comparator.state.gasConsumptionComparison
@@ -18,7 +13,7 @@ const results = {
     <div class="an-wrapper an-wrapper--med">
       <div class="text-center mb-xxl">
         <h2 class="color-an-theme">Instalando gas natural ahorrarías {{ gasConsumption.savings }} cada año.</h2>
-        <p class="an-body-l-bold color-an-theme">Consumo anual: {{ gasConsumption.consumptionRequired }}</p>
+        <p class="an-body-l-bold color-an-theme">Consumo anual estimado: {{ gasConsumption.consumptionRequired }}</p>
       </div>
 
       <div class="an-result-lines">
@@ -46,9 +41,6 @@ const results = {
         </div>
       </div>
     </div>
-
-    <featured-banner />
-
   </div>
   `,
 
