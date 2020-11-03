@@ -102,3 +102,17 @@ if (document.querySelectorAll(".an-hero-slider__item").length > 1) {
   });
 }
 */
+
+const discoverBtn = document.querySelectorAll("[data-discover-btn]");
+
+if (discoverBtn) {
+  discoverBtn.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: document.querySelector(".an-hero-slider__item").offsetWidth - 300,
+        behavior: 'smooth',
+      });
+    });
+  });
+}
