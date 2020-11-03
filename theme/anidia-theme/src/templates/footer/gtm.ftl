@@ -13,7 +13,12 @@ window.dataLayer.push({
 					<#assign hierarchy_counter += 1 />
 				</#items>
 			</#list>
-				"${hierarchy_counter}": "${layout.getHTMLTitle(locale)}"
+				"${hierarchy_counter}": "${layout.getHTMLTitle(locale)}",
+        "country": "spain",
+        "aset": "anidiamainweb",
+        "host": "${theme_display.getHost()}",
+        "mode": "${theme_display.IsMobile()?then('mobile','desktop')}",
+
 			}
 		]
 	}
