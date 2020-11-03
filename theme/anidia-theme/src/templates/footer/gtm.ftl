@@ -15,7 +15,8 @@ window.dataLayer.push({
 			</#list>
 				"${hierarchy_counter}": "${layout.getHTMLTitle(locale)}",
         "country": "spain",
-        "aset": "anidiamainweb",
+				"date": "${dateUtil.getCurrentDate("yyyyMMdd")}",
+        "asset": "anidiamainweb",
         "host": "${theme_display.getPortalDomain()}",
         "language": "${locale.getLanguage()}",
         "mode": "${browserSniffer.isMobile(request)?then('mobile','desktop')}",
