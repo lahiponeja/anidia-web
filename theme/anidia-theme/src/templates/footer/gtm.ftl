@@ -16,12 +16,12 @@ window.dataLayer.push({
 				"${hierarchy_counter}": "${layout.getHTMLTitle(locale)}",
         "country": "spain",
         "aset": "anidiamainweb",
-        "host": "${theme_display.getHost()}",
+        "host": "${theme_display.getPortalDomain()}",
         "language": "${locale.getLanguage()}",
-        "mode": "${theme_display.IsMobile()?then('mobile','desktop')}",
+        "mode": "${browserSniffer.isMobile(request)?then('mobile','desktop')}",
         "pagetype": "${gtm_pagetype}",
         "pagename": "${gtm_pagename}",
-        "referrer": "${request.getHeader("Referer")",
+        "referrer": "${request.getHeader("referer")!""}",
         "subcategory1:" "instalationtype"
         "subcategory2:" ""
         "subcategory3:" ""
