@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <#include init />
-<#include init_gtm />
+<#include "${full_templates_path}/init_gtm.ftl" />
 
 <html class="${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
 
