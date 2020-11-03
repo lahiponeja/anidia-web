@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -71,6 +72,19 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 //TO DO: Remove unused imports
 public class APCustomPortlet extends MVCPortlet {
 	
+
+	@Override
+	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+        String parameter = ParamUtil.get(renderRequest, "contentJson", "");
+        
+        System.out.println(("contentJso in doView is ==>"+parameter));
+
+                renderRequest.setAttribute("contentJson", parameter);
+                // Add attributes as required
+
+		super.doView(renderRequest, renderResponse);
+	}
+	
 	@ProcessAction(name="actionMethod1")
 	public void sampleActionMethod(ActionRequest request, ActionResponse response)
 			throws IOException, PortletException, PortalException, SystemException, DocumentException{
@@ -89,10 +103,10 @@ public class APCustomPortlet extends MVCPortlet {
 		journalArticles = JournalArticleLocalServiceUtil.getStructureArticles(groupId, structureKey);
 		
 		JSONObject contentsJson = toJson(journalArticles, languaje);
-		System.out.println(contentsJson.get("data"));	
-			
-	}
 	
+		response.getRenderParameters().setValue("contentJson", contentsJson.toJSONString());
+	}
+
 	public String getStructureKey(String strucName) {
 		DynamicQuery queryForStructure =DDMStructureLocalServiceUtil.dynamicQuery().add(PropertyFactoryUtil
 				.forName("name").like("%" + strucName + "%"));
@@ -124,7 +138,6 @@ public class APCustomPortlet extends MVCPortlet {
 		json = ("{ \"data\": [" + json + "]}");
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(json);
 		return (jsonObject);
-	
 	}
 	
 }
