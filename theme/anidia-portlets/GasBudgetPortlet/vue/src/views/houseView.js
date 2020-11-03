@@ -32,6 +32,9 @@ const homeView = {
       this.formSuccess = true
     }
   },
+  mounted() {
+    if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.remove('hide');
+  },
   template: /*html*/`
     <div class="an-house an-funnel__titles bg-white pt-xxxl pb-xxxl">
       <template v-if="!formSuccess">
@@ -64,22 +67,21 @@ const homeView = {
           <budget-ready @form-success="setFormSuccess" />
         </template>
 
-
         <!-- START TESTING -->
-        <!--
+        <!-- 
         <div class="mt-xxl mb-xxl">
           <div @click="house.changeHouseStep('cobertura')">Cobertura</div>
           <div @click="house.changeHouseStep('vivienda')">Vivienda</div>
           <div @click="house.changeHouseStep('presupuesto')">Presupuesto</div>
           <div @click="house.changeHouseStep('presupuesto-realizado')">Presupuesto Realizado</div>
-        </div> 
+        </div>
         -->
         <!-- END TESTING -->
 
       </template>
       <template v-else>
         <div class="an-wrapper an-wrapper--sml">
-          <p class="an-h6 color-an-theme-dark-grey mb-l">SOLICITUD ONLINE REALIZADA CON ÉXITO</p> 
+          <p class="an-h6 color-an-theme-dark-grey mb-l">SOLICITUD ONLINE REALIZADA CON ÉXITO</p>
           <p class="an-h2 color-an-theme mb-l">Muchas gracias {{ house.state.userFullName }} </p>
           <p class="an-body-l-regular color-an-theme">Nos pondremos en contacto contigo para darte toda la información al detalle</p>
         </div>

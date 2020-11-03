@@ -8,22 +8,24 @@ const houseForm = {
         bathroomNumber: "",
         staysNumber: "",
         gasNaturalUse: "",
-        acsUse: "", 
+        acsUse: "",
         kitchenUse: "",
-        heatingUse: "", 
+        heatingUse: "",
         boilerLocation: "",
-        hasVentilationGrill: "",
+        hasVentilationGrill: true,
         personsWater: "",
-        metersBoilerToWindow: "", 
+        metersBoilerToWindow: "",
         metersWaterIntake: "",
-        connectDeviceToKitchen: "false",
-        convertDeviceKitchen: "false",
-        controllHeatingFloor: "false",
+        connectDeviceToKitchen: false,
+        convertDeviceKitchen: false,
+        controllHeatingFloor: false,
         radiatorsBathroom: "",
       },
 
       sendingForm: false,
       submitFormError: false, // TODO
+      showVentilationGrillRadios: false,
+      showConnectConvertDeviceToKitchen: false
     }
   },
   methods: {
@@ -38,35 +40,71 @@ const houseForm = {
         this.sendingForm = false
         console.log(err)
       })
-    }
+    },
+    showVentilationGrillFn(){
+      if (this.gasBudgetRequest.boilerLocation === "Lavadero/Terraza") {
+        this.gasBudgetRequest.hasVentilationGrill = true
+        this.showVentilationGrillRadios = false
+        return false
+      } else if(this.gasBudgetRequest.boilerLocation === "Cocina") {
+        this.showVentilationGrillRadios = true
+        return true
+      } else if(this.gasBudgetRequest.boilerLocation === "Baño") {
+        this.gasBudgetRequest.hasVentilationGrill = true
+        this.showVentilationGrillRadios = false
+        return false
+      }
+    },
+    showConnectConvertDeviceToKitchenFn(){
+      if (this.gasBudgetRequest.boilerLocation === "Lavadero/Terraza") {
+        this.gasBudgetRequest.connectDeviceToKitchen = false
+        this.gasBudgetRequest.convertDeviceKitchen = false
+        this.showConnectConvertDeviceToKitchen = false
+        return false
+      } else if(this.gasBudgetRequest.boilerLocation === "Cocina") {
+        this.showConnectConvertDeviceToKitchen = true
+        return true
+      } else if(this.gasBudgetRequest.boilerLocation === "Baño") {
+        this.gasBudgetRequest.connectDeviceToKitchen = false
+        this.gasBudgetRequest.convertDeviceKitchen = false
+        this.showConnectConvertDeviceToKitchen = false
+        return false
+      }
+    },
   },
   computed: {
     kitchenSelected() {
-      return ( 
-        this.gasBudgetRequest.gasNaturalUse === "ACS+Cocina"   
-        ||   
+      return (
+        this.gasBudgetRequest.gasNaturalUse === "ACS+Cocina"
+        ||
         this.gasBudgetRequest.gasNaturalUse === "ACS+Cocina+Calefacción"
       )
     },
-  
+
     heatingSelected() {
-      return ( 
-        this.gasBudgetRequest.gasNaturalUse === "ACS+Calefacción"   
-        ||   
-        this.gasBudgetRequest.gasNaturalUse === "ACS+Cocina+Calefacción" 
+      return (
+        this.gasBudgetRequest.gasNaturalUse === "ACS+Calefacción"
+        ||
+        this.gasBudgetRequest.gasNaturalUse === "ACS+Cocina+Calefacción"
       )
     }
+  },
+  mounted () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   },
   template: /*html*/
     `<div class="an-form an-wrapper">
         <form @submit.prevent="submitRequest">
           <p class="an-body-l-bold mb-xl">Rellena los datos de tu vivienda para poderte hacer un presupuesto lo más ajustado posible</p>
           <div class="an-form__flex an-form__flex--2-cols mb-xxl">
-            
+
             <div class="an-input an-form__item">
               <div class="an-select an-select--full-width mb-none">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="gasBudgetRequest.propertyMeters" class="an-select__native">
+                <select v-model="gasBudgetRequest.propertyMeters" class="an-select__native" required>
                   <option disabled value="">Metros cuadrados</option>
                   <option value="Hasta 100m2">Hasta 100m2</option>
                   <option value="De 100m2 a 180m2">De 100m2 a 180m2</option>
@@ -86,8 +124,8 @@ const houseForm = {
             <p class="an-input__caption an-body-s-regular">*(Incluye cocina y salón y excluye baños)</p>
             </div>
           </div>
-          
-          <p class="an-body-l-bold mb-xl">¿Que necesitas?</p>
+
+          <p class="an-body-l-bold mb-xl">¿Qué necesitas?</p>
           <div class="an-form__flex an-form__flex--4-cols mb-xxl">
             <label for="agua-caliente" class="an-form__item">
               <input v-model="gasBudgetRequest.gasNaturalUse" type="radio" class="an-selection__radio" id="agua-caliente" name="que-necesitas" value="solo ACS" checked>
@@ -129,12 +167,12 @@ const houseForm = {
 
           <p class="an-body-l-bold mb-xl">Selecciona todo lo que tienes ahora mismo</p>
           <div class="an-form__flex an-form__flex--3-cols mb-xxl">
-          
+
             <div class="an-form__item">
               <p class="an-body-m-bold color-an-theme mb-m">Agua Caliente</p>
               <div class="an-select an-select--full-width">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="gasBudgetRequest.acsUse" class="an-select__native">
+                <select v-model="gasBudgetRequest.acsUse" class="an-select__native" required>
                   <option disabled value="">Seleccione una opción...</option>
                   <option value="No Procede">No procede</option>
                   <option value="Termo eléctrico">Termo eléctrico</option>
@@ -152,7 +190,7 @@ const houseForm = {
               <p class="an-body-m-bold color-an-theme mb-m">Cocina</p>
               <div class="an-select an-select--full-width" :class="{ 'an-select--disabled': !kitchenSelected }">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="gasBudgetRequest.kitchenUse" :disabled="!kitchenSelected" class="an-select__native">
+                <select v-model="gasBudgetRequest.kitchenUse" :disabled="!kitchenSelected" class="an-select__native" required>
                   <option disabled value="">Seleccione una opción...</option>
                   <option value="No Procede">No procede</option>
                   <option value="Eléctrico">Eléctrico</option>
@@ -169,7 +207,7 @@ const houseForm = {
               <p class="an-body-m-bold color-an-theme mb-m">Calefacción</p>
               <div class="an-select an-select--full-width" :class="{ 'an-select--disabled': !heatingSelected }">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="gasBudgetRequest.heatingUse" :disabled="!heatingSelected" class="an-select__native">
+                <select v-model="gasBudgetRequest.heatingUse" :disabled="!heatingSelected" class="an-select__native" required>
                   <option disabled value="">Seleccione una opción...</option>
                   <option value="No Procede">No procede</option>
                   <option value="Radiadores eléctricos">Radiadores eléctricos</option>
@@ -184,9 +222,9 @@ const houseForm = {
 
             <div class="an-form__item">
               <p class="an-body-m-bold color-an-theme mb-m">¿Dónde está la caldera?</p>
-              <div class="an-select an-select--full-width" :class="{ 'an-select--disabled': !heatingSelected }">
+              <div class="an-select an-select--full-width">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="gasBudgetRequest.boilerLocation" :disabled="!heatingSelected" class="an-select__native">
+                <select v-model="gasBudgetRequest.boilerLocation" class="an-select__native" @change="[showVentilationGrillFn(), showConnectConvertDeviceToKitchenFn()]" required>
                   <option disabled value="">Seleccione una opción...</option>
                   <option value="Lavadero/Terraza">Lavadero/Terraza</option>
                   <option value="Cocina">Cocina</option>
@@ -197,27 +235,28 @@ const houseForm = {
 
           </div>
 
-          <p class="an-body-l-bold mb-xl">¿Tienes rejilla de ventilación superior?</p>
-          <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
-            <div class="an-radio an-form__item">
-              <input v-model="gasBudgetRequest.hasVentilationGrill" value="true" class="an-radio__input" checked="" type="radio" name="rejilla-ventilacion-superior" id="vent-si">
-              <label class="an-radio__label" for="vent-si">
-                <span>
-                  Si
-                </span>
-              </label>
-            </div>
+          <template v-if="showVentilationGrillRadios">
+            <p class="an-body-l-bold mb-xl">¿Tienes rejilla de ventilación superior?</p>
+            <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
+              <div class="an-radio an-form__item">
+                <input v-model="gasBudgetRequest.hasVentilationGrill" :value="true" class="an-radio__input" checked="" type="radio" name="rejilla-ventilacion-superior" id="vent-si">
+                <label class="an-radio__label" for="vent-si">
+                  <span>
+                    Si
+                  </span>
+                </label>
+              </div>
 
-            <div class="an-radio an-form__item">
-              <input v-model="gasBudgetRequest.hasVentilationGrill" value="false" class="an-radio__input" type="radio" name="rejilla-ventilacion-superior" id="vent-no">
-              <label class="an-radio__label" for="vent-no">
-                <span>
-                  No
-                </span>
-              </label>
+              <div class="an-radio an-form__item">
+                <input v-model="gasBudgetRequest.hasVentilationGrill" :value="false" class="an-radio__input" type="radio" name="rejilla-ventilacion-superior" id="vent-no">
+                <label class="an-radio__label" for="vent-no">
+                  <span>
+                    No
+                  </span>
+                </label>
+              </div>
             </div>
-          </div>
-
+          </template>
 
           <p class="an-body-l-bold mb-xl">¿Qué uso haces del agua caliente?</p>
           <div class="an-form__flex an-form__flex--3-cols mb-xxl">
@@ -261,7 +300,7 @@ const houseForm = {
             <div class="an-input an-form__item">
               <div class="an-select an-select--full-width mb-none">
                 <span class="an-select__icon an-icon--chevron-down"></span>
-                <select v-model="gasBudgetRequest.metersWaterIntake" class="an-select__native">
+                <select v-model="gasBudgetRequest.metersWaterIntake" class="an-select__native" required>
                   <option disabled value="">Seleccione una opción...</option>
                   <option value="m.0">0</option>
                   <option value="m.1">1</option>
@@ -273,11 +312,11 @@ const houseForm = {
             </div>
           </div>
 
-          <template v-if="kitchenSelected">
+          <template v-if="showConnectConvertDeviceToKitchen">
             <p class="an-body-l-bold mb-xl">¿Necesita que conectemos el aparato de cocina actual?</p>
             <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
               <div class="an-radio an-form__item">
-                <input v-model="gasBudgetRequest.connectDeviceToKitchen" value="true" class="an-radio__input" checked="" type="radio" name="connect-kitchen-device" id="connect-kitchen-device-si">
+                <input v-model="gasBudgetRequest.connectDeviceToKitchen" :value="true" class="an-radio__input" checked="" type="radio" name="connect-kitchen-device" id="connect-kitchen-device-si">
                 <label class="an-radio__label" for="connect-kitchen-device-si">
                   <span>
                     Si
@@ -286,7 +325,7 @@ const houseForm = {
               </div>
 
               <div class="an-radio an-form__item">
-                <input v-model="gasBudgetRequest.connectDeviceToKitchen" value="false" class="an-radio__input" type="radio" name="connect-kitchen-device" id="connect-kitchen-device-no">
+                <input v-model="gasBudgetRequest.connectDeviceToKitchen" :value="false" class="an-radio__input" type="radio" name="connect-kitchen-device" id="connect-kitchen-device-no">
                 <label class="an-radio__label" for="connect-kitchen-device-no">
                   <span>
                     No
@@ -298,7 +337,7 @@ const houseForm = {
             <p class="an-body-l-bold mb-xl">¿Necesita conversión del aparato de cocina actual?</p>
             <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
               <div class="an-radio an-form__item">
-                <input v-model="gasBudgetRequest.convertDeviceKitchen" value="true" class="an-radio__input" checked="" type="radio" name="convert-kitchen-device" id="convert-kitchen-device-si">
+                <input v-model="gasBudgetRequest.convertDeviceKitchen" :value="true" class="an-radio__input" checked="" type="radio" name="convert-kitchen-device" id="convert-kitchen-device-si">
                 <label class="an-radio__label" for="convert-kitchen-device-si">
                   <span>
                     Si
@@ -307,7 +346,7 @@ const houseForm = {
               </div>
 
               <div class="an-radio an-form__item">
-                <input v-model="gasBudgetRequest.convertDeviceKitchen" value="false" class="an-radio__input" type="radio" name="convert-kitchen-device" id="convert-kitchen-device-no">
+                <input v-model="gasBudgetRequest.convertDeviceKitchen" :value="false" class="an-radio__input" type="radio" name="convert-kitchen-device" id="convert-kitchen-device-no">
                 <label class="an-radio__label" for="convert-kitchen-device-no">
                   <span>
                     No
@@ -316,9 +355,9 @@ const houseForm = {
               </div>
             </div>
           </template>
-          
+
           <template v-if="heatingSelected">
-            <p class="an-body-l-bold mb-xl">¿Quiere controlar la calefacción por planta?</p>
+            <p class="an-body-l-bold mb-xl">¿Quiere controlar la calefacción por zona?</p>
             <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
               <div class="an-radio an-form__item">
                 <input v-model="gasBudgetRequest.controllHeatingFloor" value="true" class="an-radio__input" checked="" type="radio" name="constrol-heating-floor" id="constrol-heating-floor-si">
@@ -338,24 +377,30 @@ const houseForm = {
                 </label>
               </div>
             </div>
-          
+
 
             <p class="an-body-l-bold mb-xl">¿Cuántos radiadores toalleros quiere en el baño?</p>
             <div class="an-form__flex an-form__flex--2-cols mb-xxl">
               <div class="an-input an-form__item">
-                <input v-model="gasBudgetRequest.radiatorsBathroom" type="number" class="an-input__field" required="">
+                <input v-model="gasBudgetRequest.radiatorsBathroom" type="text" placeholder="Radiadores" class="an-input__field" required="">
               </div>
             </div>
           </template>
 
-          <button type="submit" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
-            <span v-if="!sendingForm">Continuar</span>
-            <span v-else>Enviando...</span>
-          </button>
+          <div class="an-form__flex an-form__flex--6-cols mb-xxl">
+            <button @click="house.changeHouseStep('cobertura')" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
+              <span>Anterior</span>
+            </button>
+
+            <button type="submit" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
+              <span v-if="!sendingForm">Continuar</span>
+              <span v-else>Enviando...</span>
+            </button>
+          </div>
 
           <!-- TODO -->
           <p v-if="submitFormError" class="color-danger">Ups, parece que hubo un problema. Por favor intente nuevamente.</p>
-          
+
         </form>
       </div>
     `

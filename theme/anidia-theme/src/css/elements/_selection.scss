@@ -62,12 +62,13 @@
 
   &__icon {
     &::before {
-      font-size: rem(125);
+      font-size: rem(90);
     }
   }
 
   p {
     margin-bottom: rem(28);
+    text-align: center;
   }
 
   &__radio {

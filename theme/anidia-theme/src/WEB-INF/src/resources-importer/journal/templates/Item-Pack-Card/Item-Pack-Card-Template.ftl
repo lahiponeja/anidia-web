@@ -16,11 +16,11 @@
 </ul>
 
 <#if Estilo.getData() == "verde">
-  <button class="an-btn an-btn--flatter an-btn--white">${Boton.getData()}</button>
+  <a href="${Link.getFriendlyUrl()}" class="an-btn an-btn--flatter an-btn--white">${Boton.getData()}</a>
    <#else>
-    <button class="an-btn an-btn--flatter an-btn--gradient">
+    <a href="${Link.getFriendlyUrl()}" class="an-btn an-btn--flatter an-btn--gradient">
       <span>${Boton.getData()}</span>
-    </button>
+    </a>
 </#if>
 
 </div>

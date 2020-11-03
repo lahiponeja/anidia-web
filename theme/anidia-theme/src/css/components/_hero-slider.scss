@@ -1,10 +1,7 @@
 .an-hero-slider {
   height: 100%;
-
-  @include desktop {
-    transform: translateY(-200px);
-    margin-bottom: rem(-200);
-  }
+  transform: translateY(-140px);
+  margin-bottom: rem(-140);
 
   .portlet-body {
     width: 100vw;
@@ -12,6 +9,20 @@
     flex-wrap: nowrap;
     position: relative;
     height: 100%;
+
+    .an-hero-slider.green &,
+    .an-hero-slider.light-green & {
+      &:after {
+        content: '';
+        background-image: url('../../assets/img/circles-bg.svg');
+        background-size: cover;
+        background-position-x: center;
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        right: 0;
+      }
+    }
 
     .journal-content-article {
       flex-shrink: 0;
@@ -39,7 +50,7 @@
     width: 100%;
 
     .an-hero-slider.green & {
-      background: $an-theme;
+      @include gradient-green-bg;
     }
 
     .an-hero-slider.white & {
@@ -201,19 +212,20 @@
       height: auto;
       max-width: 100%;
       position: static;
-      width: rem(660);
+      width: rem(612);
     }
 
     &__image {
-      top: 50%;
+      top: 45%;
       transform: translateY(-50%);
       right: rem(-300);
       position: absolute;
-      height: rem(1286);
+      height: 120%;
 
       &-desktop {
         display: block;
         height: 100%;
+        transform: translateY(-2px);
       }
 
       &-mobile {
@@ -251,7 +263,7 @@
     }
 
     &__discover-btn {
-      right: 40%;
+      right: 30%;
       bottom: auto;
 
       span {

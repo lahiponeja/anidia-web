@@ -29,27 +29,33 @@ const budgetReady = {
       })
     }
   },
+  mounted () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  },
   template: /*html*/`
   <div class="an-form an-wrapper">
     <form @submit.prevent="submitRequest">
       <div class="an-form__flex an-form__flex--2-cols">
         <div class="an-input an-form__item">
-          <input v-model="budgetReadyForm.name" type="text" class="an-input__field" placeholder="Nombre" required="">
+          <input v-model="budgetReadyForm.name" type="text" class="an-input__field" placeholder="Nombre*" required="">
         </div>
         <div class="an-input an-form__item">
-          <input v-model="budgetReadyForm.lastname" type="text" class="an-input__field" placeholder="Apellidos" required="">
+          <input v-model="budgetReadyForm.lastname" type="text" class="an-input__field" placeholder="Apellidos*" required="">
         </div>
         <div class="an-input an-form__item">
-          <input v-model="budgetReadyForm.phone" type="text" class="an-input__field" placeholder="Teléfono" required="">
+          <input v-model="budgetReadyForm.phone" type="text" class="an-input__field" placeholder="Teléfono*" required="">
         </div>
         <div class="an-input an-form__item">
-          <input v-model="budgetReadyForm.email" type="text" class="an-input__field" placeholder="Email" required="">
+          <input v-model="budgetReadyForm.email" type="text" class="an-input__field" placeholder="Email*" required="">
         </div>
         <div class="an-input an-form__item">
           <div class="an-checkbox mt-xl">
-            <input v-model="budgetReadyForm.privacyPolicy" class="an-checkbox__input" type="checkbox" name="privacy-policy" id="privacy-policy">
+            <input v-model="budgetReadyForm.privacyPolicy" class="an-checkbox__input privacy" type="checkbox" name="privacy-policy" id="privacy-policy" required="">
             <label class="an-checkbox__label" for="privacy-policy">
-              <span> Acepto la política de privacidad </span>
+              <span> He leído y acepto la política de privacidad *</span>
             </label>
           </div>
         </div>
@@ -57,7 +63,7 @@ const budgetReady = {
           <div class="an-checkbox mt-xl">
             <input v-model="budgetReadyForm.offersAndServices" class="an-checkbox__input" type="checkbox" name="offers-and-services" id="offers-and-services">
             <label class="an-checkbox__label" for="offers-and-services">
-              <span> Quiero recibir publicidad con nuevas ofertas y servicios </span>
+              <span> Acepto recibir comunicaciones comerciales </span>
             </label>
           </div>
         </div>
@@ -67,7 +73,7 @@ const budgetReady = {
         <span v-if="!sendingForm">Continuar</span>
         <span v-else>Enviando...</span>
       </button>
-      
+
     </form>
   </div>
   `,

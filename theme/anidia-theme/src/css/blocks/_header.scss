@@ -58,6 +58,19 @@
       width: auto;
       position: initial;
 
+      &.active {
+        .nav-link .text-truncate {
+          display: flex;
+          flex-direction: column;
+
+          &:after {
+            content: '';
+            border-bottom: 2px solid;
+            width: 90%;
+            transform: translateY(rem(-10));
+          }
+        }
+      }
     }
 
     .lfr-nav-child-toggle svg {
@@ -73,11 +86,6 @@
 
       @include desktop {
         font-size: rem(18);
-      }
-
-      &:hover {
-        text-decoration: underline;
-        color: $white;
       }
 
       .text-truncate {
@@ -352,6 +360,11 @@
     input:checked ~ & {
       display: block;
       visibility: visible;
+
+      @include desktop {
+        display: none;
+        visibility: hidden;
+      }
     }
 
     .an-btn {
@@ -430,7 +443,7 @@
   .an-icon--head-phones.an-cmb--header-small {
     display: flex;
     margin-left: auto;
-    transform: translate(rem(-74), rem(20));
+    transform: translate(rem(-74), rem(0));
 
     @include desktop {
       display: none !important;

@@ -1,5 +1,6 @@
 .an-centered-featured {
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
   display: flex;
   flex-direction: column;
@@ -68,12 +69,5 @@
     .bg-an-theme-light & {
       color: $an-theme;
     }
-  }
-}
-
-.bg-an-theme--centered-featured {
-  @include desktop {
-    transform: translateY(-120px);
-    margin-bottom: rem(-120);
   }
 }

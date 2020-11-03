@@ -1,6 +1,6 @@
 const funnelView = {
   data() {
-    return { 
+    return {
       optionPicked: null,
       postalCodes: [],
     }
@@ -23,12 +23,15 @@ const funnelView = {
       this.house.setHouseType(this.optionPicked)
     },
   },
+  mounted() {
+    if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.add('hide');
+  },
   template: /*html*/
     `<div>
     <div v-if="!postalCodesLoaded" class="an-funnel__white-overlay">
       <p class="an-h3">Cargando...</p>
     </div>
-    
+
     <div class="an-funnel bg-white pt-xxxl pb-xxxl">
       <div class="an-funnel__titles an-wrapper--sml">
         <p class="an-h6 color-an-theme-dark-grey mb-l">COMIENZA TU SOLICITUD ONLINE</p>
@@ -42,7 +45,7 @@ const funnelView = {
             <div class="an-selection__icon" :class="option.icon"></div>
           </div>
         </div>
-        
+
       </div>
       <div class="an-funnel__footer">
         <button type="button" @click="continueStep" :disabled="!optionPicked" :class="{ 'an-btn--disabled': !optionPicked  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple">
