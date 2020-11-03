@@ -114,7 +114,7 @@ const compHotWater = {
 
         <div class="an-form__flex an-form__flex--6-cols mb-xxl">
           <button @click="startOver" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
-            <span>Volver a empezar</span>
+            <span>Volver a calcular</span>
           </button>
 
           <button type="submit" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">

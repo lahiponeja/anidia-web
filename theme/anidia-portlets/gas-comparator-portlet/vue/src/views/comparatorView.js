@@ -13,7 +13,7 @@ const comparatorView = {
   },
   template: /*html*/`
     <div class="w-full">
-      <div class="an-house__steps an-wrapper an-wrapper--med">  
+      <div class="an-house__steps an-house__steps--calculator an-wrapper an-wrapper--med">  
         <ul class="an-house__steps-list mb-xxxl">
           <template v-for="(compStep, index) in comparator.state.comparatorStepsArr" class="an-house__steps-item">
             <div v-if="compStep.icon" class="an-house__steps-item" :class="{'an-house__steps-item--active': compStep.active }">

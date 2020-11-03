@@ -98,9 +98,9 @@ function extensibleCards() {
           let cards = singleContainer.querySelectorAll('.journal-content-article');
           cards.forEach(card => {
             card.classList.add('active');
-            card.querySelector('.an-card--simple__text-expanded').classList.remove('hide');
-            card.querySelector('.an-card--simple__text-short').classList.add('hide');
-            card.querySelector('[data-expand-card]').classList.add('hide');
+            if (card.querySelector('.an-card--simple__text-expanded')) card.querySelector('.an-card--simple__text-expanded').classList.remove('hide');
+            if (card.querySelector('.an-card--simple__text-short')) card.querySelector('.an-card--simple__text-short').classList.add('hide');
+            if (card.querySelector('[data-expand-card]')) card.querySelector('[data-expand-card]').classList.add('hide');
           });
         });
       });
@@ -110,4 +110,9 @@ function extensibleCards() {
 
 if (document.querySelector(".extensible-cards")) {
   extensibleCards();
+  let nCards = document.querySelectorAll('.extensible-cards .journal-content-article').length;
+  let nDots = document.querySelectorAll('.extensible-cards__dot').length;
+  for (var i = nCards; i < nDots; i++) {
+    document.querySelectorAll('.extensible-cards__dot')[nDots-1].remove(document.querySelectorAll('.extensible-cards__dot')[nDots-1])
+  }
 }
