@@ -3,7 +3,7 @@
 window.dataLayer.push({
 	"event": "anidiapageview",
 	"content": {
-		"category" : "",
+		"category" : "${gtm_category_page}",
 		"contenthierarchy": [
 			{
 			<#assign hierarchy_counter = 0 />
