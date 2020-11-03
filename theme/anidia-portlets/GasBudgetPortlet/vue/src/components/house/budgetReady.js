@@ -1,5 +1,3 @@
-import { required } from 'vuelidate/lib/validators';
-
 const budgetReady = {
   inject: ["house"],
   data() {
@@ -14,27 +12,6 @@ const budgetReady = {
       },
 
       sendingForm: false,
-    }
-  },
-  validations: {
-    gasBudgetRequest: {
-      name: {
-        required
-      },
-      lastname: {
-        required
-      },
-      phone: {
-        required
-      },
-      privacyPolicy: {
-        required
-      },
-    }
-  },
-  computed: {
-    btnDisabled () {
-      return this.$v.$invalid
     }
   },
   methods: {
@@ -72,11 +49,11 @@ const budgetReady = {
           <input v-model="budgetReadyForm.phone" type="text" class="an-input__field" placeholder="Teléfono*" required="">
         </div>
         <div class="an-input an-form__item">
-          <input v-model="budgetReadyForm.email" type="text" class="an-input__field" placeholder="Email" required="">
+          <input v-model="budgetReadyForm.email" type="text" class="an-input__field" placeholder="Email*" required="">
         </div>
         <div class="an-input an-form__item">
           <div class="an-checkbox mt-xl">
-            <input v-model="budgetReadyForm.privacyPolicy" class="an-checkbox__input" type="checkbox" name="privacy-policy" id="privacy-policy">
+            <input v-model="budgetReadyForm.privacyPolicy" class="an-checkbox__input privacy" type="checkbox" name="privacy-policy" id="privacy-policy" required="">
             <label class="an-checkbox__label" for="privacy-policy">
               <span> He leído y acepto la política de privacidad *</span>
             </label>
@@ -92,7 +69,7 @@ const budgetReady = {
         </div>
       </div>
 
-      <button :disabled="btnDisabled===true" type="submit" :class="{ 'an-btn--disabled': btnDisabled }" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--check-simple mt-xl">
+      <button type="submit" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--check-simple mt-xl">
         <span v-if="!sendingForm">Continuar</span>
         <span v-else>Enviando...</span>
       </button>

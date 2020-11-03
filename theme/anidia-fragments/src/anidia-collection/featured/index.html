@@ -28,11 +28,13 @@
 [/#switch]
 
 
+<div class="an-featured
 [#if configuration.Posicion == 'Derecha']
-<div class="an-featured an-featured--image-right">
-[#else]
-    <div class="an-featured">
+ an-featured--image-right
 [/#if]
+[#if configuration.Esconder]
+hide
+[/#if]">
     <div class="an-featured__inner">
       <h2 class="an-featured__heading">
         <lfr-editable id="Título" type="text">Título</lfr-editable>

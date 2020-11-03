@@ -1,7 +1,6 @@
 import coverageError from './coverageError';
 import Autocomplete from '@trevoreyre/autocomplete-vue';
 import clickOutside from '../directives/clickoutDirective'
-import { required, numeric } from 'vuelidate/lib/validators';
 
 const coverageForm = {
   directives: {
@@ -45,31 +44,6 @@ const coverageForm = {
       loadingProperties: false,
     }
   },
-
-  validations: {
-    formData: {
-      postalCode: {
-        required,
-        numeric
-      },
-      municipalityName: {
-        required
-      },
-      municipalityId: {
-        required
-      },
-      provinceId: {
-        required
-      },
-      provMunId: {
-        required
-      },
-      number: {
-        required
-      }
-    }
-  },
-
   inject: ["house"],
   methods: {
     submitRequest() {
@@ -142,7 +116,17 @@ const coverageForm = {
         return pc.postalCode.startsWith(index)
       })
     },
-
+    // onSubmitPostalCode(e) {
+    //   const postalCode = e.target.value
+    //   this.formData.postalCode = postalCode
+    //   // Save object in the store
+    //   this.house.setCoverageData("postalCode", { postalCode })
+    //   // Get municipalities
+    //   this.loadingMunicipalities = true,
+    //   this.house.getMunicipalities(postalCode)
+    //     .then((res) => { this.loadingMunicipalities = false })
+    //     .catch((err) => { this.loadingMunicipalities = false })
+    // },
     onSubmitPostalCode(result) {
       const { postalCode } = result
       this.formData.postalCode = postalCode
@@ -152,9 +136,9 @@ const coverageForm = {
       this.loadingMunicipalities = true,
       this.house.getMunicipalities(postalCode)
         .then((res) => { this.loadingMunicipalities = false })
-        .catch((err) => { 
+        .catch((err) => {
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-          this.loadingMunicipalities = false 
+          this.loadingMunicipalities = false
         })
     },
 
@@ -176,9 +160,9 @@ const coverageForm = {
       this.loadingAddressess = true
       this.house.getAddresses(this.formData.provMunId, this.formData.postalCode)
         .then((res) => { this.loadingAddressess = false })
-        .catch((err) => { 
+        .catch((err) => {
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-          this.loadingAddressess = false 
+          this.loadingAddressess = false
         })
 
     },
@@ -201,9 +185,9 @@ const coverageForm = {
       this.loadingEstates = true
       this.house.getEstates(this.formData.provMunId, this.formData.postalCode, kind, name)
         .then((res) => { this.loadingEstates = false })
-        .catch((err) => { 
+        .catch((err) => {
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-          this.loadingEstates = false 
+          this.loadingEstates = false
         })
     },
 
@@ -228,9 +212,9 @@ const coverageForm = {
       this.loadingProperties = true
       this.house.getProperties(gateId)
         .then((res) => { this.loadingProperties = false })
-        .catch((err) => { 
+        .catch((err) => {
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-          this.loadingProperties = false 
+          this.loadingProperties = false
         })
     },
 
@@ -285,11 +269,8 @@ const coverageForm = {
       return this.statusCodes.validArr.indexOf(this.formData.status) != -1
     },
 
-    btnDisabled () {
-      return this.$v.$invalid
-    },
-
   },
+
   mounted() {
     if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.add('hide');
     window.scrollTo({
@@ -363,7 +344,6 @@ const coverageForm = {
                 >
                   <div v-bind="rootProps">
                     <input
-                      :class="{ 'form-group--error': $v.formData.postalCode.$invalid && formData.postalCode.length }"
                       v-model="formData.postalCode"
                       v-bind="inputProps"
                       v-on="inputListeners"
@@ -381,7 +361,6 @@ const coverageForm = {
                         {{ result.postalCode }}
                       </li>
                     </ul>
-                    <h6 class="form-error" v-if="$v.formData.postalCode.$invalid && formData.postalCode.length">Hay un error en el campo introducido</h6>
                   </div>
                 </template>
               </autocomplete>
@@ -622,7 +601,7 @@ const coverageForm = {
             </div>
           </div>
 
-          <button type="submit" :disabled="!formData.status && btnDisabled===true" :class="{ 'an-btn--disabled': !formData.status && btnDisabled  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
+          <button type="submit" :disabled="!formData.status" :class="{ 'an-btn--disabled': !formData.status  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Comprobar</span>
           </button>
 
