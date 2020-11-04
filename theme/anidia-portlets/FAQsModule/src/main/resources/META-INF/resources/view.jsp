@@ -27,7 +27,7 @@ JSONArray contentArray = contentJson.getJSONArray("data");
 
 %>
 
-<p> Categotías: <%= setOfCategories %> </p>
+<p> CategotÃ­as: <%= setOfCategories %> </p>
 <div class="bg-white pl-s pr-s pt-s pb-s">
 	 <div class="an-accordeon" data-accordeon>
 	 	<ul class="an-accordeon__list" data-accordeon-list>
@@ -129,4 +129,15 @@ JSONArray contentArray = contentJson.getJSONArray("data");
 	}).call(document.querySelectorAll("[data-accordeon]"));
 
 </script>
+
+<style>
+.faq {
+  color: inherit;
+  font-size: 18px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+}
+
+</style>
 
