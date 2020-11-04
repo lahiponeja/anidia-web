@@ -17,15 +17,20 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -94,12 +99,14 @@ public class APCustomPortlet extends MVCPortlet {
 		long groupId = themeDisplay.getScopeGroupId();
 		String languaje = themeDisplay.getLanguageId();
 
-		journalArticles = JournalArticleLocalServiceUtil.getStructureArticles(groupId, structureKey);
+		journalArticles = getLatestVersionArticle(JournalArticleLocalServiceUtil.getStructureArticles(groupId, structureKey));
 		
 		JSONObject contentsJson = toJson(journalArticles, languaje);
-	
+
 		response.getRenderParameters().setValue("contentJson", contentsJson.toJSONString());
 	}
+	
+	
 
 	public String getStructureKey(String strucName) {
 		DynamicQuery queryForStructure =DDMStructureLocalServiceUtil.dynamicQuery().add(PropertyFactoryUtil
@@ -119,7 +126,12 @@ public class APCustomPortlet extends MVCPortlet {
 	public JSONObject toJson(List<JournalArticle> Articles, String language)throws JSONException, DocumentException {
 		String json = "";
 		for (JournalArticle entry : Articles) {
-			if(entry.getStatus() == 0) { //Gather only published Journal Articles
+			if(!entry.isExpired()) { 		
+				List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
+				assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(entry.getPrimaryKey());
+				System.out.println("AAAA" +assetCategories.toString());
+				
+				
 				 Document document = SAXReaderUtil.read(entry.getContentByLocale(language));
 				 
 				 Node QuestionNode = document.selectSingleNode("/root/dynamic-element[@name='Question']/dynamic-content");
@@ -134,6 +146,26 @@ public class APCustomPortlet extends MVCPortlet {
 		json = ("{ \"data\": [" + json + "]}");
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(json);
 		return (jsonObject);
+	}
+		
+	    
+	public List<JournalArticle> getLatestVersionArticle(List<JournalArticle> totalArticles) {
+		List<JournalArticle> journalList = new ArrayList<JournalArticle>();
+		JournalArticle latestArticle ;
+		for (JournalArticle journalArticle : totalArticles) {
+			try {
+				 latestArticle = JournalArticleLocalServiceUtil.getLatestArticle(journalArticle.getResourcePrimKey());
+				if (journalList.contains(latestArticle)) {
+					continue;
+				} else {
+					journalList.add(latestArticle);
+				}
+			} catch (PortalException | SystemException e) {
+				e.printStackTrace();
+			}
+		}
+		return journalList;
+
 	}
 	
 }
