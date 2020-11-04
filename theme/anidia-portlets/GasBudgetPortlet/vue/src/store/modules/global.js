@@ -2,31 +2,6 @@
 import { reactive, shallowReadonly } from '@vue/composition-api'
 
 const state = reactive({
-  // optionsArr: [
-  //   {
-  //     name: "funnel",
-  //     component: 'funnel-view',
-  //     active: true,
-  //   },
-  //   {
-  //     name: 'Unifamiliar',
-  //     component: '',
-  //     title: 'Hogar unifamiliar',
-  //     icon: 'an-icon--unifamiliar-home',
-  //   },
-  //   {
-  //     name: 'Bloque de pisos',
-  //     component: '',
-  //     title: 'Piso en bloque de viviendas',
-  //     icon: 'an-icon--apartments',
-  //   },
-  //   {
-  //     name: 'Negocio',
-  //     component: '',
-  //     title: 'Negocio',
-  //     icon: 'an-icon--business',
-  //   },
-  // ],
   mainViewsArr: [
     {
       name: "funnel",
