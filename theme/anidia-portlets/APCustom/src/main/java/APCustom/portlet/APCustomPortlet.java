@@ -81,15 +81,39 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 )
 //TO DO: Remove unused imports
 public class APCustomPortlet extends MVCPortlet {
-	Set<Long> selectedCategories = new HashSet<Long>();
 
+    String structureName = "FAQ";
+    String structureKey = getStructureKey(structureName);  
+    
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-        String contentJson = ParamUtil.get(renderRequest, "contentJson", "");
-        renderRequest.setAttribute("contentJson", contentJson);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+        		WebKeys.THEME_DISPLAY);
+		
+		List<JournalArticle> journalArticles =  new ArrayList<JournalArticle>();
+        structureName = "FAQ";
+        structureKey = getStructureKey(structureName);  
         
-        String setOfCategories = ParamUtil.get(renderRequest, "setOfCategories", "");
-        renderRequest.setAttribute("setOfCategories", setOfCategories);
+		long groupId = themeDisplay.getScopeGroupId();
+		String language = themeDisplay.getLanguageId();
+
+		journalArticles = getLatestVersionArticle(JournalArticleLocalServiceUtil.getStructureArticles(groupId, structureKey));
+		
+		String searchTerm = ParamUtil.getString(renderRequest, "searchTerm");
+		String contentJson = "";
+		try {
+			contentJson = toJsonString(journalArticles, language,searchTerm);
+		} catch (JSONException | DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Set<String> setOfCategories = getSetOfCategories(journalArticles, language);
+
+
+        renderRequest.setAttribute("contentJson", contentJson);
+        renderRequest.setAttribute("setOfCategories", setOfCategories.toString());
+        
 		super.doView(renderRequest, renderResponse);
 	}
 	
@@ -101,17 +125,17 @@ public class APCustomPortlet extends MVCPortlet {
         		WebKeys.THEME_DISPLAY);
 		
 		List<JournalArticle> journalArticles =  new ArrayList<JournalArticle>();
-        String structureName = "FAQ";
-        String structureKey = getStructureKey(structureName);  
+        structureName = "FAQ";
+        structureKey = getStructureKey(structureName);  
         
 		long groupId = themeDisplay.getScopeGroupId();
-		String languaje = themeDisplay.getLanguageId();
+		String language = themeDisplay.getLanguageId();
 
 		journalArticles = getLatestVersionArticle(JournalArticleLocalServiceUtil.getStructureArticles(groupId, structureKey));
 		
 		String searchTerm = ParamUtil.getString(request, "searchTerm");
-		String contentsJson = toJsonString(journalArticles, languaje,searchTerm);
-		Set<String> setOfCategories = getSetOfCategories(journalArticles, languaje);
+		String contentsJson = toJsonString(journalArticles, language,searchTerm);
+		Set<String> setOfCategories = getSetOfCategories(journalArticles, language);
 		
 		response.getRenderParameters().setValue("setOfCategories", setOfCategories.toString());
 		response.getRenderParameters().setValue("contentJson", contentsJson);
@@ -169,26 +193,26 @@ public class APCustomPortlet extends MVCPortlet {
 		String json = "";
 		for (JournalArticle entry : Articles) {
 			if(!entry.isExpired() && !entry.isInTrash()) { 
-
-			AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",entry.getResourcePrimKey());				
-			List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
-			assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(assetEntry.getEntryId());
-			 
-
-			 Document document = SAXReaderUtil.read(entry.getContentByLocale(language));		 
-			 Node QuestionNode = document.selectSingleNode("/root/dynamic-element[@name='Question']/dynamic-content");
-			 String question = QuestionNode.getText();	 
-			 Node AnswerNode = document.selectSingleNode("/root/dynamic-element[@name='Answer']/dynamic-content");
-			 String answer = AnswerNode.getText();
-			
-			 if (searchTerm.isEmpty() || question.toLowerCase().contains(searchTerm.toLowerCase())) {
-			 json = json.concat("{ \"question\": \"" + question + "\", \"answer\": \"" + answer + "\", \"Categories\": [");
-			 
-			 for (AssetCategory category:assetCategories) {
-				 json = json.concat("\"" + category.getTitle(language) + "\", ");	 
-			 }
-			 json = json.concat("]}, ");
-			 }
+				AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",entry.getResourcePrimKey());				
+				List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
+				assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(assetEntry.getEntryId());
+				 
+				Document document = SAXReaderUtil.read(entry.getContentByLocale(language));		 
+				Node QuestionNode = document.selectSingleNode("/root/dynamic-element[@name='Question']/dynamic-content");
+				String question = QuestionNode.getText();	 
+				Node AnswerNode = document.selectSingleNode("/root/dynamic-element[@name='Answer']/dynamic-content");
+				String answer = AnswerNode.getText();
+				
+				if (searchTerm.isEmpty() || 
+					question.toLowerCase().contains(searchTerm.toLowerCase())||
+					answer.toLowerCase().contains(searchTerm.toLowerCase())){
+					json = json.concat("{ \"question\": \"" + question + "\", \"answer\": \"" + answer + "\", \"Categories\": [");
+				 
+				for (AssetCategory category:assetCategories) {
+					 json = json.concat("\"" + category.getTitle(language) + "\", ");	 
+					 }
+				 json = json.concat("]}, ");
+				 }
 			}
 		}
 		json = ("{ \"data\": [" + json + "]}");

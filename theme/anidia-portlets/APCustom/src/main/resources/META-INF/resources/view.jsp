@@ -21,7 +21,7 @@ String content = (String)renderRequest.getAttribute("contentJson");
 JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
 JSONArray contentArray = contentJson.getJSONArray("data");
 %>
-<p> Categotías encontradas: <%= setOfCategories %> </p>
+<p> Categotías: <%= setOfCategories %> </p>
 <%
 if (contentArray!=null){
 
@@ -36,7 +36,7 @@ if (contentArray!=null){
 		<h4>FAQ <%= i+1 %></h4>
 		<p> Pregunta:  <%= item.get("question") %></p>
 		<p> Respuesta:  <%= item.get("answer") %></p>
-		<p> Categotías: <%= categoriesText %> </p>
+		<p> Categorías: <%= categoriesText %> </p>
 
 
 
