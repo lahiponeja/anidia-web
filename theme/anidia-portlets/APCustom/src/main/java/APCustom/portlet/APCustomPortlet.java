@@ -132,8 +132,7 @@ public class APCustomPortlet extends MVCPortlet {
 				
 				List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
 				assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(assetEntry.getEntryId());
-				System.out.println("AAAA" +assetCategories.get(0).getName());
-				
+			
 				
 				 Document document = SAXReaderUtil.read(entry.getContentByLocale(language));
 				 
@@ -147,7 +146,7 @@ public class APCustomPortlet extends MVCPortlet {
 				 json = json.concat("\"Categories\": [");
 				 
 				 for (AssetCategory category:assetCategories) {
-					 json = json.concat("\"" + category.getName() + "\", ");	 
+					 json = json.concat("\"" + category.getTitle(language) + "\", ");	 
 				 }
 				 json = json.concat("]}, ");
 			}
