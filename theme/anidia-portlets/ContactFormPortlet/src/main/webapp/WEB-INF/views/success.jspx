@@ -5,19 +5,11 @@
 		  xmlns:form="http://www.springframework.org/tags/form"
 		  version="2.1">
 	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
-
-<div class="bg-an-theme-light pl-s pr-s pt-xxxl pb-xxxl">
-	<div class="an-form">
-		<div class="an-form__container">
-<p class="an-h2 color-an-theme mb-l mr-l">Muchas gracias ${lead.getFirstName()} ${lead.getLastName()}</p>
-      <p class="an-body-l-regular color-an-theme">Nos pondremos en contacto contigo para darte toda la información al detalle.</p>
-		</div>
-	</div>
+	<p class="an-body-l-regular color-an-theme">Muchas gracias ${lead.getFirstName()} ${lead.getLastName()}</p>
+	<p class="an-body-l-regular color-an-theme">Nos pondremos en contacto contigo para darte toda la información al detalle.</p>
 
 	<script type="text/javascript">
-		document.getElementById('p_ContactFormPortlet_WAR_ContactFormPortlet').scrollIntoView();
+	document.getElementById('p_ContactFormPortlet_WAR_ContactFormPortlet').scrollIntoView();
 	</script>
-</div>
-
 
 </jsp:root>
