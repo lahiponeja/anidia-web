@@ -12,7 +12,11 @@
     right: rem(60);
     top: calc(100% - 150px);
     width: rem(221);
+<<<<<<< HEAD
     z-index: 2;
+=======
+    z-index: 10;
+>>>>>>> feature/PY02932-50-faq-front
 
     &::after {
       border: 10px solid transparent;
