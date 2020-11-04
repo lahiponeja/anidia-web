@@ -50,11 +50,16 @@
     border-radius: rem(30);
     color: $an-theme-dark-grey;
     font-family: $open-sans-regular-family;
-    font-size: rem(18);
+    font-size: rem(14);
     height: rem(60);
     width: 100%;
     padding: 0 rem(25);
     transition: box-shadow .2s;
+
+    @include tablet {
+      font-size: rem(18);
+    }
+
 
     &--textarea {
       height: rem(250);
