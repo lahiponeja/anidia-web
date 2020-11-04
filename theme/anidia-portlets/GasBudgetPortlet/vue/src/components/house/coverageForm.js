@@ -1,6 +1,6 @@
 import coverageError from './coverageError';
 import Autocomplete from '@trevoreyre/autocomplete-vue';
-import clickOutside from '../directives/clickoutDirective'
+import clickOutside from '../../directives/clickoutDirective';
 
 const coverageForm = {
   directives: {
@@ -48,7 +48,6 @@ const coverageForm = {
   methods: {
     submitRequest() {
       if(this.isValidStatusCode) {
-        // console.log("submited")
         this.house.setPostalCode(this.formData.postalCode);
         this.house.changeHouseStep('vivienda');
       } else {
@@ -79,7 +78,6 @@ const coverageForm = {
     showHelperDropdown(elemId) {
       const elem = document.querySelector(elemId)
       if(elem) {
-        // console.log("showHelperDropdown", elem)
         elem.classList.add('d-block');
       }
     },
@@ -87,7 +85,6 @@ const coverageForm = {
     hideHelperDropdown(elemId) {
       const elem = document.querySelector(elemId)
       if(elem) {
-        // console.log("hideHelperDropdown", elem)
         elem.classList.remove('d-block');
       }
     },

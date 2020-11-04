@@ -1,0 +1,18 @@
+.view-enter-active,
+.view-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.view-enter-active {
+  transition-delay: 0.3s;
+}
+
+.view-enter,
+.view-leave-to {
+  opacity: 0;
+}
+
+.view-enter-to,
+.view-leave {
+  opacity: 1;
+}

@@ -9,6 +9,7 @@ const state = reactive({
   houseSteps: [
     {
       name: "cobertura",
+      component: "coverage-form",
       icon: "an-icon--lightning-borders",
       heading: {
         title: "TU AHORRO EMPIEZA AQUÍ",
@@ -18,6 +19,7 @@ const state = reactive({
     },
     {
       name: "vivienda",
+      component: "house-form",
       icon: "an-icon--living-place",
       heading: {
         title: "SOLICITUD ONLINE",
@@ -27,6 +29,7 @@ const state = reactive({
     },
     {
       name: "presupuesto",
+      component: "budget-card",
       icon: "an-icon--euro-cable",
       heading: {
         title: "TU AHORRO EMPIEZA AQUÍ",
@@ -36,6 +39,7 @@ const state = reactive({
     },
     {
       name: "presupuesto-realizado",
+      component: "budget-ready",
       heading: {
         title: "PRESUPUESTO REALIZADO",
         subtitle: "Rellena los datos para recibir la oferta detallada, te llamamos o te la mandamos por email",
@@ -162,11 +166,6 @@ const submitUserContactInfo = function (budgetReadyForm) {
   }
   const xml = objToXml(requestBody, options)
 
-  console.log("🔥 submitUserContactInfo 🔥")
-  console.log(xml)
-
-  console.log("requestBody", requestBody);
-
   const result = new Promise((resolve, reject) => {
     contactInfoService.postLeads(xml).then((res) => {
       resolve(res)
@@ -206,11 +205,6 @@ const submitBusinessContactInfo = function (budgetReadyForm) {
   }
   const xml = objToXml(requestBody, options)
 
-  console.log("🔥 submitBusinessContactInfo 🔥")
-  console.log(xml)
-
-  console.log("requestBody", requestBody);
-
   const result = new Promise((resolve, reject) => {
     contactInfoService.postLeads(xml).then((res) => {
       resolve(res)
@@ -227,7 +221,6 @@ const setPostalCode = function(payload) {
 }
 
 const setHouseType = function(payload) {
-  console.log("house.js", payload)
   state.houseType = payload
 }
 
@@ -332,7 +325,6 @@ const submitHouseData = function(gasBudgetRequest) {
     houseFormService.postHouseForm(xml).then((res)=> {
       const jsonData = xmlToJsonImp(res.data);
       Object.assign(state.gasBudget, jsonData.GasBudget);
-      console.log("state.gasBudget", state.gasBudget);
       resolve(state.gasBudget)
       changeHouseStep("presupuesto");
     })
@@ -341,8 +333,6 @@ const submitHouseData = function(gasBudgetRequest) {
     })
   })
 
-
-  // console.log(xml)
   return results;
 }
 

@@ -10,6 +10,12 @@ const compHeating = {
       }
     }
   },
+  mounted() {
+    window.scrollTo({
+      top: 200,
+      behavior: 'smooth',
+    })
+  },
   methods: {
     submitRequest() {
       this.comparator.setSavingByUse({

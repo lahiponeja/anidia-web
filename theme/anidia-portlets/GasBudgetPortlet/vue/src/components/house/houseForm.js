@@ -30,8 +30,6 @@ const houseForm = {
   },
   methods: {
     submitRequest() {
-      // console.log("Vivienda, enviar data...")
-      // TODO
       this.sendingForm = true
 
       this.house.submitHouseData(this.gasBudgetRequest).then((res) => {
