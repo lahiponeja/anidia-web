@@ -19,7 +19,8 @@ const funnelView = {
       this.optionPicked = option
     },
     continueStep() {
-      this.global.changeStep(this.optionPicked)
+      this.global.changeView(this.optionPicked)
+      // this.global.changeStep(this.optionPicked)
       this.house.setHouseType(this.optionPicked)
     },
   },
@@ -39,11 +40,14 @@ const funnelView = {
       </div>
       <div class="an-funnel__cards">
         <!-- CARD ITEM -->
-        <div v-for="(option, index) in global.state.optionsArr" :key="index" class="an-funnel__cards-item">
-          <div @click="pickOption(option.name)" class="an-selection" :class="{'an-selection--filled': (optionPicked === option.name)}">
-            <p class="an-menu-bold an-card__text">{{ option.title }}</p>
-            <div class="an-selection__icon" :class="option.icon"></div>
-          </div>
+        <!-- <div v-for="(option, index) in global.state.optionsArr" :key="index" class="an-funnel__cards-item"> -->
+        <div v-for="(option, index) in global.state.mainViewsArr" :key="index" class="an-funnel__cards-item">
+          <template v-if="option.name !== 'funnel'">          
+            <div @click="pickOption(option.name)" class="an-selection" :class="{'an-selection--filled': (optionPicked === option.name)}">
+              <p class="an-menu-bold an-card__text">{{ option.title }}</p>
+              <div class="an-selection__icon" :class="option.icon"></div>
+            </div>
+          </template>
         </div>
 
       </div>

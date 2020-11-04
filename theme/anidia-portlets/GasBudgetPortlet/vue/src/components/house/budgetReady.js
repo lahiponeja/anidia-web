@@ -16,13 +16,10 @@ const budgetReady = {
   },
   methods: {
     submitRequest() {
-      // TODO: add validation
       this.sendingForm = true
       this.house.submitUserContactInfo(this.budgetReadyForm).then((res) => {
-        console.log("😀¡Éxito!😀")
         this.$emit("form-success")
         this.sendingForm = false
-        console.log(res)
       }).catch((err)=>{
         console.error(err)
         this.sendingForm = false

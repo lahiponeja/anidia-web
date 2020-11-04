@@ -54,29 +54,11 @@ const homeView = {
           </ul>
         </div>
 
-        <template v-if="houseActiveStep.name === 'cobertura'">
-          <coverage-form />
-        </template>
-        <template v-else-if="houseActiveStep.name === 'vivienda'">
-          <house-form />
-        </template>
-        <template v-else-if="houseActiveStep.name === 'presupuesto'">
-          <budget-card />
-        </template>
-        <template v-else-if="houseActiveStep.name === 'presupuesto-realizado'">
-          <budget-ready @form-success="setFormSuccess" />
-        </template>
-
-        <!-- START TESTING -->
-        <!-- 
-        <div class="mt-xxl mb-xxl">
-          <div @click="house.changeHouseStep('cobertura')">Cobertura</div>
-          <div @click="house.changeHouseStep('vivienda')">Vivienda</div>
-          <div @click="house.changeHouseStep('presupuesto')">Presupuesto</div>
-          <div @click="house.changeHouseStep('presupuesto-realizado')">Presupuesto Realizado</div>
-        </div>
-        -->
-        <!-- END TESTING -->
+        <transition name="view">
+          <keep-alive>
+            <component :is="houseActiveStep.component" @form-success="setFormSuccess"></component>
+          </keep-alive>
+        </transition>
 
       </template>
       <template v-else>
