@@ -19,15 +19,18 @@ String content = (String)renderRequest.getAttribute("contentJson");
 JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
 JSONArray contentArray = contentJson.getJSONArray("data");
 %>
-<%
-for (int i = 0 ; i < contentArray.length(); i++) {
-	JSONObject item = contentArray.getJSONObject(i);
-%>
-	<h4>FAQ <%= i+1 %></h4>
 
-	<p> Pregunta:  <%= item.get("question") %></p>
-	<p> Respuesta:  <%= item.get("answer") %></p>
 <%
+if (contentArray!=null){
+
+	for (int i = 0 ; i < contentArray.length(); i++) {
+		JSONObject item = contentArray.getJSONObject(i);
+%>
+		<h4>FAQ <%= i+1 %></h4>
+		<p> Pregunta:  <%= item.get("question") %></p>
+		<p> Respuesta:  <%= item.get("answer") %></p>
+<%
+	}
 }
 %>
 
