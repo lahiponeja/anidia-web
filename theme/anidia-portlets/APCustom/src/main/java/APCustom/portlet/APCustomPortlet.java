@@ -125,13 +125,14 @@ public class APCustomPortlet extends MVCPortlet {
 	
 	public JSONObject toJson(List<JournalArticle> Articles, String language)throws JSONException, DocumentException {
 		String json = "";
+		String categoryParam = "";
 		for (JournalArticle entry : Articles) {
 			if(!entry.isExpired() && !entry.isInTrash()) { 		
 				AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",entry.getResourcePrimKey());
 				
 				List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
 				assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(assetEntry.getEntryId());
-				System.out.println("AAAA" +assetCategories.toString());
+				System.out.println("AAAA" +assetCategories.get(0).getName());
 				
 				
 				 Document document = SAXReaderUtil.read(entry.getContentByLocale(language));
@@ -142,10 +143,17 @@ public class APCustomPortlet extends MVCPortlet {
 				 Node AnswerNode = document.selectSingleNode("/root/dynamic-element[@name='Answer']/dynamic-content");
 				 String Answer = AnswerNode.getText();
 				
-				 json = json.concat("{ \"question\": \"" + Question + "\", \"answer\": \"" + Answer + "\" },");
+				 json = json.concat("{ \"question\": \"" + Question + "\", \"answer\": \"" + Answer + "\",");
+				 json = json.concat("\"Categories\": [");
+				 
+				 for (AssetCategory category:assetCategories) {
+					 json = json.concat("\"" + category.getName() + "\", ");	 
+				 }
+				 json = json.concat("]}, ");
 			}
 		}
 		json = ("{ \"data\": [" + json + "]}");
+		System.out.println(json);
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(json);
 		return (jsonObject);
 	}

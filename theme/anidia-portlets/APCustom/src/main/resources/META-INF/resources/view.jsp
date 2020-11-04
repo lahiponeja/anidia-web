@@ -25,10 +25,12 @@ if (contentArray!=null){
 
 	for (int i = 0 ; i < contentArray.length(); i++) {
 		JSONObject item = contentArray.getJSONObject(i);
+		JSONArray categoriesArray = item.getJSONArray("Categories");
 %>
 		<h4>FAQ <%= i+1 %></h4>
 		<p> Pregunta:  <%= item.get("question") %></p>
 		<p> Respuesta:  <%= item.get("answer") %></p>
+		<p> Categotías:  <%= categoriesArray %></p>
 <%
 	}
 }
