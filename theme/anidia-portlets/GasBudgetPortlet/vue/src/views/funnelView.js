@@ -40,7 +40,6 @@ const funnelView = {
       </div>
       <div class="an-funnel__cards">
         <!-- CARD ITEM -->
-        <!-- <div v-for="(option, index) in global.state.optionsArr" :key="index" class="an-funnel__cards-item"> -->
         <div v-for="(option, index) in global.state.mainViewsArr" :key="index" class="an-funnel__cards-item">
           <template v-if="option.name !== 'funnel'">          
             <div @click="pickOption(option.name)" class="an-selection" :class="{'an-selection--filled': (optionPicked === option.name)}">

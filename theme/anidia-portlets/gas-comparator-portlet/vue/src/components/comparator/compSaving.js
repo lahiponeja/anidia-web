@@ -20,6 +20,12 @@ const compSaving = {
       leadSent: false,
     }
   },
+  mounted() {
+    window.scrollTo({
+      top: 200,
+      behavior: 'smooth',
+    })
+  },
   methods: {
     submitRequest() {
       // TODO: add validation

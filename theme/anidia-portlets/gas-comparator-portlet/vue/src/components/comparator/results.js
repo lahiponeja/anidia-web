@@ -12,6 +12,11 @@ const results = {
   },
   mounted() {
     if(document.querySelector('.an-featured')) document.querySelector('.an-featured').classList.remove('hide');
+    
+    window.scrollTo({
+      top: 200,
+      behavior: 'smooth',
+    }) 
   },
   template: /*html*/`
   <div>
