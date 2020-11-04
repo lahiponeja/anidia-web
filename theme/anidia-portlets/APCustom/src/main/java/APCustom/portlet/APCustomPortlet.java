@@ -76,12 +76,7 @@ public class APCustomPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
         String parameter = ParamUtil.get(renderRequest, "contentJson", "");
-        
-        System.out.println(("contentJso in doView is ==>"+parameter));
-
-                renderRequest.setAttribute("contentJson", parameter);
-                // Add attributes as required
-
+        renderRequest.setAttribute("contentJson", parameter);
 		super.doView(renderRequest, renderResponse);
 	}
 	
@@ -99,7 +94,6 @@ public class APCustomPortlet extends MVCPortlet {
 		long groupId = themeDisplay.getScopeGroupId();
 		String languaje = themeDisplay.getLanguageId();
 
-		//TO DO: Does this fetch expired webcontents too?
 		journalArticles = JournalArticleLocalServiceUtil.getStructureArticles(groupId, structureKey);
 		
 		JSONObject contentsJson = toJson(journalArticles, languaje);
@@ -125,15 +119,17 @@ public class APCustomPortlet extends MVCPortlet {
 	public JSONObject toJson(List<JournalArticle> Articles, String language)throws JSONException, DocumentException {
 		String json = "";
 		for (JournalArticle entry : Articles) {
-			 Document document = SAXReaderUtil.read(entry.getContentByLocale(language));
-			 
-			 Node QuestionNode = document.selectSingleNode("/root/dynamic-element[@name='Question']/dynamic-content");
-			 String Question = QuestionNode.getText();
-			 
-			 Node AnswerNode = document.selectSingleNode("/root/dynamic-element[@name='Answer']/dynamic-content");
-			 String Answer = AnswerNode.getText();
-			
-			 json = json.concat("{ \"question\": \"" + Question + "\", \"answer\": \"" + Answer + "\" },");
+			if(entry.getStatus() == 0) { //Gather only published Journal Articles
+				 Document document = SAXReaderUtil.read(entry.getContentByLocale(language));
+				 
+				 Node QuestionNode = document.selectSingleNode("/root/dynamic-element[@name='Question']/dynamic-content");
+				 String Question = QuestionNode.getText();
+				 
+				 Node AnswerNode = document.selectSingleNode("/root/dynamic-element[@name='Answer']/dynamic-content");
+				 String Answer = AnswerNode.getText();
+				
+				 json = json.concat("{ \"question\": \"" + Question + "\", \"answer\": \"" + Answer + "\" },");
+			}
 		}
 		json = ("{ \"data\": [" + json + "]}");
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(json);
