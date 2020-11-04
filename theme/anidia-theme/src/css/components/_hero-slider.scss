@@ -1,7 +1,10 @@
 .an-hero-slider {
   height: 100%;
-  transform: translateY(-140px);
-  margin-bottom: rem(-140);
+
+  @include desktop {
+    transform: translateY(-200px);
+    margin-bottom: rem(-200);
+  }
 
   .portlet-body {
     width: 100vw;
@@ -131,10 +134,6 @@
   &__heading {
     color: $white;
     margin-bottom: rem(20);
-
-    @include desktop {
-      padding-top: rem(117.5);
-    }
 
     .an-hero-slider.white &,
     .an-hero-slider.light-green & {
