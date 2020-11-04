@@ -2,11 +2,6 @@ package FAQsModule.portlet;
 
 import FAQsModule.constants.FAQsModulePortletKeys;
 
-import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-
-import javax.portlet.Portlet;
-
-import org.osgi.service.component.annotations.Component;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.search.Field;
@@ -114,11 +109,11 @@ public class FAQsModulePortlet extends MVCPortlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Set<String> setOfCategories = getSetOfCategories(journalArticles, language);
+		String setOfCategories = getSetOfCategories(journalArticles, language);
 
 
         renderRequest.setAttribute("contentJson", contentJson);
-        renderRequest.setAttribute("setOfCategories", setOfCategories.toString());
+        renderRequest.setAttribute("setOfCategories", setOfCategories);
         
 		super.doView(renderRequest, renderResponse);
 	}
@@ -141,9 +136,9 @@ public class FAQsModulePortlet extends MVCPortlet {
 		
 		String searchTerm = ParamUtil.getString(request, "searchTerm");
 		String contentsJson = toJsonString(journalArticles, language,searchTerm);
-		Set<String> setOfCategories = getSetOfCategories(journalArticles, language);
+		String setOfCategories = getSetOfCategories(journalArticles, language);
 		
-		response.getRenderParameters().setValue("setOfCategories", setOfCategories.toString());
+		response.getRenderParameters().setValue("setOfCategories", setOfCategories);
 		response.getRenderParameters().setValue("contentJson", contentsJson);
 	}
 	
@@ -165,9 +160,9 @@ public class FAQsModulePortlet extends MVCPortlet {
 		return journalList;
 	}
 	
-	public Set<String> getSetOfCategories(List<JournalArticle> Articles, String Language){
+	public String getSetOfCategories(List<JournalArticle> Articles, String Language){
 		Set<String> setOfCategories = new HashSet<String>();
-		
+		String setOfCategoriesStr = "";
 		for (JournalArticle entry : Articles) {
 			AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",entry.getResourcePrimKey());				
 			List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
@@ -176,7 +171,8 @@ public class FAQsModulePortlet extends MVCPortlet {
 				 setOfCategories.add(category.getTitle(Language));
 			 }
 		}
-		return setOfCategories;
+		setOfCategoriesStr = "{ \"Categories\": "+ setOfCategories.toString() + "}";
+		return setOfCategoriesStr;
 		
 	}
 
@@ -228,3 +224,4 @@ public class FAQsModulePortlet extends MVCPortlet {
 	
 
 }
+

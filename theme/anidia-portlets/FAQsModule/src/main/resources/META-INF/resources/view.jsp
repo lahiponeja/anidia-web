@@ -8,6 +8,7 @@ page import="com.liferay.portal.kernel.json.JSONArray" %>
 <portlet:defineObjects />
 
 
+
 <portlet:actionURL name="actionMethod1" var="sampleActionMethodURL">
 </portlet:actionURL>
 <form action="${sampleActionMethodURL}" method="post">
@@ -17,29 +18,115 @@ page import="com.liferay.portal.kernel.json.JSONArray" %>
 
 <%
 String setOfCategories = (String)renderRequest.getAttribute("setOfCategories");
+JSONObject setOfCategoriesJson = JSONFactoryUtil.createJSONObject(setOfCategories);
+JSONArray setOfCategoriesArray = setOfCategoriesJson.getJSONArray("Categories");
+
 String content = (String)renderRequest.getAttribute("contentJson");
 JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
 JSONArray contentArray = contentJson.getJSONArray("data");
+
 %>
+
 <p> Categotías: <%= setOfCategories %> </p>
-<%
-if (contentArray!=null){
+<div class="bg-white pl-s pr-s pt-s pb-s">
+	 <div class="an-accordeon" data-accordeon>
+	 	<ul class="an-accordeon__list" data-accordeon-list>
+	 		<%
+			if (setOfCategoriesArray!=null){
+				
+				for (Object category : setOfCategoriesArray){
+					String categoryName =category.toString();
+					%>
+					<li class="an-accordeon__item an-accordeon__item" data-accordeon-list-item>
+						<div class="an-accordeon__item-head" data-accordeon-head>
+				          <div class="an-accordeon__item-head-title"><%=categoryName%></div>
+				          <span class="an-accordeon__item-head-icon"></span>
+				        </div>
+						<div class="an-accordeon__item-body">
+							<div class="an-accordeon__item-body-inner">
+								<div class="an-accordeon an-accordeon--child" data-accordeon>
+									<ul class="an-accordeon__list" data-accordeon-list>
+											<%
+											if (contentArray!=null){
+											
+												for (int i = 0 ; i < contentArray.length(); i++) {
+													JSONObject item = contentArray.getJSONObject(i);
+													JSONArray categories = item.getJSONArray("Categories");
+													
+													if(categories.toString().contains(categoryName)){
+											%>
+												<li class="an-accordeon__item an-accordeon__item" data-accordeon-list-item>
+									                    <div class="an-accordeon__item-head" data-accordeon-head>
+									                      <div class="an-accordeon__item-head-title"><%= item.get("question") %></div>
+									                      <span class="an-accordeon__item-head-icon"></span>
+									                    </div>
+									                    <div class="an-accordeon__item-body">
+									                      <div class="an-accordeon__item-body-inner">
+									                      <p><%= item.get("answer") %></p>
+									                        </div>
+									                    </div>    
 
-	for (int i = 0 ; i < contentArray.length(); i++) {
-		JSONObject item = contentArray.getJSONObject(i);
-		JSONArray categoriesArray = item.getJSONArray("Categories");
-		String categoriesText = "";
-		for (Object category : categoriesArray){
-			categoriesText = categoriesText.concat(category.toString() + " ");
-		}
-%>
-		<h4>FAQ <%= i+1 %></h4>
-		<p> Pregunta:  <%= item.get("question") %></p>
-		<p> Respuesta:  <%= item.get("answer") %></p>
-		<p> Categorías: <%= categoriesText %> </p>
+												</li>									
+											<%
+													}
+												}
+											}
+											%>
+									</ul>
+								</div>	
+							</div>
+						</div>
+					</li>
+					<%				
+				}
+			} 		
+	 		%>
+		</ul>		
+	</div>
+</div>
 
-<%
-	}
-}
-%>
+
+
+<script>
+(function() {
+	  function accordeon() {
+	    const accList = this.querySelector("[data-accordeon-list]");
+	    const accItems = Array.from(accList.children);
+
+	    function closeOpenItems() {
+	      const accFilteredItems = accItems.filter((item) => item != this);
+	      accFilteredItems.forEach(function(filteredItem) {
+	        const headItem = filteredItem.querySelector("[data-accordeon-head]");
+	        const parent = headItem.parentElement;
+	        if(parent.classList.contains("an-accordeon__item--open")) {
+	          parent.classList.remove("an-accordeon__item--open");
+	        }
+	      });
+	    }
+
+	    function toggleActive() {
+	      closeOpenItems.call(this);
+	      this.classList.toggle("an-accordeon__item--open");
+	    }
+
+	    function addEventListeners() {
+	      this.forEach(function(accItem) {
+	        const headItem = accItem.querySelector("[data-accordeon-head]");
+	        headItem.addEventListener("click", toggleActive.bind(accItem));
+	      });
+	    }
+
+	    function initAccordeon() {
+	      addEventListeners.call(accItems);
+	    }
+
+	    initAccordeon();
+	  }
+
+	  if(this) {
+	    this.forEach(function(acc){accordeon.call(acc);});
+	  }
+	}).call(document.querySelectorAll("[data-accordeon]"));
+
+</script>
 
