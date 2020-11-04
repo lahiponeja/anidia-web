@@ -1,4 +1,0 @@
-Bundle-Name: APCustom
-Bundle-SymbolicName: APCustom
-Bundle-Version: 1.0.0
-Export-Package: APCustom.constants
