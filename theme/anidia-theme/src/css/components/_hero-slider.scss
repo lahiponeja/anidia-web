@@ -135,10 +135,6 @@
     color: $white;
     margin-bottom: rem(20);
 
-    @include desktop {
-      padding-top: rem(117.5);
-    }
-
     .an-hero-slider.white &,
     .an-hero-slider.light-green & {
       color: $an-theme;
