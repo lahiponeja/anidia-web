@@ -24,22 +24,12 @@ export default function main({portletNamespace, contextPath, portletElementId, c
     
     // Dynamically write markup to portlet's node
     node.innerHTML = /*html*/
-		`<div>
-
-			<!-- <ul>
-				<li> House postalCode {{ house.state.postalCode }}</li>
-				<li> House houseType {{ house.state.houseType }}</li>
-			</ul> -->
-
-			<template v-if="(global.state.currentStep === 'funnel')">
-				<funnel-view />
-			</template>
-			<template v-else-if="(global.state.currentStep === 'Unifamiliar') || (global.state.currentStep === 'Bloque de pisos')">
-				<house-view />
-			</template>
-			<template v-else-if="(global.state.currentStep === 'Negocio')">
-				<business-view />
-			</template>
+		`<div class="bg-white">
+			<transition name="view">
+				<keep-alive>
+					<component :is="global.activeView().component"></component>
+				</keep-alive>
+			</transition>
 		</div>`;
 
 	new Vue({
@@ -61,8 +51,6 @@ export default function main({portletNamespace, contextPath, portletElementId, c
 			}
 		},
 		created() {
-			console.log("Loading...");
-			console.log("GET: /postal-codes");
 			house.getPostalCodes();
   	},
 	});

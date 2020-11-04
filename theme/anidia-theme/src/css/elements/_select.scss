@@ -39,6 +39,12 @@
     }
   }
 
+  &__native {
+    &:focus {
+      border: 2px solid $an-theme;
+    }
+  }
+
 
   &__form {
     border-color: $an-theme;

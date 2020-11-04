@@ -71,7 +71,7 @@ const funnelForm = {
       <form @submit.prevent="submitRequest">
         <!-- 🚧 ¿Sabes cuánto consumes en energía al año? 🚧 -->
         <p class="an-body-l-bold mb-xl">¿Sabes cuánto consumes en energía al año?</p>
-        <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
+        <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-l">
           <div class="an-radio an-form__item">
             <input v-model="known" :value="true" class="an-radio__input" checked="" type="radio" name="constrol-heating-floor" id="constrol-heating-floor-si">
             <label class="an-radio__label" for="constrol-heating-floor-si">
@@ -94,7 +94,7 @@ const funnelForm = {
         <template v-if="known">
           <!-- 🚧 ¡Genial! indícanos tu consumo anual 🚧 -->
           <p class="an-body-l-bold mb-xl">¡Genial! indícanos tu consumo anual {{ energyUnit }} </p>
-          <div class="an-form__flex an-form__flex--2-cols mb-xxl">
+          <div class="an-form__flex an-form__flex--2-cols">
 
             <div class="an-form__item">
               <div class="an-select an-select--full-width">
@@ -118,7 +118,7 @@ const funnelForm = {
 
           <!-- 🚧 ¿En qué lo empleas? 🚧 -->
           <p class="an-body-l-bold mb-xl">¿En qué lo empleas?</p>
-          <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal mb-xxl">
+          <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal">
             <div class="an-checkbox an-form__item">
               <input v-model="energyConsumption.acsUse" value="Si" class="an-checkbox__input" checked="" type="checkbox" name="check1" id="check1">
               <label class="an-checkbox__label" for="check1">
@@ -154,7 +154,7 @@ const funnelForm = {
         </template>
         <template v-else>
 
-          <div class="an-form__flex an-form__flex--2-cols mb-xxl">
+          <div class="an-form__flex an-form__flex--2-cols">
             <div class="an-form__item">
               <p class="an-body-m-bold color-an-theme mb-m">Agua Caliente</p>
               <div class="an-select an-select--full-width">

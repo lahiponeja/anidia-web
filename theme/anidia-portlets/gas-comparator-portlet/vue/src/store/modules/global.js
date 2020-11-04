@@ -33,9 +33,6 @@ Possible steps:
   'funnel': <funnel-view />
   'comparator': <comparator-view />
 */
-// const changeStep = function (step) {
-//   state.currentStep = step
-// }
 
 export default {
   state: shallowReadonly(state), 

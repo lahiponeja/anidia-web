@@ -36,6 +36,12 @@ const compHotWater = {
       }
     }
   },
+  mounted() {
+    window.scrollTo({
+      top: 200,
+      behavior: 'smooth',
+    })
+  },
   template: /*html*/`
     <div class="an-form an-wrapper">
       <form @submit.prevent="submitRequest">

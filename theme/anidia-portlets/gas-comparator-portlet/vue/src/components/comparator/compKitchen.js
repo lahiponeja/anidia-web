@@ -10,6 +10,12 @@ const compKitchen = {
       sendingForm: false,
     }
   },
+  mounted() {
+    window.scrollTo({
+      top: 200,
+      behavior: 'smooth',
+    })
+  },
   methods: {
     submitRequest() {
       this.comparator.setSavingByUse({

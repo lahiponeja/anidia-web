@@ -16,13 +16,10 @@ const businessContactForm = {
   },
   methods: {
     submitRequest() {
-      // TODO
       this.sendingForm = true
       this.house.submitBusinessContactInfo(this.businessFormData).then((res) => {
-        console.log("😀¡Éxito!😀")
         this.$emit("form-success")
         this.sendingForm = false
-        console.log(res)
       }).catch((err)=>{
         console.error(err)
         this.sendingForm = false

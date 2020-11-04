@@ -24,9 +24,11 @@ const comparatorView = {
         </ul>
       </div>
 
-      <keep-alive>
-        <component :is="comparator.activeComponent().component"></component>
-      </keep-alive>      
+      <transition name="view">
+        <keep-alive>
+          <component :is="comparator.activeComponent().component"></component>
+        </keep-alive>   
+      </transition>
     </div>
   `
 }
