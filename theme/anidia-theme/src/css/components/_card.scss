@@ -139,7 +139,9 @@
       }
     }
 
-    > * {
+    input,
+    .an-select__form,
+    .an-checkbox {
       margin-bottom: rem(20);
 
       @include desktop {
