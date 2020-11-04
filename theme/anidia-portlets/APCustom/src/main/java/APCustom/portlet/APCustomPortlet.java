@@ -81,7 +81,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 )
 //TO DO: Remove unused imports
 public class APCustomPortlet extends MVCPortlet {
-	Set<String> selectedCategories = new HashSet<String>();
+	Set<Long> selectedCategories = new HashSet<Long>();
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
@@ -109,8 +109,8 @@ public class APCustomPortlet extends MVCPortlet {
 
 		journalArticles = getLatestVersionArticle(JournalArticleLocalServiceUtil.getStructureArticles(groupId, structureKey));
 		
-		
-		String contentsJson = toJsonString(journalArticles, languaje);
+		String searchTerm = ParamUtil.getString(request, "searchTerm");
+		String contentsJson = toJsonString(journalArticles, languaje,searchTerm);
 		Set<String> setOfCategories = getSetOfCategories(journalArticles, languaje);
 		
 		response.getRenderParameters().setValue("setOfCategories", setOfCategories.toString());
@@ -165,7 +165,7 @@ public class APCustomPortlet extends MVCPortlet {
 		}	
 	}
 	
-	public String toJsonString(List<JournalArticle> Articles, String language)throws JSONException, DocumentException {
+	public String toJsonString(List<JournalArticle> Articles, String language, String searchTerm)throws JSONException, DocumentException {
 		String json = "";
 		for (JournalArticle entry : Articles) {
 			if(!entry.isExpired() && !entry.isInTrash()) { 
@@ -177,17 +177,18 @@ public class APCustomPortlet extends MVCPortlet {
 
 			 Document document = SAXReaderUtil.read(entry.getContentByLocale(language));		 
 			 Node QuestionNode = document.selectSingleNode("/root/dynamic-element[@name='Question']/dynamic-content");
-			 String Question = QuestionNode.getText();	 
+			 String question = QuestionNode.getText();	 
 			 Node AnswerNode = document.selectSingleNode("/root/dynamic-element[@name='Answer']/dynamic-content");
-			 String Answer = AnswerNode.getText();
+			 String answer = AnswerNode.getText();
 			
-			 json = json.concat("{ \"question\": \"" + Question + "\", \"answer\": \"" + Answer + "\", \"Categories\": [");
+			 if (searchTerm.isEmpty() || question.toLowerCase().contains(searchTerm.toLowerCase())) {
+			 json = json.concat("{ \"question\": \"" + question + "\", \"answer\": \"" + answer + "\", \"Categories\": [");
 			 
 			 for (AssetCategory category:assetCategories) {
-				 System.out.println(getCategoryIdByName(category.getName()));
 				 json = json.concat("\"" + category.getTitle(language) + "\", ");	 
 			 }
 			 json = json.concat("]}, ");
+			 }
 			}
 		}
 		json = ("{ \"data\": [" + json + "]}");
@@ -195,19 +196,5 @@ public class APCustomPortlet extends MVCPortlet {
 		return (json);
 	}
 	
-	public long getCategoryIdByName(String name) {
-		long id;
-		DynamicQuery categoryQuery = AssetCategoryLocalServiceUtil.dynamicQuery();
-		System.out.println(name);
-		categoryQuery.add(PropertyFactoryUtil.forName("name").eq(name));
-		List<AssetCategory> categoriesData = AssetCategoryLocalServiceUtil.dynamicQuery(categoryQuery);
-		id = categoriesData.get(0).getCategoryId();
-		return id;
-	}
-	
-	
-	
-	public void addSelectedCategory() {
-		
-	}
+
 }

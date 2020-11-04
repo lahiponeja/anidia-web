@@ -11,6 +11,7 @@ page import="com.liferay.portal.kernel.json.JSONArray" %>
 <portlet:actionURL name="actionMethod1" var="sampleActionMethodURL">
 </portlet:actionURL>
 <form action="${sampleActionMethodURL}" method="post">
+	<input type="text" name="<portlet:namespace/>searchTerm" id="<portlet:namespace/>searchTerm"/><br/>
 	<input type="submit" value="Get FAQS"> 
 </form>
 
