@@ -3,6 +3,7 @@ package APCustom.portlet;
 import APCustom.constants.APCustomPortletKeys;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.search.Field;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -18,6 +19,7 @@ import javax.portlet.RenderResponse;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -31,19 +33,22 @@ import com.liferay.portal.kernel.util.WebKeys;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetEntry;
+import com.liferay.asset.kernel.model.AssetVocabulary;
 import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetEntryServiceUtil;
+import com.liferay.asset.kernel.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.asset.kernel.service.persistence.AssetEntryQuery;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
-
 
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleResource;
@@ -80,8 +85,11 @@ public class APCustomPortlet extends MVCPortlet {
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-        String parameter = ParamUtil.get(renderRequest, "contentJson", "");
-        renderRequest.setAttribute("contentJson", parameter);
+        String contentJson = ParamUtil.get(renderRequest, "contentJson", "");
+        renderRequest.setAttribute("contentJson", contentJson);
+        
+        String setOfCategories = ParamUtil.get(renderRequest, "setOfCategories", "");
+        renderRequest.setAttribute("setOfCategories", setOfCategories);
 		super.doView(renderRequest, renderResponse);
 	}
 	
@@ -101,63 +109,14 @@ public class APCustomPortlet extends MVCPortlet {
 
 		journalArticles = getLatestVersionArticle(JournalArticleLocalServiceUtil.getStructureArticles(groupId, structureKey));
 		
+		
 		JSONObject contentsJson = toJson(journalArticles, languaje);
-
+		Set<String> setOfCategories = getSetOfCategories(journalArticles, languaje);
+		
+		response.getRenderParameters().setValue("setOfCategories", setOfCategories.toString());
 		response.getRenderParameters().setValue("contentJson", contentsJson.toJSONString());
 	}
 	
-	
-
-	public String getStructureKey(String strucName) {
-		DynamicQuery queryForStructure =DDMStructureLocalServiceUtil.dynamicQuery().add(PropertyFactoryUtil
-				.forName("name").like("%" + strucName + "%"));
-		List structures = DDMStructureLocalServiceUtil.dynamicQuery(queryForStructure, 0, 1); 
-		DDMStructure specifiedStructure = null;
-		if(structures != null && structures.size() != 0){
-			specifiedStructure = (DDMStructure) structures.get(0);		
-			return specifiedStructure.getStructureKey();
-			
-		}else{
-			System.out.println(strucName +" structure not found");
-			return null;
-		}	
-	}
-	
-	public JSONObject toJson(List<JournalArticle> Articles, String language)throws JSONException, DocumentException {
-		String json = "";
-		String categoryParam = "";
-		for (JournalArticle entry : Articles) {
-			if(!entry.isExpired() && !entry.isInTrash()) { 		
-				AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",entry.getResourcePrimKey());
-				
-				List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
-				assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(assetEntry.getEntryId());
-			
-				
-				 Document document = SAXReaderUtil.read(entry.getContentByLocale(language));
-				 
-				 Node QuestionNode = document.selectSingleNode("/root/dynamic-element[@name='Question']/dynamic-content");
-				 String Question = QuestionNode.getText();
-				 
-				 Node AnswerNode = document.selectSingleNode("/root/dynamic-element[@name='Answer']/dynamic-content");
-				 String Answer = AnswerNode.getText();
-				
-				 json = json.concat("{ \"question\": \"" + Question + "\", \"answer\": \"" + Answer + "\",");
-				 json = json.concat("\"Categories\": [");
-				 
-				 for (AssetCategory category:assetCategories) {
-					 json = json.concat("\"" + category.getTitle(language) + "\", ");	 
-				 }
-				 json = json.concat("]}, ");
-			}
-		}
-		json = ("{ \"data\": [" + json + "]}");
-		System.out.println(json);
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(json);
-		return (jsonObject);
-	}
-		
-	    
 	public List<JournalArticle> getLatestVersionArticle(List<JournalArticle> totalArticles) {
 		List<JournalArticle> journalList = new ArrayList<JournalArticle>();
 		JournalArticle latestArticle ;
@@ -174,7 +133,74 @@ public class APCustomPortlet extends MVCPortlet {
 			}
 		}
 		return journalList;
+	}
 
+	public String getStructureKey(String strucName) {
+		DynamicQuery queryForStructure =DDMStructureLocalServiceUtil.dynamicQuery().add(PropertyFactoryUtil
+				.forName("name").like("%" + strucName + "%"));
+		List structures = DDMStructureLocalServiceUtil.dynamicQuery(queryForStructure, 0, 1); 
+		DDMStructure specifiedStructure = null;
+		if(structures != null && structures.size() != 0){
+			specifiedStructure = (DDMStructure) structures.get(0);		
+			return specifiedStructure.getStructureKey();
+			
+		}else{
+			System.out.println(strucName +" structure not found");
+			return null;
+		}	
 	}
 	
+	
+	public JSONObject toJson(List<JournalArticle> Articles, String language)throws JSONException, DocumentException {
+		String json = "";
+		for (JournalArticle entry : Articles) {
+			if(!entry.isExpired() && !entry.isInTrash()) { 
+
+			AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",entry.getResourcePrimKey());				
+			List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
+			assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(assetEntry.getEntryId());
+			 
+			DynamicQuery categoryQuery = AssetCategoryLocalServiceUtil.dynamicQuery();
+			categoryQuery.add(PropertyFactoryUtil.forName("name").eq("Presbicia"));
+			List<AssetCategory> categoriesData = AssetCategoryLocalServiceUtil.dynamicQuery(categoryQuery);
+			//System.out.println(categoriesData.get(0).getCategoryId());
+			 
+			
+			 Document document = SAXReaderUtil.read(entry.getContentByLocale(language));
+			 
+			 Node QuestionNode = document.selectSingleNode("/root/dynamic-element[@name='Question']/dynamic-content");
+			 String Question = QuestionNode.getText();
+			 
+			 Node AnswerNode = document.selectSingleNode("/root/dynamic-element[@name='Answer']/dynamic-content");
+			 String Answer = AnswerNode.getText();
+			
+			 json = json.concat("{ \"question\": \"" + Question + "\", \"answer\": \"" + Answer + "\", \"Categories\": [");
+			 
+			 for (AssetCategory category:assetCategories) {
+				 json = json.concat("\"" + category.getTitle(language) + "\", ");	 
+			 }
+			 json = json.concat("]}, ");
+			}
+		}
+		json = ("{ \"data\": [" + json + "]}");
+		System.out.println(json);
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(json);
+		return (jsonObject);
+	}
+	
+	public Set<String> getSetOfCategories(List<JournalArticle> Articles, String Language){
+		Set<String> setOfCategories = new HashSet<String>();
+		
+		for (JournalArticle entry : Articles) {
+			AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",entry.getResourcePrimKey());				
+			List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
+			assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(assetEntry.getEntryId());
+			 for (AssetCategory category:assetCategories) {
+				 setOfCategories.add(category.getTitle(Language));
+			 }
+		}
+		return setOfCategories;
+		
+	}
+
 }

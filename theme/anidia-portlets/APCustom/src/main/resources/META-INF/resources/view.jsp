@@ -15,11 +15,12 @@ page import="com.liferay.portal.kernel.json.JSONArray" %>
 </form>
 
 <%
+String setOfCategories = (String)renderRequest.getAttribute("setOfCategories");
 String content = (String)renderRequest.getAttribute("contentJson");
 JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
 JSONArray contentArray = contentJson.getJSONArray("data");
 %>
-
+<p> Categotías encontradas: <%= setOfCategories %> </p>
 <%
 if (contentArray!=null){
 
@@ -28,7 +29,7 @@ if (contentArray!=null){
 		JSONArray categoriesArray = item.getJSONArray("Categories");
 		String categoriesText = "";
 		for (Object category : categoriesArray){
-			categoriesText = categoriesText.concat(category.toString()+", ");
+			categoriesText = categoriesText.concat(category.toString() + " ");
 		}
 %>
 		<h4>FAQ <%= i+1 %></h4>
