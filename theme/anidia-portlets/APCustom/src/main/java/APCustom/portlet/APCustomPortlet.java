@@ -126,7 +126,7 @@ public class APCustomPortlet extends MVCPortlet {
 	public JSONObject toJson(List<JournalArticle> Articles, String language)throws JSONException, DocumentException {
 		String json = "";
 		for (JournalArticle entry : Articles) {
-			if(!entry.isExpired()) { 		
+			if(!entry.isExpired() && !entry.isInTrash()) { 		
 				List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
 				assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(entry.getPrimaryKey());
 				System.out.println("AAAA" +assetCategories.toString());
