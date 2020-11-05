@@ -83,9 +83,6 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 //TO DO: Remove unused imports
 public class FAQsModulePortlet extends MVCPortlet {
 
-    String structureName = "FAQ";
-    String structureKey = getStructureKey(structureName);  
-    
 	@ProcessAction(name="actionMethod1")
 	public void actionMethod(ActionRequest request, ActionResponse response)
 			throws IOException, PortletException, PortalException, SystemException, DocumentException{
@@ -98,8 +95,8 @@ public class FAQsModulePortlet extends MVCPortlet {
         		WebKeys.THEME_DISPLAY);
 		
 		List<JournalArticle> journalArticles =  new ArrayList<JournalArticle>();
-        structureName = "FAQ";
-        structureKey = getStructureKey(structureName);  
+        String structureName = "FAQ";
+        String structureKey = getStructureKey(structureName);   
         
 		long groupId = themeDisplay.getScopeGroupId();
 		String language = themeDisplay.getLanguageId();
@@ -190,10 +187,10 @@ public class FAQsModulePortlet extends MVCPortlet {
 					answer.toLowerCase().contains(searchTerm.toLowerCase())){
 					json = json.concat("{ \"question\": \"" + question + "\", \"answer\": \"" + answer + "\", \"Categories\": [");
 				 
-				for (AssetCategory category:assetCategories) {
-					 json = json.concat("\"" + category.getTitle(language) + "\", ");	 
-					 }
-				 json = json.concat("]}, ");
+					for (AssetCategory category:assetCategories) {
+						 json = json.concat("\"" + category.getTitle(language) + "\", ");	 
+						 }
+					 json = json.concat("]}, ");
 				 }
 			}
 		}
