@@ -12,7 +12,6 @@ const coverageForm = {
   },
   data() {
     return {
-      // municipalityNameID = provinceCode + municipalityNameID
       formData: {
         postalCode: "",
         municipalityName: "",
@@ -44,8 +43,38 @@ const coverageForm = {
       loadingProperties: false,
     }
   },
-  inject: ["house"],
+  inject: ["global", "house"],
   methods: {
+
+    resetData() {
+      Object.assign(this.formData, {
+        postalCode: "",
+        municipalityName: "",
+        municipalityId: "",
+        provinceId: "",
+        provMunId: "",
+        addressKind: "",
+        addressName: "",
+        name: "",
+        number:"",
+        houseType: "",
+        status: "",
+        privacyPolicy: false
+      })
+
+      Object.assign(this.selected, {
+        fieldArr: "",
+        fieldKey: "",
+      })
+    },
+
+    goBack() {
+      this.resetData()
+      this.global.changeView('funnel')
+      this.house.resetAutocompleteData()
+      this.house.setCoverageError("")
+    },
+
     submitRequest() {
       if(this.isValidStatusCode) {
         this.house.setPostalCode(this.formData.postalCode);
@@ -54,6 +83,9 @@ const coverageForm = {
         this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
         if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.remove('hide');
       }
+
+      this.resetData()
+      this.house.resetAutocompleteData()
     },
 
     /*************************************
@@ -98,7 +130,6 @@ const coverageForm = {
       }
     },
 
-    // setValue(municipality.municipalityName, 'municipalityName')
     setValue(resultItemName, formDataKey, elemId) {
       this.formData[formDataKey] = resultItemName
       this.hideHelperDropdown(elemId)
@@ -113,17 +144,7 @@ const coverageForm = {
         return pc.postalCode.startsWith(index)
       })
     },
-    // onSubmitPostalCode(e) {
-    //   const postalCode = e.target.value
-    //   this.formData.postalCode = postalCode
-    //   // Save object in the store
-    //   this.house.setCoverageData("postalCode", { postalCode })
-    //   // Get municipalities
-    //   this.loadingMunicipalities = true,
-    //   this.house.getMunicipalities(postalCode)
-    //     .then((res) => { this.loadingMunicipalities = false })
-    //     .catch((err) => { this.loadingMunicipalities = false })
-    // },
+
     onSubmitPostalCode(result) {
       const { postalCode } = result
       this.formData.postalCode = postalCode
@@ -135,7 +156,7 @@ const coverageForm = {
         .then((res) => { this.loadingMunicipalities = false })
         .catch((err) => {
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-          this.loadingMunicipalities = false
+          thi.loadingMunicipalities = false
         })
     },
 
@@ -159,7 +180,7 @@ const coverageForm = {
         .then((res) => { this.loadingAddressess = false })
         .catch((err) => {
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-          this.loadingAddressess = false
+          thi.loadingAddressess = false
         })
 
     },
@@ -184,7 +205,7 @@ const coverageForm = {
         .then((res) => { this.loadingEstates = false })
         .catch((err) => {
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-          this.loadingEstates = false
+          thi.loadingEstates = false
         })
     },
 
@@ -211,7 +232,7 @@ const coverageForm = {
         .then((res) => { this.loadingProperties = false })
         .catch((err) => {
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-          this.loadingProperties = false
+          thi.loadingProperties = false
         })
     },
 
@@ -271,42 +292,12 @@ const coverageForm = {
   mounted() {
     if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.add('hide');
     window.scrollTo({
-      top: 0,
+      top: 200,
       behavior: 'smooth',
     })
   },
   template: /*html*/
   `<div>
-
-<!--
-    <div>{{ house.state.coverageData.postalCode }}</div>
-    <div>{{ house.state.coverageData.estate }}</div>
-    <div>{{ house.state.coverageData.property }}</div>
-
-
-    <br /><br /><br />
-
-
-    <h3>isValidStatusCode: {{ isValidStatusCode }}</h3>
-    <h3>Selected field {{ selected.fieldKey }}</h3>
-
-    <h5>Municipalities {{ house.state.autocompData.municipalities }}</h5>
-    <h5>Addresses {{ house.state.autocompData.addresses }}</h5>
-    <h5>Estates {{ house.state.autocompData.estates }}</h5>
-    <h5>Properties {{ house.state.autocompData.properties }}</h5>
-
-    <ul>
-      <li>Postal Code: {{ formData.postalCode }}</li>
-      <li>Municipio: {{ formData.municipalityName }}</li>
-      <li>Calle: {{ formData.addressName }}</li>
-      <li>Número: {{ formData.number }}</li>
-      <li>Vivienda: {{ formData.houseType }}</li>
-      <li>He leído y acepto la política de privacidad: {{ formData.privacyPolicy }}</li>
-      <li>--------------</li>
-      <li>Status: {{ formData.status }}</li>
-    </ul>
-  -->
-
     <template v-if="!house.state.coverageError">
       <div class="an-form an-wrapper">
         <p class="an-body-l-bold mb-xl">Rellena tu dirección para saber si tenemos cobertura en tu zona</p>
@@ -601,13 +592,18 @@ const coverageForm = {
           <button type="submit" :disabled="!formData.status" :class="{ 'an-btn--disabled': !formData.status  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Comprobar</span>
           </button>
-
+      
         </form>
       </div>
       <h5 class="mt-xl">¿No encuentras tu dirección? Llama al <a href="tel:+34900922203" class="an-link">900 92 22 03 </a>y te atendemos</h5>
     </template>
     <template v-else>
       <coverage-error :msg="house.state.coverageError" />
+      <div class="an-form__flex an-form__flex--6-cols justify-content-center">
+        <button @click="goBack" type="button" class="an-btn an-btn--green-border an-btn--icon an-icon--half-arrow-left mt-xl">
+          <span>Volver a calcular</span>
+        </button>
+      </div>  
     </template>
   </div>`
   }

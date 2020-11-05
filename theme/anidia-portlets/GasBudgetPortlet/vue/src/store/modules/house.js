@@ -88,6 +88,20 @@ const state = reactive({
   postalCode: "",
 })
 
+
+const resetAutocompleteData = function() {
+  Object.assign(state.autocompData, {
+    municipalities: [],
+    addresses: [],
+    estates: [],
+    properties: [],
+  })
+}
+
+const resetHouseFormData = function() {
+  state.houseFormData = {}
+}
+
 const setCoverageData = function(key, payloadObj) {
   Object.assign(state.coverageData[key], payloadObj)
 }
@@ -351,4 +365,6 @@ export default {
   submitHouseData,
   setCoverageData,
   submitBusinessContactInfo,
+  resetAutocompleteData,
+  resetHouseFormData,
 }

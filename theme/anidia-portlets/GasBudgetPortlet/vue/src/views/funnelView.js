@@ -20,8 +20,8 @@ const funnelView = {
     },
     continueStep() {
       this.global.changeView(this.optionPicked)
-      // this.global.changeStep(this.optionPicked)
       this.house.setHouseType(this.optionPicked)
+      this.optionPicked = null
     },
   },
   mounted() {

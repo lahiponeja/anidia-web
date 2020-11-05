@@ -24,7 +24,33 @@ const businessContactForm = {
         console.error(err)
         this.sendingForm = false
       })
-    }
+    },
+
+    resetData() {
+      Object.assign(this.businessFormData, {
+        name: "",
+        lastname: "",
+        phone: "",
+        email: "",
+        privacyPolicy: false,
+        offersAndServices: false,
+      })
+      this.sendingForm = false
+    },
+
+    goBack() {
+      this.resetData()
+      this.global.changeView('funnel')
+      this.house.resetAutocompleteData()
+      this.house.setCoverageError("")
+      this.house.changeHouseStep('cobertura')
+    },
+  },
+  mounted() {
+    window.scrollTo({
+      top: 200,
+      behavior: 'smooth',
+    })
   },
   template: /*html*/`
   <div class="an-form an-wrapper">
@@ -40,7 +66,7 @@ const businessContactForm = {
           <input v-model="businessFormData.phone" type="text" class="an-input__field" placeholder="Teléfono" required="">
         </div>
         <div class="an-input an-form__item">
-          <input v-model="businessFormData.email" type="text" class="an-input__field" placeholder="Email*" required="">
+          <input v-model="businessFormData.email" type="email" class="an-input__field" placeholder="Email*" required="">
         </div>
         <div class="an-input an-form__item">
           <div class="an-checkbox mt-xl">
@@ -59,11 +85,18 @@ const businessContactForm = {
           </div>
         </div>
       </div>
+      
+      <div class="an-form__flex an-form__flex--6-cols mb-xxl">
+        <button @click="goBack" type="button" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--half-arrow-left mt-xl">
+          <span>Volver a calcular</span>
+        </button>
 
-      <button type="submit" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--check-simple mt-xl">
-        <span v-if="!sendingForm">Continuar</span>
-        <span v-else>Enviando...</span>
-      </button>
+        <button type="submit" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--check-simple mt-xl">
+          <span v-if="!sendingForm">Continuar</span>
+          <span v-else>Enviando...</span>
+        </button>
+      </div>
+
     </form>
   </div>`,
 }

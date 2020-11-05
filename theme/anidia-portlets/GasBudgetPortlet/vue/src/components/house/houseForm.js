@@ -31,7 +31,6 @@ const houseForm = {
   methods: {
     submitRequest() {
       this.sendingForm = true
-
       this.house.submitHouseData(this.gasBudgetRequest).then((res) => {
         this.sendingForm = false
       }).catch((err) => {
@@ -39,6 +38,34 @@ const houseForm = {
         console.log(err)
       })
     },
+
+    resetData() {
+      Object.assign(this.gasBudgetRequest, {
+        propertyMeters: "",
+        floorNumber: "",
+        bathroomNumber: "",
+        staysNumber: "",
+        gasNaturalUse: "",
+        acsUse: "",
+        kitchenUse: "",
+        heatingUse: "",
+        boilerLocation: "",
+        hasVentilationGrill: true,
+        personsWater: "",
+        metersBoilerToWindow: "",
+        metersWaterIntake: "",
+        connectDeviceToKitchen: false,
+        convertDeviceKitchen: false,
+        controllHeatingFloor: false,
+        radiatorsBathroom: "",
+      })
+
+      this.sendingForm = false,
+      this.submitFormError = false,
+      this.showVentilationGrillRadios = false,
+      this.showConnectConvertDeviceToKitchen = false
+    },
+
     showVentilationGrillFn(){
       if (this.gasBudgetRequest.boilerLocation === "Lavadero/Terraza") {
         this.gasBudgetRequest.hasVentilationGrill = true
@@ -89,12 +116,16 @@ const houseForm = {
   },
   mounted () {
     window.scrollTo({
-      top: 0,
+      top: 200,
       behavior: 'smooth',
     })
   },
   template: /*html*/
     `<div class="an-form an-wrapper">
+      <div v-if="sendingForm" class="an-funnel__white-overlay">
+        <p class="an-h3">Cargando...</p>
+      </div>
+
         <form @submit.prevent="submitRequest">
           <p class="an-body-l-bold mb-xl">Rellena los datos de tu vivienda para poderte hacer un presupuesto lo más ajustado posible</p>
           <div class="an-form__flex an-form__flex--2-cols mb-xxl">
