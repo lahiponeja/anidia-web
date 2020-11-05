@@ -97,6 +97,7 @@ public class FAQsModulePortlet extends MVCPortlet {
 		super.doView(renderRequest, renderResponse);
 	}
 	
+	
 	public List<JournalArticle> getLatestVersionArticle(List<JournalArticle> totalArticles) {
 		List<JournalArticle> journalList = new ArrayList<JournalArticle>();
 		JournalArticle latestArticle ;

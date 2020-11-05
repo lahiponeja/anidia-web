@@ -11,7 +11,8 @@ buildscript {
 }
 
 apply plugin: "com.liferay.plugin"
-apply plugin: "war"
+
+
 dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.asset.taglib", version: "5.0.6"
 	compileOnly group: "com.liferay", name: "com.liferay.comment.taglib", version: "3.0.2"
@@ -42,4 +43,6 @@ repositories {
 	maven {
 		url "https://repository-cdn.liferay.com/nexus/content/groups/public"
 	}
+	
 }
+

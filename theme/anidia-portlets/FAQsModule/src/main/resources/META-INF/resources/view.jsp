@@ -17,8 +17,6 @@ page import="com.liferay.portal.kernel.json.JSONArray" %>
 </form>
 
 <%
-
-
 String content = (String)renderRequest.getAttribute("contentJson");
 JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
 JSONArray contentArray = contentJson.getJSONArray("data");

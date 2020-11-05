@@ -17,17 +17,12 @@ page import="com.liferay.portal.kernel.json.JSONArray" %>
 </form>
 
 <%
-String setOfCategories = (String)renderRequest.getAttribute("setOfCategories");
-JSONObject setOfCategoriesJson = JSONFactoryUtil.createJSONObject(setOfCategories);
-JSONArray setOfCategoriesArray = setOfCategoriesJson.getJSONArray("Categories");
-
 String content = (String)renderRequest.getAttribute("contentJson");
 JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
 JSONArray contentArray = contentJson.getJSONArray("data");
-
+JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 %>
 
-<p> Categotías: <%= setOfCategories %> </p>
 <div class="bg-white pl-s pr-s pt-s pb-s">
 	 <div class="an-accordeon" data-accordeon>
 	 	<ul class="an-accordeon__list" data-accordeon-list>
@@ -55,18 +50,18 @@ JSONArray contentArray = contentJson.getJSONArray("data");
 													
 													if(categories.toString().contains(categoryName)){
 											%>
-												<li class="an-accordeon__item an-accordeon__item" data-accordeon-list-item>
-									                    <div class="an-accordeon__item-head" data-accordeon-head>
-									                      <div class="an-accordeon__item-head-title"><%= item.get("question") %></div>
-									                      <span class="an-accordeon__item-head-icon"></span>
-									                    </div>
-									                    <div class="an-accordeon__item-body">
-									                      <div class="an-accordeon__item-body-inner">
-									                      <p><%= item.get("answer") %></p>
-									                        </div>
-									                    </div>    
-
-												</li>									
+														<li class="an-accordeon__item an-accordeon__item" data-accordeon-list-item>
+											                    <div class="an-accordeon__item-head" data-accordeon-head>
+											                      <div class="an-accordeon__item-head-title"><%= item.get("question") %></div>
+											                      <span class="an-accordeon__item-head-icon"></span>
+											                    </div>
+											                    <div class="an-accordeon__item-body">
+											                      <div class="an-accordeon__item-body-inner">
+											                      <p><%= item.get("answer") %></p>
+											                        </div>
+											                    </div>    
+		
+														</li>									
 											<%
 													}
 												}
