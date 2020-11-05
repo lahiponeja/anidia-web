@@ -31,14 +31,14 @@ const houseForm = {
   methods: {
     submitRequest() {
       this.sendingForm = true
-
-      this.house.submitHouseData(this.gasBudgetRequest).then((res) => {
+      this.house.submitHouseData(this.gasBudgetRequest).then(() => {
         this.sendingForm = false
       }).catch((err) => {
         this.sendingForm = false
         console.log(err)
       })
     },
+
     showVentilationGrillFn(){
       if (this.gasBudgetRequest.boilerLocation === "Lavadero/Terraza") {
         this.gasBudgetRequest.hasVentilationGrill = true
@@ -89,12 +89,16 @@ const houseForm = {
   },
   mounted () {
     window.scrollTo({
-      top: 0,
+      top: 200,
       behavior: 'smooth',
     })
   },
   template: /*html*/
     `<div class="an-form an-wrapper">
+      <div v-if="sendingForm" class="an-funnel__white-overlay">
+        <p class="an-h3">Cargando...</p>
+      </div>
+
         <form @submit.prevent="submitRequest">
           <p class="an-body-l-bold mb-xl">Rellena los datos de tu vivienda para poderte hacer un presupuesto lo más ajustado posible</p>
           <div class="an-form__flex an-form__flex--2-cols mb-xxl">
