@@ -34,6 +34,8 @@ const state = reactive({
     weeklyKitchenUse: 0,
   },
 
+  leadSent: false,
+
   comparatorStepsArr: [
     {
       name: "Agua caliente",
@@ -62,6 +64,43 @@ const state = reactive({
   ],
 })
 
+const setLead = function (boolVal) {
+  state.leadSent = boolVal
+}
+
+const resetComparatorStateData = function () {
+  Object.assign(state.savingsByConsumption, {
+    acsUse: false,
+    heatingUse: false,
+    kitchenUse: false,
+    energyType: "",
+    electricityConsumption: 0,
+  })
+  
+  Object.assign(state.gasConsumptionComparison, {
+    consumptionRequired: "",
+    currentCost: "",
+    futureCost: "",
+    savings: "",
+  })
+
+  Object.assign(state.savingsByUse, {
+    province: "",
+    acsIndividual: true,
+    acsUse: "",
+    numberOfPeople: 1,
+    heatingIndividual: true,
+    heatingUse: "",
+    singleFamilyHouse: true,
+    lastFloor: true,
+    surfaceHouse: 0,
+    kitchenUse: "",
+    weeklyKitchenUse: 0,
+  })
+
+  setLead(false)
+}
+
 const setGasConsumptionComparison = function (payload) {
   Object.assign(state.gasConsumptionComparison, payload.GasConsumptionComparison)
 }
@@ -74,8 +113,7 @@ const setSavingsByConsumption = function(obj) {
     attributes: false
   }
   const xml = objToXml(obj, options)
-  console.log(xml)
-  
+
   return new Promise((resolve, reject) => {
     savingsService.postSavingsByConsumption(xml)
       .then((res) => {
@@ -102,7 +140,7 @@ const sendSavingByUseService = function(obj) {
     attributes: false
   }
   const xml = objToXml(obj, options)
-  console.log(xml)
+
   return new Promise((resolve, reject) => {
     savingsService.postSavingsByUse(xml)
       .then((res) => {
@@ -172,4 +210,6 @@ export default {
   activeComponent,
   submitUserContactInfo,
   sendSavingByUseService,
+  resetComparatorStateData,
+  setLead,
 }

@@ -102,7 +102,7 @@ const funnelForm = {
                 <select v-model="energyConsumption.energyType" class="an-select__native" required>
                   <option disabled value="">Seleccione una opción...</option>
                   <option value="glp">GLP</option>
-                  <option value="goc">GOC</option>
+                  <option value="goc">Gas-oil Canalizado</option>
                   <option value="electricity">Electricidad</option>
                   <option value="butane">Butano</option>
                 </select>
