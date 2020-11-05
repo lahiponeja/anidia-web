@@ -100,7 +100,7 @@ const compHotWater = {
               <select v-model="savingsData.acsUse" class="an-select__native" required>
                 <option disabled value="">Seleccione energía...</option>
                 <option value="GLP">GLP</option>
-                <option value="GOC">GOC</option>
+                <option value="GOC">Gas-oil Canalizado</option>
                 <option value="Electricidad">Electricidad</option>
                 <option value="Butano">Butano</option>
               </select>
@@ -119,7 +119,7 @@ const compHotWater = {
         </div>
 
         <div class="an-form__flex an-form__flex--6-cols mb-xxl">
-          <button @click="startOver" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
+          <button @click="startOver" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--half-arrow-left mt-xl">
             <span>Volver a calcular</span>
           </button>
 
