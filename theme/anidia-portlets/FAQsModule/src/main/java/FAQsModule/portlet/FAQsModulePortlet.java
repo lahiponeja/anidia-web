@@ -80,12 +80,11 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 	},
 	service = Portlet.class
 )
-//TO DO: Remove unused imports
+// TODO: Remove unused imports
 public class FAQsModulePortlet extends MVCPortlet {
-
 	@ProcessAction(name="actionMethod1")
 	public void actionMethod(ActionRequest request, ActionResponse response)
-			throws IOException, PortletException, PortalException, SystemException, DocumentException{
+			throws IOException, PortletException, PortalException, SystemException{
 
 	}
     
