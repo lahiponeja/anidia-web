@@ -47,7 +47,7 @@ const compHeating = {
               <select v-model="savingsData.heatingUse" class="an-select__native" required>
                 <option disabled value="">Seleccione energía...</option>
                 <option value="GLP">GLP</option>
-                <option value="GOC">GOC</option>
+                <option value="GOC">Gas-oil Canalizado</option>
                 <option value="Electricidad">Electricidad</option>
                 <option value="Butano">Butano</option>
               </select>
@@ -112,7 +112,7 @@ const compHeating = {
         </div>
 
         <div class="an-form__flex an-form__flex--6-cols mb-xxl">
-          <button @click="goBack" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
+          <button @click="goBack" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--half-arrow-left mt-xl">
             <span>Anterior</span>
           </button>
 
