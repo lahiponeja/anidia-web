@@ -27,7 +27,7 @@ JSONArray contentArray = contentJson.getJSONArray("data");
 
 %>
 
-<p> CategotÃ­as: <%= setOfCategories %> </p>
+<p> Categotías: <%= setOfCategories %> </p>
 <div class="bg-white pl-s pr-s pt-s pb-s">
 	 <div class="an-accordeon" data-accordeon>
 	 	<ul class="an-accordeon__list" data-accordeon-list>

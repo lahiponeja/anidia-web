@@ -86,9 +86,14 @@ public class FAQsModulePortlet extends MVCPortlet {
     String structureName = "FAQ";
     String structureKey = getStructureKey(structureName);  
     
+	@ProcessAction(name="actionMethod1")
+	public void actionMethod(ActionRequest request, ActionResponse response)
+			throws IOException, PortletException, PortalException, SystemException, DocumentException{
+
+	}
+    
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
         		WebKeys.THEME_DISPLAY);
 		
@@ -106,7 +111,6 @@ public class FAQsModulePortlet extends MVCPortlet {
 		try {
 			contentJson = toJsonString(journalArticles, language,searchTerm);
 		} catch (JSONException | DocumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String setOfCategories = getSetOfCategories(journalArticles, language);
@@ -114,32 +118,8 @@ public class FAQsModulePortlet extends MVCPortlet {
 
         renderRequest.setAttribute("contentJson", contentJson);
         renderRequest.setAttribute("setOfCategories", setOfCategories);
-        
-		super.doView(renderRequest, renderResponse);
-	}
-	
-	@ProcessAction(name="actionMethod1")
-	public void actionMethod(ActionRequest request, ActionResponse response)
-			throws IOException, PortletException, PortalException, SystemException, DocumentException{
-		
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-        		WebKeys.THEME_DISPLAY);
-		
-		List<JournalArticle> journalArticles =  new ArrayList<JournalArticle>();
-        structureName = "FAQ";
-        structureKey = getStructureKey(structureName);  
-        
-		long groupId = themeDisplay.getScopeGroupId();
-		String language = themeDisplay.getLanguageId();
 
-		journalArticles = getLatestVersionArticle(JournalArticleLocalServiceUtil.getStructureArticles(groupId, structureKey));
-		
-		String searchTerm = ParamUtil.getString(request, "searchTerm");
-		String contentsJson = toJsonString(journalArticles, language,searchTerm);
-		String setOfCategories = getSetOfCategories(journalArticles, language);
-		
-		response.getRenderParameters().setValue("setOfCategories", setOfCategories);
-		response.getRenderParameters().setValue("contentJson", contentsJson);
+		super.doView(renderRequest, renderResponse);
 	}
 	
 	public List<JournalArticle> getLatestVersionArticle(List<JournalArticle> totalArticles) {
@@ -222,6 +202,5 @@ public class FAQsModulePortlet extends MVCPortlet {
 		return (json);
 	}
 	
-
 }
 
