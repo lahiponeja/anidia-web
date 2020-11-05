@@ -62,7 +62,6 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 	service = Portlet.class
 )
 
-// TODO: Remove unused imports
 public class FAQsModulePortlet extends MVCPortlet {
 	
 	@ProcessAction(name="actionMethod1")
@@ -135,7 +134,7 @@ public class FAQsModulePortlet extends MVCPortlet {
 		
 	}
 
-	public String getStructureKey(String strucName) {
+	public String getStructureKey(String strucName) throws PortletException {
 		DynamicQuery queryForStructure =DDMStructureLocalServiceUtil.dynamicQuery().add(PropertyFactoryUtil
 				.forName("name").like("%" + strucName + "%"));
 		List structures = DDMStructureLocalServiceUtil.dynamicQuery(queryForStructure, 0, 1); 
@@ -146,7 +145,7 @@ public class FAQsModulePortlet extends MVCPortlet {
 			
 		}else{
 			System.out.println(strucName +" structure not found");
-			return null;
+			throw new PortletException("FAQsModule: " + strucName + " structure not found");
 		}	
 	}
 	
