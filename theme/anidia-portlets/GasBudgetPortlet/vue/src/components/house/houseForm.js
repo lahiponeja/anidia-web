@@ -386,7 +386,7 @@ const houseForm = {
           </template>
 
           <div class="an-form__flex an-form__flex--6-cols mb-xxl">
-            <button @click="house.changeHouseStep('cobertura')" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
+            <button @click="house.changeHouseStep('cobertura')" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--half-arrow-left mt-xl">
               <span>Anterior</span>
             </button>
 
