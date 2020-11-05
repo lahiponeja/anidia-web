@@ -52,18 +52,18 @@ JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 													
 													if(categories.toString().contains(categoryName)){
 											%>
-												<li class="an-accordeon__item an-accordeon__item" data-accordeon-list-item>
-									                    <div class="an-accordeon__item-head" data-accordeon-head>
-									                      <div class="an-accordeon__item-head-title"><%= item.get("question") %></div>
-									                      <span class="an-accordeon__item-head-icon"></span>
-									                    </div>
-									                    <div class="an-accordeon__item-body">
-									                      <div class="an-accordeon__item-body-inner">
-									                      <p><%= item.get("answer") %></p>
-									                        </div>
-									                    </div>    
-
-												</li>									
+														<li class="an-accordeon__item an-accordeon__item" data-accordeon-list-item>
+											                    <div class="an-accordeon__item-head" data-accordeon-head>
+											                      <div class="an-accordeon__item-head-title"><%= item.get("question") %></div>
+											                      <span class="an-accordeon__item-head-icon"></span>
+											                    </div>
+											                    <div class="an-accordeon__item-body">
+											                      <div class="an-accordeon__item-body-inner">
+											                      <p><%= item.get("answer") %></p>
+											                        </div>
+											                    </div>    
+		
+														</li>									
 											<%
 													}
 												}

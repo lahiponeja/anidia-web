@@ -133,7 +133,6 @@ public class FAQsModulePortlet extends MVCPortlet {
 	
 	public String toJsonString(List<JournalArticle> Articles, String language, String searchTerm)throws JSONException, DocumentException {
 		Set<String> setOfCategories = new HashSet<String>();
-		String jsonSetOfCategories = "";
 		String jsonContent = "";
 		for (JournalArticle entry : Articles) {
 			if(!entry.isExpired() && !entry.isInTrash()) { 
