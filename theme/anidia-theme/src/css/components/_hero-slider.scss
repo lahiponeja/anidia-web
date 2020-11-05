@@ -1,11 +1,6 @@
 .an-hero-slider {
   height: 100%;
 
-  @include desktop {
-    transform: translateY(-200px);
-    margin-bottom: rem(-200);
-  }
-
   .portlet-body {
     width: 100vw;
     display: flex;
@@ -51,6 +46,9 @@
     padding: 0 rem(20);
     position: relative;
     width: 100%;
+    padding-top: rem(200);
+    transform: translateY(-200px);
+    margin-bottom: rem(-200);
 
     .an-hero-slider.green & {
       @include gradient-green-bg;
@@ -152,8 +150,6 @@
   }
 
   &__btn {
-    bottom: rem(43);
-    position: absolute;
     width: 100%;
 
     & > .an-btn {
