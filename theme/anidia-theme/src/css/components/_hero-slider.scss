@@ -51,6 +51,9 @@
     padding: 0 rem(20);
     position: relative;
     width: 100%;
+    padding-top: rem(100);
+    transform: translateY(-150px);
+    margin-bottom: rem(-200);
 
     .an-hero-slider.green & {
       @include gradient-green-bg;
@@ -199,7 +202,10 @@
   @include desktop {
     &__item {
       align-items: center;
+      padding-top: 0;
       padding: 0 rem(120);
+      transform: translateY(0);
+      margin-bottom:0;
 
       &-inner-wrapper {
         align-items: center;
