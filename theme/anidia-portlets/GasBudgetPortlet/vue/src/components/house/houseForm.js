@@ -31,39 +31,12 @@ const houseForm = {
   methods: {
     submitRequest() {
       this.sendingForm = true
-      this.house.submitHouseData(this.gasBudgetRequest).then((res) => {
+      this.house.submitHouseData(this.gasBudgetRequest).then(() => {
         this.sendingForm = false
       }).catch((err) => {
         this.sendingForm = false
         console.log(err)
       })
-    },
-
-    resetData() {
-      Object.assign(this.gasBudgetRequest, {
-        propertyMeters: "",
-        floorNumber: "",
-        bathroomNumber: "",
-        staysNumber: "",
-        gasNaturalUse: "",
-        acsUse: "",
-        kitchenUse: "",
-        heatingUse: "",
-        boilerLocation: "",
-        hasVentilationGrill: true,
-        personsWater: "",
-        metersBoilerToWindow: "",
-        metersWaterIntake: "",
-        connectDeviceToKitchen: false,
-        convertDeviceKitchen: false,
-        controllHeatingFloor: false,
-        radiatorsBathroom: "",
-      })
-
-      this.sendingForm = false,
-      this.submitFormError = false,
-      this.showVentilationGrillRadios = false,
-      this.showConnectConvertDeviceToKitchen = false
     },
 
     showVentilationGrillFn(){

@@ -32,15 +32,8 @@ const homeView = {
       this.formSuccess = true
     },
 
-    resetData() {
-      this.formSuccess = false
-    },
-
     goBack() {
-      this.resetData()
       this.global.changeView('funnel')
-      this.house.resetAutocompleteData()
-      this.house.setCoverageError("")
       this.house.changeHouseStep('cobertura')
     },
   },
@@ -67,9 +60,7 @@ const homeView = {
         </div>
 
         <transition name="view">
-          <keep-alive>
-            <component :is="houseActiveStep.component" @form-success="setFormSuccess"></component>
-          </keep-alive>
+          <component :is="houseActiveStep.component" @form-success="setFormSuccess"></component>
         </transition>
 
       </template>

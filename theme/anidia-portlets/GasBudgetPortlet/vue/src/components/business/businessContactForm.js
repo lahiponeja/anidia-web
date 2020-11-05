@@ -25,26 +25,6 @@ const businessContactForm = {
         this.sendingForm = false
       })
     },
-
-    resetData() {
-      Object.assign(this.businessFormData, {
-        name: "",
-        lastname: "",
-        phone: "",
-        email: "",
-        privacyPolicy: false,
-        offersAndServices: false,
-      })
-      this.sendingForm = false
-    },
-
-    goBack() {
-      this.resetData()
-      this.global.changeView('funnel')
-      this.house.resetAutocompleteData()
-      this.house.setCoverageError("")
-      this.house.changeHouseStep('cobertura')
-    },
   },
   mounted() {
     window.scrollTo({
@@ -54,6 +34,10 @@ const businessContactForm = {
   },
   template: /*html*/`
   <div class="an-form an-wrapper">
+    <div v-if="sendingForm" class="an-funnel__white-overlay">
+      <p class="an-h3">Cargando...</p>
+    </div>
+    
     <form @submit.prevent="submitRequest">
       <div class="an-form__flex an-form__flex--2-cols">
         <div class="an-input an-form__item">
@@ -87,7 +71,7 @@ const businessContactForm = {
       </div>
       
       <div class="an-form__flex an-form__flex--6-cols mb-xxl">
-        <button @click="goBack" type="button" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--half-arrow-left mt-xl">
+        <button @click="global.changeView('funnel')" type="button" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--half-arrow-left mt-xl">
           <span>Volver a calcular</span>
         </button>
 

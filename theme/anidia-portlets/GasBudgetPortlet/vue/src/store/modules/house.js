@@ -322,15 +322,14 @@ const setHouseFormData = function(payload) {
 }
 
 const submitHouseData = function(gasBudgetRequest) {
-
-  const options = {
-    rootName: 'GasBudgetRequest', // defaults to 'root'
-    attributes: false
-  }
   const dataObj = Object.assign(gasBudgetRequest, {
     postalCode: state.postalCode,
     houseType: state.houseType,
   })
+  const options = {
+    rootName: 'GasBudgetRequest', // defaults to 'root'
+    attributes: false
+  }
   const xml = objToXml(dataObj, options)
 
   setHouseFormData(dataObj)

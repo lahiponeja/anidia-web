@@ -21,7 +21,6 @@ const funnelView = {
     continueStep() {
       this.global.changeView(this.optionPicked)
       this.house.setHouseType(this.optionPicked)
-      this.optionPicked = null
     },
   },
   mounted() {

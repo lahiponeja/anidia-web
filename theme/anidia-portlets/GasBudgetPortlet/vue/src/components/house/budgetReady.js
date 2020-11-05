@@ -26,21 +26,11 @@ const budgetReady = {
       })
     },
 
-    resetData() {
-      Object.assign(this.budgetReadyForm, {
-        name: "",
-        lastname: "",
-        phone: "",
-        email: "",
-        privacyPolicy: false,
-        offersAndServices: false,
-      })
-      this.sendingForm = false
-    },
-
     goBack() {
-      this.resetData()
-      this.house.changeHouseStep('vivienda')
+      const confirmation = confirm("¿Estás seguro de que quieres volver a calcular?")
+      if(confirmation) {
+        this.house.changeHouseStep('vivienda')
+      }
     },
   },
   mounted () {
@@ -89,7 +79,7 @@ const budgetReady = {
 
       <div class="an-form__flex an-form__flex--6-cols mb-xxl">
         <button @click="goBack" type="button" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--half-arrow-left mt-xl">
-          <span>Anterior</span>
+          <span>Volver a calcular</span>
         </button>
 
         <button type="submit" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--check-simple mt-xl">
