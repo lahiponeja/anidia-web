@@ -17,17 +17,14 @@ page import="com.liferay.portal.kernel.json.JSONArray" %>
 </form>
 
 <%
-String setOfCategories = (String)renderRequest.getAttribute("setOfCategories");
-JSONObject setOfCategoriesJson = JSONFactoryUtil.createJSONObject(setOfCategories);
-JSONArray setOfCategoriesArray = setOfCategoriesJson.getJSONArray("Categories");
+
 
 String content = (String)renderRequest.getAttribute("contentJson");
 JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
 JSONArray contentArray = contentJson.getJSONArray("data");
-
+JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 %>
 
-<p> Categotías: <%= setOfCategories %> </p>
 <div class="bg-white pl-s pr-s pt-s pb-s">
 	 <div class="an-accordeon" data-accordeon>
 	 	<ul class="an-accordeon__list" data-accordeon-list>

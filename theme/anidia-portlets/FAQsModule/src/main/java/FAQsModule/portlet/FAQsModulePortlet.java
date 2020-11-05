@@ -91,11 +91,8 @@ public class FAQsModulePortlet extends MVCPortlet {
 		} catch (JSONException | DocumentException e) {
 			e.printStackTrace();
 		}
-		String setOfCategories = getSetOfCategories(journalArticles, language);
-
 
         renderRequest.setAttribute("contentJson", contentJson);
-        renderRequest.setAttribute("setOfCategories", setOfCategories);
 
 		super.doView(renderRequest, renderResponse);
 	}
@@ -118,21 +115,6 @@ public class FAQsModulePortlet extends MVCPortlet {
 		return journalList;
 	}
 	
-	public String getSetOfCategories(List<JournalArticle> Articles, String Language){
-		Set<String> setOfCategories = new HashSet<String>();
-		String setOfCategoriesStr = "";
-		for (JournalArticle entry : Articles) {
-			AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",entry.getResourcePrimKey());				
-			List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
-			assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(assetEntry.getEntryId());
-			 for (AssetCategory category:assetCategories) {
-				 setOfCategories.add(category.getTitle(Language));
-			 }
-		}
-		setOfCategoriesStr = "{ \"Categories\": "+ setOfCategories.toString() + "}";
-		return setOfCategoriesStr;
-		
-	}
 
 	public String getStructureKey(String strucName) throws PortletException {
 		DynamicQuery queryForStructure =DDMStructureLocalServiceUtil.dynamicQuery().add(PropertyFactoryUtil
@@ -150,7 +132,9 @@ public class FAQsModulePortlet extends MVCPortlet {
 	}
 	
 	public String toJsonString(List<JournalArticle> Articles, String language, String searchTerm)throws JSONException, DocumentException {
-		String json = "";
+		Set<String> setOfCategories = new HashSet<String>();
+		String jsonSetOfCategories = "";
+		String jsonContent = "";
 		for (JournalArticle entry : Articles) {
 			if(!entry.isExpired() && !entry.isInTrash()) { 
 				AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",entry.getResourcePrimKey());				
@@ -166,18 +150,18 @@ public class FAQsModulePortlet extends MVCPortlet {
 				if (searchTerm.isEmpty() || 
 					question.toLowerCase().contains(searchTerm.toLowerCase())||
 					answer.toLowerCase().contains(searchTerm.toLowerCase())){
-					json = json.concat("{ \"question\": \"" + question + "\", \"answer\": \"" + answer + "\", \"Categories\": [");
+					jsonContent = jsonContent.concat("{ \"question\": \"" + question + "\", \"answer\": \"" + answer + "\", \"Categories\": [");
 				 
 					for (AssetCategory category:assetCategories) {
-						 json = json.concat("\"" + category.getTitle(language) + "\", ");	 
+						jsonContent = jsonContent.concat("\"" + category.getTitle(language) + "\", ");
+						setOfCategories.add(category.getTitle(language));
 						 }
-					 json = json.concat("]}, ");
+					jsonContent = jsonContent.concat("]}, ");
 				 }
 			}
 		}
-		json = ("{ \"data\": [" + json + "]}");
-		System.out.println(json);
-		return (json);
+		jsonContent = ("{ \"data\": [" + jsonContent + "] , \"foundCategories\": " + setOfCategories.toString()+"}");
+		return (jsonContent);
 	}
 	
 }
