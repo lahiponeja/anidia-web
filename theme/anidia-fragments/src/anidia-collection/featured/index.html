@@ -1,38 +1,40 @@
 [#switch configuration.Color]
   [#case 'Verde']
-  <div class="bg-an-theme pl-s pr-s pt-xxxl pb-xxxl">
+  <div class="bg-an-theme pl-s pr-s pt-xl pb-xxxl">
   [#break]
 
   [#case 'Verde claro']
-  <div class="bg-an-theme-light pl-s pr-s pt-xxxl pb-xxxl">
+  <div class="bg-an-theme-light pl-s pr-s pt-xl pb-xxxl">
   [#break]
 
   [#case 'Blanco']
-  <div class="bg-white pl-s pr-s pt-xxxl pb-xxxl">
+  <div class="bg-white pl-s pr-s pt-xl pb-xxxl">
   [#break]
 
   [#case 'Amarillo']
-  <div class="bg-yellow pl-s pr-s pt-xxxl pb-xxxl">
+  <div class="bg-yellow pl-s pr-s pt-xl pb-xxxl">
   [#break]
 
   [#case 'Gris oscuro']
-  <div class="bg-an-theme-dark-grey pl-s pr-s pt-xxxl pb-xxxl">
+  <div class="bg-an-theme-dark-grey pl-s pr-s pt-xl pb-xxxl">
   [#break]
 
   [#case 'Gris claro']
-    <div class="bg-an-theme-soft-grey pl-s pr-s pt-xxxl pb-xxxl">
+    <div class="bg-an-theme-soft-grey pl-s pr-s pt-xl pb-xxxl">
   [#break]
 
   [default]
-  <div class="bg-an-theme pl-s pr-s pt-xxxl pb-xxxl">
+  <div class="bg-an-theme pl-s pr-s pt-xl pb-xxxl">
 [/#switch]
 
 
+<div class="an-featured
 [#if configuration.Posicion == 'Derecha']
-<div class="an-featured an-featured--image-right">
-[#else]
-    <div class="an-featured">
+ an-featured--image-right
 [/#if]
+[#if configuration.Esconder]
+hide
+[/#if]">
     <div class="an-featured__inner">
       <h2 class="an-featured__heading">
         <lfr-editable id="Título" type="text">Título</lfr-editable>

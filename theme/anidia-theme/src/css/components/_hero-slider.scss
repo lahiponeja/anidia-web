@@ -8,6 +8,20 @@
     position: relative;
     height: 100%;
 
+    .an-hero-slider.green &,
+    .an-hero-slider.light-green & {
+      &:after {
+        content: '';
+        background-image: url('../../assets/img/circles-bg.svg');
+        background-size: cover;
+        background-position-x: center;
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        right: 0;
+      }
+    }
+
     .journal-content-article {
       flex-shrink: 0;
       width: 100%;
@@ -28,13 +42,15 @@
     align-items: normal;
     display: flex;
     flex-shrink: 0;
-    height: 100vh;
     padding: 0 rem(20);
     position: relative;
     width: 100%;
+    padding-top: rem(150);
+    transform: translateY(-200px);
+    margin-bottom: rem(-200);
 
     .an-hero-slider.green & {
-      background: $an-theme;
+      @include gradient-green-bg;
     }
 
     .an-hero-slider.white & {
@@ -54,41 +70,12 @@
   }
 
   &__discover-btn {
-    text-transform: uppercase;
-    color: $white;
-    display: flex;
-    transform: rotate(90deg);
-    position: absolute;
-    padding: rem(20);
-    z-index: 5;
-    right: rem(-100);
-    bottom: rem(190);
-
-    .an-hero-slider.white &,
-    .an-hero-slider.light-green & {
-      color: $an-theme-dark-grey;
-    }
-
-    span {
-      display: block;
-      margin-left: rem(20);
-      font-size: rem(40);
-      position: relative;
-
-      .an-hero-slider.white &,
-      .an-hero-slider.light-green & {
-        color: $an-theme;
-      }
-    }
+    display: none;
   }
 
   &__image {
     width: 100%;
     max-width: rem(500);
-    position: absolute;
-    bottom: rem(-70);
-    left: 50%;
-    transform: translateX(-50%);
 
     &-desktop {
       display: none;
@@ -116,10 +103,6 @@
     color: $white;
     margin-bottom: rem(20);
 
-    @include desktop {
-      padding-top: rem(117.5);
-    }
-
     .an-hero-slider.white &,
     .an-hero-slider.light-green & {
       color: $an-theme;
@@ -137,8 +120,6 @@
   }
 
   &__btn {
-    bottom: rem(43);
-    position: absolute;
     width: 100%;
 
     & > .an-btn {
@@ -185,6 +166,8 @@
     &__item {
       align-items: center;
       padding: 0 rem(120);
+      height: 100vh;
+      padding-top: rem(150);
 
       &-inner-wrapper {
         align-items: center;
@@ -196,19 +179,23 @@
       height: auto;
       max-width: 100%;
       position: static;
-      width: rem(660);
+      width: rem(612);
     }
 
     &__image {
-      top: 50%;
+      bottom: rem(-70);
+      left: 50%;
+      transform: translateX(-50%);
+      top: 45%;
       transform: translateY(-50%);
       right: rem(-300);
       position: absolute;
-      height: rem(1286);
+      height: 120%;
 
       &-desktop {
         display: block;
         height: 100%;
+        transform: translateY(-2px);
       }
 
       &-mobile {
@@ -246,15 +233,35 @@
     }
 
     &__discover-btn {
-      right: 40%;
+      text-transform: uppercase;
+      color: $white;
+      display: flex;
+      transform: rotate(90deg);
+      position: absolute;
+      padding: rem(20);
+      z-index: 5;
+      right: 30%;
       bottom: auto;
 
-      span {
-        transition: all 0.3s ease;
+      .an-hero-slider.white &,
+      .an-hero-slider.light-green & {
+        color: $an-theme-dark-grey;
       }
 
-      &:hover > span {
-        animation: discoverArrow 0.8s infinite;
+      span {
+        display: block;
+        margin-left: rem(20);
+        font-size: rem(40);
+        position: relative;
+        transition: all 0.3s ease;
+        &:hover > span {
+          animation: discoverArrow 0.8s infinite;
+        }
+
+        .an-hero-slider.white &,
+        .an-hero-slider.light-green & {
+          color: $an-theme;
+        }
       }
     }
   }

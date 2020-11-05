@@ -11,6 +11,12 @@ const budgetCard = {
       return this.house.state.houseFormData
     }
   },
+  mounted() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  },
   template:/*html*/`
   <div class="an-wrapper an-wrapper--center">
     <div class="an-card an-card--pack an-card--pack--big featured">
@@ -19,21 +25,15 @@ const budgetCard = {
         <h5>{{ gasBudget.equipment }}</h5>
       </div>
       <div class="an-card--pack__info">
-        <!-- <h4>Desde</h4> -->
         <p class="an-h2">{{ gasBudget.totalPrice }}</p>
-        <!-- <h4>567€ de ahorro anual</h4> -->
       </div>
       <ul class="an-list">
         <li class="an-list__item an-body-m-regular">
           <div class="an-list__icon an-icon--check-circle"></div>
           {{ houseFormData.gasNaturalUse }}
         </li>
-        <!-- <li class="an-list__item an-body-m-regular">
-          <div class="an-list__icon an-icon--check-circle"></div>
-          Zona Norte de España
-        </li> -->
         <li class="an-list__item an-body-m-regular">
-          <div class="an-list__icon an-icon--check-circle"></div> 
+          <div class="an-list__icon an-icon--check-circle"></div>
           Tipo de vivienda: {{ house.state.houseType }}
         </li>
         <li class="an-list__item an-body-m-regular">
@@ -56,10 +56,6 @@ const budgetCard = {
           <div class="an-list__icon an-icon--check-circle"></div>
           {{ houseFormData.personsWater }} personas
         </li>
-        <!-- <li class="an-list__item an-body-m-regular">
-          <div class="an-list__icon an-icon--check-circle"></div>
-          Ahorro medio de 700€/año
-        </li> -->
       </ul>
       <button @click="house.changeHouseStep('presupuesto-realizado')" class="an-btn an-btn--flatter an-btn--white">
         <span>Recibir presupuesto detallado</span>

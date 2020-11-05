@@ -19,6 +19,9 @@ public class PersonalData {
     @JsonProperty("ProdInterest")
     private String prodInterest;
 
+    @JsonProperty("PrivacyPolicy")
+    private String privacyPolicy;
+
     public String getFirstName() {
         return firstName;
     }
@@ -57,5 +60,13 @@ public class PersonalData {
 
     public void setProdInterest(String prodInterest) {
         this.prodInterest = prodInterest;
+    }
+
+    public String getPrivacyPolicy() {
+        return privacyPolicy;
+    }
+
+    public void setPrivacyPolicy(String privacyPolicy) {
+        this.privacyPolicy = privacyPolicy;
     }
 }

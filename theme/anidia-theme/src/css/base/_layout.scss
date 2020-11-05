@@ -74,12 +74,12 @@
 
     &--4-cols {
       .an-form__item {
-        width: 100%;
+        width: flex-grid(6);
       }
 
       @include desktop {
         .an-form__item {
-          width: 23%;
+          width: flex-grid(3);
         }
       }
     }

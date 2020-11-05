@@ -101,6 +101,7 @@ tasks.register("build.portlets") {
 
 //    dependsOn 'build.portlets.contact_form'
     dependsOn 'build.portlets.gas_budget'
+    dependsOn 'build.portlets.gas_comparator'
 
 }
 
@@ -136,6 +137,27 @@ tasks.register("build.portlets.gas_budget") {
     }
     exec {
       commandLine 'cp', 'theme/anidia-portlets/GasBudgetPortlet/vue/dist/gas-budget-portlet-1.0.0.jar', 'liferay/deploy'
+    }
+  }
+}
+
+tasks.register("build.portlets.gas_comparator") {
+  group = 'Anidia'
+  description = 'Builds the Gas Comparator portlet and copy them to the deploy folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-portlets/gas-comparator-portlet'
+      commandLine 'gradle', 'build'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/gas-comparator-portlet/api/build/libs/gas-comparator-api-1.0.0.jar', 'liferay/deploy'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/gas-comparator-portlet/impl/build/libs/gas-comparator-impl-1.0.0.jar', 'liferay/deploy'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/gas-comparator-portlet/vue/dist/gas-comparator-portlet-1.0.0.jar', 'liferay/deploy'
     }
   }
 }

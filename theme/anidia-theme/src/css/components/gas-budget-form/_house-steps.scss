@@ -7,21 +7,22 @@
     }
 
     &-item {
-      width: 120px;
+      width: auto;
+      text-align: center;
 
       &:not(:first-of-type) {
-        margin-left: 106px;
+        margin-left: rem(50);
         position: relative;
 
         &::before {
           content: "";
           position: absolute;
-          width: 106px;
+          width: rem(30);
           height: 1px;
           background-color: $black;
           top: 50%;
           transform: translateY(-50%);
-          left: -106px;
+          left: rem(-30);
         }
       }
 
@@ -31,15 +32,16 @@
           &::before {
             content: "";
             position: absolute;
-            width: 106px;
+            width: rem(30);
             height: 1px;
             background-color: $an-theme;
             top: 50%;
             transform: translateY(-50%);
-            left: -106px;
+            left: rem(-30);
           }
         }
       }
+
       &-icon {
         font-size: 55px;
       }
@@ -48,10 +50,9 @@
 
   @include tablet {
     &__steps {
-      &-list {
-      }
-  
+
       &-item {
+        width: 120px;
 
         &:not(:first-of-type) {
           margin-left: 106px;
@@ -67,7 +68,43 @@
             left: -106px;
           }
         }
+
+        &--active {
+          &:not(:first-of-type) {
+            &::before {
+              width: rem(106);
+              left: rem(-106);
+            }
+          }
+        }
       }
     }
   }
+
+
+  @media screen and (max-width: $tablet) {
+    &__steps--calculator {
+		
+      .an-house__steps-item-icon { 
+        font-size: 35px;
+      }
+    
+      .an-h5 {
+        font-size: 10px;
+        line-height: 14px;
+      }
+    
+      .an-house__steps-item:not(:first-of-type) {
+        margin-left: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .an-house__steps-item:not(:first-of-type)::before {
+        left: -20px;
+        width: 20px;
+      }
+    }
+  }
+
 }

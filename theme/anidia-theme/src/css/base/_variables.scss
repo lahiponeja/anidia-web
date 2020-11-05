@@ -36,9 +36,9 @@ $g-max-columns: 12; // Total Columns For Main Container
 // Gradients
 @mixin gradient-green-bg {
   background: rgb(120,190,33);
-  background: -moz-linear-gradient(143deg, rgba(120,190,33,1) 0%, rgba(255,199,44,1) 100%);
-  background: -webkit-linear-gradient(143deg, rgba(120,190,33,1) 0%, rgba(255,199,44,1) 100%);
-  background: linear-gradient(143deg, rgba(120,190,33,1) 0%, rgba(255,199,44,1) 100%);
+  background: -moz-linear-gradient(154deg, rgba(120,190,33,1) 0%, rgba(255,199,44,1) 100%);
+  background: -webkit-linear-gradient(154deg, rgba(120,190,33,1) 0%, rgba(255,199,44,1) 100%);
+  background: linear-gradient(154deg, rgba(120,190,33,1) 0%, rgba(255,199,44,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#78be21",endColorstr="#ffc72c",GradientType=1);
 }
 

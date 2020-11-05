@@ -31,6 +31,14 @@ public class PersonalDataRequest {
     private String phone;
     //@JsonProperty("ProdInterest")
     private String prodInterest;
+    //@JsonProperty("PrivacyPolicy")
+    private String privacyPolicy;
+
+    private String codMunicipio;
+
+    private String codFinca;
+
+    private String codInmueble;
 
     public Boolean getAcceptNotCom() {
         return acceptNotCom;
@@ -144,4 +152,35 @@ public class PersonalDataRequest {
         this.prodInterest = prodInterest;
     }
 
+    public String getCodMunicipio() {
+        return codMunicipio;
+    }
+
+    public void setCodMunicipio(String codMunicipio) {
+        this.codMunicipio = codMunicipio;
+    }
+
+    public String getCodFinca() {
+        return codFinca;
+    }
+
+    public void setCodFinca(String codFinca) {
+        this.codFinca = codFinca;
+    }
+
+    public String getCodInmueble() {
+        return codInmueble;
+    }
+
+    public void setCodInmueble(String codInmueble) {
+        this.codInmueble = codInmueble;
+    }
+
+    public String getPrivacyPolicy() {
+        return privacyPolicy;
+    }
+
+    public void setPrivacyPolicy(String privacyPolicy) {
+        this.privacyPolicy = privacyPolicy;
+    }
 }

@@ -1,0 +1,152 @@
+components:
+  schemas:
+    GasCalculatedConsumption:
+      description: Info about gas consumption directly calculated by a user
+      properties:
+        electricityConsumption:
+          description: Kwh/year consumed
+          type: integer
+        acsUse:
+          description: Wether it's used for water heating.
+          type: boolean
+        heatingUse:
+          description: Wether it's used for house heating.
+          type: boolean
+        kitchenUse:
+          description: Wether it's used for the kitchen.
+          type: boolean
+        energyType:
+          description: Select Butane, GLP, GOC or Electricity
+          type: string
+          enum: [butane, glp, goc, electricity]
+    GasConsumptionByUse:
+      description: Info about gas consumption according to the answers of the user
+      properties:
+        province:
+          description: Province of the user
+          type: string
+        acsIndividual:
+          description: Water heating is individual, not collective from the building
+          type: boolean
+        acsUse:
+          description: Kind of energy used for water heating
+          type: string
+          enum: [Butano, GLP, GOC, Electricidad]
+        numberOfPeople:
+          description: Number of people living in the house
+          type: integer
+        heatingIndividual:
+          description: Heating is individual, not collective from the building
+          type: boolean
+        heatingUse:
+          description: Kind of energy used for heating
+          type: string
+          enum: [Butano, GLP, GOC, Electricidad]
+        singleFamilyHouse:
+          description: There's only a family in the house
+          type: boolean
+        lastFloor:
+          description: Wether the house is in the last floor
+          type: boolean
+        surfaceHouse:
+          description: Area of the house in m2
+          type: string
+        kitchenUse:
+          description: Kind of energy used for the kitchen
+          type: string
+          enum: [Butano, GLP, GOC, Electricidad]
+        weeklyKitchenUse:
+          description: Number of times the kitcheen is used in a week
+          type: integer
+    GasConsumptionComparison:
+      description: Details of the Gas comparison
+      properties:
+        consumptionRequired:
+          description: Real consumption by the user
+          type: string
+        currentCost:
+          description: Current cost for the user
+          type: string
+        futureCost:
+          description: Future cost with GN
+          type: string
+        savings:
+          description: Saving with GN
+          type: string
+    Sample:
+      description: A sample entity
+      properties:
+        name:
+          description: The sample name.
+          type: string
+        id:
+          description: The sample ID.
+          type: integer
+      type: object
+servers:
+  - url: http://localhost:8080/o/gas-comparator/v1.0
+info:
+  description: "API for gas price comparison"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+  title: "Gas Comparator API"
+  version: v1.0
+openapi: 3.0.1
+paths:
+  "/savings-by-consumption":
+    post:
+      operationId: postSavingsByConsumption
+      summary: Calculates the savings when the user knows the amount of energy spent,
+      description: Calculates the savings when the user knows the amount of energy spent,
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/GasCalculatedConsumption"
+      responses:
+        200:
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GasConsumptionComparison"
+          description: The saving has been calculated
+  "/savings-by-use":
+    post:
+      operationId: postSavingsByUse
+      summary: Calculates the savings inferred from the user habits
+      description: Calculates the savings inferred from the user habits
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/GasConsumptionByUse"
+      responses:
+        200:
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/GasConsumptionComparison"
+          description: The saving has been calculated
+
+
+  "/samples/{sampleId}":
+    get:
+      operationId: getSample
+      parameters:
+        - in: path
+          name: sampleId
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Sample"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Sample"
+          description: ""
+      tags: ["Sample"]

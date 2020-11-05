@@ -83,5 +83,18 @@
         }
       ]
     }
+		,
+    {
+      "label": "Módulo",
+      "fields": [
+        {
+          "name": "Esconder",
+          "label": "Esconder inicialmente",
+          "description": "El módulo se oculta inicialmente y algo más (otro módulo) debe mostrarlo",
+					"type": "checkbox",
+          "defaultValue": false
+        }
+      ]
+    }
   ]
 }

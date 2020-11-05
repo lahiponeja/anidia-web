@@ -1,4 +1,4 @@
-import { reactive, shallowReadonly } from '@vue/composition-api'
+import {reactive, shallowReadonly} from '@vue/composition-api'
 import coverageService from '../../services/coverageServices'
 import houseFormService from '../../services/houseFormService'
 import contactInfoService from '../../services/contactInfoService'
@@ -9,6 +9,7 @@ const state = reactive({
   houseSteps: [
     {
       name: "cobertura",
+      component: "coverage-form",
       icon: "an-icon--lightning-borders",
       heading: {
         title: "TU AHORRO EMPIEZA AQUÍ",
@@ -18,6 +19,7 @@ const state = reactive({
     },
     {
       name: "vivienda",
+      component: "house-form",
       icon: "an-icon--living-place",
       heading: {
         title: "SOLICITUD ONLINE",
@@ -27,6 +29,7 @@ const state = reactive({
     },
     {
       name: "presupuesto",
+      component: "budget-card",
       icon: "an-icon--euro-cable",
       heading: {
         title: "TU AHORRO EMPIEZA AQUÍ",
@@ -36,6 +39,7 @@ const state = reactive({
     },
     {
       name: "presupuesto-realizado",
+      component: "budget-ready",
       heading: {
         title: "PRESUPUESTO REALIZADO",
         subtitle: "Rellena los datos para recibir la oferta detallada, te llamamos o te la mandamos por email",
@@ -89,7 +93,7 @@ const setCoverageData = function(key, payloadObj) {
 }
 
 const submitUserContactInfo = function (budgetReadyForm) {
-  const { 
+  const {
     name,
     lastname,
     phone,
@@ -162,10 +166,44 @@ const submitUserContactInfo = function (budgetReadyForm) {
   }
   const xml = objToXml(requestBody, options)
 
-  console.log("🔥 submitUserContactInfo 🔥")
-  console.log(xml)
+  const result = new Promise((resolve, reject) => {
+    contactInfoService.postLeads(xml).then((res) => {
+      resolve(res)
+    }).catch((err) => {
+      console.error(err)
+    })
+  })
 
-  console.log("requestBody", requestBody);
+  return result
+}
+
+const submitBusinessContactInfo = function (budgetReadyForm) {
+  const {
+    name,
+    lastname,
+    phone,
+    email,
+    privacyPolicy,
+    offersAndServices } = budgetReadyForm;
+
+  const requestBody = {
+    "personalData": {
+      "firstName": name,
+      "lastName": lastname,
+      "email": email,
+      "phone": phone,
+      "prodInterest": "gas",
+      "acceptNotCom": offersAndServices,
+    },
+  }
+
+  state.userFullName = `${name} ${lastname} `
+
+  const options = {
+    rootName: 'Lead', // defaults to 'root'
+    attributes: false
+  }
+  const xml = objToXml(requestBody, options)
 
   const result = new Promise((resolve, reject) => {
     contactInfoService.postLeads(xml).then((res) => {
@@ -183,7 +221,6 @@ const setPostalCode = function(payload) {
 }
 
 const setHouseType = function(payload) {
-  console.log("house.js", payload)
   state.houseType = payload
 }
 
@@ -232,7 +269,7 @@ const getEstates = function(municipalityId, postalCode, addressKind, addressName
       const resJson = xmlToJsonImp(res.data);
       const { items } = resJson.Page.items
       const result = items
-      state.autocompData.estates = result
+      state.autocompData.estates = result.length ? result : [result]
       resolve(items)
     }).catch((err) => {
       reject(err)
@@ -271,7 +308,7 @@ const setHouseFormData = function(payload) {
 }
 
 const submitHouseData = function(gasBudgetRequest) {
-  
+
   const options = {
     rootName: 'GasBudgetRequest', // defaults to 'root'
     attributes: false
@@ -281,14 +318,13 @@ const submitHouseData = function(gasBudgetRequest) {
     houseType: state.houseType,
   })
   const xml = objToXml(dataObj, options)
-  
+
   setHouseFormData(dataObj)
 
   const results = new Promise((resolve, reject) => {
     houseFormService.postHouseForm(xml).then((res)=> {
       const jsonData = xmlToJsonImp(res.data);
       Object.assign(state.gasBudget, jsonData.GasBudget);
-      console.log("state.gasBudget", state.gasBudget);
       resolve(state.gasBudget)
       changeHouseStep("presupuesto");
     })
@@ -297,13 +333,11 @@ const submitHouseData = function(gasBudgetRequest) {
     })
   })
 
-
-  // console.log(xml)
   return results;
 }
 
-export default { 
-  state: shallowReadonly(state), 
+export default {
+  state: shallowReadonly(state),
   setPostalCode,
   setHouseType,
   changeHouseStep,
@@ -316,4 +350,5 @@ export default {
   setCoverageError,
   submitHouseData,
   setCoverageData,
+  submitBusinessContactInfo,
 }

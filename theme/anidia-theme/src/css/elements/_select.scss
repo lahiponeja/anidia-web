@@ -26,13 +26,23 @@
     border-radius: rem(30);
     color: $an-theme-dark-grey;
     font-family: $open-sans-regular-family;
-    font-size: rem(18);
+    font-size: rem(14);
     height: rem(60);
     padding: 0 rem(25);
     width: 100%;
     transition: box-shadow .2s;
     display: flex;
     align-items: center;
+
+    @include tablet {
+      font-size: rem(18);
+    }
+  }
+
+  &__native {
+    &:focus {
+      border: 2px solid $an-theme;
+    }
   }
 
 
@@ -41,6 +51,7 @@
     position: relative;
 
     select {
+      -webkit-appearance:none;
       -moz-appearance: none; /* Firefox */
       -webkit-appearance: none; /* Safari and Chrome */
       appearance: none;
@@ -49,7 +60,7 @@
       border-radius: rem(30);
       color: $an-theme-dark-grey;
       font-family: $open-sans-regular-family;
-      font-size: rem(18);
+      font-size: rem(14);
       height: rem(60);
       padding: 0 rem(25);
       width: 100%;
@@ -57,6 +68,9 @@
       display: flex;
       align-items: center;
 
+      @include tablet {
+        font-size: rem(18);
+      }
     }
 
     &:after {
@@ -171,22 +185,11 @@
     }
   }
 
-  // @media (hover: hover) {
-  //   &__native {
-  //     opacity: 0;
-  //   }
-
-  //   &__custom {
-  //     display: block;
-  //   }
-
-  //   &__native:focus + &__custom {
-  //     pointer-events: none;
-
-  //     #{ $an-select }__custom-trigger {
-  //       box-shadow: none;
-  //       border: 2px solid $an-theme;
-  //     }
-  //   }
-  // }
+  // FIX CUSTOM STYLES
+  select {
+    -webkit-appearance:none;
+    -moz-appearance: none; /* Firefox */
+    -webkit-appearance: none; /* Safari and Chrome */
+    appearance: none;
+  }
 }

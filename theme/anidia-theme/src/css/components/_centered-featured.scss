@@ -1,11 +1,16 @@
 .an-centered-featured {
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-right: rem(-20);
   margin-left: rem(-20);
+
+  .no-img & {
+    background-size: cover;
+  }
 
   @include desktop {
     flex-direction: row;
@@ -64,16 +69,14 @@
     z-index: 1;
     width: 100%;
 
+    .no-img & {
+      max-width: rem(1024);
+      margin: auto;
+    }
+
     .bg-an-theme-light &,
     .bg-an-theme-light & {
       color: $an-theme;
     }
-  }
-}
-
-.bg-an-theme--centered-featured {
-  @include desktop {
-    transform: translateY(-120px);
-    margin-bottom: rem(-120);
   }
 }

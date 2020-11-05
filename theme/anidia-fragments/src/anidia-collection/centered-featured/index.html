@@ -27,7 +27,10 @@
   <div class="bg-an-theme pl-s pr-s bg-an-theme--centered-featured">
 [/#switch]
 
-  <div class="an-centered-featured">
+  <div class="an-centered-featured
+[#if configuration.Esconder]
+hide
+[/#if]">
     [#if !configuration.hideBackgroundImage]
     <lfr-editable id="ImagenFondo" type="image"><img class="hide background-image" src="[resources:background.png]" alt=""></lfr-editable>
     [/#if]
@@ -39,7 +42,7 @@
       <h2><lfr-editable id="Título" type="text">Mantenimiento gas</lfr-editable></h2>
       <p><lfr-editable id="Subtítulo" type="text">Tranquilidad y ahorro por sólo 6,50€/mes</lfr-editable></p>
       [#if !configuration.hideLink]
-        <a href="${htmlUtil.escape(configuration.Enlace)}" class="an-btn an-btn--flatter an-btn--white"><span>${htmlUtil.escape(configuration.Texto)}</span></a>
+        <a href="${htmlUtil.escape(configuration.Enlace)}" class="an-btn an-btn--white"><span>${htmlUtil.escape(configuration.Texto)}</span></a>
 		  [/#if]
     </div>
     [#if !configuration.hideRightImage]

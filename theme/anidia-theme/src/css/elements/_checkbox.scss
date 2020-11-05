@@ -11,6 +11,11 @@
     height: 0;
     position: absolute;
 
+    &.privacy {
+      width: auto;
+      height: auto;
+    }
+
     &[disabled] {
       & ~ #{ $parent }__label {
         color: $an-theme-dark-grey-op;
@@ -43,8 +48,12 @@
 
   &__input {
     &:focus {
-      &__label {
+      & ~ label {
         text-decoration: underline;
+
+        &:before {
+          border-width: 3px;
+        }
       }
     }
 

@@ -1,0 +1,10 @@
+Bundle-Name: gas-comparator-api
+Bundle-SymbolicName: gas-comparator-api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.gasComparator.dto.v1_0,\
+	com.liferay.gasComparator.resource.v1_0
+Import-Package: com.liferay.*;version="[1.0.0,99.0.0)",\
+\
+	*
+-noee: true
