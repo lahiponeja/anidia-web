@@ -30,9 +30,11 @@ export default function main({portletNamespace, contextPath, portletElementId, c
                 <p class="an-body-l-bold color-an-theme">Calcula todo lo que podrías ahorrarte instalando gas natural</p>
             </div>
             
-            <keep-alive>
-                <component :is="global.activeView().component"></component>
-            </keep-alive>
+            <transition name="view">
+                <keep-alive>
+                    <component :is="global.activeView().component"></component>
+                </keep-alive>
+            </transition>
         </div>
     `;
     

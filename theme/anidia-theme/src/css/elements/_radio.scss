@@ -43,13 +43,17 @@
 
   &__input {
     &:focus {
-      &__label {
+      & ~ label {
         text-decoration: underline;
+
+        &:before {
+          border-width: 3px;
+        }
       }
     }
     
     &:checked {
-      & + label {
+      & ~ label {
         &:after {
           content: "";
           width: rem(10);

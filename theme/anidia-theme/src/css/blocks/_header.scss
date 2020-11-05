@@ -235,6 +235,7 @@
     transform-origin: center;
     transition: .5s ease-in-out;
     border-radius: rem(20);
+    z-index: 1;
 
     body.anidia-white & {
       background: $an-theme;

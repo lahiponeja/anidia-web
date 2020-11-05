@@ -39,6 +39,12 @@
     }
   }
 
+  &__native {
+    &:focus {
+      border: 2px solid $an-theme;
+    }
+  }
+
 
   &__form {
     border-color: $an-theme;
@@ -54,13 +60,17 @@
       border-radius: rem(30);
       color: $an-theme-dark-grey;
       font-family: $open-sans-regular-family;
-      font-size: rem(18);
+      font-size: rem(14);
       height: rem(60);
       padding: 0 rem(25);
       width: 100%;
       transition: box-shadow .2s;
       display: flex;
       align-items: center;
+
+      @include tablet {
+        font-size: rem(18);
+      }
     }
 
     &:after {
