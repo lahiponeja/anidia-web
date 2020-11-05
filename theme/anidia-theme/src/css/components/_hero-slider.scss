@@ -42,11 +42,10 @@
     align-items: normal;
     display: flex;
     flex-shrink: 0;
-    height: 100vh;
     padding: 0 rem(20);
     position: relative;
     width: 100%;
-    padding-top: rem(200);
+    padding-top: rem(150);
     transform: translateY(-200px);
     margin-bottom: rem(-200);
 
@@ -71,41 +70,12 @@
   }
 
   &__discover-btn {
-    text-transform: uppercase;
-    color: $white;
-    display: flex;
-    transform: rotate(90deg);
-    position: absolute;
-    padding: rem(20);
-    z-index: 5;
-    right: rem(-100);
-    bottom: rem(190);
-
-    .an-hero-slider.white &,
-    .an-hero-slider.light-green & {
-      color: $an-theme-dark-grey;
-    }
-
-    span {
-      display: block;
-      margin-left: rem(20);
-      font-size: rem(40);
-      position: relative;
-
-      .an-hero-slider.white &,
-      .an-hero-slider.light-green & {
-        color: $an-theme;
-      }
-    }
+    display: none;
   }
 
   &__image {
     width: 100%;
     max-width: rem(500);
-    position: absolute;
-    bottom: rem(-70);
-    left: 50%;
-    transform: translateX(-50%);
 
     &-desktop {
       display: none;
@@ -196,6 +166,7 @@
     &__item {
       align-items: center;
       padding: 0 rem(120);
+      height: 100vh;
 
       &-inner-wrapper {
         align-items: center;
@@ -211,6 +182,9 @@
     }
 
     &__image {
+      bottom: rem(-70);
+      left: 50%;
+      transform: translateX(-50%);
       top: 45%;
       transform: translateY(-50%);
       right: rem(-300);
@@ -258,15 +232,35 @@
     }
 
     &__discover-btn {
+      text-transform: uppercase;
+      color: $white;
+      display: flex;
+      transform: rotate(90deg);
+      position: absolute;
+      padding: rem(20);
+      z-index: 5;
       right: 30%;
       bottom: auto;
 
-      span {
-        transition: all 0.3s ease;
+      .an-hero-slider.white &,
+      .an-hero-slider.light-green & {
+        color: $an-theme-dark-grey;
       }
 
-      &:hover > span {
-        animation: discoverArrow 0.8s infinite;
+      span {
+        display: block;
+        margin-left: rem(20);
+        font-size: rem(40);
+        position: relative;
+        transition: all 0.3s ease;
+        &:hover > span {
+          animation: discoverArrow 0.8s infinite;
+        }
+
+        .an-hero-slider.white &,
+        .an-hero-slider.light-green & {
+          color: $an-theme;
+        }
       }
     }
   }
