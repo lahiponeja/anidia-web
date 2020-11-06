@@ -238,7 +238,13 @@ const houseForm = {
           </div>
 
           <template v-if="showVentilationGrillRadios">
-            <p class="an-body-l-bold mb-xl">¿Tienes rejilla de ventilación superior?</p>
+            <p class="an-body-l-bold mb-xl">¿Tienes rejilla de ventilación superior?</p> 
+            <div class="an-info">
+              <span class="an-info__icon an-icon--info"></span>
+              <div class="an-info__box"> 
+                Se tienen que tener rejillas superiores e inferiores.
+              </div>
+            </div>
             <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
               <div class="an-radio an-form__item">
                 <input v-model="gasBudgetRequest.hasVentilationGrill" :value="true" class="an-radio__input" checked="" type="radio" name="rejilla-ventilacion-superior" id="vent-si">
