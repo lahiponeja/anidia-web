@@ -2,7 +2,7 @@ const coverageError = {
   props: ['msg'],
   mounted () {
     window.scrollTo({
-      top: 0,
+      top: 200,
       behavior: 'smooth',
     })
   },
