@@ -23,14 +23,41 @@ window.dataLayer.push({
     "pagetype": "${gtm_pagetype}",
     "pagename": "${gtm_pagename}",
     "referrer": "${request.getHeader("referer")!""}",
-    "subcategory1:" "${gtm_subcategory}",
-    "subcategory2:" "",
-    "subcategory3:" "",
-    "subcategory4:" "",
+    "subcategory1": "${gtm_subcategory}",
+    "subcategory2": "",
+    "subcategory3": "",
+    "subcategory4": "",
     "time": "${dateUtil.getCurrentDate("HHmmss", locale, timeZoneUtil.getDefault())}",
     "url": "${request.getRequestURL()}",
     "weekday": "${dateUtil.getCurrentDate("EEEEEEEEEEE", locale, timeZoneUtil.getDefault())}"
   }
 });
+
+if (typeof ga === 'function') {
+  ga(function(tracker) {
+    var clientId = tracker.get('clientId');
+    window.dataLayer.push({
+    "event": "anidiapageview",
+    "user": {
+      "gaclient" : clientId,
+      "adblock": "disabled",
+      "useragent": "${request.getHeader("User-Agent")!""}",
+      "subcribednewsletter": undefined,
+      "logged": "no logado",
+      "idcrm": undefined,
+      "lastlogin": undefined,
+      "product1": undefined,
+      "registrationdate": undefined,
+      "gender": undefined,
+      "age": undefined,
+      "province": undefined,
+      "city": undefined,
+      "isclient": undefined,
+      "phonehas": undefined,
+      "emailhas": undefined,
+      }
+    });
+  });
+}
 
 </script>
