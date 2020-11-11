@@ -4,7 +4,7 @@ const compSaving = {
   components: {
     results,
   },
-  inject: ["comparator"],
+  inject: ["global", "comparator"],
   data() {
     return {
       compSavingForm: {
@@ -17,7 +17,6 @@ const compSaving = {
       },
 
       sendingForm: false,
-      leadSent: false,
     }
   },
   mounted() {
@@ -32,18 +31,35 @@ const compSaving = {
       this.sendingForm = true
       this.comparator.submitUserContactInfo(this.compSavingForm).then((res) => {
         this.sendingForm = false
-        this.leadSent = true
-        console.log(res)
+        this.comparator.setLead(true)
+        this.resetCompSavingForm()
       }).catch((err)=>{
         console.error(err)
         this.sendingForm = false
       })
+    },
+
+    resetCompSavingForm() {
+      Object.assign(this.compSavingForm, { 
+        name: "",
+        lastname: "",
+        phone: "",
+        email: "",
+        privacyPolicy: false,
+        offersAndServices: false,
+      })
+    },
+
+    calculateAgain() {
+      this.comparator.resetComparatorStateData()
+      this.comparator.changeStepComponent('comp-hot-water')
+      this.global.changeView('funnel')
     }
   },
   template: /*html*/`
   <div>
     <transition name="view">
-      <template v-if="!this.leadSent">
+      <template v-if="!comparator.state.leadSent">
         <div class="an-form an-wrapper">
           <form @submit.prevent="submitRequest">
             <div class="an-form__flex an-form__flex--2-cols">
@@ -57,7 +73,7 @@ const compSaving = {
                 <input v-model="compSavingForm.phone" type="text" class="an-input__field" placeholder="Teléfono*" required="">
               </div>
               <div class="an-input an-form__item">
-                <input v-model="compSavingForm.email" type="text" class="an-input__field" placeholder="Email*"  required="">
+                <input v-model="compSavingForm.email" type="email" class="an-input__field" placeholder="Email*"  required="">
               </div>
               <div class="an-input an-form__item">
                 <div class="an-checkbox mt-xl">
@@ -77,10 +93,16 @@ const compSaving = {
               </div>
             </div>
 
-            <button type="submit" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--check-simple mt-xl">
-              <span v-if="!sendingForm">Continuar</span>
-              <span v-else>Enviando...</span>
-            </button>
+            <div class="an-form__flex an-form__flex--6-cols mb-xxl">
+              <button @click="calculateAgain" type="button" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--half-arrow-left mt-xl">
+                <span>Volver a calcular</span>
+              </button>
+
+              <button type="submit" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--check-simple mt-xl">
+                <span v-if="!sendingForm">Continuar</span>
+                <span v-else>Enviando...</span>
+              </button>
+            </div>
 
           </form>
         </div>

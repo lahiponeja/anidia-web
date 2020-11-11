@@ -27,6 +27,8 @@
 @import './elements/selection';
 @import './elements/links';
 @import './elements/paragraph';
+@import './elements/modal';
+@import './elements/table';
 
 // // Components
 @import './components/card';
@@ -43,6 +45,7 @@
 @import './components/gas-comparator/result-lines';
 @import './components/gas-comparator/counter';
 @import './components/gas-comparator/transition';
+@import './components/info';
 
 // // Blocks
 @import './blocks/extensible-cards';

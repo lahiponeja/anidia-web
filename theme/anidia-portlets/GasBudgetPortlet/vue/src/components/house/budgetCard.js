@@ -13,7 +13,7 @@ const budgetCard = {
   },
   mounted() {
     window.scrollTo({
-      top: 0,
+      top: 200,
       behavior: 'smooth',
     })
   },

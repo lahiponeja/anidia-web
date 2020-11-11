@@ -1,4 +1,9 @@
+import clickOutside from '../../directives/clickoutDirective'
+
 const houseForm = {
+  directives: {
+    'click-outside': clickOutside
+  },
   inject: ["house"],
   data() {
     return {
@@ -31,14 +36,14 @@ const houseForm = {
   methods: {
     submitRequest() {
       this.sendingForm = true
-
-      this.house.submitHouseData(this.gasBudgetRequest).then((res) => {
+      this.house.submitHouseData(this.gasBudgetRequest).then(() => {
         this.sendingForm = false
       }).catch((err) => {
         this.sendingForm = false
         console.log(err)
       })
     },
+
     showVentilationGrillFn(){
       if (this.gasBudgetRequest.boilerLocation === "Lavadero/Terraza") {
         this.gasBudgetRequest.hasVentilationGrill = true
@@ -69,6 +74,14 @@ const houseForm = {
         return false
       }
     },
+
+    toggleInfoItem(e) {
+      e.target.parentElement.classList.toggle("an-info--hidden")
+    },
+
+    closeInfoItem(el) {
+      el.classList.add("an-info--hidden")
+    }
   },
   computed: {
     kitchenSelected() {
@@ -89,12 +102,16 @@ const houseForm = {
   },
   mounted () {
     window.scrollTo({
-      top: 0,
+      top: 200,
       behavior: 'smooth',
     })
   },
   template: /*html*/
     `<div class="an-form an-wrapper">
+      <div v-if="sendingForm" class="an-funnel__white-overlay">
+        <p class="an-h3">Cargando...</p>
+      </div>
+
         <form @submit.prevent="submitRequest">
           <p class="an-body-l-bold mb-xl">Rellena los datos de tu vivienda para poderte hacer un presupuesto lo más ajustado posible</p>
           <div class="an-form__flex an-form__flex--2-cols mb-xxl">
@@ -219,7 +236,15 @@ const houseForm = {
             </div>
 
             <div class="an-form__item">
-              <p class="an-body-m-bold color-an-theme mb-m">¿Dónde está la caldera?</p>
+              <div class="d-flex mb-m">
+                <p class="an-body-m-bold color-an-theme">¿Dónde está o va a estar el calentador/caldera instalado?</p>
+                <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
+                  <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
+                  <div class="an-info__box"> 
+                    En que ubicación de la casa se va a poner el equipo, la misma determinara los trabajos a realizar.
+                  </div>
+                </div>
+              </div>
               <div class="an-select an-select--full-width">
                 <span class="an-select__icon an-icon--chevron-down"></span>
                 <select v-model="gasBudgetRequest.boilerLocation" class="an-select__native" @change="[showVentilationGrillFn(), showConnectConvertDeviceToKitchenFn()]" required>
@@ -234,7 +259,16 @@ const houseForm = {
           </div>
 
           <template v-if="showVentilationGrillRadios">
-            <p class="an-body-l-bold mb-xl">¿Tienes rejilla de ventilación superior?</p>
+            <div class="d-flex mb-xl">
+              <p class="an-body-l-bold">¿Necesita instalar rejilla de ventilación?</p> 
+              <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
+                <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
+                <div class="an-info__box"> 
+                  Se tienen que tener rejillas superiores e inferiores.
+                </div>
+              </div>
+            </div>
+
             <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
               <div class="an-radio an-form__item">
                 <input v-model="gasBudgetRequest.hasVentilationGrill" :value="true" class="an-radio__input" checked="" type="radio" name="rejilla-ventilacion-superior" id="vent-si">
@@ -286,14 +320,30 @@ const houseForm = {
             </label>
           </div>
 
-          <p class="an-body-l-bold mb-xl">¿Cuántos metros hay de la caldera/calentador a la ventana?</p>
+          <div class="d-flex mb-xl">
+            <p class="an-body-l-bold">¿Distancia entre calentador/caldera y la ventana/pared exterior?</p> 
+            <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
+              <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
+              <div class="an-info__box"> 
+                Nos puede indicar los metros entre donde quiere instalar el calentador/caldera y la ventana más próxima de la estancia o la pared exterior más próxima en caso de no existir ventana.
+              </div>
+            </div>
+          </div>
           <div class="an-form__flex an-form__flex--2-cols mb-xxl">
             <div class="an-input an-form__item">
               <input v-model="gasBudgetRequest.metersBoilerToWindow" type="number" class="an-input__field" required="">
             </div>
           </div>
 
-          <p class="an-body-l-bold mb-xl">¿Cuántos metros es necesario desplazar las tomas de agua para conectarlas al aparato?</p>
+          <div class="d-flex mb-xl">
+            <p class="an-body-l-bold">¿Distancia entre las tomas de agua y la ubicación calentador/caldera?</p> 
+            <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
+              <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
+              <div class="an-info__box"> 
+                Si la ubicación del nuevo calentador/caldera es distinta de la ubicación de su aparato de generación de agua caliente actual indique la distancia en metros.
+              </div>
+            </div>
+          </div>
           <div class="an-form__flex an-form__flex--2-cols mb-xxl">
             <div class="an-input an-form__item">
               <div class="an-select an-select--full-width mb-none">
@@ -311,7 +361,15 @@ const houseForm = {
           </div>
 
           <template v-if="showConnectConvertDeviceToKitchen">
-            <p class="an-body-l-bold mb-xl">¿Necesita que conectemos el aparato de cocina actual?</p>
+            <div class="d-flex mb-xl">
+              <p class="an-body-l-bold">¿Necesita conectar su cocina a la instalación de gas?</p> 
+              <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
+                <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
+                <div class="an-info__box"> 
+                  Si no quiere utilizar cocinas eléctricas se podría conectar una cocina de gas a la nueva instalación.
+                </div>
+              </div>
+            </div>
             <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
               <div class="an-radio an-form__item">
                 <input v-model="gasBudgetRequest.connectDeviceToKitchen" :value="true" class="an-radio__input" checked="" type="radio" name="connect-kitchen-device" id="connect-kitchen-device-si">
@@ -332,7 +390,15 @@ const houseForm = {
               </div>
             </div>
 
-            <p class="an-body-l-bold mb-xl">¿Necesita conversión del aparato de cocina actual?</p>
+            <div class="d-flex mb-xl">
+              <p class="an-body-l-bold">¿Quiere intentar reutilizar su cocina?</p> 
+              <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
+                <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
+                <div class="an-info__box"> 
+                  Reutilizar la cocina existente (no eléctrica) para que funcione a gas natural transformándola.
+                </div>
+              </div>
+            </div>
             <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
               <div class="an-radio an-form__item">
                 <input v-model="gasBudgetRequest.convertDeviceKitchen" :value="true" class="an-radio__input" checked="" type="radio" name="convert-kitchen-device" id="convert-kitchen-device-si">
@@ -355,7 +421,17 @@ const houseForm = {
           </template>
 
           <template v-if="heatingSelected">
-            <p class="an-body-l-bold mb-xl">¿Quiere controlar la calefacción por zona?</p>
+            
+            <div class="d-flex mb-xl">
+              <p class="an-body-l-bold">¿Quiere controlar la calefacción de manera independiente en cada planta de su vivienda?</p> 
+              <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
+                <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
+                <div class="an-info__box"> 
+                  Solo se debería activar si tiene varias plantas, si no, no da lugar.
+                </div>
+              </div>
+            </div>
+
             <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
               <div class="an-radio an-form__item">
                 <input v-model="gasBudgetRequest.controllHeatingFloor" value="true" class="an-radio__input" checked="" type="radio" name="constrol-heating-floor" id="constrol-heating-floor-si">
@@ -376,8 +452,15 @@ const houseForm = {
               </div>
             </div>
 
-
-            <p class="an-body-l-bold mb-xl">¿Cuántos radiadores toalleros quiere en el baño?</p>
+            <div class="d-flex mb-xl">
+              <p class="an-body-l-bold">¿Necesita algún radiador toallero en su/s baño/s?</p> 
+              <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
+                <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
+                <div class="an-info__box"> 
+                  El radiador que se instalará en su baño será tipo toallero.
+                </div>
+              </div>
+            </div>
             <div class="an-form__flex an-form__flex--2-cols mb-xxl">
               <div class="an-input an-form__item">
                 <input v-model="gasBudgetRequest.radiatorsBathroom" type="text" placeholder="Radiadores" class="an-input__field" required="">
@@ -386,7 +469,7 @@ const houseForm = {
           </template>
 
           <div class="an-form__flex an-form__flex--6-cols mb-xxl">
-            <button @click="house.changeHouseStep('cobertura')" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
+            <button @click="house.changeHouseStep('cobertura')" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--half-arrow-left mt-xl">
               <span>Anterior</span>
             </button>
 
