@@ -157,6 +157,7 @@ window.dataLayer.push({
 		]
 	}
 })
+<<<<<<< HEAD
 function header() {
   if (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 1024){
     let elementWithSubmenu = document.querySelectorAll("ul .dropdown");
@@ -258,6 +259,8 @@ function getMeta(metaName) {
 
   return '';
 }
+=======
+>>>>>>> origin/integration
 
 </script>
 
