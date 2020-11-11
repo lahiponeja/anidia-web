@@ -1,102 +1,74 @@
 .an-hero-slider {
   height: 100%;
 
-  .portlet-body {
-    width: 100vw;
-    display: flex;
-    flex-wrap: nowrap;
-    position: relative;
-    height: 100%;
-
-    .an-hero-slider.green &,
-    .an-hero-slider.light-green & {
-      &:after {
-        content: '';
-        background-image: url('../../assets/img/circles-bg.svg');
-        background-size: cover;
-        background-position-x: center;
-        width: 50%;
-        height: 100%;
-        position: absolute;
-        right: 0;
-      }
-    }
-
-    .journal-content-article {
-      flex-shrink: 0;
-      width: 100%;
-      display: flex;
-      position: relative;
-      align-items: normal;
-    }
-  }
-
-  &__inner-wrapper {
-    width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    height: 100%;
-  }
-
   &__item {
-    align-items: normal;
-    display: flex;
-    flex-shrink: 0;
-    padding: 0 rem(20);
-    position: relative;
-    width: 100%;
-    padding-top: rem(150);
-    transform: translateY(-200px);
-    margin-bottom: rem(-200);
+    height: 100vh;
 
-    .an-hero-slider.green & {
-      @include gradient-green-bg;
-    }
-
-    .an-hero-slider.white & {
-      background: $white;
-    }
-
-    .an-hero-slider.light-green & {
-      background: $an-theme-light;
-    }
-
-    &-inner-wrapper {
-      width: 100%;
-      max-width: rem(1440);
-      margin: auto;
-      height: 100%;
-    }
-  }
-
-  &__discover-btn {
-    display: none;
-  }
-
-  &__image {
-    width: 100%;
-    max-width: rem(500);
-
-    &-desktop {
-      display: none;
-    }
-
-    &-mobile {
-      width: 100%;
+    @include desktop {
+      &-inner-wrapper {
+        height: 100%;
+      }
     }
   }
 
   &__info-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    @include desktop {
+      display: flex;
+      justify-content: space-between;
+      height: 100%;
+
+      &:after {
+        content: '';
+        background-image: url('../../anidia-theme/assets/img/circles-bg.svg');
+        width: 100%;
+        height: 110%;
+        position: absolute;
+        bottom: 50%;
+        right: 0;
+        transform: translate(45%, 50%);
+        z-index: 0;
+      }
+    }
   }
 
-  &__heading,
-  &__text {
-    position: relative;
+  &__info {
+    @include desktop {
+      width: flex-grid(6);
+      margin-top: auto;
+      margin-bottom: auto;
+      padding-top: rem(93);
+      padding-left: flex-grid(1);
+    }
+  }
+
+  &__image {
+    width: 100%;
     z-index: 1;
-    padding-right: rem(30);
+
+    @include desktop {
+      width: flex-grid(5);
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    &-desktop {
+      display: none;
+
+      @include desktop {
+        display: block;
+        height: 95vh;
+        transform: scale(1.2);
+      }
+    }
+
+    &-mobile {
+      width: 100%;
+
+      @include desktop {
+        display: none;
+      }
+    }
   }
 
   &__heading {
@@ -119,15 +91,36 @@
     }
   }
 
-  &__btn {
-    width: 100%;
+  &__discover-btn {
+    display: none;
 
-    & > .an-btn {
-      width: 100%;
+    @include desktop {
+      text-transform: uppercase;
+      color: $white;
+      display: flex;
+      transform: rotate(90deg);
+      position: absolute;
+      z-index: 5;
+      right: 30%;
+      bottom: rem(237);
 
       .an-hero-slider.white &,
       .an-hero-slider.light-green & {
-        @extend %an-btn--gradient;
+        color: $an-theme-dark-grey;
+      }
+
+      span {
+        display: block;
+        margin-left: rem(20);
+        font-size: rem(40);
+        position: relative;
+        transition: all 0.3s ease;
+        animation: discoverArrow 0.8s infinite;
+
+        .an-hero-slider.white &,
+        .an-hero-slider.light-green & {
+          color: $an-theme;
+        }
       }
     }
   }
@@ -161,111 +154,38 @@
       }
     }
   }
-
-  @include desktop {
-    &__item {
-      align-items: center;
-      padding: 0 rem(120);
-      height: 100vh;
-      padding-top: rem(150);
-
-      &-inner-wrapper {
-        align-items: center;
-        display: flex;
-      }
-    }
-
-    &__info-container {
-      height: auto;
-      max-width: 100%;
-      position: static;
-      width: rem(612);
-    }
-
-    &__image {
-      bottom: rem(-70);
-      left: 50%;
-      transform: translateX(-50%);
-      top: 45%;
-      transform: translateY(-50%);
-      right: rem(-300);
-      position: absolute;
-      height: 120%;
-
-      &-desktop {
-        display: block;
-        height: 100%;
-        transform: translateY(-2px);
-      }
-
-      &-mobile {
-        display: none;
-      }
-    }
-
-    &__heading,
-    &__text {
-      padding-right: 0;
-    }
-
-    &__heading,
-    &__text,
-    &__btn {
-      position: relative;
-      z-index: 1;
-    }
-
-    &__heading {
-      margin-bottom: rem(20);
-    }
-
-    &__text {
-      margin-bottom: rem(33);
-    }
-
-    &__btn {
-      bottom: auto;
-      position: relative;
-
-      & > .an-btn {
-        width: auto;
-      }
-    }
-
-    &__discover-btn {
-      text-transform: uppercase;
-      color: $white;
-      display: flex;
-      transform: rotate(90deg);
-      position: absolute;
-      padding: rem(20);
-      z-index: 5;
-      right: 30%;
-      bottom: auto;
-
-      .an-hero-slider.white &,
-      .an-hero-slider.light-green & {
-        color: $an-theme-dark-grey;
-      }
-
-      span {
-        display: block;
-        margin-left: rem(20);
-        font-size: rem(40);
-        position: relative;
-        transition: all 0.3s ease;
-        &:hover > span {
-          animation: discoverArrow 0.8s infinite;
-        }
-
-        .an-hero-slider.white &,
-        .an-hero-slider.light-green & {
-          color: $an-theme;
-        }
-      }
-    }
-  }
 }
+
+
+// .an-hero-slider {
+
+//   .portlet-body {
+//     width: 100vw;
+//     // display: flex;
+//     // flex-wrap: nowrap;
+//     // position: relative;
+//     height: 100%;
+
+//     .journal-content-article {
+//       // flex-shrink: 0;
+//       // width: 100%;
+//       // display: flex;
+//       // position: relative;
+//       // align-items: normal;
+//     }
+//   }
+
+//   &__inner-wrapper {
+//     // width: 100%;
+//     // display: flex;
+//     // flex-wrap: nowrap;
+//     // height: 100%;
+//   }
+
+//     .an-hero-slider.light-green & {
+//       background: $an-theme-light;
+//     }
+
 
 @keyframes discoverArrow {
   0% {transform: translateX(0px);}
