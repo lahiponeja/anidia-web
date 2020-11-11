@@ -35,10 +35,22 @@ window.dataLayer.push({
 if (typeof ga === 'function') {
   ga(function(tracker) {
     var clientId = tracker.get('clientId');
+
+    var adblockActive = false;
+
+    try {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("HEAD", "/js/prebid-ads.js", false);
+      xmlhttp.send();
+    } catch(e) {
+      adblockActive = true;
+    }
+
     window.dataLayer.push({
     "event": "anidiapageview",
     "user": {
       "gaclient" : clientId,
+      "adblock": (adblockActive ? "enabled" : "disabled"),
       "useragent": "${request.getHeader("User-Agent")!""}",
       "subcribednewsletter": undefined,
       "logged": "no logado",
