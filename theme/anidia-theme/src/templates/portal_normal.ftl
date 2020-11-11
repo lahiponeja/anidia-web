@@ -223,7 +223,7 @@ webPageMarkup.text = JSON.stringify(
   { "@context": "http://schema.org",
     "@type": "WebPage",
       "name": document.getElementsByTagName("title")[0].innerHTML,
-      "description": "Descripción de la página",
+      "description": getMeta('description'),
       "publisher": {
           "@type": "Organization",
           "name": "Anidia"
@@ -232,8 +232,20 @@ webPageMarkup.text = JSON.stringify(
 
 document.querySelector('head').appendChild(webPageMarkup);
 
-</script>
+function getMeta(metaName) {
+  const metas = document.getElementsByTagName('meta');
 
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === metaName) {
+      return metas[i].getAttribute('content');
+    }
+  }
+
+  return '';
+}
+
+console.log('AAAAA' + getMeta('description'));
+</script>
 
 </body>
 
