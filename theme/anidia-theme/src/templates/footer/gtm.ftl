@@ -27,8 +27,8 @@ window.dataLayer.push({
         "subcategory2:" "",
         "subcategory3:" "",
         "subcategory4:" "",
-        "time": "${dateUtil.getCurrentDate("HHmmss", locale, timeZoneUtil.getDefault())}"
-
+        "time": "${dateUtil.getCurrentDate("HHmmss", locale, timeZoneUtil.getDefault())}",
+        "url": "${request.getRequestURL()}",
       }
     ]
   }
