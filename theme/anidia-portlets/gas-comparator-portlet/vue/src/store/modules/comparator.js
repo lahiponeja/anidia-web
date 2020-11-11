@@ -61,6 +61,11 @@ const state = reactive({
       icon: "an-icon--saving",
       active: false,
     },
+    {
+      name: "Error",
+      component: "comp-error",
+      active: false,
+    },
   ],
 })
 
@@ -149,7 +154,7 @@ const sendSavingByUseService = function(obj) {
         resolve(res)
       })
       .catch((err) => {
-        console.log("setSavingsByConsumption", err)
+        console.log("setSavingByUse", err)
         reject(err)
       })
   })
