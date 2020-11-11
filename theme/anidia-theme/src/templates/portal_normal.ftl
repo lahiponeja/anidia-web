@@ -217,6 +217,25 @@ if (document.querySelector('.anidia-header__input')) {
 </script>
 <script>
 
+var organizationMarkup = document.createElement('script');
+organizationMarkup.type = 'application/ld+json';
+organizationMarkup.text = JSON.stringify(        
+  { "@context" : "http://schema.org",
+    "@type" : "Organization",
+    "url" : "https://anidia.es/",
+    "email": "email de contacto Anidia",
+    "contactPoint" : [
+      { "@type" : "ContactPoint",
+      "telephone" : `${call_center_phone_prefix} ${call_center_phone}`,
+      "contactType" : "customer service",
+      "url" : "url de contacto",
+      "areaServed" : "ES"
+      }]        
+  });
+document.querySelector('head').appendChild(organizationMarkup);
+
+
+
 var webPageMarkup = document.createElement('script');
 webPageMarkup.type = 'application/ld+json';
 webPageMarkup.text = JSON.stringify(        
@@ -229,7 +248,6 @@ webPageMarkup.text = JSON.stringify(
           "name": "Anidia"
       }        
   });
-
 document.querySelector('head').appendChild(webPageMarkup);
 
 function getMeta(metaName) {
