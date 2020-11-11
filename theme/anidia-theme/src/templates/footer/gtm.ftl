@@ -1,4 +1,3 @@
-
 <script>
 window.dataLayer.push({
   "event": "anidiapageview",
@@ -40,7 +39,6 @@ if (typeof ga === 'function') {
     "event": "anidiapageview",
     "user": {
       "gaclient" : clientId,
-      "adblock": "disabled",
       "useragent": "${request.getHeader("User-Agent")!""}",
       "subcribednewsletter": undefined,
       "logged": "no logado",
