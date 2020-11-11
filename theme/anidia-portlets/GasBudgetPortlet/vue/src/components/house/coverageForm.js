@@ -369,7 +369,7 @@ const coverageForm = {
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
-                        :key="result.municipalityName"
+                        :key="'municipality-'+index"
                         v-bind="resultProps[index]"
                       >
                         {{ result.municipalityName }}
@@ -377,7 +377,7 @@ const coverageForm = {
                     </ul>
 
                     <ul id="municustomul" v-show="house.state.autocompData.municipalities.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
-                      <li @click="[setValue(municipality.municipalityName, 'municipalityName', '#municustomul'), onSubmitMunicipalities(municipality)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(municipality, index) in house.state.autocompData.municipalities" :key="municipality.municipalityId">
+                      <li @click="[setValue(municipality.municipalityName, 'municipalityName', '#municustomul'), onSubmitMunicipalities(municipality)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(municipality, index) in house.state.autocompData.municipalities" :key="'second-municipality-'+index">
                         {{ municipality.municipalityName }}
                       </li>
                     </ul>
@@ -426,7 +426,7 @@ const coverageForm = {
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
-                        :key="'street-'+index"
+                        :key="'address-'+index"
                         v-bind="resultProps[index]"
                       >
                         {{ result.name }}
@@ -434,7 +434,7 @@ const coverageForm = {
                     </ul>
 
                     <ul id="addresscustomul" v-show="house.state.autocompData.addresses.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
-                      <li @click="[setValue(address.name, 'name', '#addresscustomul'), onSubmitAddresses(address)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(address, index) in house.state.autocompData.addresses" :key="address.name">
+                      <li @click="[setValue(address.name, 'name', '#addresscustomul'), onSubmitAddresses(address)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(address, index) in house.state.autocompData.addresses" :key="'second-address-'+index">
                         {{ address.name }}
                       </li>
                     </ul>
@@ -483,7 +483,7 @@ const coverageForm = {
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
-                        :key="result.number"
+                        :key="'estate-'+index"
                         v-bind="resultProps[index]"
                       >
                         {{ result.number }}
@@ -491,7 +491,7 @@ const coverageForm = {
                     </ul>
 
                     <ul id="estatescustomul" v-show="house.state.autocompData.estates.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
-                      <li @click="[setValue(estate.number, 'number', '#estatescustomul'), onSubmitEstates(estate)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(estate, index) in house.state.autocompData.estates" :key="estate.gateId">
+                      <li @click="[setValue(estate.number, 'number', '#estatescustomul'), onSubmitEstates(estate)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(estate, index) in house.state.autocompData.estates" :key="'second-estate-'+index">
                         {{ estate.number }}
                       </li>
                     </ul>
@@ -539,7 +539,7 @@ const coverageForm = {
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
-                        :key="'propertyResult'+index"
+                        :key="'property-'+index"
                         v-bind="resultProps[index]"
                       >
                         {{ result.address }}
@@ -547,7 +547,7 @@ const coverageForm = {
                     </ul>
 
                     <ul id="propertiescustomul" v-show="house.state.autocompData.properties.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
-                      <li @click="[setValue(property.address, 'address', '#propertiescustomul'), onSubmitProperties(property)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(property, index) in house.state.autocompData.properties" :key="'property'+index">
+                      <li @click="[setValue(property.address, 'address', '#propertiescustomul'), onSubmitProperties(property)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(property, index) in house.state.autocompData.properties" :key="'second-property-'+index">
                         {{ property.address }}
                       </li>
                     </ul>
