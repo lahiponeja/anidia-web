@@ -26,9 +26,7 @@ export default function main({portletNamespace, contextPath, portletElementId, c
     node.innerHTML = /*html*/
 		`<div class="bg-white">
 			<transition name="view">
-				<keep-alive>
 					<component :is="global.activeView().component"></component>
-				</keep-alive>
 			</transition>
 		</div>`;
 

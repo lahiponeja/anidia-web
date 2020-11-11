@@ -643,3 +643,10 @@ $an-icon-thunder-house: "\e933";
   content: $an-icon-thunder-house;
   display: block;
 }
+
+$an-icon-info: "\ea0c";
+.an-icon--info:before {
+  font-family: $an-icons;
+  content: $an-icon-info;
+  display: block;
+}
