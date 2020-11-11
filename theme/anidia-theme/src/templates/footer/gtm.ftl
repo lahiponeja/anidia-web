@@ -29,6 +29,8 @@ window.dataLayer.push({
         "subcategory4:" "",
         "time": "${dateUtil.getCurrentDate("HHmmss", locale, timeZoneUtil.getDefault())}",
         "url": "${request.getRequestURL()}",
+        "weekday": "${dateUtil.getCurrentDate("EEEEEEEEEEE", locale, timeZoneUtil.getDefault())}"
+
       }
     ]
   }
