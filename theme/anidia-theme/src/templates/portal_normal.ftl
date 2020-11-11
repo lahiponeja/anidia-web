@@ -244,7 +244,6 @@ function getMeta(metaName) {
   return '';
 }
 
-console.log('AAAAA' + getMeta('description'));
 </script>
 
 </body>
