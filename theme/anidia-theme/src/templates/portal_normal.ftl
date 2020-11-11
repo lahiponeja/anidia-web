@@ -214,8 +214,27 @@ function header() {
 if (document.querySelector('.anidia-header__input')) {
   header();
 }
+</script>
+<script>
+
+var webPageMarkup = document.createElement('script');
+webPageMarkup.type = 'application/ld+json';
+webPageMarkup.text = JSON.stringify(        
+  { "@context": "http://schema.org",
+    "@type": "WebPage",
+      "name": document.getElementsByTagName("title")[0].innerHTML,
+      "description": "Descripción de la página",
+      "publisher": {
+          "@type": "Organization",
+          "name": "Anidia"
+      }        
+  });
+
+document.querySelector('head').appendChild(webPageMarkup);
 
 </script>
+
+
 </body>
 
 </html>
