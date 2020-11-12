@@ -11,7 +11,7 @@ function heroSlider() {
   var controller = new ScrollMagic.Controller({});
 
 
-  if (document.querySelectorAll('.section--one')) document.querySelectorAll('.section--one')[0].parentElement.style.padding = 0;
+  if (document.querySelectorAll('#an-hero-slider__flag')) document.querySelectorAll('#an-hero-slider__flag')[0].parentElement.style.padding = 0;
 
   let sceneBgAnimate;
   for (var i = 0; i < slides.length; i++) {
@@ -29,11 +29,11 @@ function heroSlider() {
   }
 
   new ScrollMagic.Scene({
-      triggerElement: (".section--one"),
+      triggerElement: ("#an-hero-slider__flag"),
       triggerHook: "onEnter",
       duration: '0'
     })
-    .setPin(".section--one")
+    .setPin("#an-hero-slider__flag")
     .addTo(controller)
     .on('start', function() {
       if(sceneBgAnimate) sceneBgAnimate.destroy();
