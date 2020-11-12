@@ -2,7 +2,6 @@
 
   .portlet-body {
     display: flex;
-    scroll-padding: 0 100%;
     padding-bottom: rem(24);
     overflow-x: auto;
     overflow-y: hidden;
@@ -31,6 +30,7 @@
   .journal-content-article  {
     margin-right: rem(20);
     min-width:  calc(100% - 40px);
+    scroll-snap-align: start;
 
     @include desktop {
       min-width: rem(278);

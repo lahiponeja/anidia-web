@@ -2,6 +2,7 @@ import compHotWater from "../components/comparator/compHotWater";
 import compHeating from "../components/comparator/compHeating";
 import compKitchen from "../components/comparator/compKitchen";
 import compSaving from "../components/comparator/compSaving";
+import compError from "../components/comparator/compError";
 
 const comparatorView = {
   inject: ["comparator"],
@@ -10,6 +11,7 @@ const comparatorView = {
     'comp-heating': compHeating,
     'comp-kitchen': compKitchen,
     'comp-saving': compSaving,
+    'comp-error': compError,
   },
   template: /*html*/`
     <div class="w-full">
