@@ -3,6 +3,7 @@
 
   &__item {
     height: 100vh;
+    overflow: hidden;
 
     @include desktop {
       &-inner-wrapper {
@@ -51,13 +52,9 @@
 
   &__image {
     width: 100%;
-    // z-index: 1;
 
     @include desktop {
       width: flex-grid(5);
-      // position: absolute;
-      // top: 0;
-      // right: 0;
     }
 
     &-desktop {
@@ -196,37 +193,6 @@
     }
   }
 }
-
-
-// .an-hero-slider {
-
-//   .portlet-body {
-//     width: 100vw;
-//     // display: flex;
-//     // flex-wrap: nowrap;
-//     // position: relative;
-//     height: 100%;
-
-//     .journal-content-article {
-//       // flex-shrink: 0;
-//       // width: 100%;
-//       // display: flex;
-//       // position: relative;
-//       // align-items: normal;
-//     }
-//   }
-
-//   &__inner-wrapper {
-//     // width: 100%;
-//     // display: flex;
-//     // flex-wrap: nowrap;
-//     // height: 100%;
-//   }
-
-//     .an-hero-slider.light-green & {
-//       background: $an-theme-light;
-//     }
-
 
 @keyframes discoverArrow {
   0% {transform: translateX(0px);}

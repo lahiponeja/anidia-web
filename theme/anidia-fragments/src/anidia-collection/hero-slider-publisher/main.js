@@ -10,28 +10,36 @@ function heroSlider() {
 
   var controller = new ScrollMagic.Controller({});
 
-  for (var i=0; i < slides.length; i++) {
-    new ScrollMagic.Scene({
+
+  if (document.querySelectorAll('.section--one')) document.querySelectorAll('.section--one')[0].parentElement.style.padding = 0;
+
+  let sceneBgAnimate;
+  for (var i = 0; i < slides.length; i++) {
+    sceneBgAnimate = new ScrollMagic.Scene({
       triggerElement: slides[i],
       triggerHook: "onLeave",
       duration: '100%'
     })
     .setPin(slides[i], {pushFollowers: false})
-    // .addIndicators({colorEnd: "tomato"})
-    .addTo(controller);
+    .addTo(controller)
+    .on('end', function() {
+      document.getElementById('banner').style.left = '0';
+      document.querySelector('.an-hero-slider__lines').style.display = 'block';
+    });
   }
 
-    new ScrollMagic.Scene({
+  new ScrollMagic.Scene({
       triggerElement: (".section--one"),
-      triggerHook: "onLeave",
-      duration: '100%'
+      triggerHook: "onEnter",
+      duration: '0'
     })
     .setPin(".section--one")
-    // .addIndicators({
-    //   name: ".section--one Pin",
-    //   colorEnd: "dodgerblue"
-    // })
-    .addTo(controller);
+    .addTo(controller)
+    .on('start', function() {
+      if(sceneBgAnimate) sceneBgAnimate.destroy();
+      document.getElementById('banner').style.left = '-100%';
+      document.querySelector('.an-hero-slider__lines').style.display = 'none';
+    });
 }
 
 if (document.querySelectorAll(".an-hero-slider__item").length > 1) {
@@ -53,4 +61,3 @@ if (discoverBtn) {
     });
   });
 }
-
