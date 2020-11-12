@@ -136,3 +136,22 @@ JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 
 </style>
 
+<script type="application/ld+json">
+	{   "@context": "https://schema.org",
+		"@type": "FAQPage",
+		"mainEntity": [
+		<%for (int i = 0 ; i < contentArray.length(); i++) {
+			JSONObject item = contentArray.getJSONObject(i);
+		%>	
+		 {
+			"@type": "Question",
+			"name": "<%= item.get("question") %>",
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": "<%= item.get("answer") %>"
+			}
+		 }, 
+	  <%}%>
+		  ]
+	}
+</script>
