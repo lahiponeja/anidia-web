@@ -39,7 +39,7 @@
   { "@context": "http://schema.org",
     "@type": "WebPage",
       "name": "${the_title} | Anidia",
-      "description": `${page_description}`,
+      "description": "${page_description}",
       "publisher": {
           "@type": "Organization",
           "name": "Anidia"
