@@ -88,6 +88,20 @@ const state = reactive({
   postalCode: "",
 })
 
+
+const resetAutocompleteData = function() {
+  Object.assign(state.autocompData, {
+    municipalities: [],
+    addresses: [],
+    estates: [],
+    properties: [],
+  })
+}
+
+const resetHouseFormData = function() {
+  state.houseFormData = {}
+}
+
 const setCoverageData = function(key, payloadObj) {
   Object.assign(state.coverageData[key], payloadObj)
 }
@@ -308,15 +322,14 @@ const setHouseFormData = function(payload) {
 }
 
 const submitHouseData = function(gasBudgetRequest) {
-
-  const options = {
-    rootName: 'GasBudgetRequest', // defaults to 'root'
-    attributes: false
-  }
   const dataObj = Object.assign(gasBudgetRequest, {
     postalCode: state.postalCode,
     houseType: state.houseType,
   })
+  const options = {
+    rootName: 'GasBudgetRequest', // defaults to 'root'
+    attributes: false
+  }
   const xml = objToXml(dataObj, options)
 
   setHouseFormData(dataObj)
@@ -351,4 +364,6 @@ export default {
   submitHouseData,
   setCoverageData,
   submitBusinessContactInfo,
+  resetAutocompleteData,
+  resetHouseFormData,
 }

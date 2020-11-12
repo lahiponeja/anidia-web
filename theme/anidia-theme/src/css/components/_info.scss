@@ -1,0 +1,51 @@
+.an-info {
+  margin-left: rem(20);
+  position: relative;
+
+  &__icon {
+    color: $an-theme;
+    cursor: pointer;
+    font-size: rem(18);
+  }
+
+  &__box {
+    position: absolute;
+    width: rem(300);
+    background-color: $an-theme;
+    padding: rem(10) rem(12);
+    border-radius: 6px;
+    color: $an-theme-light;
+    font-style: italic;
+    top: 34px;
+    right: -15px;
+    z-index: 2;
+
+    &:before {
+      content: "";
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-bottom: 11px solid $an-theme;
+      position: absolute;
+      top: -9px;
+      right: 13px;
+    }
+
+    @media screen and (min-width: 1100px) {
+      right: initial;
+      left: 50%;
+      transform: translateX(-50%);
+
+      &:before {
+        right: initial;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  &--hidden {
+    .an-info__box {
+      display: none;
+    }
+  }
+}

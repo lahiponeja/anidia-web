@@ -1,5 +1,5 @@
 const budgetReady = {
-  inject: ["house"],
+  inject: ["global", "house"],
   data() {
     return {
       budgetReadyForm: {
@@ -24,16 +24,27 @@ const budgetReady = {
         console.error(err)
         this.sendingForm = false
       })
-    }
+    },
+
+    goBack() {
+      const confirmation = confirm("¿Estás seguro de que quieres volver a calcular?")
+      if(confirmation) {
+        this.house.changeHouseStep('vivienda')
+      }
+    },
   },
   mounted () {
     window.scrollTo({
-      top: 0,
+      top: 200,
       behavior: 'smooth',
     })
   },
   template: /*html*/`
   <div class="an-form an-wrapper">
+    <div v-if="sendingForm" class="an-funnel__white-overlay">
+      <p class="an-h3">Cargando...</p>
+    </div>
+
     <form @submit.prevent="submitRequest">
       <div class="an-form__flex an-form__flex--2-cols">
         <div class="an-input an-form__item">
@@ -46,7 +57,7 @@ const budgetReady = {
           <input v-model="budgetReadyForm.phone" type="text" class="an-input__field" placeholder="Teléfono*" required="">
         </div>
         <div class="an-input an-form__item">
-          <input v-model="budgetReadyForm.email" type="text" class="an-input__field" placeholder="Email*" required="">
+          <input v-model="budgetReadyForm.email" type="email" class="an-input__field" placeholder="Email*" required="">
         </div>
         <div class="an-input an-form__item">
           <div class="an-checkbox mt-xl">
@@ -66,10 +77,16 @@ const budgetReady = {
         </div>
       </div>
 
-      <button type="submit" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--check-simple mt-xl">
-        <span v-if="!sendingForm">Continuar</span>
-        <span v-else>Enviando...</span>
-      </button>
+      <div class="an-form__flex an-form__flex--6-cols mb-xxl">
+        <button @click="goBack" type="button" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--half-arrow-left mt-xl">
+          <span>Volver a calcular</span>
+        </button>
+
+        <button type="submit" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--check-simple mt-xl">
+          <span v-if="!sendingForm">Continuar</span>
+          <span v-else>Enviando...</span>
+        </button>
+      </div>
 
     </form>
   </div>
