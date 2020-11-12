@@ -13,12 +13,12 @@
       <#if TextoBotón.getData?? && TextoBotón.getData() != "">
 			<div class="an-hero-slider__btn">
         <#if LinkToPage1z94.getFriendlyUrl() != "">
-        <a href="${LinkToPage1z94.getFriendlyUrl()}" class="an-btn an-btn--flatter an-btn--white">
+        <a href="${LinkToPage1z94.getFriendlyUrl()}" class="an-btn an-btn--white">
           <span>${TextoBotón.getData()}</span>
         </a>
         <#else>
             <#if LinkToUrl.getData??>
-                <a href="${LinkToUrl.getData()}" class="an-btn an-btn--flatter an-btn--white">
+                <a href="${LinkToUrl.getData()}" class="an-btn an-btn--white">
                   <span>${TextoBotón.getData()}</span>
                 </a>
             </#if>

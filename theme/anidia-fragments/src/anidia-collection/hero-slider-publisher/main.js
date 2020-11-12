@@ -8,23 +8,30 @@ function heroSlider() {
   }
   dataSliderLinesList.innerHTML = linesHTML.join("");
 
-  // init
-  var controller = new ScrollMagic.Controller({
-    globalSceneOptions: {
-      triggerHook: 'onLeave',
-      duration: "200%"
-    }
-  });
+  var controller = new ScrollMagic.Controller({});
 
-  for (var i=0; i<slides.length; i++) {
+  for (var i=0; i < slides.length; i++) {
     new ScrollMagic.Scene({
-        triggerElement: slides[i],
-        duration: '200%'
-      })
-      .setPin(slides[i], {pushFollowers: false})
-      // .addIndicators()
-      .addTo(controller);
+      triggerElement: slides[i],
+      triggerHook: "onLeave",
+      duration: '100%'
+    })
+    .setPin(slides[i], {pushFollowers: false})
+    // .addIndicators({colorEnd: "tomato"})
+    .addTo(controller);
   }
+
+    new ScrollMagic.Scene({
+      triggerElement: (".section--one"),
+      triggerHook: "onLeave",
+      duration: '100%'
+    })
+    .setPin(".section--one")
+    // .addIndicators({
+    //   name: ".section--one Pin",
+    //   colorEnd: "dodgerblue"
+    // })
+    .addTo(controller);
 }
 
 if (document.querySelectorAll(".an-hero-slider__item").length > 1) {
