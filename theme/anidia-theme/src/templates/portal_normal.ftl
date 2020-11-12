@@ -24,7 +24,6 @@
     "@context" : "http://schema.org",
     "@type" : "Organization",
     "url" : "https://anidia.es/",
-    "email": "${contact_mail}",
     "contactPoint" : [
       { "@type" : "ContactPoint",
       "telephone" : "${call_center_phone_prefix} ${call_center_phone}",

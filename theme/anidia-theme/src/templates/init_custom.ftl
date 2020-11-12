@@ -6,8 +6,6 @@ This file allows you to override and define new FreeMarker variables.
 
 <#assign page_description = layout.getDescription(themeDisplay.getLocale(), true)/>
 
-<#assign contact_mail = themeDisplay.getThemeSetting("Mail de contacto") />
-
 <#-- We use slicing to split the phone and the prefix if it's needed -->
 <#assign call_center_phone = themeDisplay.getThemeSetting("Teléfono de Call Center") />
 <#assign call_center_phone_prefix = "+34" />
