@@ -51,9 +51,12 @@ const compSaving = {
     },
 
     calculateAgain() {
-      this.comparator.resetComparatorStateData()
-      this.comparator.changeStepComponent('comp-hot-water')
-      this.global.changeView('funnel')
+      const confirmation = confirm("¿Estás seguro de que quieres volver a calcular?")
+      if(confirmation) {
+        this.comparator.resetComparatorStateData()
+        this.comparator.changeStepComponent('comp-hot-water')
+        this.global.changeView('funnel')
+      }
     }
   },
   template: /*html*/`
@@ -61,6 +64,10 @@ const compSaving = {
     <transition name="view">
       <template v-if="!comparator.state.leadSent">
         <div class="an-form an-wrapper">
+        <div v-if="sendingForm" class="an-funnel__white-overlay">
+          <p class="an-h3">Cargando...</p>
+        </div>
+        
           <form @submit.prevent="submitRequest">
             <div class="an-form__flex an-form__flex--2-cols">
               <div class="an-input an-form__item">
@@ -99,11 +106,10 @@ const compSaving = {
               </button>
 
               <button type="submit" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--check-simple mt-xl">
-                <span v-if="!sendingForm">Continuar</span>
-                <span v-else>Enviando...</span>
+                <span v-if="sendingForm">Enviando...</span>
+                <span v-else>Continuar</span>
               </button>
             </div>
-
           </form>
         </div>
       </template>
