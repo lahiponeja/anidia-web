@@ -37,8 +37,10 @@ const houseForm = {
     submitRequest() {
       this.sendingForm = true
       this.house.submitHouseData(this.gasBudgetRequest).then(() => {
+        window.dataLayer.push(this.house.getDatalayerDetailsStepInfo("FUNNEL - CONTRATACIÓN", "details OK", "gas"));
         this.sendingForm = false
       }).catch((err) => {
+        window.dataLayer.push(this.house.getDatalayerDetailsStepInfo("FUNNEL - CONTRATACIÓN", "details KO", "gas"));
         this.sendingForm = false
         console.log(err)
       })
@@ -101,6 +103,7 @@ const houseForm = {
     }
   },
   mounted () {
+    window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "details", "gas"));
     window.scrollTo({
       top: 200,
       behavior: 'smooth',
