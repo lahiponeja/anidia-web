@@ -202,6 +202,50 @@ const submitUserContactInfo = function (compSavingForm) {
   return result
 }
 
+const getDatalayerInitialInfo = function(category, action, label) {
+  return {
+    event: 'ananalyticsevent',
+    eventdata: {
+      category: category,
+      action: action,
+      label: label
+    }
+  }
+}
+
+const getDatalayerFirstStepInfo = function(category, action, label) {
+  var datalayerInfo = this.getDatalayerInitialInfo(category, action, label);
+  datalayerInfo.eventdata.energyspent = 'energyspent';//? 100?
+  datalayerInfo.eventdata.previousservicetype = 'previousservicetype';//?
+  return datalayerInfo;
+}
+
+const getDatalayerWaterStepInfo = function(category, action, label) {
+  var datalayerInfo = this.getDatalayerFirstStepInfo(category, action, label);
+  datalayerInfo.eventdata.hashotwater = 'hashotwater';//repetido?
+  datalayerInfo.eventdata.boilertype = 'boilertype';//repetido?
+  datalayerInfo.eventdata.peopleinhouse = this.state.savingsByUse.numberOfPeople;//repetido?
+  return datalayerInfo;
+}
+
+const getDatalayerHeatingStepInfo = function(category, action, label) {
+  var datalayerInfo = this.getDatalayerWaterStepInfo(category, action, label);
+  datalayerInfo.eventdata.hasheating = this.state.savingsByUse.heatingUse;
+  datalayerInfo.eventdata.heatingtype = 'heatingtype';  
+  datalayerInfo.eventdata.housetype = 'housetype'; 
+  datalayerInfo.eventdata.sqmeters = this.state.savingsByUse.surfaceHouse; 
+  datalayerInfo.eventdata.livesinlastflor =  this.state.savingsByUse.lastFloor; //flor o floor?
+  return datalayerInfo;
+}
+
+const getDatalayerKitchenStepInfo = function(category, action, label) {
+  var datalayerInfo = this.getDatalayerHeatingStepInfo(category, action, label);
+  datalayerInfo.eventdata.haskitchen = 'haskitchen'; 
+  datalayerInfo.eventdata.kitchentype = this.state.savingsByUse.kitchenUse; 
+  datalayerInfo.eventdata.kitchenusedays = this.state.savingsByUse.weeklyKitchenUse; 
+  return datalayerInfo;
+}
+
 export default {
   state: shallowReadonly(state),
   setSavingsByConsumption,
@@ -212,4 +256,9 @@ export default {
   sendSavingByUseService,
   resetComparatorStateData,
   setLead,
+  getDatalayerInitialInfo,
+  getDatalayerFirstStepInfo,
+  getDatalayerWaterStepInfo,
+  getDatalayerHeatingStepInfo,
+  getDatalayerKitchenStepInfo,
 }

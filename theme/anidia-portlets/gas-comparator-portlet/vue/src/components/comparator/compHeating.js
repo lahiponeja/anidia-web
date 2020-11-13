@@ -11,6 +11,8 @@ const compHeating = {
     }
   },
   mounted() {
+    window.dataLayer.push(this.comparator.getDatalayerWaterStepInfo("engagement", "calculator", "heatingsystem"));
+
     window.scrollTo({
       top: 200,
       behavior: 'smooth',
@@ -18,6 +20,7 @@ const compHeating = {
   },
   methods: {
     submitRequest() {
+      window.dataLayer.push(this.comparator.getDatalayerHeatingStepInfo("engagement", "calculator", "heatingsystem"));
       this.comparator.setSavingByUse({
         heatingUse: this.savingsData.heatingUse,
         singleFamilyHouse: this.savingsData.singleFamilyHouse,

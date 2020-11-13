@@ -31,6 +31,7 @@ const funnelForm = {
   },
   methods: {
     submitRequest() {
+      window.dataLayer.push(this.comparator.getDatalayerFirstStepInfo("engagement", "calculator", "energyspent"));
       if(this.known) {
         this.sendingForm = true
         this.comparator.setSavingsByConsumption(this.energyConsumption)
@@ -47,6 +48,7 @@ const funnelForm = {
     }
   },
   mounted() {
+    window.dataLayer.push(this.comparator.getDatalayerInitialInfo("engagement", "calculator", "energyspent"));
     if(document.querySelector('.an-featured')) document.querySelector('.an-featured').classList.add('hide');
   },
   template: /*html*/`

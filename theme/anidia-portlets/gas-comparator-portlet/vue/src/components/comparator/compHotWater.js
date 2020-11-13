@@ -12,6 +12,7 @@ const compHotWater = {
   },
   methods: {
     submitRequest() {
+      window.dataLayer.push(this.comparator.getDatalayerWaterStepInfo("engagement", "calculator", "hotwater"));
       this.comparator.setSavingByUse({
         acsIndividual: this.savingsData.acsIndividual,
         heatingIndividual: this.savingsData.heatingIndividual,
@@ -37,6 +38,7 @@ const compHotWater = {
     }
   },
   mounted() {
+    window.dataLayer.push(this.comparator.getDatalayerFirstStepInfo("engagement", "calculator", "hotwater"));//heating system??
     window.scrollTo({
       top: 200,
       behavior: 'smooth',
