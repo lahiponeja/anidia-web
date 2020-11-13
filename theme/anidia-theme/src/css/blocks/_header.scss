@@ -510,17 +510,16 @@
 }
 
 #banner {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 2;
+
+  &.more-elem {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+  }
 
   @include desktop {
     padding: rem(19) rem(60);
-
-    &.more-elem {
-      position: fixed;
-    }
   }
 }
 
