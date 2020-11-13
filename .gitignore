@@ -51,6 +51,7 @@ Thumbs.db
 # Docker
 
 docker/db-data
+.env
 
 # Portlets
 
@@ -60,3 +61,14 @@ RemoteSystemsTempFiles
 
 # Liferay
 liferay/deploy/*
+logs/*
+
+#Java projects
+.classpath
+.project
+.settings
+.gradle
+gradle/
+
+.env
+.tool-versions

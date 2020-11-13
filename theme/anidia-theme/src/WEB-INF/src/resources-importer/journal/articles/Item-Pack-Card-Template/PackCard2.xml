@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<root available-locales="es_ES" default-locale="es_ES">
+	<dynamic-element name="Nombre" type="text" index-type="keyword" instance-id="oncv">
+		<dynamic-content language-id="es_ES"><![CDATA[PACK 2]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="Detalle" type="text" index-type="keyword" instance-id="boeq">
+		<dynamic-content language-id="es_ES"><![CDATA[AGUA CALIENTE + CALEFACCIÓN]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="Título" type="text_area" index-type="text" instance-id="wvkk">
+		<dynamic-content language-id="es_ES"><![CDATA[<h3>Instalación</h3><h2>Gratis</h2><h3>xxx€ de ahorro anual</h3>]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="Ventajas" type="text_area" index-type="text" instance-id="yhpw">
+		<dynamic-content language-id="es_ES"><![CDATA[<ul><li class="an-list__item an-body-m-regular"><div class="an-list__icon an-icon--check-circle"> </div>Lorem ipsum dolor</li><li class="an-list__item an-body-m-regular"><div class="an-list__icon an-icon--check-circle"> </div>Lorem ipsum dolor</li><li class="an-list__item an-body-m-regular"><div class="an-list__icon an-icon--check-circle"> </div>Lorem ipsum dolor</li></ul>]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="Botón" type="text" index-type="keyword" instance-id="npfl">
+		<dynamic-content language-id="es_ES"><![CDATA[Más información]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="Estilo" type="radio" index-type="keyword" instance-id="wcxa">
+		<dynamic-content language-id="es_ES"><![CDATA[blanco]]></dynamic-content>
+	</dynamic-element>
+</root>

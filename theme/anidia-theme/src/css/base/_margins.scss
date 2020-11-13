@@ -1,7 +1,7 @@
 // Margins
-$margin-desktop: 8 16 24 32 48 64 104;
-$margin-mobile: 8 16 24 32 48 64 '64'; // Quotes for hack and prevent the duplication remove in sass lists
-$margin-names: 'xs' 's' 'm' 'l' 'xl' 'xxl' 'xxxl';
+$margin-desktop: 0 8 16 24 32 48 64 104;
+$margin-mobile: 0 8 16 24 32 48 64 '64'; // Quotes for hack and prevent the duplication remove in sass lists
+$margin-names: 'none' 'xs' 's' 'm' 'l' 'xl' 'xxl' 'xxxl';
 
 @each $size in $margin-mobile {
   $i: index($margin-mobile, $size);

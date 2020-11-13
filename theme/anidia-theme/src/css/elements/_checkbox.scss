@@ -11,8 +11,13 @@
     height: 0;
     position: absolute;
 
+    &.privacy {
+      width: auto;
+      height: auto;
+    }
+
     &[disabled] {
-      & + #{ $parent }__label {
+      & ~ #{ $parent }__label {
         color: $an-theme-dark-grey-op;
 
         &:before {
@@ -37,24 +42,29 @@
 
     span {
       margin-left: rem(10);
+      flex: 1;
     }
   }
 
   &__input {
     &:focus {
-      &__label {
+      & ~ label {
         text-decoration: underline;
+
+        &:before {
+          border-width: 3px;
+        }
       }
     }
 
     &:checked {
-      & + label {
+      & ~ label {
         &:after {
           content: $an-icon-check-simple;
           color: $an-theme;
           font-family: $an-icons;
           font-size: rem(11);
-          height: rem(10);
+          height: rem(15);
           left: rem(5);
           position: absolute;
           width: rem(10);

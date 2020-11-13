@@ -1,12 +1,18 @@
+%an-input,
 .an-input {
   $parent: &;
 
   align-items: center;
   display: flex;
-  margin-bottom: rem(25);
+  margin-bottom: rem(40);
   position: relative;
   max-width: 100%;
   width: rem(496);
+
+  &__caption {
+    position: absolute;
+    bottom: rem(-25);
+  }
 
   &--icon {
     #{$parent}__field {
@@ -17,33 +23,43 @@
       color: $an-theme;
       position: absolute;
       right: rem(27);
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     &-left {
       #{$parent}__field {
         padding-left: rem(55);
       }
-  
+
       span {
         color: $an-theme;
         position: absolute;
         left: rem(27);
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
   }
-  
-  &__field {
+
+  &__field,
+  &__field input {
     background-color: $white;
     border: 1px solid $an-theme-soft-grey-sec;
     box-shadow: $an-shadow-two;
     border-radius: rem(30);
     color: $an-theme-dark-grey;
     font-family: $open-sans-regular-family;
-    font-size: rem(18);
+    font-size: rem(14);
     height: rem(60);
     width: 100%;
     padding: 0 rem(25);
     transition: box-shadow .2s;
+
+    @include tablet {
+      font-size: rem(18);
+    }
+
 
     &--textarea {
       height: rem(250);

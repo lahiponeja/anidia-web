@@ -1,0 +1,46 @@
+{
+  "fieldSets": [
+    {
+      "label": "Botón",
+      "fields": [
+        {
+          "name": "TextoEnlace",
+          "label": "Texto",
+          "description": "Texto del botón del módulo",
+          "type": "text",
+          "dataType": "string"
+        },
+        {
+          "name": "Enlace",
+          "label": "Enlace",
+          "description": "Enlace del botón del módulo",
+          "type": "text",
+          "dataType": "string"
+        }
+      ]
+    },
+    {
+      "label": "Tamaño cards",
+      "fields": [
+        {
+          "name": "CardSize",
+          "label": "Tamaño cards",
+          "description": "Tamaño de las cards",
+          "type": "select",
+          "dataType": "string",
+          "defaultValue": "Small",
+          "typeOptions": {
+            "validValues": [
+              {
+                "value": "Big"
+              },
+              {
+                "value": "Small"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

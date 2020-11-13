@@ -1,0 +1,10 @@
+apiDir: "../api/src/main/java"
+apiPackagePath: "com.liferay.gasComparator"
+application:
+    baseURI: "/gas-comparator"
+    className: "gasComparatorApplication"
+    name: "Liferay.gasComparator"
+    security:
+        guestAllowed: true
+author: "David Brenes"
+generateGraphQL: false

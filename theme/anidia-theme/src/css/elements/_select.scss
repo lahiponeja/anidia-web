@@ -26,13 +26,63 @@
     border-radius: rem(30);
     color: $an-theme-dark-grey;
     font-family: $open-sans-regular-family;
-    font-size: rem(18);
+    font-size: rem(14);
     height: rem(60);
     padding: 0 rem(25);
     width: 100%;
     transition: box-shadow .2s;
     display: flex;
     align-items: center;
+
+    @include tablet {
+      font-size: rem(18);
+    }
+  }
+
+  &__native {
+    &:focus {
+      border: 2px solid $an-theme;
+    }
+  }
+
+
+  &__form {
+    border-color: $an-theme;
+    position: relative;
+
+    select {
+      -webkit-appearance:none;
+      -moz-appearance: none; /* Firefox */
+      -webkit-appearance: none; /* Safari and Chrome */
+      appearance: none;
+      background-color: $white;
+      border: 1px solid $an-theme;
+      border-radius: rem(30);
+      color: $an-theme-dark-grey;
+      font-family: $open-sans-regular-family;
+      font-size: rem(14);
+      height: rem(60);
+      padding: 0 rem(25);
+      width: 100%;
+      transition: box-shadow .2s;
+      display: flex;
+      align-items: center;
+
+      @include tablet {
+        font-size: rem(18);
+      }
+    }
+
+    &:after {
+      content: $an-icon-chevron-down;
+      color: $an-theme;
+      font-family: $an-icons;
+      font-size: rem(16);
+      right: 0;
+      bottom: 50%;
+      position: absolute;
+      transform: translate(rem(-24), 50%);
+    }
   }
 
   &__icon {
@@ -44,7 +94,7 @@
     transition: all 0.2s ease;
     z-index: 4;
   }
-  
+
   &.is-active {
     z-index: 5;
 
@@ -66,6 +116,10 @@
     #{ $an-select }__icon {
       color: $an-theme-dark-grey-op;
     }
+  }
+
+  &--full-width {
+    width: 100%;
   }
 
   &__custom {
@@ -90,6 +144,8 @@
       padding: rem(45) 0 rem(25) 0;
       position: relative;
       top: rem(-28);
+      max-height: 300px;
+      overflow: auto;
     }
 
     &-option {
@@ -111,6 +167,10 @@
       &.is-hover {
         color: $an-theme;
       }
+
+      &[aria-selected="true"] {
+        color: $an-theme;
+      }
     }
 
     &.is-active {
@@ -125,23 +185,11 @@
     }
   }
 
-  @media (hover: hover) {
-    &__native {
-      opacity: 0;
-    }
-
-    &__custom {
-      display: block;
-    }
-    
-    &__native:focus + &__custom {
-      pointer-events: none;
-
-      #{ $an-select }__custom-trigger {
-        box-shadow: none;
-        border: 2px solid $an-theme;
-      }
-    }
+  // FIX CUSTOM STYLES
+  select {
+    -webkit-appearance:none;
+    -moz-appearance: none; /* Firefox */
+    -webkit-appearance: none; /* Safari and Chrome */
+    appearance: none;
   }
 }
-

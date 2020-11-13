@@ -1,42 +1,61 @@
-<!--
-  ---------------------------------------
-  Option        |  CSS class
-  ---------------------------------------
-  green        ->  bg-an-theme
-  green light  ->  bg-an-theme-light
-  white        ->  bg-white
-  yellow       ->  bg-yellow
-  dark gray    ->  bg-an-theme-dark-grey
-  soft gray    ->  bg-an-theme-soft-grey
-  ---------------------------------------
+[#switch configuration.Color]
+  [#case 'Verde']
+  <div class="bg-an-theme pl-s pr-s pt-xl pb-xxxl">
+  [#break]
 
-  <div class="bg-an-theme pl-s pr-s pt-xxxl pb-xxxl">
--->
+  [#case 'Verde claro']
+  <div class="bg-an-theme-light pl-s pr-s pt-xl pb-xxxl">
+  [#break]
 
-<div class="bg-an-theme pl-s pr-s pt-xxxl pb-xxxl">
+  [#case 'Blanco']
+  <div class="bg-white pl-s pr-s pt-xl pb-xxxl">
+  [#break]
 
-  <!--
-    Al añadir la clase "an-featured--image-right" se alinea la imagen a la derecha.
+  [#case 'Amarillo']
+  <div class="bg-yellow pl-s pr-s pt-xl pb-xxxl">
+  [#break]
 
-    <div class="an-featured an-featured--image-right">
-  -->
-  <div class="an-featured">
+  [#case 'Gris oscuro']
+  <div class="bg-an-theme-dark-grey pl-s pr-s pt-xl pb-xxxl">
+  [#break]
+
+  [#case 'Gris claro']
+    <div class="bg-an-theme-soft-grey pl-s pr-s pt-xl pb-xxxl">
+  [#break]
+
+  [default]
+  <div class="bg-an-theme pl-s pr-s pt-xl pb-xxxl">
+[/#switch]
+
+
+<div class="an-featured
+[#if configuration.Posicion == 'Derecha']
+ an-featured--image-right
+[/#if]
+[#if configuration.Esconder]
+hide
+[/#if]">
     <div class="an-featured__inner">
       <h2 class="an-featured__heading">
-        Te presentamos nuestra calculadora de ahorro
+        <lfr-editable id="Título" type="text">Título</lfr-editable>
       </h2>
 
-      <p class="an-featured__text">
-        Conecta con la energía que necesitas par redefinir tu energía.
-      </p>
+      <div class="an-featured__text">
+        <lfr-editable id="Subtítulo" type="text">Subtítulo</lfr-editable>
+      </div>
 
       <div class="an-featured__image">
-        <img src="[resources:featured-module.png]" alt="">
+        <lfr-editable id="Imagen1" type="image"
+          ><img src="[resources:featured-module.png]" alt=""
+        /></lfr-editable>
       </div>
 
       <div class="an-featured__btn">
-        <a href="#" class="an-btn an-btn--flatter an-btn--gradient">
-          <span>Lorem ipsum dolor</span>
+        <a
+          href="${htmlUtil.escape(configuration.Enlace)}"
+          class="an-btn an-btn--gradient"
+        >
+          <span>${htmlUtil.escape(configuration.Texto)}</span>
         </a>
       </div>
     </div>

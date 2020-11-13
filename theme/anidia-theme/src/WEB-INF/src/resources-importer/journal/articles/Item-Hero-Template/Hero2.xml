@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<root available-locales="es_ES" default-locale="es_ES">
+	<dynamic-element name="Título" type="text" index-type="keyword" instance-id="ezdg">
+		<dynamic-content language-id="es_ES"><![CDATA[Título de ejemplo2]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="Subtítulo" type="text_box" index-type="text" instance-id="gwcy">
+		<dynamic-content language-id="es_ES"><![CDATA[Subtítulo de ejemplo, un poco más largo que el título.2]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="TextoBotón" type="text" index-type="keyword" instance-id="jwda">
+		<dynamic-content language-id="es_ES"><![CDATA[Ver más]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="LinkToPage1z94" type="link_to_layout" index-type="keyword" instance-id="iyde">
+		<dynamic-content language-id="es_ES"><![CDATA[13@public@20122]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="ImagenMobile" type="image" index-type="text" instance-id="nkhn">
+		<dynamic-content language-id="es_ES"><![CDATA[]]></dynamic-content>
+	</dynamic-element>
+	<dynamic-element name="ImagenDesktop" type="image" index-type="text" instance-id="jzlo">
+		<dynamic-content language-id="es_ES"><![CDATA[{"classPK":"54550","groupId":"20122","name":"girl-jumping.png","alt":"","title":"girl-jumping.png","type":"journal","uuid":"7d5803b8-7d60-2154-58b3-2a7a2faa1744","fileEntryId":"54556","resourcePrimKey":"54535"}]]></dynamic-content>
+	</dynamic-element>
+</root>

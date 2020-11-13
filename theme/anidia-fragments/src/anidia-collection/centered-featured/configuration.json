@@ -17,6 +17,82 @@
           "description": "Enlace del botón del módulo",
           "type": "text",
           "dataType": "string"
+        },
+        {
+          "name": "hideBackgroundImage",
+          "label": "Ocultar imagen de fondo",
+          "description": "Oculta la imagen de fondo si no se quiere tener ninguna",
+					"type": "checkbox",
+          "defaultValue": false
+        },
+        {
+          "name": "hideLeftImage",
+          "label": "Ocultar imagen izquierda",
+          "description": "Oculta la imagen izquierda",
+					"type": "checkbox",
+          "defaultValue": false
+        },
+        {
+          "name": "hideRightImage",
+          "label": "Ocultar imagen derecha",
+          "description": "Oculta la imagen derecha",
+					"type": "checkbox",
+          "defaultValue": false
+        },
+        {
+          "name": "hideLink",
+          "label": "Ocultar enlace",
+          "description": "Oculta el enlace de más información",
+					"type": "checkbox",
+          "defaultValue": false
+        }
+      ]
+    },
+    {
+      "label": "Fondo",
+      "fields": [
+        {
+          "name": "Color",
+          "label": "Color",
+          "description": "Color del fondo del módulo",
+          "type": "select",
+          "dataType": "string",
+          "defaultValue": "Verde",
+          "typeOptions": {
+            "validValues": [
+              {
+                "value": "Verde"
+              },
+              {
+                "value": "Verde claro"
+              },
+              {
+                "value": "Blanco"
+              },
+              {
+                "value": "Amarillo"
+              },
+              {
+                "value": "Gris oscuro"
+              },
+              {
+                "value": "Gris claro"
+              }
+            ]
+          }
+        }
+      ]
+    }
+		,
+    {
+      "label": "Módulo",
+      "fields": [
+        {
+          "name": "Esconder",
+          "label": "Esconder inicialmente",
+          "description": "El módulo se oculta inicialmente y algo más (otro módulo) debe mostrarlo",
+					"type": "checkbox",
+          "defaultValue": false
         }
       ]
     }

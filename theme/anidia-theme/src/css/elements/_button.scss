@@ -1,3 +1,4 @@
+%an-btn,
 .an-btn {
   border: none;
   border-radius: rem(40);
@@ -66,7 +67,7 @@
       color: $white;
     }
   }
-  
+
   &--gradient {
     color: $white;
     overflow: hidden;
@@ -88,11 +89,11 @@
       z-index: 1;
       @include gradient-yellow-bg;
     }
-    
+
     &:hover {
       color: $white;
     }
-    
+
     &:hover:after,
     &:active:after {
       opacity: 1;
@@ -104,6 +105,7 @@
     box-shadow: none;
     color: $an-theme-dark-grey-op;
     cursor: not-allowed;
+    pointer-events: none;
   }
 
   &--icon {

@@ -1,0 +1,235 @@
+.an-stepper {
+  color: $white;
+  margin-right: rem(-20);
+  margin-left: rem(-20);
+
+  @include desktop {
+    margin-right: unset;
+    margin-left: unset;
+    padding-bottom: rem(120);
+  }
+
+  h3 {
+    text-align: center;
+    margin-bottom: rem(55);
+  }
+
+  &__dropdown {
+    outline: 0;
+    box-shadow: none;
+    border: 0;
+    background: none;
+    color: $white;
+    text-transform: uppercase;
+    display: flex;
+    margin: auto;
+
+    @include desktop {
+      display: none !important;
+      visibility: hidden !important;
+    }
+  }
+
+  &__tabs {
+    margin-bottom: rem(99);
+
+    @include desktop {
+      min-height: rem(285);
+      clear: both;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      margin: 0 auto;
+    }
+  }
+
+  &__tab {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+    @include desktop {
+      float: left;
+      display: block;
+    }
+
+    label {
+      margin-right: rem(30);
+      position: relative;
+      top: 0;
+      cursor: pointer;
+      text-transform: uppercase;
+      display: none !important;
+      visibility: hidden !important;
+
+      @include desktop {
+        display: block !important;
+        visibility: visible !important;
+      }
+    }
+
+    [type=radio] {
+      display: none !important;
+      visibility: hidden !important;
+    }
+  }
+
+
+  &__tab__container {
+    margin-top: rem(55);
+    display: flex;
+    margin-bottom: rem(24);
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
+    -ms-scroll-snap-type: x mandatory;
+    counter-reset: step;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @include desktop {
+      position: absolute;
+      top: 40px;
+      overflow: hidden;
+      scroll-snap-type: none;
+      scroll-padding: none;
+      left: 0;
+      transition: opacity .2s cubic-bezier(.42,0,.34,1.01);
+      opacity: 0;
+      justify-content: center;
+    }
+
+    h4 {
+      font-size: rem(24);
+      line-height: rem(32);
+      font-family: $fs-emeric-bold-family;
+      margin-bottom: rem(12);
+
+      @include desktop {
+        margin-right: rem(15);
+        margin-left: rem(15);
+      }
+    }
+  }
+
+  &__tab__content {
+    min-width: 100%;
+    text-align: center;
+    scroll-snap-align: start;
+
+    @include desktop {
+      min-width: auto;
+      width: rem(234);
+    }
+
+    &:first-child {
+      .an-stepper__tab__content__step:after {
+        content: none;
+      }
+    }
+
+    p {
+      max-width: rem(234);
+      margin: auto;
+
+      @include desktop {
+        margin: 0 rem(15);
+      }
+    }
+  }
+
+  &__tab__content__step {
+    margin: auto;
+    margin-bottom: rem(9);
+    position: relative;
+    height: rem(35);
+
+    &::before {
+      /* CSS for creating steper block before the li item*/
+      content: counter(step);
+      counter-increment: step;
+      width: rem(35);
+      height: rem(35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      border-radius: 50%;
+      background-color: $an-yellow;
+      color: $an-theme;
+      z-index: 1;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: $an-yellow;
+      bottom: 50%;
+      left: 0;
+      z-index: 0;
+      transform: translate(-50%, 100%);
+    }
+  }
+
+  [type=radio]:checked ~ label ~ &__tab__container {
+    @include desktop {
+      z-index: 1;
+      opacity: 1;
+    }
+  }
+
+  [type=radio]:checked ~ label {
+    border-bottom: 2px solid;
+    z-index: 2;
+  }
+
+    &__dots {
+    align-items: center;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    @include desktop {
+      display: none;
+    }
+  }
+
+  &__dot {
+    cursor: pointer;
+    background: $white;
+    overflow: hidden;
+    display: flex;
+    width: rem(6);
+    height: rem(6);
+    border-radius: 100%;
+    margin-right: rem(20);
+
+    &[aria-pressed=true] {
+      width: rem(15);
+      height: rem(15);
+    }
+  }
+
+  &__footer {
+    text-align: center;
+
+    @include desktop {
+      margin-top: rem(100);
+    }
+  }
+}
