@@ -124,17 +124,6 @@ JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 
 </script>
 
-<style>
-.faq {
-  color: inherit;
-  font-size: 18px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
-}
-
-</style>
-
 <script type="application/ld+json">
 	{   "@context": "https://schema.org",
 		"@type": "FAQPage",
