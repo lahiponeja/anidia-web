@@ -2,3 +2,7 @@
 .sass-cache/
 build/
 target/
+.vscode/
+portlet.properties
+.settings
+gradle/
