@@ -100,6 +100,7 @@ tasks.register("build.portlets") {
   description = 'Builds all the portlets and copy them to the deploy folder'
 
 //    dependsOn 'build.portlets.contact_form'
+//    dependsOn 'build.portlets.faqs_module'
     dependsOn 'build.portlets.gas_budget'
     dependsOn 'build.portlets.gas_comparator'
 
@@ -116,6 +117,21 @@ tasks.register("build.portlets.contact_form") {
     }
     exec {
       commandLine 'cp', 'theme/anidia-portlets/ContactFormPortlet/build/libs/ContactFormPortlet.war', 'liferay/deploy'
+    }
+  }
+}
+
+tasks.register("build.portlets.faqs_module") {
+  group = 'Anidia'
+  description = 'Builds the FAQs module portlet files and copies it to the deploy folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-portlets/FAQsModule'
+      commandLine 'gradle', 'build'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/FAQsModule/build/libs/FAQsModule-1.0.0.jar', 'liferay/deploy'
     }
   }
 }
