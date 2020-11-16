@@ -5,16 +5,8 @@ page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %><%@
 page import="com.liferay.portal.kernel.json.JSONObject"%><%@ 
 page import="com.liferay.portal.kernel.json.JSONArray" %>
 
+
 <portlet:defineObjects />
-
-
-
-<portlet:actionURL name="actionMethod1" var="sampleActionMethodURL">
-</portlet:actionURL>
-<form action="${sampleActionMethodURL}" method="post">
-	<input type="text" name="<portlet:namespace/>searchTerm" id="<portlet:namespace/>searchTerm"/><br/>
-	<input type="submit" value="Get FAQS"> 
-</form>
 
 <%
 String content = (String)renderRequest.getAttribute("contentJson");
@@ -24,7 +16,16 @@ JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 %>
 
 <div class="bg-white pl-s pr-s pt-s pb-s">
-	 <div class="an-accordeon" data-accordeon>
+	<div class="an-accordeon" data-accordeon>
+
+		<form method="post" class="an-accordeon__search">
+			<div class="an-input an-input--icon-left an-accordeon__search-input-wrapper">
+				<span class="an-icon--search"></span>
+				<input type="text" class="an-input__field" placeholder="Busca por palabras" name="<portlet:namespace/>searchTerm" id="<portlet:namespace/>searchTerm" required/>
+			</div>
+			<input class="an-btn an-btn--green-border an-btn--flatter an-accordeon__search-btn" type="submit" value="Buscar">
+		</form>
+
 	 	<ul class="an-accordeon__list" data-accordeon-list>
 	 		<%
 			if (setOfCategoriesArray!=null){
@@ -79,8 +80,6 @@ JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 		</ul>		
 	</div>
 </div>
-
-
 
 <script>
 (function() {

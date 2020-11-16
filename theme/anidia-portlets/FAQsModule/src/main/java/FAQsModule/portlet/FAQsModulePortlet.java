@@ -64,12 +64,6 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 public class FAQsModulePortlet extends MVCPortlet {
 	
-	@ProcessAction(name="actionMethod1")
-	public void actionMethod(ActionRequest request, ActionResponse response)
-			throws IOException, PortletException, PortalException, SystemException{
-
-	}
-    
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
