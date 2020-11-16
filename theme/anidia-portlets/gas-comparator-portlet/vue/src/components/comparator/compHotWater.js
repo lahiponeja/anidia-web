@@ -12,14 +12,14 @@ const compHotWater = {
   },
   methods: {
     submitRequest() {
-      window.dataLayer.push(this.comparator.getDatalayerWaterStepInfo("engagement", "calculator", "hotwater"));
       this.comparator.setSavingByUse({
         acsIndividual: this.savingsData.acsIndividual,
         heatingIndividual: this.savingsData.heatingIndividual,
         acsUse: this.savingsData.acsUse,
         numberOfPeople: this.savingsData.numberOfPeople,
       })
-
+      window.dataLayer.push(this.comparator.getDatalayerWaterStepInfo("engagement", "calculator", "hotwater"));
+      
       this.comparator.changeStepComponent('comp-heating')
     },
 

@@ -20,13 +20,14 @@ const compHeating = {
   },
   methods: {
     submitRequest() {
-      window.dataLayer.push(this.comparator.getDatalayerHeatingStepInfo("engagement", "calculator", "heatingsystem"));
       this.comparator.setSavingByUse({
         heatingUse: this.savingsData.heatingUse,
         singleFamilyHouse: this.savingsData.singleFamilyHouse,
         lastFloor: this.savingsData.lastFloor,
         surfaceHouse: this.savingsData.surfaceHouse,
       })
+      window.dataLayer.push(this.comparator.getDatalayerHeatingStepInfo("engagement", "calculator", "heatingsystem"));
+      
 
       this.comparator.changeStepComponent('comp-kitchen')
     },

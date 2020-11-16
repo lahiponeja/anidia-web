@@ -11,7 +11,7 @@ const compKitchen = {
     }
   },
   mounted() {
-    window.dataLayer.push(this.comparator.getDatalayerHeatingStepInfo("engagement", "calculator", "heatingsystem"));
+    window.dataLayer.push(this.comparator.getDatalayerHeatingStepInfo("engagement", "calculator", "kitchen"));
     window.scrollTo({
       top: 200,
       behavior: 'smooth',
@@ -19,11 +19,12 @@ const compKitchen = {
   },
   methods: {
     submitRequest() {
-      window.dataLayer.push(this.comparator.getDatalayerKitchenStepInfo("engagement", "calculator", "kitchen"));
       this.comparator.setSavingByUse({
         kitchenUse: this.savingsData.kitchenUse,
         weeklyKitchenUse: this.savingsData.weeklyKitchenUse,
       })
+
+      window.dataLayer.push(this.comparator.getDatalayerKitchenStepInfo("engagement", "calculator", "kitchen"));
 
       this.sendingForm = true
       this.comparator.sendSavingByUseService(this.comparator.state.savingsByUse)

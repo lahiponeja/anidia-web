@@ -31,7 +31,6 @@ const funnelForm = {
   },
   methods: {
     submitRequest() {
-      window.dataLayer.push(this.comparator.getDatalayerFirstStepInfo("engagement", "calculator", "energyspent"));
       if(this.known) {
         this.sendingForm = true
         this.comparator.setSavingsByConsumption(this.energyConsumption)
@@ -41,10 +40,10 @@ const funnelForm = {
         this.comparator.setSavingByUse({
           province: this.province
         })
-
         this.global.changeView('comparator')
         this.comparator.changeStepComponent('comp-hot-water')
       }
+      window.dataLayer.push(this.comparator.getDatalayerFirstStepInfo("engagement", "calculator", "energyspent"));
     }
   },
   mounted() {
