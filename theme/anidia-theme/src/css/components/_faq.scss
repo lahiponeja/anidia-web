@@ -6,8 +6,13 @@
   margin: 0 auto;
   padding: rem(20);
   
+  &__list {
+    
+  }
+  
   &__item {
     $item-parent: &;
+    
     overflow: hidden;
     
     &-head {
@@ -68,7 +73,7 @@
       transition: max-height 0.4s;
       
       &-inner {
-        padding: rem(30);
+        padding: 30px;
       }
     }
     
@@ -87,6 +92,32 @@
           }
         }
       } 
+    }
+  }
+
+  &__search {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: rem(68);
+  }
+
+  &__search-input-wrapper,
+  &__search-btn {
+    width: 100%;
+  }
+
+  @include tablet {
+    &__search {
+      flex-direction: row;
+    }
+
+    &__search-input-wrapper {
+      flex-grow: 1;
+      margin-right: rem(25);
+    }
+
+    &__search-btn {
+      width: auto;
     }
   }
 }
