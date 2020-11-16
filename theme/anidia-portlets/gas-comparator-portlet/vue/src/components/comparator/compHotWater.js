@@ -24,6 +24,7 @@ const compHotWater = {
     },
 
     startOver() {
+      window.dataLayer.push(this.comparator.getDatalayerInitialInfo("engagement", "calculator", "back"));
       this.global.changeView('funnel')
     },
 

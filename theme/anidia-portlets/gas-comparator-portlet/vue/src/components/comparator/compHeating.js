@@ -32,6 +32,7 @@ const compHeating = {
     },
 
     goBack() {
+      window.dataLayer.push(this.comparator.getDatalayerInitialInfo("engagement", "calculator", "back"));
       this.comparator.changeStepComponent('comp-hot-water')
     },
 
