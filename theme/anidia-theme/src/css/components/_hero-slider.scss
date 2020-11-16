@@ -45,7 +45,7 @@
       width: flex-grid(6);
       margin-top: auto;
       margin-bottom: auto;
-      padding-top: rem(93);
+      padding-top: rem(180);
       padding-left: flex-grid(1);
     }
   }
@@ -79,7 +79,14 @@
   &__heading {
     color: $white;
 
-    @include desktop {
+    @media (min-width: 1024px) {
+      font-size: rem(68);
+      line-height: rem(74);
+    }
+
+    @media (min-width: 1440px) {
+      font-size: rem(80);
+      line-height: rem(96);
       margin-bottom: rem(20);
     }
 
@@ -106,7 +113,7 @@
   &__discover-btn {
     display: none;
 
-    @include desktop {
+    @media (min-width: 1024px) {
       text-transform: uppercase;
       color: $white;
       display: flex;
@@ -114,7 +121,7 @@
       position: absolute;
       z-index: 5;
       right: 30%;
-      bottom: rem(237);
+      bottom: rem(140);
 
       .an-hero-slider.white &,
       .an-hero-slider.light-green & {
@@ -134,6 +141,10 @@
           color: $an-theme;
         }
       }
+    }
+
+    @media (min-width: 1440px) {
+      bottom: rem(237);
     }
   }
 

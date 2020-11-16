@@ -1,6 +1,8 @@
 function heroSlider() {
   const dataSliderLinesList = document.querySelector("[data-slider-lines-list]");
   var slides = document.querySelectorAll(".an-hero-slider .journal-content-article");
+  var controller = new ScrollMagic.Controller({});
+  let sceneBgAnimate;
 
   const linesHTML = []
   for(let i = 0; i < slides.length; i++) {
@@ -8,12 +10,8 @@ function heroSlider() {
   }
   dataSliderLinesList.innerHTML = linesHTML.join("");
 
-  var controller = new ScrollMagic.Controller({});
-
-
   if (document.querySelectorAll('#an-hero-slider__flag')) document.querySelectorAll('#an-hero-slider__flag')[0].parentElement.style.padding = 0;
 
-  let sceneBgAnimate;
   for (var i = 0; i < slides.length; i++) {
     sceneBgAnimate = new ScrollMagic.Scene({
       triggerElement: slides[i],
@@ -25,6 +23,9 @@ function heroSlider() {
     .on('end', function() {
       document.getElementById('banner').style.left = '0';
       document.querySelector('.an-hero-slider__lines').style.display = 'block';
+      document.querySelectorAll("[data-discover-btn]").forEach((btn) => {
+        btn.style.display = 'flex';
+      });
     });
   }
 
@@ -39,6 +40,9 @@ function heroSlider() {
       if(sceneBgAnimate) sceneBgAnimate.destroy();
       document.getElementById('banner').style.left = '-100%';
       document.querySelector('.an-hero-slider__lines').style.display = 'none';
+      document.querySelectorAll("[data-discover-btn]").forEach((btn) => {
+        btn.style.display = 'none';
+      });
     });
 }
 
