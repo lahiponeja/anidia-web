@@ -136,10 +136,10 @@ public class FAQsModulePortlet extends MVCPortlet {
 				assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(assetEntry.getEntryId());
 				 
 				Document document = SAXReaderUtil.read(entry.getContentByLocale(language));		 
-				Node QuestionNode = document.selectSingleNode("/root/dynamic-element[@name='Question']/dynamic-content");
-				String question = QuestionNode.getText();	 
-				Node AnswerNode = document.selectSingleNode("/root/dynamic-element[@name='Answer']/dynamic-content");
-				String answer = AnswerNode.getText();
+				Node questionNode = document.selectSingleNode("/root/dynamic-element[@name='Question']/dynamic-content");
+				String question = questionNode.getText();	 
+				Node answerNode = document.selectSingleNode("/root/dynamic-element[@name='Answer']/dynamic-content");
+				String answer = answerNode.getText();
 				
 				if (searchTerm.isEmpty() || 
 					question.toLowerCase().contains(searchTerm.toLowerCase())||
