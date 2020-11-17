@@ -21,7 +21,7 @@ JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 		<form method="post" class="an-accordeon__search">
 			<div class="an-input an-input--icon-left an-accordeon__search-input-wrapper">
 				<span class="an-icon--search"></span>
-				<input type="text" class="an-input__field" placeholder="Busca por palabras" name="<portlet:namespace/>searchTerm" id="<portlet:namespace/>searchTerm" required/>
+				<input type="text" class="an-input__field" placeholder="Busca por palabras" name="<portlet:namespace/>searchTerm" id="<portlet:namespace/>searchTerm"/>
 			</div>
 			<input class="an-btn an-btn--green-border an-btn--flatter an-accordeon__search-btn" type="submit" value="Buscar">
 		</form>
