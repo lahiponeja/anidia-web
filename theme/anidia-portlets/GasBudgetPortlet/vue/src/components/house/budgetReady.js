@@ -16,11 +16,6 @@ const budgetReady = {
       sendingForm: false,
     }
   },
-  computed: {
-    fullPhoneNumber() {
-      return `${this.phonePrefix} ${this.phoneNumber}`
-    }
-  },
   methods: {
     submitRequest() {
       const payloadObj = Object.assign(this.budgetReadyForm, {
