@@ -58,7 +58,7 @@ JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 											                    </div>
 											                    <div class="an-accordeon__item-body">
 											                      <div class="an-accordeon__item-body-inner">
-											                      <p><%= item.get("answer") %></p>
+											                        <%= item.get("answer") %>
 											                        </div>
 											                    </div>    
 		
