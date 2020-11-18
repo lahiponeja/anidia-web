@@ -28,9 +28,12 @@ const compSaving = {
   },
   methods: {
     submitRequest() {
+      const payloadObj = Object.assign(this.compSavingForm, {
+        phone: this.fullPhoneNumber
+      })
       // TODO: add validation
       this.sendingForm = true
-      this.comparator.submitUserContactInfo(this.compSavingForm).then((res) => {
+      this.comparator.submitUserContactInfo(payloadObj).then((res) => {
         this.sendingForm = false
         this.comparator.setLead(true)
         this.resetCompSavingForm()
@@ -78,7 +81,16 @@ const compSaving = {
                 <input v-model="compSavingForm.lastname" type="text" class="an-input__field" placeholder="Apellidos*" required="">
               </div>
               <div class="an-input an-form__item">
-                <input v-model="compSavingForm.phone" type="text" class="an-input__field" placeholder="Teléfono*" required="">
+                <div class="an-select an-select--small-width mr-xs">
+                  <span class="an-select__icon an-icon--chevron-down"></span>
+                  <select v-model="phonePrefix" class="an-select__native" required>
+                    <option v-for="(option, index) in phonePrefixesOptions" :value="option.value">
+                      {{ option.text }}
+                    </option>
+                  </select>
+                </div>
+
+                <input v-model="phoneNumber" type="number" class="an-input__field" placeholder="Teléfono*" required="">
               </div>
               <div class="an-input an-form__item">
                 <input v-model="compSavingForm.email" type="email" class="an-input__field" placeholder="Email*"  required="">
