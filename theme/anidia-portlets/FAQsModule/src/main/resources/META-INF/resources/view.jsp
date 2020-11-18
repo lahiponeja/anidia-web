@@ -47,7 +47,7 @@ JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 											
 												for (int i = 0 ; i < contentArray.length(); i++) {
 													JSONObject item = contentArray.getJSONObject(i);
-													JSONArray categories = item.getJSONArray("Categories");
+													JSONArray categories = item.getJSONArray("categories");
 													
 													if(categories.toString().contains(categoryName)){
 											%>
@@ -58,7 +58,7 @@ JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 											                    </div>
 											                    <div class="an-accordeon__item-body">
 											                      <div class="an-accordeon__item-body-inner">
-											                      <p><%= item.get("answer") %></p>
+											                        <%= item.get("answer") %>
 											                        </div>
 											                    </div>    
 		

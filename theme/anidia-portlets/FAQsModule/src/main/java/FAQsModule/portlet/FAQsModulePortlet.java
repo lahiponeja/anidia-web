@@ -5,14 +5,13 @@ import FAQsModule.constants.FAQsModulePortletKeys;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
+
 import javax.portlet.Portlet;
 
+import org.json.JSONObject;
 import org.osgi.service.component.annotations.Component;
 
 import javax.portlet.PortletException;
-import javax.portlet.ProcessAction;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -39,6 +38,7 @@ import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portal.kernel.json.JSONException;
+
 import com.liferay.portal.kernel.xml.*;
 
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -49,10 +49,10 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 @Component(
 	immediate = true,
 	property = {
-		"com.liferay.portlet.display-category=category.sample",
+		"com.liferay.portlet.display-category=anidia",
 		"com.liferay.portlet.header-portlet-css=/css/main.css",
 		"com.liferay.portlet.instanceable=true",
-		"javax.portlet.display-name=APCustom",
+		"javax.portlet.display-name=FAQsModule",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
 		"javax.portlet.name=" + FAQsModulePortletKeys.FAQSMODULE,
@@ -82,7 +82,7 @@ public class FAQsModulePortlet extends MVCPortlet {
 		String contentJson = "";
 		try {
 			contentJson = toJsonString(journalArticles, language,searchTerm);
-		} catch (JSONException | DocumentException e) {
+		} catch (JSONException | DocumentException | org.json.JSONException e) {
 			e.printStackTrace();
 		}
 
@@ -126,11 +126,14 @@ public class FAQsModulePortlet extends MVCPortlet {
 		}	
 	}
 	
-	public String toJsonString(List<JournalArticle> Articles, String language, String searchTerm)throws JSONException, DocumentException {
+	public String toJsonString(List<JournalArticle> Articles, String language, String searchTerm)throws JSONException, DocumentException, org.json.JSONException {
 		Set<String> setOfCategories = new HashSet<String>();
-		String jsonContent = "";
+		JSONObject jsonFullData = new JSONObject();	
+		JSONObject jsonAssetCategories =  new JSONObject();
+		
 		for (JournalArticle entry : Articles) {
 			if(!entry.isExpired() && !entry.isInTrash()) { 
+				
 				AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",entry.getResourcePrimKey());				
 				List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
 				assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(assetEntry.getEntryId());
@@ -144,19 +147,22 @@ public class FAQsModulePortlet extends MVCPortlet {
 				if (searchTerm.isEmpty() || 
 					question.toLowerCase().contains(searchTerm.toLowerCase())||
 					answer.toLowerCase().contains(searchTerm.toLowerCase())){
-					jsonContent = jsonContent.concat("{ \"question\": \"" + question + "\", \"answer\": \"" + answer + "\", \"Categories\": [");
-				 
+					JSONObject jsonAssetFields =  new JSONObject();
+					List<String> assetCategoryNames = new ArrayList<String>();
+	
 					for (AssetCategory category:assetCategories) {
-						jsonContent = jsonContent.concat("\"" + category.getTitle(language) + "\", ");
 						setOfCategories.add(category.getTitle(language));
-						 }
-					jsonContent = jsonContent.concat("]}, ");
+						assetCategoryNames.add(category.getTitle(language));
+					}
+					jsonAssetFields.put("question", question);
+					jsonAssetFields.put("answer", answer);
+					jsonAssetFields.put("categories", assetCategoryNames);	
+					jsonFullData.append("data", jsonAssetFields);				
 				 }
 			}
 		}
-		jsonContent = ("{ \"data\": [" + jsonContent + "] , \"foundCategories\": " + setOfCategories.toString()+"}");
-		return (jsonContent);
+		jsonFullData.put("foundCategories", setOfCategories);
+		return jsonFullData.toString();
 	}
-	
 }
 
