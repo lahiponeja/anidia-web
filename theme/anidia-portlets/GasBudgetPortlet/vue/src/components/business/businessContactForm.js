@@ -1,4 +1,7 @@
+import phonePrefixMixin from "../../mixins/phonePrefixMixin"
+
 const businessContactForm = {
+  mixins: [phonePrefixMixin],
   inject: ["global", "house"], // TODO: refactor once I tackle this business form.
   data() {
     return {
@@ -10,7 +13,6 @@ const businessContactForm = {
         privacyPolicy: false,
         offersAndServices: false,
       },
-
       sendingForm: false,
     }
   },

@@ -1,4 +1,7 @@
+import phonePrefixMixin from "../../mixins/phonePrefixMixin"
+
 const budgetReady = {
+  mixins: [phonePrefixMixin],
   inject: ["global", "house"],
   data() {
     return {
@@ -10,7 +13,6 @@ const budgetReady = {
         privacyPolicy: false,
         offersAndServices: false,
       },
-
       sendingForm: false,
     }
   },

@@ -1,6 +1,8 @@
 import results from "./results";
+import phonePrefixMixin from "../../mixins/phonePrefixMixin"
 
 const compSaving = {
+  mixins: [phonePrefixMixin],
   components: {
     results,
   },
@@ -15,7 +17,6 @@ const compSaving = {
         privacyPolicy: false,
         offersAndServices: false,
       },
-
       sendingForm: false,
     }
   },
