@@ -1,4 +1,7 @@
+import phonePrefixMixin from "../../mixins/phonePrefixMixin"
+
 const budgetReady = {
+  mixins: [phonePrefixMixin],
   inject: ["global", "house"],
   data() {
     return {
@@ -10,14 +13,17 @@ const budgetReady = {
         privacyPolicy: false,
         offersAndServices: false,
       },
-
       sendingForm: false,
     }
   },
   methods: {
     submitRequest() {
+      const payloadObj = Object.assign(this.budgetReadyForm, {
+        phone: this.fullPhoneNumber
+      })
+
       this.sendingForm = true
-      this.house.submitUserContactInfo(this.budgetReadyForm).then((res) => {
+      this.house.submitUserContactInfo(payloadObj).then((res) => {
         this.$emit("form-success")
         this.sendingForm = false
       }).catch((err)=>{
@@ -54,7 +60,15 @@ const budgetReady = {
           <input v-model="budgetReadyForm.lastname" type="text" class="an-input__field" placeholder="Apellidos*" required="">
         </div>
         <div class="an-input an-form__item">
-          <input v-model="budgetReadyForm.phone" type="text" class="an-input__field" placeholder="Teléfono*" required="">
+          <div class="an-select an-select--small-width mr-xs">
+            <span class="an-select__icon an-icon--chevron-down"></span>
+            <select v-model="phonePrefix" class="an-select__native" required>
+              <option v-for="(option, index) in phonePrefixesOptions" :value="option.value">
+                {{ option.text }}
+              </option>
+            </select>
+          </div>
+          <input v-model="phoneNumber" type="number" class="an-input__field" placeholder="Teléfono*" required="">
         </div>
         <div class="an-input an-form__item">
           <input v-model="budgetReadyForm.email" type="email" class="an-input__field" placeholder="Email*" required="">
