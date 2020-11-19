@@ -8,6 +8,7 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import javax.portlet.Portlet;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.osgi.service.component.annotations.Component;
 
@@ -130,7 +131,7 @@ public class FAQsModulePortlet extends MVCPortlet {
 		Set<String> setOfCategories = new HashSet<String>();
 		JSONObject jsonFullData = new JSONObject();	
 		JSONObject jsonAssetCategories =  new JSONObject();
-		
+		JSONArray faqsData = new JSONArray();	
 		for (JournalArticle entry : Articles) {
 			if(!entry.isExpired() && !entry.isInTrash()) { 
 				
@@ -157,12 +158,13 @@ public class FAQsModulePortlet extends MVCPortlet {
 					jsonAssetFields.put("question", question);
 					jsonAssetFields.put("answer", answer);
 					jsonAssetFields.put("categories", assetCategoryNames);	
-					jsonFullData.append("data", jsonAssetFields);				
+					jsonFullData.append("data", jsonAssetFields);
+					faqsData.put(jsonAssetFields);
 				 }
 			}
 		}
 		jsonFullData.put("foundCategories", setOfCategories);
+		jsonFullData.put("data",faqsData);
 		return jsonFullData.toString();
 	}
 }
-
