@@ -20,6 +20,9 @@
 		<form:input id="${namespace}email" cssClass="an-input__field" path="email" placeholder="${emailPlaceholder}" type="email"/>
 		<div class="an-input an-form__item mb-0">
 			<div class="an-select__form an-select--small-width mr-xs">
+				
+				<!-- <div class="an-select__flag" v-if="option.value === phonePrefix" v-html="option.flagImg"></div> -->
+				
 				<form:select id="${namespace}phonePrefix" path="phonePrefix" items="${prefixes}"/>
 			</div>
 			<form:input id="${namespace}phoneNumber" cssClass="an-input__field" path="phoneNumber" placeholder="${phonePlaceholder}" required="required" />
