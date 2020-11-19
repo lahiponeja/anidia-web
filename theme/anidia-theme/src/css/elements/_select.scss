@@ -118,6 +118,10 @@
     }
   }
 
+  &--small-width {
+    width: rem(180);
+  }
+  
   &--full-width {
     width: 100%;
   }
