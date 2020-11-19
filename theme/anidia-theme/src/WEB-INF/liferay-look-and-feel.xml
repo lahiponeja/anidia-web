@@ -21,7 +21,7 @@
 			<setting configurable="true" key="Teléfono de Call Center" type="text" value="900922203" />
 			<setting configurable="true" key="GTM-ID" type="text" value="GTM-XXXXXXX" />
 			<setting configurable="true" key="Versión de Call Center en móvil" options="icono,icono + texto" type="select" value="icono" />
-			<setting configurable="true" key="Esquema de colores de cabecera" options="verde,blanco" type="select" value="verde" />
+			<setting configurable="true" key="Esquema de colores de fondo de la página" options="verde,blanco,blanco con imagen,verde claro" type="select" value="verde" />
 			<setting configurable="true" key="Entorno OneTrust" options="test,produccion" type="select" value="test" />
 		</settings>
 	</theme>

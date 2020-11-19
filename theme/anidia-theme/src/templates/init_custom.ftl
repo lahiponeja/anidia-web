@@ -14,10 +14,14 @@ This file allows you to override and define new FreeMarker variables.
   <#assign call_center_phone = call_center_phone[3..] />
 </#if>
 
-<#if getterUtil.getString(themeDisplay.getThemeSetting("Esquema de colores de cabecera")) == "verde">
+<#if getterUtil.getString(themeDisplay.getThemeSetting("Esquema de colores de fondo de la página")) == "verde">
 	<#assign css_class = css_class + " anidia-green" />
-<#else/>
+<#elseif getterUtil.getString(themeDisplay.getThemeSetting("Esquema de colores de fondo de la página")) == "verde claro">
+	<#assign css_class = css_class + " anidia-green-light" />
+<#elseif getterUtil.getString(themeDisplay.getThemeSetting("Esquema de colores de fondo de la página")) == "blanco">
 	<#assign css_class = css_class + " anidia-white" />
+<#else />
+  <#assign css_class = css_class + " anidia-white-img" />
 </#if>
 
 <#assign gtm_id = themeDisplay.getThemeSetting("GTM-ID") />

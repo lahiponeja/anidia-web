@@ -55,13 +55,3 @@
 /* endinject */
 
 /* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
-// TODO: IMPLEMENT THIS FEATURE IN THE STYLES
-body {
-  &.anidia-green {
-    background: $an-theme;
-  }
-
-  &.anidia-white {
-    background: $white;
-  }
-}
