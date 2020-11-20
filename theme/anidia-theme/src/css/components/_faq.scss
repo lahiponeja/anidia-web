@@ -106,7 +106,6 @@
   }
 
   @include tablet {
-    margin-top: -80px;
     position: relative;
     z-index: 2;
 
@@ -115,6 +114,7 @@
     }
 
     &__search {
+      margin-top: -80px;
       flex-direction: row;
     }
 
