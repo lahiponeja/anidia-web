@@ -1,5 +1,25 @@
-<div class="bg-an-theme pl-s pr-s pt-xxxl pb-xxxl an-info-elems__container">
-  <div class="an-info-elems">
+[#switch configuration.Color]
+  [#case 'Verde']
+  <div class="bg-an-theme pl-s pr-s pt-xxxl pb-xxxl an-info-elems__container">
+  [#break]
+
+  [#case 'Verde claro']
+  <div class="bg-an-theme-light pl-s pr-s pt-xxxl pb-xxxl an-info-elems__container">
+  [#break]
+
+  [#case 'Blanco']
+  <div class="bg-white pl-s pr-s pt-xxxl pb-xxxl an-info-elems__container">
+  [#break]
+
+  [#case 'Transparente']
+  <div class="bg-transparent pl-s pr-s pt-xxxl pb-xxxls an-info-elems__container">
+  [#break]
+
+  [default]
+  <div class="bg-an-theme pl-s pr-s pt-xxxl pb-xxxl an-info-elems__container">
+[/#switch]
+
+<div class="an-info-elems">
     <div class="an-info-elems__headings mb-xxl">
       <lfr-editable id="Pre-Título" class="an-h6 mb-m" type="text"
         >PRE-TÍTULO</lfr-editable
