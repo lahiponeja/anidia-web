@@ -2,9 +2,7 @@ package FAQsModule.portlet;
 
 import FAQsModule.constants.FAQsModulePortletKeys;
 
-
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-
 
 import javax.portlet.Portlet;
 
@@ -25,9 +23,10 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetEntry;
@@ -127,18 +126,22 @@ public class FAQsModulePortlet extends MVCPortlet {
 		}	
 	}
 	
-	public String toJsonString(List<JournalArticle> Articles, String language, String searchTerm)throws JSONException, DocumentException, org.json.JSONException {
-		Set<String> setOfCategories = new HashSet<String>();
+	public String toJsonString(List<JournalArticle> articles, String language, String searchTerm) throws JSONException, DocumentException, org.json.JSONException {
+		LinkedHashSet<String> setOfCategories = new LinkedHashSet<String>();
+
 		JSONObject jsonFullData = new JSONObject();	
 		JSONObject jsonAssetCategories =  new JSONObject();
-		JSONArray faqsData = new JSONArray();	
-		for (JournalArticle entry : Articles) {
+		JSONArray faqsData = new JSONArray();
+		
+		sortByPriority(articles);
+		
+		for (JournalArticle entry : articles) {
 			if(!entry.isExpired() && !entry.isInTrash()) { 
 				
 				AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",entry.getResourcePrimKey());				
 				List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
 				assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(assetEntry.getEntryId());
-				 
+				
 				Document document = SAXReaderUtil.read(entry.getContentByLocale(language));		 
 				Node questionNode = document.selectSingleNode("/root/dynamic-element[@name='Pregunta']/dynamic-content");
 				String question = questionNode.getText();	 
@@ -166,5 +169,22 @@ public class FAQsModulePortlet extends MVCPortlet {
 		jsonFullData.put("foundCategories", setOfCategories);
 		jsonFullData.put("data",faqsData);
 		return jsonFullData.toString();
+	}
+	
+	public void sortByPriority(List<JournalArticle> articless){
+		Collections.sort(articless,new Comparator<JournalArticle>(){
+            public int compare(JournalArticle o1, JournalArticle o2)
+            {
+            	double priorityO1 = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",o1.getResourcePrimKey()).getPriority();
+            	double priorityO2 = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",o2.getResourcePrimKey()).getPriority();
+                if (priorityO1 == priorityO2){
+                    return 0;
+                }
+                else if (priorityO1 < priorityO2){
+                    return -1;
+                }
+                return 1;
+            }
+        });
 	}
 }
