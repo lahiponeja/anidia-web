@@ -27,7 +27,6 @@
 
       &-title {
         color: $an-theme;
-        //an-body-l-bold
         font-family: $open-sans-bold-family;
         font-size: rem(16);
         line-height: rem(24);
@@ -107,6 +106,14 @@
   }
 
   @include tablet {
+    margin-top: -80px;
+    position: relative;
+    z-index: 2;
+
+    .an-input__field {
+      background-color: rgba(255,255,255,0.5);
+    }
+
     &__search {
       flex-direction: row;
     }
