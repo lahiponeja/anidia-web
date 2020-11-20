@@ -22,12 +22,7 @@
 			<div class="an-select an-select--flag an-select--small-width mr-xs mb-m">
 				<img class="an-select__flag" src="" />
 				<span class="an-select__icon an-icon--chevron-down"></span>
-				<select required="required" class="an-select__native prefix-select">
-					<option value="+34"><span>+34</span></option>
-					<option value="+44"><span>+44</span></option>
-					<option value="+49"><span>+49</span></option>
-				</select>
-				<!-- <form:select id="${namespace}phonePrefix" cssClass="prefix-select" path="phonePrefix" items="${prefixes}"/> -->
+				<form:select id="${namespace}phonePrefix" cssClass="an-select__native prefix-select" path="phonePrefix" items="${prefixes}"/>
 			</div>
 			<form:input id="${namespace}phoneNumber" cssClass="an-input__field" path="phoneNumber" placeholder="${phonePlaceholder}" required="required" />
 		</div>
