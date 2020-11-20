@@ -2,17 +2,15 @@ package FAQsModule.portlet;
 
 import FAQsModule.constants.FAQsModulePortletKeys;
 
-
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.osgi.service.component.annotations.Component;
 
 import javax.portlet.PortletException;
-import javax.portlet.ProcessAction;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -25,9 +23,10 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetEntry;
@@ -39,6 +38,7 @@ import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portal.kernel.json.JSONException;
+
 import com.liferay.portal.kernel.xml.*;
 
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -49,10 +49,10 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 @Component(
 	immediate = true,
 	property = {
-		"com.liferay.portlet.display-category=category.sample",
+		"com.liferay.portlet.display-category=anidia",
 		"com.liferay.portlet.header-portlet-css=/css/main.css",
 		"com.liferay.portlet.instanceable=true",
-		"javax.portlet.display-name=APCustom",
+		"javax.portlet.display-name=FAQsModule",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
 		"javax.portlet.name=" + FAQsModulePortletKeys.FAQSMODULE,
@@ -81,11 +81,12 @@ public class FAQsModulePortlet extends MVCPortlet {
 		String searchTerm = ParamUtil.getString(renderRequest, "searchTerm");
 		String contentJson = "";
 		try {
-			contentJson = toJsonString(journalArticles, language,searchTerm);
-		} catch (JSONException | DocumentException e) {
+			contentJson = toJsonString(journalArticles, language, searchTerm);
+		} catch (JSONException | DocumentException | org.json.JSONException e) {
 			e.printStackTrace();
 		}
 
+		renderRequest.setAttribute("usedSearchTerm", searchTerm);
         renderRequest.setAttribute("contentJson", contentJson);
 
 		super.doView(renderRequest, renderResponse);
@@ -126,37 +127,65 @@ public class FAQsModulePortlet extends MVCPortlet {
 		}	
 	}
 	
-	public String toJsonString(List<JournalArticle> Articles, String language, String searchTerm)throws JSONException, DocumentException {
-		Set<String> setOfCategories = new HashSet<String>();
-		String jsonContent = "";
-		for (JournalArticle entry : Articles) {
+	public String toJsonString(List<JournalArticle> articles, String language, String searchTerm) throws JSONException, DocumentException, org.json.JSONException {
+		LinkedHashSet<String> setOfCategories = new LinkedHashSet<String>();
+
+		JSONObject jsonFullData = new JSONObject();	
+		JSONObject jsonAssetCategories =  new JSONObject();
+		JSONArray faqsData = new JSONArray();
+		
+		sortByPriority(articles);
+		
+		for (JournalArticle entry : articles) {
 			if(!entry.isExpired() && !entry.isInTrash()) { 
+				
 				AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",entry.getResourcePrimKey());				
 				List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
 				assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(assetEntry.getEntryId());
-				 
+				
 				Document document = SAXReaderUtil.read(entry.getContentByLocale(language));		 
-				Node questionNode = document.selectSingleNode("/root/dynamic-element[@name='Question']/dynamic-content");
+				Node questionNode = document.selectSingleNode("/root/dynamic-element[@name='Pregunta']/dynamic-content");
 				String question = questionNode.getText();	 
-				Node answerNode = document.selectSingleNode("/root/dynamic-element[@name='Answer']/dynamic-content");
+				Node answerNode = document.selectSingleNode("/root/dynamic-element[@name='Respuesta']/dynamic-content");
 				String answer = answerNode.getText();
 				
 				if (searchTerm.isEmpty() || 
 					question.toLowerCase().contains(searchTerm.toLowerCase())||
 					answer.toLowerCase().contains(searchTerm.toLowerCase())){
-					jsonContent = jsonContent.concat("{ \"question\": \"" + question + "\", \"answer\": \"" + answer + "\", \"Categories\": [");
-				 
+					JSONObject jsonAssetFields =  new JSONObject();
+					List<String> assetCategoryNames = new ArrayList<String>();
+	
 					for (AssetCategory category:assetCategories) {
-						jsonContent = jsonContent.concat("\"" + category.getTitle(language) + "\", ");
 						setOfCategories.add(category.getTitle(language));
-						 }
-					jsonContent = jsonContent.concat("]}, ");
+						assetCategoryNames.add(category.getTitle(language));
+					}
+					jsonAssetFields.put("question", question);
+					jsonAssetFields.put("answer", answer);
+					jsonAssetFields.put("categories", assetCategoryNames);	
+					jsonFullData.append("data", jsonAssetFields);
+					faqsData.put(jsonAssetFields);
 				 }
 			}
 		}
-		jsonContent = ("{ \"data\": [" + jsonContent + "] , \"foundCategories\": " + setOfCategories.toString()+"}");
-		return (jsonContent);
+		jsonFullData.put("foundCategories", setOfCategories);
+		jsonFullData.put("data",faqsData);
+		return jsonFullData.toString();
 	}
 	
+	public void sortByPriority(List<JournalArticle> articless){
+		Collections.sort(articless,new Comparator<JournalArticle>(){
+            public int compare(JournalArticle o1, JournalArticle o2)
+            {
+            	double priorityO1 = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",o1.getResourcePrimKey()).getPriority();
+            	double priorityO2 = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",o2.getResourcePrimKey()).getPriority();
+                if (priorityO1 == priorityO2){
+                    return 0;
+                }
+                else if (priorityO1 < priorityO2){
+                    return -1;
+                }
+                return 1;
+            }
+        });
+	}
 }
-

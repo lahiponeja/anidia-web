@@ -9,6 +9,8 @@ page import="com.liferay.portal.kernel.json.JSONArray" %>
 <portlet:defineObjects />
 
 <%
+String usedSearchTerm = renderRequest.getAttribute("usedSearchTerm") != null ?
+		(String)renderRequest.getAttribute("usedSearchTerm") : "";
 String content = (String)renderRequest.getAttribute("contentJson");
 JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
 JSONArray contentArray = contentJson.getJSONArray("data");
@@ -21,14 +23,14 @@ JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 		<form method="post" class="an-accordeon__search">
 			<div class="an-input an-input--icon-left an-accordeon__search-input-wrapper">
 				<span class="an-icon--search"></span>
-				<input type="text" class="an-input__field" placeholder="Busca por palabras" name="<portlet:namespace/>searchTerm" id="<portlet:namespace/>searchTerm" required/>
+				<input type="text" class="an-input__field" value="<%=usedSearchTerm%>" placeholder="Busca por palabras" name="<portlet:namespace/>searchTerm" id="<portlet:namespace/>searchTerm"/>
 			</div>
 			<input class="an-btn an-btn--green-border an-btn--flatter an-accordeon__search-btn" type="submit" value="Buscar">
 		</form>
 
 	 	<ul class="an-accordeon__list" data-accordeon-list>
 	 		<%
-			if (setOfCategoriesArray!=null){
+			if (setOfCategoriesArray != null){
 				
 				for (Object category : setOfCategoriesArray){
 					String categoryName =category.toString();
@@ -43,14 +45,14 @@ JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 								<div class="an-accordeon an-accordeon--child" data-accordeon>
 									<ul class="an-accordeon__list" data-accordeon-list>
 											<%
-											if (contentArray!=null){
+											if (contentArray != null){
 											
 												for (int i = 0 ; i < contentArray.length(); i++) {
 													JSONObject item = contentArray.getJSONObject(i);
-													JSONArray categories = item.getJSONArray("Categories");
+													JSONArray categories = item.getJSONArray("categories");
 													
 													if(categories.toString().contains(categoryName)){
-											%>
+														%>
 														<li class="an-accordeon__item an-accordeon__item" data-accordeon-list-item>
 											                    <div class="an-accordeon__item-head" data-accordeon-head>
 											                      <div class="an-accordeon__item-head-title"><%= item.get("question") %></div>
@@ -58,12 +60,12 @@ JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 											                    </div>
 											                    <div class="an-accordeon__item-body">
 											                      <div class="an-accordeon__item-body-inner">
-											                      <p><%= item.get("answer") %></p>
+											                        <%= item.get("answer") %>
 											                        </div>
 											                    </div>    
 		
 														</li>									
-											<%
+														<%
 													}
 												}
 											}
