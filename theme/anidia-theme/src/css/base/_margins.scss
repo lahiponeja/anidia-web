@@ -13,6 +13,14 @@ $margin-names: 'none' 'xs' 's' 'm' 'l' 'xl' 'xxl' 'xxxl';
   .mt-#{nth($margin-names, $i)} {
     margin-top: #{$size}px;
   }
+
+  .ml-#{nth($margin-names, $i)} {
+    margin-left: #{$size}px;
+  }
+
+  .mr-#{nth($margin-names, $i)} {
+    margin-right: #{$size}px;
+  }
 }
 
 @each $size in $margin-desktop {
@@ -25,6 +33,14 @@ $margin-names: 'none' 'xs' 's' 'm' 'l' 'xl' 'xxl' 'xxxl';
 
     .mt-#{nth($margin-names, $i)} {
       margin-top: #{$size}px;
+    }
+
+    .ml-#{nth($margin-names, $i)} {
+      margin-left: #{$size}px;
+    }
+
+    .mr-#{nth($margin-names, $i)} {
+      margin-right: #{$size}px;
     }
   }
 }

@@ -1,4 +1,4 @@
-	<title>${the_title} - ${company_name}</title>
+	<title>${the_title} | Anidia</title>
 
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
