@@ -81,11 +81,12 @@ public class FAQsModulePortlet extends MVCPortlet {
 		String searchTerm = ParamUtil.getString(renderRequest, "searchTerm");
 		String contentJson = "";
 		try {
-			contentJson = toJsonString(journalArticles, language,searchTerm);
+			contentJson = toJsonString(journalArticles, language, searchTerm);
 		} catch (JSONException | DocumentException | org.json.JSONException e) {
 			e.printStackTrace();
 		}
 
+		renderRequest.setAttribute("usedSearchTerm", searchTerm);
         renderRequest.setAttribute("contentJson", contentJson);
 
 		super.doView(renderRequest, renderResponse);
