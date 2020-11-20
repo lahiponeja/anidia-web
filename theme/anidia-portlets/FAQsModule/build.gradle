@@ -34,7 +34,7 @@ dependencies {
     compile group: "com.liferay", name:"com.liferay.journal.api", version:"6.0.1"
 	compile group: 'com.liferay', name: 'com.liferay.dynamic.data.mapping.api', version: '8.0.0'
 	compile group: 'com.liferay', name: 'com.liferay.asset.service', version: '4.0.22'
-
+	compile group: 'org.json', name: 'json', version: '20090211'
     
 	cssBuilder group: "com.liferay", name: "com.liferay.css.builder", version: "3.0.2"
 }
