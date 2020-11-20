@@ -1,13 +1,19 @@
 .an-hero-slider {
-  height: 100%;
+  // height: 100%;
+
+ .journal-content-article  {
+  @include gradient-green-bg;
+
+ }
 
   &__item {
-    height: 100vh;
-    overflow: hidden;
+    // height: 100vh;
+    // overflow: hidden;
+    // opacity: 0;
 
     @include desktop {
       &-inner-wrapper {
-        height: 100%;
+        // height: 100%;
       }
     }
   }
@@ -21,7 +27,7 @@
     @include desktop {
       display: flex;
       justify-content: space-between;
-      height: 100%;
+      // height: 100%;
       background: none;
 
       &:after {

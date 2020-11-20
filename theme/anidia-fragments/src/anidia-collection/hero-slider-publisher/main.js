@@ -1,8 +1,6 @@
 function heroSlider() {
   const dataSliderLinesList = document.querySelector("[data-slider-lines-list]");
   var slides = document.querySelectorAll(".an-hero-slider .journal-content-article");
-  var controller = new ScrollMagic.Controller({});
-  let sceneBgAnimate;
 
   const linesHTML = []
   for(let i = 0; i < slides.length; i++) {
@@ -10,45 +8,35 @@ function heroSlider() {
   }
   dataSliderLinesList.innerHTML = linesHTML.join("");
 
-  if (document.querySelectorAll('#an-hero-slider__flag')) document.querySelectorAll('#an-hero-slider__flag')[0].parentElement.style.padding = 0;
+  const controller = new ScrollMagic.Controller({ addIndicators: true });
 
-  for (var i = 0; i < slides.length; i++) {
-    sceneBgAnimate = new ScrollMagic.Scene({
-      triggerElement: slides[i],
-      triggerHook: "onLeave",
-      duration: '100%'
-    })
-    .setPin(slides[i], {pushFollowers: false})
-    .addTo(controller)
-    .on('end', function() {
-      document.getElementById('banner').style.left = '0';
-      document.querySelector('.an-hero-slider__lines').style.display = 'block';
-      document.querySelectorAll("[data-discover-btn]").forEach((btn) => {
-        btn.style.display = 'flex';
-      });
-    });
-  }
+  // var timeline = new TimelineMax();
 
-  new ScrollMagic.Scene({
-      triggerElement: ("#an-hero-slider__flag"),
-      triggerHook: "onEnter",
-      duration: '0'
-    })
-    .setPin("#an-hero-slider__flag")
-    .addTo(controller)
-    .on('start', function() {
-      if(sceneBgAnimate) sceneBgAnimate.destroy();
-      document.getElementById('banner').style.left = '-100%';
-      document.querySelector('.an-hero-slider__lines').style.display = 'none';
-      document.querySelectorAll("[data-discover-btn]").forEach((btn) => {
-        btn.style.display = 'none';
-      });
-    });
+  // var tween1 = TweenMax.staggerFromTo(".an-hero-slider__info-container", 1, { bottom: 0 },{bottom: document.querySelectorAll(".an-hero-slider").offsetHeight}, 0.1);
+
+  // var tween2a = TweenMax.staggerTo(".an-hero-slider__info-container", 0.5, { y: 0 }, 0.1);
+
+  // var tween2b = TweenMax.staggerTo(".an-hero-slider__info-container", 0.35, { y: -100 }, 0.1);
+
+  // timeline.add(tween1, 0)
+  //     .add(tween2a, 0)
+  //     .add(tween2b, 0.5);
+
+
+  const sceneBgAnimate = new ScrollMagic.Scene({
+    triggerElement: '.an-hero-slider',
+    duration: document.querySelector('.an-hero-slider').offsetHeight,
+    triggerHook: 0,
+  })
+  .setPin('.an-hero-slider')
+  // .setTween(timeline)
+  .addTo(controller);
+
+
 }
 
 if (document.querySelectorAll(".an-hero-slider__item").length > 1) {
   heroSlider();
-  document.getElementById('banner').classList.add('more-elem');
 }
 
 
