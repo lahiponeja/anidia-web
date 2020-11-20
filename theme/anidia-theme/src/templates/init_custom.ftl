@@ -24,7 +24,7 @@ This file allows you to override and define new FreeMarker variables.
   <#assign css_class = css_class + " anidia-white-img" />
 </#if>
 
-<#if getterUtil.getString(themeDisplay.getThemeSetting("Esquema de colores de cabecera")) == "verde">
+<#if getterUtil.getString(themeDisplay.getThemeSetting("Esquema de colores de cabecera")) == "blanco">
 	<#assign css_class = css_class + " anidia-header-green" />
 <#else />
   <#assign css_class = css_class + " anidia-header-white" />
