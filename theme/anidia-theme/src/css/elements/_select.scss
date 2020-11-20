@@ -39,6 +39,20 @@
     }
   }
 
+  &--flag {
+    .an-select__native,
+    .an-select__custom-trigger {
+      padding: 0 rem(25) 0 rem(35);
+    }
+
+    @include tablet {
+      .an-select__native,
+      .an-select__custom-trigger {
+        padding: 0 rem(25) 0 rem(45);
+      }
+    }
+  }
+
   &__native {
     &:focus {
       border: 2px solid $an-theme;
@@ -94,6 +108,12 @@
     transition: all 0.2s ease;
     z-index: 4;
   }
+  
+  &--flag {
+    .an-select__icon {
+      right: rem(17);
+    }
+  }
 
   &.is-active {
     z-index: 5;
@@ -118,6 +138,10 @@
     }
   }
 
+  &--small-width {
+    width: rem(180);
+  }
+  
   &--full-width {
     width: 100%;
   }
@@ -182,6 +206,23 @@
       #{ $custom }-options {
         display: block;
       }
+    }
+  }
+
+  &__flag {
+    position: absolute;
+    width: 20px;
+    z-index: 1;
+    left: 14px;
+    pointer-events: none;
+
+    svg {
+      width: 100%;
+      max-height: 60px;
+    }
+
+    @include tablet {
+      left: 22px;
     }
   }
 
