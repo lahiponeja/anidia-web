@@ -24,6 +24,11 @@ const budgetReady = {
 
       this.sendingForm = true
       this.house.submitUserContactInfo(payloadObj).then((res) => {
+        window.dataLayer.push(this.house.getLeadFormStepInfo(
+          "FUNNEL - CONTRATACIÓN", "quotationlead OK", "gas",
+          (this.budgetReadyForm.email != ''),
+          (this.budgetReadyForm.phone != '')
+        ));
         this.$emit("form-success")
         this.sendingForm = false
       }).catch((err)=>{
@@ -40,6 +45,7 @@ const budgetReady = {
     },
   },
   mounted () {
+    window.dataLayer.push(this.house.getDatalayerDetailsStepInfo("FUNNEL - CONTRATACIÓN", "quotationlead", "gas"));
     window.scrollTo({
       top: 200,
       behavior: 'smooth',

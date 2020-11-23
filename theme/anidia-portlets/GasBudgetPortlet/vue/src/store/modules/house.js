@@ -349,6 +349,54 @@ const submitHouseData = function(gasBudgetRequest) {
   return results;
 }
 
+const getDatalayerInitialInfo = function(category, action, label) {
+  return {
+    event: 'ananalyticsevent',
+    eventdata: {
+      category: category,
+      action: action,
+      label: label
+    }
+  }
+}
+
+const getDatalayerFirstStepInfo = function(category, action, label) {
+  var datalayerInfo = this.getDatalayerInitialInfo(category, action, label);
+  datalayerInfo.eventdata.installationtype = this.state.houseType;
+  return datalayerInfo;
+}
+
+const getDatalayerAddressStepInfo = function(category, action, label) {
+  var datalayerInfo = this.getDatalayerFirstStepInfo(category, action, label);
+  datalayerInfo.eventdata.formcity = this.state.coverageData.postalCode.municipalityName;
+  return datalayerInfo;
+}
+
+const getDatalayerDetailsStepInfo = function(category, action, label) {
+  var datalayerInfo = this.getDatalayerAddressStepInfo(category, action, label);
+  datalayerInfo.eventdata.formcity = this.state.coverageData.postalCode.municipalityName;
+  datalayerInfo.eventdata.sqmeters = this.state.houseFormData.propertyMeters;
+  datalayerInfo.eventdata.bathrooms = this.state.houseFormData.bathroomNumber;
+  datalayerInfo.eventdata.rooms = this.state.houseFormData.staysNumber;
+  datalayerInfo.eventdata.floors = this.state.houseFormData.floorNumber;
+  datalayerInfo.eventdata.servicetype = this.state.houseFormData.gasNaturalUse;
+  datalayerInfo.eventdata.previouswater = this.state.houseFormData.acsUse;
+  datalayerInfo.eventdata.previouskitchen = this.state.houseFormData.kitchenUse;
+  datalayerInfo.eventdata.previousheat = this.state.houseFormData.heatingUse;
+  datalayerInfo.eventdata.sqmetersboilerroom = this.state.houseFormData.metersBoilerToWindow;
+  datalayerInfo.eventdata.boilerventilation = this.state.houseFormData.hasVentilationGrill;
+  datalayerInfo.eventdata.watteruse = this.state.houseFormData.personsWater;
+  return datalayerInfo;
+}
+
+const getLeadFormStepInfo = function(category, action, label, hasEmail, hasPhone) {
+  var datalayerInfo = this.getDatalayerDetailsStepInfo(category, action, label);
+  datalayerInfo.eventdata.leademailhas = hasEmail ? "si" : "no";
+  datalayerInfo.eventdata.leadphonehash = hasPhone ? "si" : "no";
+  datalayerInfo.eventdata.leadcontactype = "presupuestadora gas"
+  return datalayerInfo;
+}
+
 export default {
   state: shallowReadonly(state),
   setPostalCode,
@@ -366,4 +414,9 @@ export default {
   submitBusinessContactInfo,
   resetAutocompleteData,
   resetHouseFormData,
+  getDatalayerInitialInfo,
+  getDatalayerFirstStepInfo,
+  getDatalayerAddressStepInfo,
+  getDatalayerDetailsStepInfo,
+  getLeadFormStepInfo
 }

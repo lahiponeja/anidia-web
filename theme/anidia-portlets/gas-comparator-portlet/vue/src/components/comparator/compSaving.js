@@ -21,6 +21,7 @@ const compSaving = {
     }
   },
   mounted() {
+    window.dataLayer.push(this.comparator.getDatalayerKitchenStepInfo("FUNNEL - CONTRATACIÓN", "calculatorlead", "calculator"));
     window.scrollTo({
       top: 200,
       behavior: 'smooth',
@@ -31,6 +32,7 @@ const compSaving = {
       const payloadObj = Object.assign(this.compSavingForm, {
         phone: this.fullPhoneNumber
       })
+      window.dataLayer.push(this.comparator.getDatalayerKitchenStepInfo("conversion", "calculatorlead", "calculator"));
       // TODO: add validation
       this.sendingForm = true
       this.comparator.submitUserContactInfo(payloadObj).then((res) => {
@@ -44,7 +46,7 @@ const compSaving = {
     },
 
     resetCompSavingForm() {
-      Object.assign(this.compSavingForm, { 
+      Object.assign(this.compSavingForm, {
         name: "",
         lastname: "",
         phone: "",
@@ -71,7 +73,7 @@ const compSaving = {
         <div v-if="sendingForm" class="an-funnel__white-overlay">
           <p class="an-h3">Cargando...</p>
         </div>
-        
+
           <form @submit.prevent="submitRequest">
             <div class="an-form__flex an-form__flex--2-cols">
               <div class="an-input an-form__item">
