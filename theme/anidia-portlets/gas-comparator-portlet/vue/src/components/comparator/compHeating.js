@@ -11,6 +11,8 @@ const compHeating = {
     }
   },
   mounted() {
+    window.dataLayer.push(this.comparator.getDatalayerWaterStepInfo("engagement", "calculator", "heatingsystem"));
+
     window.scrollTo({
       top: 200,
       behavior: 'smooth',
@@ -24,11 +26,14 @@ const compHeating = {
         lastFloor: this.savingsData.lastFloor,
         surfaceHouse: this.savingsData.surfaceHouse,
       })
+      window.dataLayer.push(this.comparator.getDatalayerHeatingStepInfo("engagement", "calculator", "heatingsystem"));
+      
 
       this.comparator.changeStepComponent('comp-kitchen')
     },
 
     goBack() {
+      window.dataLayer.push(this.comparator.getDatalayerInitialInfo("engagement", "calculator", "back"));
       this.comparator.changeStepComponent('comp-hot-water')
     },
 
