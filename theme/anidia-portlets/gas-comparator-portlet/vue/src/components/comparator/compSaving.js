@@ -20,6 +20,7 @@ const compSaving = {
     }
   },
   mounted() {
+    window.dataLayer.push(this.comparator.getDatalayerKitchenStepInfo("FUNNEL - CONTRATACIÓN", "calculatorlead", "calculator"));
     window.scrollTo({
       top: 200,
       behavior: 'smooth',
@@ -27,6 +28,7 @@ const compSaving = {
   },
   methods: {
     submitRequest() {
+      window.dataLayer.push(this.comparator.getDatalayerKitchenStepInfo("conversion", "calculatorlead", "calculator"));
       // TODO: add validation
       this.sendingForm = true
       this.comparator.submitUserContactInfo(this.compSavingForm).then((res) => {

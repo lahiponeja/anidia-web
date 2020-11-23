@@ -40,13 +40,14 @@ const funnelForm = {
         this.comparator.setSavingByUse({
           province: this.province
         })
-
         this.global.changeView('comparator')
         this.comparator.changeStepComponent('comp-hot-water')
       }
+      window.dataLayer.push(this.comparator.getDatalayerFirstStepInfo("engagement", "calculator", "energyspent"));
     }
   },
   mounted() {
+    window.dataLayer.push(this.comparator.getDatalayerInitialInfo("engagement", "calculator", "energyspent"));
     if(document.querySelector('.an-featured')) document.querySelector('.an-featured').classList.add('hide');
   },
   template: /*html*/`
