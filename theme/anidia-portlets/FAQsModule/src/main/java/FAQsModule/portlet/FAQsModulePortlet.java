@@ -66,8 +66,7 @@ public class FAQsModulePortlet extends MVCPortlet {
 	
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
-        		WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		
 		List<JournalArticle> journalArticles =  new ArrayList<JournalArticle>();
         String structureName = "FAQ";
@@ -137,9 +136,9 @@ public class FAQsModulePortlet extends MVCPortlet {
 		sortByPriority(articles);
 		
 		for (JournalArticle entry : articles) {
-			if(!entry.isExpired() && !entry.isInTrash()) { 
+			if(!entry.isExpired() && !entry.isInTrash() && !entry.isDraft()) { 
 				
-				AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle",entry.getResourcePrimKey());				
+				AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry("com.liferay.journal.model.JournalArticle", entry.getResourcePrimKey());				
 				List<AssetCategory> assetCategories =  new ArrayList<AssetCategory>();
 				assetCategories= AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(assetEntry.getEntryId());
 				
