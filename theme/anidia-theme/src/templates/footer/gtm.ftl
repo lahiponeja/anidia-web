@@ -73,13 +73,13 @@ if (typeof ga === 'function') {
 window.dataLayer.push({
   "event": "anidiapageview",
   "campaign": {
-    "campaign": "${request.getParameter("utm_campaign")}",
-    "trafficsource": "${request.getParameter("utm_trafficsource")}",
-    "medium": "${request.getParameter("utm_medium")}",
-    "term": "${request.getParameter("utm_term")}",
-    "content": "${request.getParameter("utm_content")}",
-    "glcid": "${request.getParameter("gclid")}",
-    "gclsrc": "${request.getParameter("gclsrc")}"
+    "campaign": "${request.getParameter("utm_campaign")!""}",
+    "trafficsource": "${request.getParameter("utm_trafficsource")!""}",
+    "medium": "${request.getParameter("utm_medium")!""}",
+    "term": "${request.getParameter("utm_term")!""}",
+    "content": "${request.getParameter("utm_content")!""}",
+    "glcid": "${request.getParameter("gclid")!""}",
+    "gclsrc": "${request.getParameter("gclsrc")!""}"
   }
 });
 </script>
