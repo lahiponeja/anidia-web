@@ -69,7 +69,7 @@ function checkLeftCollision() {
     triggerHook: 0
   })
   .setPin('.an-hero-slider .portlet-body')
-  .addIndicators({name: "pin scene", colorStart: "tomato"})
+  //.addIndicators({name: "pin scene", colorStart: "tomato"})
   .setTween(tl)
   .addTo(controller)
   .on('enter', startBgAnimate)
