@@ -1,22 +1,10 @@
 .an-hero-slider {
-  // height: 100%;
 
- .journal-content-article  {
-  @include gradient-green-bg;
-
+ .portlet-body {
+  width: 100%;
+  overflow: hidden;
+  height: 100vh;
  }
-
-  &__item {
-    // height: 100vh;
-    // overflow: hidden;
-    // opacity: 0;
-
-    @include desktop {
-      &-inner-wrapper {
-        // height: 100%;
-      }
-    }
-  }
 
   &__info-container {
     background-image: url('../../anidia-theme/assets/img/circles-bg.svg');
@@ -27,8 +15,8 @@
     @include desktop {
       display: flex;
       justify-content: space-between;
-      // height: 100%;
       background: none;
+      overflow: hidden;
 
       &:after {
         content: '';
@@ -40,12 +28,14 @@
         right: 0;
         transform: translate(45%, 50%);
         z-index: 0;
+        background-size: contain;
       }
     }
   }
 
   &__info {
     padding: rem(117) rem(20) 0;
+    transform: none !important;
 
     @include desktop {
       width: flex-grid(6);
@@ -53,6 +43,8 @@
       margin-bottom: auto;
       padding-top: rem(180);
       padding-left: flex-grid(1);
+      height: 100%;
+      transform: unset;
     }
   }
 
@@ -61,6 +53,8 @@
 
     @include desktop {
       width: flex-grid(5);
+      will-change: transform;
+      height: 100vh;
     }
 
     &-desktop {
@@ -68,7 +62,7 @@
 
       @include desktop {
         display: block;
-        height: 95vh;
+        height: 100%;
         transform: scale(1.2);
       }
     }
@@ -191,6 +185,7 @@
     transform: translateX(50%);
     padding: rem(20);
     width: 100%;
+    z-index: 1;
 
     @include desktop {
       position: relative;
