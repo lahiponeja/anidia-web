@@ -24,3 +24,5 @@ RUN apt-get update -qq && \
   nodejs yarn
 
 COPY . .  
+
+USER gradle
