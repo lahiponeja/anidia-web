@@ -1,6 +1,8 @@
 import results from "./results";
+import phonePrefixMixin from "../../mixins/phonePrefixMixin"
 
 const compSaving = {
+  mixins: [phonePrefixMixin],
   components: {
     results,
   },
@@ -15,11 +17,11 @@ const compSaving = {
         privacyPolicy: false,
         offersAndServices: false,
       },
-
       sendingForm: false,
     }
   },
   mounted() {
+    window.dataLayer.push(this.comparator.getDatalayerKitchenStepInfo("FUNNEL - CONTRATACIÓN", "calculatorlead", "calculator"));
     window.scrollTo({
       top: 200,
       behavior: 'smooth',
@@ -27,9 +29,13 @@ const compSaving = {
   },
   methods: {
     submitRequest() {
+      const payloadObj = Object.assign(this.compSavingForm, {
+        phone: this.fullPhoneNumber
+      })
+      window.dataLayer.push(this.comparator.getDatalayerKitchenStepInfo("conversion", "calculatorlead", "calculator"));
       // TODO: add validation
       this.sendingForm = true
-      this.comparator.submitUserContactInfo(this.compSavingForm).then((res) => {
+      this.comparator.submitUserContactInfo(payloadObj).then((res) => {
         this.sendingForm = false
         this.comparator.setLead(true)
         this.resetCompSavingForm()
@@ -40,7 +46,7 @@ const compSaving = {
     },
 
     resetCompSavingForm() {
-      Object.assign(this.compSavingForm, { 
+      Object.assign(this.compSavingForm, {
         name: "",
         lastname: "",
         phone: "",
@@ -67,7 +73,7 @@ const compSaving = {
         <div v-if="sendingForm" class="an-funnel__white-overlay">
           <p class="an-h3">Cargando...</p>
         </div>
-        
+
           <form @submit.prevent="submitRequest">
             <div class="an-form__flex an-form__flex--2-cols">
               <div class="an-input an-form__item">
@@ -77,7 +83,19 @@ const compSaving = {
                 <input v-model="compSavingForm.lastname" type="text" class="an-input__field" placeholder="Apellidos*" required="">
               </div>
               <div class="an-input an-form__item">
-                <input v-model="compSavingForm.phone" type="text" class="an-input__field" placeholder="Teléfono*" required="">
+                <div class="an-select an-select--flag an-select--small-width mr-xs">
+                  <template v-for="(option, index) in phonePrefixesOptions">
+                    <img class="an-select__flag" v-if="option.value === phonePrefix" :src="option.flagUrl" />
+                  </template>
+                  <span class="an-select__icon an-icon--chevron-down"></span>
+                  <select v-model="phonePrefix" class="an-select__native" required>
+                    <option v-for="(option, index) in phonePrefixesOptions" :value="option.value">
+                      {{ option.text }}
+                    </option>
+                  </select>
+                </div>
+
+                <input v-model="phoneNumber" type="number" class="an-input__field" placeholder="Teléfono*" required="">
               </div>
               <div class="an-input an-form__item">
                 <input v-model="compSavingForm.email" type="email" class="an-input__field" placeholder="Email*"  required="">

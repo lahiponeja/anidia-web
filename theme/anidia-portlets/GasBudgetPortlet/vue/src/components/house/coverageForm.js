@@ -55,8 +55,11 @@ const coverageForm = {
     submitRequest() {
       if(this.isValidStatusCode) {
         this.house.setPostalCode(this.formData.postalCode);
+        window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture OK", "gas"));
         this.house.changeHouseStep('vivienda');
       } else {
+        this.house.setPostalCode(this.formData.postalCode);
+        window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
         this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
         if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.remove('hide');
       }
@@ -131,6 +134,7 @@ const coverageForm = {
       this.house.getMunicipalities(postalCode)
         .then(() => { this.loadingMunicipalities = false })
         .catch((err) => {
+          window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
           this.loadingMunicipalities = false
           console.error(err)
@@ -156,6 +160,7 @@ const coverageForm = {
       this.house.getAddresses(this.formData.provMunId, this.formData.postalCode)
         .then(() => { this.loadingAddressess = false })
         .catch((err) => {
+          window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
           this.loadingAddressess = false
           console.error(err)
@@ -182,6 +187,7 @@ const coverageForm = {
       this.house.getEstates(this.formData.provMunId, this.formData.postalCode, kind, name)
         .then(() => { this.loadingEstates = false })
         .catch((err) => {
+          window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
           this.loadingEstates = false
           console.error(err)
@@ -210,6 +216,7 @@ const coverageForm = {
       this.house.getProperties(gateId)
         .then(() => { this.loadingProperties = false })
         .catch((err) => {
+          window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
           this.loadingProperties = false
           console.error(err)
@@ -270,6 +277,7 @@ const coverageForm = {
   },
 
   mounted() {
+    window.dataLayer.push(this.house.getDatalayerFirstStepInfo("FUNNEL - CONTRATACIÓN", "coberture", "gas"));
     if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.add('hide');
     window.scrollTo({
       top: 200,
