@@ -81,19 +81,30 @@ pipeline {
       }
     }
     
-    /*
-    stage('Publish') {
+    stage('Gradle v4 builds') {
       steps {
         sh """
-          docker tag ${env.IMAGE}:${env.TAG} ${env.IMAGE}:latest
-          docker push ${env.IMAGE}:${env.TAG}
-          docker push ${env.IMAGE}:latest
+          docker run gradle4:builder -- npm install ./theme 
+          docker run gradle4:builder -- npm install ./theme/anidia-fragments
+          docker run gradle4:builder -- npm install ./theme/anidia-theme
+          docker run gradle4:builder -- npm install ./theme/anidia-portlets
         """
       }
     }
-    */
-  // END OF STAGES
-  }
+
+    stage('Gradle v6 builds') {
+      steps {
+        sh """
+          docker run gradle6:builder -- npm install ./theme 
+          docker run gradle6:builder -- npm install ./theme/anidia-fragments
+          docker run gradle6:builder -- npm install ./theme/anidia-theme
+          docker run gradle6:builder -- npm install ./theme/anidia-portlets
+        """
+      }
+    }
+
+
+  } // END OF STAGES
 
   post { // Post Actions
     always {
@@ -135,8 +146,7 @@ pipeline {
         """
       )
     }
-  // END OF POST ACTIONS
-  }
+  
+  } // END OF POST ACTIONS
 
-// END OF PIPELINE
-}
+} // END OF PIPELINE
