@@ -3,10 +3,10 @@ function heroSlider() {
   var slides = document.querySelectorAll(".an-hero-slider .journal-content-article");
 
   slides.forEach((el, i) => {
-    if (i === 0) el.classList.add('one');
+    if (i === 0) el.classList.add('first');
     else {
-      if (i === slides.length - 1) el.classList.add('three');
-      else el.classList.add('two');
+      if (i === slides.length - 1) el.classList.add('last');
+      else el.classList.add('inner');
     }
   });
 
@@ -50,17 +50,18 @@ function checkLeftCollision() {
 
   var tl = new TimelineMax();
   tl
-  .to(".one .an-hero-slider__image", {y: 0, duration: 20, display: 'none'})
-  .to(".one .an-hero-slider__info", {y: 0, duration: 0, display: 'none'})
+  .to(".first .an-hero-slider__image", {y: 0, duration: 20, display: 'none'})
+  // DIEGO .an-hero-slider__info
+  .to(".first .an-hero-slider__info", {y: 0, duration: 0, display: 'none'})
 
-  .to(".two .an-hero-slider__image", {y: 0, duration: 10, display: 'block'})
-  .to(".two .an-hero-slider__info", {y: 0, duration: 20, display: 'block'})
+  .to(".inner .an-hero-slider__image", {y: 0, duration: 10, display: 'block'})
+  .to(".inner .an-hero-slider__info", {y: 0, duration: 20, display: 'block'})
 
-  .to(".two .an-hero-slider__image", {y: 0, duration: 10, display: 'none'})
-  .to(".two .an-hero-slider__info", {y: 0, duration: 0, display: 'none'})
+  .to(".inner .an-hero-slider__image", {y: 0, duration: 10, display: 'none'})
+  .to(".inner .an-hero-slider__info", {y: 0, duration: 0, display: 'none'})
 
-  .to(".three .an-hero-slider__image", {y: 0, duration: 20, display: 'block'})
-  .to(".three .an-hero-slider__info", {y: 0, duration: 20, display: 'block'});
+  .to(".last .an-hero-slider__image", {y: 0, duration: 20, display: 'block'})
+  .to(".last .an-hero-slider__info", {y: 0, duration: 20, display: 'block'});
 
   const controller = new ScrollMagic.Controller();
 
@@ -69,7 +70,7 @@ function checkLeftCollision() {
     triggerHook: 0
   })
   .setPin('.an-hero-slider .portlet-body')
-  //.addIndicators({name: "pin scene", colorStart: "tomato"})
+  .addIndicators({name: "pin scene", colorStart: "tomato"})
   .setTween(tl)
   .addTo(controller)
   .on('enter', startBgAnimate)
