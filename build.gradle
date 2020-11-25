@@ -179,3 +179,68 @@ tasks.register("build.portlets.gas_comparator") {
     }
   }
 }
+
+
+tasks.register("install.npm") {
+
+    group = 'Anidia'
+    description = 'Install npm dependencies in every folder'
+
+    dependsOn 'install.npm.base'
+    dependsOn 'install.npm.theme'
+    dependsOn 'install.npm.fragments'
+    dependsOn 'install.npm.portlets'
+
+}
+
+tasks.register("install.npm.base") {
+  group = 'Anidia'
+  description = 'Install npm dependencies in the base theme folder'
+
+  doLast {
+    exec {
+      workingDir 'theme'
+      commandLine 'npm', 'install'
+    }
+  }
+}
+
+tasks.register("install.npm.theme") {
+  group = 'Anidia'
+  description = 'Install npm dependencies in the anidia-theme folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-theme'
+      commandLine 'npm', 'install'
+    }
+  }
+}
+
+tasks.register("install.npm.fragments") {
+  group = 'Anidia'
+  description = 'Install npm dependencies in the anidia-fragments folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-fragments'
+      commandLine 'npm', 'install'
+    }
+  }
+}
+
+tasks.register("install.npm.portlets") {
+  group = 'Anidia'
+  description = 'Install npm dependencies in the vue portlets folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-portlets/gas-comparator-portlet/vue'
+      commandLine 'npm', 'install'
+    }
+    exec {
+      workingDir 'theme/anidia-portlets/GasBudgetPortlet/vue'
+      commandLine 'npm', 'install'
+    }
+  }
+}
