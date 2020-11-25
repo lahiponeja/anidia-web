@@ -72,22 +72,12 @@ pipeline {
       }
     }
 
-    stage('Create Gradle builers') {
-      steps {
-        sh """
-          docker build -f docker/gradle4.dockerfile . -t gradle4:builder
-          docker build -f docker/gradle4.dockerfile . -t gradle6:builder
-        """
-      }
-    }
-    
     stage('Gradle v4 builds') {
       steps {
         sh """
-          docker run gradle4:builder -- npm install ./theme 
-          docker run gradle4:builder -- npm install ./theme/anidia-fragments
-          docker run gradle4:builder -- npm install ./theme/anidia-theme
-          docker run gradle4:builder -- npm install ./theme/anidia-portlets
+          docker build -f docker/gradle4.dockerfile . -t gradle4:builder
+          docker run gradle4:builder "gradle install.npm"
+          docker run gradle4:builder "gradle build.gradle-v4"
         """
       }
     }
@@ -95,14 +85,12 @@ pipeline {
     stage('Gradle v6 builds') {
       steps {
         sh """
-          docker run gradle6:builder -- npm install ./theme 
-          docker run gradle6:builder -- npm install ./theme/anidia-fragments
-          docker run gradle6:builder -- npm install ./theme/anidia-theme
-          docker run gradle6:builder -- npm install ./theme/anidia-portlets
+          docker build -f docker/gradle4.dockerfile . -t gradle6:builder
+          docker run gradle6:builder "gradle install.npm"
+          docker run gradle6:builder "gradle build.gradle-v6"
         """
       }
     }
-
 
   } // END OF STAGES
 
