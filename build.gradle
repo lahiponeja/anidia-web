@@ -108,7 +108,7 @@ tasks.register("build.assetPublisher.jsp") {
 
 tasks.register("build.portlets.gradle-v4") {
   group = 'Anidia'
-  description = 'Builds all the portlets and copy them to the deploy folder'
+  description = 'Builds all the portlets that compile in Gradle 4 and copy them to the deploy folder'
 
     dependsOn 'build.portlets.gas_budget'
     dependsOn 'build.portlets.gas_comparator'
@@ -117,7 +117,7 @@ tasks.register("build.portlets.gradle-v4") {
 
 tasks.register("build.portlets.gradle-v6") {
   group = 'Anidia'
-  description = 'Builds all the portlets and copy them to the deploy folder'
+  description = 'Builds all the portlets that compile in Gradle 6 and copy them to the deploy folder'
 
     dependsOn 'build.portlets.contact_form'
 
