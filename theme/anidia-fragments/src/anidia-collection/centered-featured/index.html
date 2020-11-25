@@ -1,30 +1,31 @@
 [#switch configuration.Color]
   [#case 'Verde']
-  <div class="bg-an-theme pl-s pr-s bg-an-theme--centered-featured">
+  <div class="bg-an-theme pl-s pr-s bg-an-theme--centered-featured [#if configuration.Translate] translate [/#if]">
   [#break]
 
   [#case 'Verde claro']
-  <div class="bg-an-theme-light pl-s pr-s bg-an-theme--centered-featured">
+  <div class="bg-an-theme-light pl-s pr-s bg-an-theme--centered-featured [#if configuration.Translate] translate
+  [/#if]">
   [#break]
 
   [#case 'Blanco']
-  <div class="bg-white pl-s pr-s bg-an-theme--centered-featured">
+  <div class="bg-white pl-s pr-s bg-an-theme--centered-featured [#if configuration.Translate] translate [/#if]">
   [#break]
 
   [#case 'Transparente']
-  <div class="bg-transparent pl-s pr-s bg-an-theme--centered-featured">
+  <div class="bg-transparent pl-s pr-s bg-an-theme--centered-featured [#if configuration.Translate] translate [/#if]">
   [#break]
 
   [#case 'Gris oscuro']
-  <div class="bg-an-theme-dark-grey pl-s pr-s bg-an-theme--centered-featured">
+  <div class="bg-an-theme-dark-grey pl-s pr-s bg-an-theme--centered-featured [#if configuration.Translate] translate [/#if]">
   [#break]
 
   [#case 'Gris claro']
-    <div class="bg-an-theme-soft-grey pl-s pr-s bg-an-theme--centered-featured">
+    <div class="bg-an-theme-soft-grey pl-s pr-s bg-an-theme--centered-featured [#if configuration.Translate] translate [/#if]">
   [#break]
 
   [default]
-  <div class="bg-an-theme pl-s pr-s bg-an-theme--centered-featured">
+  <div class="bg-an-theme pl-s pr-s bg-an-theme--centered-featured [#if configuration.Translate] translate [/#if]">
 [/#switch]
 
   <div class="an-centered-featured

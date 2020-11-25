@@ -26,7 +26,7 @@ function header() {
           event.preventDefault();
           link.parentElement.classList.add('hide-border')
           link.classList.add("active");
-          document.querySelector('.nav-item.dropdown:not(.active)').classList.add('hide')
+          document.querySelector('.nav-item.dropdown:not(.active)').classList.add('hide');
           link.nextElementSibling.classList.add("active");
         });
     }

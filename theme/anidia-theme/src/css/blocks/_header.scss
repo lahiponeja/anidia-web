@@ -61,13 +61,15 @@
       &.active {
         .nav-link .text-truncate {
           display: flex;
-          flex-direction: column;
 
           &:after {
             content: '';
             border-bottom: 2px solid;
             width: 90%;
             transform: translateY(rem(-10));
+            position: absolute;
+            bottom: 0;
+            left: 0;
           }
         }
       }

@@ -28,6 +28,29 @@
           }
         }
       ]
+    },
+    {
+      "label": "Color texto",
+      "fields": [
+        {
+          "name": "TextColor",
+          "label": "Color de texto",
+          "description": "Color de texto",
+          "type": "select",
+          "dataType": "string",
+          "defaultValue": "Verde",
+          "typeOptions": {
+            "validValues": [
+              {
+                "value": "Verde"
+              },
+              {
+                "value": "Blanco"
+              }
+            ]
+          }
+        }
+      ]
     }
   ]
 }
