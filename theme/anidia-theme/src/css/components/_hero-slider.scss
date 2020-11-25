@@ -112,6 +112,10 @@
     .an-hero-slider.transparent & {
       color: $an-theme;
     }
+
+    .an-hero-slider__inner-wrapper.green & {
+      color: $an-theme;
+    }
   }
 
   &__text {
@@ -121,6 +125,10 @@
     .an-hero-slider.white &,
     .an-hero-slider.light-green &,
     .an-hero-slider.transparent & {
+      color: $an-theme;
+    }
+
+    .an-hero-slider__inner-wrapper.green & {
       color: $an-theme;
     }
   }
@@ -256,20 +264,19 @@
         color: $an-theme-dark-grey;
       }
 
+      .an-hero-slider__inner-wrapper.green & {
+        color: $an-theme-dark-grey
+      }
+
       span {
         display: block;
         margin-left: rem(20);
         font-size: rem(40);
         position: relative;
         transition: all 0.3s ease;
+
         &:hover > span {
           animation: discoverArrow 0.8s infinite;
-        }
-
-        .an-hero-slider.white &,
-        .an-hero-slider.light-green &,
-        .an-hero-slider.transparent & {
-          color: $an-theme;
         }
       }
     }
