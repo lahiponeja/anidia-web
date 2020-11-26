@@ -52,6 +52,6 @@ expect -exact "(Y/n)"
 send -- "\r"
 expect -exact "(liferay.com)"
 send -- "\r"
-expect -exact "(Guest) \[22m\[43D\[43C"
+expect -exact "(Guest)"
 send -- "\r"
 expect eof
