@@ -1,6 +1,5 @@
 .anidia-header {
   width: 100%;
-
   &.active {
     position: fixed;
     background: $an-theme-dark-grey;
@@ -510,14 +509,14 @@
 }
 
 #banner {
-
   @include desktop {
     padding: rem(19) rem(60);
-    z-index: 2;
+  }
 
-    &.more-elem {
-      position: fixed;
-    }
+  &.more-elem {
+    position: fixed;
+    width: 100%;
+    z-index: 2;
   }
 }
 

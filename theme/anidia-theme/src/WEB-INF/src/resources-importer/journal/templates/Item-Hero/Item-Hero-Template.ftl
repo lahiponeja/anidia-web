@@ -1,12 +1,31 @@
 <section class="an-hero-slider__item" data-slider-item-section>
 	<div class="an-hero-slider__item-inner-wrapper">
 	<div class="an-hero-slider__info-container">
-		<p class="an-h1 an-hero-slider__heading">
-		${Título.getData()}
-		</p>
-		<p class="an-body-l-regular an-hero-slider__text">
-		${Subtítulo.getData()}
-		</p>
+
+    <div class="an-hero-slider__info">
+    	<p class="an-h1 an-hero-slider__heading">
+      ${Título.getData()}
+      </p>
+      <p class="an-body-l-regular an-hero-slider__text">
+      ${Subtítulo.getData()}
+      </p>
+
+      <#if TextoBotón.getData?? && TextoBotón.getData() != "">
+			<div class="an-hero-slider__btn">
+        <#if LinkToPage1z94.getFriendlyUrl() != "">
+        <a href="${LinkToPage1z94.getFriendlyUrl()}" class="an-btn an-btn--white">
+          <span>${TextoBotón.getData()}</span>
+        </a>
+        <#else>
+            <#if LinkToUrl.getData??>
+                <a href="${LinkToUrl.getData()}" class="an-btn an-btn--white">
+                  <span>${TextoBotón.getData()}</span>
+                </a>
+            </#if>
+        </#if>
+        </div>
+      </#if>
+    </div>
 
 		<div class="an-hero-slider__image">
 		<#if ImagenDesktop.getData()?? && ImagenDesktop.getData() != "">
@@ -21,22 +40,6 @@
 		Descubre más
 		<span class="an-icon--half-arrow-right"></span>
 		</button>
-
-		<#if TextoBotón.getData?? && TextoBotón.getData() != "">
-			<div class="an-hero-slider__btn">
-			<#if LinkToPage1z94.getFriendlyUrl() != "">
-			<a href="${LinkToPage1z94.getFriendlyUrl()}" class="an-btn an-btn--flatter an-btn--white">
-				<span>${TextoBotón.getData()}</span>
-			</a>
-			<#else>
-			    <#if LinkToUrl.getData??>
-        			<a href="${LinkToUrl.getData()}" class="an-btn an-btn--flatter an-btn--white">
-        				<span>${TextoBotón.getData()}</span>
-        			</a>
-    			</#if>
-			</#if>
-			</div>
-		</#if>
 
 	</div>
 	</div>
