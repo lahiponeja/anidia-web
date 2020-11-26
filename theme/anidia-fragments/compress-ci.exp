@@ -47,6 +47,8 @@ spawn npm run compress
 match_max 100000
 
 expect -exact "(Y/n)"
+send -- "n\r"
+expect -exact "(Y/n)"
 send -- "\r"
 expect -exact "(liferay.com)"
 send -- "\r"

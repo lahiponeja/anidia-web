@@ -23,8 +23,11 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get update -qq && \
   apt-get install -y \
   nodejs yarn
+<<<<<<< HEAD
 
 RUN update-ca-certificates -f
+=======
+>>>>>>> 24833ac31331dc9e049d2c2abd241a60b86b7139
 
 # Install Azure Cli and AzCopy tools
 # RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
@@ -33,4 +36,23 @@ RUN update-ca-certificates -f
 #     && rm azcopy.tar.gz
 
 USER gradle
+<<<<<<< HEAD
 #COPY --chown=gradle:gradle . .
+=======
+COPY --chown=gradle:gradle . .
+
+#RUN cd $HOME/theme \
+# && npm install \
+# && echo "npm install on $PWD base done!" \
+# && cd $HOME/theme/anidia-fragments \
+# && npm install \
+# && echo "npm install on $PWD done!" \
+# && cd $HOME/theme/anidia-theme \
+# && npm install \
+# && echo "npm install on $PWD done!" \
+# && cd $HOME/theme/anidia-portlets \
+# && npm install \
+# && echo "npm install on $PWD done!" \
+# && cd $HOME \
+# && echo "Al carajo con NodeJS done!"
+>>>>>>> 24833ac31331dc9e049d2c2abd241a60b86b7139
