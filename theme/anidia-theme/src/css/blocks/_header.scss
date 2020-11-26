@@ -58,7 +58,7 @@
       width: auto;
       position: initial;
 
-      &.active {
+      &.open {
         .nav-link .text-truncate {
           display: flex;
 
@@ -149,14 +149,6 @@
         margin-right: rem(38);
         margin-bottom: rem(20);
       }
-    }
-
-    &.active {
-      left: 0;
-      z-index: 2;
-      display: block;
-      position: relative;
-      transform: translateY(-60px);
     }
 
     .dropdown-item {
@@ -388,6 +380,12 @@
   }
 
   .dropdown.open > .dropdown-menu {
+    left: 0;
+    z-index: 2;
+    display: block;
+    position: relative;
+    transform: translateY(-60px);
+
     @include desktop {
       display: flex;
     }
