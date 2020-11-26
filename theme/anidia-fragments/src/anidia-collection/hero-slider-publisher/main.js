@@ -109,6 +109,7 @@ function setSliderLines(slides) {
 }
 
 if (document.querySelectorAll(".an-hero-slider__item").length > 1) {
+  document.querySelector(".an-hero-slider").classList.add("an-hero-slider--has-slides");
   heroSlider();
   if(document.getElementById('banner')) {
     document.getElementById('banner').classList.add('more-elem');
