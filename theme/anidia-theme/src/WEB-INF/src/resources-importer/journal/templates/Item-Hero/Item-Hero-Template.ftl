@@ -1,4 +1,4 @@
-<section class="an-hero-slider__item bg-gradient-green" data-slider-item-section>
+<section class="an-hero-slider__item" data-slider-item-section>
 	<div class="an-hero-slider__item-inner-wrapper">
 	<div class="an-hero-slider__info-container">
 		<p class="an-h1 an-hero-slider__heading">

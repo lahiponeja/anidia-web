@@ -61,6 +61,10 @@
       background: $an-theme-light;
     }
 
+    .an-hero-slider.transparent & {
+      background: transparent;
+    }
+
     &-inner-wrapper {
       width: 100%;
       max-width: rem(1440);
@@ -104,7 +108,12 @@
     margin-bottom: rem(20);
 
     .an-hero-slider.white &,
-    .an-hero-slider.light-green & {
+    .an-hero-slider.light-green &,
+    .an-hero-slider.transparent & {
+      color: $an-theme;
+    }
+
+    .an-hero-slider__inner-wrapper.green & {
       color: $an-theme;
     }
   }
@@ -114,7 +123,12 @@
     margin-bottom: rem(33);
 
     .an-hero-slider.white &,
-    .an-hero-slider.light-green & {
+    .an-hero-slider.light-green &,
+    .an-hero-slider.transparent & {
+      color: $an-theme;
+    }
+
+    .an-hero-slider__inner-wrapper.green & {
       color: $an-theme;
     }
   }
@@ -126,7 +140,8 @@
       width: 100%;
 
       .an-hero-slider.white &,
-      .an-hero-slider.light-green & {
+      .an-hero-slider.light-green &,
+      .an-hero-slider.transparent & {
         @extend %an-btn--gradient;
       }
     }
@@ -151,7 +166,8 @@
       transition: all 0.3s ease;
 
       .an-hero-slider.white &,
-      .an-hero-slider.light-green & {
+      .an-hero-slider.light-green &,
+      .an-hero-slider.transparent & {
         background-color: $an-theme;
       }
 
@@ -248,19 +264,19 @@
         color: $an-theme-dark-grey;
       }
 
+      .an-hero-slider__inner-wrapper.green & {
+        color: $an-theme-dark-grey
+      }
+
       span {
         display: block;
         margin-left: rem(20);
         font-size: rem(40);
         position: relative;
         transition: all 0.3s ease;
+
         &:hover > span {
           animation: discoverArrow 0.8s infinite;
-        }
-
-        .an-hero-slider.white &,
-        .an-hero-slider.light-green & {
-          color: $an-theme;
         }
       }
     }

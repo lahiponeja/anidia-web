@@ -18,11 +18,13 @@ const compHotWater = {
         acsUse: this.savingsData.acsUse,
         numberOfPeople: this.savingsData.numberOfPeople,
       })
-
+      window.dataLayer.push(this.comparator.getDatalayerWaterStepInfo("engagement", "calculator", "hotwater"));
+      
       this.comparator.changeStepComponent('comp-heating')
     },
 
     startOver() {
+      window.dataLayer.push(this.comparator.getDatalayerInitialInfo("engagement", "calculator", "back"));
       this.global.changeView('funnel')
     },
 
@@ -37,6 +39,7 @@ const compHotWater = {
     }
   },
   mounted() {
+    window.dataLayer.push(this.comparator.getDatalayerFirstStepInfo("engagement", "calculator", "hotwater"));//heating system??
     window.scrollTo({
       top: 200,
       behavior: 'smooth',

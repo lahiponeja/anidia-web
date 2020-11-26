@@ -7,7 +7,15 @@
 [#if configuration.BackgroundColor == 'Verde Claro']
 <div class="an-hero-slider light-green">
 [/#if]
-  <div class="an-hero-slider__inner-wrapper">
+[#if configuration.BackgroundColor == 'Transparente']
+<div class="an-hero-slider transparent">
+[/#if]
+[#if configuration.TextColor == 'Verde']
+  <div class="an-hero-slider__inner-wrapper green">
+[/#if]
+[#if configuration.TextColor == 'Blanco']
+  <div class="an-hero-slider__inner-wrapper white">
+[/#if]
     <div class="an-hero-slider__lines">
       <div class="an-hero-slider__lines-list" data-slider-lines-list>
         <!-- addLines() -->
