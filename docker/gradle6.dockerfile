@@ -32,4 +32,6 @@ RUN update-ca-certificates -f
 #     && rm azcopy.tar.gz
 
 USER gradle
-#COPY --chown=gradle:gradle . .
+COPY --chown=gradle:gradle . .
+RUN gradle install.npm
+RUN gradle build.gradle-v6

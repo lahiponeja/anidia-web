@@ -76,8 +76,6 @@ pipeline {
       steps {
         sh """
           docker build -f docker/gradle4.dockerfile . -t gradle4:builder
-          docker run -v ${env.WORKSPACE}:/home/gradle gradle4:builder gradle install.npm
-          docker run -v ${env.WORKSPACE}:/home/gradle gradle4:builder gradle build.gradle-v4
         """
       }
     }
@@ -86,8 +84,6 @@ pipeline {
       steps {
         sh """
           docker build -f docker/gradle4.dockerfile . -t gradle6:builder
-          docker run -v ${env.WORKSPACE}:/home/gradle gradle6:builder gradle install.npm
-          docker run -v ${env.WORKSPACE}:/home/gradle gradle6:builder gradle build.gradle-v6
         """
       }
     }
