@@ -39,8 +39,9 @@
 			<form:checkbox id="${namespace}privacyAccepted" cssClass="an-checkbox__input privacy" path="privacyAccepted"  required="required"/>
 			<form:label for="${namespace}privacyAccepted" cssClass="an-checkbox__label an-body-s-regular" path="privacyAccepted">
 				<span>
+        	<spring:message code="privacy-accepted" />
 					<a href="#modal-privacy-accepted">
-						<spring:message code="privacy-accepted" />
+						<spring:message code="privacy-accepted-link" />
 					</a>
 				</span>
 			</form:label>
@@ -50,8 +51,9 @@
 			<form:checkbox id="${namespace}communicationAccepted" cssClass="an-checkbox__input" path="communicationAccepted"/>
 			<form:label for="${namespace}communicationAccepted" cssClass="an-checkbox__label an-body-s-regular" path="communicationAccepted">
 				<span>
+          <spring:message code="communication-accepted" />
 					<a href="#modal-communication-accepted">
-						<spring:message code="communication-accepted" />
+						<spring:message code="communication-accepted-link" />
 					</a>
 				</span>
 			</form:label>

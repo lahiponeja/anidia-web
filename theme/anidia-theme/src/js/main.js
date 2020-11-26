@@ -3,7 +3,7 @@ function header() {
     let elementWithSubmenu = document.querySelectorAll("ul .dropdown");
 
     for (let i = 0; i < elementWithSubmenu.length; i++) {
-        openSubmenu(elementWithSubmenu[i].getElementsByTagName("a")[0]);
+        openSubmenu(elementWithSubmenu[i].getElementsByClassName("lfr-nav-child-toggle")[0]);
         returnLink(elementWithSubmenu[i]);
     }
 
@@ -24,9 +24,13 @@ function header() {
     function openSubmenu(link) {
         link.addEventListener("click", (event) => {
           event.preventDefault();
-          link.parentElement.classList.add('hide-border')
+          link.parentElement.classList.add('hide-border');
           link.classList.add("active");
-          document.querySelector('.nav-item.dropdown:not(.active)').classList.add('hide')
+          if (document.querySelectorAll('.nav-item:not(.open)').length) {
+            document.querySelectorAll('.nav-item:not(.open)').forEach(e => {
+              e.classList.add('hide');
+            });
+          }
           link.nextElementSibling.classList.add("active");
         });
     }
@@ -35,12 +39,11 @@ function header() {
         link.addEventListener("click", (event) => {
           event.preventDefault();
           let submenu = link.parentElement.parentElement;
-          submenu.classList.remove("active");
-          submenu.previousElementSibling.classList.remove("active");
+          submenu.classList.remove("open");
           document.querySelectorAll('.nav-item.dropdown').forEach(e => {
             e.classList.remove('hide');
             e.classList.remove('hide-border');
-          })
+          });
         });
     }
     document.querySelector('.anidia-header__input').addEventListener('change', () => {
@@ -55,3 +58,12 @@ function header() {
 if (document.querySelector('.anidia-header__input')) {
   header();
 }
+svg4everybody(
+  {
+    attributeName: 'data-href',
+    polyfill: true,
+    validate: function (src, svg, use) {
+      return !src || !src.startsWith('#');
+    }
+  }
+);
