@@ -84,7 +84,7 @@
        width: flex-grid(6);
        margin-top: auto;
        margin-bottom: auto;
-       padding-top: rem(120);
+       padding-top: rem(150);
        padding-left: flex-grid(1);
        height: 100%;
        transform: unset;
@@ -209,9 +209,9 @@
        }
      }
  
-     @media (min-width: 1440px) {
-       bottom: rem(237);
-     }
+    //  @media (min-width: 1440px) {
+    //    bottom: rem(237);
+    //  }
    }
  
    &__lines {
