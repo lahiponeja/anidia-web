@@ -2,7 +2,6 @@ FROM gradle:4.10.2-jdk11 as build
 
 # Run as user Root
 USER root
-# WORKDIR /tmp
 
 # Install Dependencies
 ENV DEBIAN_FRONTEND noninteractive
@@ -31,4 +30,4 @@ RUN apt-get update -qq && \
 #     && rm azcopy.tar.gz
 
 USER gradle
-COPY --chown=gradle:gradle . .
+#COPY --chown=gradle:gradle . .

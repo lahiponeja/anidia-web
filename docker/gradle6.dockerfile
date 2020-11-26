@@ -2,7 +2,7 @@ FROM gradle:6.6.1-jdk11-hotspot as build
 
 # Run as user Root
 USER root
-# WORKDIR /tmp
+#WORKDIR /tmp
 
 # Install Dependencies
 ENV DEBIAN_FRONTEND noninteractive
@@ -17,12 +17,14 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 
 # Install NodeJS v12
 # REF. https://github.com/nodesource/distributions/blob/master/README.md
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - 
-  
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+
 # Install Everything
 RUN apt-get update -qq && \
   apt-get install -y \
-  nodejs yarn  
+  nodejs yarn
+
+RUN update-ca-certificates -f
 
 # Install Azure Cli and AzCopy tools
 # RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
@@ -31,19 +33,4 @@ RUN apt-get update -qq && \
 #     && rm azcopy.tar.gz
 
 USER gradle
-# COPY --chown=gradle:gradle . .
-
-#RUN cd $HOME/theme \
-# && npm install \
-# && echo "npm install on $PWD base done!" \
-# && cd $HOME/theme/anidia-fragments \
-# && npm install \
-# && echo "npm install on $PWD done!" \
-# && cd $HOME/theme/anidia-theme \
-# && npm install \
-# && echo "npm install on $PWD done!" \
-# && cd $HOME/theme/anidia-portlets \
-# && npm install \
-# && echo "npm install on $PWD done!" \
-# && cd $HOME \
-# && echo "Al carajo con NodeJS done!"
+#COPY --chown=gradle:gradle . .
