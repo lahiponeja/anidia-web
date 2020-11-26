@@ -23,6 +23,8 @@ RUN apt-get update -qq && \
   apt-get install -y \
   nodejs yarn
 
+RUN update-ca-certificates -f
+
 # Install Azure Cli and AzCopy tools
 # RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 # RUN wget -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux \
