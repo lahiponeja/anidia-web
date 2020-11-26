@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qq && \
   apt-get install -o APT::Immediate-Configure=false -f -y \
   wget curl lsb-release unzip git expect \
-  ca-certificates apt-transport-https gnupg
+  ca-certificates-java ca-certificates apt-transport-https gnupg
 
 # YARN: REF. https://classic.yarnpkg.com/en/docs/install/#debian-stable
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -34,4 +34,4 @@ RUN update-ca-certificates -f
 USER gradle
 COPY --chown=gradle:gradle . .
 RUN gradle install.npm
-RUN gradle build.gradle-v6
+RUN gradle build.gradle-v6 -Penv=ci
