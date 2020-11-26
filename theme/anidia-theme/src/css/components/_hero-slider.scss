@@ -84,7 +84,7 @@
        width: flex-grid(6);
        margin-top: auto;
        margin-bottom: auto;
-       padding-top: rem(120);
+       padding-top: rem(150);
        padding-left: flex-grid(1);
        height: 100%;
        transform: unset;
@@ -119,7 +119,6 @@
      }
  
      &-mobile {
-      //  width: 100%;
        width: 85%;
        position: relative;
        left: 50%;
@@ -207,10 +206,6 @@
            color: $an-theme;
          }
        }
-     }
- 
-     @media (min-width: 1440px) {
-       bottom: rem(237);
      }
    }
  
