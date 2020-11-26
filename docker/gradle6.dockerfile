@@ -17,12 +17,12 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 
 # Install NodeJS v12
 # REF. https://github.com/nodesource/distributions/blob/master/README.md
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - 
-  
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+
 # Install Everything
 RUN apt-get update -qq && \
   apt-get install -y \
-  nodejs yarn  
+  nodejs yarn
 
 # Install Azure Cli and AzCopy tools
 # RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
@@ -31,7 +31,7 @@ RUN apt-get update -qq && \
 #     && rm azcopy.tar.gz
 
 USER gradle
-# COPY --chown=gradle:gradle . .
+COPY --chown=gradle:gradle . .
 
 #RUN cd $HOME/theme \
 # && npm install \
