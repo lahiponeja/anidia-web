@@ -21,10 +21,8 @@ function heroSlider() {
       const opacityNum = window.getComputedStyle(info).getPropertyValue("opacity")
       const slideRect = slide.getBoundingClientRect();
       if(slideLine.length) {
-        // if(Math.abs(slideRect.top).toFixed(0) < 300) {
         if(opacityNum > 0) {
-        const slideLineSiblings = getSiblings(slideLine[i]);
-
+          const slideLineSiblings = getSiblings(slideLine[i]);
           slideLine[i].classList.add('an-hero-slider__lines-item--active');
 
           slideLineSiblings.forEach((siblingLine) => {
@@ -38,24 +36,29 @@ function heroSlider() {
   gsap.registerPlugin(ScrollTrigger);
 
   var tl = new TimelineMax();
-  tl.to(".first.journal-content-article .an-hero-slider__image", { duration: 30,  opacity: 0})
-  tl.to(".first.journal-content-article .an-hero-slider__info", { duration: 27,  opacity: 0, y:-100}, "-=30")
+  tl.to(".first.journal-content-article .an-hero-slider__image", { duration: 30,  opacity: 0, display: "none"})
+  tl.to(".first.journal-content-article .an-hero-slider__info", { duration: 27,  opacity: 0, y:-300, display: "none"}, "-=30")
+  tl.to(".first.journal-content-article .an-hero-slider__discover-btn", {duration: 27,  opacity: 0, display: "none"}, "-=30")
 
   if(document.querySelectorAll(".inner.journal-content-article").length > 0) {
     Array.from(document.querySelectorAll(".inner.journal-content-article")).forEach((elem, index) => {
       const img = elem.querySelector(".an-hero-slider__image")
       const info = elem.querySelector(".an-hero-slider__info")
+      const btnDiscovery = elem.querySelector(".an-hero-slider__discover-btn")
 
-      tl.to(img, {duration: 30,  opacity: 1})
-      tl.to(info, {duration: 27, opacity: 1, y: 0}, "-=30")
+      tl.to(img, {duration: 30,  opacity: 1, display: "block"})
+      tl.to(info, {duration: 27, opacity: 1, y: 0, display: "block"}, "-=30")
+      tl.to(btnDiscovery, {duration: 27,  opacity: 1, display: "flex"}, "-=30")
 
-      tl.to(img, {duration: 30,  opacity: 0})
-      tl.to(info, {duration: 27, opacity: 0, y:-100}, "-=30")
+      tl.to(img, {duration: 30,  opacity: 0, display: "none"})
+      tl.to(info, {duration: 27, opacity: 0, y:-300, display: "none"}, "-=30")
+      tl.to(btnDiscovery, {duration: 27,  opacity: 0, display: "none"}, "-=30")
     });
   }
 
-  tl.to(".last.journal-content-article .an-hero-slider__image", {duration: 30,  opacity: 1})
-  tl.to(".last.journal-content-article .an-hero-slider__info", {duration: 27, opacity: 1, y:0}, "-=30")
+  tl.to(".last.journal-content-article .an-hero-slider__image", {duration: 30,  opacity: 1, display: "block"})
+  tl.to(".last.journal-content-article .an-hero-slider__info", {duration: 27, opacity: 1, y:0, display: "block"}, "-=30")
+  tl.to(".last.journal-content-article .an-hero-slider__discover-btn", {duration: 27,  opacity: 1, display: "flex"}, "-=30")
 
   const controller = new ScrollMagic.Controller();
 
@@ -64,7 +67,7 @@ function heroSlider() {
     triggerHook: 0
   })
   .setPin('.an-hero-slider .portlet-body')
-  .addIndicators({name: "pin scene", colorStart: "tomato"})
+  // .addIndicators({name: "pin scene", colorStart: "tomato"})
   .setTween(tl)
   .addTo(controller)
   .on('enter', startBgAnimate)

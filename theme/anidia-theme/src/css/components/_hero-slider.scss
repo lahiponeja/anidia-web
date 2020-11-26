@@ -11,15 +11,28 @@
 
     &.first {
       .an-hero-slider__image,
-      .an-hero-slider__info {opacity: 1;}
+      .an-hero-slider__info,
+      .an-hero-slider__discover-btn {
+        opacity: 1;
+      }
     }
     &.inner,
     &.last {
       .an-hero-slider__image,
-      .an-hero-slider__info {opacity: 0;}
+      .an-hero-slider__info,
+      .an-hero-slider__discover-btn {
+        opacity: 0;
+        display: none;
+      }
       
       .an-hero-slider__info {
         transform: translateY(200px);
+      }
+    }
+
+    @media screen and (max-width: 1023px) {
+      .an-hero-slider__discover-btn {
+        display: none !important;
       }
     }
   }
@@ -52,8 +65,10 @@
    }
  
    &__info {
-     padding: rem(117) rem(20) 0;
-     opacity: 0;
+      padding: rem(117) rem(20) 0;
+      opacity: 0;
+      position: absolute;
+      height: 90vh;
  
      @include desktop {
        width: flex-grid(6);
@@ -63,12 +78,15 @@
        padding-left: flex-grid(1);
        height: 100%;
        transform: unset;
+       position: relative;
      }
    }
  
    &__image {
      width: 100%;
      opacity: 0;
+     position: relative;
+     z-index: -1;
 
      &:first-of-type {
        opacity: 1;
@@ -78,6 +96,7 @@
        width: flex-grid(5);
        will-change: transform;
        height: 100vh;
+       z-index: 0;
      }
  
      &-desktop {
@@ -91,7 +110,12 @@
      }
  
      &-mobile {
-       width: 100%;
+      //  width: 100%;
+       width: 85%;
+       position: relative;
+       left: 50%;
+       transform: translateX(-50%);
+       bottom: -295px;
  
        @include desktop {
          display: none;
