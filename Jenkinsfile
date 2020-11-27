@@ -27,7 +27,6 @@ pipeline {
     PROJECT = 'anidia-web'
     COMMIT  = sh ( script: 'git rev-parse --short=7 HEAD', returnStdout: true).trim()
     AUTHOR  = sh ( script: 'git --no-pager show -s --format="%an" ${commit}', returnStdout: true).trim()
-    //STAGE   = defineEnv()
 
     // Container
     REGISTRY     = defineAcr()
@@ -83,7 +82,7 @@ pipeline {
         sh """
           docker pull ${env.REGISTRY}/gradle6:latest
           docker tag ${env.REGISTRY}/gradle6:latest gradle6:latest
-          docker build -f docker/gradle.dockerfile . -t gradle6:builder
+          docker build -f docker/gradle6.dockerfile . -t gradle6:builder
         """
       }
     }
