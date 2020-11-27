@@ -83,7 +83,7 @@ pipeline {
         sh """
           docker pull ${env.REGISTRY}/gradle6:latest
           docker tag ${env.REGISTRY}/gradle6:latest gradle6:latest
-          docker build -f docker/gradle4.dockerfile . -t gradle6:builder
+          docker build -f docker/gradle6.dockerfile . -t gradle6:builder
         """
       }
     }
