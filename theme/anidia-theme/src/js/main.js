@@ -4,7 +4,7 @@ function header() {
 
     for (let i = 0; i < elementWithSubmenu.length; i++) {
         openSubmenu(elementWithSubmenu[i].getElementsByClassName("lfr-nav-child-toggle")[0]);
-        returnLink(elementWithSubmenu[i]);
+        returnLink(elementWithSubmenu[i].getElementsByClassName("nav-link")[0]);
     }
 
     function returnLink(menuItem) {
@@ -24,7 +24,7 @@ function header() {
     function openSubmenu(link) {
         link.addEventListener("click", (event) => {
           event.preventDefault();
-          link.parentElement.classList.add('hide-border');
+          link.parentElement.parentElement.parentElement.classList.add('hide-border');
           link.classList.add("active");
           if (document.querySelectorAll('.nav-item:not(.open)').length) {
             document.querySelectorAll('.nav-item:not(.open)').forEach(e => {
@@ -38,7 +38,7 @@ function header() {
     function closeSubmenu(link) {
         link.addEventListener("click", (event) => {
           event.preventDefault();
-          let submenu = link.parentElement.parentElement;
+          let submenu = link.parentElement;
           submenu.classList.remove("open");
           document.querySelectorAll('.nav-item.dropdown').forEach(e => {
             e.classList.remove('hide');
