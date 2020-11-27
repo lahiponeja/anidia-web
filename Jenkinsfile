@@ -5,17 +5,13 @@ Required plugins:
 · https://plugins.jenkins.io/azure-credentials/
 */
 
-def defineEnv() {
-  branchName="${env.BRANCH_NAME}"
-  if ( branchName == "master" ) {
-    return "pro"
-  }
-  branchName="${env.BRANCH_NAME}"
-  if ( branchName == "staging" ) {
-    return "uat"
+def defineAcr() {
+  acRegistry="${env.BRANCH_NAME}"
+  if ( acRegistry == "master" ) {
+    return "rdxacrpro.azurecr.io"
   }
   else {
-    return "null"
+    return "rdxacruat.azurecr.io"
   }
 }
 
@@ -59,15 +55,10 @@ pipeline {
     stage('Show Env') { steps { sh 'env|sort' } }
 
     stage('Login into Azure') {
-      when {
-        anyOf {
-          branch "master"
-          branch "staging"
-        }
-      }
       steps {
         sh """
           az login --service-principal -u ${env.AZURE_CLIENT_ID} -p ${env.AZURE_CLIENT_SECRET} --tenant ${env.AZURE_TENANT_ID}
+          docker login -u ${env.AZURE_CLIENT_ID} -p ${env.AZURE_CLIENT_SECRET} ${env.REGISTRY_URL}
         """
       }
     }
@@ -75,9 +66,9 @@ pipeline {
     stage('Gradle v4 builds') {
       steps {
         sh """
+          docker pull ${env.REGISTRY}/gradle4:latest
+          docker tag ${env.REGISTRY}/gradle4:latest gradle4:latest
           docker build -f docker/gradle4.dockerfile . -t gradle4:builder
-          docker run -v ${env.WORKSPACE}:/home/gradle gradle4:builder gradle install.npm
-          docker run -v ${env.WORKSPACE}:/home/gradle gradle4:builder gradle build.gradle-v4
         """
       }
     }
@@ -85,9 +76,9 @@ pipeline {
     stage('Gradle v6 builds') {
       steps {
         sh """
+          docker pull ${env.REGISTRY}/gradle6:latest
+          docker tag ${env.REGISTRY}/gradle6:latest gradle6:latest
           docker build -f docker/gradle4.dockerfile . -t gradle6:builder
-          docker run -v ${env.WORKSPACE}:/home/gradle gradle6:builder gradle install.npm
-          docker run -v ${env.WORKSPACE}:/home/gradle gradle6:builder gradle build.gradle-v6
         """
       }
     }
