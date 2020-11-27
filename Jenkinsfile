@@ -27,7 +27,12 @@ pipeline {
     PROJECT = 'anidia-web'
     COMMIT  = sh ( script: 'git rev-parse --short=7 HEAD', returnStdout: true).trim()
     AUTHOR  = sh ( script: 'git --no-pager show -s --format="%an" ${commit}', returnStdout: true).trim()
-    STAGE   = defineEnv()
+    //STAGE   = defineEnv()
+
+    // Container
+    REGISTRY     = defineAcr()
+    REGISTRY_URL = "https://${env.REGISTRY}"
+    TAG          = "${env.COMMIT}"
 
     // Slack
     SLACK_COLOR_INFO  = '#6ECADC'
