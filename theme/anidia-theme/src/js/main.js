@@ -4,7 +4,7 @@ function header() {
 
     for (let i = 0; i < elementWithSubmenu.length; i++) {
         openSubmenu(elementWithSubmenu[i].getElementsByClassName("lfr-nav-child-toggle")[0]);
-        returnLink(elementWithSubmenu[i].getElementsByClassName("nav-link")[0]);
+        returnLink(elementWithSubmenu[i]);
     }
 
     function returnLink(menuItem) {
@@ -39,7 +39,7 @@ function header() {
         link.addEventListener("click", (event) => {
           event.preventDefault();
           let submenu = link.parentElement;
-          submenu.classList.remove("open");
+          submenu.parentElement.parentElement.classList.remove("open");
           document.querySelectorAll('.nav-item.dropdown').forEach(e => {
             e.classList.remove('hide');
             e.classList.remove('hide-border');
