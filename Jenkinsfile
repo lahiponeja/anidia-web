@@ -67,22 +67,22 @@ pipeline {
       }
     }
 
-    stage('Gradle v4 builds') {
-      steps {
-        sh """
-          docker pull ${env.REGISTRY}/gradle4:latest
-          docker tag ${env.REGISTRY}/gradle4:latest gradle4:latest
-          docker build -f docker/gradle4.dockerfile . -t gradle4:builder
-        """
-      }
-    }
-
     stage('Gradle v6 builds') {
       steps {
         sh """
           docker pull ${env.REGISTRY}/gradle6:latest
           docker tag ${env.REGISTRY}/gradle6:latest gradle6:latest
           docker build -f docker/gradle6.dockerfile . -t gradle6:builder
+        """
+      }
+    }
+
+    stage('Gradle v4 builds') {
+      steps {
+        sh """
+          docker pull ${env.REGISTRY}/gradle4:latest
+          docker tag ${env.REGISTRY}/gradle4:latest gradle4:latest
+          docker build -f docker/gradle4.dockerfile . -t gradle4:builder
         """
       }
     }
