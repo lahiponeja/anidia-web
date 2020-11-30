@@ -76,6 +76,10 @@ gradlew
 .env
 .tool-versions
 
+# Node, npm y yo
+
+.yo-repository/
+
 # vscode
 .vscode/
 
