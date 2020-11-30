@@ -29,4 +29,4 @@ USER root
 # Run Predefined Gradle tasks
 # RUN gradle install.npm
 WORKDIR /home/gradle/theme/anidia-portlets/ContactFormPortlet
-RUN gradle buildCSS
+RUN gradle help
