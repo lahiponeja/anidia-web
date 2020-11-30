@@ -8,10 +8,11 @@ function header() {
     }
 
     function returnLink(menuItem) {
-        let link = menuItem.getElementsByTagName("a")[0],
-            submenu = menuItem.getElementsByTagName("ul")[0],
-            backItem = document.createElement("li"),
-            backLink = document.createElement("a");
+        if (!menuItem.querySelector('.anidia-header__back')) {
+          let link = menuItem.getElementsByTagName("a")[0],
+          submenu = menuItem.getElementsByTagName("ul")[0],
+          backItem = document.createElement("li"),
+          backLink = document.createElement("a");
 
         backLink.href = link.href;
         backLink.text = link.text;
@@ -19,6 +20,7 @@ function header() {
         backItem.appendChild(backLink);
         submenu.insertAdjacentElement("afterbegin", backItem);
         closeSubmenu(backLink);
+        }
     }
 
     function openSubmenu(link) {
