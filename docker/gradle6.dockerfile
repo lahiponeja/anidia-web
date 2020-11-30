@@ -36,6 +36,4 @@ USER root
 
 # Run Predefined Gradle tasks
 # RUN gradle install.npm
-WORKDIR /home/gradle/theme/anidia-portlets/ContactFormPortlet
-RUN npm install -g sass
-RUN gradle buildCSS
+RUN gradle build.gradle-v6 -Penv=ci
