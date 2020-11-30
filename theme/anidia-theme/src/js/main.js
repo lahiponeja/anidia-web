@@ -8,10 +8,11 @@ function header() {
     }
 
     function returnLink(menuItem) {
-        let link = menuItem.getElementsByTagName("a")[0],
-            submenu = menuItem.getElementsByTagName("ul")[0],
-            backItem = document.createElement("li"),
-            backLink = document.createElement("a");
+        if (!menuItem.querySelector('.anidia-header__back')) {
+          let link = menuItem.getElementsByTagName("a")[0],
+          submenu = menuItem.getElementsByTagName("ul")[0],
+          backItem = document.createElement("li"),
+          backLink = document.createElement("a");
 
         backLink.href = link.href;
         backLink.text = link.text;
@@ -19,6 +20,7 @@ function header() {
         backItem.appendChild(backLink);
         submenu.insertAdjacentElement("afterbegin", backItem);
         closeSubmenu(backLink);
+        }
     }
 
     function openSubmenu(link) {
@@ -58,6 +60,27 @@ function header() {
 if (document.querySelector('.anidia-header__input')) {
   header();
 }
+
+if (document.querySelectorAll(".an-checkbox__label a").length && document.querySelectorAll(".an-modal").length) {
+  var buttons = document.querySelectorAll(".an-checkbox__label a");
+
+  buttons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById(button.dataset.modal).style.display = 'block';
+    });
+  });
+
+  var close = document.querySelectorAll(".an-modal__close");
+
+  close.forEach(c => {
+    c.addEventListener('click', (e) => {
+      e.preventDefault();
+      c.parentElement.parentElement.style.display = "none";
+    });
+  });
+}
+
 svg4everybody(
   {
     attributeName: 'data-href',

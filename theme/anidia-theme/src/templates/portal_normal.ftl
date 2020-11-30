@@ -19,7 +19,7 @@
 
 
 <script type="application/ld+json">
-  { 
+  {
     "@context" : "http://schema.org",
     "@type" : "Organization",
     "url" : "https://anidia.es/",
@@ -29,7 +29,7 @@
       "contactType" : "customer service",
       "url" : "https://www.anidia.es/#p_p_id_ContactFormPortlet_WAR_ContactFormPortlet_",
       "areaServed" : "ES"
-      }]        
+      }]
   }
 </script>
 
@@ -181,15 +181,16 @@ function header() {
     let elementWithSubmenu = document.querySelectorAll("ul .dropdown");
 
     for (let i = 0; i < elementWithSubmenu.length; i++) {
-        openSubmenu(elementWithSubmenu[i].getElementsByTagName("a")[0]);
+        openSubmenu(elementWithSubmenu[i].getElementsByClassName("lfr-nav-child-toggle")[0]);
         returnLink(elementWithSubmenu[i]);
     }
 
     function returnLink(menuItem) {
-        let link = menuItem.getElementsByTagName("a")[0],
-            submenu = menuItem.getElementsByTagName("ul")[0],
-            backItem = document.createElement("li"),
-            backLink = document.createElement("a");
+        if (!menuItem.querySelector('.anidia-header__back')) {
+          let link = menuItem.getElementsByTagName("a")[0],
+          submenu = menuItem.getElementsByTagName("ul")[0],
+          backItem = document.createElement("li"),
+          backLink = document.createElement("a");
 
         backLink.href = link.href;
         backLink.text = link.text;
@@ -197,14 +198,19 @@ function header() {
         backItem.appendChild(backLink);
         submenu.insertAdjacentElement("afterbegin", backItem);
         closeSubmenu(backLink);
+        }
     }
 
     function openSubmenu(link) {
         link.addEventListener("click", (event) => {
           event.preventDefault();
-          link.parentElement.classList.add('hide-border')
+          link.parentElement.parentElement.parentElement.classList.add('hide-border');
           link.classList.add("active");
-          document.querySelector('.nav-item.dropdown:not(.active)').classList.add('hide')
+          if (document.querySelectorAll('.nav-item:not(.open)').length) {
+            document.querySelectorAll('.nav-item:not(.open)').forEach(e => {
+              e.classList.add('hide');
+            });
+          }
           link.nextElementSibling.classList.add("active");
         });
     }
@@ -212,13 +218,12 @@ function header() {
     function closeSubmenu(link) {
         link.addEventListener("click", (event) => {
           event.preventDefault();
-          let submenu = link.parentElement.parentElement;
-          submenu.classList.remove("active");
-          submenu.previousElementSibling.classList.remove("active");
+          let submenu = link.parentElement;
+          submenu.parentElement.parentElement.classList.remove("open");
           document.querySelectorAll('.nav-item.dropdown').forEach(e => {
             e.classList.remove('hide');
             e.classList.remove('hide-border');
-          })
+          });
         });
     }
     document.querySelector('.anidia-header__input').addEventListener('change', () => {
@@ -233,6 +238,37 @@ function header() {
 if (document.querySelector('.anidia-header__input')) {
   header();
 }
+
+if (document.querySelectorAll(".an-checkbox__label a").length && document.querySelectorAll(".an-modal").length) {
+  var buttons = document.querySelectorAll(".an-checkbox__label a");
+
+  buttons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById(button.dataset.modal).style.display = 'block';
+    });
+  });
+
+  var close = document.querySelectorAll(".an-modal__close");
+
+  close.forEach(c => {
+    c.addEventListener('click', (e) => {
+      e.preventDefault();
+      c.parentElement.parentElement.style.display = "none";
+    });
+  });
+}
+
+svg4everybody(
+  {
+    attributeName: 'data-href',
+    polyfill: true,
+    validate: function (src, svg, use) {
+      return !src || !src.startsWith('#');
+    }
+  }
+);
+
 
 </script>
 </body>
