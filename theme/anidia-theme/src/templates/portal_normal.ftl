@@ -181,9 +181,21 @@ function header() {
     let elementWithSubmenu = document.querySelectorAll("ul .dropdown");
 
     for (let i = 0; i < elementWithSubmenu.length; i++) {
-        openSubmenu(elementWithSubmenu[i].getElementsByClassName("lfr-nav-child-toggle")[0]);
-        returnLink(elementWithSubmenu[i]);
+      returnLink(elementWithSubmenu[i]);
     }
+
+  var e = document.querySelector('.nav-item')
+    var observer = new MutationObserver(function (event) {
+    if (document.querySelector('.nav-item.open')) {
+      document.querySelectorAll('.nav-item:not(.open)').forEach(e => {
+          e.classList.add('hide');
+        });
+      }
+    })
+
+    observer.observe(e, {
+      attributeFilter: ['class']
+    })
 
     function returnLink(menuItem) {
         if (!menuItem.querySelector('.anidia-header__back')) {
@@ -198,21 +210,7 @@ function header() {
         backItem.appendChild(backLink);
         submenu.insertAdjacentElement("afterbegin", backItem);
         closeSubmenu(backLink);
-        }
-    }
-
-    function openSubmenu(link) {
-        link.addEventListener("click", (event) => {
-          event.preventDefault();
-          link.parentElement.parentElement.parentElement.classList.add('hide-border');
-          link.classList.add("active");
-          if (document.querySelectorAll('.nav-item:not(.open)').length) {
-            document.querySelectorAll('.nav-item:not(.open)').forEach(e => {
-              e.classList.add('hide');
-            });
-          }
-          link.nextElementSibling.classList.add("active");
-        });
+      }
     }
 
     function closeSubmenu(link) {
@@ -220,12 +218,12 @@ function header() {
           event.preventDefault();
           let submenu = link.parentElement;
           submenu.parentElement.parentElement.classList.remove("open");
-          document.querySelectorAll('.nav-item.dropdown').forEach(e => {
+          document.querySelectorAll('.nav-item').forEach(e => {
             e.classList.remove('hide');
-            e.classList.remove('hide-border');
           });
         });
     }
+
     document.querySelector('.anidia-header__input').addEventListener('change', () => {
       document.body.classList.toggle('overflow-hidden');
       document.querySelector('.anidia-header').classList.toggle('active');
