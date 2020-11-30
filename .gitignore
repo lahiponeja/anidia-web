@@ -75,3 +75,11 @@ gradlew
 
 .env
 .tool-versions
+
+# vscode
+.vscode/
+
+# custom
+tmp/
+azure/
+theme/anidia-theme/src/templates/init.ftl
