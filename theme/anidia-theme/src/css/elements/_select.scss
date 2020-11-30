@@ -195,6 +195,36 @@
       &[aria-selected="true"] {
         color: $an-theme;
       }
+
+      &-flag {
+        display: flex;
+
+        &:before {  
+          content: "";        
+          width: 20px;
+          max-height: 60px;
+          margin-right: 10px;
+        }
+    
+        &--es {
+          &:before {
+            background: url('../images/flags/flag-spain.svg') no-repeat center;
+            background-size: contain;
+          }
+        }
+        &--de {
+          &:before {
+            background: url('../images/flags/flag-germany.svg') no-repeat center;
+            background-size: contain;
+          }
+        }
+        &--uk {
+          &:before {
+            background: url('../images/flags/flag-uk.svg') no-repeat center;
+            background-size: contain;
+          }
+        }
+      }
     }
 
     &.is-active {
@@ -233,4 +263,24 @@
     -webkit-appearance: none; /* Safari and Chrome */
     appearance: none;
   }
+
+  @media (hover: hover) {
+    &__native {
+      opacity: 0;
+    }
+
+    &__custom {
+      display: block;
+    }
+    
+    &__native:focus + &__custom {
+      pointer-events: none;
+
+      #{ $an-select }__custom-trigger {
+        box-shadow: none;
+        border: 2px solid $an-theme;
+      }
+    }
+  }
+
 }
