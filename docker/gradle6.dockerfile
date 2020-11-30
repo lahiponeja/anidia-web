@@ -10,4 +10,5 @@ USER root
 
 # Run Predefined Gradle tasks
 # RUN gradle install.npm
-RUN gradle build.gradle-v6 -Penv=ci --debug
+WORKDIR /home/gradle/theme/anidia-portlets/ContactFormPortlet
+RUN gradle war
