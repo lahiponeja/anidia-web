@@ -56,7 +56,7 @@
       margin-right: rem(40);
       border: none;
       width: auto;
-      position: relative;
+      position: inherit;
 
       &.open {
         .nav-link .text-truncate {
@@ -389,7 +389,7 @@
     @include desktop {
       display: flex;
       position: absolute;
-      transform: translateX(rem(-60));
+      transform: none;
     }
   }
 }
