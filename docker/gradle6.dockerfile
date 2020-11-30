@@ -10,4 +10,4 @@ USER root
 
 # Run Predefined Gradle tasks
 # RUN gradle install.npm
-RUN gradle build.gradle-v6 -Penv=ci --debug
+RUN gradle build.gradle-v6 -Penv=ci --debug --no-daemon
