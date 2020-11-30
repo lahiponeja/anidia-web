@@ -388,7 +388,7 @@
 
     @include desktop {
       display: flex;
-      position: fixed;
+      position: absolute;
       transform: translateX(rem(-60));
     }
   }
