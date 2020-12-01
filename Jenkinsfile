@@ -15,6 +15,18 @@ def defineAcr() {
   }
 }
 
+def defineSecret() {
+  FileShareSecrets="${env.BRANCH_NAME}"
+  if ( FileShareSecrets == "master" ) {
+    return "fileshare-key-pro"
+  }
+  else {
+    return "fileshare-key-uat"
+  }
+}
+
+
+
 pipeline {
   options {
     buildDiscarder(logRotator(numToKeepStr: '3'))
@@ -33,6 +45,10 @@ pipeline {
     REGISTRY_URL = "https://${env.REGISTRY}"
     TAG          = "${env.COMMIT}"
 
+    // Azure Storage Fileshare
+    SA_CREDENTIALS = defineSecret()
+    CREDENTIALS    = credentials($SA_CREDENTIALS)
+ 
     // Slack
     SLACK_COLOR_INFO  = '#6ECADC'
     SLACK_COLOR_GOOD  = '#3EB991'
@@ -92,10 +108,19 @@ pipeline {
         sh """
           docker cp `docker create --rm gradle4:builder`:/home/gradle/liferay/deploy .
           docker cp `docker create --rm gradle5:builder`:/home/gradle/liferay/deploy .
-          ls -lrt deploy
         """
       }
     }
+
+    stage('Get Credentials') {
+      steps {
+        sh """
+          echo $CREDENTIALS
+        """
+      }
+    }
+
+
 
   } // END OF STAGES
 
