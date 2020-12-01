@@ -9,10 +9,6 @@
   overflow: auto;
   background-color: rgba($an-theme-dark-grey, .4);
 
-  &:target {
-    display: table;
-  }
-
   h4 {
     margin-bottom: rem(24);
     color: $an-theme;

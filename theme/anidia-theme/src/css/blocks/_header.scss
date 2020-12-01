@@ -1,5 +1,6 @@
 .anidia-header {
   width: 100%;
+
   &.active {
     position: fixed;
     background: $an-theme-dark-grey;
@@ -47,7 +48,7 @@
     border-bottom: rem(1) solid $an-border;
     z-index: 2;
 
-    &.hide-border {
+    &.open {
       border-bottom: 0;
     }
 
@@ -55,7 +56,7 @@
       margin-right: rem(40);
       border: none;
       width: auto;
-      position: initial;
+      position: inherit;
 
       &.open {
         .nav-link .text-truncate {
@@ -387,6 +388,8 @@
 
     @include desktop {
       display: flex;
+      position: absolute;
+      transform: none;
     }
   }
 }
