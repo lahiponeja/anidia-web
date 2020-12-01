@@ -1,8 +1,5 @@
 const selects = document.querySelectorAll('.data-select-container');
 
-console.group("selects")
-console.log(selects)
-
 function customSelect() {
   const elSelectContainer = this;
   const elSelectNative = elSelectContainer.querySelector('.data-select-native');
@@ -172,7 +169,6 @@ prefixSelect.addEventListener("change", function() {
 })
 
 function setFlag(prefixSelectValue) {
-  console.log("setFlag", prefixSelectValue)
   flagImgArr.forEach((flagImg) => {
     switch(prefixSelectValue) {
       case "+34":

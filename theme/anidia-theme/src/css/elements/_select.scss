@@ -177,7 +177,7 @@
       cursor: pointer;
       font-family: $open-sans-regular-family;
       font-size: rem(18);
-      padding: 0 rem(25);
+      padding: 0 rem(20);
       position: relative;
 
       &:not(:last-of-type) {
@@ -204,6 +204,7 @@
           width: 20px;
           max-height: 60px;
           margin-right: 10px;
+          flex-shrink: 0;
         }
     
         &--es {
@@ -264,23 +265,26 @@
     appearance: none;
   }
 
-  @media (hover: hover) {
-    &__native {
+  &.data-select-container {
+    .an-select__native {
       opacity: 0;
     }
 
-    &__custom {
+    .an-select__custom {
       display: block;
     }
     
-    &__native:focus + &__custom {
-      pointer-events: none;
+    .an-select__native:focus + .an-select__custom {
+      // pointer-events: none;
 
-      #{ $an-select }__custom-trigger {
+      .an-select__custom-trigger {
         box-shadow: none;
         border: 2px solid $an-theme;
       }
     }
   }
+  // @media (hover: hover) {
+    
+  // }
 
 }
