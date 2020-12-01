@@ -21,6 +21,7 @@ const compSaving = {
     }
   },
   mounted() {
+    window.dataLayer.push(this.comparator.getDatalayerKitchenStepInfo("FUNNEL - CONTRATACIÓN", "calculatorlead", "calculator"));
     window.scrollTo({
       top: 200,
       behavior: 'smooth',
@@ -31,6 +32,7 @@ const compSaving = {
       const payloadObj = Object.assign(this.compSavingForm, {
         phone: this.fullPhoneNumber
       })
+      window.dataLayer.push(this.comparator.getDatalayerKitchenStepInfo("conversion", "calculatorlead", "calculator"));
       // TODO: add validation
       this.sendingForm = true
       this.comparator.submitUserContactInfo(payloadObj).then((res) => {
@@ -44,7 +46,7 @@ const compSaving = {
     },
 
     resetCompSavingForm() {
-      Object.assign(this.compSavingForm, { 
+      Object.assign(this.compSavingForm, {
         name: "",
         lastname: "",
         phone: "",
@@ -71,7 +73,7 @@ const compSaving = {
         <div v-if="sendingForm" class="an-funnel__white-overlay">
           <p class="an-h3">Cargando...</p>
         </div>
-        
+
           <form @submit.prevent="submitRequest">
             <div class="an-form__flex an-form__flex--2-cols">
               <div class="an-input an-form__item">
@@ -81,7 +83,10 @@ const compSaving = {
                 <input v-model="compSavingForm.lastname" type="text" class="an-input__field" placeholder="Apellidos*" required="">
               </div>
               <div class="an-input an-form__item">
-                <div class="an-select an-select--small-width mr-xs">
+                <div class="an-select an-select--flag an-select--small-width mr-xs">
+                  <template v-for="(option, index) in phonePrefixesOptions">
+                    <img class="an-select__flag" v-if="option.value === phonePrefix" :src="option.flagUrl" />
+                  </template>
                   <span class="an-select__icon an-icon--chevron-down"></span>
                   <select v-model="phonePrefix" class="an-select__native" required>
                     <option v-for="(option, index) in phonePrefixesOptions" :value="option.value">
