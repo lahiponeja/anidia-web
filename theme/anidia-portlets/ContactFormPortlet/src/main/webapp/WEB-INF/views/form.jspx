@@ -18,8 +18,14 @@
 		<form:input id="${namespace}firstName" cssClass="an-input__field" path="firstName" placeholder="${firstNamePlaceholder}" required="required"/>
 		<form:input id="${namespace}lastName" cssClass="an-input__field" path="lastName" placeholder="${lastNamePlaceholder}" required="required"/>
 		<form:input id="${namespace}email" cssClass="an-input__field" path="email" placeholder="${emailPlaceholder}" type="email"/>
-		<div class="an-select__form"><form:select id="${namespace}phonePrefix" path="phonePrefix" items="${prefixes}"/></div>
-		<form:input id="${namespace}phoneNumber" cssClass="an-input__field" path="phoneNumber" placeholder="${phonePlaceholder}" required="required" />
+		<div class="an-input an-form__item mb-0">
+			<div class="an-select an-select--flag an-select--small-width mr-xs mb-m">
+				<img class="an-select__flag" src="" />
+				<span class="an-select__icon an-icon--chevron-down"></span>
+				<form:select id="${namespace}phonePrefix" cssClass="an-select__native prefix-select" path="phonePrefix" items="${prefixes}"/>
+			</div>
+			<form:input id="${namespace}phoneNumber" cssClass="an-input__field" path="phoneNumber" placeholder="${phonePlaceholder}" required="required" />
+		</div>
 		<div class="an-select__form">
 			<form:select id="${namespace}productType" path="productType">
 				<form:option value=""><spring:message code="product-type-placeholder" /></form:option>
@@ -33,7 +39,7 @@
 			<form:checkbox id="${namespace}privacyAccepted" cssClass="an-checkbox__input privacy" path="privacyAccepted"  required="required"/>
 			<form:label for="${namespace}privacyAccepted" cssClass="an-checkbox__label an-body-s-regular" path="privacyAccepted">
 				<span>
-					<a href="/política-de-privacidad">
+					<a href="#modal-privacy-accepted">
 						<spring:message code="privacy-accepted" />
 					</a>
 				</span>
@@ -44,7 +50,7 @@
 			<form:checkbox id="${namespace}communicationAccepted" cssClass="an-checkbox__input" path="communicationAccepted"/>
 			<form:label for="${namespace}communicationAccepted" cssClass="an-checkbox__label an-body-s-regular" path="communicationAccepted">
 				<span>
-					<a href="/política-de-privacidad">
+					<a href="#modal-communication-accepted">
 						<spring:message code="communication-accepted" />
 					</a>
 				</span>
@@ -55,5 +61,76 @@
 			<span><spring:message code="submit" /></span>
 		</button>
 
+    <div id="modal-privacy-accepted" class="an-modal">
+      <div class="an-modal__content">
+        <a href="#" class="an-modal__close" aria-hidden="true"></a>
+        <h4>Política de privacidad</h4>
+        <table>
+          <tr>
+            <td>Responsable del tratamiento</td>
+            <td>Redexis Gas Servicios, S.L.U. Domicilio: calle Mahonia, nº 2, 28043, Madrid</td>
+          </tr>
+          <tr>
+            <td>Finalidades del tratamiento</td>
+            <td>Gestionar su solicitud así como la relación contractual relativa a los servicios y productos contratados, y para enviarle por cualquier medio información comercial relacionada con el sector energético en el caso en que así lo desee</td>
+          </tr>
+           <tr>
+            <td>Legitimación del tratamiento</td>
+            <td>Existencia de un contrato o precontrato. Consentimiento del interesado</td>
+          </tr>
+           <tr>
+            <td>Destinatarios de la información</td>
+            <td>Empresas colaboradoras de Redexis Gas Servicios, S.L.U., y empresas pertenecientes al grupo Redexis que necesiten acceder a los mismos para la prestación de los servicios solicitados o contratados</td>
+          </tr>
+           <tr>
+            <td>Sus derechos</td>
+            <td>Puede revocar su consentimiento y ejercitar sus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad dirigiendo un escrito al Delegado de Protección de Datos (<a href="mailto:dpo@redexisgas.es" class="an-link">dpo@redexisgas.es</a>)</td>
+          </tr>
+           <tr>
+            <td colspan="2">Puede consultar la política de privacidad de Redexis Gas Servicios, S.L.U. en la web <a class="an-link" href="www.redexisgas.es/protecciondedatos">www.redexisgas.es/protecciondedatos</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+      <div id="modal-communication-accepted" class="an-modal">
+      <div class="an-modal__content">
+        <a href="#" class="an-modal__close" aria-hidden="true"></a>
+        <h4>Información comercial</h4>
+        <p>Al marcar esta casilla, Ud., autoriza a Redexis Gas Servicios, S.L.U., y al resto de las empresas del grupo Redexis, a remitirle por cualquier medio, incluyendo medios electrónicos, comunicaciones comerciales relativas a productos y servicios relacionados con la gestión energética de su inmueble, ofertadas por las mismas. Estas comunicaciones podrán estar basadas en el análisis de los datos relativos a su persona que sean objeto de tratamiento y en la elaboración de un perfil que permita ofrecerle solamente aquella información que pueda resultar de su interés.</p>
+        <p>Puede revocar su consentimiento y ejercitar sus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad dirigiendo un escrito al Delegado de Protección de Datos (<a href="mailto:dpo@redexisgas.es" class="an-link">dpo@redexisgas.es</a>)</p>
+        <p>Puede consultar la política de privacidad de Redexis Gas Servicios, S.L.U. en la web <a class="an-link" href="www.redexisgas.es/protecciondedatos">www.redexisgas.es/protecciondedatos</a></p>
+      </div>
+    </div>
 	</form:form>
+
+		<script type="text/javascript">
+		(function(){
+			var locationOrigin = window.location.origin,
+					prefixSelect = document.querySelector(".prefix-select"),
+					flagImg = document.querySelector(".an-select__flag"),
+					prefixSelectValue = prefixSelect.value;
+
+			prefixSelect.addEventListener("change", function() {
+				prefixSelectValue = prefixSelect.value;
+				setFlag();
+			})
+
+			function setFlag() {
+				switch(prefixSelectValue) {
+					case "+34":
+						flagImg.src = locationOrigin + "/o/anidia-theme/images/flags/flag-spain.svg";
+						break;
+					case "+44":
+						flagImg.src = locationOrigin + "/o/anidia-theme/images/flags/flag-uk.svg";
+						break;
+					case "+49":
+						flagImg.src = locationOrigin + "/o/anidia-theme/images/flags/flag-germany.svg";
+						break;
+				}
+			}
+
+			setFlag();
+		})();
+		</script>
 </jsp:root>

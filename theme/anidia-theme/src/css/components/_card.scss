@@ -127,8 +127,7 @@
     margin: auto;
 
     @include desktop {
-      padding: rem(55) rem(51) rem(52);
-      margin: unset;
+      padding: rem(50) rem(40);
     }
 
     .an-checkbox {

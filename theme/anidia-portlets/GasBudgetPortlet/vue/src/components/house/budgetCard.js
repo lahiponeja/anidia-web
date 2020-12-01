@@ -12,6 +12,7 @@ const budgetCard = {
     }
   },
   mounted() {
+    window.dataLayer.push(this.house.getDatalayerDetailsStepInfo("FUNNEL - CONTRATACIÓN", "maintenanceupselling", "gas"));
     window.scrollTo({
       top: 200,
       behavior: 'smooth',

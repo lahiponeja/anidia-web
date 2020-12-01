@@ -11,6 +11,7 @@ const compKitchen = {
     }
   },
   mounted() {
+    window.dataLayer.push(this.comparator.getDatalayerHeatingStepInfo("engagement", "calculator", "kitchen"));
     window.scrollTo({
       top: 200,
       behavior: 'smooth',
@@ -23,16 +24,22 @@ const compKitchen = {
         weeklyKitchenUse: this.savingsData.weeklyKitchenUse,
       })
 
+      window.dataLayer.push(this.comparator.getDatalayerKitchenStepInfo("engagement", "calculator", "kitchen"));
+
       this.sendingForm = true
       this.comparator.sendSavingByUseService(this.comparator.state.savingsByUse)
         .then((res) => { 
           this.sendingForm = false 
           this.comparator.changeStepComponent('comp-saving')
         })
-        .catch((err) => { this.sendingForm = false })
+        .catch((err) => { 
+          this.sendingForm = false 
+          this.comparator.changeStepComponent('comp-error')
+        })
     },
 
     goBack() {
+      window.dataLayer.push(this.comparator.getDatalayerInitialInfo("engagement", "calculator", "back"));
       this.comparator.changeStepComponent('comp-heating')
     },
 
@@ -49,8 +56,11 @@ const compKitchen = {
   },
   template: /*html*/`
     <div class="an-form an-wrapper">
-      <form @submit.prevent="submitRequest">
+      <div v-if="sendingForm" class="an-funnel__white-overlay">
+        <p class="an-h3">Cargando...</p>
+      </div>
 
+      <form @submit.prevent="submitRequest">
         <!-- 🚧 ¿Qué energía usas para cocinar? 🚧 -->
         <p class="an-body-l-bold mb-xl">¿Qué energía usas para cocinar?</p>
         <div class="an-form__flex an-form__flex--2-cols mb-xxl">
@@ -86,8 +96,8 @@ const compKitchen = {
           </button>
 
           <button type="submit" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
-            <span v-if="!sendingForm">Continuar</span>
-            <span v-else>Cargando...</span>
+            <span v-if="sendingForm">Cargando...</span>
+            <span v-else>Continuar</span>
           </button>
         </div>
 

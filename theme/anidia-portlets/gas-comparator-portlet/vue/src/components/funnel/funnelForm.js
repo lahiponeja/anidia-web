@@ -40,33 +40,21 @@ const funnelForm = {
         this.comparator.setSavingByUse({
           province: this.province
         })
-
         this.global.changeView('comparator')
         this.comparator.changeStepComponent('comp-hot-water')
       }
+      window.dataLayer.push(this.comparator.getDatalayerFirstStepInfo("engagement", "calculator", "energyspent"));
     }
   },
   mounted() {
+    window.dataLayer.push(this.comparator.getDatalayerInitialInfo("engagement", "calculator", "energyspent"));
     if(document.querySelector('.an-featured')) document.querySelector('.an-featured').classList.add('hide');
   },
   template: /*html*/`
     <div class="an-form an-wrapper">
-
-      <!-- <h3>known: {{ known }}</h3>
-      <h3>energyConsumption.energyType: {{ energyConsumption.energyType }}</h3>
-      <h3>energyConsumption.electricityConsumption: {{ energyConsumption.electricityConsumption }}</h3>
-      <h3>energyConsumption.acsUse: {{ energyConsumption.acsUse }}</h3>
-      <h3>energyConsumption.heatingUse: {{ energyConsumption.heatingUse }}</h3>
-      <h3>energyConsumption.kitchenUse: {{ energyConsumption.kitchenUse }}</h3>
-
-      <div>
-      gasConsumptionComparison: {
-        <div>consumptionRequired: {{ comparator.state.gasConsumptionComparison.consumptionRequired }},</div>
-        <div>currentCost: {{ comparator.state.gasConsumptionComparison.currentCost }},</div>
-        <div>futureCost: {{ comparator.state.gasConsumptionComparison.futureCost }},</div>
-        <div>savings: {{ comparator.state.gasConsumptionComparison.savings }},</div>
-      }
-      </div> -->
+      <div v-if="sendingForm" class="an-funnel__white-overlay">
+        <p class="an-h3">Cargando...</p>
+      </div>
 
       <form @submit.prevent="submitRequest">
         <!-- 🚧 ¿Sabes cuánto consumes en energía al año? 🚧 -->
@@ -111,7 +99,7 @@ const funnelForm = {
 
             <div class="an-form__item">
               <div class="an-input">
-                <input v-model="energyConsumption.electricityConsumption" type="text" class="an-input__field" required="">
+                <input v-model="energyConsumption.electricityConsumption" type="number" class="an-input__field" required="">
               </div>
             </div>
           </div>
@@ -148,8 +136,8 @@ const funnelForm = {
           </div>
 
           <button type="submit" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
-            <span v-if="!sendingForm">Ver ahorro</span>
-            <span v-else>Enviando...</span>
+            <span v-if="sendingForm">Enviando...</span>
+            <span v-else>Continuar</span>
           </button>
         </template>
         <template v-else>
@@ -170,8 +158,8 @@ const funnelForm = {
           </div>
 
           <button type="submit" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
-            <span v-if="!sendingForm">Continuar</span>
-            <span v-else>Enviando...</span>
+            <span v-if="sendingForm">Enviando...</span>
+            <span v-else>Continuar</span>
           </button>
         </template>
 
