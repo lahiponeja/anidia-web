@@ -47,7 +47,7 @@ pipeline {
 
     // Azure Storage Fileshare
     SA_CREDENTIALS = defineSecret()
-    CREDENTIALS    = credentials($SA_CREDENTIALS)
+    CREDENTIALS    = credentials("$SA_CREDENTIALS")
  
     // Slack
     SLACK_COLOR_INFO  = '#6ECADC'
