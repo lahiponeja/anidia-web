@@ -67,14 +67,11 @@ pipeline {
       }
     }
 
-    stage('Gradle v6 builds') {
+    stage('Gradle v5 builds') {
       steps {
-        // sh """
-        //   docker pull ${env.REGISTRY}/gradle5:latest
-        //   docker tag ${env.REGISTRY}/gradle5:latest gradle5:latest
-        //   docker build -f docker/gradle5.dockerfile . -t gradle5:builder
-        // """
-         sh """
+        sh """
+          docker pull ${env.REGISTRY}/gradle5:latest
+          docker tag ${env.REGISTRY}/gradle5:latest gradle5:latest
           docker build -f docker/gradle5.dockerfile . -t gradle5:builder
         """
       }
@@ -132,7 +129,7 @@ pipeline {
         """
       )
     }
-  
+
   } // END OF POST ACTIONS
 
 } // END OF PIPELINE
