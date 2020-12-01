@@ -107,7 +107,7 @@ pipeline {
         anyOf {
           branch "master"
           branch "uat"
-          //branch "feature/docker"
+          branch 'feature/docker'
         }
       }      
       steps {
@@ -123,7 +123,7 @@ pipeline {
         anyOf {
           branch "master"
           branch "uat"
-          //branch "feature/docker"
+          branch 'feature/docker'
         }
       }      
       steps {
