@@ -67,6 +67,8 @@ pipeline {
       }
     }
 
+    stage('Install AzCopy') { steps { sh 'az version' } }
+
     stage('Gradle v5 builds') {
       steps {
         sh """
