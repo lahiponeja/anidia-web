@@ -77,13 +77,13 @@ function heroSlider() {
   .on('leave', endBgAnimate);
 
   function endBgAnimate () {
-    document.getElementById('banner').style.opacity = '0';
+    document.querySelector('#banner #heading').style.opacity = '0';
     document.querySelector('.an-hero-slider__lines').style.opacity = '0';
   }
 
   function startBgAnimate () {
-    if(document.getElementById('banner') && document.querySelector('.an-hero-slider__lines')) {
-      document.getElementById('banner').style.opacity = '1';
+    if(document.querySelector('#banner #heading') && document.querySelector('.an-hero-slider__lines')) {
+      document.querySelector('#banner #heading').style.opacity = '1';
       document.querySelector('.an-hero-slider__lines').style.opacity = '1';
     }
   }
