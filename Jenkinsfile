@@ -87,6 +87,16 @@ pipeline {
       }
     }
 
+    stage('Copy files from Image to Host') {
+      steps {
+        sh """
+          docker cp $(docker create --rm gradle4:builder):/home/gradle/liferay/deploy .
+          docker cp $(docker create --rm gradle5:builder):/home/gradle/liferay/deploy .
+          ls -lrt deploy
+        """
+      }
+    }
+
   } // END OF STAGES
 
   post { // Post Actions
