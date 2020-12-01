@@ -69,6 +69,21 @@ logs/*
 .settings
 .gradle
 gradle/
+build/
+gradlew.bat
+gradlew
 
 .env
 .tool-versions
+
+# Node, npm y yo
+
+.yo-repository/
+
+# vscode
+.vscode/
+
+# custom
+tmp/
+azure/
+theme/anidia-theme/src/templates/init.ftl

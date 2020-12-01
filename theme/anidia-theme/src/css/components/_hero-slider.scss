@@ -76,7 +76,7 @@
    }
 
    &__info {
-      padding: rem(117) rem(20) 0;
+      padding: rem(75) rem(20) 0;
       position: absolute;
       height: 90vh;
 
@@ -123,8 +123,8 @@
        position: relative;
        left: 50%;
        transform: translateX(-50%);
-       bottom: -295px;
-
+       bottom: -200px;
+ 
        @include desktop {
          display: none;
        }
@@ -143,6 +143,9 @@
 
    &__heading {
      color: $white;
+     font-size: rem(30);
+     font-weight: normal;
+     line-height: rem(37);
 
      @media (min-width: 1024px) {
        font-size: rem(68);
@@ -155,6 +158,16 @@
        margin-bottom: rem(20);
      }
 
+    //  font-family: $fs-emeric-semibold-family;
+    //  font-size: rem(30);
+    //  font-weight: normal;
+    //  line-height: rem(37);
+   
+    //  @include tablet {
+    //    font-size: rem(60);
+    //    line-height: rem(74);
+    //  }
+ 
      .an-hero-slider.white &,
      .an-hero-slider.light-green & {
        color: $an-theme;
@@ -185,7 +198,7 @@
        transform: rotate(90deg);
        position: absolute;
        z-index: 5;
-       right: 30%;
+       right: 38%;
        bottom: rem(140);
 
        .an-hero-slider.white &,
