@@ -1,4 +1,4 @@
-FROM gradle:5.6.4-jdk11 as build
+FROM gradle5:latest as build
 
 # Run as user Root
 USER root
