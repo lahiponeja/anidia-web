@@ -132,7 +132,7 @@ pipeline {
         sh """
           az storage file upload-batch --connection-string ${CREDENTIALS} --destination deploy --source ./deploy
           tar cvf ${RELEASE_FILE} ./deploy
-          az storage file upload-batch --connection-string ${CREDENTIALS} --destination releases --source ${RELEASE_FILE}
+          az storage file upload --connection-string ${CREDENTIALS} --destination releases --source ${RELEASE_FILE}
         """
       }
     }
