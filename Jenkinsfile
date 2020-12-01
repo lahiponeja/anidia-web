@@ -25,8 +25,6 @@ def defineSecret() {
   }
 }
 
-
-
 pipeline {
   options {
     buildDiscarder(logRotator(numToKeepStr: '3'))
@@ -48,6 +46,7 @@ pipeline {
     // Azure Storage Fileshare
     SA_CREDENTIALS = defineSecret()
     CREDENTIALS    = credentials("$SA_CREDENTIALS")
+    RELEASE_FILE   = "release-${COMMIT}.tar"
  
     // Slack
     SLACK_COLOR_INFO  = '#6ECADC'
@@ -104,6 +103,13 @@ pipeline {
     }
 
     stage('Copy files from Image to Host') {
+      when {
+        anyOf {
+          branch "master"
+          branch "uat"
+          //branch "feature/docker"
+        }
+      }      
       steps {
         sh """
           docker cp `docker create --rm gradle4:builder`:/home/gradle/liferay/deploy .
@@ -113,14 +119,21 @@ pipeline {
     }
 
     stage('Get Credentials') {
+      when {
+        anyOf {
+          branch "master"
+          branch "uat"
+          //branch "feature/docker"
+        }
+      }      
       steps {
         sh """
-          echo $CREDENTIALS
+          az storage file upload-batch --connection-string ${CREDENTIALS} --destination deploy --source ./deploy
+          tar cvf ${RELEASE_FILE} ./deploy
+          az storage file upload-batch --connection-string ${CREDENTIALS} --destination releases --source ${RELEASE_FILE}
         """
       }
     }
-
-
 
   } // END OF STAGES
 
