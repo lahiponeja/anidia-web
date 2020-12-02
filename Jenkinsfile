@@ -117,14 +117,12 @@ pipeline {
     }
 
     stage('Copy files from Image to Host') {
-      /*
       when {
         anyOf {
-          branch "master"
+          // branch "master"
           branch "uat"
         }
       }
-      */
       steps {
         sh """
           docker cp `docker create --rm gradle4:builder`:/home/gradle/liferay/deploy .
@@ -134,14 +132,12 @@ pipeline {
     }
 
     stage('Get Credentials') {
-      /*
       when {
         anyOf {
-          branch "master"
+          // branch "master"
           branch "uat"
         }
       }
-      */
       steps {
         sh """
           az storage file upload-batch --connection-string ${CREDENTIALS} --destination deploy --source ./deploy
