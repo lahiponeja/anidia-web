@@ -82,21 +82,35 @@ pipeline {
       }
     }
 
-    stage('Gradle v5 builds') {
+    stage('Gradle v5 Image Pull') {
       steps {
         sh """
           docker pull ${env.REGISTRY}/gradle5:latest
           docker tag ${env.REGISTRY}/gradle5:latest gradle5:latest
+        """
+      }
+    }
+
+    stage('Gradle v5 Build') {
+      steps {
+        sh """
           docker build -f docker/gradle5.dockerfile . -t gradle5:builder
         """
       }
     }
 
-    stage('Gradle v4 builds') {
+    stage('Gradle v4 Image Pull') {
       steps {
         sh """
           docker pull ${env.REGISTRY}/gradle4:latest
           docker tag ${env.REGISTRY}/gradle4:latest gradle4:latest
+        """
+      }
+    }
+
+        stage('Gradle v4 Build') {
+      steps {
+        sh """
           docker build -f docker/gradle4.dockerfile . -t gradle4:builder
         """
       }
@@ -109,8 +123,8 @@ pipeline {
           branch "master"
           branch "uat"
         }
-      } 
-      */     
+      }
+      */
       steps {
         sh """
           docker cp `docker create --rm gradle4:builder`:/home/gradle/liferay/deploy .
@@ -126,8 +140,8 @@ pipeline {
           branch "master"
           branch "uat"
         }
-      } 
-      */     
+      }
+      */
       steps {
         sh """
           az storage file upload-batch --connection-string ${CREDENTIALS} --destination deploy --source ./deploy
