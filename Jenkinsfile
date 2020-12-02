@@ -47,7 +47,7 @@ pipeline {
     SA_CREDENTIALS = defineSecret()
     CREDENTIALS    = credentials("$SA_CREDENTIALS")
     RELEASE_FILE   = "release-${COMMIT}.tar"
- 
+
     // Slack
     SLACK_COLOR_INFO  = '#6ECADC'
     SLACK_COLOR_GOOD  = '#3EB991'
@@ -131,7 +131,7 @@ pipeline {
       }
     }
 
-    stage('Get Credentials') {
+    stage('Deploy') {
       when {
         anyOf {
           // branch "master"
@@ -141,8 +141,21 @@ pipeline {
       steps {
         sh """
           az storage file upload-batch --connection-string ${CREDENTIALS} --destination deploy --source ./deploy
+        """
+      }
+    }
+
+    stage('Archive Release') {
+      when {
+        anyOf {
+          // branch "master"
+          branch "uat"
+        }
+      }
+      steps {
+        sh """
           tar cvf ${RELEASE_FILE} ./deploy
-          az storage file upload --connection-string ${CREDENTIALS} --destination releases --source ${RELEASE_FILE}
+          az storage file upload-batch --connection-string ${CREDENTIALS} --destination releases --source ${RELEASE_FILE}
         """
       }
     }
