@@ -15,13 +15,13 @@ tasks.register("install.build.gradle-v4") {
 }
 
 
-tasks.register("install.build.gradle-v6") {
+tasks.register("install.build.gradle-v5") {
 
     group = 'Anidia'
     description = 'Install the dependencies and builds the project in Gradle 6'
 
     dependsOn 'install.npm'
-    dependsOn 'build.gradle-v6'
+    dependsOn 'build.gradle-v5'
 
 }
 
@@ -42,14 +42,14 @@ tasks.register("build.gradle-v4") {
 }
 
 
-tasks.register("build.gradle-v6") {
+tasks.register("build.gradle-v5") {
 
     group = 'Anidia'
     description = 'Builds the modules that compile in Gradle 6 and copy them to the autodeploy folder'
 
     mustRunAfter 'install.npm'
 
-    dependsOn 'build.portlets.gradle-v6'
+    dependsOn 'build.portlets.gradle-v5'
 
 }
 
@@ -141,7 +141,7 @@ tasks.register("build.portlets.gradle-v4") {
 
 }
 
-tasks.register("build.portlets.gradle-v6") {
+tasks.register("build.portlets.gradle-v5") {
   group = 'Anidia'
   description = 'Builds all the portlets that compile in Gradle 6 and copy them to the deploy folder'
 

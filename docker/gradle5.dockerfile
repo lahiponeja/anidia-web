@@ -6,4 +6,4 @@ COPY --chown=gradle:gradle . .
 
 # Run Predefined Gradle tasks
 RUN gradle install.npm
-RUN gradle build.gradle-v6 -Penv=ci
+RUN gradle build.gradle-v5 -Penv=ci
