@@ -510,16 +510,18 @@
 }
 
 #banner {
-
   @include desktop {
     padding: rem(19) rem(60);
-    z-index: 3;
+  }
 
-    &.more-elem {
-      position: fixed;
-    }
+  &.more-elem {
+    position: fixed;
+    width: 100%;
+    z-index: 2;
   }
 }
+
+
 
 #sign-in {
   display: none;
