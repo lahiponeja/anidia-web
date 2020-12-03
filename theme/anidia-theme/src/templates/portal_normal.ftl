@@ -178,6 +178,7 @@
 <script>
 function header() {
   if (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 1024){
+
     document.querySelector('.anidia-header__input').addEventListener('change', () => {
       document.body.classList.toggle('overflow-hidden');
       document.querySelector('.anidia-header').classList.toggle('active');
