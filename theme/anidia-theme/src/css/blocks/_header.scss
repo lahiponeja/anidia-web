@@ -51,6 +51,21 @@
 
     &.open {
       border-bottom: 0;
+
+      .nav-link {
+        border-bottom: rem(2) solid $an-theme;
+        align-items: center;
+        justify-content: center;
+        color: $an-theme;
+        font-size: rem(24);
+        font-family: $fs-emeric-semibold-family;
+
+        .lfr-nav-child-toggle {
+          color: $an-theme;
+          font-family: $an-icons;
+          transform: rotate(180deg);
+        }
+      }
     }
 
     @include desktop {
@@ -156,7 +171,7 @@
       font-size: rem(18);
       border-bottom: rem(1) solid $white;
       line-height: rem(36);
-      padding: rem(13) 0;
+      padding: rem(13) rem(20);
       color: $white;
 
       @include desktop {
@@ -316,33 +331,6 @@
     }
   }
 
-  &__back {
-    border-bottom: rem(2) solid $an-theme;
-    text-align: center;
-    color: $an-theme;
-
-    @include desktop {
-      display: none;
-    }
-
-    a {
-      align-items: center;
-      justify-content: center;
-      color: $an-theme !important;
-      font-size: rem(24);
-      font-family: $fs-emeric-semibold-family;
-
-      &::before {
-        color: $an-theme;
-        font-family: $an-icons;
-        font-size: rem(28);
-        content: $an-icon-half-arrow-left;
-        position: absolute;
-        left: 0;
-      }
-    }
-  }
-
   &__footer {
     display: none;
     visibility: hidden;
@@ -385,7 +373,6 @@
     z-index: 2;
     display: block;
     position: relative;
-    transform: translateY(-60px);
 
     @include desktop {
       display: flex;
