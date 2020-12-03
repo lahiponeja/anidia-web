@@ -49,21 +49,23 @@
     border-bottom: rem(1) solid $an-border;
     z-index: 2;
 
-    &.open {
-      border-bottom: 0;
+    @media (max-width: 1024px) {
+      &.open {
+        border-bottom: 0;
 
-      .nav-link {
-        border-bottom: rem(2) solid $an-theme;
-        align-items: center;
-        justify-content: center;
-        color: $an-theme;
-        font-size: rem(24);
-        font-family: $fs-emeric-semibold-family;
-
-        .lfr-nav-child-toggle {
+        .nav-link {
+          border-bottom: rem(2) solid $an-theme;
+          align-items: center;
+          justify-content: center;
           color: $an-theme;
-          font-family: $an-icons;
-          transform: rotate(180deg);
+          font-size: rem(24);
+          font-family: $fs-emeric-semibold-family;
+
+          .lfr-nav-child-toggle {
+            color: $an-theme;
+            font-family: $an-icons;
+            transform: rotate(180deg);
+          }
         }
       }
     }
