@@ -35,7 +35,8 @@
     border-radius: rem(20);
     position: relative;
     text-align: justify;
-    overflow-x: hidden;
+    width: 100vw;
+    overflow-x: scroll;
     /* Add animation */
     -webkit-animation-name: modal-animation; /* Chrome, Safari, Opera */
     -webkit-animation-duration: .5s; /* Chrome, Safari, Opera */
