@@ -178,52 +178,6 @@
 <script>
 function header() {
   if (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 1024){
-    let elementWithSubmenu = document.querySelectorAll("ul .dropdown");
-
-    for (let i = 0; i < elementWithSubmenu.length; i++) {
-      returnLink(elementWithSubmenu[i]);
-    }
-
-  var e = document.querySelector('.nav-item')
-    var observer = new MutationObserver(function (event) {
-    if (document.querySelector('.nav-item.open')) {
-      document.querySelectorAll('.nav-item:not(.open)').forEach(e => {
-          e.classList.add('hide');
-        });
-      }
-    })
-
-    observer.observe(e, {
-      attributeFilter: ['class']
-    })
-
-    function returnLink(menuItem) {
-        if (!menuItem.querySelector('.anidia-header__back')) {
-          let link = menuItem.getElementsByTagName("a")[0],
-          submenu = menuItem.getElementsByTagName("ul")[0],
-          backItem = document.createElement("li"),
-          backLink = document.createElement("a");
-
-        backLink.href = link.href;
-        backLink.text = link.text;
-        backItem.classList.add("anidia-header__back");
-        backItem.appendChild(backLink);
-        submenu.insertAdjacentElement("afterbegin", backItem);
-        closeSubmenu(backLink);
-      }
-    }
-
-    function closeSubmenu(link) {
-        link.addEventListener("click", (event) => {
-          event.preventDefault();
-          let submenu = link.parentElement;
-          submenu.parentElement.parentElement.classList.remove("open");
-          document.querySelectorAll('.nav-item').forEach(e => {
-            e.classList.remove('hide');
-          });
-        });
-    }
-
     document.querySelector('.anidia-header__input').addEventListener('change', () => {
       document.body.classList.toggle('overflow-hidden');
       document.querySelector('.anidia-header').classList.toggle('active');
