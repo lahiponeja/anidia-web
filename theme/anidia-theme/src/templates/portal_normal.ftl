@@ -8,8 +8,6 @@
 <head>
 	<#include "${full_templates_path}/head/one_trust.ftl" />
 	<#include "${full_templates_path}/head/gtm.ftl" />
-
-
 	<#include "${full_templates_path}/head/meta_tags.ftl" />
 
 	<#--  <link rel="stylesheet" href="${css_folder}/anidia.css" charset="utf-8">  -->
@@ -174,7 +172,7 @@
 <!-- endinject -->
 
 <#include "${full_templates_path}/footer/gtm.ftl" />
-
+<#include "${full_templates_path}/footer/menu_script.ftl" />
 <script>
 function header() {
   if (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 1024){
