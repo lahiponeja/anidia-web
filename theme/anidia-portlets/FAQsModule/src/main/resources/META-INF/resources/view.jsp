@@ -9,7 +9,7 @@ page import="com.liferay.portal.kernel.json.JSONArray" %>
 <portlet:defineObjects />
 
 <%
-String usedSearchTerm = renderRequest.getAttribute("usedSearchTerm") != null ?
+String usedSearchTerm = renderRequest.getAttribute("usedSearchTerm") != "" ?
 		(String)renderRequest.getAttribute("usedSearchTerm") : null;
 String content = (String)renderRequest.getAttribute("contentJson");
 JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
