@@ -134,7 +134,7 @@ pipeline {
     stage('Deploy') {
       when {
         anyOf {
-          // branch "master"
+          branch "master"
           branch "uat"
         }
       }
@@ -148,7 +148,7 @@ pipeline {
     stage('Archive Release') {
       when {
         anyOf {
-          // branch "master"
+          branch "master"
           branch "uat"
         }
       }
