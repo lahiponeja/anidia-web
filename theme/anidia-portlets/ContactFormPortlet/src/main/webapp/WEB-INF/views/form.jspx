@@ -19,10 +19,27 @@
 		<form:input id="${namespace}lastName" cssClass="an-input__field" path="lastName" placeholder="${lastNamePlaceholder}" required="required"/>
 		<form:input id="${namespace}email" cssClass="an-input__field" path="email" placeholder="${emailPlaceholder}" type="email"/>
 		<div class="an-input an-form__item mb-0">
-			<div class="an-select an-select--flag an-select--small-width mr-xs mb-m">
+			<div class="an-select an-select--flag an-select--small-width mr-xs mb-m data-select-container">
 				<img class="an-select__flag" src="" />
 				<span class="an-select__icon an-icon--chevron-down"></span>
-				<form:select id="${namespace}phonePrefix" cssClass="an-select__native prefix-select" path="phonePrefix" items="${prefixes}"/>
+				<form:select id="${namespace}phonePrefix" cssClass="an-select__native prefix-select data-select-native" path="phonePrefix" items="${prefixes}"/>
+				<div class="an-select__custom data-select-custom" aria-hidden="true">
+					<div class="an-select__custom-trigger data-select-custom-trigger">
+						<img class="an-select__flag" src="" />
+						<span>+34</span>
+					</div>
+					<div class="an-select__custom-options data-select-custom-options">
+						<div class="an-select__custom-option an-select__custom-option-flag an-select__custom-option-flag--es" data-value="+34">
+							+34
+						</div>
+						<div class="an-select__custom-option an-select__custom-option-flag an-select__custom-option-flag--de" data-value="+49">
+							+49
+						</div>
+						<div class="an-select__custom-option an-select__custom-option-flag an-select__custom-option-flag--uk" data-value="+44">
+							+44
+						</div>
+					</div>
+				</div>
 			</div>
 			<form:input id="${namespace}phoneNumber" cssClass="an-input__field" path="phoneNumber" placeholder="${phonePlaceholder}" required="required" />
 		</div>
@@ -103,34 +120,4 @@
       </div>
     </div>
 	</form:form>
-
-		<script type="text/javascript">
-		(function(){
-			var locationOrigin = window.location.origin,
-					prefixSelect = document.querySelector(".prefix-select"),
-					flagImg = document.querySelector(".an-select__flag"),
-					prefixSelectValue = prefixSelect.value;
-
-			prefixSelect.addEventListener("change", function() {
-				prefixSelectValue = prefixSelect.value;
-				setFlag();
-			})
-
-			function setFlag() {
-				switch(prefixSelectValue) {
-					case "+34":
-						flagImg.src = locationOrigin + "/o/anidia-theme/images/flags/flag-spain.svg";
-						break;
-					case "+44":
-						flagImg.src = locationOrigin + "/o/anidia-theme/images/flags/flag-uk.svg";
-						break;
-					case "+49":
-						flagImg.src = locationOrigin + "/o/anidia-theme/images/flags/flag-germany.svg";
-						break;
-				}
-			}
-
-			setFlag();
-		})();
-		</script>
 </jsp:root>
