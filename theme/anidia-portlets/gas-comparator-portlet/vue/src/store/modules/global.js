@@ -14,7 +14,11 @@ const state = reactive({
       active: false,
     },
   ],
-  // activeStep
+  modalOpen: false,
+  modalSettings: {
+    type: 'default',
+    componentName: ''
+  }
 })
 
 const changeView = function (stepName) {
@@ -28,14 +32,25 @@ const activeView = function() {
   return state.mainViewsArr.find((viewItem) => viewItem.active)
 }
 
-/*
-Possible steps:
-  'funnel': <funnel-view />
-  'comparator': <comparator-view />
-*/
+const setModalStatus = function(payload) {
+  state.modalOpen = payload
+}
+
+const setModalSettings = function(payload) {
+  state.modalSettings = payload
+}
+
+const changeModalStatus = function(payload) {
+  const { open, options } = payload
+  setModalStatus(open)
+  if (options) {
+    setModalSettings(options)
+  }
+}
 
 export default {
   state: shallowReadonly(state), 
   changeView,
   activeView,
+  changeModalStatus
 }

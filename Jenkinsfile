@@ -119,7 +119,7 @@ pipeline {
     stage('Copy files from Image to Host') {
       when {
         anyOf {
-          // branch "master"
+          branch "master"
           branch "uat"
         }
       }
@@ -134,7 +134,7 @@ pipeline {
     stage('Deploy') {
       when {
         anyOf {
-          // branch "master"
+          branch "master"
           branch "uat"
         }
       }
@@ -148,7 +148,7 @@ pipeline {
     stage('Archive Release') {
       when {
         anyOf {
-          // branch "master"
+          branch "master"
           branch "uat"
         }
       }

@@ -43,6 +43,15 @@ const budgetReady = {
       if(confirmation) {
         this.house.changeHouseStep('vivienda')
       }
+    },
+
+    openModal(name) {
+      this.global.changeModalStatus({
+        open: true,
+        options: {
+          componentName: name
+        }
+      })
     }
   },
   mounted () {
@@ -101,7 +110,7 @@ const budgetReady = {
           <div class="an-checkbox mt-xl">
             <input v-model="budgetReadyForm.privacyPolicy" class="an-checkbox__input privacy" type="checkbox" name="privacy-policy" id="privacy-policy" required="">
             <label class="an-checkbox__label" for="privacy-policy">
-              <span> He leído y acepto la política de privacidad *</span>
+              <span> He leído y acepto <a href="#" @click.prevent="openModal('privacyPolicyModal')">la política de privacidad*</a> </span>
             </label>
           </div>
         </div>
@@ -109,7 +118,7 @@ const budgetReady = {
           <div class="an-checkbox mt-xl">
             <input v-model="budgetReadyForm.offersAndServices" class="an-checkbox__input" type="checkbox" name="offers-and-services" id="offers-and-services">
             <label class="an-checkbox__label" for="offers-and-services">
-              <span> Acepto recibir comunicaciones comerciales </span>
+              <span> Acepto recibir <a href="#" @click.prevent="openModal('commercialModal')">comunicaciones comerciales</a> </span>
             </label>
           </div>
         </div>
