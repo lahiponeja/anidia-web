@@ -47,7 +47,7 @@ const modal = {
     }
   },
   template: /*html*/`
-  <div class="an-modal" id="modal-privacy-accepted" :style="openModal">
+  <div class="an-modal" :style="openModal">
     <div class="an-modal__content">
       <component
         :is="settings.componentName"
