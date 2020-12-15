@@ -69,14 +69,32 @@
     z-index: 1;
     width: 100%;
 
+    .bg-white & {
+      color: $an-theme;
+    }
+
     .no-img & {
       max-width: rem(1024);
       margin: auto;
+      height: rem(720);
+
+      h2 {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
     }
 
     .bg-an-theme-light &,
-    .bg-an-theme-light & {
+    .bg-an-theme-white & {
       color: $an-theme;
     }
+  }
+}
+
+.bg-an-theme--centered-featured.translate {
+  @include desktop {
+    transform: translateY(-200px);
+    margin-bottom: rem(-200);
   }
 }

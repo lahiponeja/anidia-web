@@ -18,7 +18,7 @@
       text-decoration: none;
       width: 100%;
 
-      body.anidia-white & {
+      body.anidia-header-white & {
         @include desktop {
           color: $an-theme;
         }
@@ -40,6 +40,7 @@
       flex-direction: row;
       opacity: 1;
       display: flex;
+      position: relative;
     }
   }
 
@@ -48,26 +49,45 @@
     border-bottom: rem(1) solid $an-border;
     z-index: 2;
 
-    &.hide-border {
-      border-bottom: 0;
+    @media (max-width: 1024px) {
+      &.open {
+        border-bottom: 0;
+
+        .nav-link {
+          border-bottom: rem(2) solid $an-theme;
+          align-items: center;
+          justify-content: center;
+          color: $an-theme;
+          font-size: rem(24);
+          font-family: $fs-emeric-semibold-family;
+
+          .lfr-nav-child-toggle {
+            color: $an-theme;
+            font-family: $an-icons;
+            transform: rotate(180deg);
+          }
+        }
+      }
     }
 
     @include desktop {
-      margin-right: rem(40);
+      padding-right: rem(40);
       border: none;
       width: auto;
       position: initial;
 
-      &.active {
+      &.open {
         .nav-link .text-truncate {
           display: flex;
-          flex-direction: column;
 
           &:after {
             content: '';
             border-bottom: 2px solid;
             width: 90%;
             transform: translateY(rem(-10));
+            position: absolute;
+            bottom: 0;
+            left: 0;
           }
         }
       }
@@ -149,19 +169,11 @@
       }
     }
 
-    &.active {
-      left: 0;
-      z-index: 2;
-      display: block;
-      position: relative;
-      transform: translateY(-60px);
-    }
-
     .dropdown-item {
       font-size: rem(18);
       border-bottom: rem(1) solid $white;
       line-height: rem(36);
-      padding: rem(13) 0;
+      padding: rem(13) rem(20);
       color: $white;
 
       @include desktop {
@@ -237,7 +249,7 @@
     border-radius: rem(20);
     z-index: 1;
 
-    body.anidia-white & {
+    body.anidia-header-white & {
       background: $an-theme;
     }
 
@@ -252,7 +264,7 @@
       background: $white;
       border-radius: rem(20);
 
-      body.anidia-white & {
+      body.anidia-header-white & {
         background: $an-theme;
       }
 
@@ -321,33 +333,6 @@
     }
   }
 
-  &__back {
-    border-bottom: rem(2) solid $an-theme;
-    text-align: center;
-    color: $an-theme;
-
-    @include desktop {
-      display: none;
-    }
-
-    a {
-      align-items: center;
-      justify-content: center;
-      color: $an-theme !important;
-      font-size: rem(24);
-      font-family: $fs-emeric-semibold-family;
-
-      &::before {
-        color: $an-theme;
-        font-family: $an-icons;
-        font-size: rem(28);
-        content: $an-icon-half-arrow-left;
-        position: absolute;
-        left: 0;
-      }
-    }
-  }
-
   &__footer {
     display: none;
     visibility: hidden;
@@ -386,8 +371,15 @@
   }
 
   .dropdown.open > .dropdown-menu {
+    left: 0;
+    z-index: 2;
+    display: block;
+    position: relative;
+
     @include desktop {
       display: flex;
+      position: absolute;
+      transform: translate(-3.75rem, 0);
     }
   }
 }
@@ -427,7 +419,7 @@
     &--green {
       display: none;
 
-      body.anidia-white & {
+      body.anidia-header-white & {
         display: inline;
       }
     }
@@ -435,7 +427,7 @@
     &--white {
       display: inline;
 
-      body.anidia-white & {
+      body.anidia-header-white & {
         display: none;
       }
     }
@@ -455,7 +447,7 @@
     transform: translate(rem(-74), rem(-5));
     margin-left: auto;
 
-    body.anidia-white & {
+    body.anidia-header-white & {
       display: none;
     }
 
@@ -493,13 +485,13 @@
     &--green {
       display: none !important;
 
-      body.anidia-white & {
+      body.anidia-header-white & {
         display: block !important;
       }
     }
 
     &--white {
-      body.anidia-white & {
+      body.anidia-header-white & {
 
         @include desktop {
           display: none !important;
@@ -510,14 +502,14 @@
 }
 
 #banner {
-
   @include desktop {
     padding: rem(19) rem(60);
-    z-index: 2;
+  }
 
-    &.more-elem {
-      position: fixed;
-    }
+  &.more-elem {
+    position: fixed;
+    width: 100%;
+    z-index: 2;
   }
 }
 

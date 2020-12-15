@@ -9,11 +9,6 @@
   overflow: auto;
   background-color: rgba($an-theme-dark-grey, .4);
 
-  &:target {
-    display: table;
-    position: absolute;
-  }
-
   h4 {
     margin-bottom: rem(24);
     color: $an-theme;
@@ -27,19 +22,25 @@
   &__content {
     background-color: $white;
     margin: auto;
-    padding: rem(69) rem(77);
-    width: 100%;
+    padding: rem(40);
     max-width: rem(870);
     margin-top: rem(80);
     height: auto;
     border-radius: rem(20);
     position: relative;
     text-align: justify;
+    width: 100vw;
+    overflow-x: scroll;
     /* Add animation */
     -webkit-animation-name: modal-animation; /* Chrome, Safari, Opera */
     -webkit-animation-duration: .5s; /* Chrome, Safari, Opera */
     animation-name: modal-animation;
     animation-duration: .5s;
+
+    @include desktop() {
+      width: 100%;
+      padding: rem(69) rem(77);
+    }
   }
 
   &__close {
@@ -47,11 +48,17 @@
       content: $an-icon-close-cross;
       font-family: $an-icons;
       color: $an-theme;
-      font-size: rem(31);
+      font-size: rem(18);
       position: absolute;
-      top: rem(47);
-      right: rem(47);
+      top: rem(20);
+      right: rem(20);
       cursor: pointer;
+
+      @include desktop() {
+        font-size: rem(31);
+        top: rem(47);
+        right: rem(47);
+      }
     }
   }
 }
