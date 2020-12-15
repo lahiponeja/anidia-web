@@ -9,15 +9,14 @@ page import="com.liferay.portal.kernel.json.JSONArray" %>
 <portlet:defineObjects />
 
 <%
-String usedSearchTerm = renderRequest.getAttribute("usedSearchTerm") != null ?
-		(String)renderRequest.getAttribute("usedSearchTerm") : "";
+String usedSearchTerm = (String)renderRequest.getAttribute("usedSearchTerm");
 String content = (String)renderRequest.getAttribute("contentJson");
 JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
 JSONArray contentArray = contentJson.getJSONArray("data");
 JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 %>
 
-<div class="bg-white pl-s pr-s pt-s pb-s">
+<div id=faqsDivId class="bg-white pl-s pr-s pt-s pb-s">
 	<div class="an-accordeon" data-accordeon>
 
 		<form method="post" class="an-accordeon__search">
@@ -84,6 +83,9 @@ JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
 </div>
 
 <script>
+<%if(usedSearchTerm != ""){%>
+    document.getElementById("faqsDivId").scrollIntoView(true);
+<%}%>
 (function() {
 	  function accordeon() {
 	    const accList = this.querySelector("[data-accordeon-list]");

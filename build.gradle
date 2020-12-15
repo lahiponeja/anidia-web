@@ -116,6 +116,8 @@ tasks.register("build.portlets.gradle-v4") {
   group = 'Anidia'
   description = 'Builds all the portlets that compile in Gradle 4 and copy them to the deploy folder'
 
+  //dependsOn 'build.portlets.contact_form'
+  //dependsOn 'build.portlets.faqs_module'
     dependsOn 'build.portlets.gas_budget'
     dependsOn 'build.portlets.gas_comparator'
 
