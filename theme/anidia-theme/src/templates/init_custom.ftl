@@ -21,10 +21,6 @@ This file allows you to override and define new FreeMarker variables.
 	<#assign css_class = css_class + " anidia-white" />
 </#if>
 
-<#assign gtm_id = themeDisplay.getThemeSetting("GTM-ID") />
-<#assign oneTrustEnvironment = themeDisplay.getThemeSetting("Entorno OneTrust") />
-
-
 <#-- ---------- Footer -------------  -->
 <#-- Settings for the footer menu  -->
 

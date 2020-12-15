@@ -21,9 +21,11 @@ const funnelView = {
     continueStep() {
       this.global.changeView(this.optionPicked)
       this.house.setHouseType(this.optionPicked)
+      window.dataLayer.push(this.house.getDatalayerFirstStepInfo("FUNNEL - CONTRATACIÓN", "instalationtype OK", "gas"));
     },
   },
   mounted() {
+    window.dataLayer.push(this.house.getDatalayerInitialInfo("FUNNEL - CONTRATACIÓN", "instalationtype", "gas"));
     if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.add('hide');
   },
   template: /*html*/

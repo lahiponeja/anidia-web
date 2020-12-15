@@ -1,51 +1,19 @@
 <!DOCTYPE html>
 
 <#include init />
+<#include "${full_templates_path}/init_gtm.ftl" />
 
 <html class="${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
 
 <head>
 	<#include "${full_templates_path}/head/one_trust.ftl" />
-
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtm_id}');</script>
-<!-- End Google Tag Manager -->
-
+	<#include "${full_templates_path}/head/gtm.ftl" />
 	<#include "${full_templates_path}/head/meta_tags.ftl" />
-
+  <#include "${full_templates_path}/head/seo_schema_markup.ftl" />
 	<#--  <link rel="stylesheet" href="${css_folder}/anidia.css" charset="utf-8">  -->
   <script src="${javascript_folder}/main.js" type="text/javascript"></script>
 
 	<link rel="stylesheet" href="${css_folder}/anidia.css?t=${theme_timestamp}" charset="utf-8">
-
-
-<script type="application/ld+json">
-  { 
-    "@context" : "http://schema.org",
-    "@type" : "Organization",
-    "url" : "https://anidia.es/",
-    "contactPoint" : [
-      { "@type" : "ContactPoint",
-      "telephone" : "${call_center_phone_prefix} ${call_center_phone}",
-      "contactType" : "customer service",
-      "url" : "https://www.anidia.es/#p_p_id_ContactFormPortlet_WAR_ContactFormPortlet_",
-      "areaServed" : "ES"
-      }]        
-  }
-</script>
-
-<script type="application/ld+json">
-  { "@context": "http://schema.org",
-    "@type": "WebPage",
-      "name": "${the_title} | Anidia",
-      "description": "${page_description}",
-      "publisher": {
-          "@type": "Organization",
-          "name": "Anidia"
-  }    }
-</script>
-
-
 </head>
 
 <body class="${css_class}">
@@ -173,18 +141,67 @@
 </#if>
 <!-- inject:js -->
 <!-- endinject -->
+
+<#include "${full_templates_path}/footer/gtm.ftl" />
+
 <script>
-window.dataLayer.push({
-	"event": "anidiapageview",
-	"content": {
-		"category" :"",
-		"contenthierarchy": [
-			{
-				"0": "home"
-			}
-		]
-	}
-})
+function header() {
+  if (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 1024){
+    let elementWithSubmenu = document.querySelectorAll("ul .dropdown");
+
+    for (let i = 0; i < elementWithSubmenu.length; i++) {
+        openSubmenu(elementWithSubmenu[i].getElementsByTagName("a")[0]);
+        returnLink(elementWithSubmenu[i]);
+    }
+
+    function returnLink(menuItem) {
+        let link = menuItem.getElementsByTagName("a")[0],
+            submenu = menuItem.getElementsByTagName("ul")[0],
+            backItem = document.createElement("li"),
+            backLink = document.createElement("a");
+
+        backLink.href = link.href;
+        backLink.text = link.text;
+        backItem.classList.add("anidia-header__back");
+        backItem.appendChild(backLink);
+        submenu.insertAdjacentElement("afterbegin", backItem);
+        closeSubmenu(backLink);
+    }
+
+    function openSubmenu(link) {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          link.parentElement.classList.add('hide-border')
+          link.classList.add("active");
+          document.querySelector('.nav-item.dropdown:not(.active)').classList.add('hide')
+          link.nextElementSibling.classList.add("active");
+        });
+    }
+
+    function closeSubmenu(link) {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          let submenu = link.parentElement.parentElement;
+          submenu.classList.remove("active");
+          submenu.previousElementSibling.classList.remove("active");
+          document.querySelectorAll('.nav-item.dropdown').forEach(e => {
+            e.classList.remove('hide');
+            e.classList.remove('hide-border');
+          })
+        });
+    }
+    document.querySelector('.anidia-header__input').addEventListener('change', () => {
+      document.body.classList.toggle('overflow-hidden');
+      document.querySelector('.anidia-header').classList.toggle('active');
+      document.querySelector('.site-title .anidia-logo-header--mobile--white').classList.toggle('hide');
+      document.querySelector('.site-title .anidia-logo-header--mobile--green').classList.toggle('hide');
+    });
+  }
+}
+
+if (document.querySelector('.anidia-header__input')) {
+  header();
+}
 
 </script>
 </body>

@@ -39,6 +39,20 @@
     }
   }
 
+  &--flag {
+    .an-select__native,
+    .an-select__custom-trigger {
+      padding: 0 rem(25) 0 rem(35);
+    }
+
+    @include tablet {
+      .an-select__native,
+      .an-select__custom-trigger {
+        padding: 0 rem(25) 0 rem(45);
+      }
+    }
+  }
+
   &__native {
     &:focus {
       border: 2px solid $an-theme;
@@ -93,6 +107,12 @@
     right: rem(27);
     transition: all 0.2s ease;
     z-index: 4;
+  }
+  
+  &--flag {
+    .an-select__icon {
+      right: rem(17);
+    }
   }
 
   &.is-active {
@@ -157,7 +177,7 @@
       cursor: pointer;
       font-family: $open-sans-regular-family;
       font-size: rem(18);
-      padding: 0 rem(25);
+      padding: 0 rem(20);
       position: relative;
 
       &:not(:last-of-type) {
@@ -175,6 +195,37 @@
       &[aria-selected="true"] {
         color: $an-theme;
       }
+
+      &-flag {
+        display: flex;
+
+        &:before {  
+          content: "";        
+          width: 20px;
+          max-height: 60px;
+          margin-right: 10px;
+          flex-shrink: 0;
+        }
+    
+        &--es {
+          &:before {
+            background: url('../images/flags/flag-spain.svg') no-repeat center;
+            background-size: contain;
+          }
+        }
+        &--de {
+          &:before {
+            background: url('../images/flags/flag-germany.svg') no-repeat center;
+            background-size: contain;
+          }
+        }
+        &--uk {
+          &:before {
+            background: url('../images/flags/flag-uk.svg') no-repeat center;
+            background-size: contain;
+          }
+        }
+      }
     }
 
     &.is-active {
@@ -189,6 +240,23 @@
     }
   }
 
+  &__flag {
+    position: absolute;
+    width: 20px;
+    z-index: 1;
+    left: 14px;
+    pointer-events: none;
+
+    svg {
+      width: 100%;
+      max-height: 60px;
+    }
+
+    @include tablet {
+      left: 22px;
+    }
+  }
+
   // FIX CUSTOM STYLES
   select {
     -webkit-appearance:none;
@@ -196,4 +264,27 @@
     -webkit-appearance: none; /* Safari and Chrome */
     appearance: none;
   }
+
+  &.data-select-container {
+    .an-select__native {
+      opacity: 0;
+    }
+
+    .an-select__custom {
+      display: block;
+    }
+    
+    .an-select__native:focus + .an-select__custom {
+      // pointer-events: none;
+
+      .an-select__custom-trigger {
+        box-shadow: none;
+        border: 2px solid $an-theme;
+      }
+    }
+  }
+  // @media (hover: hover) {
+    
+  // }
+
 }

@@ -1,4 +1,5 @@
 import phonePrefixMixin from "../../mixins/phonePrefixMixin"
+import customSelect from "../../helpers/customSelect"
 
 const businessContactForm = {
   mixins: [phonePrefixMixin],
@@ -30,13 +31,14 @@ const businessContactForm = {
         console.error(err)
         this.sendingForm = false
       })
-    },
+    }
   },
   mounted() {
     window.scrollTo({
       top: 200,
       behavior: 'smooth',
     })
+    customSelect()
   },
   template: /*html*/`
   <div class="an-form an-wrapper">
@@ -54,13 +56,29 @@ const businessContactForm = {
           <input v-model="businessFormData.lastname" type="text" class="an-input__field" placeholder="Apellidos" required="">
         </div>
         <div class="an-input an-form__item">
-          <div class="an-select an-select--small-width mr-xs">
+          <div class="an-select an-select--flag an-select--small-width mr-xs data-select-container">
+            <template v-for="(option, index) in phonePrefixesOptions">
+              <img class="an-select__flag" v-if="option.value === phonePrefix" :src="option.flagUrl" />
+            </template>
             <span class="an-select__icon an-icon--chevron-down"></span>
-            <select v-model="phonePrefix" class="an-select__native" required>
+            <select v-model="phonePrefix" @change="setFlag" class="an-select__native data-select-native" required>
               <option v-for="(option, index) in phonePrefixesOptions" :value="option.value">
-                {{ option.text }}
+                <span>{{ option.text }}</span>
               </option>
             </select>
+            <div class="an-select__custom data-select-custom">
+              <div class="an-select__custom-trigger data-select-custom-trigger">
+                <img class="an-select__flag" :src="activeFlag" />
+                <span>+34</span>
+              </div>
+              <div class="an-select__custom-options data-select-custom-options">
+                <template v-for="(option, index) in phonePrefixesOptions">
+                  <div @click="setPrefix(option.value, option.flagUrl)" class="an-select__custom-option an-select__custom-option-flag" :class="'an-select__custom-option-flag--' + (option.name)" :data-value="option.value">
+                    {{ option.text }}
+                  </div>
+                </template>
+              </div>
+            </div>
           </div>
           
           <input v-model="phoneNumber" type="number" class="an-input__field" placeholder="Teléfono" required="">
