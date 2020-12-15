@@ -104,7 +104,7 @@
             <td>Puede revocar su consentimiento y ejercitar sus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad dirigiendo un escrito al Delegado de Protección de Datos (<a href="mailto:dpo@redexisgas.es" class="an-link">dpo@redexisgas.es</a>)</td>
           </tr>
            <tr>
-            <td colspan="2">Puede consultar la política de privacidad de Redexis Gas Servicios, S.L.U. en la web <a class="an-link" href="https://www.redexisgas.es/protecciondedatos/">www.redexisgas.es/protecciondedatos</a></td>
+            <td colspan="2">Puede consultar la política de privacidad de Redexis Gas Servicios, S.L.U. en la web <a class="an-link" href="https://www.redexisgas.es/protecciondedatos/" target="_blank">www.redexisgas.es/protecciondedatos</a></td>
           </tr>
         </table>
       </div>
@@ -116,7 +116,7 @@
         <h4>Información comercial</h4>
         <p>Al marcar esta casilla, Ud., autoriza a Redexis Gas Servicios, S.L.U., y al resto de las empresas del grupo Redexis, a remitirle por cualquier medio, incluyendo medios electrónicos, comunicaciones comerciales relativas a productos y servicios relacionados con la gestión energética de su inmueble, ofertadas por las mismas. Estas comunicaciones podrán estar basadas en el análisis de los datos relativos a su persona que sean objeto de tratamiento y en la elaboración de un perfil que permita ofrecerle solamente aquella información que pueda resultar de su interés.</p>
         <p>Puede revocar su consentimiento y ejercitar sus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad dirigiendo un escrito al Delegado de Protección de Datos (<a href="mailto:dpo@redexisgas.es" class="an-link">dpo@redexisgas.es</a>)</p>
-        <p>Puede consultar la política de privacidad de Redexis Gas Servicios, S.L.U. en la web <a class="an-link" href="https://www.redexisgas.es/protecciondedatos/">www.redexisgas.es/protecciondedatos</a></p>
+        <p>Puede consultar la política de privacidad de Redexis Gas Servicios, S.L.U. en la web <a class="an-link" href="https://www.redexisgas.es/protecciondedatos/" target="_blank">www.redexisgas.es/protecciondedatos</a></p>
       </div>
     </div>
 	</form:form>
