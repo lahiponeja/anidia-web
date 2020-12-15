@@ -1,4 +1,8 @@
+import phonePrefixMixin from "../../mixins/phonePrefixMixin"
+import customSelect from "../../helpers/customSelect"
+
 const businessContactForm = {
+  mixins: [phonePrefixMixin],
   inject: ["global", "house"], // TODO: refactor once I tackle this business form.
   data() {
     return {
@@ -10,30 +14,35 @@ const businessContactForm = {
         privacyPolicy: false,
         offersAndServices: false,
       },
-
       sendingForm: false,
     }
   },
   methods: {
     submitRequest() {
+      const payloadObj = Object.assign(this.businessFormData, {
+        phone: this.fullPhoneNumber
+      })
+
       this.sendingForm = true
-      this.house.submitBusinessContactInfo(this.businessFormData).then((res) => {
+      this.house.submitBusinessContactInfo(payloadObj).then((res) => {
         this.$emit("form-success")
         this.sendingForm = false
       }).catch((err)=>{
         console.error(err)
         this.sendingForm = false
       })
-    },
+    }
   },
   mounted() {
     window.scrollTo({
       top: 200,
       behavior: 'smooth',
     })
+    customSelect()
   },
   template: /*html*/`
   <div class="an-form an-wrapper">
+
     <div v-if="sendingForm" class="an-funnel__white-overlay">
       <p class="an-h3">Cargando...</p>
     </div>
@@ -47,7 +56,32 @@ const businessContactForm = {
           <input v-model="businessFormData.lastname" type="text" class="an-input__field" placeholder="Apellidos" required="">
         </div>
         <div class="an-input an-form__item">
-          <input v-model="businessFormData.phone" type="text" class="an-input__field" placeholder="Teléfono" required="">
+          <div class="an-select an-select--flag an-select--small-width mr-xs data-select-container">
+            <template v-for="(option, index) in phonePrefixesOptions">
+              <img class="an-select__flag" v-if="option.value === phonePrefix" :src="option.flagUrl" />
+            </template>
+            <span class="an-select__icon an-icon--chevron-down"></span>
+            <select v-model="phonePrefix" @change="setFlag" class="an-select__native data-select-native" required>
+              <option v-for="(option, index) in phonePrefixesOptions" :value="option.value">
+                <span>{{ option.text }}</span>
+              </option>
+            </select>
+            <div class="an-select__custom data-select-custom">
+              <div class="an-select__custom-trigger data-select-custom-trigger">
+                <img class="an-select__flag" :src="activeFlag" />
+                <span>+34</span>
+              </div>
+              <div class="an-select__custom-options data-select-custom-options">
+                <template v-for="(option, index) in phonePrefixesOptions">
+                  <div @click="setPrefix(option.value, option.flagUrl)" class="an-select__custom-option an-select__custom-option-flag" :class="'an-select__custom-option-flag--' + (option.name)" :data-value="option.value">
+                    {{ option.text }}
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
+          
+          <input v-model="phoneNumber" type="number" class="an-input__field" placeholder="Teléfono" required="">
         </div>
         <div class="an-input an-form__item">
           <input v-model="businessFormData.email" type="email" class="an-input__field" placeholder="Email*" required="">

@@ -4,17 +4,32 @@
  * This is a general purpose Gradle build.
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds
  */
-tasks.register("build") {
+
+tasks.register("build.gradle-v4") {
 
     group = 'Anidia'
-    description = 'Builds the whole project and copy all the components to liferay folder'
+    description = 'Builds the modules that compile in Gradle 4 and copy them to the autodeploy folder'
+
+    mustRunAfter 'install.npm'
 
     dependsOn 'build.theme'
     dependsOn 'build.fragments'
     if( project.hasProperty('buildPublisher') && buildPublisher == "true") {
       dependsOn 'build.assetPublisher'
     }
-    dependsOn 'build.portlets'
+    dependsOn 'build.portlets.gradle-v4'
+
+}
+
+
+tasks.register("build.gradle-v5") {
+
+    group = 'Anidia'
+    description = 'Builds the modules that compile in Gradle 6 and copy them to the autodeploy folder'
+
+    mustRunAfter 'install.npm'
+
+    dependsOn 'build.portlets.gradle-v5'
 
 }
 
@@ -43,6 +58,8 @@ tasks.register("build.fragments") {
       if( project.hasProperty('env')) {
         if( env=='production') {
           commandLine 'expect', 'compress-production.exp'
+        } else if( env=='ci') {
+          commandLine 'expect', 'compress-ci.exp'
         } else {
           commandLine 'expect', 'compress-dev.exp'
         }
@@ -95,14 +112,22 @@ tasks.register("build.assetPublisher.jsp") {
   }
 }
 
-tasks.register("build.portlets") {
+tasks.register("build.portlets.gradle-v4") {
   group = 'Anidia'
-  description = 'Builds all the portlets and copy them to the deploy folder'
+  description = 'Builds all the portlets that compile in Gradle 4 and copy them to the deploy folder'
 
-//    dependsOn 'build.portlets.contact_form'
-//    dependsOn 'build.portlets.faqs_module'
+  //dependsOn 'build.portlets.contact_form'
+  //dependsOn 'build.portlets.faqs_module'
     dependsOn 'build.portlets.gas_budget'
     dependsOn 'build.portlets.gas_comparator'
+
+}
+
+tasks.register("build.portlets.gradle-v5") {
+  group = 'Anidia'
+  description = 'Builds all the portlets that compile in Gradle 6 and copy them to the deploy folder'
+
+    dependsOn 'build.portlets.contact_form'
 
 }
 
@@ -113,7 +138,7 @@ tasks.register("build.portlets.contact_form") {
   doLast {
     exec {
       workingDir 'theme/anidia-portlets/ContactFormPortlet'
-      commandLine 'gradle', 'build'
+      commandLine 'gradle', 'war'
     }
     exec {
       commandLine 'cp', 'theme/anidia-portlets/ContactFormPortlet/build/libs/ContactFormPortlet.war', 'liferay/deploy'
@@ -174,6 +199,71 @@ tasks.register("build.portlets.gas_comparator") {
     }
     exec {
       commandLine 'cp', 'theme/anidia-portlets/gas-comparator-portlet/vue/dist/gas-comparator-portlet-1.0.0.jar', 'liferay/deploy'
+    }
+  }
+}
+
+
+tasks.register("install.npm") {
+
+    group = 'Anidia'
+    description = 'Install npm dependencies in every folder'
+
+    dependsOn 'install.npm.base'
+    dependsOn 'install.npm.theme'
+    dependsOn 'install.npm.fragments'
+    dependsOn 'install.npm.portlets'
+
+}
+
+tasks.register("install.npm.base") {
+  group = 'Anidia'
+  description = 'Install npm dependencies in the base theme folder'
+
+  doLast {
+    exec {
+      workingDir 'theme'
+      commandLine 'npm', 'install'
+    }
+  }
+}
+
+tasks.register("install.npm.theme") {
+  group = 'Anidia'
+  description = 'Install npm dependencies in the anidia-theme folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-theme'
+      commandLine 'npm', 'install'
+    }
+  }
+}
+
+tasks.register("install.npm.fragments") {
+  group = 'Anidia'
+  description = 'Install npm dependencies in the anidia-fragments folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-fragments'
+      commandLine 'npm', 'install'
+    }
+  }
+}
+
+tasks.register("install.npm.portlets") {
+  group = 'Anidia'
+  description = 'Install npm dependencies in the vue portlets folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-portlets/gas-comparator-portlet/vue'
+      commandLine 'npm', 'install'
+    }
+    exec {
+      workingDir 'theme/anidia-portlets/GasBudgetPortlet/vue'
+      commandLine 'npm', 'install'
     }
   }
 }
