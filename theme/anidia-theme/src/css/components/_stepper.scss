@@ -3,6 +3,10 @@
   margin-right: rem(-20);
   margin-left: rem(-20);
 
+  .bg-white & {
+    color: $an-theme;
+  }
+
   @include desktop {
     margin-right: unset;
     margin-left: unset;
@@ -23,6 +27,10 @@
     text-transform: uppercase;
     display: flex;
     margin: auto;
+
+    .bg-white & {
+      color: $an-theme;
+    }
 
     @include desktop {
       display: none !important;
