@@ -442,7 +442,7 @@ const coverageForm = {
                     </ul>
 
                     <ul id="addresscustomul" v-show="house.state.autocompData.addresses.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
-                      <li @click="[setValue(address.name, 'name', '#addresscustomul'), onSubmitAddresses(address)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(address, index) in house.state.autocompData.addresses" :key="'second-address-'+index">
+                      <li v-for="(address, index) in house.state.autocompData.addresses" :key="'second-address-'+index" @click="[setValue(address.name, 'name', '#addresscustomul'), onSubmitAddresses(address)]" v-bind="resultProps[index]" class="an-select__custom-option">
                         {{ address.name }}
                       </li>
                     </ul>
