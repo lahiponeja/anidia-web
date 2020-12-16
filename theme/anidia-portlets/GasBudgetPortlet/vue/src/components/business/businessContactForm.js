@@ -31,6 +31,15 @@ const businessContactForm = {
         console.error(err)
         this.sendingForm = false
       })
+    },
+
+    openModal(name) {
+      this.global.changeModalStatus({
+        open: true,
+        options: {
+          componentName: name
+        }
+      })
     }
   },
   mounted() {
@@ -42,7 +51,6 @@ const businessContactForm = {
   },
   template: /*html*/`
   <div class="an-form an-wrapper">
-
     <div v-if="sendingForm" class="an-funnel__white-overlay">
       <p class="an-h3">Cargando...</p>
     </div>
@@ -90,7 +98,7 @@ const businessContactForm = {
           <div class="an-checkbox mt-xl">
             <input v-model="businessFormData.privacyPolicy" class="an-checkbox__input" type="checkbox" name="privacy-policy" id="privacy-policy">
             <label class="an-checkbox__label" for="privacy-policy">
-              <span> Acepto la política de privacidad </span>
+              <span> He leído y acepto <a href="#" @click.prevent="openModal('privacyPolicyModal')">la política de privacidad</a> </span>
             </label>
           </div>
         </div>
@@ -98,7 +106,7 @@ const businessContactForm = {
           <div class="an-checkbox mt-xl">
             <input v-model="businessFormData.offersAndServices" class="an-checkbox__input" type="checkbox" name="offers-and-services" id="offers-and-services">
             <label class="an-checkbox__label" for="offers-and-services">
-              <span> Quiero recibir publicidad con nuevas ofertas y servicios </span>
+              <span> Acepto recibir <a href="#" @click.prevent="openModal('commercialModal')">comunicaciones comerciales</a> </span>
             </label>
           </div>
         </div>

@@ -3,6 +3,7 @@ import compHeating from "../components/comparator/compHeating";
 import compKitchen from "../components/comparator/compKitchen";
 import compSaving from "../components/comparator/compSaving";
 import compError from "../components/comparator/compError";
+import modal from "../components/modal";
 
 const comparatorView = {
   inject: ["comparator"],
@@ -12,9 +13,11 @@ const comparatorView = {
     'comp-kitchen': compKitchen,
     'comp-saving': compSaving,
     'comp-error': compError,
+    modal
   },
   template: /*html*/`
     <div class="w-full">
+      <modal />
       <div class="an-house__steps an-house__steps--calculator an-wrapper an-wrapper--med">  
         <ul class="an-house__steps-list mb-xxxl">
           <template v-for="(compStep, index) in comparator.state.comparatorStepsArr" class="an-house__steps-item">

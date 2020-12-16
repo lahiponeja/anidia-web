@@ -1,4 +1,5 @@
 import businessContactForm from '../components/business/businessContactForm'
+import modal from '../components/modal'
 
 const businessView = {
   inject: ["global", "house"],
@@ -9,6 +10,7 @@ const businessView = {
   },
   components: {
     businessContactForm,
+    modal
   },
   methods: {
     setFormSuccess() {
@@ -20,12 +22,12 @@ const businessView = {
   },
   template: /*html*/`
     <div class="an-funnel__titles bg-white pb-xxxl pt-xxxl">
+    <modal />
     <template v-if="!formSuccess">
         <div class="an-funnel__titles mb-xl">
           <p class="an-h6 color-an-theme-dark-grey mb-l">TE INFORMAMOS</p>
           <p class="an-body-l-bold color-an-theme">Déjanos tus datos y contactamos contigo</p>
         </div>
-
         <businessContactForm @form-success="setFormSuccess" />
       </template>
       <template v-else>
