@@ -268,7 +268,8 @@ const getAddresses = function(municipalityId, postalCode) {
       const resJson = xmlToJsonImp(res.data);
       const { items } = resJson.Page.items
       const result = items
-      state.autocompData.addresses = result.length ? result : [result]
+      const checkIfIsArrayResults = result.length ? result : [result] 
+      state.autocompData.addresses = checkIfIsArrayResults.sort((a, b) => a.name.localeCompare(b.name));
       resolve(items)
     }).catch((err) => {
       reject(err)
