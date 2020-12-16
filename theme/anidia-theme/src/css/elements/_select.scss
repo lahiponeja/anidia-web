@@ -170,6 +170,7 @@
       top: rem(-28);
       max-height: 300px;
       overflow: auto;
+      z-index: 3 !important;
     }
 
     &-option {
