@@ -35,7 +35,7 @@ export default function main({portletNamespace, contextPath, portletElementId, c
 		components: {
 			'funnel-view': funnelView,
 			'house-view': houseView,
-			'business-view': businessView,
+			'business-view': businessView
 		},
 		provide: {
 			global,

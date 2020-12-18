@@ -30,7 +30,28 @@ const state = reactive({
       active: false,
     },
   ],
+  modalOpen: false,
+  modalSettings: {
+    type: 'default',
+    componentName: ''
+  }
 })
+
+const setModalStatus = function(payload) {
+  state.modalOpen = payload
+}
+
+const setModalSettings = function(payload) {
+  state.modalSettings = payload
+}
+
+const changeModalStatus = function(payload) {
+  const { open, options } = payload
+  setModalStatus(open)
+  if (options) {
+    setModalSettings(options)
+  }
+}
 
 const changeView = function (stepName) {
   const viewToChange = state.mainViewsArr.find((viewItem) => viewItem.name === stepName)
@@ -47,4 +68,5 @@ export default {
   state: shallowReadonly(state), 
   changeView,
   activeView,
+  changeModalStatus
 }

@@ -1,5 +1,6 @@
 import results from "./results";
 import phonePrefixMixin from "../../mixins/phonePrefixMixin"
+import customSelect from "../../helpers/customSelect"
 
 const compSaving = {
   mixins: [phonePrefixMixin],
@@ -26,6 +27,7 @@ const compSaving = {
       top: 200,
       behavior: 'smooth',
     })
+    customSelect()
   },
   methods: {
     submitRequest() {
@@ -63,6 +65,15 @@ const compSaving = {
         this.comparator.changeStepComponent('comp-hot-water')
         this.global.changeView('funnel')
       }
+    },
+
+    openModal(name) {
+      this.global.changeModalStatus({
+        open: true,
+        options: {
+          componentName: name
+        }
+      })
     }
   },
   template: /*html*/`
@@ -83,16 +94,29 @@ const compSaving = {
                 <input v-model="compSavingForm.lastname" type="text" class="an-input__field" placeholder="Apellidos*" required="">
               </div>
               <div class="an-input an-form__item">
-                <div class="an-select an-select--flag an-select--small-width mr-xs">
+                <div class="an-select an-select--flag an-select--small-width mr-xs data-select-container">
                   <template v-for="(option, index) in phonePrefixesOptions">
                     <img class="an-select__flag" v-if="option.value === phonePrefix" :src="option.flagUrl" />
                   </template>
                   <span class="an-select__icon an-icon--chevron-down"></span>
-                  <select v-model="phonePrefix" class="an-select__native" required>
+                  <select v-model="phonePrefix" @change="setFlag" class="an-select__native data-select-native" required>
                     <option v-for="(option, index) in phonePrefixesOptions" :value="option.value">
                       {{ option.text }}
                     </option>
                   </select>
+                  <div class="an-select__custom data-select-custom">
+                    <div class="an-select__custom-trigger data-select-custom-trigger">
+                      <img class="an-select__flag" :src="activeFlag" />
+                      <span>+34</span>
+                    </div>
+                    <div class="an-select__custom-options data-select-custom-options">
+                      <template v-for="(option, index) in phonePrefixesOptions">
+                        <div @click="setPrefix(option.value, option.flagUrl)" class="an-select__custom-option an-select__custom-option-flag" :class="'an-select__custom-option-flag--' + (option.name)" :data-value="option.value">
+                          {{ option.text }}
+                        </div>
+                      </template>
+                    </div>
+                  </div>
                 </div>
 
                 <input v-model="phoneNumber" type="number" class="an-input__field" placeholder="Teléfono*" required="">
@@ -104,7 +128,7 @@ const compSaving = {
                 <div class="an-checkbox mt-xl">
                   <input v-model="compSavingForm.privacyPolicy" class="an-checkbox__input privacy" type="checkbox" name="privacy-policy" id="privacy-policy" required="">
                   <label class="an-checkbox__label" for="privacy-policy">
-                    <span> He leído y acepto la política de privacidad*</span>
+                    <span> He leído y acepto <a href="#" @click.prevent="openModal('privacyPolicyModal')">la política de privacidad*</a> </span>
                   </label>
                 </div>
               </div>
@@ -112,7 +136,7 @@ const compSaving = {
                 <div class="an-checkbox mt-xl">
                   <input v-model="compSavingForm.offersAndServices" class="an-checkbox__input" type="checkbox" name="offers-and-services" id="offers-and-services">
                   <label class="an-checkbox__label" for="offers-and-services">
-                    <span> Acepto recibir comunicaciones comerciales </span>
+                    <span> Acepto recibir <a href="#" @click.prevent="openModal('commercialModal')">comunicaciones comerciales</a> </span>
                   </label>
                 </div>
               </div>

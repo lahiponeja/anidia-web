@@ -1,5 +1,5 @@
-$colors: $white $an-theme $an-theme-light $yellow $an-theme-dark-grey $an-theme-soft-grey;
-$colors-names: 'white' 'an-theme' 'an-theme-light' 'yellow' 'an-theme-dark-grey' 'an-theme-soft-grey';
+$colors: $white $an-theme $an-theme-light 'transparent' $an-theme-dark-grey $an-theme-soft-grey;
+$colors-names: 'white' 'an-theme' 'an-theme-light' 'transparent' 'an-theme-dark-grey' 'an-theme-soft-grey';
 
 @each $color in $colors {
   $i: index($colors, $color);
@@ -17,4 +17,27 @@ $colors-names: 'white' 'an-theme' 'an-theme-light' 'yellow' 'an-theme-dark-grey'
 }
 .bg-gradient-green-card {
   @include gradient-green-card-bg;
+}
+
+
+// BODY BACKGROUNDS
+body {
+  &.anidia-green {
+    @include gradient-green-bg;
+  }
+
+  &.anidia-green-light {
+    background: $an-theme-light;
+  }
+
+  &.anidia-white {
+    background: $white;
+  }
+
+  &.anidia-white-img {
+    background-color: $white;
+    background-image: url('../assets/img/bg-white-img.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }

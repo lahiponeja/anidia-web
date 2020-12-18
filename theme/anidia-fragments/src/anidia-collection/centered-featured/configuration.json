@@ -70,7 +70,7 @@
                 "value": "Blanco"
               },
               {
-                "value": "Amarillo"
+                "value": "Transparente"
               },
               {
                 "value": "Gris oscuro"
@@ -91,6 +91,18 @@
           "name": "Esconder",
           "label": "Esconder inicialmente",
           "description": "El módulo se oculta inicialmente y algo más (otro módulo) debe mostrarlo",
+					"type": "checkbox",
+          "defaultValue": false
+        }
+      ]
+    },
+    {
+      "label": "Trasladar arriba",
+      "fields": [
+        {
+          "name": "Translate",
+          "label": "Trasladar arriba",
+          "description": "Trasladar el módulo arriba para que se sitúe debajo del módulo anterior",
 					"type": "checkbox",
           "defaultValue": false
         }

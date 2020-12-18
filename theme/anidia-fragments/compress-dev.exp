@@ -45,15 +45,11 @@ if {$force_conservative} {
 set timeout -1
 spawn npm run compress
 match_max 100000
-expect -exact "\r
-> yo liferay-fragments:compress\r
-\r
-\[32m?\[39m \[1mAdd deployment descriptor?\[22m\[0m \[0m\[2m(Y/n) \[22m\[35D\[35C"
+
+expect -exact "(Y/n)"
 send -- "\r"
-expect -exact "\[2K\[G\[32m?\[39m \[1mAdd deployment descriptor?\[22m\[0m \[0m\[36mYes\[39m\[32D\[32C\r
-\[32m?\[39m \[1mDeployment descriptor company Web ID?\[22m\[0m \[0m\[2m(liferay.com) \[22m\[54D\[54C"
+expect -exact "(liferay.com)"
 send -- "\r"
-expect -exact "\[2K\[G\[32m?\[39m \[1mDeployment descriptor company Web ID?\[22m\[0m \[0m\[36mliferay.com\[39m\[51D\[51C\r
-\[32m?\[39m \[1mDeployment descriptor group key?\[22m\[0m \[0m\[2m(Guest) \[22m\[43D\[43C"
+expect -exact "(Guest) \[22m\[43D\[43C"
 send -- "\r"
 expect eof
