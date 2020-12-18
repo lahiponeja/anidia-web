@@ -14,6 +14,7 @@
   <script src="${javascript_folder}/main.js" type="text/javascript"></script>
 
 	<link rel="stylesheet" href="${css_folder}/anidia.css?t=${theme_timestamp}" charset="utf-8">
+  <meta name="google-site-verification" content="SwBBZBXUk_O8KLpkdbzosHIckYQYpLbTRBwD2QZvSns" />
 </head>
 
 <body class="${css_class}">
