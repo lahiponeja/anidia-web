@@ -516,3 +516,39 @@
 #sign-in {
   display: none;
 }
+
+@include desktop {
+  .active-section {
+    .nav-link {
+      .text-truncate {
+        display: flex;
+
+        &:after {
+          content: '';
+          border-bottom: 2px solid;
+          width: calc(100% - 28px);
+          transform: translateY(rem(-10));
+          position: absolute;
+          bottom: 0;
+          left: 0;
+        }
+      }
+
+      &.dropdown-toggle {
+        .text-truncate {
+          display: flex;
+
+          &:after {
+            content: '';
+            border-bottom: 2px solid;
+            width: 90%;
+            transform: translateY(rem(-10));
+            position: absolute;
+            bottom: 0;
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+}
