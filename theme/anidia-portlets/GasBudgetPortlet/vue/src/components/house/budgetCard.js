@@ -1,5 +1,5 @@
 const budgetCard = {
-  inject: ["house"],
+  inject: ["global", "house"],
   data() {
     return {}
   },
@@ -10,6 +10,15 @@ const budgetCard = {
     houseFormData() {
       return this.house.state.houseFormData
     }
+  },
+  methods: {
+    calculateAgain() {
+      const confirmation = confirm('¿Estás seguro de que quieres volver a calcular?')
+      if(confirmation) {
+        this.global.changeView('funnel')
+        this.house.changeHouseStep('cobertura')
+      }
+    },
   },
   mounted() {
     window.dataLayer.push(this.house.getDatalayerDetailsStepInfo("FUNNEL - CONTRATACIÓN", "maintenanceupselling", "gas"));
@@ -60,6 +69,12 @@ const budgetCard = {
       </ul>
       <button @click="house.changeHouseStep('presupuesto-realizado')" class="an-btn an-btn--flatter an-btn--white">
         <span>Recibir presupuesto detallado</span>
+      </button>
+    </div>
+
+    <div class="an-form__flex an-form__flex--6-cols mb-xxl">
+      <button @click="calculateAgain" type="button" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--half-arrow-left mt-xl">
+        <span>Volver a calcular</span>
       </button>
     </div>
   </div>`,
