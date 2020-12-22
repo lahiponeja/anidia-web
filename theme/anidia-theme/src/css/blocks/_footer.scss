@@ -107,3 +107,20 @@
 #onetrust-consent-sdk #onetrust-banner-sdk a {
   white-space: nowrap !important;
 }
+
+// Fix to make the footer stay properly at the bottom of the page
+@include desktop {
+  #wrapper {
+    min-height: 100vh;
+  }
+
+  #content {
+    padding-bottom: rem(156); // The height of the footer
+  }
+
+  #footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
