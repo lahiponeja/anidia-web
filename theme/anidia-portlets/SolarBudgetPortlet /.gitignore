@@ -15,4 +15,4 @@ api/bin
 .classpath
 .project
 .settings
-impl/src/main/resources/com/liferay/gasBudget/internal/services/portlet.properties
+impl/src/main/resources/com/liferay/solarBudget/internal/services/portlet.properties
