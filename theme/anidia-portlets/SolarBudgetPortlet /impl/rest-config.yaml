@@ -1,9 +1,9 @@
 apiDir: "../api/src/main/java"
-apiPackagePath: "com.liferay.gasBudget"
+apiPackagePath: "com.liferay.solarBudget"
 application:
-    baseURI: "/gas-budget"
-    className: "GasBudgetApplication"
-    name: "Liferay.GasBudget"
+    baseURI: "/solar-budget"
+    className: "SolarBudgetApplication"
+    name: "Liferay.SolarBudget"
     security:
         guestAllowed: true
 author: "David Brenes"

@@ -1,2 +1,2 @@
-rootProject.name = 'gas-budget-portlet'
+rootProject.name = 'solar-budget-portlet'
 include "vue", "api", "impl"
