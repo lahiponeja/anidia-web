@@ -1,13 +1,24 @@
 package com.liferay.gasBudget.dto.v1_0;
 
-import com.fasterxml.jackson.annotation.*;
-import com.liferay.petra.function.*;
-import com.liferay.petra.string.*;
-import com.liferay.portal.vulcan.graphql.annotation.*;
-import io.swagger.v3.oas.annotations.media.*;
-import java.util.*;
-import javax.annotation.*;
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.liferay.petra.function.UnsafeSupplier;
+import com.liferay.petra.string.StringBundler;
+import com.liferay.portal.vulcan.graphql.annotation.GraphQLField;
+import com.liferay.portal.vulcan.graphql.annotation.GraphQLName;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
+import javax.annotation.Generated;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author David Brenes
