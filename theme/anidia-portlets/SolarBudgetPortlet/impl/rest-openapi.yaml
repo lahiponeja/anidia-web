@@ -19,6 +19,149 @@ components:
           description: The sample ID.
           type: integer
       type: object
+    SolarBudgetRequest:
+      description: The required information to calculate a Solar Budget
+      properties:
+        entryCode:
+          description: Entry code
+          type: string
+        houseType:
+          description: Kind of house
+          type: string
+          enum: ["Unifamiliar de 1 planta sin A/A", "Bloque de pisos"]
+        monthlyConsumption:
+          description: Monthly consumprion
+          type: integer 
+          enum: ["Si", "No"] 
+        annualConsumption: 
+          description: Annual Consumption
+          type: integer 
+        additionalPanels:
+          description: User wants aditional panels
+          type: string 
+          enum: ["Si", "No"]
+        panelsCanTell:  
+          description: User knows the aditional panels quantity
+          type: string
+          enum: ["Si", "No"]  
+        panelsNumber:
+          description: Aditional panels quantity
+          type: string
+          enum: ["Si", "No"]
+        panelsSelected:
+          description: Selected panels
+          type: string 
+          enum: ["UStandard", "Diseño (LG)"]
+        installationType:
+          description: Instalation type
+          type: string 
+          enum: ["Monofásica", "Trifásica"]
+        inverterOversized:
+          description: User wants an oversized inverter
+          type: string
+          enum: ["Si", "No"]
+        inverterType:
+          description: Inverter type
+          type: string 
+          enum: ["Standard", "Fronius"]
+        roofType:
+          description: Roof type
+          type: string 
+          enum: ["Plano o inclinación menor a 20º", "Inclinación superior a 20º"]
+        pergola:
+          description: User wants pergola
+          type: string
+          enum: ["Si", "No"] 
+        pipelineUnderground:
+          description: The pipeline needs to be underground
+          type: string
+          enum: ["Si", "No"]
+        pipelineMeters:
+          description: Pipeline meters
+          type: integer
+        carCharger:
+          description: User needs car charger
+          type: string
+          enum: ["Si", "No"] 
+        needBattery:
+          description: User needs battery
+          type: string 
+          enum: ["Si", "No"]
+        hasAdditionalPanels:
+          description: User has additional panels
+          type: string 
+          enum: ["Si", "No"]
+        numberAdditionalPanels:
+          description: Number of additional panels
+          type: integer 
+        electricalAppliances:
+          $ref: "#/components/schemas/electricalAppliance"
+    electricalAppliance:
+      description: Home appliances
+      properties:
+        electricalAppliance1:
+          type: string
+        electricalAppliance2:
+          type: string
+        electricalAppliance3:
+          type: string
+    SolarBudget:
+      description: Information about the solar budget sent by Solusoft API
+      properties:
+        proposedPack:
+          description: Title of the pack
+          type: string
+        equipment:
+          description: Equipment included in the budget
+          type: string
+        baseBudget:
+          description: Base price of the budget
+          type: string
+        bonus:
+          description: Discount
+          type: string
+        totalBudget:
+          description: Total Price without VAT.
+          type: string
+        vat:
+          description: VAT amount
+          type: string
+        totalPrice:
+          description: Total price with VAT
+          type: string
+        metersBoilerToWindow:
+          description: Distance between the boiler and the window
+          $ref: "#/components/schemas/SolarBudgetExtra"
+        metersWaterIntake:
+          description: Distance to the water intake
+          $ref: "#/components/schemas/SolarBudgetExtra"
+        hasVentilationGrill:
+          description: Has the client a ventilation grill?
+          $ref: "#/components/schemas/SolarBudgetExtra"
+        controllHeatingFloor:
+          description: Has the client controlled heating in the whole floor?
+          $ref: "#/components/schemas/SolarBudgetExtra"
+        connectDeviceToKitchen:
+          description: Has the client a connect device in the kitchen?
+          $ref: "#/components/schemas/SolarBudgetExtra"
+        convertDeviceKitchen:
+          description: Has the client a convert device in the kitchen?
+          $ref: "#/components/schemas/SolarBudgetExtra"
+        radiatorsBathroom:
+          description: Number of the radiators in the bathroom.
+          $ref: "#/components/schemas/SolarBudgetExtra"
+        extraTotalPrice:
+          description: Total price for all the extras
+          type: string
+    SolarBudgetExtra:
+      description: Information about some extra from the solar budget
+      properties:
+        value:
+          description: Detail of the extra
+          type: string
+        price:
+          description: Price for the extra
+          type: string
           
 paths:
   "/samples/{sampleId}":
@@ -41,3 +184,27 @@ paths:
                 $ref: "#/components/schemas/Sample"
           description: ""
       tags: ["Sample"]
+  "/solar-budgets":
+    post:
+      operationId: postSolarBudget
+      summary: Create a Solar Budget using Solusoft API
+      description: Converts all the information into a format usable by Solusoft and returns the response
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SolarBudgetRequest"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/SolarBudgetRequest"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SolarBudget"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/SolarBudget"
+          description: The budget has been created
+      tags: ["Budget"]
