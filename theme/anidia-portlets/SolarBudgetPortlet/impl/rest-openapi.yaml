@@ -19,6 +19,7 @@ components:
           description: The sample ID.
           type: integer
       type: object
+
     SolarBudgetRequest:
       description: The required information to calculate a Solar Budget
       properties:
@@ -105,63 +106,77 @@ components:
           type: string
         electricalAppliance3:
           type: string
+
     SolarBudget:
       description: Information about the solar budget sent by Solusoft API
       properties:
-        proposedPack:
-          description: Title of the pack
-          type: string
-        equipment:
-          description: Equipment included in the budget
-          type: string
-        baseBudget:
-          description: Base price of the budget
-          type: string
-        bonus:
-          description: Discount
-          type: string
-        totalBudget:
-          description: Total Price without VAT.
-          type: string
-        vat:
-          description: VAT amount
-          type: string
-        totalPrice:
-          description: Total price with VAT
-          type: string
-        metersBoilerToWindow:
+        size:
           description: Distance between the boiler and the window
           $ref: "#/components/schemas/SolarBudgetExtra"
-        metersWaterIntake:
+        inverter:
+          description: Distance between the boiler and the window
+          $ref: "#/components/schemas/SolarBudgetExtra"
+        panelsExtra:
+          description: Distance between the boiler and the window
+          $ref: "#/components/schemas/SolarBudgetExtra"
+        triphasicExtra:
           description: Distance to the water intake
           $ref: "#/components/schemas/SolarBudgetExtra"
-        hasVentilationGrill:
+        inverterExtra:
           description: Has the client a ventilation grill?
           $ref: "#/components/schemas/SolarBudgetExtra"
-        controllHeatingFloor:
+        roofExtra:
           description: Has the client controlled heating in the whole floor?
           $ref: "#/components/schemas/SolarBudgetExtra"
-        connectDeviceToKitchen:
+        pergolaExtra:
           description: Has the client a connect device in the kitchen?
           $ref: "#/components/schemas/SolarBudgetExtra"
-        convertDeviceKitchen:
+        pipelineExtra:
           description: Has the client a convert device in the kitchen?
           $ref: "#/components/schemas/SolarBudgetExtra"
-        radiatorsBathroom:
-          description: Number of the radiators in the bathroom.
-          $ref: "#/components/schemas/SolarBudgetExtra"
-        extraTotalPrice:
-          description: Total price for all the extras
-          type: string
-    SolarBudgetExtra:
+
+    SolarBudgetExtraStringValue:
       description: Information about some extra from the solar budget
       properties:
         value:
           description: Detail of the extra
           type: string
+        unitPrice:
+          description: Unit price for the extra
+          type: string
         price:
           description: Price for the extra
           type: string
+
+    SolarBudgetExtraYesNoValue:
+      description: Information about some extra from the solar budget
+      properties:
+        value:
+          description: Detail of the extra
+          type: string
+          enum: ["Si", "No"]
+        unitPrice:
+          description: Unit price for the extra
+          type: string
+        price:
+          description: Price for the extra
+          type: string
+
+    SolarOutputInverter:
+      description: Inverter info
+      properties:
+        brand:
+          description: Brand
+          type: string
+        model:
+          description: Model
+          type: string
+        price:
+          description: Price
+          type: string
+
+
+
           
 paths:
   "/samples/{sampleId}":
