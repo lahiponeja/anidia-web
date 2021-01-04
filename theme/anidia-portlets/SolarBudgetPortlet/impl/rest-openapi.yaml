@@ -110,30 +110,49 @@ components:
     SolarBudget:
       description: Information about the solar budget sent by Solusoft API
       properties:
+        panelsType:
+          description: Tipo de paneles
+          type: string
         size:
-          description: Distance between the boiler and the window
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          description: Size
+          $ref: "#/components/schemas/SolarBudgetExtraStringValue"
         inverter:
-          description: Distance between the boiler and the window
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          description: Inverter
+          $ref: "#/components/schemas/SolarOutputInverter"
         panelsExtra:
-          description: Distance between the boiler and the window
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          description: Extra panels
+          $ref: "#/components/schemas/SolarBudgetExtraStringValue"
         triphasicExtra:
-          description: Distance to the water intake
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          description: Extra triphasic
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
         inverterExtra:
-          description: Has the client a ventilation grill?
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          description: Extra inverter
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
         roofExtra:
-          description: Has the client controlled heating in the whole floor?
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          description: Extra roof
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
         pergolaExtra:
-          description: Has the client a connect device in the kitchen?
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          description: Extra pergola
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
         pipelineExtra:
-          description: Has the client a convert device in the kitchen?
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          description: Extra pipeline
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+        carCharger:
+          description: Car charger
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+        battery:
+          description: Battery
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+        additionalPanelsInstallation:
+          description: Additional Installation
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+        totalPrize:
+          description: Total prize
+          type: string
+        superiorInstallation:
+          description: Superior installation data
+          $ref: "#/components/schemas/SolarSuperiorInstallation"
+        
 
     SolarBudgetExtraStringValue:
       description: Information about some extra from the solar budget
@@ -174,10 +193,43 @@ components:
         price:
           description: Price
           type: string
+    
+    SuperiorSize:
+      properties:
+        value:
+           type: string
+        prize:
+           type: string
 
-
-
-          
+    SolarSuperiorInstallation:
+      properties:
+        superiorSize:
+          type: string
+        panelType:
+          type: string
+        inverterType:
+          type: string
+        extraFornius:
+          type: string
+        panelsExtra:
+          $ref: "#/components/schemas/SolarBudgetExtraStringValue"
+        triphasicExtra:
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+        inverterExtra:
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+        roofExtra:
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+        pergolaExtra:
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+        pipelineExtra:
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+        carCharcher:
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+        battery:
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+        additionalPanelsInstallation:
+          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+         
 paths:
   "/samples/{sampleId}":
     get:
