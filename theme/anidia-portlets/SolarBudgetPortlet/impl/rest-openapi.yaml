@@ -96,8 +96,8 @@ components:
           description: Number of additional panels
           type: integer 
         electricalAppliances:
-          $ref: "#/components/schemas/electricalAppliance"
-    electricalAppliance:
+          $ref: "#/components/schemas/ElectricalAppliance"
+    ElectricalAppliance:
       description: Home appliances
       properties:
         electricalAppliance1:
