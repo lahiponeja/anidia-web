@@ -23,8 +23,8 @@ components:
     SolarBudgetRequest:
       description: The required information to calculate a Solar Budget
       properties:
-        entryCode:
-          description: Entry code
+        entryKey:
+          description: Entry key
           type: string
         houseType:
           description: Kind of house
@@ -33,7 +33,6 @@ components:
         monthlyConsumption:
           description: Monthly consumprion
           type: integer 
-          enum: ["Si", "No"] 
         annualConsumption: 
           description: Annual Consumption
           type: integer 
@@ -47,8 +46,7 @@ components:
           enum: ["Si", "No"]  
         panelsNumber:
           description: Aditional panels quantity
-          type: string
-          enum: ["Si", "No"]
+          type: integer
         panelsSelected:
           description: Selected panels
           type: string 
