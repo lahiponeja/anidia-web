@@ -274,4 +274,3 @@ paths:
               schema:
                 $ref: "#/components/schemas/SolarBudget"
           description: The budget has been created
-      tags: ["Budget"]

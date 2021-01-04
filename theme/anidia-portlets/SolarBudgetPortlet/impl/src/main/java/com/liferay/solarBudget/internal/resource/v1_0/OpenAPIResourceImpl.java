@@ -52,6 +52,8 @@ public class OpenAPIResourceImpl {
 		{
 			add(SampleResourceImpl.class);
 
+			add(SolarBudgetResourceImpl.class);
+
 			add(OpenAPIResourceImpl.class);
 		}
 	};

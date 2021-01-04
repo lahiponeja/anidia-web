@@ -181,6 +181,27 @@ tasks.register("build.portlets.gas_budget") {
   }
 }
 
+tasks.register("build.portlets.solar_budget") {
+  group = 'Anidia'
+  description = 'Builds the Solar Budget portlet and copy them to the deploy folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-portlets/SolarBudgetPortlet'
+      commandLine 'gradle', 'deploy'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/SolarBudgetPortlet/api/build/libs/solar-budget-api-1.0.0.jar', 'liferay/deploy'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/SolarBudgetPortlet/impl/build/libs/solar-budget-impl-1.0.0.jar', 'liferay/deploy'
+    }
+    /*exec {
+      commandLine 'cp', 'theme/anidia-portlets/SolarBudgetPortlet/vue/dist/solar-budget-portlet-1.0.0.jar', 'liferay/deploy'
+    }*/
+  }
+}
+
 tasks.register("build.portlets.gas_comparator") {
   group = 'Anidia'
   description = 'Builds the Gas Comparator portlet and copy them to the deploy folder'
