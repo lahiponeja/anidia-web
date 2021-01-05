@@ -115,8 +115,15 @@ public class Calculator {
     superiorInstallation.setPanelType(jsonSuperiorInstallation.getString("PanelType"));
     superiorInstallation.setInverterType(jsonSuperiorInstallation.getString("InverterType"));
     superiorInstallation.setExtraFornius(jsonSuperiorInstallation.getString("ExtraFornius"));
-    superiorInstallation.setPanelsExtra(this.createSuperiorExtra(jsonBudget.getJSONObject("PanelsExtra"),jsonSuperiorInstallation.getString("PanelsExtra") ));
-
+    superiorInstallation.setPanelsExtra(this.createSuperiorExtra(jsonBudget.getJSONObject("PanelsExtra"),jsonSuperiorInstallation.getString("PanelsExtra")));
+    superiorInstallation.setTriphasicExtra(this.createSuperiorExtra(jsonBudget.getJSONObject("TriphasicExtra"),jsonSuperiorInstallation.getString("TriphasicExtra")));
+    superiorInstallation.setInverterExtra(this.createSuperiorExtra(jsonBudget.getJSONObject("InverterExtra"),jsonSuperiorInstallation.getString("InverterExtra")));
+    superiorInstallation.setRoofExtra(this.createSuperiorExtra(jsonBudget.getJSONObject("RoofExtra"),jsonSuperiorInstallation.getString("RoofExtra")));
+    superiorInstallation.setPergolaExtra(this.createSuperiorExtra(jsonBudget.getJSONObject("PergolaExtra"),jsonSuperiorInstallation.getString("PergolaExtra")));
+    superiorInstallation.setPipelineExtra(this.createSuperiorExtra(jsonBudget.getJSONObject("PipelineExtra"),jsonSuperiorInstallation.getString("PipelineExtra")));
+    superiorInstallation.setCarCharger(this.createSuperiorExtra(jsonBudget.getJSONObject("CarCharcher"),jsonSuperiorInstallation.getString("CarCharcher")));
+    superiorInstallation.setBattery(this.createSuperiorExtra(jsonBudget.getJSONObject("Battery"),jsonSuperiorInstallation.getString("Battery")));
+    superiorInstallation.setAdditionalPanelsInstallation(this.createSuperiorExtra(jsonBudget.getJSONObject("AdditionalPanelsInstallation"),jsonSuperiorInstallation.getString("AdditionalPanelsInstallation")));
     return superiorInstallation;
   }
   private SuperiorSize createSuperiorSize(JSONObject jsonSuperiorSize) throws JSONException {

@@ -96,20 +96,20 @@ public class SolarSuperiorInstallation {
 
 	@Schema
 	@Valid
-	public SolarBudgetExtra getCarCharcher() {
-		return carCharcher;
+	public SolarBudgetExtra getCarCharger() {
+		return carCharger;
 	}
 
-	public void setCarCharcher(SolarBudgetExtra carCharcher) {
-		this.carCharcher = carCharcher;
+	public void setCarCharger(SolarBudgetExtra carCharger) {
+		this.carCharger = carCharger;
 	}
 
 	@JsonIgnore
-	public void setCarCharcher(
-		UnsafeSupplier<SolarBudgetExtra, Exception> carCharcherUnsafeSupplier) {
+	public void setCarCharger(
+		UnsafeSupplier<SolarBudgetExtra, Exception> carChargerUnsafeSupplier) {
 
 		try {
-			carCharcher = carCharcherUnsafeSupplier.get();
+			carCharger = carChargerUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -121,7 +121,7 @@ public class SolarSuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SolarBudgetExtra carCharcher;
+	protected SolarBudgetExtra carCharger;
 
 	@Schema
 	public String getExtraFornius() {
@@ -462,14 +462,14 @@ public class SolarSuperiorInstallation {
 			sb.append(String.valueOf(battery));
 		}
 
-		if (carCharcher != null) {
+		if (carCharger != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"carCharcher\": ");
+			sb.append("\"carCharger\": ");
 
-			sb.append(String.valueOf(carCharcher));
+			sb.append(String.valueOf(carCharger));
 		}
 
 		if (extraFornius != null) {

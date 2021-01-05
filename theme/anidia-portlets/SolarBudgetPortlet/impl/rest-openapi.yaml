@@ -206,7 +206,7 @@ components:
           $ref: "#/components/schemas/SolarBudgetExtra"
         pipelineExtra:
           $ref: "#/components/schemas/SolarBudgetExtra"
-        carCharcher:
+        carCharger:
           $ref: "#/components/schemas/SolarBudgetExtra"
         battery:
           $ref: "#/components/schemas/SolarBudgetExtra"
