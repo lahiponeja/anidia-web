@@ -34,19 +34,19 @@ public class SolarSuperiorInstallation {
 
 	@Schema
 	@Valid
-	public SolarBudgetExtraYesNoValue getAdditionalPanelsInstallation() {
+	public SolarBudgetExtra getAdditionalPanelsInstallation() {
 		return additionalPanelsInstallation;
 	}
 
 	public void setAdditionalPanelsInstallation(
-		SolarBudgetExtraYesNoValue additionalPanelsInstallation) {
+		SolarBudgetExtra additionalPanelsInstallation) {
 
 		this.additionalPanelsInstallation = additionalPanelsInstallation;
 	}
 
 	@JsonIgnore
 	public void setAdditionalPanelsInstallation(
-		UnsafeSupplier<SolarBudgetExtraYesNoValue, Exception>
+		UnsafeSupplier<SolarBudgetExtra, Exception>
 			additionalPanelsInstallationUnsafeSupplier) {
 
 		try {
@@ -63,22 +63,21 @@ public class SolarSuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SolarBudgetExtraYesNoValue additionalPanelsInstallation;
+	protected SolarBudgetExtra additionalPanelsInstallation;
 
 	@Schema
 	@Valid
-	public SolarBudgetExtraYesNoValue getBattery() {
+	public SolarBudgetExtra getBattery() {
 		return battery;
 	}
 
-	public void setBattery(SolarBudgetExtraYesNoValue battery) {
+	public void setBattery(SolarBudgetExtra battery) {
 		this.battery = battery;
 	}
 
 	@JsonIgnore
 	public void setBattery(
-		UnsafeSupplier<SolarBudgetExtraYesNoValue, Exception>
-			batteryUnsafeSupplier) {
+		UnsafeSupplier<SolarBudgetExtra, Exception> batteryUnsafeSupplier) {
 
 		try {
 			battery = batteryUnsafeSupplier.get();
@@ -93,22 +92,21 @@ public class SolarSuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SolarBudgetExtraYesNoValue battery;
+	protected SolarBudgetExtra battery;
 
 	@Schema
 	@Valid
-	public SolarBudgetExtraYesNoValue getCarCharcher() {
+	public SolarBudgetExtra getCarCharcher() {
 		return carCharcher;
 	}
 
-	public void setCarCharcher(SolarBudgetExtraYesNoValue carCharcher) {
+	public void setCarCharcher(SolarBudgetExtra carCharcher) {
 		this.carCharcher = carCharcher;
 	}
 
 	@JsonIgnore
 	public void setCarCharcher(
-		UnsafeSupplier<SolarBudgetExtraYesNoValue, Exception>
-			carCharcherUnsafeSupplier) {
+		UnsafeSupplier<SolarBudgetExtra, Exception> carCharcherUnsafeSupplier) {
 
 		try {
 			carCharcher = carCharcherUnsafeSupplier.get();
@@ -123,7 +121,7 @@ public class SolarSuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SolarBudgetExtraYesNoValue carCharcher;
+	protected SolarBudgetExtra carCharcher;
 
 	@Schema
 	public String getExtraFornius() {
@@ -155,17 +153,17 @@ public class SolarSuperiorInstallation {
 
 	@Schema
 	@Valid
-	public SolarBudgetExtraYesNoValue getInverterExtra() {
+	public SolarBudgetExtra getInverterExtra() {
 		return inverterExtra;
 	}
 
-	public void setInverterExtra(SolarBudgetExtraYesNoValue inverterExtra) {
+	public void setInverterExtra(SolarBudgetExtra inverterExtra) {
 		this.inverterExtra = inverterExtra;
 	}
 
 	@JsonIgnore
 	public void setInverterExtra(
-		UnsafeSupplier<SolarBudgetExtraYesNoValue, Exception>
+		UnsafeSupplier<SolarBudgetExtra, Exception>
 			inverterExtraUnsafeSupplier) {
 
 		try {
@@ -181,7 +179,7 @@ public class SolarSuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SolarBudgetExtraYesNoValue inverterExtra;
+	protected SolarBudgetExtra inverterExtra;
 
 	@Schema
 	public String getInverterType() {
@@ -241,18 +239,17 @@ public class SolarSuperiorInstallation {
 
 	@Schema
 	@Valid
-	public SolarBudgetExtraStringValue getPanelsExtra() {
+	public SolarBudgetExtra getPanelsExtra() {
 		return panelsExtra;
 	}
 
-	public void setPanelsExtra(SolarBudgetExtraStringValue panelsExtra) {
+	public void setPanelsExtra(SolarBudgetExtra panelsExtra) {
 		this.panelsExtra = panelsExtra;
 	}
 
 	@JsonIgnore
 	public void setPanelsExtra(
-		UnsafeSupplier<SolarBudgetExtraStringValue, Exception>
-			panelsExtraUnsafeSupplier) {
+		UnsafeSupplier<SolarBudgetExtra, Exception> panelsExtraUnsafeSupplier) {
 
 		try {
 			panelsExtra = panelsExtraUnsafeSupplier.get();
@@ -267,21 +264,21 @@ public class SolarSuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SolarBudgetExtraStringValue panelsExtra;
+	protected SolarBudgetExtra panelsExtra;
 
 	@Schema
 	@Valid
-	public SolarBudgetExtraYesNoValue getPergolaExtra() {
+	public SolarBudgetExtra getPergolaExtra() {
 		return pergolaExtra;
 	}
 
-	public void setPergolaExtra(SolarBudgetExtraYesNoValue pergolaExtra) {
+	public void setPergolaExtra(SolarBudgetExtra pergolaExtra) {
 		this.pergolaExtra = pergolaExtra;
 	}
 
 	@JsonIgnore
 	public void setPergolaExtra(
-		UnsafeSupplier<SolarBudgetExtraYesNoValue, Exception>
+		UnsafeSupplier<SolarBudgetExtra, Exception>
 			pergolaExtraUnsafeSupplier) {
 
 		try {
@@ -297,21 +294,21 @@ public class SolarSuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SolarBudgetExtraYesNoValue pergolaExtra;
+	protected SolarBudgetExtra pergolaExtra;
 
 	@Schema
 	@Valid
-	public SolarBudgetExtraYesNoValue getPipelineExtra() {
+	public SolarBudgetExtra getPipelineExtra() {
 		return pipelineExtra;
 	}
 
-	public void setPipelineExtra(SolarBudgetExtraYesNoValue pipelineExtra) {
+	public void setPipelineExtra(SolarBudgetExtra pipelineExtra) {
 		this.pipelineExtra = pipelineExtra;
 	}
 
 	@JsonIgnore
 	public void setPipelineExtra(
-		UnsafeSupplier<SolarBudgetExtraYesNoValue, Exception>
+		UnsafeSupplier<SolarBudgetExtra, Exception>
 			pipelineExtraUnsafeSupplier) {
 
 		try {
@@ -327,22 +324,21 @@ public class SolarSuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SolarBudgetExtraYesNoValue pipelineExtra;
+	protected SolarBudgetExtra pipelineExtra;
 
 	@Schema
 	@Valid
-	public SolarBudgetExtraYesNoValue getRoofExtra() {
+	public SolarBudgetExtra getRoofExtra() {
 		return roofExtra;
 	}
 
-	public void setRoofExtra(SolarBudgetExtraYesNoValue roofExtra) {
+	public void setRoofExtra(SolarBudgetExtra roofExtra) {
 		this.roofExtra = roofExtra;
 	}
 
 	@JsonIgnore
 	public void setRoofExtra(
-		UnsafeSupplier<SolarBudgetExtraYesNoValue, Exception>
-			roofExtraUnsafeSupplier) {
+		UnsafeSupplier<SolarBudgetExtra, Exception> roofExtraUnsafeSupplier) {
 
 		try {
 			roofExtra = roofExtraUnsafeSupplier.get();
@@ -357,7 +353,7 @@ public class SolarSuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SolarBudgetExtraYesNoValue roofExtra;
+	protected SolarBudgetExtra roofExtra;
 
 	@Schema
 	public String getSuperiorSize() {
@@ -389,17 +385,17 @@ public class SolarSuperiorInstallation {
 
 	@Schema
 	@Valid
-	public SolarBudgetExtraYesNoValue getTriphasicExtra() {
+	public SolarBudgetExtra getTriphasicExtra() {
 		return triphasicExtra;
 	}
 
-	public void setTriphasicExtra(SolarBudgetExtraYesNoValue triphasicExtra) {
+	public void setTriphasicExtra(SolarBudgetExtra triphasicExtra) {
 		this.triphasicExtra = triphasicExtra;
 	}
 
 	@JsonIgnore
 	public void setTriphasicExtra(
-		UnsafeSupplier<SolarBudgetExtraYesNoValue, Exception>
+		UnsafeSupplier<SolarBudgetExtra, Exception>
 			triphasicExtraUnsafeSupplier) {
 
 		try {
@@ -415,7 +411,7 @@ public class SolarSuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SolarBudgetExtraYesNoValue triphasicExtra;
+	protected SolarBudgetExtra triphasicExtra;
 
 	@Override
 	public boolean equals(Object object) {

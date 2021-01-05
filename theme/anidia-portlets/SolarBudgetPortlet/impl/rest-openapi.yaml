@@ -50,7 +50,7 @@ components:
         panelsSelected:
           description: Selected panels
           type: string 
-          enum: ["UStandard", "Diseño (LG)"]
+          enum: ["Standard", "Diseño (LG)"]
         installationType:
           description: Instalation type
           type: string 
@@ -62,7 +62,6 @@ components:
         inverterType:
           description: Inverter type
           type: string 
-          enum: ["Standard", "Fronius"]
         roofType:
           description: Roof type
           type: string 
@@ -113,37 +112,37 @@ components:
           type: string
         size:
           description: Size
-          $ref: "#/components/schemas/SolarBudgetExtraStringValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         inverter:
           description: Inverter
           $ref: "#/components/schemas/SolarOutputInverter"
         panelsExtra:
           description: Extra panels
-          $ref: "#/components/schemas/SolarBudgetExtraStringValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         triphasicExtra:
           description: Extra triphasic
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         inverterExtra:
           description: Extra inverter
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         roofExtra:
           description: Extra roof
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         pergolaExtra:
           description: Extra pergola
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         pipelineExtra:
           description: Extra pipeline
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         carCharger:
           description: Car charger
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         battery:
           description: Battery
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         additionalPanelsInstallation:
           description: Additional Installation
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         totalPrize:
           description: Total prize
           type: string
@@ -152,26 +151,12 @@ components:
           $ref: "#/components/schemas/SolarSuperiorInstallation"
         
 
-    SolarBudgetExtraStringValue:
+    SolarBudgetExtra:
       description: Information about some extra from the solar budget
       properties:
         value:
           description: Detail of the extra
           type: string
-        unitPrice:
-          description: Unit price for the extra
-          type: string
-        price:
-          description: Price for the extra
-          type: string
-
-    SolarBudgetExtraYesNoValue:
-      description: Information about some extra from the solar budget
-      properties:
-        value:
-          description: Detail of the extra
-          type: string
-          enum: ["Si", "No"]
         unitPrice:
           description: Unit price for the extra
           type: string
@@ -210,23 +195,23 @@ components:
         extraFornius:
           type: string
         panelsExtra:
-          $ref: "#/components/schemas/SolarBudgetExtraStringValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         triphasicExtra:
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         inverterExtra:
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         roofExtra:
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         pergolaExtra:
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         pipelineExtra:
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         carCharcher:
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         battery:
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
         additionalPanelsInstallation:
-          $ref: "#/components/schemas/SolarBudgetExtraYesNoValue"
+          $ref: "#/components/schemas/SolarBudgetExtra"
          
 paths:
   "/samples/{sampleId}":

@@ -239,40 +239,6 @@ public class SolarBudgetRequest {
 
 	}
 
-	@GraphQLName("InverterType")
-	public static enum InverterType {
-
-		STANDARD("Standard"), FRONIUS("Fronius");
-
-		@JsonCreator
-		public static InverterType create(String value) {
-			for (InverterType inverterType : values()) {
-				if (Objects.equals(inverterType.getValue(), value)) {
-					return inverterType;
-				}
-			}
-
-			return null;
-		}
-
-		@JsonValue
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private InverterType(String value) {
-			_value = value;
-		}
-
-		private final String _value;
-
-	}
-
 	@GraphQLName("NeedBattery")
 	public static enum NeedBattery {
 
@@ -344,7 +310,7 @@ public class SolarBudgetRequest {
 	@GraphQLName("PanelsSelected")
 	public static enum PanelsSelected {
 
-		U_STANDARD("UStandard"), DISEO_LG("Diseño (LG)");
+		STANDARD("Standard"), DISEO_LG("Diseño (LG)");
 
 		@JsonCreator
 		public static PanelsSelected create(String value) {
@@ -801,27 +767,17 @@ public class SolarBudgetRequest {
 	protected InverterOversized inverterOversized;
 
 	@Schema(description = "Inverter type")
-	@Valid
-	public InverterType getInverterType() {
+	public String getInverterType() {
 		return inverterType;
 	}
 
-	@JsonIgnore
-	public String getInverterTypeAsString() {
-		if (inverterType == null) {
-			return null;
-		}
-
-		return inverterType.toString();
-	}
-
-	public void setInverterType(InverterType inverterType) {
+	public void setInverterType(String inverterType) {
 		this.inverterType = inverterType;
 	}
 
 	@JsonIgnore
 	public void setInverterType(
-		UnsafeSupplier<InverterType, Exception> inverterTypeUnsafeSupplier) {
+		UnsafeSupplier<String, Exception> inverterTypeUnsafeSupplier) {
 
 		try {
 			inverterType = inverterTypeUnsafeSupplier.get();
@@ -836,7 +792,7 @@ public class SolarBudgetRequest {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected InverterType inverterType;
+	protected String inverterType;
 
 	@Schema(description = "Monthly consumprion")
 	public Integer getMonthlyConsumption() {
@@ -1337,7 +1293,7 @@ public class SolarBudgetRequest {
 
 			sb.append("\"");
 
-			sb.append(inverterType);
+			sb.append(_escape(inverterType));
 
 			sb.append("\"");
 		}
