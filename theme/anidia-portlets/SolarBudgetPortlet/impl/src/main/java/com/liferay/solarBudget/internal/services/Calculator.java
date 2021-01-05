@@ -11,6 +11,9 @@ import com.liferay.solarBudget.dto.v1_0.SolarBudget;
 import com.liferay.solarBudget.dto.v1_0.SolarBudgetRequest;
 //import com.liferay.solarBudget.dto.v1_0.GasBudgetRequest.MetersWaterIntake;
 import com.liferay.solarBudget.dto.v1_0.SolarBudgetExtra;
+import com.liferay.solarBudget.dto.v1_0.SolarOutputInverter;
+import com.liferay.solarBudget.dto.v1_0.SolarSuperiorInstallation;
+import com.liferay.solarBudget.dto.v1_0.SuperiorSize;
 //import com.liferay.solarBudget.dto.v1_0.GasBudgetRequest.PersonsWater;
 
 import org.json.JSONException;
@@ -51,7 +54,6 @@ public class Calculator {
       jsonRequest.getJSONObject("ElectricalAppliances").put("ElectricalAppliance2",solarBudgetRequest.getElectricalAppliances().getElectricalAppliance2());
       jsonRequest.getJSONObject("ElectricalAppliances").put("ElectricalAppliance3", solarBudgetRequest.getElectricalAppliances().getElectricalAppliance3());
 
-
     } catch (JSONException e) {
       e.printStackTrace();
       return responseBudget;
@@ -81,11 +83,10 @@ public class Calculator {
       JSONObject jsonResponse =  new JSONObject(response.body());
  
       JSONObject jsonBudget = jsonResponse.getJSONObject("data").getJSONArray("items").getJSONObject(0);
-      System.out.println(">    ESTE ES EL JSON DE SIZE" + jsonBudget.getJSONObject("Size"));
       responseBudget.setPanelsType(jsonBudget.getString("PanelsType"));
-      //responseBudget.setTotalPrize(jsonBudget.getString("TotalPrice"));
+      responseBudget.setTotalPrize(jsonBudget.get("TotalPrice").toString());
       responseBudget.setSize(this.createExtra(jsonBudget.getJSONObject("Size")));
-      //responseBudget.setInverter(this.createExtraYN(jsonBudget.getJSONObject("Inverter")));
+      responseBudget.setInverter(this.createInverter(jsonBudget.getJSONObject("Inverter")));
       responseBudget.setPanelsExtra(this.createExtra(jsonBudget.getJSONObject("PanelsExtra")));
       responseBudget.setTriphasicExtra(this.createExtra(jsonBudget.getJSONObject("TriphasicExtra")));
       responseBudget.setInverterExtra(this.createExtra(jsonBudget.getJSONObject("InverterExtra")));
@@ -96,6 +97,9 @@ public class Calculator {
       responseBudget.setBattery(this.createExtra(jsonBudget.getJSONObject("Battery")));
       responseBudget.setAdditionalPanelsInstallation(this.createExtra(jsonBudget.getJSONObject("AdditionalPanelsInstallation")));
 
+      JSONObject jsonSuperiorInstallation = jsonBudget.getJSONObject("SuperiorInstallation");
+      responseBudget.setSuperiorInstallation(this.createSuperiorInstallation(jsonSuperiorInstallation, jsonBudget ));
+
     } catch (JSONException e) {
       e.printStackTrace();
       return null;
@@ -104,6 +108,31 @@ public class Calculator {
     return responseBudget;
 
   }
+  private SolarSuperiorInstallation createSuperiorInstallation(JSONObject jsonSuperiorInstallation,JSONObject jsonBudget) throws JSONException {
+    SolarSuperiorInstallation superiorInstallation = new SolarSuperiorInstallation();
+    
+    superiorInstallation.setSuperiorSize(this.createSuperiorSize(jsonSuperiorInstallation.getJSONObject("SuperiorSize")));
+    superiorInstallation.setPanelType(jsonSuperiorInstallation.getString("PanelType"));
+    superiorInstallation.setInverterType(jsonSuperiorInstallation.getString("InverterType"));
+    superiorInstallation.setExtraFornius(jsonSuperiorInstallation.getString("ExtraFornius"));
+    superiorInstallation.setPanelsExtra(this.createSuperiorExtra(jsonBudget.getJSONObject("PanelsExtra"),jsonSuperiorInstallation.getString("PanelsExtra") ));
+
+    return superiorInstallation;
+  }
+  private SuperiorSize createSuperiorSize(JSONObject jsonSuperiorSize) throws JSONException {
+    SuperiorSize superiorSize = new SuperiorSize();
+    superiorSize.setValue(jsonSuperiorSize.get("Value") != null ? jsonSuperiorSize.get("Value").toString() : "" );
+    superiorSize.setPrice(jsonSuperiorSize.get("Price") != null ? jsonSuperiorSize.get("Price").toString() : "" );
+    return superiorSize;
+  }
+
+  private SolarBudgetExtra createSuperiorExtra(JSONObject jsonExtra, String unitPrize) throws JSONException {
+    SolarBudgetExtra extra = new SolarBudgetExtra();
+    extra.setValue(jsonExtra.get("Value") != null ? jsonExtra.get("Value").toString() : "" );
+    extra.setUnitPrice(unitPrize);
+    extra.setPrice( "" );
+    return extra;
+  }
 
   private SolarBudgetExtra createExtra(JSONObject jsonExtra) throws JSONException {
     SolarBudgetExtra extra = new SolarBudgetExtra();
@@ -111,6 +140,13 @@ public class Calculator {
     extra.setUnitPrice(jsonExtra.get("UnitPrice") != null ? jsonExtra.get("UnitPrice").toString() : "" );
     extra.setPrice(jsonExtra.get("Price") != null ? jsonExtra.get("Price").toString() : "" );
     return extra;
+  }
+  private SolarOutputInverter createInverter(JSONObject jsonExtra) throws JSONException {
+    SolarOutputInverter inverter = new SolarOutputInverter();
+    inverter.setBrand(jsonExtra.get("Brand") != null ? jsonExtra.get("Brand").toString() : "" );
+    inverter.setModel(jsonExtra.get("Model") != null ? jsonExtra.get("Model").toString() : "" );
+    inverter.setPrice(jsonExtra.get("Price") != null ? jsonExtra.get("Price").toString() : "" );
+    return inverter;
   }
 /*
   private String translatePersonsWater(PersonsWater original) {

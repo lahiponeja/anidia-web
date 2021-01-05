@@ -356,17 +356,18 @@ public class SolarSuperiorInstallation {
 	protected SolarBudgetExtra roofExtra;
 
 	@Schema
-	public String getSuperiorSize() {
+	@Valid
+	public SuperiorSize getSuperiorSize() {
 		return superiorSize;
 	}
 
-	public void setSuperiorSize(String superiorSize) {
+	public void setSuperiorSize(SuperiorSize superiorSize) {
 		this.superiorSize = superiorSize;
 	}
 
 	@JsonIgnore
 	public void setSuperiorSize(
-		UnsafeSupplier<String, Exception> superiorSizeUnsafeSupplier) {
+		UnsafeSupplier<SuperiorSize, Exception> superiorSizeUnsafeSupplier) {
 
 		try {
 			superiorSize = superiorSizeUnsafeSupplier.get();
@@ -381,7 +382,7 @@ public class SolarSuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String superiorSize;
+	protected SuperiorSize superiorSize;
 
 	@Schema
 	@Valid
@@ -570,11 +571,7 @@ public class SolarSuperiorInstallation {
 
 			sb.append("\"superiorSize\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(superiorSize));
-
-			sb.append("\"");
+			sb.append(String.valueOf(superiorSize));
 		}
 
 		if (triphasicExtra != null) {

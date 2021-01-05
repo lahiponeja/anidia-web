@@ -181,13 +181,13 @@ components:
       properties:
         value:
            type: string
-        prize:
+        price:
            type: string
 
     SolarSuperiorInstallation:
       properties:
         superiorSize:
-          type: string
+           $ref: "#/components/schemas/SuperiorSize"
         panelType:
           type: string
         inverterType:

@@ -31,20 +31,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SuperiorSize {
 
 	@Schema
-	public String getPrize() {
-		return prize;
+	public String getPrice() {
+		return price;
 	}
 
-	public void setPrize(String prize) {
-		this.prize = prize;
+	public void setPrice(String price) {
+		this.price = price;
 	}
 
 	@JsonIgnore
-	public void setPrize(
-		UnsafeSupplier<String, Exception> prizeUnsafeSupplier) {
+	public void setPrice(
+		UnsafeSupplier<String, Exception> priceUnsafeSupplier) {
 
 		try {
-			prize = prizeUnsafeSupplier.get();
+			price = priceUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -56,7 +56,7 @@ public class SuperiorSize {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String prize;
+	protected String price;
 
 	@Schema
 	public String getValue() {
@@ -113,16 +113,16 @@ public class SuperiorSize {
 
 		sb.append("{");
 
-		if (prize != null) {
+		if (price != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"prize\": ");
+			sb.append("\"price\": ");
 
 			sb.append("\"");
 
-			sb.append(_escape(prize));
+			sb.append(_escape(price));
 
 			sb.append("\"");
 		}
