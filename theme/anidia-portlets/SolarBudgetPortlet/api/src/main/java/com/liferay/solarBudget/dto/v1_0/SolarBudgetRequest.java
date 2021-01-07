@@ -239,6 +239,40 @@ public class SolarBudgetRequest {
 
 	}
 
+	@GraphQLName("InverterType")
+	public static enum InverterType {
+
+		STANDARD("Standard"), FRONIUS("Fronius");
+
+		@JsonCreator
+		public static InverterType create(String value) {
+			for (InverterType inverterType : values()) {
+				if (Objects.equals(inverterType.getValue(), value)) {
+					return inverterType;
+				}
+			}
+
+			return null;
+		}
+
+		@JsonValue
+		public String getValue() {
+			return _value;
+		}
+
+		@Override
+		public String toString() {
+			return _value;
+		}
+
+		private InverterType(String value) {
+			_value = value;
+		}
+
+		private final String _value;
+
+	}
+
 	@GraphQLName("NeedBattery")
 	public static enum NeedBattery {
 
@@ -767,17 +801,27 @@ public class SolarBudgetRequest {
 	protected InverterOversized inverterOversized;
 
 	@Schema(description = "Inverter type")
-	public String getInverterType() {
+	@Valid
+	public InverterType getInverterType() {
 		return inverterType;
 	}
 
-	public void setInverterType(String inverterType) {
+	@JsonIgnore
+	public String getInverterTypeAsString() {
+		if (inverterType == null) {
+			return null;
+		}
+
+		return inverterType.toString();
+	}
+
+	public void setInverterType(InverterType inverterType) {
 		this.inverterType = inverterType;
 	}
 
 	@JsonIgnore
 	public void setInverterType(
-		UnsafeSupplier<String, Exception> inverterTypeUnsafeSupplier) {
+		UnsafeSupplier<InverterType, Exception> inverterTypeUnsafeSupplier) {
 
 		try {
 			inverterType = inverterTypeUnsafeSupplier.get();
@@ -792,7 +836,7 @@ public class SolarBudgetRequest {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String inverterType;
+	protected InverterType inverterType;
 
 	@Schema(description = "Monthly consumprion")
 	public Integer getMonthlyConsumption() {
@@ -1293,7 +1337,7 @@ public class SolarBudgetRequest {
 
 			sb.append("\"");
 
-			sb.append(_escape(inverterType));
+			sb.append(inverterType);
 
 			sb.append("\"");
 		}

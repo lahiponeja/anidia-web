@@ -9,12 +9,10 @@ import java.net.http.HttpResponse;
 import com.liferay.portal.kernel.json.JSON;
 import com.liferay.solarBudget.dto.v1_0.SolarBudget;
 import com.liferay.solarBudget.dto.v1_0.SolarBudgetRequest;
-//import com.liferay.solarBudget.dto.v1_0.GasBudgetRequest.MetersWaterIntake;
 import com.liferay.solarBudget.dto.v1_0.SolarBudgetExtra;
 import com.liferay.solarBudget.dto.v1_0.SolarOutputInverter;
 import com.liferay.solarBudget.dto.v1_0.SolarSuperiorInstallation;
 import com.liferay.solarBudget.dto.v1_0.SuperiorSize;
-//import com.liferay.solarBudget.dto.v1_0.GasBudgetRequest.PersonsWater;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,26 +25,25 @@ public class Calculator {
 
     JSONObject jsonRequest = new JSONObject();
     SolarBudget responseBudget = new SolarBudget();
-    System.out.println(solarBudgetRequest);
     try {
       jsonRequest.put("EntryKey", solarBudgetRequest.getEntryKey());
       jsonRequest.put("HouseType", solarBudgetRequest.getHouseTypeAsString());
       jsonRequest.put("MonthlyConsumption", solarBudgetRequest.getMonthlyConsumption());
       jsonRequest.put("AnnualConsumption", solarBudgetRequest.getAnnualConsumption());
-      jsonRequest.put("AdditionalPanels", solarBudgetRequest.getAdditionalPanels());
-      jsonRequest.put("PanelsCanTell", solarBudgetRequest.getPanelsCanTell());
+      jsonRequest.put("AdditionalPanels", solarBudgetRequest.getAdditionalPanelsAsString());
+      jsonRequest.put("PanelsCanTell", solarBudgetRequest.getPanelsCanTellAsString());
       jsonRequest.put("PanelsNumber", solarBudgetRequest.getPanelsNumber());
-      jsonRequest.put("PanelsSelected", solarBudgetRequest.getPanelsSelected());
-      jsonRequest.put("InstallationType", solarBudgetRequest.getInstallationType());
-      jsonRequest.put("InverterOversized", solarBudgetRequest.getInverterOversized());
-      jsonRequest.put("InverterType", solarBudgetRequest.getInverterType());
+      jsonRequest.put("PanelsSelected", solarBudgetRequest.getPanelsSelectedAsString());
+      jsonRequest.put("InstallationType", solarBudgetRequest.getInstallationTypeAsString());
+      jsonRequest.put("InverterOversized", solarBudgetRequest.getInverterOversizedAsString());
+      jsonRequest.put("InverterType", solarBudgetRequest.getInverterTypeAsString());
       jsonRequest.put("RoofType", solarBudgetRequest.getRoofTypeAsString());
-      jsonRequest.put("Pergola", solarBudgetRequest.getPergola());
-      jsonRequest.put("PipelineUnderground", solarBudgetRequest.getPipelineUnderground());
+      jsonRequest.put("Pergola", solarBudgetRequest.getPergolaAsString());
+      jsonRequest.put("PipelineUnderground", solarBudgetRequest.getPipelineUndergroundAsString());
       jsonRequest.put("PipelineMeters", solarBudgetRequest.getPipelineMeters());
       jsonRequest.put("CarCharger", solarBudgetRequest.getCarCharger());
       jsonRequest.put("NeedBattery", solarBudgetRequest.getNeedBattery());
-      jsonRequest.put("HasAdditionalPanels", solarBudgetRequest.getHasAdditionalPanels());
+      jsonRequest.put("HasAdditionalPanels", solarBudgetRequest.getHasAdditionalPanelsAsString());
       jsonRequest.put("NumberAdditionalPanels", solarBudgetRequest.getNumberAdditionalPanels());
 
       jsonRequest.put("ElectricalAppliances", new JSONObject());
@@ -54,6 +51,7 @@ public class Calculator {
       jsonRequest.getJSONObject("ElectricalAppliances").put("ElectricalAppliance2",solarBudgetRequest.getElectricalAppliances().getElectricalAppliance2());
       jsonRequest.getJSONObject("ElectricalAppliances").put("ElectricalAppliance3", solarBudgetRequest.getElectricalAppliances().getElectricalAppliance3());
 
+      System.out.println(jsonRequest);
     } catch (JSONException e) {
       e.printStackTrace();
       return responseBudget;
@@ -155,33 +153,4 @@ public class Calculator {
     inverter.setPrice(jsonExtra.get("Price") != null ? jsonExtra.get("Price").toString() : "" );
     return inverter;
   }
-/*
-  private String translatePersonsWater(PersonsWater original) {
-    switch (original.getValue()) {
-      case "Hasta 2":
-        return "Hasta 2 personas";
-      case "Entre 3-4":
-        return "De 3-4 personas";
-      case "Más de 4":
-        return "5 o más personas";
-    }
-    return null;
-  }
-
-  private String translateMetersWaterIntake(MetersWaterIntake original) {
-    switch (original.getValue()) {
-      case "m.0":
-        return "0";
-      case "m.1":
-        return "1";
-      case "m.2":
-        return "2";
-      case "m.3":
-        return "3";
-      case "m.4":
-        return "4";
-    }
-    return null;
-  }
-*/
 }

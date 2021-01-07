@@ -62,6 +62,7 @@ components:
         inverterType:
           description: Inverter type
           type: string 
+          enum: ["Standard", "Fronius"]
         roofType:
           description: Roof type
           type: string 
