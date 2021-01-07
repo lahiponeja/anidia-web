@@ -9,17 +9,6 @@ openapi: 3.0.1
 
 components:
   schemas:
-    Sample:
-      description: A sample entity
-      properties:
-        name:
-          description: The sample name.
-          type: string
-        id:
-          description: The sample ID.
-          type: integer
-      type: object
-
     SolarBudgetRequest:
       description: The required information to calculate a Solar Budget
       properties:
@@ -215,26 +204,6 @@ components:
           $ref: "#/components/schemas/SolarBudgetExtra"
          
 paths:
-  "/samples/{sampleId}":
-    get:
-      operationId: getSample
-      parameters:
-        - in: path
-          name: sampleId
-          required: true
-          schema:
-            type: integer
-      responses:
-        200:
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Sample"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/Sample"
-          description: ""
-      tags: ["Sample"]
   "/solar-budgets":
     post:
       operationId: postSolarBudget

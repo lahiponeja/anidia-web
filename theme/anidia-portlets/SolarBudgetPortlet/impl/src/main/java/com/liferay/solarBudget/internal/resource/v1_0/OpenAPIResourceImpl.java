@@ -50,8 +50,6 @@ public class OpenAPIResourceImpl {
 
 	private final Set<Class<?>> _resourceClasses = new HashSet<Class<?>>() {
 		{
-			add(SampleResourceImpl.class);
-
 			add(SolarBudgetResourceImpl.class);
 
 			add(OpenAPIResourceImpl.class);
