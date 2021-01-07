@@ -18,7 +18,9 @@ components:
         houseType:
           description: Kind of house
           type: string
-          enum: ["Unifamiliar de 1 planta sin A/A", "Bloque de pisos"]
+          enum: [ Unifamiliar de 1 planta sin A/A, Unifamiliar de 1 planta con A/A, 
+          Unifamiliar de 2-3 plantas sin A/A ni piscina, Unifamiliar de 2-3 plantas con A/A o piscina,
+          Unifamiliar de 2-3 plantas con A/A y piscina o calefacción eléctrica ]
         monthlyConsumption:
           description: Monthly consumprion
           type: integer 

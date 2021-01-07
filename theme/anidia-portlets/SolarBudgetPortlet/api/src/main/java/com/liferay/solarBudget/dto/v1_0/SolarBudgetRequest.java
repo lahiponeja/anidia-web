@@ -140,7 +140,13 @@ public class SolarBudgetRequest {
 	public static enum HouseType {
 
 		UNIFAMILIAR_DE_1_PLANTA_SIN_A_A("Unifamiliar de 1 planta sin A/A"),
-		BLOQUE_DE_PISOS("Bloque de pisos");
+		UNIFAMILIAR_DE_1_PLANTA_CON_A_A("Unifamiliar de 1 planta con A/A"),
+		UNIFAMILIAR_DE_2_3_PLANTAS_SIN_A_A_NI_PISCINA(
+			"Unifamiliar de 2-3 plantas sin A/A ni piscina"),
+		UNIFAMILIAR_DE_2_3_PLANTAS_CON_A_A_O_PISCINA(
+			"Unifamiliar de 2-3 plantas con A/A o piscina"),
+		UNIFAMILIAR_DE_2_3_PLANTAS_CON_A_A_Y_PISCINA_O_CALEFACCIN_ELCTRICA(
+			"Unifamiliar de 2-3 plantas con A/A y piscina o calefacción eléctrica");
 
 		@JsonCreator
 		public static HouseType create(String value) {
