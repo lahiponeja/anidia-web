@@ -161,23 +161,23 @@ components:
         extraFornius:
           type: string
         panelsExtra:
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         triphasicExtra:
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         inverterExtra:
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         roofExtra:
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         pergolaExtra:
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         pipelineExtra:
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         carCharger:
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         battery:
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         additionalPanelsInstallation:
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
          
 paths:
   "/solar-budgets":

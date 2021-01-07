@@ -96,7 +96,7 @@ public class Calculator {
       responseBudget.setAdditionalPanelsInstallation(this.createExtra(jsonBudget.getJSONObject("AdditionalPanelsInstallation")));
 
       JSONObject jsonSuperiorInstallation = jsonBudget.getJSONObject("SuperiorInstallation");
-      responseBudget.setSuperiorInstallation(this.createSuperiorInstallation(jsonSuperiorInstallation, jsonBudget ));
+      responseBudget.setSuperiorInstallation(this.createSuperiorInstallation(jsonSuperiorInstallation));
 
     } catch (JSONException e) {
       e.printStackTrace();
@@ -106,22 +106,22 @@ public class Calculator {
     return responseBudget;
 
   }
-  private SolarSuperiorInstallation createSuperiorInstallation(JSONObject jsonSuperiorInstallation,JSONObject jsonBudget) throws JSONException {
+  private SolarSuperiorInstallation createSuperiorInstallation(JSONObject jsonSuperiorInstallation) throws JSONException {
     SolarSuperiorInstallation superiorInstallation = new SolarSuperiorInstallation();
     
     superiorInstallation.setSuperiorSize(this.createSuperiorSize(jsonSuperiorInstallation.getJSONObject("SuperiorSize")));
     superiorInstallation.setPanelType(jsonSuperiorInstallation.getString("PanelType"));
     superiorInstallation.setInverterType(jsonSuperiorInstallation.getString("InverterType"));
     superiorInstallation.setExtraFornius(jsonSuperiorInstallation.getString("ExtraFornius"));
-    superiorInstallation.setPanelsExtra(this.createSuperiorExtra(jsonBudget.getJSONObject("PanelsExtra"),jsonSuperiorInstallation.getString("PanelsExtra")));
-    superiorInstallation.setTriphasicExtra(this.createSuperiorExtra(jsonBudget.getJSONObject("TriphasicExtra"),jsonSuperiorInstallation.getString("TriphasicExtra")));
-    superiorInstallation.setInverterExtra(this.createSuperiorExtra(jsonBudget.getJSONObject("InverterExtra"),jsonSuperiorInstallation.getString("InverterExtra")));
-    superiorInstallation.setRoofExtra(this.createSuperiorExtra(jsonBudget.getJSONObject("RoofExtra"),jsonSuperiorInstallation.getString("RoofExtra")));
-    superiorInstallation.setPergolaExtra(this.createSuperiorExtra(jsonBudget.getJSONObject("PergolaExtra"),jsonSuperiorInstallation.getString("PergolaExtra")));
-    superiorInstallation.setPipelineExtra(this.createSuperiorExtra(jsonBudget.getJSONObject("PipelineExtra"),jsonSuperiorInstallation.getString("PipelineExtra")));
-    superiorInstallation.setCarCharger(this.createSuperiorExtra(jsonBudget.getJSONObject("CarCharcher"),jsonSuperiorInstallation.getString("CarCharcher")));
-    superiorInstallation.setBattery(this.createSuperiorExtra(jsonBudget.getJSONObject("Battery"),jsonSuperiorInstallation.getString("Battery")));
-    superiorInstallation.setAdditionalPanelsInstallation(this.createSuperiorExtra(jsonBudget.getJSONObject("AdditionalPanelsInstallation"),jsonSuperiorInstallation.getString("AdditionalPanelsInstallation")));
+    superiorInstallation.setPanelsExtra(jsonSuperiorInstallation.getString("PanelsExtra"));
+    superiorInstallation.setTriphasicExtra(jsonSuperiorInstallation.getString("TriphasicExtra"));
+    superiorInstallation.setInverterExtra(jsonSuperiorInstallation.getString("InverterExtra"));
+    superiorInstallation.setRoofExtra(jsonSuperiorInstallation.getString("RoofExtra"));
+    superiorInstallation.setPergolaExtra(jsonSuperiorInstallation.getString("PergolaExtra"));
+    superiorInstallation.setPipelineExtra(jsonSuperiorInstallation.getString("PipelineExtra"));
+    superiorInstallation.setCarCharger(jsonSuperiorInstallation.getString("CarCharcher"));
+    superiorInstallation.setBattery(jsonSuperiorInstallation.getString("Battery"));
+    superiorInstallation.setAdditionalPanelsInstallation(jsonSuperiorInstallation.getString("AdditionalPanelsInstallation"));
     return superiorInstallation;
   }
   private SuperiorSize createSuperiorSize(JSONObject jsonSuperiorSize) throws JSONException {
@@ -129,14 +129,6 @@ public class Calculator {
     superiorSize.setValue(jsonSuperiorSize.get("Value") != null ? jsonSuperiorSize.get("Value").toString() : "" );
     superiorSize.setPrice(jsonSuperiorSize.get("Price") != null ? jsonSuperiorSize.get("Price").toString() : "" );
     return superiorSize;
-  }
-
-  private SolarBudgetExtra createSuperiorExtra(JSONObject jsonExtra, String unitPrize) throws JSONException {
-    SolarBudgetExtra extra = new SolarBudgetExtra();
-    extra.setValue(jsonExtra.get("Value") != null ? jsonExtra.get("Value").toString() : "" );
-    extra.setUnitPrice(unitPrize);
-    extra.setPrice( "" );
-    return extra;
   }
 
   private SolarBudgetExtra createExtra(JSONObject jsonExtra) throws JSONException {
