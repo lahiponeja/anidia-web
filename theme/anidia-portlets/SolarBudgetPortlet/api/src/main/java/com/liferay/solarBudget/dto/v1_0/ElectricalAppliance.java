@@ -1,8 +1,10 @@
 package com.liferay.solarBudget.dto.v1_0;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import com.liferay.petra.function.UnsafeSupplier;
 import com.liferay.petra.string.StringBundler;
@@ -18,6 +20,8 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
+import javax.validation.Valid;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -30,18 +34,160 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "ElectricalAppliance")
 public class ElectricalAppliance {
 
+	@GraphQLName("ElectricalAppliance1")
+	public static enum ElectricalAppliance1 {
+
+		VITROCERMICA("Vitrocerámica"), FRIGORFICO("Frigorífico"),
+		LAVADORA("Lavadora"), HORNO("Horno"), TELEVISIN("Televisión"),
+		ALUMBRADO("Alumbrado"), ORDENADOR("Ordenador"),
+		MICROONDAS("Microondas"), AIRE_ACONDICIONADO("Aire acondicionado"),
+		TERMO_ELCTRICO("Termo Eléctrico"),
+		PATINETE_ELCTRICO("Patinete eléctrico"), DOMTICA("Domótica"),
+		COCHE_ELCTRICO("Coche eléctrico"), SECADORA("Secadora"),
+		DEPURADORA_PISCINA("Depuradora Piscina"), ASCENSOR("Ascensor"),
+		BOMBRA_DE_PRESIN("Bombra de presión"),
+		ASPIRADORA_INTELIGENTE("Aspiradora inteligente");
+
+		@JsonCreator
+		public static ElectricalAppliance1 create(String value) {
+			for (ElectricalAppliance1 electricalAppliance1 : values()) {
+				if (Objects.equals(electricalAppliance1.getValue(), value)) {
+					return electricalAppliance1;
+				}
+			}
+
+			return null;
+		}
+
+		@JsonValue
+		public String getValue() {
+			return _value;
+		}
+
+		@Override
+		public String toString() {
+			return _value;
+		}
+
+		private ElectricalAppliance1(String value) {
+			_value = value;
+		}
+
+		private final String _value;
+
+	}
+
+	@GraphQLName("ElectricalAppliance2")
+	public static enum ElectricalAppliance2 {
+
+		VITROCERMICA("Vitrocerámica"), FRIGORFICO("Frigorífico"),
+		LAVADORA("Lavadora"), HORNO("Horno"), TELEVISIN("Televisión"),
+		ALUMBRADO("Alumbrado"), ORDENADOR("Ordenador"),
+		MICROONDAS("Microondas"), AIRE_ACONDICIONADO("Aire acondicionado"),
+		TERMO_ELCTRICO("Termo Eléctrico"),
+		PATINETE_ELCTRICO("Patinete eléctrico"), DOMTICA("Domótica"),
+		COCHE_ELCTRICO("Coche eléctrico"), SECADORA("Secadora"),
+		DEPURADORA_PISCINA("Depuradora Piscina"), ASCENSOR("Ascensor"),
+		BOMBRA_DE_PRESIN("Bombra de presión"),
+		ASPIRADORA_INTELIGENTE("Aspiradora inteligente");
+
+		@JsonCreator
+		public static ElectricalAppliance2 create(String value) {
+			for (ElectricalAppliance2 electricalAppliance2 : values()) {
+				if (Objects.equals(electricalAppliance2.getValue(), value)) {
+					return electricalAppliance2;
+				}
+			}
+
+			return null;
+		}
+
+		@JsonValue
+		public String getValue() {
+			return _value;
+		}
+
+		@Override
+		public String toString() {
+			return _value;
+		}
+
+		private ElectricalAppliance2(String value) {
+			_value = value;
+		}
+
+		private final String _value;
+
+	}
+
+	@GraphQLName("ElectricalAppliance3")
+	public static enum ElectricalAppliance3 {
+
+		VITROCERMICA("Vitrocerámica"), FRIGORFICO("Frigorífico"),
+		LAVADORA("Lavadora"), HORNO("Horno"), TELEVISIN("Televisión"),
+		ALUMBRADO("Alumbrado"), ORDENADOR("Ordenador"),
+		MICROONDAS("Microondas"), AIRE_ACONDICIONADO("Aire acondicionado"),
+		TERMO_ELCTRICO("Termo Eléctrico"),
+		PATINETE_ELCTRICO("Patinete eléctrico"), DOMTICA("Domótica"),
+		COCHE_ELCTRICO("Coche eléctrico"), SECADORA("Secadora"),
+		DEPURADORA_PISCINA("Depuradora Piscina"), ASCENSOR("Ascensor"),
+		BOMBRA_DE_PRESIN("Bombra de presión"),
+		ASPIRADORA_INTELIGENTE("Aspiradora inteligente");
+
+		@JsonCreator
+		public static ElectricalAppliance3 create(String value) {
+			for (ElectricalAppliance3 electricalAppliance3 : values()) {
+				if (Objects.equals(electricalAppliance3.getValue(), value)) {
+					return electricalAppliance3;
+				}
+			}
+
+			return null;
+		}
+
+		@JsonValue
+		public String getValue() {
+			return _value;
+		}
+
+		@Override
+		public String toString() {
+			return _value;
+		}
+
+		private ElectricalAppliance3(String value) {
+			_value = value;
+		}
+
+		private final String _value;
+
+	}
+
 	@Schema
-	public String getElectricalAppliance1() {
+	@Valid
+	public ElectricalAppliance1 getElectricalAppliance1() {
 		return electricalAppliance1;
 	}
 
-	public void setElectricalAppliance1(String electricalAppliance1) {
+	@JsonIgnore
+	public String getElectricalAppliance1AsString() {
+		if (electricalAppliance1 == null) {
+			return null;
+		}
+
+		return electricalAppliance1.toString();
+	}
+
+	public void setElectricalAppliance1(
+		ElectricalAppliance1 electricalAppliance1) {
+
 		this.electricalAppliance1 = electricalAppliance1;
 	}
 
 	@JsonIgnore
 	public void setElectricalAppliance1(
-		UnsafeSupplier<String, Exception> electricalAppliance1UnsafeSupplier) {
+		UnsafeSupplier<ElectricalAppliance1, Exception>
+			electricalAppliance1UnsafeSupplier) {
 
 		try {
 			electricalAppliance1 = electricalAppliance1UnsafeSupplier.get();
@@ -56,20 +202,33 @@ public class ElectricalAppliance {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String electricalAppliance1;
+	protected ElectricalAppliance1 electricalAppliance1;
 
 	@Schema
-	public String getElectricalAppliance2() {
+	@Valid
+	public ElectricalAppliance2 getElectricalAppliance2() {
 		return electricalAppliance2;
 	}
 
-	public void setElectricalAppliance2(String electricalAppliance2) {
+	@JsonIgnore
+	public String getElectricalAppliance2AsString() {
+		if (electricalAppliance2 == null) {
+			return null;
+		}
+
+		return electricalAppliance2.toString();
+	}
+
+	public void setElectricalAppliance2(
+		ElectricalAppliance2 electricalAppliance2) {
+
 		this.electricalAppliance2 = electricalAppliance2;
 	}
 
 	@JsonIgnore
 	public void setElectricalAppliance2(
-		UnsafeSupplier<String, Exception> electricalAppliance2UnsafeSupplier) {
+		UnsafeSupplier<ElectricalAppliance2, Exception>
+			electricalAppliance2UnsafeSupplier) {
 
 		try {
 			electricalAppliance2 = electricalAppliance2UnsafeSupplier.get();
@@ -84,20 +243,33 @@ public class ElectricalAppliance {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String electricalAppliance2;
+	protected ElectricalAppliance2 electricalAppliance2;
 
 	@Schema
-	public String getElectricalAppliance3() {
+	@Valid
+	public ElectricalAppliance3 getElectricalAppliance3() {
 		return electricalAppliance3;
 	}
 
-	public void setElectricalAppliance3(String electricalAppliance3) {
+	@JsonIgnore
+	public String getElectricalAppliance3AsString() {
+		if (electricalAppliance3 == null) {
+			return null;
+		}
+
+		return electricalAppliance3.toString();
+	}
+
+	public void setElectricalAppliance3(
+		ElectricalAppliance3 electricalAppliance3) {
+
 		this.electricalAppliance3 = electricalAppliance3;
 	}
 
 	@JsonIgnore
 	public void setElectricalAppliance3(
-		UnsafeSupplier<String, Exception> electricalAppliance3UnsafeSupplier) {
+		UnsafeSupplier<ElectricalAppliance3, Exception>
+			electricalAppliance3UnsafeSupplier) {
 
 		try {
 			electricalAppliance3 = electricalAppliance3UnsafeSupplier.get();
@@ -112,7 +284,7 @@ public class ElectricalAppliance {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String electricalAppliance3;
+	protected ElectricalAppliance3 electricalAppliance3;
 
 	@Override
 	public boolean equals(Object object) {
@@ -150,7 +322,7 @@ public class ElectricalAppliance {
 
 			sb.append("\"");
 
-			sb.append(_escape(electricalAppliance1));
+			sb.append(electricalAppliance1);
 
 			sb.append("\"");
 		}
@@ -164,7 +336,7 @@ public class ElectricalAppliance {
 
 			sb.append("\"");
 
-			sb.append(_escape(electricalAppliance2));
+			sb.append(electricalAppliance2);
 
 			sb.append("\"");
 		}
@@ -178,7 +350,7 @@ public class ElectricalAppliance {
 
 			sb.append("\"");
 
-			sb.append(_escape(electricalAppliance3));
+			sb.append(electricalAppliance3);
 
 			sb.append("\"");
 		}

@@ -31,25 +31,25 @@ public class Calculator {
       jsonRequest.put("MonthlyConsumption", solarBudgetRequest.getMonthlyConsumption());
       jsonRequest.put("AnnualConsumption", solarBudgetRequest.getAnnualConsumption());
       jsonRequest.put("AdditionalPanels", solarBudgetRequest.getAdditionalPanelsAsString());
-      jsonRequest.put("PanelsCanTell", solarBudgetRequest.getPanelsCanTellAsString());
-      jsonRequest.put("PanelsNumber", solarBudgetRequest.getPanelsNumber());
+      jsonRequest.put("PanelsCanTell", "No");
+      jsonRequest.put("PanelsNumber", 0);
       jsonRequest.put("PanelsSelected", solarBudgetRequest.getPanelsSelectedAsString());
-      jsonRequest.put("InstallationType", solarBudgetRequest.getInstallationTypeAsString());
-      jsonRequest.put("InverterOversized", solarBudgetRequest.getInverterOversizedAsString());
+      jsonRequest.put("InstallationType", "Monofásica");
+      jsonRequest.put("InverterOversized", "No");
       jsonRequest.put("InverterType", solarBudgetRequest.getInverterTypeAsString());
       jsonRequest.put("RoofType", solarBudgetRequest.getRoofTypeAsString());
-      jsonRequest.put("Pergola", solarBudgetRequest.getPergolaAsString());
-      jsonRequest.put("PipelineUnderground", solarBudgetRequest.getPipelineUndergroundAsString());
+      jsonRequest.put("Pergola", "No");
+      jsonRequest.put("PipelineUnderground", "No");
       jsonRequest.put("PipelineMeters", solarBudgetRequest.getPipelineMeters());
-      jsonRequest.put("CarCharger", solarBudgetRequest.getCarCharger());
-      jsonRequest.put("NeedBattery", solarBudgetRequest.getNeedBattery());
-      jsonRequest.put("HasAdditionalPanels", solarBudgetRequest.getHasAdditionalPanelsAsString());
-      jsonRequest.put("NumberAdditionalPanels", solarBudgetRequest.getNumberAdditionalPanels());
+      jsonRequest.put("CarCharger", "No");
+      jsonRequest.put("NeedBattery", "No");
+      jsonRequest.put("HasAdditionalPanels", "No");
+      jsonRequest.put("NumberAdditionalPanels", 0);
 
       jsonRequest.put("ElectricalAppliances", new JSONObject());
-      jsonRequest.getJSONObject("ElectricalAppliances").put("ElectricalAppliance1", solarBudgetRequest.getElectricalAppliances().getElectricalAppliance1());
-      jsonRequest.getJSONObject("ElectricalAppliances").put("ElectricalAppliance2",solarBudgetRequest.getElectricalAppliances().getElectricalAppliance2());
-      jsonRequest.getJSONObject("ElectricalAppliances").put("ElectricalAppliance3", solarBudgetRequest.getElectricalAppliances().getElectricalAppliance3());
+      jsonRequest.getJSONObject("ElectricalAppliances").put("ElectricalAppliance1", solarBudgetRequest.getElectricalAppliances().getElectricalAppliance1AsString());
+      jsonRequest.getJSONObject("ElectricalAppliances").put("ElectricalAppliance2",solarBudgetRequest.getElectricalAppliances().getElectricalAppliance2AsString());
+      jsonRequest.getJSONObject("ElectricalAppliances").put("ElectricalAppliance3", solarBudgetRequest.getElectricalAppliances().getElectricalAppliance3AsString());
 
       System.out.println(jsonRequest);
     } catch (JSONException e) {

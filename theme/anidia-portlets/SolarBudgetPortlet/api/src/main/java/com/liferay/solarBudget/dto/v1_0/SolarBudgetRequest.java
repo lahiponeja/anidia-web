@@ -68,74 +68,6 @@ public class SolarBudgetRequest {
 
 	}
 
-	@GraphQLName("CarCharger")
-	public static enum CarCharger {
-
-		SI("Si"), NO("No");
-
-		@JsonCreator
-		public static CarCharger create(String value) {
-			for (CarCharger carCharger : values()) {
-				if (Objects.equals(carCharger.getValue(), value)) {
-					return carCharger;
-				}
-			}
-
-			return null;
-		}
-
-		@JsonValue
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private CarCharger(String value) {
-			_value = value;
-		}
-
-		private final String _value;
-
-	}
-
-	@GraphQLName("HasAdditionalPanels")
-	public static enum HasAdditionalPanels {
-
-		SI("Si"), NO("No");
-
-		@JsonCreator
-		public static HasAdditionalPanels create(String value) {
-			for (HasAdditionalPanels hasAdditionalPanels : values()) {
-				if (Objects.equals(hasAdditionalPanels.getValue(), value)) {
-					return hasAdditionalPanels;
-				}
-			}
-
-			return null;
-		}
-
-		@JsonValue
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private HasAdditionalPanels(String value) {
-			_value = value;
-		}
-
-		private final String _value;
-
-	}
-
 	@GraphQLName("HouseType")
 	public static enum HouseType {
 
@@ -177,74 +109,6 @@ public class SolarBudgetRequest {
 
 	}
 
-	@GraphQLName("InstallationType")
-	public static enum InstallationType {
-
-		MONOFSICA("Monofásica"), TRIFSICA("Trifásica");
-
-		@JsonCreator
-		public static InstallationType create(String value) {
-			for (InstallationType installationType : values()) {
-				if (Objects.equals(installationType.getValue(), value)) {
-					return installationType;
-				}
-			}
-
-			return null;
-		}
-
-		@JsonValue
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private InstallationType(String value) {
-			_value = value;
-		}
-
-		private final String _value;
-
-	}
-
-	@GraphQLName("InverterOversized")
-	public static enum InverterOversized {
-
-		SI("Si"), NO("No");
-
-		@JsonCreator
-		public static InverterOversized create(String value) {
-			for (InverterOversized inverterOversized : values()) {
-				if (Objects.equals(inverterOversized.getValue(), value)) {
-					return inverterOversized;
-				}
-			}
-
-			return null;
-		}
-
-		@JsonValue
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private InverterOversized(String value) {
-			_value = value;
-		}
-
-		private final String _value;
-
-	}
-
 	@GraphQLName("InverterType")
 	public static enum InverterType {
 
@@ -279,74 +143,6 @@ public class SolarBudgetRequest {
 
 	}
 
-	@GraphQLName("NeedBattery")
-	public static enum NeedBattery {
-
-		SI("Si"), NO("No");
-
-		@JsonCreator
-		public static NeedBattery create(String value) {
-			for (NeedBattery needBattery : values()) {
-				if (Objects.equals(needBattery.getValue(), value)) {
-					return needBattery;
-				}
-			}
-
-			return null;
-		}
-
-		@JsonValue
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private NeedBattery(String value) {
-			_value = value;
-		}
-
-		private final String _value;
-
-	}
-
-	@GraphQLName("PanelsCanTell")
-	public static enum PanelsCanTell {
-
-		SI("Si"), NO("No");
-
-		@JsonCreator
-		public static PanelsCanTell create(String value) {
-			for (PanelsCanTell panelsCanTell : values()) {
-				if (Objects.equals(panelsCanTell.getValue(), value)) {
-					return panelsCanTell;
-				}
-			}
-
-			return null;
-		}
-
-		@JsonValue
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private PanelsCanTell(String value) {
-			_value = value;
-		}
-
-		private final String _value;
-
-	}
-
 	@GraphQLName("PanelsSelected")
 	public static enum PanelsSelected {
 
@@ -374,74 +170,6 @@ public class SolarBudgetRequest {
 		}
 
 		private PanelsSelected(String value) {
-			_value = value;
-		}
-
-		private final String _value;
-
-	}
-
-	@GraphQLName("Pergola")
-	public static enum Pergola {
-
-		SI("Si"), NO("No");
-
-		@JsonCreator
-		public static Pergola create(String value) {
-			for (Pergola pergola : values()) {
-				if (Objects.equals(pergola.getValue(), value)) {
-					return pergola;
-				}
-			}
-
-			return null;
-		}
-
-		@JsonValue
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private Pergola(String value) {
-			_value = value;
-		}
-
-		private final String _value;
-
-	}
-
-	@GraphQLName("PipelineUnderground")
-	public static enum PipelineUnderground {
-
-		SI("Si"), NO("No");
-
-		@JsonCreator
-		public static PipelineUnderground create(String value) {
-			for (PipelineUnderground pipelineUnderground : values()) {
-				if (Objects.equals(pipelineUnderground.getValue(), value)) {
-					return pipelineUnderground;
-				}
-			}
-
-			return null;
-		}
-
-		@JsonValue
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private PipelineUnderground(String value) {
 			_value = value;
 		}
 
@@ -551,44 +279,6 @@ public class SolarBudgetRequest {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer annualConsumption;
 
-	@Schema(description = "User needs car charger")
-	@Valid
-	public CarCharger getCarCharger() {
-		return carCharger;
-	}
-
-	@JsonIgnore
-	public String getCarChargerAsString() {
-		if (carCharger == null) {
-			return null;
-		}
-
-		return carCharger.toString();
-	}
-
-	public void setCarCharger(CarCharger carCharger) {
-		this.carCharger = carCharger;
-	}
-
-	@JsonIgnore
-	public void setCarCharger(
-		UnsafeSupplier<CarCharger, Exception> carChargerUnsafeSupplier) {
-
-		try {
-			carCharger = carChargerUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected CarCharger carCharger;
-
 	@Schema
 	@Valid
 	public ElectricalAppliance getElectricalAppliances() {
@@ -649,47 +339,6 @@ public class SolarBudgetRequest {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String entryKey;
 
-	@Schema(description = "User has additional panels")
-	@Valid
-	public HasAdditionalPanels getHasAdditionalPanels() {
-		return hasAdditionalPanels;
-	}
-
-	@JsonIgnore
-	public String getHasAdditionalPanelsAsString() {
-		if (hasAdditionalPanels == null) {
-			return null;
-		}
-
-		return hasAdditionalPanels.toString();
-	}
-
-	public void setHasAdditionalPanels(
-		HasAdditionalPanels hasAdditionalPanels) {
-
-		this.hasAdditionalPanels = hasAdditionalPanels;
-	}
-
-	@JsonIgnore
-	public void setHasAdditionalPanels(
-		UnsafeSupplier<HasAdditionalPanels, Exception>
-			hasAdditionalPanelsUnsafeSupplier) {
-
-		try {
-			hasAdditionalPanels = hasAdditionalPanelsUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected HasAdditionalPanels hasAdditionalPanels;
-
 	@Schema(description = "Kind of house")
 	@Valid
 	public HouseType getHouseType() {
@@ -727,84 +376,6 @@ public class SolarBudgetRequest {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected HouseType houseType;
-
-	@Schema(description = "Instalation type")
-	@Valid
-	public InstallationType getInstallationType() {
-		return installationType;
-	}
-
-	@JsonIgnore
-	public String getInstallationTypeAsString() {
-		if (installationType == null) {
-			return null;
-		}
-
-		return installationType.toString();
-	}
-
-	public void setInstallationType(InstallationType installationType) {
-		this.installationType = installationType;
-	}
-
-	@JsonIgnore
-	public void setInstallationType(
-		UnsafeSupplier<InstallationType, Exception>
-			installationTypeUnsafeSupplier) {
-
-		try {
-			installationType = installationTypeUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected InstallationType installationType;
-
-	@Schema(description = "User wants an oversized inverter")
-	@Valid
-	public InverterOversized getInverterOversized() {
-		return inverterOversized;
-	}
-
-	@JsonIgnore
-	public String getInverterOversizedAsString() {
-		if (inverterOversized == null) {
-			return null;
-		}
-
-		return inverterOversized.toString();
-	}
-
-	public void setInverterOversized(InverterOversized inverterOversized) {
-		this.inverterOversized = inverterOversized;
-	}
-
-	@JsonIgnore
-	public void setInverterOversized(
-		UnsafeSupplier<InverterOversized, Exception>
-			inverterOversizedUnsafeSupplier) {
-
-		try {
-			inverterOversized = inverterOversizedUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected InverterOversized inverterOversized;
 
 	@Schema(description = "Inverter type")
 	@Valid
@@ -872,44 +443,6 @@ public class SolarBudgetRequest {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer monthlyConsumption;
 
-	@Schema(description = "User needs battery")
-	@Valid
-	public NeedBattery getNeedBattery() {
-		return needBattery;
-	}
-
-	@JsonIgnore
-	public String getNeedBatteryAsString() {
-		if (needBattery == null) {
-			return null;
-		}
-
-		return needBattery.toString();
-	}
-
-	public void setNeedBattery(NeedBattery needBattery) {
-		this.needBattery = needBattery;
-	}
-
-	@JsonIgnore
-	public void setNeedBattery(
-		UnsafeSupplier<NeedBattery, Exception> needBatteryUnsafeSupplier) {
-
-		try {
-			needBattery = needBatteryUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected NeedBattery needBattery;
-
 	@Schema(description = "Number of additional panels")
 	public Integer getNumberAdditionalPanels() {
 		return numberAdditionalPanels;
@@ -938,72 +471,6 @@ public class SolarBudgetRequest {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer numberAdditionalPanels;
-
-	@Schema(description = "User knows the aditional panels quantity")
-	@Valid
-	public PanelsCanTell getPanelsCanTell() {
-		return panelsCanTell;
-	}
-
-	@JsonIgnore
-	public String getPanelsCanTellAsString() {
-		if (panelsCanTell == null) {
-			return null;
-		}
-
-		return panelsCanTell.toString();
-	}
-
-	public void setPanelsCanTell(PanelsCanTell panelsCanTell) {
-		this.panelsCanTell = panelsCanTell;
-	}
-
-	@JsonIgnore
-	public void setPanelsCanTell(
-		UnsafeSupplier<PanelsCanTell, Exception> panelsCanTellUnsafeSupplier) {
-
-		try {
-			panelsCanTell = panelsCanTellUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected PanelsCanTell panelsCanTell;
-
-	@Schema(description = "Aditional panels quantity")
-	public Integer getPanelsNumber() {
-		return panelsNumber;
-	}
-
-	public void setPanelsNumber(Integer panelsNumber) {
-		this.panelsNumber = panelsNumber;
-	}
-
-	@JsonIgnore
-	public void setPanelsNumber(
-		UnsafeSupplier<Integer, Exception> panelsNumberUnsafeSupplier) {
-
-		try {
-			panelsNumber = panelsNumberUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Integer panelsNumber;
 
 	@Schema(description = "Selected panels")
 	@Valid
@@ -1044,44 +511,6 @@ public class SolarBudgetRequest {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected PanelsSelected panelsSelected;
 
-	@Schema(description = "User wants pergola")
-	@Valid
-	public Pergola getPergola() {
-		return pergola;
-	}
-
-	@JsonIgnore
-	public String getPergolaAsString() {
-		if (pergola == null) {
-			return null;
-		}
-
-		return pergola.toString();
-	}
-
-	public void setPergola(Pergola pergola) {
-		this.pergola = pergola;
-	}
-
-	@JsonIgnore
-	public void setPergola(
-		UnsafeSupplier<Pergola, Exception> pergolaUnsafeSupplier) {
-
-		try {
-			pergola = pergolaUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Pergola pergola;
-
 	@Schema(description = "Pipeline meters")
 	public Integer getPipelineMeters() {
 		return pipelineMeters;
@@ -1109,47 +538,6 @@ public class SolarBudgetRequest {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer pipelineMeters;
-
-	@Schema(description = "The pipeline needs to be underground")
-	@Valid
-	public PipelineUnderground getPipelineUnderground() {
-		return pipelineUnderground;
-	}
-
-	@JsonIgnore
-	public String getPipelineUndergroundAsString() {
-		if (pipelineUnderground == null) {
-			return null;
-		}
-
-		return pipelineUnderground.toString();
-	}
-
-	public void setPipelineUnderground(
-		PipelineUnderground pipelineUnderground) {
-
-		this.pipelineUnderground = pipelineUnderground;
-	}
-
-	@JsonIgnore
-	public void setPipelineUnderground(
-		UnsafeSupplier<PipelineUnderground, Exception>
-			pipelineUndergroundUnsafeSupplier) {
-
-		try {
-			pipelineUnderground = pipelineUndergroundUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected PipelineUnderground pipelineUnderground;
 
 	@Schema(description = "Roof type")
 	@Valid
@@ -1240,20 +628,6 @@ public class SolarBudgetRequest {
 			sb.append(annualConsumption);
 		}
 
-		if (carCharger != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"carCharger\": ");
-
-			sb.append("\"");
-
-			sb.append(carCharger);
-
-			sb.append("\"");
-		}
-
 		if (electricalAppliances != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -1278,20 +652,6 @@ public class SolarBudgetRequest {
 			sb.append("\"");
 		}
 
-		if (hasAdditionalPanels != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"hasAdditionalPanels\": ");
-
-			sb.append("\"");
-
-			sb.append(hasAdditionalPanels);
-
-			sb.append("\"");
-		}
-
 		if (houseType != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -1302,34 +662,6 @@ public class SolarBudgetRequest {
 			sb.append("\"");
 
 			sb.append(houseType);
-
-			sb.append("\"");
-		}
-
-		if (installationType != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"installationType\": ");
-
-			sb.append("\"");
-
-			sb.append(installationType);
-
-			sb.append("\"");
-		}
-
-		if (inverterOversized != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"inverterOversized\": ");
-
-			sb.append("\"");
-
-			sb.append(inverterOversized);
 
 			sb.append("\"");
 		}
@@ -1358,20 +690,6 @@ public class SolarBudgetRequest {
 			sb.append(monthlyConsumption);
 		}
 
-		if (needBattery != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"needBattery\": ");
-
-			sb.append("\"");
-
-			sb.append(needBattery);
-
-			sb.append("\"");
-		}
-
 		if (numberAdditionalPanels != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -1380,30 +698,6 @@ public class SolarBudgetRequest {
 			sb.append("\"numberAdditionalPanels\": ");
 
 			sb.append(numberAdditionalPanels);
-		}
-
-		if (panelsCanTell != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"panelsCanTell\": ");
-
-			sb.append("\"");
-
-			sb.append(panelsCanTell);
-
-			sb.append("\"");
-		}
-
-		if (panelsNumber != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"panelsNumber\": ");
-
-			sb.append(panelsNumber);
 		}
 
 		if (panelsSelected != null) {
@@ -1420,20 +714,6 @@ public class SolarBudgetRequest {
 			sb.append("\"");
 		}
 
-		if (pergola != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"pergola\": ");
-
-			sb.append("\"");
-
-			sb.append(pergola);
-
-			sb.append("\"");
-		}
-
 		if (pipelineMeters != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -1442,20 +722,6 @@ public class SolarBudgetRequest {
 			sb.append("\"pipelineMeters\": ");
 
 			sb.append(pipelineMeters);
-		}
-
-		if (pipelineUnderground != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"pipelineUnderground\": ");
-
-			sb.append("\"");
-
-			sb.append(pipelineUnderground);
-
-			sb.append("\"");
 		}
 
 		if (roofType != null) {

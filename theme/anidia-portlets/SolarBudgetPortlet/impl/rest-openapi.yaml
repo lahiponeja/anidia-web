@@ -31,25 +31,10 @@ components:
           description: User wants aditional panels
           type: string 
           enum: ["Si", "No"]
-        panelsCanTell:  
-          description: User knows the aditional panels quantity
-          type: string
-          enum: ["Si", "No"]  
-        panelsNumber:
-          description: Aditional panels quantity
-          type: integer
         panelsSelected:
           description: Selected panels
           type: string 
           enum: ["Standard", "Diseño (LG)"]
-        installationType:
-          description: Instalation type
-          type: string 
-          enum: ["Monofásica", "Trifásica"]
-        inverterOversized:
-          description: User wants an oversized inverter
-          type: string
-          enum: ["Si", "No"]
         inverterType:
           description: Inverter type
           type: string 
@@ -58,29 +43,9 @@ components:
           description: Roof type
           type: string 
           enum: ["Plano o inclinación menor a 20º", "Inclinación superior a 20º"]
-        pergola:
-          description: User wants pergola
-          type: string
-          enum: ["Si", "No"] 
-        pipelineUnderground:
-          description: The pipeline needs to be underground
-          type: string
-          enum: ["Si", "No"]
         pipelineMeters:
           description: Pipeline meters
           type: integer
-        carCharger:
-          description: User needs car charger
-          type: string
-          enum: ["Si", "No"] 
-        needBattery:
-          description: User needs battery
-          type: string 
-          enum: ["Si", "No"]
-        hasAdditionalPanels:
-          description: User has additional panels
-          type: string 
-          enum: ["Si", "No"]
         numberAdditionalPanels:
           description: Number of additional panels
           type: integer 
@@ -91,10 +56,19 @@ components:
       properties:
         electricalAppliance1:
           type: string
+          enum: [ Vitrocerámica, Frigorífico, Lavadora, Horno, Televisión, Alumbrado, Ordenador, 
+          Microondas, Aire acondicionado, Termo Eléctrico, Patinete eléctrico, Domótica, Coche eléctrico, 
+          Secadora, Depuradora Piscina, Ascensor, Bombra de presión, Aspiradora inteligente ]
         electricalAppliance2:
           type: string
+          enum: [ Vitrocerámica, Frigorífico, Lavadora, Horno, Televisión, Alumbrado, Ordenador, 
+          Microondas, Aire acondicionado, Termo Eléctrico, Patinete eléctrico, Domótica, Coche eléctrico, 
+          Secadora, Depuradora Piscina, Ascensor, Bombra de presión, Aspiradora inteligente ]
         electricalAppliance3:
           type: string
+          enum: [ Vitrocerámica, Frigorífico, Lavadora, Horno, Televisión, Alumbrado, Ordenador, 
+          Microondas, Aire acondicionado, Termo Eléctrico, Patinete eléctrico, Domótica, Coche eléctrico, 
+          Secadora, Depuradora Piscina, Ascensor, Bombra de presión, Aspiradora inteligente ]
 
     SolarBudget:
       description: Information about the solar budget sent by Solusoft API
