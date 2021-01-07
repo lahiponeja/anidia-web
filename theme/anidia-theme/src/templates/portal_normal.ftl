@@ -8,43 +8,13 @@
 <head>
 	<#include "${full_templates_path}/head/one_trust.ftl" />
 	<#include "${full_templates_path}/head/gtm.ftl" />
-
-
 	<#include "${full_templates_path}/head/meta_tags.ftl" />
-
+  <#include "${full_templates_path}/head/seo_schema_markup.ftl" />
 	<#--  <link rel="stylesheet" href="${css_folder}/anidia.css" charset="utf-8">  -->
   <script src="${javascript_folder}/main.js" type="text/javascript"></script>
 
 	<link rel="stylesheet" href="${css_folder}/anidia.css?t=${theme_timestamp}" charset="utf-8">
-
-
-<script type="application/ld+json">
-  { 
-    "@context" : "http://schema.org",
-    "@type" : "Organization",
-    "url" : "https://anidia.es/",
-    "contactPoint" : [
-      { "@type" : "ContactPoint",
-      "telephone" : "${call_center_phone_prefix} ${call_center_phone}",
-      "contactType" : "customer service",
-      "url" : "https://www.anidia.es/#p_p_id_ContactFormPortlet_WAR_ContactFormPortlet_",
-      "areaServed" : "ES"
-      }]        
-  }
-</script>
-
-<script type="application/ld+json">
-  { "@context": "http://schema.org",
-    "@type": "WebPage",
-      "name": "${the_title} | Anidia",
-      "description": "${page_description}",
-      "publisher": {
-          "@type": "Organization",
-          "name": "Anidia"
-  }    }
-</script>
-
-
+  <meta name="google-site-verification" content="SwBBZBXUk_O8KLpkdbzosHIckYQYpLbTRBwD2QZvSns" />
 </head>
 
 <body class="${css_class}">
@@ -174,53 +144,11 @@
 <!-- endinject -->
 
 <#include "${full_templates_path}/footer/gtm.ftl" />
-
+<#include "${full_templates_path}/footer/menu_script.ftl" />
 <script>
 function header() {
   if (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 1024){
-    let elementWithSubmenu = document.querySelectorAll("ul .dropdown");
 
-    for (let i = 0; i < elementWithSubmenu.length; i++) {
-        openSubmenu(elementWithSubmenu[i].getElementsByTagName("a")[0]);
-        returnLink(elementWithSubmenu[i]);
-    }
-
-    function returnLink(menuItem) {
-        let link = menuItem.getElementsByTagName("a")[0],
-            submenu = menuItem.getElementsByTagName("ul")[0],
-            backItem = document.createElement("li"),
-            backLink = document.createElement("a");
-
-        backLink.href = link.href;
-        backLink.text = link.text;
-        backItem.classList.add("anidia-header__back");
-        backItem.appendChild(backLink);
-        submenu.insertAdjacentElement("afterbegin", backItem);
-        closeSubmenu(backLink);
-    }
-
-    function openSubmenu(link) {
-        link.addEventListener("click", (event) => {
-          event.preventDefault();
-          link.parentElement.classList.add('hide-border')
-          link.classList.add("active");
-          document.querySelector('.nav-item.dropdown:not(.active)').classList.add('hide')
-          link.nextElementSibling.classList.add("active");
-        });
-    }
-
-    function closeSubmenu(link) {
-        link.addEventListener("click", (event) => {
-          event.preventDefault();
-          let submenu = link.parentElement.parentElement;
-          submenu.classList.remove("active");
-          submenu.previousElementSibling.classList.remove("active");
-          document.querySelectorAll('.nav-item.dropdown').forEach(e => {
-            e.classList.remove('hide');
-            e.classList.remove('hide-border');
-          })
-        });
-    }
     document.querySelector('.anidia-header__input').addEventListener('change', () => {
       document.body.classList.toggle('overflow-hidden');
       document.querySelector('.anidia-header').classList.toggle('active');
@@ -233,6 +161,37 @@ function header() {
 if (document.querySelector('.anidia-header__input')) {
   header();
 }
+
+if (document.querySelectorAll(".an-checkbox__label a").length && document.querySelectorAll(".an-modal").length) {
+  var buttons = document.querySelectorAll(".an-checkbox__label a");
+
+  buttons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById(button.dataset.modal).style.display = 'block';
+    });
+  });
+
+  var close = document.querySelectorAll(".an-modal__close");
+
+  close.forEach(c => {
+    c.addEventListener('click', (e) => {
+      e.preventDefault();
+      c.parentElement.parentElement.style.display = "none";
+    });
+  });
+}
+
+svg4everybody(
+  {
+    attributeName: 'data-href',
+    polyfill: true,
+    validate: function (src, svg, use) {
+      return !src || !src.startsWith('#');
+    }
+  }
+);
+
 
 </script>
 </body>
