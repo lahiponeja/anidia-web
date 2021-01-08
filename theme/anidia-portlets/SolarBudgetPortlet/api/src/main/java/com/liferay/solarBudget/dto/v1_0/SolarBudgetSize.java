@@ -30,6 +30,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "SolarBudgetSize")
 public class SolarBudgetSize {
 
+	@Schema(description = "Base panels")
+	public String getBasePanels() {
+		return basePanels;
+	}
+
+	public void setBasePanels(String basePanels) {
+		this.basePanels = basePanels;
+	}
+
+	@JsonIgnore
+	public void setBasePanels(
+		UnsafeSupplier<String, Exception> basePanelsUnsafeSupplier) {
+
+		try {
+			basePanels = basePanelsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String basePanels;
+
 	@Schema(description = "Price for the extra")
 	public String getPrice() {
 		return price;
@@ -57,6 +85,34 @@ public class SolarBudgetSize {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String price;
+
+	@Schema(description = "Total panels")
+	public String getTotalPanels() {
+		return totalPanels;
+	}
+
+	public void setTotalPanels(String totalPanels) {
+		this.totalPanels = totalPanels;
+	}
+
+	@JsonIgnore
+	public void setTotalPanels(
+		UnsafeSupplier<String, Exception> totalPanelsUnsafeSupplier) {
+
+		try {
+			totalPanels = totalPanelsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String totalPanels;
 
 	@Schema(description = "Unit price for the extra")
 	public String getUnitPrice() {
@@ -141,6 +197,20 @@ public class SolarBudgetSize {
 
 		sb.append("{");
 
+		if (basePanels != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"basePanels\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(basePanels));
+
+			sb.append("\"");
+		}
+
 		if (price != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -151,6 +221,20 @@ public class SolarBudgetSize {
 			sb.append("\"");
 
 			sb.append(_escape(price));
+
+			sb.append("\"");
+		}
+
+		if (totalPanels != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"totalPanels\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(totalPanels));
 
 			sb.append("\"");
 		}

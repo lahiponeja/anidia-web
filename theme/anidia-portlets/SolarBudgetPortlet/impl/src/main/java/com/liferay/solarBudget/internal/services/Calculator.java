@@ -121,6 +121,7 @@ public class Calculator {
     SuperiorSize superiorSize = new SuperiorSize();
     superiorSize.setValue(jsonSuperiorSize.get("Value") != null ? jsonSuperiorSize.get("Value").toString() : "" );
     superiorSize.setPrice(jsonSuperiorSize.get("Price") != null ? jsonSuperiorSize.get("Price").toString() : "" );
+    superiorSize.setBasePanels(jsonSuperiorSize.get("BasePanels") != null ? jsonSuperiorSize.get("BasePanels").toString() : "" );
     return superiorSize;
   }
 
@@ -129,6 +130,8 @@ public class Calculator {
     size.setValue(jsonSize.get("Value") != null ? jsonSize.get("Value").toString() : "" );
     size.setUnitPrice(jsonSize.get("UnitPrice") != null ? jsonSize.get("UnitPrice").toString() : "" );
     size.setPrice(jsonSize.get("Price") != null ? jsonSize.get("Price").toString() : "" );
+    size.setBasePanels(jsonSize.get("BasePanels") != null ? jsonSize.get("BasePanels").toString() : "" );
+    size.setTotalPanels(jsonSize.get("TotalPanels") != null ? jsonSize.get("TotalPanels").toString() : "" );
     return size;
   }
   private SolarOutputInverter createInverter(JSONObject jsonExtra) throws JSONException {

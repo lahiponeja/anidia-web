@@ -30,6 +30,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "SuperiorSize")
 public class SuperiorSize {
 
+	@Schema(description = "Base panels")
+	public String getBasePanels() {
+		return basePanels;
+	}
+
+	public void setBasePanels(String basePanels) {
+		this.basePanels = basePanels;
+	}
+
+	@JsonIgnore
+	public void setBasePanels(
+		UnsafeSupplier<String, Exception> basePanelsUnsafeSupplier) {
+
+		try {
+			basePanels = basePanelsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String basePanels;
+
 	@Schema
 	public String getPrice() {
 		return price;
@@ -112,6 +140,20 @@ public class SuperiorSize {
 		StringBundler sb = new StringBundler();
 
 		sb.append("{");
+
+		if (basePanels != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"basePanels\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(basePanels));
+
+			sb.append("\"");
+		}
 
 		if (price != null) {
 			if (sb.length() > 1) {

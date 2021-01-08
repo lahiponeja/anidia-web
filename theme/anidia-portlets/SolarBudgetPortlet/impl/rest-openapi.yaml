@@ -89,6 +89,12 @@ components:
         price:
           description: Price for the extra
           type: string
+        basePanels:
+          description: Base panels
+          type: string
+        totalPanels:
+          description: Total panels
+          type: string
 
     SolarOutputInverter:
       description: Inverter info
@@ -109,6 +115,9 @@ components:
            type: string
         price:
            type: string
+        basePanels:
+          description: Base panels
+          type: string
 
     SolarSuperiorInstallation:
       properties:
