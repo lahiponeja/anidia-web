@@ -9,7 +9,7 @@ import java.net.http.HttpResponse;
 import com.liferay.portal.kernel.json.JSON;
 import com.liferay.solarBudget.dto.v1_0.SolarBudget;
 import com.liferay.solarBudget.dto.v1_0.SolarBudgetRequest;
-import com.liferay.solarBudget.dto.v1_0.SolarBudgetExtra;
+import com.liferay.solarBudget.dto.v1_0.SolarBudgetSize;
 import com.liferay.solarBudget.dto.v1_0.SolarOutputInverter;
 import com.liferay.solarBudget.dto.v1_0.SolarSuperiorInstallation;
 import com.liferay.solarBudget.dto.v1_0.SuperiorSize;
@@ -83,17 +83,17 @@ public class Calculator {
       JSONObject jsonBudget = jsonResponse.getJSONObject("data").getJSONArray("items").getJSONObject(0);
       responseBudget.setPanelsType(jsonBudget.getString("PanelsType"));
       responseBudget.setTotalPrize(jsonBudget.get("TotalPrice").toString());
-      responseBudget.setSize(this.createExtra(jsonBudget.getJSONObject("Size")));
+      responseBudget.setSize(this.createSize(jsonBudget.getJSONObject("Size")));
       responseBudget.setInverter(this.createInverter(jsonBudget.getJSONObject("Inverter")));
-      responseBudget.setPanelsExtra(this.createExtra(jsonBudget.getJSONObject("PanelsExtra")));
-      responseBudget.setTriphasicExtra(this.createExtra(jsonBudget.getJSONObject("TriphasicExtra")));
-      responseBudget.setInverterExtra(this.createExtra(jsonBudget.getJSONObject("InverterExtra")));
-      responseBudget.setRoofExtra(this.createExtra(jsonBudget.getJSONObject("RoofExtra")));
-      responseBudget.setPergolaExtra(this.createExtra(jsonBudget.getJSONObject("PergolaExtra")));
-      responseBudget.setPipelineExtra(this.createExtra(jsonBudget.getJSONObject("PipelineExtra")));
-      responseBudget.setCarCharger(this.createExtra(jsonBudget.getJSONObject("CarCharcher")));
-      responseBudget.setBattery(this.createExtra(jsonBudget.getJSONObject("Battery")));
-      responseBudget.setAdditionalPanelsInstallation(this.createExtra(jsonBudget.getJSONObject("AdditionalPanelsInstallation")));
+      responseBudget.setPanelsExtra(jsonBudget.getJSONObject("PanelsExtra").getString("UnitPrice"));
+      responseBudget.setTriphasicExtra(jsonBudget.getJSONObject("TriphasicExtra").getString("UnitPrice"));
+      responseBudget.setInverterExtra(jsonBudget.getJSONObject("InverterExtra").getString("UnitPrice"));
+      responseBudget.setRoofExtra(jsonBudget.getJSONObject("RoofExtra").getString("UnitPrice"));
+      responseBudget.setPergolaExtra(jsonBudget.getJSONObject("PergolaExtra").getString("UnitPrice"));
+      responseBudget.setPipelineExtra(jsonBudget.getJSONObject("PipelineExtra").getString("UnitPrice"));
+      responseBudget.setCarCharger(jsonBudget.getJSONObject("CarCharcher").getString("UnitPrice"));
+      responseBudget.setBattery(jsonBudget.getJSONObject("Battery").getString("UnitPrice"));
+      responseBudget.setAdditionalPanelsInstallation(jsonBudget.getJSONObject("AdditionalPanelsInstallation").getString("UnitPrice"));
 
       JSONObject jsonSuperiorInstallation = jsonBudget.getJSONObject("SuperiorInstallation");
       responseBudget.setSuperiorInstallation(this.createSuperiorInstallation(jsonSuperiorInstallation));
@@ -131,12 +131,12 @@ public class Calculator {
     return superiorSize;
   }
 
-  private SolarBudgetExtra createExtra(JSONObject jsonExtra) throws JSONException {
-    SolarBudgetExtra extra = new SolarBudgetExtra();
-    extra.setValue(jsonExtra.get("Value") != null ? jsonExtra.get("Value").toString() : "" );
-    extra.setUnitPrice(jsonExtra.get("UnitPrice") != null ? jsonExtra.get("UnitPrice").toString() : "" );
-    extra.setPrice(jsonExtra.get("Price") != null ? jsonExtra.get("Price").toString() : "" );
-    return extra;
+  private SolarBudgetSize createSize(JSONObject jsonSize) throws JSONException {
+    SolarBudgetSize size = new SolarBudgetSize();
+    size.setValue(jsonSize.get("Value") != null ? jsonSize.get("Value").toString() : "" );
+    size.setUnitPrice(jsonSize.get("UnitPrice") != null ? jsonSize.get("UnitPrice").toString() : "" );
+    size.setPrice(jsonSize.get("Price") != null ? jsonSize.get("Price").toString() : "" );
+    return size;
   }
   private SolarOutputInverter createInverter(JSONObject jsonExtra) throws JSONException {
     SolarOutputInverter inverter = new SolarOutputInverter();

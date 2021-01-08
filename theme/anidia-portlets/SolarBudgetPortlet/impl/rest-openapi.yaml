@@ -78,37 +78,37 @@ components:
           type: string
         size:
           description: Size
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          $ref: "#/components/schemas/SolarBudgetSize"
         inverter:
           description: Inverter
           $ref: "#/components/schemas/SolarOutputInverter"
         panelsExtra:
           description: Extra panels
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         triphasicExtra:
           description: Extra triphasic
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         inverterExtra:
           description: Extra inverter
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         roofExtra:
           description: Extra roof
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         pergolaExtra:
           description: Extra pergola
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         pipelineExtra:
           description: Extra pipeline
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         carCharger:
           description: Car charger
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         battery:
           description: Battery
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         additionalPanelsInstallation:
           description: Additional Installation
-          $ref: "#/components/schemas/SolarBudgetExtra"
+          type: string
         totalPrize:
           description: Total prize
           type: string
@@ -117,7 +117,7 @@ components:
           $ref: "#/components/schemas/SolarSuperiorInstallation"
         
 
-    SolarBudgetExtra:
+    SolarBudgetSize:
       description: Information about some extra from the solar budget
       properties:
         value:

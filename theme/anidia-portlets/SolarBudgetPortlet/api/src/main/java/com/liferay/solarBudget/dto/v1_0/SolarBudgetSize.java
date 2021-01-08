@@ -25,10 +25,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("SolarBudgetExtra")
+@GraphQLName("SolarBudgetSize")
 @JsonFilter("Liferay.Vulcan")
-@XmlRootElement(name = "SolarBudgetExtra")
-public class SolarBudgetExtra {
+@XmlRootElement(name = "SolarBudgetSize")
+public class SolarBudgetSize {
 
 	@Schema(description = "Price for the extra")
 	public String getPrice() {
@@ -120,13 +120,13 @@ public class SolarBudgetExtra {
 			return true;
 		}
 
-		if (!(object instanceof SolarBudgetExtra)) {
+		if (!(object instanceof SolarBudgetSize)) {
 			return false;
 		}
 
-		SolarBudgetExtra solarBudgetExtra = (SolarBudgetExtra)object;
+		SolarBudgetSize solarBudgetSize = (SolarBudgetSize)object;
 
-		return Objects.equals(toString(), solarBudgetExtra.toString());
+		return Objects.equals(toString(), solarBudgetSize.toString());
 	}
 
 	@Override
