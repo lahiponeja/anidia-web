@@ -34,40 +34,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "SolarBudgetRequest")
 public class SolarBudgetRequest {
 
-	@GraphQLName("AdditionalPanels")
-	public static enum AdditionalPanels {
-
-		SI("Si"), NO("No");
-
-		@JsonCreator
-		public static AdditionalPanels create(String value) {
-			for (AdditionalPanels additionalPanels : values()) {
-				if (Objects.equals(additionalPanels.getValue(), value)) {
-					return additionalPanels;
-				}
-			}
-
-			return null;
-		}
-
-		@JsonValue
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private AdditionalPanels(String value) {
-			_value = value;
-		}
-
-		private final String _value;
-
-	}
-
 	@GraphQLName("HouseType")
 	public static enum HouseType {
 
@@ -102,74 +68,6 @@ public class SolarBudgetRequest {
 		}
 
 		private HouseType(String value) {
-			_value = value;
-		}
-
-		private final String _value;
-
-	}
-
-	@GraphQLName("InverterType")
-	public static enum InverterType {
-
-		STANDARD("Standard"), FRONIUS("Fronius");
-
-		@JsonCreator
-		public static InverterType create(String value) {
-			for (InverterType inverterType : values()) {
-				if (Objects.equals(inverterType.getValue(), value)) {
-					return inverterType;
-				}
-			}
-
-			return null;
-		}
-
-		@JsonValue
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private InverterType(String value) {
-			_value = value;
-		}
-
-		private final String _value;
-
-	}
-
-	@GraphQLName("PanelsSelected")
-	public static enum PanelsSelected {
-
-		STANDARD("Standard"), DISEO_LG("Diseño (LG)");
-
-		@JsonCreator
-		public static PanelsSelected create(String value) {
-			for (PanelsSelected panelsSelected : values()) {
-				if (Objects.equals(panelsSelected.getValue(), value)) {
-					return panelsSelected;
-				}
-			}
-
-			return null;
-		}
-
-		@JsonValue
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private PanelsSelected(String value) {
 			_value = value;
 		}
 
@@ -212,45 +110,6 @@ public class SolarBudgetRequest {
 
 	}
 
-	@Schema(description = "User wants aditional panels")
-	@Valid
-	public AdditionalPanels getAdditionalPanels() {
-		return additionalPanels;
-	}
-
-	@JsonIgnore
-	public String getAdditionalPanelsAsString() {
-		if (additionalPanels == null) {
-			return null;
-		}
-
-		return additionalPanels.toString();
-	}
-
-	public void setAdditionalPanels(AdditionalPanels additionalPanels) {
-		this.additionalPanels = additionalPanels;
-	}
-
-	@JsonIgnore
-	public void setAdditionalPanels(
-		UnsafeSupplier<AdditionalPanels, Exception>
-			additionalPanelsUnsafeSupplier) {
-
-		try {
-			additionalPanels = additionalPanelsUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected AdditionalPanels additionalPanels;
-
 	@Schema(description = "Annual Consumption")
 	public Integer getAnnualConsumption() {
 		return annualConsumption;
@@ -278,66 +137,6 @@ public class SolarBudgetRequest {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer annualConsumption;
-
-	@Schema
-	@Valid
-	public ElectricalAppliance getElectricalAppliances() {
-		return electricalAppliances;
-	}
-
-	public void setElectricalAppliances(
-		ElectricalAppliance electricalAppliances) {
-
-		this.electricalAppliances = electricalAppliances;
-	}
-
-	@JsonIgnore
-	public void setElectricalAppliances(
-		UnsafeSupplier<ElectricalAppliance, Exception>
-			electricalAppliancesUnsafeSupplier) {
-
-		try {
-			electricalAppliances = electricalAppliancesUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected ElectricalAppliance electricalAppliances;
-
-	@Schema(description = "Entry key")
-	public String getEntryKey() {
-		return entryKey;
-	}
-
-	public void setEntryKey(String entryKey) {
-		this.entryKey = entryKey;
-	}
-
-	@JsonIgnore
-	public void setEntryKey(
-		UnsafeSupplier<String, Exception> entryKeyUnsafeSupplier) {
-
-		try {
-			entryKey = entryKeyUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String entryKey;
 
 	@Schema(description = "Kind of house")
 	@Valid
@@ -377,44 +176,6 @@ public class SolarBudgetRequest {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected HouseType houseType;
 
-	@Schema(description = "Inverter type")
-	@Valid
-	public InverterType getInverterType() {
-		return inverterType;
-	}
-
-	@JsonIgnore
-	public String getInverterTypeAsString() {
-		if (inverterType == null) {
-			return null;
-		}
-
-		return inverterType.toString();
-	}
-
-	public void setInverterType(InverterType inverterType) {
-		this.inverterType = inverterType;
-	}
-
-	@JsonIgnore
-	public void setInverterType(
-		UnsafeSupplier<InverterType, Exception> inverterTypeUnsafeSupplier) {
-
-		try {
-			inverterType = inverterTypeUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected InverterType inverterType;
-
 	@Schema(description = "Monthly consumprion")
 	public Integer getMonthlyConsumption() {
 		return monthlyConsumption;
@@ -442,102 +203,6 @@ public class SolarBudgetRequest {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer monthlyConsumption;
-
-	@Schema(description = "Number of additional panels")
-	public Integer getNumberAdditionalPanels() {
-		return numberAdditionalPanels;
-	}
-
-	public void setNumberAdditionalPanels(Integer numberAdditionalPanels) {
-		this.numberAdditionalPanels = numberAdditionalPanels;
-	}
-
-	@JsonIgnore
-	public void setNumberAdditionalPanels(
-		UnsafeSupplier<Integer, Exception>
-			numberAdditionalPanelsUnsafeSupplier) {
-
-		try {
-			numberAdditionalPanels = numberAdditionalPanelsUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Integer numberAdditionalPanels;
-
-	@Schema(description = "Selected panels")
-	@Valid
-	public PanelsSelected getPanelsSelected() {
-		return panelsSelected;
-	}
-
-	@JsonIgnore
-	public String getPanelsSelectedAsString() {
-		if (panelsSelected == null) {
-			return null;
-		}
-
-		return panelsSelected.toString();
-	}
-
-	public void setPanelsSelected(PanelsSelected panelsSelected) {
-		this.panelsSelected = panelsSelected;
-	}
-
-	@JsonIgnore
-	public void setPanelsSelected(
-		UnsafeSupplier<PanelsSelected, Exception>
-			panelsSelectedUnsafeSupplier) {
-
-		try {
-			panelsSelected = panelsSelectedUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected PanelsSelected panelsSelected;
-
-	@Schema(description = "Pipeline meters")
-	public Integer getPipelineMeters() {
-		return pipelineMeters;
-	}
-
-	public void setPipelineMeters(Integer pipelineMeters) {
-		this.pipelineMeters = pipelineMeters;
-	}
-
-	@JsonIgnore
-	public void setPipelineMeters(
-		UnsafeSupplier<Integer, Exception> pipelineMetersUnsafeSupplier) {
-
-		try {
-			pipelineMeters = pipelineMetersUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Integer pipelineMeters;
 
 	@Schema(description = "Roof type")
 	@Valid
@@ -604,20 +269,6 @@ public class SolarBudgetRequest {
 
 		sb.append("{");
 
-		if (additionalPanels != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"additionalPanels\": ");
-
-			sb.append("\"");
-
-			sb.append(additionalPanels);
-
-			sb.append("\"");
-		}
-
 		if (annualConsumption != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -626,30 +277,6 @@ public class SolarBudgetRequest {
 			sb.append("\"annualConsumption\": ");
 
 			sb.append(annualConsumption);
-		}
-
-		if (electricalAppliances != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"electricalAppliances\": ");
-
-			sb.append(String.valueOf(electricalAppliances));
-		}
-
-		if (entryKey != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"entryKey\": ");
-
-			sb.append("\"");
-
-			sb.append(_escape(entryKey));
-
-			sb.append("\"");
 		}
 
 		if (houseType != null) {
@@ -666,20 +293,6 @@ public class SolarBudgetRequest {
 			sb.append("\"");
 		}
 
-		if (inverterType != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"inverterType\": ");
-
-			sb.append("\"");
-
-			sb.append(inverterType);
-
-			sb.append("\"");
-		}
-
 		if (monthlyConsumption != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -688,40 +301,6 @@ public class SolarBudgetRequest {
 			sb.append("\"monthlyConsumption\": ");
 
 			sb.append(monthlyConsumption);
-		}
-
-		if (numberAdditionalPanels != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"numberAdditionalPanels\": ");
-
-			sb.append(numberAdditionalPanels);
-		}
-
-		if (panelsSelected != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"panelsSelected\": ");
-
-			sb.append("\"");
-
-			sb.append(panelsSelected);
-
-			sb.append("\"");
-		}
-
-		if (pipelineMeters != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"pipelineMeters\": ");
-
-			sb.append(pipelineMeters);
 		}
 
 		if (roofType != null) {

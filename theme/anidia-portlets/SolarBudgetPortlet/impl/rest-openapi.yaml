@@ -12,9 +12,6 @@ components:
     SolarBudgetRequest:
       description: The required information to calculate a Solar Budget
       properties:
-        entryKey:
-          description: Entry key
-          type: string
         houseType:
           description: Kind of house
           type: string
@@ -27,48 +24,11 @@ components:
         annualConsumption: 
           description: Annual Consumption
           type: integer 
-        additionalPanels:
-          description: User wants aditional panels
-          type: string 
-          enum: ["Si", "No"]
-        panelsSelected:
-          description: Selected panels
-          type: string 
-          enum: ["Standard", "Diseño (LG)"]
-        inverterType:
-          description: Inverter type
-          type: string 
-          enum: ["Standard", "Fronius"]
         roofType:
           description: Roof type
           type: string 
           enum: ["Plano o inclinación menor a 20º", "Inclinación superior a 20º"]
-        pipelineMeters:
-          description: Pipeline meters
-          type: integer
-        numberAdditionalPanels:
-          description: Number of additional panels
-          type: integer 
-        electricalAppliances:
-          $ref: "#/components/schemas/ElectricalAppliance"
-    ElectricalAppliance:
-      description: Home appliances
-      properties:
-        electricalAppliance1:
-          type: string
-          enum: [ Vitrocerámica, Frigorífico, Lavadora, Horno, Televisión, Alumbrado, Ordenador, 
-          Microondas, Aire acondicionado, Termo Eléctrico, Patinete eléctrico, Domótica, Coche eléctrico, 
-          Secadora, Depuradora Piscina, Ascensor, Bombra de presión, Aspiradora inteligente ]
-        electricalAppliance2:
-          type: string
-          enum: [ Vitrocerámica, Frigorífico, Lavadora, Horno, Televisión, Alumbrado, Ordenador, 
-          Microondas, Aire acondicionado, Termo Eléctrico, Patinete eléctrico, Domótica, Coche eléctrico, 
-          Secadora, Depuradora Piscina, Ascensor, Bombra de presión, Aspiradora inteligente ]
-        electricalAppliance3:
-          type: string
-          enum: [ Vitrocerámica, Frigorífico, Lavadora, Horno, Televisión, Alumbrado, Ordenador, 
-          Microondas, Aire acondicionado, Termo Eléctrico, Patinete eléctrico, Domótica, Coche eléctrico, 
-          Secadora, Depuradora Piscina, Ascensor, Bombra de presión, Aspiradora inteligente ]
+
 
     SolarBudget:
       description: Information about the solar budget sent by Solusoft API
