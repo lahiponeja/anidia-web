@@ -147,6 +147,147 @@ components:
           type: string
         additionalPanelsInstallation:
           type: string
+    PostalCode:
+      description: Postal code and name for municipalities covered by Anidia
+      properties:
+        postalCode:
+          description: Postal Code
+          type: string
+        municipalityName:
+          description: Municipality name
+          type: string
+        municipalityId:
+          description: INE Municipality identifier
+          type: string
+        provinceId:
+          description: Municipality name (2 first digits from postal code)
+          type: string
+      type: object
+    Address:
+      description: All the information about an address from Anidia CRM
+      properties:
+        kind:
+          description: Type of the address (street, avenue...)
+          type: string
+        name:
+          description: Name of the address
+          type: string
+    Estate:
+      description: All the information about an estate
+      properties:
+        addressKind:
+          description: Type of the address (street, avenue...)
+          type: string
+        addressName:
+          description: Name of the address
+          type: string
+        number:
+          description: Number of the gate
+          type: string
+        annex:
+          description: Annex to the gate number (e.g BIS in 2 BIS)
+          type: string
+        gateId:
+          description: Unique identifier of the gate
+          type: string
+    Property:
+      description: All the information about the house in which someone lives
+      properties:
+        address:
+          description: Full address for the property
+          type: string
+        propertyId:
+          description: Property unique identifier
+          type: string
+        block:
+          description: Block of the property (e.g. 2)
+          type: string
+        ladder:
+          description: Ladder of the property (e.g. Izq)
+          type: string
+        floor:
+          description: Floor of the property (e.g. 2º)
+          type: string
+        door:
+          description: Door in the flor of the property (e.g. C)
+          type: string
+        status:
+          description: Status of the property
+          type: string
+        contractStatus:
+          description: Status of the contract for this property
+          type: string
+    SelectedExtras:
+      properties:
+        extraPanels:
+          type: integer
+        triphasicExtra:
+          type: boolean
+        roofExtra:
+          type: boolean
+        pergolaExtra:
+          type: boolean
+        pipelineUnderground:
+          type: boolean
+        battery:
+          type: integer
+        carCharger:
+          type: boolean
+
+
+    Lead:
+      description: Information about a lead to be sent to CRM
+      properties:
+        personalData:
+          description: Personal information of the Lead
+          $ref: "#/components/schemas/PersonalData"
+        CalculatorSolar:
+          description: Calculator gas of the Lead
+          $ref: "#/components/schemas/CalculatorSolar"
+    PersonalData:
+      description: Personal information of the Lead
+      properties:
+        firstName:
+          description: First name of the lead
+          type: string
+        lastName:
+          description: Last name of the lead
+          type: string
+        email:
+          description: Email of the lead
+          type: string
+        phone:
+          description: Phone (including international prefix)
+          type: string
+        prodInterest:
+          description: Product of Interest (gas, solar, mantenimiento)
+          type: string
+          enum: [gas, solar, mantenimiento]
+        acceptNotCom:
+          description: Wether the lead has accepted commercial communications
+          type: boolean
+        postalCode:
+          description: Postal Code of the Lead
+          $ref: "#/components/schemas/PostalCode"
+        estate:
+          description: Estate of the lead
+          $ref: "#/components/schemas/Estate"
+        property:
+          description: Full property of the Lead
+          $ref: "#/components/schemas/Property"
+         
+    CalculatorSolar:
+      description: Calculator solar information to send Lead
+      properties:
+        input:
+          description: Input object
+          $ref: "#/components/schemas/SolarBudgetRequest"
+        selectedExtras:
+          description: Selected extras
+          $ref: "#/components/schemas/SelectedExtras"
+        output:
+          description: Output object
+          $ref: "#/components/schemas/SolarBudget"
          
 paths:
   "/solar-budgets":
@@ -172,3 +313,26 @@ paths:
               schema:
                 $ref: "#/components/schemas/SolarBudget"
           description: The budget has been created
+  "/leads":
+    post:
+      operationId: postLead
+      summary: Create a Lead in CRM
+      description: Collects the lead information and send it to CRM
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Lead"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/Lead"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lead"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Lead"
+          description: The lead has been saved in CRM
