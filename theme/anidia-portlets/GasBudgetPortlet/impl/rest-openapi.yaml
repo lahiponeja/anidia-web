@@ -79,6 +79,9 @@ components:
         calculatorGas:
           description: Calculator gas of the Lead
           $ref: "#/components/schemas/CalculatorGas"
+        calculatorSolar:
+          description: Calculator solar of the Lead
+          $ref: "#/components/schemas/CalculatorSolar"
     PersonalData:
       description: Personal information of the Lead
       properties:
@@ -110,6 +113,171 @@ components:
         property:
           description: Full property of the Lead
           $ref: "#/components/schemas/Property"
+    CalculatorSolar:
+      description: Calculator solar information to send Lead
+      properties:
+        input:
+          description: Input object
+          $ref: "#/components/schemas/SolarBudgetRequest"
+        selectedExtras:
+          description: Selected extras
+          $ref: "#/components/schemas/SelectedExtras"
+        output:
+          description: Output object
+          $ref: "#/components/schemas/SolarBudget"
+          
+    SolarBudgetRequest:
+      description: The required information to calculate a Solar Budget
+      properties:
+        houseType:
+          description: Kind of house
+          type: string
+          enum: [ Unifamiliar de 1 planta sin A/A, Unifamiliar de 1 planta con A/A, 
+          Unifamiliar de 2-3 plantas sin A/A ni piscina, Unifamiliar de 2-3 plantas con A/A o piscina,
+          Unifamiliar de 2-3 plantas con A/A y piscina o calefacción eléctrica ]
+        monthlyConsumption:
+          description: Monthly consumprion
+          type: integer 
+        annualConsumption: 
+          description: Annual Consumption
+          type: integer 
+        roofType:
+          description: Roof type
+          type: string 
+          enum: ["Plano o inclinación menor a 20º", "Inclinación superior a 20º"]
+
+    SolarBudgetSize:
+      description: Information about some extra from the solar budget
+      properties:
+        value:
+          description: Detail of the extra
+          type: string
+        unitPrice:
+          description: Unit price for the extra
+          type: string
+        price:
+          description: Price for the extra
+          type: string
+        basePanels:
+          description: Base panels
+          type: string
+        totalPanels:
+          description: Total panels
+          type: string
+
+    SolarOutputInverter:
+      description: Inverter info
+      properties:
+        brand:
+          description: Brand
+          type: string
+        model:
+          description: Model
+          type: string
+        price:
+          description: Price
+          type: string
+    
+    SuperiorSize:
+      properties:
+        value:
+           type: string
+        price:
+           type: string
+        basePanels:
+          description: Base panels
+          type: string
+    SolarSuperiorInstallation:
+      properties:
+        superiorSize:
+           $ref: "#/components/schemas/SuperiorSize"
+        panelType:
+          type: string
+        inverterType:
+          type: string
+        extraFornius:
+          type: string
+        panelsExtra:
+          type: string
+        triphasicExtra:
+          type: string
+        inverterExtra:
+          type: string
+        roofExtra:
+          type: string
+        pergolaExtra:
+          type: string
+        pipelineExtra:
+          type: string
+        carCharger:
+          type: string
+        battery:
+          type: string
+        additionalPanelsInstallation:
+          type: string
+
+    SolarBudget:
+      description: Information about the solar budget sent by Solusoft API
+      properties:
+        panelsType:
+          description: Tipo de paneles
+          type: string
+        size:
+          description: Size
+          $ref: "#/components/schemas/SolarBudgetSize"
+        inverter:
+          description: Inverter
+          $ref: "#/components/schemas/SolarOutputInverter"
+        panelsExtra:
+          description: Extra panels
+          type: string
+        triphasicExtra:
+          description: Extra triphasic
+          type: string
+        inverterExtra:
+          description: Extra inverter
+          type: string
+        roofExtra:
+          description: Extra roof
+          type: string
+        pergolaExtra:
+          description: Extra pergola
+          type: string
+        pipelineExtra:
+          description: Extra pipeline
+          type: string
+        carCharger:
+          description: Car charger
+          type: string
+        battery:
+          description: Battery
+          type: string
+        additionalPanelsInstallation:
+          description: Additional Installation
+          type: string
+        totalPrize:
+          description: Total prize
+          type: string
+        superiorInstallation:
+          description: Superior installation data
+          $ref: "#/components/schemas/SolarSuperiorInstallation"
+  
+    SelectedExtras:
+      properties:
+        extraPanels:
+          type: integer
+        triphasicExtra:
+          type: boolean
+        roofExtra:
+          type: boolean
+        pergolaExtra:
+          type: boolean
+        pipelineUnderground:
+          type: boolean
+        battery:
+          type: integer
+        carCharger:
+          type: boolean
     CalculatorGas:
       description: Calculator gas information to send Lead
       properties:

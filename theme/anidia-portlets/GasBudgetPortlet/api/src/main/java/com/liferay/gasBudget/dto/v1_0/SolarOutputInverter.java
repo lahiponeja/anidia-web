@@ -1,4 +1,4 @@
-package com.liferay.solarBudget.dto.v1_0;
+package com.liferay.gasBudget.dto.v1_0;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,8 +18,6 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
-import javax.validation.Valid;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,27 +25,26 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("CalculatorSolar")
+@GraphQLName("SolarOutputInverter")
 @JsonFilter("Liferay.Vulcan")
-@XmlRootElement(name = "CalculatorSolar")
-public class CalculatorSolar {
+@XmlRootElement(name = "SolarOutputInverter")
+public class SolarOutputInverter {
 
-	@Schema(description = "Input object")
-	@Valid
-	public SolarBudgetRequest getInput() {
-		return input;
+	@Schema(description = "Brand")
+	public String getBrand() {
+		return brand;
 	}
 
-	public void setInput(SolarBudgetRequest input) {
-		this.input = input;
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	@JsonIgnore
-	public void setInput(
-		UnsafeSupplier<SolarBudgetRequest, Exception> inputUnsafeSupplier) {
+	public void setBrand(
+		UnsafeSupplier<String, Exception> brandUnsafeSupplier) {
 
 		try {
-			input = inputUnsafeSupplier.get();
+			brand = brandUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -59,24 +56,23 @@ public class CalculatorSolar {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SolarBudgetRequest input;
+	protected String brand;
 
-	@Schema(description = "Output object")
-	@Valid
-	public SolarBudget getOutput() {
-		return output;
+	@Schema(description = "Model")
+	public String getModel() {
+		return model;
 	}
 
-	public void setOutput(SolarBudget output) {
-		this.output = output;
+	public void setModel(String model) {
+		this.model = model;
 	}
 
 	@JsonIgnore
-	public void setOutput(
-		UnsafeSupplier<SolarBudget, Exception> outputUnsafeSupplier) {
+	public void setModel(
+		UnsafeSupplier<String, Exception> modelUnsafeSupplier) {
 
 		try {
-			output = outputUnsafeSupplier.get();
+			model = modelUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -88,25 +84,23 @@ public class CalculatorSolar {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SolarBudget output;
+	protected String model;
 
-	@Schema(description = "Selected extras")
-	@Valid
-	public SelectedExtras getSelectedExtras() {
-		return selectedExtras;
+	@Schema(description = "Price")
+	public String getPrice() {
+		return price;
 	}
 
-	public void setSelectedExtras(SelectedExtras selectedExtras) {
-		this.selectedExtras = selectedExtras;
+	public void setPrice(String price) {
+		this.price = price;
 	}
 
 	@JsonIgnore
-	public void setSelectedExtras(
-		UnsafeSupplier<SelectedExtras, Exception>
-			selectedExtrasUnsafeSupplier) {
+	public void setPrice(
+		UnsafeSupplier<String, Exception> priceUnsafeSupplier) {
 
 		try {
-			selectedExtras = selectedExtrasUnsafeSupplier.get();
+			price = priceUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -118,7 +112,7 @@ public class CalculatorSolar {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SelectedExtras selectedExtras;
+	protected String price;
 
 	@Override
 	public boolean equals(Object object) {
@@ -126,13 +120,13 @@ public class CalculatorSolar {
 			return true;
 		}
 
-		if (!(object instanceof CalculatorSolar)) {
+		if (!(object instanceof SolarOutputInverter)) {
 			return false;
 		}
 
-		CalculatorSolar calculatorSolar = (CalculatorSolar)object;
+		SolarOutputInverter solarOutputInverter = (SolarOutputInverter)object;
 
-		return Objects.equals(toString(), calculatorSolar.toString());
+		return Objects.equals(toString(), solarOutputInverter.toString());
 	}
 
 	@Override
@@ -147,34 +141,46 @@ public class CalculatorSolar {
 
 		sb.append("{");
 
-		if (input != null) {
+		if (brand != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"input\": ");
+			sb.append("\"brand\": ");
 
-			sb.append(String.valueOf(input));
+			sb.append("\"");
+
+			sb.append(_escape(brand));
+
+			sb.append("\"");
 		}
 
-		if (output != null) {
+		if (model != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"output\": ");
+			sb.append("\"model\": ");
 
-			sb.append(String.valueOf(output));
+			sb.append("\"");
+
+			sb.append(_escape(model));
+
+			sb.append("\"");
 		}
 
-		if (selectedExtras != null) {
+		if (price != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"selectedExtras\": ");
+			sb.append("\"price\": ");
 
-			sb.append(String.valueOf(selectedExtras));
+			sb.append("\"");
+
+			sb.append(_escape(price));
+
+			sb.append("\"");
 		}
 
 		sb.append("}");

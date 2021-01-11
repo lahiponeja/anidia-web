@@ -1,4 +1,4 @@
-package com.liferay.solarBudget.dto.v1_0;
+package com.liferay.gasBudget.dto.v1_0;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,28 +27,27 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("Lead")
+@GraphQLName("CalculatorSolar")
 @JsonFilter("Liferay.Vulcan")
-@XmlRootElement(name = "Lead")
-public class Lead {
+@XmlRootElement(name = "CalculatorSolar")
+public class CalculatorSolar {
 
-	@Schema(description = "Calculator gas of the Lead")
+	@Schema(description = "Input object")
 	@Valid
-	public CalculatorSolar getCalculatorSolar() {
-		return CalculatorSolar;
+	public SolarBudgetRequest getInput() {
+		return input;
 	}
 
-	public void setCalculatorSolar(CalculatorSolar CalculatorSolar) {
-		this.CalculatorSolar = CalculatorSolar;
+	public void setInput(SolarBudgetRequest input) {
+		this.input = input;
 	}
 
 	@JsonIgnore
-	public void setCalculatorSolar(
-		UnsafeSupplier<CalculatorSolar, Exception>
-			CalculatorSolarUnsafeSupplier) {
+	public void setInput(
+		UnsafeSupplier<SolarBudgetRequest, Exception> inputUnsafeSupplier) {
 
 		try {
-			CalculatorSolar = CalculatorSolarUnsafeSupplier.get();
+			input = inputUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -60,24 +59,24 @@ public class Lead {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected CalculatorSolar CalculatorSolar;
+	protected SolarBudgetRequest input;
 
-	@Schema(description = "Personal information of the Lead")
+	@Schema(description = "Output object")
 	@Valid
-	public PersonalData getPersonalData() {
-		return personalData;
+	public SolarBudget getOutput() {
+		return output;
 	}
 
-	public void setPersonalData(PersonalData personalData) {
-		this.personalData = personalData;
+	public void setOutput(SolarBudget output) {
+		this.output = output;
 	}
 
 	@JsonIgnore
-	public void setPersonalData(
-		UnsafeSupplier<PersonalData, Exception> personalDataUnsafeSupplier) {
+	public void setOutput(
+		UnsafeSupplier<SolarBudget, Exception> outputUnsafeSupplier) {
 
 		try {
-			personalData = personalDataUnsafeSupplier.get();
+			output = outputUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -89,7 +88,37 @@ public class Lead {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected PersonalData personalData;
+	protected SolarBudget output;
+
+	@Schema(description = "Selected extras")
+	@Valid
+	public SelectedExtras getSelectedExtras() {
+		return selectedExtras;
+	}
+
+	public void setSelectedExtras(SelectedExtras selectedExtras) {
+		this.selectedExtras = selectedExtras;
+	}
+
+	@JsonIgnore
+	public void setSelectedExtras(
+		UnsafeSupplier<SelectedExtras, Exception>
+			selectedExtrasUnsafeSupplier) {
+
+		try {
+			selectedExtras = selectedExtrasUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected SelectedExtras selectedExtras;
 
 	@Override
 	public boolean equals(Object object) {
@@ -97,13 +126,13 @@ public class Lead {
 			return true;
 		}
 
-		if (!(object instanceof Lead)) {
+		if (!(object instanceof CalculatorSolar)) {
 			return false;
 		}
 
-		Lead lead = (Lead)object;
+		CalculatorSolar calculatorSolar = (CalculatorSolar)object;
 
-		return Objects.equals(toString(), lead.toString());
+		return Objects.equals(toString(), calculatorSolar.toString());
 	}
 
 	@Override
@@ -118,24 +147,34 @@ public class Lead {
 
 		sb.append("{");
 
-		if (CalculatorSolar != null) {
+		if (input != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"CalculatorSolar\": ");
+			sb.append("\"input\": ");
 
-			sb.append(String.valueOf(CalculatorSolar));
+			sb.append(String.valueOf(input));
 		}
 
-		if (personalData != null) {
+		if (output != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"personalData\": ");
+			sb.append("\"output\": ");
 
-			sb.append(String.valueOf(personalData));
+			sb.append(String.valueOf(output));
+		}
+
+		if (selectedExtras != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"selectedExtras\": ");
+
+			sb.append(String.valueOf(selectedExtras));
 		}
 
 		sb.append("}");

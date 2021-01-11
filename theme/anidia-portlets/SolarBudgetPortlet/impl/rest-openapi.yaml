@@ -217,78 +217,7 @@ components:
         contractStatus:
           description: Status of the contract for this property
           type: string
-    SelectedExtras:
-      properties:
-        extraPanels:
-          type: integer
-        triphasicExtra:
-          type: boolean
-        roofExtra:
-          type: boolean
-        pergolaExtra:
-          type: boolean
-        pipelineUnderground:
-          type: boolean
-        battery:
-          type: integer
-        carCharger:
-          type: boolean
-
-
-    Lead:
-      description: Information about a lead to be sent to CRM
-      properties:
-        personalData:
-          description: Personal information of the Lead
-          $ref: "#/components/schemas/PersonalData"
-        CalculatorSolar:
-          description: Calculator gas of the Lead
-          $ref: "#/components/schemas/CalculatorSolar"
-    PersonalData:
-      description: Personal information of the Lead
-      properties:
-        firstName:
-          description: First name of the lead
-          type: string
-        lastName:
-          description: Last name of the lead
-          type: string
-        email:
-          description: Email of the lead
-          type: string
-        phone:
-          description: Phone (including international prefix)
-          type: string
-        prodInterest:
-          description: Product of Interest (gas, solar, mantenimiento)
-          type: string
-          enum: [gas, solar, mantenimiento]
-        acceptNotCom:
-          description: Wether the lead has accepted commercial communications
-          type: boolean
-        postalCode:
-          description: Postal Code of the Lead
-          $ref: "#/components/schemas/PostalCode"
-        estate:
-          description: Estate of the lead
-          $ref: "#/components/schemas/Estate"
-        property:
-          description: Full property of the Lead
-          $ref: "#/components/schemas/Property"
-         
-    CalculatorSolar:
-      description: Calculator solar information to send Lead
-      properties:
-        input:
-          description: Input object
-          $ref: "#/components/schemas/SolarBudgetRequest"
-        selectedExtras:
-          description: Selected extras
-          $ref: "#/components/schemas/SelectedExtras"
-        output:
-          description: Output object
-          $ref: "#/components/schemas/SolarBudget"
-         
+    
 paths:
   "/solar-budgets":
     post:
@@ -313,26 +242,3 @@ paths:
               schema:
                 $ref: "#/components/schemas/SolarBudget"
           description: The budget has been created
-  "/leads":
-    post:
-      operationId: postLead
-      summary: Create a Lead in CRM
-      description: Collects the lead information and send it to CRM
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Lead"
-          application/xml:
-            schema:
-              $ref: "#/components/schemas/Lead"
-      responses:
-        200:
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Lead"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/Lead"
-          description: The lead has been saved in CRM

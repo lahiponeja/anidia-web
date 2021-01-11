@@ -18,8 +18,6 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
-import javax.validation.Valid;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,27 +25,26 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("Lead")
+@GraphQLName("SuperiorSize")
 @JsonFilter("Liferay.Vulcan")
-@XmlRootElement(name = "Lead")
-public class Lead {
+@XmlRootElement(name = "SuperiorSize")
+public class SuperiorSize {
 
-	@Schema(description = "Calculator gas of the Lead")
-	@Valid
-	public CalculatorGas getCalculatorGas() {
-		return calculatorGas;
+	@Schema(description = "Base panels")
+	public String getBasePanels() {
+		return basePanels;
 	}
 
-	public void setCalculatorGas(CalculatorGas calculatorGas) {
-		this.calculatorGas = calculatorGas;
+	public void setBasePanels(String basePanels) {
+		this.basePanels = basePanels;
 	}
 
 	@JsonIgnore
-	public void setCalculatorGas(
-		UnsafeSupplier<CalculatorGas, Exception> calculatorGasUnsafeSupplier) {
+	public void setBasePanels(
+		UnsafeSupplier<String, Exception> basePanelsUnsafeSupplier) {
 
 		try {
-			calculatorGas = calculatorGasUnsafeSupplier.get();
+			basePanels = basePanelsUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -59,25 +56,23 @@ public class Lead {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected CalculatorGas calculatorGas;
+	protected String basePanels;
 
-	@Schema(description = "Calculator solar of the Lead")
-	@Valid
-	public CalculatorSolar getCalculatorSolar() {
-		return calculatorSolar;
+	@Schema
+	public String getPrice() {
+		return price;
 	}
 
-	public void setCalculatorSolar(CalculatorSolar calculatorSolar) {
-		this.calculatorSolar = calculatorSolar;
+	public void setPrice(String price) {
+		this.price = price;
 	}
 
 	@JsonIgnore
-	public void setCalculatorSolar(
-		UnsafeSupplier<CalculatorSolar, Exception>
-			calculatorSolarUnsafeSupplier) {
+	public void setPrice(
+		UnsafeSupplier<String, Exception> priceUnsafeSupplier) {
 
 		try {
-			calculatorSolar = calculatorSolarUnsafeSupplier.get();
+			price = priceUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -89,24 +84,23 @@ public class Lead {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected CalculatorSolar calculatorSolar;
+	protected String price;
 
-	@Schema(description = "Personal information of the Lead")
-	@Valid
-	public PersonalData getPersonalData() {
-		return personalData;
+	@Schema
+	public String getValue() {
+		return value;
 	}
 
-	public void setPersonalData(PersonalData personalData) {
-		this.personalData = personalData;
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	@JsonIgnore
-	public void setPersonalData(
-		UnsafeSupplier<PersonalData, Exception> personalDataUnsafeSupplier) {
+	public void setValue(
+		UnsafeSupplier<String, Exception> valueUnsafeSupplier) {
 
 		try {
-			personalData = personalDataUnsafeSupplier.get();
+			value = valueUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -118,7 +112,7 @@ public class Lead {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected PersonalData personalData;
+	protected String value;
 
 	@Override
 	public boolean equals(Object object) {
@@ -126,13 +120,13 @@ public class Lead {
 			return true;
 		}
 
-		if (!(object instanceof Lead)) {
+		if (!(object instanceof SuperiorSize)) {
 			return false;
 		}
 
-		Lead lead = (Lead)object;
+		SuperiorSize superiorSize = (SuperiorSize)object;
 
-		return Objects.equals(toString(), lead.toString());
+		return Objects.equals(toString(), superiorSize.toString());
 	}
 
 	@Override
@@ -147,34 +141,46 @@ public class Lead {
 
 		sb.append("{");
 
-		if (calculatorGas != null) {
+		if (basePanels != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"calculatorGas\": ");
+			sb.append("\"basePanels\": ");
 
-			sb.append(String.valueOf(calculatorGas));
+			sb.append("\"");
+
+			sb.append(_escape(basePanels));
+
+			sb.append("\"");
 		}
 
-		if (calculatorSolar != null) {
+		if (price != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"calculatorSolar\": ");
+			sb.append("\"price\": ");
 
-			sb.append(String.valueOf(calculatorSolar));
+			sb.append("\"");
+
+			sb.append(_escape(price));
+
+			sb.append("\"");
 		}
 
-		if (personalData != null) {
+		if (value != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"personalData\": ");
+			sb.append("\"value\": ");
 
-			sb.append(String.valueOf(personalData));
+			sb.append("\"");
+
+			sb.append(_escape(value));
+
+			sb.append("\"");
 		}
 
 		sb.append("}");
