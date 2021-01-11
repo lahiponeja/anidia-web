@@ -26,24 +26,11 @@ public class Calculator {
     JSONObject jsonRequest = new JSONObject();
     SolarBudget responseBudget = new SolarBudget();
     try {
+      jsonRequest.put("EntryKey", "Web");
       jsonRequest.put("HouseType", solarBudgetRequest.getHouseTypeAsString());
       jsonRequest.put("MonthlyConsumption", solarBudgetRequest.getMonthlyConsumption());
       jsonRequest.put("AnnualConsumption", solarBudgetRequest.getAnnualConsumption());
       jsonRequest.put("RoofType", solarBudgetRequest.getRoofTypeAsString());
-      jsonRequest.put("AdditionalPanels", "No");
-      jsonRequest.put("PanelsCanTell", "No");
-      jsonRequest.put("PanelsNumber", 0);
-      jsonRequest.put("PanelsSelected", "Standard");
-      jsonRequest.put("InstallationType", "Monofásica");
-      jsonRequest.put("InverterOversized", "No");
-      jsonRequest.put("InverterType", "Standard");
-      jsonRequest.put("Pergola", "No");
-      jsonRequest.put("PipelineUnderground", "No");
-      jsonRequest.put("PipelineMeters", 0);
-      jsonRequest.put("CarCharger", "No");
-      jsonRequest.put("NeedBattery", "No");
-      jsonRequest.put("HasAdditionalPanels", "No");
-      jsonRequest.put("NumberAdditionalPanels", 0);
       System.out.println(jsonRequest);
     } catch (JSONException e) {
       e.printStackTrace();
