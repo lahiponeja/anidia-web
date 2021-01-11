@@ -122,9 +122,13 @@ components:
         selectedExtras:
           description: Selected extras
           $ref: "#/components/schemas/SelectedExtras"
+        superiorInstallation:
+          type: boolean
         output:
           description: Output object
           $ref: "#/components/schemas/SolarBudget"
+        finalPrice:
+          type: string
           
     SolarBudgetRequest:
       description: The required information to calculate a Solar Budget

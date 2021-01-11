@@ -32,6 +32,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "CalculatorSolar")
 public class CalculatorSolar {
 
+	@Schema
+	public String getFinalPrice() {
+		return finalPrice;
+	}
+
+	public void setFinalPrice(String finalPrice) {
+		this.finalPrice = finalPrice;
+	}
+
+	@JsonIgnore
+	public void setFinalPrice(
+		UnsafeSupplier<String, Exception> finalPriceUnsafeSupplier) {
+
+		try {
+			finalPrice = finalPriceUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String finalPrice;
+
 	@Schema(description = "Input object")
 	@Valid
 	public SolarBudgetRequest getInput() {
@@ -120,6 +148,34 @@ public class CalculatorSolar {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected SelectedExtras selectedExtras;
 
+	@Schema
+	public Boolean getSuperiorInstallation() {
+		return superiorInstallation;
+	}
+
+	public void setSuperiorInstallation(Boolean superiorInstallation) {
+		this.superiorInstallation = superiorInstallation;
+	}
+
+	@JsonIgnore
+	public void setSuperiorInstallation(
+		UnsafeSupplier<Boolean, Exception> superiorInstallationUnsafeSupplier) {
+
+		try {
+			superiorInstallation = superiorInstallationUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Boolean superiorInstallation;
+
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
@@ -146,6 +202,20 @@ public class CalculatorSolar {
 		StringBundler sb = new StringBundler();
 
 		sb.append("{");
+
+		if (finalPrice != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"finalPrice\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(finalPrice));
+
+			sb.append("\"");
+		}
 
 		if (input != null) {
 			if (sb.length() > 1) {
@@ -175,6 +245,16 @@ public class CalculatorSolar {
 			sb.append("\"selectedExtras\": ");
 
 			sb.append(String.valueOf(selectedExtras));
+		}
+
+		if (superiorInstallation != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"superiorInstallation\": ");
+
+			sb.append(superiorInstallation);
 		}
 
 		sb.append("}");

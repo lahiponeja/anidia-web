@@ -387,13 +387,6 @@ public class SalesforceService {
 		return calculatorGasRequest;
 	}
 
-	private CalculatorGasRequest mapToCalculatorGas(CalculatorGas calculatorGas) {
-		CalculatorGasRequest calculatorGasRequest = new CalculatorGasRequest();
-		calculatorGasRequest.setInput(mapToInputRequest(calculatorGas.getInput()));
-		calculatorGasRequest.setOutput(mapToOutputRequest(calculatorGas.getOutput()));
-
-		return calculatorGasRequest;
-	}
 
 	/**
 	 *
