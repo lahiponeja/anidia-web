@@ -359,11 +359,18 @@ public class SalesforceService {
 	private SendLeadRequest mapToSendLeadRequest(Lead lead) {
 
 		SendLeadRequest sendLeadRequest = new SendLeadRequest();
+
+		sendLeadRequest.setPersonalData(mapToPersonalDataRequest(lead.getPersonalData()));
+		
 		if (lead.getCalculatorGas() != null){
 			sendLeadRequest.setCalculatorGas(mapToCalculatorGas(lead.getCalculatorGas()));
+			sendLeadRequest.getPersonalData().setPrivacyPolicy("GasServicios");
 		}
-		sendLeadRequest.setPersonalData(mapToPersonalDataRequest(lead.getPersonalData()));
-		sendLeadRequest.getPersonalData().setPrivacyPolicy("GasServicios");
+		else if (lead.getCalculatorSolar() != null){
+		//	sendLeadRequest.setCalculatorGas(mapToCalculatorGas(lead.getCalculatorGas()));
+		//	sendLeadRequest.getPersonalData().setPrivacyPolicy("SolarServicios");
+		}
+		
 		return sendLeadRequest;
 	}
 
@@ -372,6 +379,14 @@ public class SalesforceService {
 	 * @param calculatorGas
 	 * @return
 	 */
+	private CalculatorGasRequest mapToCalculatorGas(CalculatorGas calculatorGas) {
+		CalculatorGasRequest calculatorGasRequest = new CalculatorGasRequest();
+		calculatorGasRequest.setInput(mapToInputRequest(calculatorGas.getInput()));
+		calculatorGasRequest.setOutput(mapToOutputRequest(calculatorGas.getOutput()));
+
+		return calculatorGasRequest;
+	}
+
 	private CalculatorGasRequest mapToCalculatorGas(CalculatorGas calculatorGas) {
 		CalculatorGasRequest calculatorGasRequest = new CalculatorGasRequest();
 		calculatorGasRequest.setInput(mapToInputRequest(calculatorGas.getInput()));
