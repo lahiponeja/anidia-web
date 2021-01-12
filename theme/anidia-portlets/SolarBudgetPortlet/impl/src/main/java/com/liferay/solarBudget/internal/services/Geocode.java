@@ -13,9 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.liferay.portal.vulcan.pagination.Page;
-import com.liferay.portal.kernel.json.JSON;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONArray;
 import com.liferay.solarBudget.dto.v1_0.PostalCode;
 
 public class Geocode{
@@ -94,12 +95,17 @@ public class Geocode{
         }
     
         try {
-          JSONObject jsonResponse =  new JSONObject( "{ response: "  + response.body() + "}");
-          
+            JSONObject jsonResponse =  new JSONObject( "{ response: "  + response.body() + "}");
+            JSONArray municipalities = jsonResponse.getJSONArray("response");
 
-            System.out.println(">  ##  JSON DEVUELTO " + jsonResponse.toString());
-
-    
+            for (int i = 0 ; i < municipalities.length(); i++) {
+                JSONObject data = municipalities.getJSONObject(i);
+                PostalCode receivedPostalCode = new PostalCode();
+                receivedPostalCode.setMunicipalityId(data.getString("codMunicipio"));
+                receivedPostalCode.setMunicipalityName(data.getString("desPoblacion"));
+                receivedPostalCode.setProvinceId(data.getString("codProvincia"));
+                postalCodes.add(receivedPostalCode);           
+            }
         } catch (JSONException e) {
           e.printStackTrace();
           return null;
