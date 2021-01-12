@@ -382,7 +382,7 @@ public class SalesforceService {
 		CalculatorSolarRequest calculatorSolarRequest = new CalculatorSolarRequest();
 		calculatorSolarRequest.setSuperiorInstallation(calculatorSolar.getSuperiorInstallation());
 		calculatorSolarRequest.setFinalPrice(calculatorSolar.getFinalPrice());
-		calculatorSolarRequest.setInstallatorId(calculatorSolar.getInstallatorId());
+		calculatorSolarRequest.setInstallerCode(calculatorSolar.getInstallerCode());
 
 		calculatorSolarRequest.setSelectedExtras(maptoSelectedExtras(calculatorSolar.getSelectedExtras()));
 		calculatorSolarRequest.setInput(mapToSolarInputRequest(calculatorSolar.getInput()));

@@ -33,6 +33,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class CalculatorSolar {
 
 	@Schema
+	public String getInstallerCode() {
+		return InstallerCode;
+	}
+
+	public void setInstallerCode(String InstallerCode) {
+		this.InstallerCode = InstallerCode;
+	}
+
+	@JsonIgnore
+	public void setInstallerCode(
+		UnsafeSupplier<String, Exception> InstallerCodeUnsafeSupplier) {
+
+		try {
+			InstallerCode = InstallerCodeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String InstallerCode;
+
+	@Schema
 	public String getFinalPrice() {
 		return finalPrice;
 	}
@@ -88,34 +116,6 @@ public class CalculatorSolar {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected SolarBudgetRequest input;
-
-	@Schema
-	public String getInstallatorId() {
-		return installatorId;
-	}
-
-	public void setInstallatorId(String installatorId) {
-		this.installatorId = installatorId;
-	}
-
-	@JsonIgnore
-	public void setInstallatorId(
-		UnsafeSupplier<String, Exception> installatorIdUnsafeSupplier) {
-
-		try {
-			installatorId = installatorIdUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String installatorId;
 
 	@Schema(description = "Output object")
 	@Valid
@@ -231,6 +231,20 @@ public class CalculatorSolar {
 
 		sb.append("{");
 
+		if (InstallerCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"InstallerCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(InstallerCode));
+
+			sb.append("\"");
+		}
+
 		if (finalPrice != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -253,20 +267,6 @@ public class CalculatorSolar {
 			sb.append("\"input\": ");
 
 			sb.append(String.valueOf(input));
-		}
-
-		if (installatorId != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"installatorId\": ");
-
-			sb.append("\"");
-
-			sb.append(_escape(installatorId));
-
-			sb.append("\"");
 		}
 
 		if (output != null) {

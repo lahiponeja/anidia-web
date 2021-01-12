@@ -129,7 +129,7 @@ components:
           $ref: "#/components/schemas/SolarBudget"
         finalPrice:
           type: string
-        installatorId:
+        InstallerCode:
           type: string
           
     SolarBudgetRequest:
