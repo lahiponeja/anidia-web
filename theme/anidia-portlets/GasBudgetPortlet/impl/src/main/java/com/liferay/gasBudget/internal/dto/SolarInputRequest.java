@@ -6,7 +6,6 @@ public class SolarInputRequest {
     private String houseType;
     private Integer monthlyConsumption;
     private Integer annualConsumption;
-    private String finalPrice;
     private String roofType;
 
     public String getHouseType() {
@@ -31,14 +30,6 @@ public class SolarInputRequest {
 
     public void setAnnualConsumption(Integer annualConsumption) {
     this.annualConsumption = annualConsumption;
-    }
-
-    public String getFinalPrice() {
-        return finalPrice;
-        }
-    
-    public void setFinalPrice(String finalPrice) {
-    this.finalPrice = finalPrice;
     }
 
     public String getRoofType() {

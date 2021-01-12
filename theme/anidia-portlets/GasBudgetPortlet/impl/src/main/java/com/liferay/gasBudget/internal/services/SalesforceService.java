@@ -361,7 +361,6 @@ public class SalesforceService {
 		SendLeadRequest sendLeadRequest = new SendLeadRequest();
 
 		sendLeadRequest.setPersonalData(mapToPersonalDataRequest(lead.getPersonalData()));
-		
 		if (lead.getCalculatorGas() != null){
 			sendLeadRequest.setCalculatorGas(mapToCalculatorGas(lead.getCalculatorGas()));
 			sendLeadRequest.getPersonalData().setPrivacyPolicy("GasServicios");
@@ -380,13 +379,14 @@ public class SalesforceService {
 	 * @return
 	 */
 	private CalculatorSolarRequest mapToCalculatorSolar(CalculatorSolar calculatorSolar) {
+		System.out.println("Generando calculator solar");
 		CalculatorSolarRequest calculatorSolarRequest = new CalculatorSolarRequest();
 		calculatorSolarRequest.setSuperiorInstallation(calculatorSolar.getSuperiorInstallation());
 		calculatorSolarRequest.setFinalPrice(calculatorSolar.getFinalPrice());
 		calculatorSolarRequest.setInstallatorId(calculatorSolar.getInstallatorId());
 
 		calculatorSolarRequest.setSelectedExtras(maptoSelectedExtras(calculatorSolar.getSelectedExtras()));
-		//calculatorSolarRequest.setInput(mapToInputRequest(calculatorSolar.getInput()));
+		calculatorSolarRequest.setInput(mapToSolarInputRequest(calculatorSolar.getInput()));
 		//calculatorcalculatorSolarRequestGasRequest.setOutput(mapToOutputRequest(calculatorSolar.getOutput()));
 
 		return calculatorSolarRequest;
@@ -404,11 +404,25 @@ public class SalesforceService {
 		extras.setRoofExtra(selectedExtras.getRoofExtra());
 		extras.setPergolaExtra(selectedExtras.getPergolaExtra());
 		extras.setPipelineUnderground(selectedExtras.getPipelineUnderground());
-		extras.setBattery(selectedExtras.getExtraPanels());
+		extras.setBattery(selectedExtras.getBattery());
 		extras.setCarCharger(selectedExtras.getCarCharger());
 		return extras;
 	}
 
+	/**
+	 *
+	 * @param calculatorSolarInput
+	 * @return
+	 */
+	private SolarInputRequest mapToSolarInputRequest(SolarBudgetRequest calculatorSolarInput) {
+		System.out.println("Generando calculator solar input");
+		SolarInputRequest inputRequest = new SolarInputRequest();
+		inputRequest.setHouseType(calculatorSolarInput.getHouseTypeAsString());
+		inputRequest.setMonthlyConsumption(calculatorSolarInput.getMonthlyConsumption());
+		inputRequest.setAnnualConsumption(calculatorSolarInput.getAnnualConsumption());
+		inputRequest.setRoofType(calculatorSolarInput.getRoofTypeAsString());
+		return inputRequest;
+	}
 
 	/**
 	 *
