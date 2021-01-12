@@ -20,7 +20,7 @@ import com.liferay.solarBudget.dto.v1_0.PostalCode;
 
 public class Geocode{
     static String GEOCODE_LOGIN_URL = System.getenv().get("GEOCODE_LOGIN_URL");
-
+    static String GEOCODE_MUNICIPALITIES_URL = System.getenv().get("GEOCODE_MUNICIPALITIES_URL");
     private String getGeocodeToken() {
 
         JSONObject jsonRequestBody = new JSONObject();
@@ -68,10 +68,44 @@ public class Geocode{
 		}
     }
     
-    public Page<PostalCode> getMunicipalities(String postalCode){
-        List<PostalCode> postalCodes = new ArrayList<PostalCode>();
-        System.out.println("RECIBIDO  tokenn " + getGeocodeToken());
 
+
+    public Page<PostalCode> getMunicipalities(String postalCode) {
+        List<PostalCode> postalCodes = new ArrayList<PostalCode>();
+        String url = Geocode.GEOCODE_MUNICIPALITIES_URL + "/" + postalCode;
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder().
+            uri(URI.create(url)).
+            header("Content-Type", "application/json").
+            header("codSesion", getGeocodeToken()).
+            GET().
+            build();
+    
+        System.out.println("Solicitando municipios a " + url);
+        System.out.println(">   CP " + postalCode);
+    
+        HttpResponse<String> response;
+        try {
+          response = client.send(request, HttpResponse.BodyHandlers.ofString());
+          System.out.println(">    Respuesta " + response.body());
+        } catch (IOException | InterruptedException e) {
+          e.printStackTrace();
+          return null;
+        }
+    
+        try {
+          JSONObject jsonResponse =  new JSONObject( "{ response: "  + response.body() + "}");
+          
+
+            System.out.println(">  ##  JSON DEVUELTO " + jsonResponse.toString());
+
+    
+        } catch (JSONException e) {
+          e.printStackTrace();
+          return null;
+        }
+    
         return Page.of(postalCodes);
-    }
+    
+      }
 }
