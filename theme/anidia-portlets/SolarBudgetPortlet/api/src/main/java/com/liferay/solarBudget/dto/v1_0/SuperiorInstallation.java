@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("SolarSuperiorInstallation")
+@GraphQLName("SuperiorInstallation")
 @JsonFilter("Liferay.Vulcan")
-@XmlRootElement(name = "SolarSuperiorInstallation")
-public class SolarSuperiorInstallation {
+@XmlRootElement(name = "SuperiorInstallation")
+public class SuperiorInstallation {
 
 	@Schema
 	public String getAdditionalPanelsInstallation() {
@@ -205,34 +205,6 @@ public class SolarSuperiorInstallation {
 	protected String inverterType;
 
 	@Schema
-	public String getPanelType() {
-		return panelType;
-	}
-
-	public void setPanelType(String panelType) {
-		this.panelType = panelType;
-	}
-
-	@JsonIgnore
-	public void setPanelType(
-		UnsafeSupplier<String, Exception> panelTypeUnsafeSupplier) {
-
-		try {
-			panelType = panelTypeUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String panelType;
-
-	@Schema
 	public String getPanelsExtra() {
 		return panelsExtra;
 	}
@@ -259,6 +231,34 @@ public class SolarSuperiorInstallation {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String panelsExtra;
+
+	@Schema
+	public String getPanelsType() {
+		return panelsType;
+	}
+
+	public void setPanelsType(String panelsType) {
+		this.panelsType = panelsType;
+	}
+
+	@JsonIgnore
+	public void setPanelsType(
+		UnsafeSupplier<String, Exception> panelsTypeUnsafeSupplier) {
+
+		try {
+			panelsType = panelsTypeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String panelsType;
 
 	@Schema
 	public String getPergolaExtra() {
@@ -407,14 +407,14 @@ public class SolarSuperiorInstallation {
 			return true;
 		}
 
-		if (!(object instanceof SolarSuperiorInstallation)) {
+		if (!(object instanceof SuperiorInstallation)) {
 			return false;
 		}
 
-		SolarSuperiorInstallation solarSuperiorInstallation =
-			(SolarSuperiorInstallation)object;
+		SuperiorInstallation superiorInstallation =
+			(SuperiorInstallation)object;
 
-		return Objects.equals(toString(), solarSuperiorInstallation.toString());
+		return Objects.equals(toString(), superiorInstallation.toString());
 	}
 
 	@Override
@@ -513,20 +513,6 @@ public class SolarSuperiorInstallation {
 			sb.append("\"");
 		}
 
-		if (panelType != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"panelType\": ");
-
-			sb.append("\"");
-
-			sb.append(_escape(panelType));
-
-			sb.append("\"");
-		}
-
 		if (panelsExtra != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -537,6 +523,20 @@ public class SolarSuperiorInstallation {
 			sb.append("\"");
 
 			sb.append(_escape(panelsExtra));
+
+			sb.append("\"");
+		}
+
+		if (panelsType != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"panelsType\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(panelsType));
 
 			sb.append("\"");
 		}

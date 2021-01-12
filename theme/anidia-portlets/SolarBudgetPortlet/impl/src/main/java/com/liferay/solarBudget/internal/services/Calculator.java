@@ -11,7 +11,7 @@ import com.liferay.solarBudget.dto.v1_0.SolarBudget;
 import com.liferay.solarBudget.dto.v1_0.SolarBudgetRequest;
 import com.liferay.solarBudget.dto.v1_0.SolarBudgetSize;
 import com.liferay.solarBudget.dto.v1_0.SolarOutputInverter;
-import com.liferay.solarBudget.dto.v1_0.SolarSuperiorInstallation;
+import com.liferay.solarBudget.dto.v1_0.SuperiorInstallation;
 import com.liferay.solarBudget.dto.v1_0.SuperiorSize;
 
 import org.json.JSONException;
@@ -61,7 +61,7 @@ public class Calculator {
  
       JSONObject jsonBudget = jsonResponse.getJSONObject("data").getJSONArray("items").getJSONObject(0);
       responseBudget.setPanelsType(jsonBudget.getString("PanelsType"));
-      responseBudget.setTotalPrize(jsonBudget.get("TotalPrice").toString());
+      responseBudget.setTotalPrice(jsonBudget.get("TotalPrice").toString());
       responseBudget.setSize(this.createSize(jsonBudget.getJSONObject("Size")));
       responseBudget.setInverter(this.createInverter(jsonBudget.getJSONObject("Inverter")));
       responseBudget.setPanelsExtra(jsonBudget.getJSONObject("PanelsExtra").getString("UnitPrice"));
@@ -85,11 +85,11 @@ public class Calculator {
     return responseBudget;
 
   }
-  private SolarSuperiorInstallation createSuperiorInstallation(JSONObject jsonSuperiorInstallation) throws JSONException {
-    SolarSuperiorInstallation superiorInstallation = new SolarSuperiorInstallation();
+  private SuperiorInstallation createSuperiorInstallation(JSONObject jsonSuperiorInstallation) throws JSONException {
+    SuperiorInstallation superiorInstallation = new SuperiorInstallation();
     
     superiorInstallation.setSuperiorSize(this.createSuperiorSize(jsonSuperiorInstallation.getJSONObject("SuperiorSize")));
-    superiorInstallation.setPanelType(jsonSuperiorInstallation.getString("PanelType"));
+    superiorInstallation.setPanelsType(jsonSuperiorInstallation.getString("PanelType"));
     superiorInstallation.setInverterType(jsonSuperiorInstallation.getString("InverterType"));
     superiorInstallation.setExtraFornius(jsonSuperiorInstallation.getString("ExtraFornius"));
     superiorInstallation.setPanelsExtra(jsonSuperiorInstallation.getString("PanelsExtra"));
