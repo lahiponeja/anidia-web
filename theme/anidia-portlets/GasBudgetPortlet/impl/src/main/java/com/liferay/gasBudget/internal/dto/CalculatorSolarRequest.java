@@ -7,6 +7,7 @@ public class CalculatorSolarRequest {
     private SolarOutputRequest output;
     private SelectedSolarExtrasRequest selectedExtras;
     private Boolean superiorInstallation;
+    private String finalPrice;
 
     public SolarInputRequest getInput() {
         return input;
@@ -34,6 +35,26 @@ public class CalculatorSolarRequest {
 
     public Boolean getSuperiorInstallation(){
         return superiorInstallation;
+    }
+
+    public void setselectedExtras(SelectedSolarExtrasRequest selectedExtras) {
+        this.selectedExtras = selectedExtras;
+    }
+
+    public Boolean getSuperiorInstallation(){
+        return superiorInstallation;
+    }
+
+    public void setSuperiorInstallation(Boolean superiorInstallation) {
+        this.superiorInstallation = superiorInstallation;
+    }
+
+    public String getFinalPrice(){
+        return superiorInstallation;
+    }
+
+    public void setFinalPrice(String finalPrice) {
+        this.finalPrice = finalPrice;
     }
 
 }

@@ -15,9 +15,9 @@ public class SolarOutputRequest {
     private String pipelineExtra;
     private String carCharger;
     private String battery;
-    private String additionalPanelsInstallation;
+    private String additionalPanelsInstallation;//
     private String totalPrize;
-    private String superiorInstallation;
+    private String superiorInstallation;//
 
     public String getPanelsType() {
         return panelsType;

@@ -3,9 +3,8 @@ package com.liferay.gasBudget.internal.dto;
 
 public class SendLeadRequest {
 
-    //@JsonProperty("calculatorGas")
     private CalculatorGasRequest calculatorGas;
-    //@JsonProperty("personalData")
+    private CalculatorSolarRequest calculatorSolar;
     private PersonalDataRequest personalData;
 
     public CalculatorGasRequest getCalculatorGas() {
@@ -14,6 +13,14 @@ public class SendLeadRequest {
 
     public void setCalculatorGas(CalculatorGasRequest calculatorGas) {
         this.calculatorGas = calculatorGas;
+    }
+
+    public CalculatorSolarRequest getCalculatorSolar() {
+        return calculatorSolar;
+    }
+
+    public void setCalculatorSolar(CalculatorSolarRequest calculatorSolar) {
+        this.calculatorSolar = calculatorSolar;
     }
 
     public PersonalDataRequest getPersonalData() {
