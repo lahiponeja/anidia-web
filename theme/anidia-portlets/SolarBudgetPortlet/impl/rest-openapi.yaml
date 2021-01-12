@@ -239,3 +239,31 @@ paths:
               schema:
                 $ref: "#/components/schemas/SolarBudget"
           description: The budget has been created
+
+  "/municipalities/{postalCode}":
+    get:
+      operationId: getMunicipalityPostalCodePage
+      summary: Get the municipalities for a postal code
+      description: Get all the municipalities for a postal code from the Anidia database
+      parameters:
+        - name: "postalCode"
+          in: "path"
+          description: "Postal Code of the municipalities"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/PostalCode"
+            application/xml:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/PostalCode"
+          description: ""
+      tags: ["PostalCode"]
