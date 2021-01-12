@@ -30,15 +30,7 @@ public class CalculatorSolarRequest {
         return selectedExtras;
     }
 
-    public void setselectedExtras(SelectedSolarExtrasRequest selectedExtras) {
-        this.selectedExtras = selectedExtras;
-    }
-
-    public Boolean getSuperiorInstallation(){
-        return superiorInstallation;
-    }
-
-    public void setselectedExtras(SelectedSolarExtrasRequest selectedExtras) {
+    public void setSelectedExtras(SelectedSolarExtrasRequest selectedExtras) {
         this.selectedExtras = selectedExtras;
     }
 
@@ -51,7 +43,7 @@ public class CalculatorSolarRequest {
     }
 
     public String getFinalPrice(){
-        return superiorInstallation;
+        return finalPrice;
     }
 
     public void setFinalPrice(String finalPrice) {

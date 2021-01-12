@@ -320,7 +320,7 @@ public class SalesforceService {
 			build();
 
 		HttpResponse<String> response = null;
-		try {
+		/*try {
 			response = client.send(request, HttpResponse.BodyHandlers.ofString());
 			if (response.statusCode() != 200 && response.statusCode() != 201) {
 				throw new PortletException(2, "Error creating lead");
@@ -334,7 +334,7 @@ public class SalesforceService {
 		}
 
 		System.out.println("** Lead creado correctamente ** " + response.statusCode());
-		System.out.println("** Respuesta creado lead ** " + response.body());
+		System.out.println("** Respuesta creado lead ** " + response.body());*/
 		return lead;
 	}
 
@@ -367,12 +367,48 @@ public class SalesforceService {
 			sendLeadRequest.getPersonalData().setPrivacyPolicy("GasServicios");
 		}
 		else if (lead.getCalculatorSolar() != null){
-		//	sendLeadRequest.setCalculatorGas(mapToCalculatorGas(lead.getCalculatorGas()));
-		//	sendLeadRequest.getPersonalData().setPrivacyPolicy("SolarServicios");
+			sendLeadRequest.setCalculatorSolar(mapToCalculatorSolar(lead.getCalculatorSolar()));
+			sendLeadRequest.getPersonalData().setPrivacyPolicy("SolarServicios");
 		}
 		
 		return sendLeadRequest;
 	}
+
+	/**
+	 *
+	 * @param calculatorSolar
+	 * @return
+	 */
+	private CalculatorSolarRequest mapToCalculatorSolar(CalculatorSolar calculatorSolar) {
+		CalculatorSolarRequest calculatorSolarRequest = new CalculatorSolarRequest();
+		calculatorSolarRequest.setSuperiorInstallation(calculatorSolar.getSuperiorInstallation());
+		calculatorSolarRequest.setFinalPrice(calculatorSolar.getFinalPrice());
+		calculatorSolarRequest.setInstallatorId(calculatorSolar.getInstallatorId());
+
+		calculatorSolarRequest.setSelectedExtras(maptoSelectedExtras(calculatorSolar.getSelectedExtras()));
+		//calculatorSolarRequest.setInput(mapToInputRequest(calculatorSolar.getInput()));
+		//calculatorcalculatorSolarRequestGasRequest.setOutput(mapToOutputRequest(calculatorSolar.getOutput()));
+
+		return calculatorSolarRequest;
+	}
+
+		/**
+	 *
+	 * @param selectedExtras
+	 * @return
+	 */
+	private SelectedSolarExtrasRequest maptoSelectedExtras(SelectedExtras selectedExtras) {
+		SelectedSolarExtrasRequest extras = new SelectedSolarExtrasRequest();
+		extras.setExtraPanels(selectedExtras.getExtraPanels());
+		extras.setTriphasicExtra(selectedExtras.getTriphasicExtra());
+		extras.setRoofExtra(selectedExtras.getRoofExtra());
+		extras.setPergolaExtra(selectedExtras.getPergolaExtra());
+		extras.setPipelineUnderground(selectedExtras.getPipelineUnderground());
+		extras.setBattery(selectedExtras.getExtraPanels());
+		extras.setCarCharger(selectedExtras.getCarCharger());
+		return extras;
+	}
+
 
 	/**
 	 *

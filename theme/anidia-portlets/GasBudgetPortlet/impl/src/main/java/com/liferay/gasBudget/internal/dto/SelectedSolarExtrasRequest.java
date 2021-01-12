@@ -3,12 +3,12 @@ package com.liferay.gasBudget.internal.dto;
 public class SelectedSolarExtrasRequest {
 
     private Integer extraPanels;
-    private String triphasicExtra;
-    private String roofExtra;
-    private String pergolaExtra;
-    private String pipelineUnderground;
+    private Boolean triphasicExtra;
+    private Boolean roofExtra;
+    private Boolean pergolaExtra;
+    private Boolean pipelineUnderground;
     private Integer battery;
-    private String carCharger;
+    private Boolean carCharger;
     
     public Integer getExtraPanels() {
     return extraPanels;
@@ -18,35 +18,35 @@ public class SelectedSolarExtrasRequest {
     this.extraPanels = extraPanels;
     }
     
-    public String getTriphasicExtra() {
+    public Boolean getTriphasicExtra() {
     return triphasicExtra;
     }
     
-    public void setTriphasicExtra(String triphasicExtra) {
+    public void setTriphasicExtra(Boolean triphasicExtra) {
     this.triphasicExtra = triphasicExtra;
     }
     
-    public String getRoofExtra() {
+    public Boolean getRoofExtra() {
     return roofExtra;
     }
     
-    public void setRoofExtra(String roofExtra) {
+    public void setRoofExtra(Boolean roofExtra) {
     this.roofExtra = roofExtra;
     }
     
-    public String getPergolaExtra() {
+    public Boolean getPergolaExtra() {
     return pergolaExtra;
     }
     
-    public void setPergolaExtra(String pergolaExtra) {
+    public void setPergolaExtra(Boolean pergolaExtra) {
     this.pergolaExtra = pergolaExtra;
     }
     
-    public String getPipelineUnderground() {
+    public Boolean getPipelineUnderground() {
     return pipelineUnderground;
     }
     
-    public void setPipelineUnderground(String pipelineUnderground) {
+    public void setPipelineUnderground(Boolean pipelineUnderground) {
     this.pipelineUnderground = pipelineUnderground;
     }
     
@@ -58,11 +58,11 @@ public class SelectedSolarExtrasRequest {
     this.battery = battery;
     }
     
-    public String getCarCharger() {
+    public Boolean getCarCharger() {
     return carCharger;
     }
     
-    public void setCarCharger(String carCharger) {
+    public void setCarCharger(Boolean carCharger) {
     this.carCharger = carCharger;
     }
     
