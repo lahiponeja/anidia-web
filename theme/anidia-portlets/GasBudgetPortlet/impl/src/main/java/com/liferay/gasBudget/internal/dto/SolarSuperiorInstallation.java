@@ -1,12 +1,12 @@
-
 package com.liferay.gasBudget.internal.dto;
 
 
-public class SolarOutputRequest {
+public class SolarSuperiorInstallation {
 
-    private String panelsType;
-    private String size;
-    private String inverter;
+    private SolarSuperiorSize superiorSize;
+    private String panelType;
+    private String inverterType;
+    private String extraFornius;
     private String panelsExtra;
     private String triphasicExtra;
     private String inverterExtra;
@@ -16,31 +16,37 @@ public class SolarOutputRequest {
     private String carCharger;
     private String battery;
     private String additionalPanelsInstallation;
-    private String totalPrize;
-    private String superiorInstallation;
 
-    public String getPanelsType() {
-        return panelsType;
+    public SolarSuperiorSize getSuperiorSize() {
+        return superiorSize;
     }
 
-    public void setPanelsType(String panelsType) {
-        this.panelsType = panelsType;
+    public void setSuperiorSize(SolarSuperiorSize superiorSize) {
+        this.superiorSize = superiorSize;
     }
 
-    public String getSize() {
-        return size;
+    public String getPanelType() {
+        return panelType;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setPanelType(String panelType) {
+        this.panelType = panelType;
     }
 
-    public String getInverter() {
-        return inverter;
+    public String getInverterType() {
+        return inverterType;
     }
 
-    public void setInverter(String inverter) {
-        this.inverter = inverter;
+    public void setInverterType(String inverterType) {
+        this.inverterType = inverterType;
+    }
+
+    public String getExtraFornius() {
+        return extraFornius;
+    }
+
+    public void setExtraFornius(String extraFornius) {
+        this.extraFornius = extraFornius;
     }
 
     public String getPanelsExtra() {
@@ -64,7 +70,7 @@ public class SolarOutputRequest {
     }
 
     public void setInverterExtra(String inverterExtra) {
-    this.inverterExtra = inverterExtra;
+        this.inverterExtra = inverterExtra;
     }
 
     public String getRoofExtra() {
@@ -104,7 +110,7 @@ public class SolarOutputRequest {
     }
 
     public void setBattery(String battery) {
-    this.battery = battery;
+        this.battery = battery;
     }
 
     public String getAdditionalPanelsInstallation() {
@@ -113,22 +119,6 @@ public class SolarOutputRequest {
 
     public void setAdditionalPanelsInstallation(String additionalPanelsInstallation) {
         this.additionalPanelsInstallation = additionalPanelsInstallation;
-    }
-
-    public String getTotalPrize() {
-        return totalPrize;
-    }
-
-    public void setTotalPrize(String totalPrize) {
-        this.totalPrize = totalPrize;
-    }
-
-    public String getSuperiorInstallation() {
-        return superiorInstallation;
-    }
-
-    public void setSuperiorInstallation(String superiorInstallation) {
-        this.superiorInstallation = superiorInstallation;
     }
 
 }

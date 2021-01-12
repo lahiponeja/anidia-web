@@ -129,6 +129,8 @@ components:
           $ref: "#/components/schemas/SolarBudget"
         finalPrice:
           type: string
+        installatorId:
+          type: string
           
     SolarBudgetRequest:
       description: The required information to calculate a Solar Budget

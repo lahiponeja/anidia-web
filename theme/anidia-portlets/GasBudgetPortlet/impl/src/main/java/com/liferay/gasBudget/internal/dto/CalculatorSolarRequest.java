@@ -8,6 +8,7 @@ public class CalculatorSolarRequest {
     private SelectedSolarExtrasRequest selectedExtras;
     private Boolean superiorInstallation;
     private String finalPrice;
+    private String installatorId;
 
     public SolarInputRequest getInput() {
         return input;
@@ -55,6 +56,14 @@ public class CalculatorSolarRequest {
 
     public void setFinalPrice(String finalPrice) {
         this.finalPrice = finalPrice;
+    }
+
+    public String getInstallatorId(){
+        return installatorId;
+    }
+
+    public void setInstallatorId(String installatorId) {
+        this.installatorId = installatorId;
     }
 
 }

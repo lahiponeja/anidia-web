@@ -89,6 +89,34 @@ public class CalculatorSolar {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected SolarBudgetRequest input;
 
+	@Schema
+	public String getInstallatorId() {
+		return installatorId;
+	}
+
+	public void setInstallatorId(String installatorId) {
+		this.installatorId = installatorId;
+	}
+
+	@JsonIgnore
+	public void setInstallatorId(
+		UnsafeSupplier<String, Exception> installatorIdUnsafeSupplier) {
+
+		try {
+			installatorId = installatorIdUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String installatorId;
+
 	@Schema(description = "Output object")
 	@Valid
 	public SolarBudget getOutput() {
@@ -225,6 +253,20 @@ public class CalculatorSolar {
 			sb.append("\"input\": ");
 
 			sb.append(String.valueOf(input));
+		}
+
+		if (installatorId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"installatorId\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(installatorId));
+
+			sb.append("\"");
 		}
 
 		if (output != null) {
