@@ -4,7 +4,7 @@ package com.liferay.gasBudget.internal.dto;
 public class SolarSuperiorInstallation {
 
     private SolarSuperiorSize superiorSize;
-    private String panelType;
+    private String panelsType;
     private String inverterType;
     private String extraFornius;
     private String panelsExtra;
@@ -25,12 +25,12 @@ public class SolarSuperiorInstallation {
         this.superiorSize = superiorSize;
     }
 
-    public String getPanelType() {
-        return panelType;
+    public String getPanelsType() {
+        return panelsType;
     }
 
-    public void setPanelType(String panelType) {
-        this.panelType = panelType;
+    public void setPanelsType(String panelsType) {
+        this.panelsType = panelsType;
     }
 
     public String getInverterType() {

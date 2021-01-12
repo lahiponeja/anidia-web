@@ -379,7 +379,6 @@ public class SalesforceService {
 	 * @return
 	 */
 	private CalculatorSolarRequest mapToCalculatorSolar(CalculatorSolar calculatorSolar) {
-		System.out.println("Generando calculator solar");
 		CalculatorSolarRequest calculatorSolarRequest = new CalculatorSolarRequest();
 		calculatorSolarRequest.setSuperiorInstallation(calculatorSolar.getSuperiorInstallation());
 		calculatorSolarRequest.setFinalPrice(calculatorSolar.getFinalPrice());
@@ -387,7 +386,7 @@ public class SalesforceService {
 
 		calculatorSolarRequest.setSelectedExtras(maptoSelectedExtras(calculatorSolar.getSelectedExtras()));
 		calculatorSolarRequest.setInput(mapToSolarInputRequest(calculatorSolar.getInput()));
-		//calculatorcalculatorSolarRequestGasRequest.setOutput(mapToOutputRequest(calculatorSolar.getOutput()));
+		calculatorSolarRequest.setOutput(mapToSolarOutputRequest(calculatorSolar.getOutput()));
 
 		return calculatorSolarRequest;
 	}
@@ -415,7 +414,6 @@ public class SalesforceService {
 	 * @return
 	 */
 	private SolarInputRequest mapToSolarInputRequest(SolarBudgetRequest calculatorSolarInput) {
-		System.out.println("Generando calculator solar input");
 		SolarInputRequest inputRequest = new SolarInputRequest();
 		inputRequest.setHouseType(calculatorSolarInput.getHouseTypeAsString());
 		inputRequest.setMonthlyConsumption(calculatorSolarInput.getMonthlyConsumption());
@@ -423,6 +421,97 @@ public class SalesforceService {
 		inputRequest.setRoofType(calculatorSolarInput.getRoofTypeAsString());
 		return inputRequest;
 	}
+
+	/**
+	 *
+	 * @param calculatorSolarOutput
+	 * @return
+	 */
+	private SolarOutputRequest mapToSolarOutputRequest(SolarBudget calculatorSolarOutput) {
+		SolarOutputRequest outputRequest = new SolarOutputRequest();
+		outputRequest.setPanelsType(calculatorSolarOutput.getPanelsType());
+		outputRequest.setPanelsExtra(calculatorSolarOutput.getPanelsExtra());
+		outputRequest.setTriphasicExtra(calculatorSolarOutput.getTriphasicExtra());
+		outputRequest.setInverterExtra(calculatorSolarOutput.getInverterExtra());
+		outputRequest.setRoofExtra(calculatorSolarOutput.getRoofExtra());
+		outputRequest.setPergolaExtra(calculatorSolarOutput.getPergolaExtra());
+		outputRequest.setPipelineExtra(calculatorSolarOutput.getPipelineExtra());
+		outputRequest.setCarCharger(calculatorSolarOutput.getCarCharger());
+		outputRequest.setBattery(calculatorSolarOutput.getBattery());
+		outputRequest.setAdditionalPanelsInstallation(calculatorSolarOutput.getAdditionalPanelsInstallation());
+		outputRequest.setTotalPrice(calculatorSolarOutput.getTotalPrice());
+		outputRequest.setSize(mapToSolarSize(calculatorSolarOutput.getSize()));
+		outputRequest.setInverter(mapToSolarInverter(calculatorSolarOutput.getInverter()));
+		outputRequest.setSuperiorInstallation(mapToSolarSuperiorInstallation(calculatorSolarOutput.getSuperiorInstallation()));
+
+		return outputRequest;
+	}
+	/**
+	 *
+	 * @param budgetSize
+	 * @return
+	 */
+	private SolarSize mapToSolarSize(SolarBudgetSize budgetSize) {
+		SolarSize size = new SolarSize();
+		size.setValue(budgetSize.getValue());
+		size.setUnitPrice(budgetSize.getUnitPrice());
+		size.setPrice(budgetSize.getPrice());
+		size.setBasePanels(budgetSize.getBasePanels());
+		size.setTotalPanels(budgetSize.getTotalPanels());
+		return size;
+	}
+
+	/**
+	 *
+	 * @param solarInverter
+	 * @return
+	 */
+	private SolarInverter mapToSolarInverter(SolarOutputInverter solarInverter) {
+		SolarInverter inverter = new SolarInverter();
+		inverter.setBrand(solarInverter.getBrand());
+		inverter.setModel(solarInverter.getModel());
+		inverter.setPrice(solarInverter.getPrice());
+
+		return inverter;
+	}
+
+	/**
+	 *
+	 * @param superiorInstallation
+	 * @return
+	 */
+	private SolarSuperiorInstallation mapToSolarSuperiorInstallation(SuperiorInstallation superiorInstallation) {
+		SolarSuperiorInstallation sInstallation = new SolarSuperiorInstallation();
+		sInstallation.setPanelsType(superiorInstallation.getPanelsType());
+		sInstallation.setPanelsExtra(superiorInstallation.getPanelsExtra());
+		sInstallation.setTriphasicExtra(superiorInstallation.getTriphasicExtra());
+		sInstallation.setInverterExtra(superiorInstallation.getInverterExtra());
+		sInstallation.setInverterType(superiorInstallation.getInverterType());
+		sInstallation.setRoofExtra(superiorInstallation.getRoofExtra());
+		sInstallation.setPergolaExtra(superiorInstallation.getPergolaExtra());
+		sInstallation.setPipelineExtra(superiorInstallation.getPipelineExtra());
+		sInstallation.setCarCharger(superiorInstallation.getCarCharger());
+		sInstallation.setBattery(superiorInstallation.getBattery());
+		sInstallation.setExtraFornius(superiorInstallation.getExtraFornius());
+		sInstallation.setAdditionalPanelsInstallation(superiorInstallation.getAdditionalPanelsInstallation());
+		sInstallation.setSuperiorSize(mapToSolarSuperiorSize(superiorInstallation.getSuperiorSize()));
+
+		return sInstallation;
+	}
+
+		/**
+	 *
+	 * @param superiorSize
+	 * @return
+	 */
+	private SolarSuperiorSize mapToSolarSuperiorSize(SuperiorSize superiorSize) {
+		SolarSuperiorSize size = new SolarSuperiorSize();
+		size.setValue(superiorSize.getValue());
+		size.setPrice(superiorSize.getPrice());
+		size.setBasePanels(superiorSize.getBasePanels());
+		return size;
+	}
+
 
 	/**
 	 *

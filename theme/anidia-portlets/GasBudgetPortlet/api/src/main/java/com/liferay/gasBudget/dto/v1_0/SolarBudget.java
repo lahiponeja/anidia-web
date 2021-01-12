@@ -348,19 +348,19 @@ public class SolarBudget {
 
 	@Schema(description = "Superior installation data")
 	@Valid
-	public SolarSuperiorInstallation getSuperiorInstallation() {
+	public SuperiorInstallation getSuperiorInstallation() {
 		return superiorInstallation;
 	}
 
 	public void setSuperiorInstallation(
-		SolarSuperiorInstallation superiorInstallation) {
+		SuperiorInstallation superiorInstallation) {
 
 		this.superiorInstallation = superiorInstallation;
 	}
 
 	@JsonIgnore
 	public void setSuperiorInstallation(
-		UnsafeSupplier<SolarSuperiorInstallation, Exception>
+		UnsafeSupplier<SuperiorInstallation, Exception>
 			superiorInstallationUnsafeSupplier) {
 
 		try {
@@ -376,23 +376,23 @@ public class SolarBudget {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SolarSuperiorInstallation superiorInstallation;
+	protected SuperiorInstallation superiorInstallation;
 
-	@Schema(description = "Total prize")
-	public String getTotalPrize() {
-		return totalPrize;
+	@Schema(description = "Total price")
+	public String getTotalPrice() {
+		return totalPrice;
 	}
 
-	public void setTotalPrize(String totalPrize) {
-		this.totalPrize = totalPrize;
+	public void setTotalPrice(String totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	@JsonIgnore
-	public void setTotalPrize(
-		UnsafeSupplier<String, Exception> totalPrizeUnsafeSupplier) {
+	public void setTotalPrice(
+		UnsafeSupplier<String, Exception> totalPriceUnsafeSupplier) {
 
 		try {
-			totalPrize = totalPrizeUnsafeSupplier.get();
+			totalPrice = totalPriceUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -404,7 +404,7 @@ public class SolarBudget {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String totalPrize;
+	protected String totalPrice;
 
 	@Schema(description = "Extra triphasic")
 	public String getTriphasicExtra() {
@@ -617,16 +617,16 @@ public class SolarBudget {
 			sb.append(String.valueOf(superiorInstallation));
 		}
 
-		if (totalPrize != null) {
+		if (totalPrice != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"totalPrize\": ");
+			sb.append("\"totalPrice\": ");
 
 			sb.append("\"");
 
-			sb.append(_escape(totalPrize));
+			sb.append(_escape(totalPrice));
 
 			sb.append("\"");
 		}

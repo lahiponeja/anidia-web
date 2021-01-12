@@ -193,11 +193,11 @@ components:
         basePanels:
           description: Base panels
           type: string
-    SolarSuperiorInstallation:
+    SuperiorInstallation:
       properties:
         superiorSize:
            $ref: "#/components/schemas/SuperiorSize"
-        panelType:
+        panelsType:
           type: string
         inverterType:
           type: string
@@ -261,12 +261,12 @@ components:
         additionalPanelsInstallation:
           description: Additional Installation
           type: string
-        totalPrize:
-          description: Total prize
+        totalPrice:
+          description: Total price
           type: string
         superiorInstallation:
           description: Superior installation data
-          $ref: "#/components/schemas/SolarSuperiorInstallation"
+          $ref: "#/components/schemas/SuperiorInstallation"
   
     SelectedExtras:
       properties:

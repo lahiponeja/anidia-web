@@ -5,8 +5,8 @@ package com.liferay.gasBudget.internal.dto;
 public class SolarOutputRequest {
 
     private String panelsType;
-    private String size;
-    private String inverter;
+    private SolarSize size;
+    private SolarInverter inverter;
     private String panelsExtra;
     private String triphasicExtra;
     private String inverterExtra;
@@ -16,8 +16,8 @@ public class SolarOutputRequest {
     private String carCharger;
     private String battery;
     private String additionalPanelsInstallation;
-    private String totalPrize;
-    private String superiorInstallation;
+    private String totalPrice;
+    private SolarSuperiorInstallation superiorInstallation;
 
     public String getPanelsType() {
         return panelsType;
@@ -27,19 +27,19 @@ public class SolarOutputRequest {
         this.panelsType = panelsType;
     }
 
-    public String getSize() {
+    public SolarSize getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(SolarSize size) {
         this.size = size;
     }
 
-    public String getInverter() {
+    public SolarInverter getInverter() {
         return inverter;
     }
 
-    public void setInverter(String inverter) {
+    public void setInverter(SolarInverter inverter) {
         this.inverter = inverter;
     }
 
@@ -115,19 +115,19 @@ public class SolarOutputRequest {
         this.additionalPanelsInstallation = additionalPanelsInstallation;
     }
 
-    public String getTotalPrize() {
-        return totalPrize;
+    public String getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setTotalPrize(String totalPrize) {
-        this.totalPrize = totalPrize;
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
-    public String getSuperiorInstallation() {
+    public SolarSuperiorInstallation getSuperiorInstallation() {
         return superiorInstallation;
     }
 
-    public void setSuperiorInstallation(String superiorInstallation) {
+    public void setSuperiorInstallation(SolarSuperiorInstallation superiorInstallation) {
         this.superiorInstallation = superiorInstallation;
     }
 
