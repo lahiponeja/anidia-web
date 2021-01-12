@@ -29,7 +29,6 @@ public class Calculator {
       jsonRequest.put("EntryKey", "Web");
       jsonRequest.put("HouseType", solarBudgetRequest.getHouseTypeAsString());
       jsonRequest.put("MonthlyConsumption", solarBudgetRequest.getMonthlyConsumption());
-      jsonRequest.put("AnnualConsumption", solarBudgetRequest.getAnnualConsumption());
       jsonRequest.put("RoofType", solarBudgetRequest.getRoofTypeAsString());
       System.out.println(jsonRequest);
     } catch (JSONException e) {

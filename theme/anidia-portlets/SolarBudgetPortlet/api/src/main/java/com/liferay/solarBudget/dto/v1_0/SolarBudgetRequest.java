@@ -110,34 +110,6 @@ public class SolarBudgetRequest {
 
 	}
 
-	@Schema(description = "Annual Consumption")
-	public Integer getAnnualConsumption() {
-		return annualConsumption;
-	}
-
-	public void setAnnualConsumption(Integer annualConsumption) {
-		this.annualConsumption = annualConsumption;
-	}
-
-	@JsonIgnore
-	public void setAnnualConsumption(
-		UnsafeSupplier<Integer, Exception> annualConsumptionUnsafeSupplier) {
-
-		try {
-			annualConsumption = annualConsumptionUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Integer annualConsumption;
-
 	@Schema(description = "Kind of house")
 	@Valid
 	public HouseType getHouseType() {
@@ -268,16 +240,6 @@ public class SolarBudgetRequest {
 		StringBundler sb = new StringBundler();
 
 		sb.append("{");
-
-		if (annualConsumption != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"annualConsumption\": ");
-
-			sb.append(annualConsumption);
-		}
 
 		if (houseType != null) {
 			if (sb.length() > 1) {

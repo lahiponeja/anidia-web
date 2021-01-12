@@ -417,7 +417,6 @@ public class SalesforceService {
 		SolarInputRequest inputRequest = new SolarInputRequest();
 		inputRequest.setHouseType(calculatorSolarInput.getHouseTypeAsString());
 		inputRequest.setMonthlyConsumption(calculatorSolarInput.getMonthlyConsumption());
-		inputRequest.setAnnualConsumption(calculatorSolarInput.getAnnualConsumption());
 		inputRequest.setRoofType(calculatorSolarInput.getRoofTypeAsString());
 		return inputRequest;
 	}

@@ -144,9 +144,6 @@ components:
         monthlyConsumption:
           description: Monthly consumprion
           type: integer 
-        annualConsumption: 
-          description: Annual Consumption
-          type: integer 
         roofType:
           description: Roof type
           type: string 
