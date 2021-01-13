@@ -18,7 +18,7 @@ public class PostalCodeResourceImpl extends BasePostalCodeResourceImpl {
 	@Override
 	public Page<PostalCode> getMunicipalityPostalCodePage(@NotNull String postalCode){
 		Geocode geocode = new Geocode();
-		return geocode.getMunicipalities(postalCode);
+		return Page.of(geocode.getMunicipalities(postalCode));
 
 	}
 

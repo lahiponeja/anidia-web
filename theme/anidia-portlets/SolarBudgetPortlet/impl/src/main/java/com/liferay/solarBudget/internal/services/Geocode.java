@@ -33,45 +33,45 @@ public class Geocode{
           e.printStackTrace();
         }
 
-		HttpClient client = HttpClient.newHttpClient();
-		HttpRequest request = HttpRequest.newBuilder().
-			uri(URI.create(Geocode.GEOCODE_LOGIN_URL)).
-			header("Content-Type", "application/json").
-			POST(HttpRequest.BodyPublishers.ofString(jsonRequestBody.toString())).
-        build();
+      HttpClient client = HttpClient.newHttpClient();
+      HttpRequest request = HttpRequest.newBuilder().
+        uri(URI.create(Geocode.GEOCODE_LOGIN_URL)).
+        header("Content-Type", "application/json").
+        POST(HttpRequest.BodyPublishers.ofString(jsonRequestBody.toString())).
+          build();
 
-		HttpResponse<String> response = null;
-		try {
-			response = client.send(request, HttpResponse.BodyHandlers.ofString());
-		} catch (IOException | InterruptedException e) {
-			if(response != null) {
-				System.out.println(response.body());
-			}
-			e.printStackTrace();
-			return null;
-		}
+      HttpResponse<String> response = null;
+      try {
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+      } catch (IOException | InterruptedException e) {
+        if(response != null) {
+          System.out.println(response.body());
+        }
+        e.printStackTrace();
+        return null;
+      }
 
-		JSONObject json;
-		try {
-			json = new JSONObject(response.body());
-		} catch (JSONException e) {
-			System.out.println(response.body());
-			e.printStackTrace();
-			return null;
-		}
+      JSONObject json;
+      try {
+        json = new JSONObject(response.body());
+      } catch (JSONException e) {
+        System.out.println(response.body());
+        e.printStackTrace();
+        return null;
+      }
 
-		try {
-			return json.getString("UserToken") + "@" + json.getString("UserDomain");
-		} catch (JSONException e) {
-			System.out.println(json.toString());
-			e.printStackTrace();
-			return null;
-		}
+      try {
+        return json.getString("UserToken") + "@" + json.getString("UserDomain");
+      } catch (JSONException e) {
+        System.out.println(json.toString());
+        e.printStackTrace();
+        return null;
+      }
     }
     
 
 
-    public Page<PostalCode> getMunicipalities(String postalCode) {
+    public List<PostalCode> getMunicipalities(String postalCode) {
         List<PostalCode> postalCodes = new ArrayList<PostalCode>();
         String url = Geocode.GEOCODE_MUNICIPALITIES_URL + "/" + postalCode;
         HttpClient client = HttpClient.newHttpClient();
@@ -82,89 +82,104 @@ public class Geocode{
             GET().
             build();
     
-        System.out.println("Solicitando municipios a " + url);
-        System.out.println(">   CP " + postalCode);
-    
-        HttpResponse<String> response;
+        HttpResponse<String> response = null;
+        JSONArray responseJson;
+        System.out.println("Requesting municipalities to " +url);
         try {
           response = client.send(request, HttpResponse.BodyHandlers.ofString());
-          System.out.println(">    Respuesta " + response.body());
-        } catch (IOException | InterruptedException e) {
+          responseJson = new JSONArray(response.body());
+         } catch (IOException | InterruptedException e) {
           e.printStackTrace();
-          return null;
-        }
-    
-        try {
-            JSONArray jsonResponse = new JSONArray(response.body());
-            for (int i = 0 ; i < jsonResponse.length(); i++) {
-                JSONObject data = jsonResponse.getJSONObject(i);
-                PostalCode receivedPostalCode = new PostalCode();
-                receivedPostalCode.setMunicipalityId(data.getString("codMunicipio"));
-                receivedPostalCode.setMunicipalityName(data.getString("desPoblacion"));
-                receivedPostalCode.setProvinceId(data.getString("codProvincia"));
-                receivedPostalCode.setPopulationId(data.getString("codPoblacion"));
-                postalCodes.add(receivedPostalCode);           
-            }
+          return postalCodes;
         } catch (JSONException e) {
+          if(response != null) {
+            System.out.println("Geocode response: " + response.body());
+          }
           e.printStackTrace();
-          return null;
+          return postalCodes;
         }
     
-        return Page.of(postalCodes);
-    
+
+        for (int i = 0 ; i < responseJson.length(); i++) {
+          JSONObject postalcodeJson = null;
+          try {
+            postalcodeJson = responseJson.getJSONObject(i);
+            PostalCode postalCodeData = new PostalCode();
+            postalCodeData.setMunicipalityId(postalcodeJson.getString("codMunicipio"));
+            postalCodeData.setMunicipalityName(postalcodeJson.getString("desPoblacion"));
+            postalCodeData.setProvinceId(postalcodeJson.getString("codProvincia"));
+            postalCodeData.setPopulationId(postalcodeJson.getString("codPoblacion"));
+            postalCodes.add(postalCodeData);  
+          } catch (JSONException e) {
+            System.out.println("Geocode response: " + response.body());
+            if(postalcodeJson != null) {
+              System.out.println("Json Object with error: " + postalcodeJson.toString());
+            }
+            e.printStackTrace();
+          }         
+        }
+        return postalCodes;  
       }
 
     
-      public List<Property> getProperties( String postalCode, String municipalityId,
-      String streetId, String portalNumber) {
-        List<Property> properties = new ArrayList<Property>();
+    public List<Property> getProperties( String postalCode, String municipalityId,
+    String streetId, String portalNumber) {
+      List<Property> properties = new ArrayList<Property>();
 
 
-        StringBuilder urlBuilder = new StringBuilder();
-        urlBuilder.append(Geocode.GEOCODE_PROPERTIES_URL);
-        urlBuilder.append("?");
-        urlBuilder.append("&codProvincia=");
-        urlBuilder.append(postalCode.substring(0, 2));
-        urlBuilder.append("&codMunicipio=");
-        urlBuilder.append(municipalityId);
-        urlBuilder.append("&codVia=");
-        urlBuilder.append(streetId);
-        urlBuilder.append("&numPortal=");
-        urlBuilder.append(portalNumber);
-        urlBuilder.append("&sistemaCoordenada=ETRS89");
+      StringBuilder urlBuilder = new StringBuilder();
+      urlBuilder.append(Geocode.GEOCODE_PROPERTIES_URL);
+      urlBuilder.append("?");
+      urlBuilder.append("&codProvincia=");
+      urlBuilder.append(postalCode.substring(0, 2));
+      urlBuilder.append("&codMunicipio=");
+      urlBuilder.append(municipalityId);
+      urlBuilder.append("&codVia=");
+      urlBuilder.append(streetId);
+      urlBuilder.append("&numPortal=");
+      urlBuilder.append(portalNumber);
+      urlBuilder.append("&sistemaCoordenada=ETRS89");
 
-        String url = Geocode.GEOCODE_MUNICIPALITIES_URL + "/" + postalCode;
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().
-            uri(URI.create(urlBuilder.toString())).
-            header("Content-Type", "application/json").
-            header("codSesion", getGeocodeToken()).
-            GET().
-            build();
-    
-        System.out.println("Solicitando datos de propiedades a a " + url);
+      String url = Geocode.GEOCODE_MUNICIPALITIES_URL + "/" + postalCode;
+      HttpClient client = HttpClient.newHttpClient();
+      HttpRequest request = HttpRequest.newBuilder().
+          uri(URI.create(urlBuilder.toString())).
+          header("Content-Type", "application/json").
+          header("codSesion", getGeocodeToken()).
+          GET().
+          build();
+  
+      System.out.println("Requesting properties to " + url);
 
 
-        HttpResponse<String> response;
-        try {
-          response = client.send(request, HttpResponse.BodyHandlers.ofString());
-          System.out.println(">    Respuesta " + response.body());
-        } catch (IOException | InterruptedException e) {
-          e.printStackTrace();
-          return null;
+      HttpResponse<String> response = null;
+      JSONArray responseJson;
+
+      try {
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        responseJson = new JSONArray(response.body());
+      } catch (IOException | InterruptedException e) {
+        e.printStackTrace();
+        return properties;
+      } catch (JSONException e) {
+        if(response != null) {
+          System.out.println("Geocode response: " + response.body());
         }
-    
-        try {
-            JSONArray jsonResponse = new JSONArray(response.body());
-            for (int i = 0 ; i < jsonResponse.length(); i++) {
-                JSONObject propertyJson = jsonResponse.getJSONObject(i);
+        e.printStackTrace();
+        return properties;
+      }
+          
+          for (int i = 0 ; i < responseJson.length(); i++) {
+              JSONObject propertyJson = null;
+              try {
+                propertyJson = responseJson.getJSONObject(i);
                 Property property = new Property();
                 property.setPropertyId(propertyJson.optString("referenciaCatastral"));
                 property.setBlock(propertyJson.optString("bloque"));
                 property.setLadder(propertyJson.optString("escalera"));
                 property.setFloor(propertyJson.optString("piso"));
                 property.setDoor(propertyJson.optString("puerta"));
-                property.setContractStatus("POR DEFINIR");
+                //property.setContractStatus("POR DEFINIR");
         
                 StringBuilder completeAddress = new StringBuilder();
                 if(property.getBlock() != null && !property.getBlock().equals("")) {
@@ -194,13 +209,14 @@ public class Geocode{
                 }   
                 
                 properties.add(property);
+              } catch (JSONException e) {
+                System.out.println("Geocode response: " + response.body());
+                if(propertyJson != null) {
+                  System.out.println("Json Object with error: " + propertyJson.toString());
+                }
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-          e.printStackTrace();
-          return null;
-        }
-    
-        return properties;
-    
-      }
+          }  
+    return properties;
+  }
 }
