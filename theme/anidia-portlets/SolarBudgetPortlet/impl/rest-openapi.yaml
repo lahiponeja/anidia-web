@@ -283,9 +283,9 @@ paths:
   
   "/availability":
     get:
-      operationId: getAddressAvailability
-      summary: Get the municipalities for a postal code
-      description: Get all the municipalities for a postal code from the Anidia database
+      operationId: getAvailability
+      summary: Get solar installer availability
+      description: Get solar installer availability
       parameters:
         - name: "postalCode"
           in: "query"
