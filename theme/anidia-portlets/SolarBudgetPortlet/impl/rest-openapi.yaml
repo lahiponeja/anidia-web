@@ -9,6 +9,16 @@ openapi: 3.0.1
 
 components:
   schemas:
+    Installer:
+      description: Solar installer available
+      properties:
+        installerCode:
+          description: Installer code
+          type: string
+        installerName:
+          description: Installer Name
+          type: string
+
     SolarBudgetRequest:
       description: The required information to calculate a Solar Budget
       properties:
@@ -270,3 +280,32 @@ paths:
                   $ref: "#/components/schemas/PostalCode"
           description: ""
       tags: ["PostalCode"]
+  
+  "/availability":
+    get:
+      operationId: getAddressAvailability
+      summary: Get the municipalities for a postal code
+      description: Get all the municipalities for a postal code from the Anidia database
+      parameters:
+        - name: "postalCode"
+          in: "query"
+          description: "Postal Code"
+          required: true
+          schema:
+            type: "string"
+        - name: "municipalityId"
+          in: "query"
+          description: "Municipality Id"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Installer"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Installer"
+          description: Found installer
