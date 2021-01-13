@@ -224,34 +224,6 @@ public class Property {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String propertyId;
 
-	@Schema(description = "Status of the property")
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	@JsonIgnore
-	public void setStatus(
-		UnsafeSupplier<String, Exception> statusUnsafeSupplier) {
-
-		try {
-			status = statusUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String status;
-
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
@@ -373,20 +345,6 @@ public class Property {
 			sb.append("\"");
 
 			sb.append(_escape(propertyId));
-
-			sb.append("\"");
-		}
-
-		if (status != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"status\": ");
-
-			sb.append("\"");
-
-			sb.append(_escape(status));
 
 			sb.append("\"");
 		}

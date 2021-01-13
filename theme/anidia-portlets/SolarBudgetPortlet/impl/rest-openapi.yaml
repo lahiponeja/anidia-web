@@ -221,9 +221,6 @@ components:
         door:
           description: Door in the flor of the property (e.g. C)
           type: string
-        status:
-          description: Status of the property
-          type: string
         contractStatus:
           description: Status of the contract for this property
           type: string
@@ -309,3 +306,51 @@ paths:
               schema:
                 $ref: "#/components/schemas/Installer"
           description: Found installer
+
+
+  "/properties":
+    get:
+      operationId: getPropertiesPage
+      summary: Get all properties for an estate
+      description: Get all the properties for an estate
+      parameters:
+        - name: "postalCode"
+          in: "query"
+          description: "Gate Id of the estate in CRM"
+          required: true
+          schema:
+            type: "string"
+        - name: "municipalityId"
+          in: "query"
+          description: "Municipality Id"
+          required: true
+          schema:
+            type: "string"
+        - name: "streetId"
+          in: "query"
+          description: "Street Id"
+          required: true
+          schema:
+            type: "string"
+        - name: "portalNumber"
+          in: "query"
+          description: "Portal number"
+          required: true
+          schema:
+            type: "string"
+            
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Property"
+            application/xml:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Property"
+          description: ""
+      tags: ["Property"]
