@@ -16,10 +16,12 @@ import com.liferay.portal.vulcan.pagination.Page;
 
 import org.json.*;
 import com.liferay.solarBudget.dto.v1_0.PostalCode;
-
+import com.liferay.solarBudget.dto.v1_0.Property;
 public class Geocode{
     static String GEOCODE_LOGIN_URL = System.getenv().get("GEOCODE_LOGIN_URL");
     static String GEOCODE_MUNICIPALITIES_URL = System.getenv().get("GEOCODE_MUNICIPALITIES_URL");
+    static String GEOCODE_PROPERTIES_URL = System.getenv().get("GEOCODE_PROPERTIES_URL");
+
     private String getGeocodeToken() {
 
         JSONObject jsonRequestBody = new JSONObject();
@@ -109,6 +111,96 @@ public class Geocode{
         }
     
         return Page.of(postalCodes);
+    
+      }
+
+    
+      public List<Property> getProperties( String postalCode, String municipalityId,
+      String streetId, String portalNumber) {
+        List<Property> properties = new ArrayList<Property>();
+
+
+        StringBuilder urlBuilder = new StringBuilder();
+        urlBuilder.append(Geocode.GEOCODE_PROPERTIES_URL);
+        urlBuilder.append("?");
+        urlBuilder.append("&codProvincia=");
+        urlBuilder.append(postalCode.substring(0, 2));
+        urlBuilder.append("&codMunicipio=");
+        urlBuilder.append(municipalityId);
+        urlBuilder.append("&codVia=");
+        urlBuilder.append(streetId);
+        urlBuilder.append("&numPortal=");
+        urlBuilder.append(portalNumber);
+        urlBuilder.append("&sistemaCoordenada=ETRS89");
+
+        String url = Geocode.GEOCODE_MUNICIPALITIES_URL + "/" + postalCode;
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder().
+            uri(URI.create(urlBuilder.toString())).
+            header("Content-Type", "application/json").
+            header("codSesion", getGeocodeToken()).
+            GET().
+            build();
+    
+        System.out.println("Solicitando datos de propiedades a a " + url);
+
+
+        HttpResponse<String> response;
+        try {
+          response = client.send(request, HttpResponse.BodyHandlers.ofString());
+          System.out.println(">    Respuesta " + response.body());
+        } catch (IOException | InterruptedException e) {
+          e.printStackTrace();
+          return null;
+        }
+    
+        try {
+            JSONArray jsonResponse = new JSONArray(response.body());
+            for (int i = 0 ; i < jsonResponse.length(); i++) {
+                JSONObject propertyJson = jsonResponse.getJSONObject(i);
+                Property property = new Property();
+                property.setPropertyId(propertyJson.optString("referenciaCatastral"));
+                property.setBlock(propertyJson.optString("bloque"));
+                property.setLadder(propertyJson.optString("escalera"));
+                property.setFloor(propertyJson.optString("piso"));
+                property.setDoor(propertyJson.optString("puerta"));
+                property.setContractStatus("POR DEFINIR");
+        
+                StringBuilder completeAddress = new StringBuilder();
+                if(property.getBlock() != null && !property.getBlock().equals("")) {
+                  completeAddress.append("Bloque ");
+                  completeAddress.append(property.getBlock());
+                  completeAddress.append(" ");
+                }
+                if(property.getLadder() != null && !property.getLadder().equals("")) {
+                  completeAddress.append("Escalera ");
+                  completeAddress.append(property.getLadder());
+                  completeAddress.append(" ");
+                }
+                if(property.getFloor() != null && !property.getFloor().equals("")) {
+                  completeAddress.append("Piso ");
+                  completeAddress.append(property.getFloor());
+                  completeAddress.append(" ");
+                }
+                if(property.getDoor() != null && !property.getDoor().equals("")) {
+                  completeAddress.append("Puerta ");
+                  completeAddress.append(property.getDoor());
+                }
+        
+                if(completeAddress.toString().equals("")) {
+                  property.setAddress(propertyJson.optString("Direccion_completa__c"));
+                } else {
+                  property.setAddress(completeAddress.toString());
+                }   
+                
+                properties.add(property);
+            }
+        } catch (JSONException e) {
+          e.printStackTrace();
+          return null;
+        }
+    
+        return properties;
     
       }
 }
