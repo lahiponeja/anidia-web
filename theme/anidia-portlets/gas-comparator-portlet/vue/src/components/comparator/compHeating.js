@@ -35,7 +35,7 @@ const compHeating = {
     goBack() {
       window.dataLayer.push(this.comparator.getDatalayerInitialInfo("engagement", "calculator", "back"));
       this.comparator.changeStepComponent('comp-hot-water')
-    },
+    }
 
   },
   template: /*html*/`
@@ -111,7 +111,7 @@ const compHeating = {
         <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal mb-xxl">
           <div class="an-form__item">
             <div class="an-input">
-              <input v-model="savingsData.surfaceHouse" type="number" class="an-input__field" placeholder="Metros cuadrados" required="">
+              <input v-model="savingsData.surfaceHouse" type="number" min=0 class="an-input__field" placeholder="Metros cuadrados" required="">
             </div>
           </div>
         </div>
