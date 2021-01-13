@@ -86,6 +86,34 @@ public class PostalCode {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String municipalityName;
 
+	@Schema(description = "Population identifier")
+	public String getPopulationId() {
+		return populationId;
+	}
+
+	public void setPopulationId(String populationId) {
+		this.populationId = populationId;
+	}
+
+	@JsonIgnore
+	public void setPopulationId(
+		UnsafeSupplier<String, Exception> populationIdUnsafeSupplier) {
+
+		try {
+			populationId = populationIdUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String populationId;
+
 	@Schema(description = "Postal Code")
 	public String getPostalCode() {
 		return postalCode;
@@ -193,6 +221,20 @@ public class PostalCode {
 			sb.append("\"");
 
 			sb.append(_escape(municipalityName));
+
+			sb.append("\"");
+		}
+
+		if (populationId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"populationId\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(populationId));
 
 			sb.append("\"");
 		}

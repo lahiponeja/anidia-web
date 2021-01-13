@@ -156,6 +156,9 @@ components:
         municipalityId:
           description: INE Municipality identifier
           type: string
+        populationId:
+          description: Population identifier
+          type: string
         provinceId:
           description: Municipality name (2 first digits from postal code)
           type: string
