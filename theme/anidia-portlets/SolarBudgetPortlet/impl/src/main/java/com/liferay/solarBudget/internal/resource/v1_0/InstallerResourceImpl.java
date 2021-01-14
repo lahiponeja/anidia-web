@@ -17,7 +17,7 @@ import com.liferay.solarBudget.internal.services.Availability;
 public class InstallerResourceImpl extends BaseInstallerResourceImpl {
 
 	@Override
-	public Installer getAvailability(@NotNull String postalCode, @NotNull String municipalityId) {
+	public Installer getAvailability(@NotNull String postalCode, String municipalityId) {
 		Availability availability = new Availability();
 		return availability.checkAvailability(postalCode, municipalityId);
 	}

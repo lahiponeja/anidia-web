@@ -57,8 +57,8 @@ public abstract class BaseInstallerResourceImpl implements InstallerResource {
 	public Installer getAvailability(
 			@NotNull @Parameter(hidden = true) @QueryParam("postalCode") String
 				postalCode,
-			@NotNull @Parameter(hidden = true) @QueryParam("municipalityId")
-				String municipalityId)
+			@Parameter(hidden = true) @QueryParam("municipalityId") String
+				municipalityId)
 		throws Exception {
 
 		return new Installer();

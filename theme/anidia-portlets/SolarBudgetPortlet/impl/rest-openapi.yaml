@@ -293,7 +293,7 @@ paths:
         - name: "municipalityId"
           in: "query"
           description: "Municipality Id"
-          required: true
+          required: false
           schema:
             type: "string"
       responses:
