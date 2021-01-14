@@ -182,6 +182,9 @@ components:
         name:
           description: Name of the address
           type: string
+        addressId:
+          description: Id of the address
+          type: string
     Estate:
       description: All the information about an estate
       properties:

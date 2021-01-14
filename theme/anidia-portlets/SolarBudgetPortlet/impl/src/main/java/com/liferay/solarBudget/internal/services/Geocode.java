@@ -17,10 +17,12 @@ import com.liferay.portal.vulcan.pagination.Page;
 import org.json.*;
 import com.liferay.solarBudget.dto.v1_0.PostalCode;
 import com.liferay.solarBudget.dto.v1_0.Property;
+import com.liferay.solarBudget.dto.v1_0.Address;
 public class Geocode{
     static String GEOCODE_LOGIN_URL = System.getenv().get("GEOCODE_LOGIN_URL");
     static String GEOCODE_MUNICIPALITIES_URL = System.getenv().get("GEOCODE_MUNICIPALITIES_URL");
     static String GEOCODE_PROPERTIES_URL = System.getenv().get("GEOCODE_PROPERTIES_URL");
+    static String GEOCODE_ADDRESSES_URL = System.getenv().get("GEOCODE_ADDRESSES_URL");
 
     private String getGeocodeToken() {
 
@@ -140,7 +142,6 @@ public class Geocode{
       urlBuilder.append(portalNumber);
       urlBuilder.append("&sistemaCoordenada=ETRS89");
 
-      String url = Geocode.GEOCODE_MUNICIPALITIES_URL + "/" + postalCode;
       HttpClient client = HttpClient.newHttpClient();
       HttpRequest request = HttpRequest.newBuilder().
           uri(URI.create(urlBuilder.toString())).
@@ -149,7 +150,7 @@ public class Geocode{
           GET().
           build();
   
-      System.out.println("Requesting properties to " + url);
+      System.out.println("Requesting properties to " + urlBuilder.toString());
 
 
       HttpResponse<String> response = null;
@@ -219,4 +220,66 @@ public class Geocode{
           }  
     return properties;
   }
+
+
+
+  public List<Address> getAddresses(String populationId, String postalCode) {
+    List<Address> addresses = new ArrayList<Address>();
+    StringBuilder urlBuilder = new StringBuilder();
+    urlBuilder.append(Geocode.GEOCODE_ADDRESSES_URL);
+    urlBuilder.append("?");
+    urlBuilder.append("&codPoblacion=");
+    urlBuilder.append(populationId);
+    urlBuilder.append("&literales=false");
+    urlBuilder.append("&patron=rai*");
+
+    String url = Geocode.GEOCODE_MUNICIPALITIES_URL + "/" + postalCode;
+    HttpClient client = HttpClient.newHttpClient();
+    HttpRequest request = HttpRequest.newBuilder().
+        uri(URI.create(urlBuilder.toString())).
+        header("Content-Type", "application/json").
+        header("codSesion", getGeocodeToken()).
+        GET().
+        build();
+
+    System.out.println("Requesting addresses to " + urlBuilder.toString());
+
+    HttpResponse<String> response = null;
+    JSONArray responseJson;
+    try {
+      response = client.send(request, HttpResponse.BodyHandlers.ofString());
+      responseJson = new JSONArray(response.body());
+     } catch (IOException | InterruptedException e) {
+      e.printStackTrace();
+      return addresses;
+    } catch (JSONException e) {
+      if(response != null) {
+        System.out.println("Geocode response: " + response.body());
+      }
+      e.printStackTrace();
+      return addresses;
+    }
+
+
+    for (int i = 0 ; i < responseJson.length(); i++) {
+      JSONObject addressJson = null;
+      try {
+        addressJson = responseJson.getJSONObject(i);
+        Address address = new Address();
+        address.setKind(addressJson.getString("tipoVia"));
+        address.setName(addressJson.getString("desVia"));
+        address.setAddressId(addressJson.getString("codVia"));
+        addresses.add(address);  
+      } catch (JSONException e) {
+        System.out.println("Geocode response: " + response.body());
+        if(addressJson != null) {
+          System.out.println("Json Object with error: " + addressJson.toString());
+        }
+        e.printStackTrace();
+      }         
+    }
+    return addresses;  
+  }
+
+
 }

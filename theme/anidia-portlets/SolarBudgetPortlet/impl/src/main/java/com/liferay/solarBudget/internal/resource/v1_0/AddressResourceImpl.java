@@ -1,9 +1,12 @@
 package com.liferay.solarBudget.internal.resource.v1_0;
 
 import com.liferay.solarBudget.resource.v1_0.AddressResource;
-
+import com.liferay.solarBudget.internal.services.Geocode;
+import com.liferay.solarBudget.dto.v1_0.Address;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ServiceScope;
+import javax.validation.constraints.NotNull;
+import com.liferay.portal.vulcan.pagination.Page;
 
 /**
  * @author David Brenes
@@ -13,4 +16,9 @@ import org.osgi.service.component.annotations.ServiceScope;
 	scope = ServiceScope.PROTOTYPE, service = AddressResource.class
 )
 public class AddressResourceImpl extends BaseAddressResourceImpl {
+
+	public Page<Address> getAddressesPostalCodePage(@NotNull String populationId, @NotNull String postalCode) {
+		Geocode geocode = new Geocode();
+		return Page.of(geocode.getAddresses(populationId, postalCode));
+	}
 }

@@ -30,6 +30,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Address")
 public class Address {
 
+	@Schema(description = "Id of the address")
+	public String getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(String addressId) {
+		this.addressId = addressId;
+	}
+
+	@JsonIgnore
+	public void setAddressId(
+		UnsafeSupplier<String, Exception> addressIdUnsafeSupplier) {
+
+		try {
+			addressId = addressIdUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String addressId;
+
 	@Schema(description = "Type of the address (street, avenue...)")
 	public String getKind() {
 		return kind;
@@ -108,6 +136,20 @@ public class Address {
 		StringBundler sb = new StringBundler();
 
 		sb.append("{");
+
+		if (addressId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"addressId\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(addressId));
+
+			sb.append("\"");
+		}
 
 		if (kind != null) {
 			if (sb.length() > 1) {
