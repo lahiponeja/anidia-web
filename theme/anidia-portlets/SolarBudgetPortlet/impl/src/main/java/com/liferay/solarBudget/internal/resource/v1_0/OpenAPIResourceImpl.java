@@ -56,6 +56,8 @@ public class OpenAPIResourceImpl {
 
 			add(PostalCodeResourceImpl.class);
 
+			add(AddressResourceImpl.class);
+
 			add(PropertyResourceImpl.class);
 
 			add(OpenAPIResourceImpl.class);

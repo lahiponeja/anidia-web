@@ -354,3 +354,37 @@ paths:
                   $ref: "#/components/schemas/Property"
           description: ""
       tags: ["Property"]
+
+  "/addresses/{populationId}/{postalCode}":
+    get:
+      operationId: getAddressesPostalCodePage
+      summary: Get all addresses for a population and postal code
+      description: Get all the addresses for a municipality and postal code from Anidia CRM
+      parameters:
+        - name: "populationId"
+          in: "path"
+          description: "Population Id"
+          required: true
+          schema:
+            type: "string"
+        - name: "postalCode"
+          in: "path"
+          description: "Postal Code of the addresses"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Address"
+            application/xml:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Address"
+          description: ""
+      tags: ["Address"]
