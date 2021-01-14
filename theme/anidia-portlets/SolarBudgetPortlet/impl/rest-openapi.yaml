@@ -224,9 +224,7 @@ components:
         door:
           description: Door in the flor of the property (e.g. C)
           type: string
-        contractStatus:
-          description: Status of the contract for this property
-          type: string
+
     
 paths:
   "/solar-budgets":
@@ -329,7 +327,7 @@ paths:
           required: true
           schema:
             type: "string"
-        - name: "streetId"
+        - name: "addressId"
           in: "query"
           description: "Street Id"
           required: true

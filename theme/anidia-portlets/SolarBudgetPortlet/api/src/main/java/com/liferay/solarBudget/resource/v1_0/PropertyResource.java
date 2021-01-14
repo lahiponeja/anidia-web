@@ -28,7 +28,7 @@ import org.osgi.annotation.versioning.ProviderType;
 public interface PropertyResource {
 
 	public Page<Property> getPropertiesPage(
-			String postalCode, String municipalityId, String streetId,
+			String postalCode, String municipalityId, String addressId,
 			String portalNumber)
 		throws Exception;
 

@@ -86,34 +86,6 @@ public class Property {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String block;
 
-	@Schema(description = "Status of the contract for this property")
-	public String getContractStatus() {
-		return contractStatus;
-	}
-
-	public void setContractStatus(String contractStatus) {
-		this.contractStatus = contractStatus;
-	}
-
-	@JsonIgnore
-	public void setContractStatus(
-		UnsafeSupplier<String, Exception> contractStatusUnsafeSupplier) {
-
-		try {
-			contractStatus = contractStatusUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String contractStatus;
-
 	@Schema(description = "Door in the flor of the property (e.g. C)")
 	public String getDoor() {
 		return door;
@@ -275,20 +247,6 @@ public class Property {
 			sb.append("\"");
 
 			sb.append(_escape(block));
-
-			sb.append("\"");
-		}
-
-		if (contractStatus != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"contractStatus\": ");
-
-			sb.append("\"");
-
-			sb.append(_escape(contractStatus));
 
 			sb.append("\"");
 		}

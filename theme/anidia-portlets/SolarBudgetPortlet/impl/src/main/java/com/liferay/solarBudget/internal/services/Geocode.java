@@ -125,7 +125,7 @@ public class Geocode{
 
     
     public List<Property> getProperties( String postalCode, String municipalityId,
-    String streetId, String portalNumber) {
+    String addressId, String portalNumber) {
       List<Property> properties = new ArrayList<Property>();
 
 
@@ -137,7 +137,7 @@ public class Geocode{
       urlBuilder.append("&codMunicipio=");
       urlBuilder.append(municipalityId);
       urlBuilder.append("&codVia=");
-      urlBuilder.append(streetId);
+      urlBuilder.append(addressId);
       urlBuilder.append("&numPortal=");
       urlBuilder.append(portalNumber);
       urlBuilder.append("&sistemaCoordenada=ETRS89");
@@ -180,7 +180,6 @@ public class Geocode{
                 property.setLadder(propertyJson.optString("escalera"));
                 property.setFloor(propertyJson.optString("piso"));
                 property.setDoor(propertyJson.optString("puerta"));
-                //property.setContractStatus("POR DEFINIR");
         
                 StringBuilder completeAddress = new StringBuilder();
                 if(property.getBlock() != null && !property.getBlock().equals("")) {

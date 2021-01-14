@@ -20,8 +20,8 @@ public class PropertyResourceImpl extends BasePropertyResourceImpl {
 
 	@Override
 	public Page<Property> getPropertiesPage(@NotNull String postalCode, @NotNull String municipalityId,
-		@NotNull String streetId, @NotNull String portalNumber) {
+		@NotNull String addressId, @NotNull String portalNumber) {
 			Geocode geocode = new Geocode();
-			return Page.of(geocode.getProperties(postalCode, municipalityId, streetId, portalNumber));
+			return Page.of(geocode.getProperties(postalCode, municipalityId, addressId, portalNumber));
 	}
 }

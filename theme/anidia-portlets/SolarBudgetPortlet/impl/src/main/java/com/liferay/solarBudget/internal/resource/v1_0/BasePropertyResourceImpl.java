@@ -52,7 +52,7 @@ public abstract class BasePropertyResourceImpl implements PropertyResource {
 		value = {
 			@Parameter(in = ParameterIn.QUERY, name = "postalCode"),
 			@Parameter(in = ParameterIn.QUERY, name = "municipalityId"),
-			@Parameter(in = ParameterIn.QUERY, name = "streetId"),
+			@Parameter(in = ParameterIn.QUERY, name = "addressId"),
 			@Parameter(in = ParameterIn.QUERY, name = "portalNumber")
 		}
 	)
@@ -64,8 +64,8 @@ public abstract class BasePropertyResourceImpl implements PropertyResource {
 				postalCode,
 			@NotNull @Parameter(hidden = true) @QueryParam("municipalityId")
 				String municipalityId,
-			@NotNull @Parameter(hidden = true) @QueryParam("streetId") String
-				streetId,
+			@NotNull @Parameter(hidden = true) @QueryParam("addressId") String
+				addressId,
 			@NotNull @Parameter(hidden = true) @QueryParam("portalNumber")
 				String portalNumber)
 		throws Exception {
