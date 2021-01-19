@@ -19,7 +19,7 @@ public class Availability {
 
 	public Installer checkAvailability(String postalCode, String municipalityId) {
     Installer installer = new Installer();
-    String url =  Availability.SOLAR_AVAILABILITY_REQUEST_URL + "?zipCode=" + postalCode +"&ineCode=" + municipalityId;
+    String url =  Availability.SOLAR_AVAILABILITY_REQUEST_URL + "zipCode=" + postalCode +"&ineCode=" + municipalityId;
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder().
       uri(URI.create(url)).
