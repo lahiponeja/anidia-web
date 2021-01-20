@@ -74,6 +74,10 @@
          background-repeat: no-repeat;
        }
      }
+
+    body.anidia-white & {
+      background-image: url('../../anidia-theme/assets/img/circles-bg-green.svg');
+    }
    }
 
    &__info {
