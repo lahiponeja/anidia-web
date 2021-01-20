@@ -267,19 +267,19 @@ components:
     SelectedExtras:
       properties:
         extraPanels:
-          type: integer
+          type: string
         triphasicExtra:
-          type: boolean
+          type: string
         roofExtra:
-          type: boolean
+          type: string
         pergolaExtra:
-          type: boolean
+          type: string
         pipelineUnderground:
-          type: boolean
+          type: string
         battery:
-          type: integer
+          type: string
         carCharger:
-          type: boolean
+          type: string
     CalculatorGas:
       description: Calculator gas information to send Lead
       properties:

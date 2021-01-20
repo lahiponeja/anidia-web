@@ -2,67 +2,67 @@ package com.liferay.gasBudget.internal.dto;
 
 public class SelectedSolarExtrasRequest {
 
-    private Integer extraPanels;
-    private Boolean triphasicExtra;
-    private Boolean roofExtra;
-    private Boolean pergolaExtra;
-    private Boolean pipelineUnderground;
-    private Integer battery;
-    private Boolean carCharger;
+    private String extraPanels;
+    private String triphasicExtra;
+    private String roofExtra;
+    private String pergolaExtra;
+    private String pipelineUnderground;
+    private String battery;
+    private String carCharger;
     
-    public Integer getExtraPanels() {
+    public String getExtraPanels() {
     return extraPanels;
     }
     
-    public void setExtraPanels(Integer extraPanels) {
+    public void setExtraPanels(String extraPanels) {
     this.extraPanels = extraPanels;
     }
     
-    public Boolean getTriphasicExtra() {
+    public String getTriphasicExtra() {
     return triphasicExtra;
     }
     
-    public void setTriphasicExtra(Boolean triphasicExtra) {
+    public void setTriphasicExtra(String triphasicExtra) {
     this.triphasicExtra = triphasicExtra;
     }
     
-    public Boolean getRoofExtra() {
+    public String getRoofExtra() {
     return roofExtra;
     }
     
-    public void setRoofExtra(Boolean roofExtra) {
+    public void setRoofExtra(String roofExtra) {
     this.roofExtra = roofExtra;
     }
     
-    public Boolean getPergolaExtra() {
+    public String getPergolaExtra() {
     return pergolaExtra;
     }
     
-    public void setPergolaExtra(Boolean pergolaExtra) {
+    public void setPergolaExtra(String pergolaExtra) {
     this.pergolaExtra = pergolaExtra;
     }
     
-    public Boolean getPipelineUnderground() {
+    public String getPipelineUnderground() {
     return pipelineUnderground;
     }
     
-    public void setPipelineUnderground(Boolean pipelineUnderground) {
+    public void setPipelineUnderground(String pipelineUnderground) {
     this.pipelineUnderground = pipelineUnderground;
     }
     
-    public Integer getBattery() {
+    public String getBattery() {
     return battery;
     }
     
-    public void setBattery(Integer battery) {
+    public void setBattery(String battery) {
     this.battery = battery;
     }
     
-    public Boolean getCarCharger() {
+    public String getCarCharger() {
     return carCharger;
     }
     
-    public void setCarCharger(Boolean carCharger) {
+    public void setCarCharger(String carCharger) {
     this.carCharger = carCharger;
     }
     
