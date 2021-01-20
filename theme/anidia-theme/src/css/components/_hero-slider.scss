@@ -75,7 +75,8 @@
        }
      }
 
-    body.anidia-white & {
+    body.anidia-white &,
+    body.anidia-green-light & {
       background-image: url('../../anidia-theme/assets/img/circles-bg-green.svg');
     }
    }
