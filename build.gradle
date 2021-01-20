@@ -196,9 +196,9 @@ tasks.register("build.portlets.solar_budget") {
     exec {
       commandLine 'cp', 'theme/anidia-portlets/SolarBudgetPortlet/impl/build/libs/solar-budget-impl-1.0.0.jar', 'liferay/deploy'
     }
-    /*exec {
+    exec {
       commandLine 'cp', 'theme/anidia-portlets/SolarBudgetPortlet/vue/dist/solar-budget-portlet-1.0.0.jar', 'liferay/deploy'
-    }*/
+    }
   }
 }
 

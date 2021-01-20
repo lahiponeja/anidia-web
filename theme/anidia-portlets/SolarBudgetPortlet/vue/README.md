@@ -1,3 +1,3 @@
-# gas-budget-portlet
+# solar-budget-portlet
 
-Sample Vue Portlet
+Solar Budget Vue Portlet
