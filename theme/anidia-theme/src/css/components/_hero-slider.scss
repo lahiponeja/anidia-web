@@ -83,6 +83,7 @@
     body.anidia-white-img & {
       &::after {
         background-image: url('../../anidia-theme/assets/img/circles-bg-green.svg');
+        bottom: rem(182);
       }
     }
   }
