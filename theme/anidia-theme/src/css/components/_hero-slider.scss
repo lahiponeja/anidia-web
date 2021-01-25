@@ -58,9 +58,9 @@
       content: '';
       height: 100%;
       position: absolute;
-      right: 0;
+      right: rem(-30);
       width: 100%;
-      z-index: 0;
+      z-index: -2;
 
       @include desktop {
         bottom: 50%;
@@ -82,6 +82,10 @@
       &::after {
         background-image: url('../../anidia-theme/assets/img/circles-bg-green.svg');
         bottom: rem(-182);
+
+        @include desktop {
+          bottom: 50%;
+        }
       }
     }
   }
@@ -106,7 +110,7 @@
    &__image {
      width: 100%;
      position: relative;
-     z-index: 1;
+     z-index: -1;
 
      &:first-of-type {
        opacity: 1;
