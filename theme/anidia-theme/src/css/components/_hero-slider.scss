@@ -94,10 +94,6 @@
       position: absolute;
       height: 90vh;
 
-      &--one-slide {
-        padding: rem(20) rem(20) 0;
-      }
-
      @include desktop {
        width: flex-grid(6);
        margin-top: auto;
@@ -107,6 +103,15 @@
        height: 100%;
        transform: unset;
        position: relative;
+     }
+
+     &--one-slide {
+      padding: rem(20) rem(20) 0;
+
+      @include desktop {
+        padding-left: flex-grid(1);
+        padding-top: rem(150);
+      }
      }
    }
 
