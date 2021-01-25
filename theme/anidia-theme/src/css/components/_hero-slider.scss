@@ -60,7 +60,7 @@
       position: absolute;
       right: rem(-30);
       width: 100%;
-      z-index: -2px;
+      z-index: -2;
 
       @include desktop {
         background-size: contain;
