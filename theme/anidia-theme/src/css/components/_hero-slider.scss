@@ -104,6 +104,10 @@
        transform: unset;
        position: relative;
      }
+
+    &--one-slide {
+      padding: rem(20) rem(20) 0;
+    }
    }
 
    &__image {
