@@ -53,18 +53,20 @@
     &::after {
       background-image: url('../../anidia-theme/assets/img/circles-bg.svg');
       background-repeat: no-repeat;
-      background-size: contain;
-      bottom: -50%;
+      background-size: rem(494) rem(432);
+      bottom: rem(-200);
       content: '';
       height: 100%;
       position: absolute;
-      right: 0;
+      right: rem(13);
       width: 100%;
       z-index: 0;
 
       @include desktop {
+        background-size: contain;
         bottom: 50%;
         height: 110%;
+        right: 0;
         transform: translate(45%, 50%);
       }
     }
