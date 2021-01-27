@@ -48,11 +48,13 @@ const state = reactive({
     },
   ],
   coverageData: {
+    installerCode: "",
     postalCode: {
       postalCode: "",
       municipalityName: "",
       municipalityId: "",
-      provinceId: ""
+      provinceId: "",
+      populationId: ""
     },
     estate: {
       addressKind: "",
@@ -79,6 +81,7 @@ const state = reactive({
     estates: [],
     properties: [],
   },
+  availability: {},
   houseFormData: {},
   gasBudget: {},
   userContactInfo: {},
@@ -96,6 +99,10 @@ const resetAutocompleteData = function() {
     estates: [],
     properties: [],
   })
+}
+
+const setInstallerCode = function(installerCode) {
+  state.coverageData.installerCode = installerCode
 }
 
 const resetHouseFormData = function() {
@@ -238,6 +245,25 @@ const setHouseType = function(payload) {
   state.houseType = payload
 }
 
+const getAvailability = function(postalCode) {
+  return new Promise((resolve, reject) =>{
+    coverageService.getAvailability(postalCode).then((res) => {
+      const resJson = xmlToJsonImp(res.data);
+      console.log(resJson)
+      if( Object.keys(resJson.Installer).length > 0 ) {
+        const { installerCode } = resJson.Installer
+        setInstallerCode(installerCode)
+        resolve(installerCode)
+      } else {
+        // TODO: Ir a la vista de error. Indicando que no hay disponibilidad.
+      }
+    }).catch((err) => {
+      console.error(err)
+      reject(err)
+    })
+  })
+}
+
 const getPostalCodes = function () {
   coverageService.getPostalCodes().then((res) => {
     const resJson = xmlToJsonImp(res.data);
@@ -262,9 +288,9 @@ const getMunicipalities = function(pc) {
   })
 }
 
-const getAddresses = function(municipalityId, postalCode) {
+const getAddresses = function(populationId, postalCode) {
   return new Promise((resolve, reject) =>{
-    coverageService.getAddresses(municipalityId, postalCode).then((res) => {
+    coverageService.getAddresses(populationId, postalCode).then((res) => {
       const resJson = xmlToJsonImp(res.data);
       const { items } = resJson.Page.items
       const result = items
@@ -405,6 +431,7 @@ export default {
   changeHouseStep,
   submitUserContactInfo,
   getPostalCodes,
+  getAvailability,
   getMunicipalities,
   getAddresses,
   getEstates,

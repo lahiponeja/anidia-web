@@ -18,6 +18,7 @@ const coverageForm = {
         municipalityId: "",
         provinceId: "",
         provMunId: "",
+        populationId: "",
         addressKind: "",
         addressName: "",
         name: "",
@@ -124,7 +125,20 @@ const coverageForm = {
       })
     },
 
+    checkAvailability(result) {
+      const { postalCode } = result
+
+      this.house.getAvailability(postalCode)
+      .then(() => { 
+        this.onSubmitPostalCode(result)
+       })
+      .catch((err) => {
+        console.error(err)
+      })
+    },
+
     onSubmitPostalCode(result) {
+
       const { postalCode } = result
       this.formData.postalCode = postalCode
       // Save object in the store
@@ -146,18 +160,19 @@ const coverageForm = {
      * MUNICIPALITIES
     *************************************/
     onSubmitMunicipalities(result) {
-      const { municipalityId, municipalityName, provinceId } = result
+      const { municipalityId, municipalityName, provinceId, populationId } = result
       this.formData.provMunId =  provinceId + municipalityId
 
       // Save object in the store
-      this.house.setCoverageData("postalCode", { municipalityId, municipalityName, provinceId })
+      this.house.setCoverageData("postalCode", { municipalityId, municipalityName, provinceId, populationId})
 
       this.formData.municipalityName = municipalityName
       this.formData.municipalityId = municipalityId
       this.formData.provinceId = provinceId
+      this.formData.populationId = populationId
 
       this.loadingAddressess = true
-      this.house.getAddresses(this.formData.provMunId, this.formData.postalCode)
+      this.house.getAddresses(populationId, this.formData.postalCode)
         .then(() => { this.loadingAddressess = false })
         .catch((err) => {
           window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
@@ -295,7 +310,7 @@ const coverageForm = {
            <div class="an-input an-form__item">
               <autocomplete
                 :debounce-time="700"
-                @submit="onSubmitPostalCode"
+                @submit="checkAvailability"
                 :search="searchPostalCodes"
                 :get-result-value="getResultValue"
                 placeholder="Código Postal"

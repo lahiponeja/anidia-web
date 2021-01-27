@@ -15,8 +15,8 @@ const coverageService = {
    * API GET Method
    * @param { string } id
    */
-  getMunicipalities: function(postalCode) {
-    return http.get(`municipalities/${postalCode}`)
+  getAvailability: function(postalCode) {
+    return httpSolar.get(`availability?postalCode=${postalCode}`)
   },
 
   /**
@@ -24,8 +24,17 @@ const coverageService = {
    * API GET Method
    * @param { string } id
    */
-  getAddresses: function(municipalityId, postalCode) {
-    return http.get(`addresses/${municipalityId}/${postalCode}`)
+  getMunicipalities: function(postalCode) {
+    return httpSolar.get(`municipalities/${postalCode}`)
+  },
+
+  /**
+   * Request new example
+   * API GET Method
+   * @param { string } id
+   */
+  getAddresses: function(populationId, postalCode) {
+    return httpSolar.get(`addresses/${populationId}/${postalCode}`)
   },
 
   /**
