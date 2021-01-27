@@ -28,10 +28,16 @@ export default function main({portletNamespace, contextPath, portletElementId, c
 			<transition name="view">
 					<component :is="global.activeView().component"></component>
       </transition>
-      
-      <button @click="global.changeView('funnel-view')">funnel-view</button>
-      <button @click="global.changeView('house-view')">house-view</button>
-      <button @click="global.changeView('business-view')">business-view</button>
+			
+			
+			<div style="margin: 50px 0;">
+				<h3>house.state.coverageData</h3>
+				{{ JSON.stringify(house.state.coverageData) }}
+			</div>
+
+      <button @click="global.changeView('funnel')">funnel-view</button>
+      <button @click="global.changeView('Unifamiliar')">house-view</button>
+      <button @click="global.changeView('Negocio')">business-view</button>
 		</div>`;
 
 	new Vue({

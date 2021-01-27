@@ -12,8 +12,8 @@ const state = reactive({
       component: "coverage-form",
       icon: "an-icon--lightning-borders",
       heading: {
-        title: "TU AHORRO EMPIEZA AQUÍ",
-        subtitle: "Disfruta de un calor homogéneo y una temperatura constante en el agua caliente gracias a un suministro sin interrupciones que no ocupa espacio de almacenamiento",
+        title: "COMIENZA TU SOLICITUD ONLINE",
+        subtitle: "Con nuestros planes ahorrarás desde el primer instante, rentabilizando rápidamente la inversión inicial",
       },
       active: true,
     },

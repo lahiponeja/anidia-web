@@ -53,8 +53,8 @@ const changeModalStatus = function(payload) {
   }
 }
 
-const changeView = function (comp) {
-  const viewToChange = state.mainViewsArr.find((viewItem) => viewItem.component === comp)
+const changeView = function (name) {
+  const viewToChange = state.mainViewsArr.find((viewItem) => viewItem.name === name)
   state.mainViewsArr.forEach((viewItem) => viewItem.active = false)
   viewToChange.active = true
   activeView();

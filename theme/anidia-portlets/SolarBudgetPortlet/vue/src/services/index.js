@@ -9,3 +9,11 @@ export const http = axios.create({
     'Content-Type': 'application/xml',
   },
 })
+
+export const httpSolar = axios.create({
+  baseURL: `${locationOrigin}/o/solar-budget/v1.0/`,
+  headers: {
+    'Accept': 'application/xml',
+    'Content-Type': 'application/xml',
+  },
+})

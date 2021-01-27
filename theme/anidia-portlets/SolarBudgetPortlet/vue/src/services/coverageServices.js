@@ -1,4 +1,4 @@
-import { http } from './index'
+import { http, httpSolar } from './index'
 
 const coverageService = {
   /**
