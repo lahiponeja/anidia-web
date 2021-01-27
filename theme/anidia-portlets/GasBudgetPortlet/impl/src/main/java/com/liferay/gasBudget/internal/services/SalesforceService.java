@@ -320,7 +320,7 @@ public class SalesforceService {
 			build();
 
 		HttpResponse<String> response = null;
-		/*try {
+		try {
 			response = client.send(request, HttpResponse.BodyHandlers.ofString());
 			if (response.statusCode() != 200 && response.statusCode() != 201) {
 				throw new PortletException(2, "Error creating lead");
@@ -334,7 +334,7 @@ public class SalesforceService {
 		}
 
 		System.out.println("** Lead creado correctamente ** " + response.statusCode());
-		System.out.println("** Respuesta creado lead ** " + response.body());*/
+		System.out.println("** Respuesta creado lead ** " + response.body());
 		return lead;
 	}
 

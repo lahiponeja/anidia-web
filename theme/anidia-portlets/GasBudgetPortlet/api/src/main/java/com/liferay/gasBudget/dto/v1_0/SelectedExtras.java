@@ -31,17 +31,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SelectedExtras {
 
 	@Schema
-	public Integer getBattery() {
+	public String getBattery() {
 		return battery;
 	}
 
-	public void setBattery(Integer battery) {
+	public void setBattery(String battery) {
 		this.battery = battery;
 	}
 
 	@JsonIgnore
 	public void setBattery(
-		UnsafeSupplier<Integer, Exception> batteryUnsafeSupplier) {
+		UnsafeSupplier<String, Exception> batteryUnsafeSupplier) {
 
 		try {
 			battery = batteryUnsafeSupplier.get();
@@ -56,20 +56,20 @@ public class SelectedExtras {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Integer battery;
+	protected String battery;
 
 	@Schema
-	public Boolean getCarCharger() {
+	public String getCarCharger() {
 		return carCharger;
 	}
 
-	public void setCarCharger(Boolean carCharger) {
+	public void setCarCharger(String carCharger) {
 		this.carCharger = carCharger;
 	}
 
 	@JsonIgnore
 	public void setCarCharger(
-		UnsafeSupplier<Boolean, Exception> carChargerUnsafeSupplier) {
+		UnsafeSupplier<String, Exception> carChargerUnsafeSupplier) {
 
 		try {
 			carCharger = carChargerUnsafeSupplier.get();
@@ -84,20 +84,20 @@ public class SelectedExtras {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Boolean carCharger;
+	protected String carCharger;
 
 	@Schema
-	public Integer getExtraPanels() {
+	public String getExtraPanels() {
 		return extraPanels;
 	}
 
-	public void setExtraPanels(Integer extraPanels) {
+	public void setExtraPanels(String extraPanels) {
 		this.extraPanels = extraPanels;
 	}
 
 	@JsonIgnore
 	public void setExtraPanels(
-		UnsafeSupplier<Integer, Exception> extraPanelsUnsafeSupplier) {
+		UnsafeSupplier<String, Exception> extraPanelsUnsafeSupplier) {
 
 		try {
 			extraPanels = extraPanelsUnsafeSupplier.get();
@@ -112,20 +112,20 @@ public class SelectedExtras {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Integer extraPanels;
+	protected String extraPanels;
 
 	@Schema
-	public Boolean getPergolaExtra() {
+	public String getPergolaExtra() {
 		return pergolaExtra;
 	}
 
-	public void setPergolaExtra(Boolean pergolaExtra) {
+	public void setPergolaExtra(String pergolaExtra) {
 		this.pergolaExtra = pergolaExtra;
 	}
 
 	@JsonIgnore
 	public void setPergolaExtra(
-		UnsafeSupplier<Boolean, Exception> pergolaExtraUnsafeSupplier) {
+		UnsafeSupplier<String, Exception> pergolaExtraUnsafeSupplier) {
 
 		try {
 			pergolaExtra = pergolaExtraUnsafeSupplier.get();
@@ -140,20 +140,20 @@ public class SelectedExtras {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Boolean pergolaExtra;
+	protected String pergolaExtra;
 
 	@Schema
-	public Boolean getPipelineUnderground() {
+	public String getPipelineUnderground() {
 		return pipelineUnderground;
 	}
 
-	public void setPipelineUnderground(Boolean pipelineUnderground) {
+	public void setPipelineUnderground(String pipelineUnderground) {
 		this.pipelineUnderground = pipelineUnderground;
 	}
 
 	@JsonIgnore
 	public void setPipelineUnderground(
-		UnsafeSupplier<Boolean, Exception> pipelineUndergroundUnsafeSupplier) {
+		UnsafeSupplier<String, Exception> pipelineUndergroundUnsafeSupplier) {
 
 		try {
 			pipelineUnderground = pipelineUndergroundUnsafeSupplier.get();
@@ -168,20 +168,20 @@ public class SelectedExtras {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Boolean pipelineUnderground;
+	protected String pipelineUnderground;
 
 	@Schema
-	public Boolean getRoofExtra() {
+	public String getRoofExtra() {
 		return roofExtra;
 	}
 
-	public void setRoofExtra(Boolean roofExtra) {
+	public void setRoofExtra(String roofExtra) {
 		this.roofExtra = roofExtra;
 	}
 
 	@JsonIgnore
 	public void setRoofExtra(
-		UnsafeSupplier<Boolean, Exception> roofExtraUnsafeSupplier) {
+		UnsafeSupplier<String, Exception> roofExtraUnsafeSupplier) {
 
 		try {
 			roofExtra = roofExtraUnsafeSupplier.get();
@@ -196,20 +196,20 @@ public class SelectedExtras {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Boolean roofExtra;
+	protected String roofExtra;
 
 	@Schema
-	public Boolean getTriphasicExtra() {
+	public String getTriphasicExtra() {
 		return triphasicExtra;
 	}
 
-	public void setTriphasicExtra(Boolean triphasicExtra) {
+	public void setTriphasicExtra(String triphasicExtra) {
 		this.triphasicExtra = triphasicExtra;
 	}
 
 	@JsonIgnore
 	public void setTriphasicExtra(
-		UnsafeSupplier<Boolean, Exception> triphasicExtraUnsafeSupplier) {
+		UnsafeSupplier<String, Exception> triphasicExtraUnsafeSupplier) {
 
 		try {
 			triphasicExtra = triphasicExtraUnsafeSupplier.get();
@@ -224,7 +224,7 @@ public class SelectedExtras {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Boolean triphasicExtra;
+	protected String triphasicExtra;
 
 	@Override
 	public boolean equals(Object object) {
@@ -260,7 +260,11 @@ public class SelectedExtras {
 
 			sb.append("\"battery\": ");
 
-			sb.append(battery);
+			sb.append("\"");
+
+			sb.append(_escape(battery));
+
+			sb.append("\"");
 		}
 
 		if (carCharger != null) {
@@ -270,7 +274,11 @@ public class SelectedExtras {
 
 			sb.append("\"carCharger\": ");
 
-			sb.append(carCharger);
+			sb.append("\"");
+
+			sb.append(_escape(carCharger));
+
+			sb.append("\"");
 		}
 
 		if (extraPanels != null) {
@@ -280,7 +288,11 @@ public class SelectedExtras {
 
 			sb.append("\"extraPanels\": ");
 
-			sb.append(extraPanels);
+			sb.append("\"");
+
+			sb.append(_escape(extraPanels));
+
+			sb.append("\"");
 		}
 
 		if (pergolaExtra != null) {
@@ -290,7 +302,11 @@ public class SelectedExtras {
 
 			sb.append("\"pergolaExtra\": ");
 
-			sb.append(pergolaExtra);
+			sb.append("\"");
+
+			sb.append(_escape(pergolaExtra));
+
+			sb.append("\"");
 		}
 
 		if (pipelineUnderground != null) {
@@ -300,7 +316,11 @@ public class SelectedExtras {
 
 			sb.append("\"pipelineUnderground\": ");
 
-			sb.append(pipelineUnderground);
+			sb.append("\"");
+
+			sb.append(_escape(pipelineUnderground));
+
+			sb.append("\"");
 		}
 
 		if (roofExtra != null) {
@@ -310,7 +330,11 @@ public class SelectedExtras {
 
 			sb.append("\"roofExtra\": ");
 
-			sb.append(roofExtra);
+			sb.append("\"");
+
+			sb.append(_escape(roofExtra));
+
+			sb.append("\"");
 		}
 
 		if (triphasicExtra != null) {
@@ -320,7 +344,11 @@ public class SelectedExtras {
 
 			sb.append("\"triphasicExtra\": ");
 
-			sb.append(triphasicExtra);
+			sb.append("\"");
+
+			sb.append(_escape(triphasicExtra));
+
+			sb.append("\"");
 		}
 
 		sb.append("}");
