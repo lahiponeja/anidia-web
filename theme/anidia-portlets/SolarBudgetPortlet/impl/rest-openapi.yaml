@@ -191,12 +191,6 @@ components:
     Estate:
       description: All the information about an estate
       properties:
-        addressKind:
-          description: Type of the address (street, avenue...)
-          type: string
-        addressName:
-          description: Name of the address
-          type: string
         number:
           description: Number of the gate
           type: string
@@ -392,3 +386,37 @@ paths:
                   $ref: "#/components/schemas/Address"
           description: ""
       tags: ["Address"]
+
+  "/estates/{populationId}/{addressId}":
+    get:
+      operationId: getEstatesAddressPage
+      summary: Get all estates for an address
+      description: Get all the estates for a whole address from Anidia CRM
+      parameters:
+        - name: "populationId"
+          in: "path"
+          description: "INE Municipality identifier of the address"
+          required: true
+          schema:
+            type: "string"
+        - name: "addressId"
+          in: "path"
+          description: "Id of the address"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Estate"
+            application/xml:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Estate"
+          description: ""
+      tags: ["Estate"]

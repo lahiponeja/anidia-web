@@ -18,12 +18,13 @@ import org.json.*;
 import com.liferay.solarBudget.dto.v1_0.PostalCode;
 import com.liferay.solarBudget.dto.v1_0.Property;
 import com.liferay.solarBudget.dto.v1_0.Address;
+import com.liferay.solarBudget.dto.v1_0.Estate;
 public class Geocode{
     static String GEOCODE_LOGIN_URL = System.getenv().get("GEOCODE_LOGIN_URL");
     static String GEOCODE_MUNICIPALITIES_URL = System.getenv().get("GEOCODE_MUNICIPALITIES_URL");
     static String GEOCODE_PROPERTIES_URL = System.getenv().get("GEOCODE_PROPERTIES_URL");
     static String GEOCODE_ADDRESSES_URL = System.getenv().get("GEOCODE_ADDRESSES_URL");
-
+    static String GEOCODE_ESTATES_URL = System.getenv().get("GEOCODE_ESTATES_URL");
     private String getGeocodeToken() {
 
         JSONObject jsonRequestBody = new JSONObject();
@@ -86,7 +87,7 @@ public class Geocode{
     
         HttpResponse<String> response = null;
         JSONArray responseJson;
-        System.out.println("Requesting municipalities to " +url);
+        System.out.println("Requesting municipalities to " + url);
         try {
           response = client.send(request, HttpResponse.BodyHandlers.ofString());
           responseJson = new JSONArray(response.body());
@@ -233,7 +234,6 @@ public class Geocode{
     urlBuilder.append("&codPostal=");
     urlBuilder.append(postalCode);
 
-    String url = Geocode.GEOCODE_MUNICIPALITIES_URL + "/" + postalCode;
     HttpClient client = HttpClient.newHttpClient();
     HttpRequest request = HttpRequest.newBuilder().
         uri(URI.create(urlBuilder.toString())).
@@ -281,5 +281,60 @@ public class Geocode{
     return addresses;  
   }
 
+  public List<Estate> getEstates(String populationId, String addressId) {
+    List<Estate> estates = new ArrayList<Estate>();
+    StringBuilder urlBuilder = new StringBuilder();
+    urlBuilder.append(Geocode.GEOCODE_ESTATES_URL);
+    urlBuilder.append("?");
+    urlBuilder.append("&codPoblacion=");
+    urlBuilder.append(populationId);
+    urlBuilder.append("&codVia=");
+    urlBuilder.append(addressId);
 
+    HttpClient client = HttpClient.newHttpClient();
+    HttpRequest request = HttpRequest.newBuilder().
+        uri(URI.create(urlBuilder.toString())).
+        header("Content-Type", "application/json").
+        header("codSesion", getGeocodeToken()).
+        GET().
+        build();
+
+    System.out.println("Requesting addresses to " + urlBuilder.toString());
+
+    HttpResponse<String> response = null;
+    JSONArray responseJson;
+    try {
+      response = client.send(request, HttpResponse.BodyHandlers.ofString());
+      responseJson = new JSONArray(response.body());
+     } catch (IOException | InterruptedException e) {
+      e.printStackTrace();
+      return estates;
+    } catch (JSONException e) {
+      if(response != null) {
+        System.out.println("Geocode response: " + response.body());
+      }
+      e.printStackTrace();
+      return estates;
+    }
+
+
+    for (int i = 0 ; i < responseJson.length(); i++) {
+      JSONObject estateJson = null;
+      try {
+        estateJson = responseJson.getJSONObject(i);
+        Estate estate = new Estate();
+        estate.setNumber(estateJson.getString("numPortal"));
+        estate.setAnnex(estateJson.getString("letra"));
+        estate.setGateId(estateJson.getString("codRedexisPortal"));
+        estates.add(estate);  
+      } catch (JSONException e) {
+        System.out.println("Geocode response: " + response.body());
+        if(estateJson != null) {
+          System.out.println("Json Object with error: " + estateJson.toString());
+        }
+        e.printStackTrace();
+      }         
+    }
+    return estates;  
+  }
 }
