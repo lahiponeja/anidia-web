@@ -104,4 +104,20 @@
       }
     }
   }
+
+  @media screen and (max-width: 768px) {
+    width: 9rem;
+    height: 11rem;
+    padding: 10px;
+
+    &__icon {
+      &::before {
+        font-size: rem(50);
+      }
+    }
+
+    p {
+      margin-bottom: rem(8);
+    }
+  }
 }

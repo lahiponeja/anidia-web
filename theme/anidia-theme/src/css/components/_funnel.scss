@@ -3,6 +3,8 @@
   flex-direction: column;
   align-items: center;
 
+
+
   &__titles {
     text-align: center;
     margin-bottom: rem(32);
@@ -10,11 +12,18 @@
 
   &__cards {
     display: flex;
-    flex-direction: column;
+    max-width: rem(447);
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
 
     &-item {
+      &:first-child {
+        margin-right: rem(16);
+      }
+
       &:not(:last-child) {
-        margin-bottom: rem(32);
+        margin-bottom: rem(16);
       }
     }
   }
@@ -41,14 +50,18 @@
     justify-content: center;
   }
 
-  @include desktop {
+  @include tablet {
     &__cards {
       display: flex;
-    
+      max-width: 100%;
       flex-direction: row;
 
       &-item {
         margin-bottom: 0;
+
+        &:first-child {
+          margin-right: rem(32);
+        }
         &:not(:last-child) {
           margin-right: rem(32);
         }
