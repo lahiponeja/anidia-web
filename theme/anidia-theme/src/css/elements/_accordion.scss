@@ -1,0 +1,36 @@
+.an-accordion {
+  $el: &;
+
+  &__item {
+    cursor: pointer;
+    display: flex;
+  }
+
+  &__item-icon {
+    margin-left: rem(19);
+    margin-top: rem(-5);
+    transform: rotate(180deg);
+
+    &::before {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    .closed & {
+      &::before {
+        transform: scale(-1);
+      }
+    }
+  }
+
+  &__content {
+    max-height: 800px;
+    opacity: 1;
+    transition: all 0.4s ease;
+
+    &.closed {
+      max-height: 0;
+      opacity: 0;
+    }
+  }
+}

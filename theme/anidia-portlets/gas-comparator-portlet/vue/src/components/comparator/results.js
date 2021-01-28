@@ -64,6 +64,10 @@ const results = {
             <h3>{{ gasConsumption.futureCost }}</h3>
           </div>
         </div>
+        <div>
+          <p class="an-body-s-regular mb-s">*Los precios utilizados para el cálculo se actualizan el último jueves del mes. Datos obtenidos acorde a los precios publicados en el BOE. (*)Todos los importes incluyen IVA.</p>
+          <p class="an-body-s-regular">*La información sobre tarifas eléctricas está obtenida de Esios a través del término de facturación del PVPC para peaje por defecto y 2 periodos con agrupación mensual para el caso de DH.</p>
+        </div>
       </div>
       
       <div class="an-funnel__footer justify-content-center">

@@ -72,3 +72,11 @@ $lines-clamp: 2 3 4 !default;
 .quick-access-nav {
   display: none;
 }
+
+.t-uppercase {
+  text-transform: uppercase;
+}
+
+.c-theme {
+  color: $an-theme;
+}

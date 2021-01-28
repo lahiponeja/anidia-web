@@ -119,7 +119,7 @@ const compSaving = {
                   </div>
                 </div>
 
-                <input v-model="phoneNumber" type="number" class="an-input__field" placeholder="Teléfono*" required="">
+                <input v-model="phoneNumber" type="number" min=0 class="an-input__field" placeholder="Teléfono*" required="">
               </div>
               <div class="an-input an-form__item">
                 <input v-model="compSavingForm.email" type="email" class="an-input__field" placeholder="Email*"  required="">
