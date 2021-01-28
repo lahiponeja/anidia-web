@@ -373,6 +373,7 @@
     overflow: hidden;
     padding: rem(36) rem(18);
     position: relative;
+    scroll-snap-align: center;
     white-space: initial;
 
     @include desktop {
