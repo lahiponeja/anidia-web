@@ -264,6 +264,30 @@ $an-icon-leafs-percentage: url('#{$icon-img-path}/leafs-percentage.svg');
   }
 }
 
+$an-icon-arrow-down: url('#{$icon-img-path}/arrow-down.svg');
+.an-icon--arrow-down-svg {
+  &:before {
+    background: $an-icon-arrow-down no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(12);
+    width: rem(12);
+  }
+}
+
+$an-icon-arrow-down-green: url('#{$icon-img-path}/arrow-down-green.svg');
+.an-icon--arrow-down-green-svg {
+  &:before {
+    background: $an-icon-arrow-down-green no-repeat center center;
+    background-size: contain;
+    content: "";
+    display: block;
+    height: rem(12);
+    width: rem(12);
+  }
+}
+
 // Icons font
 
 $an-icon-half-arrow-down: "\e900";

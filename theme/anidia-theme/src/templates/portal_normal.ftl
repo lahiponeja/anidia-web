@@ -145,6 +145,7 @@
 
 <#include "${full_templates_path}/footer/gtm.ftl" />
 <#include "${full_templates_path}/footer/menu_script.ftl" />
+<#include "${full_templates_path}/footer/active_navitem_script.ftl" />
 <script>
 function header() {
   if (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 1024){

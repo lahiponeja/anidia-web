@@ -40,7 +40,7 @@
       border: 1px solid $an-theme;
     }
 
-    span {
+    span:not(.an-tooltip__icon) {
       margin-left: rem(10);
       flex: 1;
     }
@@ -68,6 +68,24 @@
           left: rem(5);
           position: absolute;
           width: rem(10);
+        }
+      }
+    }
+  }
+
+  &--white {
+    #{$parent}__label {
+      &:before {
+        border: 1px solid $white;
+      }
+    }
+
+    #{$parent}__input {
+      &:checked {
+        & ~ label {
+          &:after {
+            color: $white;
+          }
         }
       }
     }

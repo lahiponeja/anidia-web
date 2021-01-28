@@ -29,6 +29,9 @@
 @import './elements/paragraph';
 @import './elements/modal';
 @import './elements/table';
+@import './elements/input-number';
+@import './elements/tooltip';
+@import './elements/accordion';
 
 // // Components
 @import './components/card';
@@ -48,6 +51,7 @@
 @import './components/gas-comparator/counter';
 @import './components/gas-comparator/transition';
 @import './components/info';
+@import './components/cards-vue';
 
 // // Blocks
 @import './blocks/extensible-cards';
