@@ -114,6 +114,8 @@ if (document.querySelectorAll(".an-hero-slider__item").length > 1) {
   if(document.getElementById('banner')) {
     document.getElementById('banner').classList.add('more-elem');
   }
+} else {
+  document.querySelector(".an-hero-slider__info").classList.add("an-hero-slider__info--one-slide");
 }
 
 const discoverBtn = document.querySelectorAll("[data-discover-btn]");
