@@ -230,8 +230,8 @@ public class Geocode{
     urlBuilder.append("?");
     urlBuilder.append("&codPoblacion=");
     urlBuilder.append(populationId);
-    urlBuilder.append("&literales=false");
-    urlBuilder.append("&patron=rai*");
+    urlBuilder.append("&codPostal=");
+    urlBuilder.append(postalCode);
 
     String url = Geocode.GEOCODE_MUNICIPALITIES_URL + "/" + postalCode;
     HttpClient client = HttpClient.newHttpClient();
