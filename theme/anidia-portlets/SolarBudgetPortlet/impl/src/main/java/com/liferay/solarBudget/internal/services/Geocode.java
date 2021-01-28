@@ -108,9 +108,10 @@ public class Geocode{
             postalcodeJson = responseJson.getJSONObject(i);
             PostalCode postalCodeData = new PostalCode();
             postalCodeData.setMunicipalityId(postalcodeJson.getString("codMunicipio"));
-            postalCodeData.setMunicipalityName(postalcodeJson.getString("desPoblacion"));
-            postalCodeData.setProvinceId(postalcodeJson.getString("codProvincia"));
+            postalCodeData.setMunicipalityName(postalcodeJson.getString("desMunicipio"));
+            postalCodeData.setPopulationName(postalcodeJson.getString("desPoblacion"));
             postalCodeData.setPopulationId(postalcodeJson.getString("codPoblacion"));
+            postalCodeData.setProvinceId(postalcodeJson.getString("codProvincia"));
             postalCodes.add(postalCodeData);  
           } catch (JSONException e) {
             System.out.println("Geocode response: " + response.body());

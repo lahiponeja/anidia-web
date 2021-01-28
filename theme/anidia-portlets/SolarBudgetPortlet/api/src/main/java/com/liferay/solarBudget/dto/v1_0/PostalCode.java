@@ -114,6 +114,34 @@ public class PostalCode {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String populationId;
 
+	@Schema(description = "Population name")
+	public String getPopulationName() {
+		return populationName;
+	}
+
+	public void setPopulationName(String populationName) {
+		this.populationName = populationName;
+	}
+
+	@JsonIgnore
+	public void setPopulationName(
+		UnsafeSupplier<String, Exception> populationNameUnsafeSupplier) {
+
+		try {
+			populationName = populationNameUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String populationName;
+
 	@Schema(description = "Postal Code")
 	public String getPostalCode() {
 		return postalCode;
@@ -235,6 +263,20 @@ public class PostalCode {
 			sb.append("\"");
 
 			sb.append(_escape(populationId));
+
+			sb.append("\"");
+		}
+
+		if (populationName != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"populationName\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(populationName));
 
 			sb.append("\"");
 		}

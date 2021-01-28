@@ -166,6 +166,9 @@ components:
         municipalityId:
           description: INE Municipality identifier
           type: string
+        populationName:
+          description: Population name
+          type: string
         populationId:
           description: Population identifier
           type: string
