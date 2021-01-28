@@ -116,8 +116,7 @@ const coverageForm = {
     },
 
     /*************************************
-     * POSTAL CODES
-    *************************************/
+     * POSTAL CODES | Códigos postales */
     searchPostalCodes(index) {
       if (index.length < 1) { return [] }
       return this.postalCodesArr.filter(pc => {
@@ -145,7 +144,7 @@ const coverageForm = {
       this.house.setCoverageData("postalCode", { postalCode })
       // Get municipalities
       this.loadingMunicipalities = true,
-      this.house.getMunicipalities(postalCode)
+      this.house.getMunicipalities(postalCode)  // OBTENER MUNICIPIOS
         .then(() => { this.loadingMunicipalities = false })
         .catch((err) => {
           window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
@@ -157,7 +156,7 @@ const coverageForm = {
 
 
     /*************************************
-     * MUNICIPALITIES
+     * MUNICIPALITIES | Municipios
     *************************************/
     onSubmitMunicipalities(result) {
       const { municipalityId, municipalityName, provinceId, populationId } = result
@@ -172,7 +171,7 @@ const coverageForm = {
       this.formData.populationId = populationId
 
       this.loadingAddressess = true
-      this.house.getAddresses(populationId, this.formData.postalCode)
+      this.house.getAddresses(populationId, this.formData.postalCode) // OBTENER CALLES
         .then(() => { this.loadingAddressess = false })
         .catch((err) => {
           window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
@@ -184,7 +183,7 @@ const coverageForm = {
     },
 
     /*************************************
-     * ADDRESSES
+     * ADDRESSES | Calles
     *************************************/
     onSubmitAddresses(result) {
       const { kind, name } = result
@@ -199,7 +198,7 @@ const coverageForm = {
       this.formData.addressName = name
 
       this.loadingEstates = true
-      this.house.getEstates(this.formData.provMunId, this.formData.postalCode, kind, name)
+      this.house.getEstates(this.formData.provMunId, this.formData.postalCode, kind, name)  // OBTENER NÚMEROS DE PORTAL
         .then(() => { this.loadingEstates = false })
         .catch((err) => {
           window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
@@ -210,7 +209,7 @@ const coverageForm = {
     },
 
     /*************************************
-     * ESTATES
+     * ESTATES | NÚMEROS DE PORTAL
     *************************************/
     searchEstates(index) {
       if (index.length < 1) { return [] }
@@ -227,19 +226,21 @@ const coverageForm = {
 
       this.formData.number = number
 
-      this.loadingProperties = true
-      this.house.getProperties(gateId)
-        .then(() => { this.loadingProperties = false })
-        .catch((err) => {
-          window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
-          this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-          this.loadingProperties = false
-          console.error(err)
-        })
+      // AL PARECER NO HARÁ FALTA CONSULTAR VIVIENDAS
+      //------------------------------------------------
+      // this.loadingProperties = true
+      // this.house.getProperties(gateId)
+      //   .then(() => { this.loadingProperties = false })
+      //   .catch((err) => {
+      //     window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
+      //     this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+      //     this.loadingProperties = false
+      //     console.error(err)
+      //   })
     },
 
     /*************************************
-     * PROPERTIES
+     * PROPERTIES | VIVIENDAS
     *************************************/
     onSubmitProperties(result) {
       const {
