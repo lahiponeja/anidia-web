@@ -60,7 +60,7 @@ const coverageForm = {
       } else {
         this.house.setPostalCode(this.formData.postalCode);
         window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
-        this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+        this.house.setCoverageError('Hemos detectado que ya tienes gas natural instalado');
         if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.remove('hide');
       }
 
