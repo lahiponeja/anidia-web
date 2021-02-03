@@ -322,7 +322,6 @@ const coverageForm = {
                       class="an-input__field"
                       @focus="setActiveField('postalCodesArr', 'postalCode')"
                       required=""
-                      autocomplete="off"
                     >
                     <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                       <li
