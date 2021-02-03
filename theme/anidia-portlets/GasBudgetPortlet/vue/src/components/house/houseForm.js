@@ -132,13 +132,13 @@ const houseForm = {
             </div>
 
             <div class="an-input an-form__item">
-              <input v-model="gasBudgetRequest.floorNumber" type="text" class="an-input__field" placeholder="Plantas" required="">
+              <input v-model="gasBudgetRequest.floorNumber" type="number" min="0" class="an-input__field" placeholder="Plantas" required="">
             </div>
             <div class="an-input an-form__item">
-              <input v-model="gasBudgetRequest.bathroomNumber" type="text" class="an-input__field" placeholder="Baños" required="">
+              <input v-model="gasBudgetRequest.bathroomNumber" type="number" min="0" class="an-input__field" placeholder="Baños" required="">
             </div>
             <div class="an-input an-form__item">
-              <input v-model="gasBudgetRequest.staysNumber" type="text" class="an-input__field" placeholder="Número de estancias" required="">
+              <input v-model="gasBudgetRequest.staysNumber" type="number" min="0" class="an-input__field" placeholder="Número de estancias" required="">
             <p class="an-input__caption an-body-s-regular">*(Incluye cocina y salón y excluye baños)</p>
             </div>
           </div>
