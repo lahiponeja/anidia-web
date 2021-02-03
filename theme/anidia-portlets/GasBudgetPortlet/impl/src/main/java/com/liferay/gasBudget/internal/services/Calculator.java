@@ -27,17 +27,17 @@ public class Calculator {
 
     try {
       jsonRequest.put("ZipCode", gasBudgetRequest.getPostalCode());
-      jsonRequest.put("HouseType", gasBudgetRequest.getHouseType());
-      jsonRequest.put("PropertyMeters", gasBudgetRequest.getPropertyMeters());
+      jsonRequest.put("HouseType", gasBudgetRequest.getHouseType().getValue());
+      jsonRequest.put("PropertyMeters", gasBudgetRequest.getPropertyMeters().getValue());
       jsonRequest.put("StaysNumber", gasBudgetRequest.getStaysNumber());
-      jsonRequest.put("BathroomNumber", gasBudgetRequest.getBathroomNumber());
-      jsonRequest.put("FloorNumber", gasBudgetRequest.getFloorNumber());
-      jsonRequest.put("GasNaturalUse", gasBudgetRequest.getGasNaturalUse() );
-      jsonRequest.put("ACSUse", gasBudgetRequest.getAcsUse());
-      jsonRequest.put("KitchenUse", gasBudgetRequest.getKitchenUse());
-      jsonRequest.put("HeatingUse", gasBudgetRequest.getHeatingUse());
+      jsonRequest.put("BathroomNumber", gasBudgetRequest.getBathroomNumber().toString());
+      jsonRequest.put("FloorNumber", gasBudgetRequest.getFloorNumber().toString());
+      jsonRequest.put("GasNaturalUse", gasBudgetRequest.getGasNaturalUse().getValue() );
+      jsonRequest.put("ACSUse", gasBudgetRequest.getAcsUse().getValue());
+      jsonRequest.put("KitchenUse", gasBudgetRequest.getKitchenUse().getValue());
+      jsonRequest.put("HeatingUse", gasBudgetRequest.getHeatingUse().getValue());
       jsonRequest.put("PersonsWater", this.translatePersonsWater(gasBudgetRequest.getPersonsWater()));
-      jsonRequest.put("BoilerLocation", gasBudgetRequest.getBoilerLocation());
+      jsonRequest.put("BoilerLocation", gasBudgetRequest.getBoilerLocation().getValue());
       jsonRequest.put("Extras", new JSONObject());
 
       jsonRequest.getJSONObject("Extras").put("MetersBoilerToWindow", gasBudgetRequest.getMetersBoilerToWindow());
