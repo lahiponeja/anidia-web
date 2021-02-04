@@ -465,10 +465,21 @@ const houseForm = {
               </div>
             </div>
             <div class="an-form__flex an-form__flex--2-cols mb-xxl">
-              <div class="an-input an-form__item">
-                <input v-model="gasBudgetRequest.radiatorsBathroom" type="text" placeholder="Radiadores" class="an-input__field" required="">
+            <div class="an-input an-form__item">
+              <div class="an-select an-select--full-width mb-none">
+                <span class="an-select__icon an-icon--chevron-down"></span>
+                <select v-model="gasBudgetRequest.radiatorsBathroom" class="an-select__native" required="required">
+                  <option disabled value="">Seleccione una opción...</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
               </div>
             </div>
+          </div>
+
           </template>
 
           <div class="an-form__flex an-form__flex--6-cols mb-xxl">
