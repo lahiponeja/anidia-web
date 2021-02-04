@@ -2,6 +2,7 @@ import './plugins/compositionApi'
 // State Modules
 import global from './store/modules/global'
 import house from './store/modules/house'
+import lead from './store/modules/lead'
 // Views
 import funnelView from './views/funnelView'
 import houseView from './views/houseView'
@@ -31,6 +32,15 @@ export default function main({portletNamespace, contextPath, portletElementId, c
 			
 			
 			<div style="margin: 50px 0;">
+				<h3>lead.state.lead</h3>
+				{{ JSON.stringify(lead.state.lead) }}
+			</div>
+
+			<br>
+			<br>
+			<br>
+
+			<div style="margin: 50px 0;">
 				<h3>house.state.coverageData</h3>
 				{{ JSON.stringify(house.state.coverageData) }}
 			</div>
@@ -50,11 +60,13 @@ export default function main({portletNamespace, contextPath, portletElementId, c
 		provide: {
 			global,
 			house,
+			lead
 		},
 		data() {
 			return {
 				global,
 				house,
+				lead,
 				portletNamespace, contextPath, portletElementId, configuration
 			}
 		},

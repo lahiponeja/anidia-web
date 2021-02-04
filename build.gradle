@@ -188,7 +188,7 @@ tasks.register("build.portlets.solar_budget") {
   doLast {
     exec {
       workingDir 'theme/anidia-portlets/SolarBudgetPortlet'
-      commandLine 'gradle', 'deploy'
+      commandLine 'gradle', 'build'
     }
     exec {
       commandLine 'cp', 'theme/anidia-portlets/SolarBudgetPortlet/api/build/libs/solar-budget-api-1.0.0.jar', 'liferay/deploy'

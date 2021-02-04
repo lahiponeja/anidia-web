@@ -65,6 +65,14 @@ $lines-clamp: 2 3 4 !default;
   width: 100%;
 }
 
+.w-half {
+  width: 50%;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }

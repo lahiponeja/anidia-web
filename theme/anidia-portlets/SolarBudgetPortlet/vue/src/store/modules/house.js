@@ -4,6 +4,7 @@ import houseFormService from '../../services/houseFormService'
 import contactInfoService from '../../services/contactInfoService'
 import xmlToJsonImp from '../../helpers/xmlToJsonImp'
 import objToXml from '../../helpers/objToXml'
+import lead from './lead'
 
 const state = reactive({
   houseSteps: [
@@ -23,7 +24,7 @@ const state = reactive({
       icon: "an-icon--living-place",
       heading: {
         title: "SOLICITUD ONLINE",
-        subtitle: "Cuéntanos cómo es tu hogar o negocio para que podamos redefinir tu energía",
+        subtitle: "Con nuestros planes ahorrarás desde el primer instante, rentabilizando rápidamente la inversión inicial",
       },
       active: false,
     },
@@ -48,7 +49,6 @@ const state = reactive({
     },
   ],
   coverageData: {
-    installerCode: "",
     postalCode: {
       postalCode: "",
       municipalityName: "",
@@ -83,7 +83,7 @@ const state = reactive({
   },
   availability: {},
   houseFormData: {},
-  gasBudget: {},
+  solarBudget: {},
   userContactInfo: {},
   userFullName: "",
   coverageError: "",
@@ -99,10 +99,6 @@ const resetAutocompleteData = function() {
     estates: [],
     properties: [],
   })
-}
-
-const setInstallerCode = function(installerCode) {
-  state.coverageData.installerCode = installerCode
 }
 
 const resetHouseFormData = function() {
@@ -134,48 +130,68 @@ const submitUserContactInfo = function (budgetReadyForm) {
       "estate": state.coverageData.estate,
       "property": state.coverageData.property
     },
-    "calculatorGas": {
+    "calculatorSolar": {
       "input": {
-        "zipCode": "",
-        "houseType": state.houseType,
-        "propertyMeters": state.houseFormData.propertyMeters,
-        "staysNumber": state.houseFormData.staysNumber,
-        "bathroomNumber": state.houseFormData.bathroomNumber,
-        "floorNumber": state.houseFormData.floorNumber,
-        "gasNaturalUse": state.houseFormData.gasNaturalUse,
-        "acsUse": state.houseFormData.acsUse,
-        "kitchenUse": state.houseFormData.kitchenUse,
-        "heatingUse": state.houseFormData.heatingUse,
-        "personsWater": state.houseFormData.personsWater,
-        "boilerLocation": state.houseFormData.boilerLocation,
-        "extras": {
-          "metersBoilerToWindow": state.houseFormData.metersBoilerToWindow,
-          "metersWaterIntake": state.houseFormData.metersWaterIntake,
-          "hasVentilationGrill": state.houseFormData.hasVentilationGrill,
-          "controllHeatingFloor": state.houseFormData.controllHeatingFloor,
-          "connectDeviceToKitchen": state.houseFormData.connectDeviceToKitchen,
-          "convertDeviceKitchen": state.houseFormData.convertDeviceKitchen,
-          "radiatorsBathroom": state.houseFormData.radiatorsBathroom
+        "houseType": "TO-DO",
+        "monthlyConsumption": "TO-DO",
+        "roofType": "TO-DO"
+      }, 
+      "selectedExtras": {
+        "extraPanels": "string",
+        "triphasicExtra": "string",
+        "roofExtra": "string",
+        "pergolaExtra": "string",
+        "pipelineUnderground": "string",
+        "battery": "string",
+        "carCharger": "string"
+      },
+      "superiorInstallation": true,
+      "output": {
+        "panelsType": "string",
+        "size": {
+          "value": "string",
+          "unitPrice": "string",
+          "price": "string",
+          "basePanels": "string",
+          "totalPanels": "string"
+        },
+        "inverter": {
+          "brand": "string",
+          "model": "string",
+          "price": "string"
+        },
+        "panelsExtra": "string",
+        "triphasicExtra": "string",
+        "inverterExtra": "string",
+        "roofExtra": "string",
+        "pergolaExtra": "string",
+        "pipelineExtra": "string",
+        "carCharger": "string",
+        "battery": "string",
+        "additionalPanelsInstallation": "string",
+        "totalPrice": "string",
+        "superiorInstallation": {
+          "superiorSize": {
+            "value": "string",
+            "price": "string",
+            "basePanels": "string"
+          },
+          "panelsType": "string",
+          "inverterType": "string",
+          "extraFornius": "string",
+          "panelsExtra": "string",
+          "triphasicExtra": "string",
+          "inverterExtra": "string",
+          "roofExtra": "string",
+          "pergolaExtra": "string",
+          "pipelineExtra": "string",
+          "carCharger": "string",
+          "battery": "string",
+          "additionalPanelsInstallation": "string"
         }
       },
-      "output": {
-        "proposedPack": state.gasBudget.proposedPack,
-        "equipment": state.gasBudget.equipment,
-        "baseBadget": state.gasBudget.baseBudget,
-        "bonus": state.gasBudget.bonus,
-        "totalBudget": state.gasBudget.totalBudget,
-        "iva21": state.gasBudget.vat,
-        "totalPVP": state.gasBudget.totalPrice,
-        "extras": {
-          "MetersBoilerToWindow": state.gasBudget.metersBoilerToWindow.price,
-          "MetersWaterIntake": state.gasBudget.metersWaterIntake.price,
-          "HasVentilationGrill": state.gasBudget.hasVentilationGrill.price,
-          "ControllHeatingFloor": state.gasBudget.controllHeatingFloor.price,
-          "ConvertDeviceKitchen": state.gasBudget.convertDeviceKitchen.price,
-          "RadiatorsBathroom": state.gasBudget.radiatorsBathroom.price,
-          "ExtraTotalPrice": state.gasBudget.extraTotalPrice
-        }
-      }
+      "finalPrice": "string",
+      "InstallerCode": "string"
     }
   }
 
@@ -252,7 +268,7 @@ const getAvailability = function(postalCode) {
       console.log(resJson)
       if( Object.keys(resJson.Installer).length > 0 ) {
         const { installerCode } = resJson.Installer
-        setInstallerCode(installerCode)
+        lead.setInstallerCode(installerCode)
         resolve(installerCode)
       } else {
         // TODO: Ir a la vista de error. Indicando que no hay disponibilidad.
@@ -304,9 +320,9 @@ const getAddresses = function(populationId, postalCode) {
   })
 }
 
-const getEstates = function(municipalityId, postalCode, addressKind, addressName) {
+const getEstates = function(populationId, addressId) {
   return new Promise((resolve, reject) =>{
-    coverageService.getEstates(municipalityId, postalCode, addressKind, addressName).then((res) => {
+    coverageService.getEstates(populationId, addressId).then((res) => {
       const resJson = xmlToJsonImp(res.data);
       const { items } = resJson.Page.items
       const result = items
@@ -344,37 +360,37 @@ const setCoverageError = function(msg) {
   state.coverageError = msg
 }
 
-const setHouseFormData = function(payload) {
-  state.houseFormData = payload
-}
+// const setHouseFormData = function(payload) {
+//   state.houseFormData = payload
+// }
 
-const submitHouseData = function(gasBudgetRequest) {
-  const dataObj = Object.assign(gasBudgetRequest, {
-    postalCode: state.postalCode,
-    houseType: state.houseType,
-  })
-  const options = {
-    rootName: 'GasBudgetRequest', // defaults to 'root'
-    attributes: false
-  }
-  const xml = objToXml(dataObj, options)
+// const submitHouseData = function(solarBudgetRequest) {
+//   const dataObj = Object.assign(solarBudgetRequest, {
+//     postalCode: state.postalCode,
+//     houseType: state.houseType,
+//   })
+//   const options = {
+//     rootName: 'SolarBudgetRequest', // defaults to 'root'
+//     attributes: false
+//   }
+//   const xml = objToXml(dataObj, options)
 
-  setHouseFormData(dataObj)
+//   setHouseFormData(dataObj)
 
-  const results = new Promise((resolve, reject) => {
-    houseFormService.postHouseForm(xml).then((res)=> {
-      const jsonData = xmlToJsonImp(res.data);
-      Object.assign(state.gasBudget, jsonData.GasBudget);
-      resolve(state.gasBudget)
-      changeHouseStep("presupuesto");
-    })
-    .catch((err)=>{
-      console.error(reject(err))
-    })
-  })
+//   const results = new Promise((resolve, reject) => {
+//     houseFormService.postHouseForm(xml).then((res)=> {
+//       const jsonData = xmlToJsonImp(res.data);
+//       Object.assign(state.gasBudget, jsonData.GasBudget);
+//       resolve(state.gasBudget)
+//       changeHouseStep("presupuesto");
+//     })
+//     .catch((err)=>{
+//       console.error(reject(err))
+//     })
+//   })
 
-  return results;
-}
+//   return results;
+// }
 
 const getDatalayerInitialInfo = function(category, action, label) {
   return {
@@ -437,7 +453,7 @@ export default {
   getEstates,
   getProperties,
   setCoverageError,
-  submitHouseData,
+  // submitHouseData,
   setCoverageData,
   submitBusinessContactInfo,
   resetAutocompleteData,

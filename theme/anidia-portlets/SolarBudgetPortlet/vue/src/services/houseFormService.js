@@ -1,4 +1,4 @@
-import { http } from './index'
+import { httpSolar } from './index'
 
 const houseFormService = {
   /**
@@ -7,7 +7,7 @@ const houseFormService = {
    * @param { string } payload
    */
   postHouseForm: function(payload) {
-    return http.post('gas-budgets', payload)
+    return httpSolar.post('solar-budgets', payload)
   },
 
 }

@@ -42,8 +42,8 @@ const coverageService = {
    * API GET Method
    * @param { string } id
    */
-  getEstates: function(municipalityId, postalCode, addressKind, addressName) {
-    return http.get(`estates/${municipalityId}/${postalCode}/${addressKind}/${addressName}`)
+  getEstates: function(populationId, addressId) {
+    return httpSolar.get(`estates/${populationId}/${addressId}`)
   },
 
   /**

@@ -1,5 +1,5 @@
 import coverageForm from '../components/house/coverageForm'
-// import houseForm from '../components/house/houseForm'
+import houseForm from '../components/house/houseForm'
 // import budgetCard from '../components/house/budgetCard'
 // import budgetReady from '../components/house/budgetReady'
 // import modal from '../components/modal'
@@ -7,7 +7,7 @@ import coverageForm from '../components/house/coverageForm'
 const homeView = {
   components: {
     'coverage-form': coverageForm,
-    // 'house-form': houseForm,
+    'house-form': houseForm,
     // 'budget-card': budgetCard,
     // 'budget-ready': budgetReady,
     // modal,

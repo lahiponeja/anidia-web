@@ -60,6 +60,12 @@
       font-size: rem(18);
     }
 
+    &__field {
+      &-right-text {
+        margin-left: rem(16);
+      }
+    }
+
 
     &--textarea {
       height: rem(250);

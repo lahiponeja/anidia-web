@@ -23,7 +23,7 @@ const coverageForm = {
         addressName: "",
         name: "",
         number:"",
-        houseType: "",
+        propertyAddress: "",
         status: "",
         privacyPolicy: false
       },
@@ -44,7 +44,7 @@ const coverageForm = {
       loadingProperties: false,
     }
   },
-  inject: ["global", "house"],
+  inject: ["global", "house", "lead"],
   methods: {
 
     goBack() {
@@ -54,16 +54,19 @@ const coverageForm = {
     },
 
     submitRequest() {
-      if(this.isValidStatusCode) {
-        this.house.setPostalCode(this.formData.postalCode);
-        window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture OK", "gas"));
+      if(this.formData.propertyAddress) {
+        this.lead.setAddress(this.formData.propertyAddress)
         this.house.changeHouseStep('vivienda');
-      } else {
-        this.house.setPostalCode(this.formData.postalCode);
-        window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
-        this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-        if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.remove('hide');
       }
+      // if(this.isValidStatusCode) {
+        // this.house.setPostalCode(this.formData.postalCode);
+        // window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture OK", "gas"));
+      // } else {
+      //   this.house.setPostalCode(this.formData.postalCode);
+      //   window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
+      //   this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+      //   if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.remove('hide');
+      // }
 
       this.house.resetAutocompleteData()
     },
@@ -142,12 +145,14 @@ const coverageForm = {
       this.formData.postalCode = postalCode
       // Save object in the store
       this.house.setCoverageData("postalCode", { postalCode })
+      this.lead.setPostalCodeData({ postalCode })
+      
       // Get municipalities
       this.loadingMunicipalities = true,
       this.house.getMunicipalities(postalCode)  // OBTENER MUNICIPIOS
         .then(() => { this.loadingMunicipalities = false })
         .catch((err) => {
-          window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
+          // window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
           this.loadingMunicipalities = false
           console.error(err)
@@ -164,6 +169,7 @@ const coverageForm = {
 
       // Save object in the store
       this.house.setCoverageData("postalCode", { municipalityId, municipalityName, provinceId, populationId})
+      this.lead.setPostalCodeData({ municipalityId, municipalityName, provinceId})
 
       this.formData.municipalityName = municipalityName
       this.formData.municipalityId = municipalityId
@@ -174,7 +180,7 @@ const coverageForm = {
       this.house.getAddresses(populationId, this.formData.postalCode) // OBTENER CALLES
         .then(() => { this.loadingAddressess = false })
         .catch((err) => {
-          window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
+          // window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
           this.loadingAddressess = false
           console.error(err)
@@ -186,22 +192,28 @@ const coverageForm = {
      * ADDRESSES | Calles
     *************************************/
     onSubmitAddresses(result) {
-      const { kind, name } = result
+      const { kind, name, addressId } = result
 
       // Save object in the store
       this.house.setCoverageData("estate", {
+        addressId,
         addressKind: kind,
-        addressName: name
+        addressName: name,
+      })
+      this.lead.setEstateData({ 
+        addressKind: kind,
+        addressName: name,
       })
 
       this.formData.addressKind = kind
       this.formData.addressName = name
+      this.formData.addressId = addressId
 
       this.loadingEstates = true
-      this.house.getEstates(this.formData.provMunId, this.formData.postalCode, kind, name)  // OBTENER NÚMEROS DE PORTAL
+      this.house.getEstates(this.formData.populationId, this.formData.addressId)  // OBTENER NÚMEROS DE PORTAL
         .then(() => { this.loadingEstates = false })
         .catch((err) => {
-          window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
+          // window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
           this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
           this.loadingEstates = false
           console.error(err)
@@ -223,6 +235,7 @@ const coverageForm = {
 
       // Save object in the store
       this.house.setCoverageData("estate", { gateId, number })
+      this.lead.setEstateData({ number, gateId })
 
       this.formData.number = number
 
@@ -237,37 +250,7 @@ const coverageForm = {
       //     this.loadingProperties = false
       //     console.error(err)
       //   })
-    },
-
-    /*************************************
-     * PROPERTIES | VIVIENDAS
-    *************************************/
-    onSubmitProperties(result) {
-      const {
-        address,
-        propertyId,
-        status,
-        contractStatus,
-        floor,
-        block,
-        ladder,
-        door} = result
-
-      // Save object in the store
-      this.house.setCoverageData("property", {
-        address: address || "",
-        propertyId: propertyId || "",
-        status: status || "",
-        contractStatus: contractStatus || "",
-        floor: floor || "",
-        block: block || "",
-        ladder: ladder || "",
-        door: door || ""
-      })
-
-      this.formData.houseType = address
-      this.formData.status = status
-    },
+    }
   },
   computed: {
     postalCodesArr() {
@@ -524,8 +507,18 @@ const coverageForm = {
               </autocomplete>
             </div>
 
-            <!--INPUT FIELD: formData.houseType -->
-            <div class="an-input an-form__item" :class="{ 'an-input--disabled': !!!propertiesArr.length }">
+            <!--INPUT FIELD: formData.propertyAddress -->
+
+            <div class="an-input an-form__item" :class="{ 'an-input--disabled': !formData.number }">
+            <input
+              :disabled="!formData.number"
+              v-model="formData.propertyAddress"
+              class="an-input__field"
+              placeholder="Vivienda (bloque, escalera, piso, puerta)"
+            >
+            </div>
+
+            <!-- <div class="an-input an-form__item" :class="{ 'an-input--disabled': !!!propertiesArr.length }">
               <small v-show="loadingProperties" style="position: absolute;z-index: 1;right: 30px;">Cargando viviendas...</small>
               <autocomplete
                 @submit="onSubmitProperties"
@@ -549,7 +542,7 @@ const coverageForm = {
                   <div v-bind="rootProps" v-click-outside:propertiescustomul="hideHelperDropdown">
                     <input
                       :disabled="!!!propertiesArr.length"
-                      v-model="formData.houseType"
+                      v-model="formData.propertyAddress"
                       v-bind="inputProps"
                       v-on="inputListeners"
                       class="an-input__field"
@@ -578,10 +571,10 @@ const coverageForm = {
                   </div>
                 </template>
               </autocomplete>
-            </div>
+            </div> -->
           </div>
 
-          <button type="submit" :disabled="!formData.status" :class="{ 'an-btn--disabled': !formData.status  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
+          <button type="submit" :disabled="!formData.propertyAddress" :class="{ 'an-btn--disabled': !formData.propertyAddress  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Comprobar</span>
           </button>
       
