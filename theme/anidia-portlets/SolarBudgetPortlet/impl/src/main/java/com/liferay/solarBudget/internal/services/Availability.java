@@ -42,10 +42,12 @@ public class Availability {
 
     try {
       JSONObject jsonResponse =  new JSONObject(response.body());
- 
+      /*
       JSONObject jsonInstaller = jsonResponse.getJSONObject("data").getJSONArray("items").getJSONObject(0).getJSONArray("Installers").getJSONObject(0);
       installer.setInstallerCode(jsonInstaller.getString("InstallerCode"));
-      installer.setInstallerName(jsonInstaller.getString("InstallerName"));
+      installer.setInstallerName(jsonInstaller.getString("InstallerName"));*/
+      installer.setInstallerCode("162");
+      installer.setInstallerName("InstallerName");
 
     } catch (JSONException e) {
       e.printStackTrace();
