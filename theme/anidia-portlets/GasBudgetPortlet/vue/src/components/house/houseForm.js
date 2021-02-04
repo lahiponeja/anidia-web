@@ -308,7 +308,7 @@ const houseForm = {
               <input v-model="gasBudgetRequest.personsWater" type="radio" class="an-selection__radio" id="agua-caliente-dos-sitios" name="uso-agua-caliente" value="Entre 3-4">
 
               <div class="an-selection">
-                <p class="an-menu-bold an-card__text">Agua caliente en dos sitios a la vez para 2 o 3 personas</p>
+                <p class="an-menu-bold an-card__text">Agua caliente en dos sitios a la vez para 3 o 4 personas</p>
                 <div class="an-selection__icon an-icon--hot-water-three"></div>
               </div>
             </label>
@@ -317,7 +317,7 @@ const houseForm = {
               <input v-model="gasBudgetRequest.personsWater" type="radio" class="an-selection__radio" id="agua-caliente-tres-sitios" name="uso-agua-caliente" value="Más de 4">
 
               <div class="an-selection">
-                <p class="an-menu-bold an-card__text">Agua caliente en tres o más sitios a la vez para 4 o más personas</p>
+                <p class="an-menu-bold an-card__text">Agua caliente en tres o más sitios a la vez para 5 o más personas</p>
                 <div class="an-selection__icon an-icon--hot-water-four"></div>
               </div>
             </label>
