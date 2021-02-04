@@ -17,9 +17,13 @@ import com.liferay.solarBudget.dto.v1_0.SuperiorSize;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.log.Log;
+
 public class Calculator {
   static String SOLAR_BUDGET_REQUEST_URL = System.getenv().get("SOLAR_BUDGET_REQUEST_URL");
 	static String SOLUSOFT_SECRET = System.getenv().get("SOLUSOFT_SECRET");
+  private static Log _log = LogFactoryUtil.getLog(Calculator.class);
 
 	public SolarBudget createSolarBudget(SolarBudgetRequest solarBudgetRequest) {
 
@@ -30,7 +34,6 @@ public class Calculator {
       jsonRequest.put("HouseType", solarBudgetRequest.getHouseTypeAsString());
       jsonRequest.put("MonthlyConsumption", solarBudgetRequest.getMonthlyConsumption());
       jsonRequest.put("RoofType", solarBudgetRequest.getRoofTypeAsString());
-      System.out.println(jsonRequest);
     } catch (JSONException e) {
       e.printStackTrace();
       return responseBudget;
@@ -44,13 +47,13 @@ public class Calculator {
 			POST(HttpRequest.BodyPublishers.ofString(jsonRequest.toString())).
       build();
 
-    System.out.println("Solicitando presupuesto a " + Calculator.SOLAR_BUDGET_REQUEST_URL);
-    System.out.println(">    Detalle de presupuesto " + jsonRequest.toString());
+    _log.info("Solicitando presupuesto a " + Calculator.SOLAR_BUDGET_REQUEST_URL);
+    _log.info(">    Detalle de presupuesto " + jsonRequest.toString());
 
     HttpResponse<String> response;
     try {
       response = client.send(request, HttpResponse.BodyHandlers.ofString());
-      System.out.println(">    Respuesta " + response.body());
+      _log.info(">    Respuesta " + response.body());
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
       return null;
