@@ -386,7 +386,7 @@
     }
 
     &.featured {
-      &::before {
+      &::after {
         @include gradient-green-bg;
         border-radius: 50%;
         content: '';
@@ -397,6 +397,7 @@
         top: -6%;
         width: rem(426);
         z-index: 1;
+        pointer-events: none;
 
         @include desktop {
           height: rem(597);
