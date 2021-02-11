@@ -22,6 +22,9 @@ public class PersonalData {
     @JsonProperty("PrivacyPolicy")
     private String privacyPolicy;
 
+    @JsonProperty("AcceptNotCom")
+    private boolean acceptNotCom;
+
     public String getFirstName() {
         return firstName;
     }
@@ -68,5 +71,13 @@ public class PersonalData {
 
     public void setPrivacyPolicy(String privacyPolicy) {
         this.privacyPolicy = privacyPolicy;
+    }
+
+    public boolean getAcceptNotCom() {
+        return acceptNotCom;
+    }
+
+    public void setAcceptNotCom(boolean acceptNotCom) {
+        this.acceptNotCom = acceptNotCom;
     }
 }
