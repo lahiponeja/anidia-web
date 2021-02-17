@@ -42,6 +42,7 @@ const coverageForm = {
       loadingAddressess: false,
       loadingEstates: false,
       loadingProperties: false,
+      checkingAvailability: false
     }
   },
   inject: ["global", "house", "lead"],
@@ -130,12 +131,16 @@ const coverageForm = {
     checkAvailability(result) {
       const { postalCode } = result
 
+      this.checkingAvailability = true
+
       this.house.getAvailability(postalCode)
       .then(() => { 
         this.onSubmitPostalCode(result)
+        this.checkingAvailability = false
        })
       .catch((err) => {
         console.error(err)
+        this.checkingAvailability = false
       })
     },
 
@@ -287,6 +292,9 @@ const coverageForm = {
   `<div>
     <template v-if="!house.state.coverageError">
       <div class="an-form an-wrapper">
+        <div v-if="checkingAvailability" class="an-funnel__white-overlay">
+          <p class="an-h3">Verificando disponibilidad...</p>
+        </div>
         <p class="an-body-l-bold mb-xl">Rellena tu dirección para saber si tenemos cobertura en tu zona</p>
         <form @submit.prevent="submitRequest">
           <div class="an-form__flex an-form__flex--2-cols">

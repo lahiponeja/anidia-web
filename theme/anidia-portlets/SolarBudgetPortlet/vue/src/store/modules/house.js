@@ -83,7 +83,6 @@ const state = reactive({
   },
   availability: {},
   houseFormData: {},
-  solarBudget: {},
   userContactInfo: {},
   userFullName: "",
   coverageError: "",
@@ -268,6 +267,7 @@ const getAvailability = function(postalCode) {
       console.log(resJson)
       if( Object.keys(resJson.Installer).length > 0 ) {
         const { installerCode } = resJson.Installer
+        console.log(resJson.Installer)
         lead.setInstallerCode(installerCode)
         resolve(installerCode)
       } else {

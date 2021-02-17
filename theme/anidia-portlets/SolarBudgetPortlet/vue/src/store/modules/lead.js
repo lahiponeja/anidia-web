@@ -4,112 +4,30 @@ import houseFormService from '../../services/houseFormService'
 import contactInfoService from '../../services/contactInfoService'
 import xmlToJsonImp from '../../helpers/xmlToJsonImp'
 import objToXml from '../../helpers/objToXml'
+import leadDefault from '../leadDefault'
+import solarBudgetDefault from '../solarBudgetDefault'
+import house from './house'
 
 const state = reactive({
-  lead: {
-    personalData: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      prodInterest: "solar",
-      acceptNotCom: true,
-      postalCode: {
-        postalCode: "",
-        municipalityName: "",
-        municipalityId: "",
-        provinceId: ""
-      },
-      estate: {
-        addressKind: "",
-        addressName: "",
-        number: "",
-        annex: "",//Letra 
-        gateId: ""// Código redexis de portal,
-      },
-      property: {
-        address: ""
-      }
-      // property: {// Para solar,no se informa
-      //   address: "string"// Para solar,no se informa
-      //   propertyId: "string",// Para solar,no se informa
-      //   block: "string",// Para solar,no se informa
-      //   ladder: "string",// Para solar,no se informa
-      //   floor: "string",// Para solar,no se informa
-      //   door: "string",// Para solar,no se informa
-      //   status: "string",//Para solar,no se informa
-      //   contractStatus: //Para solar,no se informa
-      // }
-    },
-  
-    calculatorSolar: {
-      input: {
-        houseType: "",
-        monthlyConsumption: "",
-        roofType: ""
-      }, 
-      selectedExtras: {
-        extraPanels: "",
-        triphasicExtra: "",
-        roofExtra: "",
-        pergolaExtra: "",
-        pipelineUnderground: "",
-        battery: "",
-        carCharger: ""
-      },
-      superiorInstallation: true,
-      output: {
-        panelsType: "",
-        size: {
-          value: "",
-          unitPrice: "",
-          price: "",
-          basePanels: "",
-          totalPanels: ""
-        },
-        inverter: {
-          brand: "",
-          model: "",
-          price: ""
-        },
-        panelsExtra: "",
-        triphasicExtra: "",
-        inverterExtra: "",
-        roofExtra: "",
-        pergolaExtra: "",
-        pipelineExtra: "",
-        carCharger: "",
-        battery: "",
-        additionalPanelsInstallation: "",
-        totalPrice: "",
-        superiorInstallation: {
-          superiorSize: {
-            value: "",
-            price: "",
-            basePanels: ""
-          },
-          panelsType: "",
-          inverterType: "",
-          extraFornius: "",
-          panelsExtra: "",
-          triphasicExtra: "",
-          inverterExtra: "",
-          roofExtra: "",
-          pergolaExtra: "",
-          pipelineExtra: "",
-          carCharger: "",
-          battery: "",
-          additionalPanelsInstallation: ""
-        }
-      },
-      finalPrice: "",
-      InstallerCode: ""
-    }
-  }
+  lead: leadDefault(),
+  solarBudget: solarBudgetDefault(),
+  userFullName: ""
 })
 
 const setInstallerCode = function(installerCode) {
   state.lead.calculatorSolar.InstallerCode = installerCode
+}
+
+const setLeadFormData = function(payload) {
+  Object.assign(state.lead.personalData, {
+    firstName: payload.name,
+    lastName: payload.lastname,
+    email: payload.email,
+    phone: payload.phone,
+    acceptNotCom: payload.offersAndServices
+  })
+
+  submitLead()
 }
 
 const setPostalCodeData = function(payload) {
@@ -127,6 +45,29 @@ const setAddress = function(address) {
   property.address = address
 }
 
+const setSolarBudget = function(solarBudget) {
+  Object.assign(state.solarBudget, solarBudget);
+  Object.assign(state.lead.calculatorSolar.output, solarBudget);
+}
+
+const setSuperiorInstalation = function(bool) {
+  state.lead.calculatorSolar.superiorInstallation = bool
+}
+
+const setSelectedExtras = function(selectedExtrasObj) {
+  Object.assign(state.lead.calculatorSolar.selectedExtras, {
+    extraPanels: selectedExtrasObj.panelsExtra,
+    pipelineUnderground: selectedExtrasObj.pipelineExtra,
+    triphasicExtra: selectedExtrasObj.triphasicExtra ? 'SI' : 'NO',
+    roofExtra: selectedExtrasObj.roofExtra ? 'SI' : 'NO',
+    pergolaExtra: selectedExtrasObj.pergolaExtra ? 'SI' : 'NO'
+  })
+}
+
+const setFinalPrice = function(finalPrice) {
+  state.lead.calculatorSolar.finalPrice = finalPrice
+}
+
 const submitHouseData = function(solarBudgetRequest) {
   const { input } = state.lead.calculatorSolar
 
@@ -141,9 +82,9 @@ const submitHouseData = function(solarBudgetRequest) {
     houseFormService.postHouseForm(xml).then((res)=> {
       const jsonData = xmlToJsonImp(res.data);
       console.log(jsonData)
-      // Object.assign(state.gasBudget, jsonData.GasBudget);
-      // resolve(state.gasBudget)
-      // changeHouseStep("presupuesto");
+      setSolarBudget(jsonData.SolarBudget)
+      resolve(state.solarBudget)
+      house.changeHouseStep("presupuesto");
     })
     .catch((err)=>{
       console.error(reject(err))
@@ -153,17 +94,45 @@ const submitHouseData = function(solarBudgetRequest) {
   return results;
 }
 
+const submitLead = function () {
+
+  const { firstName, lastName } = state.lead
+
+  state.userFullName = `${firstName} ${lastName} `
+
+  const options = {
+    rootName: 'Lead', // defaults to 'root'
+    attributes: false
+  }
+  const xml = objToXml(state.lead, options)
+
+  const result = new Promise((resolve, reject) => {
+    contactInfoService.postLeads(xml).then((res) => {
+      resolve(res)
+    }).catch((err) => {
+      console.error(err)
+    })
+  })
+
+  return result
+}
+
 export default {
   state: shallowReadonly(state),
   setInstallerCode,
   setPostalCodeData,
   setEstateData,
   setAddress,
-  submitHouseData
+  submitHouseData,
+  setSuperiorInstalation,
+  setSelectedExtras,
+  setFinalPrice,
+  setLeadFormData,
+  submitLead
 }
 
 /*
-const submitUserContactInfo = function (budgetReadyForm) {
+const submitLead = function (budgetReadyForm) {
   const {
     name,
     lastname,

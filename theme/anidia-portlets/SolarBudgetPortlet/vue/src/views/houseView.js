@@ -1,18 +1,18 @@
 import coverageForm from '../components/house/coverageForm'
 import houseForm from '../components/house/houseForm'
-// import budgetCard from '../components/house/budgetCard'
-// import budgetReady from '../components/house/budgetReady'
+import budgetCard from '../components/house/budgetCard'
+import budgetReady from '../components/house/budgetReady'
 // import modal from '../components/modal'
 
 const homeView = {
   components: {
     'coverage-form': coverageForm,
     'house-form': houseForm,
-    // 'budget-card': budgetCard,
-    // 'budget-ready': budgetReady,
+    'budget-card': budgetCard,
+    'budget-ready': budgetReady,
     // modal,
   },
-  inject: ["global", "house"],
+  inject: ["global", "house", "lead"],
   data() {
     return {
       formSuccess: false,
@@ -70,7 +70,7 @@ const homeView = {
       <template v-else>
         <div class="an-wrapper an-wrapper--sml">
           <p class="an-h6 color-an-theme-dark-grey mb-l">SOLICITUD ONLINE REALIZADA CON ÉXITO</p>
-          <p class="an-h2 color-an-theme mb-l">Muchas gracias {{ house.state.userFullName }} </p>
+          <p class="an-h2 color-an-theme mb-l">Muchas gracias {{ lead.state.userFullName }} </p>
           <p class="an-body-l-regular color-an-theme">Nos pondremos en contacto contigo para darte toda la información al detalle</p>
           <div class="an-form__flex an-form__flex--6-cols justify-content-center">
             <button @click="goBack" type="button" class="an-btn an-btn--green-border an-btn--icon an-icon--half-arrow-left mt-xl">

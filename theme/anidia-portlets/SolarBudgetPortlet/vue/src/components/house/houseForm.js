@@ -21,7 +21,7 @@ const houseForm = {
   methods: {
     submitRequest() {
       this.sendingForm = true
-      this.lead.submitHouseData(this.gasBudgetRequest).then(() => {
+      this.lead.submitHouseData(this.solarBudgetRequest).then(() => {
         // window.dataLayer.push(this.house.getDatalayerDetailsStepInfo("FUNNEL - CONTRATACIÓN", "details OK", "gas"));
         this.sendingForm = false
       }).catch((err) => {
@@ -105,7 +105,7 @@ const houseForm = {
           <p class="an-body-l-bold mb-xl">¿Cómo es el tejado de tu vivienda?</p>
           <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-l">
             <div class="an-radio an-form__item">
-              <input v-model="solarBudgetRequest.roofType" value="Plano o inclinación menor a 20º" class="an-radio__input" checked="" type="radio" name="roof-type" id="piso-plano">
+              <input v-model="solarBudgetRequest.roofType" value="Plano o inclinación menor a 20º" class="an-radio__input" checked="" type="radio" name="roof-type" id="piso-plano" required>
               <label class="an-radio__label" for="piso-plano">
                 <span>
                   Plano
@@ -114,7 +114,7 @@ const houseForm = {
             </div>
 
             <div class="an-radio an-form__item">
-              <input v-model="solarBudgetRequest.roofType" value="Inclinación superior a 20º" class="an-radio__input" type="radio" name="roof-type" id="piso-inclinado">
+              <input v-model="solarBudgetRequest.roofType" value="Inclinación superior a 20º" class="an-radio__input" type="radio" name="roof-type" id="piso-inclinado" required>
               <label class="an-radio__label" for="piso-inclinado">
                 <span>
                   Inclinado
@@ -125,15 +125,17 @@ const houseForm = {
           
           <!-- 🚧 ¿Sabes el gasto mensual que tienes de electricidad? 🚧 -->
           <p class="an-body-l-bold mb-xl">¿Sabes el gasto mensual que tienes de electricidad?</p>
-          <div class="an-form__flex an-form__flex--2-cols an-form__flex--justify-normal mb-l">
-            <div class="an-radio an-form__item display-flex">
+          <!-- <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal mb-l"> -->
+          <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal mb-l">
+            <div class="an-radio an-form__item display-flex width-150">
               <input v-model="knowMonthlyExpenses" :value="true" class="an-radio__input" checked="" type="radio" name="monthly-expenses" id="gasto-mensual-si">
               <label class="an-radio__label w-half" for="gasto-mensual-si">
                 <span>
                   Si
                 </span>
               </label>
-              
+            </div> 
+            <div class="an-radio an-form__item width-150">
               <input v-model="knowMonthlyExpenses" :value="false" class="an-radio__input" type="radio" name="monthly-expenses" id="gasto-mensual-no">
               <label class="an-radio__label w-half" for="gasto-mensual-no">
                 <span>
@@ -142,9 +144,9 @@ const houseForm = {
               </label>
             </div>
 
-            <div class="an-form__item">
+            <div v-if="knowMonthlyExpenses" class="an-form__item mb-0">
               <div class="an-input mb-0">
-                <input v-model="solarBudgetRequest.monthlyConsumption" type="number" min="0" required="required" class="an-input__field">
+                <input v-model="solarBudgetRequest.monthlyConsumption" type="number" min="0" class="an-input__field" required>
                 <span class="an-input__field-right-text">€/mes</span>
               </div>
             </div>
@@ -173,6 +175,19 @@ const houseForm = {
             </div>
           </template>
 
+          <div class="an-form__flex an-form__flex--6-cols mb-xxl">
+            <button @click="house.changeHouseStep('cobertura')" type="button" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--half-arrow-left mt-xl">
+              <span>Anterior</span>
+            </button>
+
+            <button type="submit" class="an-btn an-btn--flatter an-btn--green-border an-btn--icon an-icon--check-simple mt-xl">
+              <span v-if="!sendingForm">Continuar</span>
+              <span v-else>Enviando...</span>
+            </button>
+          </div>
+
+          <!-- TODO -->
+          <p v-if="submitFormError" class="color-danger">Ups, parece que hubo un problema. Por favor intente nuevamente.</p>
 
         </form>
       </div>
