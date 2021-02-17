@@ -118,6 +118,8 @@ tasks.register("build.portlets.gradle-v4") {
 
     dependsOn 'build.portlets.gas_budget'
     dependsOn 'build.portlets.gas_comparator'
+    dependsOn 'build.portlets.solar_budget'
+
 
 }
 
@@ -283,6 +285,10 @@ tasks.register("install.npm.portlets") {
     }
     exec {
       workingDir 'theme/anidia-portlets/GasBudgetPortlet/vue'
+      commandLine 'npm', 'install'
+    }
+    exec {
+      workingDir 'theme/anidia-portlets/SolarBudgetPortlet/vue'
       commandLine 'npm', 'install'
     }
   }
