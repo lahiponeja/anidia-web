@@ -50,7 +50,6 @@ const funnelView = {
             </template>
           </div>
         </div>
-        <h3>Funnel Option picked: {{ optionPicked }}</h3>
         <div class="an-funnel__footer">
           <button type="button" @click="continueStep" :disabled="!optionPicked" :class="{ 'an-btn--disabled': !optionPicked  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple">
             <span>Continuar</span>

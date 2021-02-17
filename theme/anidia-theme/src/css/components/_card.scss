@@ -386,26 +386,26 @@
     }
 
     &.featured {
-      &::after {
-        @include gradient-green-bg;
-        border-radius: 50%;
-        content: '';
-        height: rem(415);
-        opacity: 44%;
-        position: absolute;
-        right: -43%;
-        top: -6%;
-        width: rem(426);
-        z-index: 1;
-        pointer-events: none;
+      // &::after {
+      //   @include gradient-green-bg;
+      //   border-radius: 50%;
+      //   content: '';
+      //   height: rem(415);
+      //   opacity: 44%;
+      //   position: absolute;
+      //   right: -43%;
+      //   top: -6%;
+      //   width: rem(426);
+      //   z-index: 1;
+      //   pointer-events: none;
 
-        @include desktop {
-          height: rem(597);
-          right: -38%;
-          top: -21%;
-          width: rem(613);
-        }
-      }
+      //   @include desktop {
+      //     height: rem(597);
+      //     right: -38%;
+      //     top: -21%;
+      //     width: rem(613);
+      //   }
+      // }
 
       #{$el}--pack__info {
         color: #C5EF3F;

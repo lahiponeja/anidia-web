@@ -18,18 +18,6 @@ const setInstallerCode = function(installerCode) {
   state.lead.calculatorSolar.InstallerCode = installerCode
 }
 
-const setLeadFormData = function(payload) {
-  Object.assign(state.lead.personalData, {
-    firstName: payload.name,
-    lastName: payload.lastname,
-    email: payload.email,
-    phone: payload.phone,
-    acceptNotCom: payload.offersAndServices
-  })
-
-  submitLead()
-}
-
 const setPostalCodeData = function(payload) {
   const { postalCode } = state.lead.personalData
   Object.assign(postalCode, payload)
@@ -94,11 +82,17 @@ const submitHouseData = function(solarBudgetRequest) {
   return results;
 }
 
-const submitLead = function () {
+const submitLead = function (payload) {
 
-  const { firstName, lastName } = state.lead
+  Object.assign(state.lead.personalData, {
+    firstName: payload.name,
+    lastName: payload.lastname,
+    email: payload.email,
+    phone: payload.phone,
+    acceptNotCom: payload.offersAndServices
+  })
 
-  state.userFullName = `${firstName} ${lastName} `
+  state.userFullName = `${payload.name} ${payload.lastname}`
 
   const options = {
     rootName: 'Lead', // defaults to 'root'
@@ -127,7 +121,6 @@ export default {
   setSuperiorInstalation,
   setSelectedExtras,
   setFinalPrice,
-  setLeadFormData,
   submitLead
 }
 

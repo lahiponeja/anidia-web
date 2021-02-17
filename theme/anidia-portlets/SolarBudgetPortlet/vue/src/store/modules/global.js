@@ -6,14 +6,14 @@ const state = reactive({
     {
       name: "funnel",
       component: 'funnel-view',
-      active: false,
+      active: true,
     },
     {
       name: 'Unifamiliar',
       component: 'house-view',
       title: 'Hogar unifamiliar',
       icon: 'an-icon--unifamiliar-home',
-      active: true,
+      active: false,
     },
     {
       name: 'Bloque de pisos',

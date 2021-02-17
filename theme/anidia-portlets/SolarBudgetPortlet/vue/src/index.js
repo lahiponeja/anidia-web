@@ -29,30 +29,6 @@ export default function main({portletNamespace, contextPath, portletElementId, c
 			<transition name="view">
 					<component :is="global.activeView().component"></component>
       </transition>
-			
-			
-			<div style="margin: 50px 0;">
-				<h3>lead.state.lead</h3>
-				{{ JSON.stringify(lead.state.lead) }}
-			</div>
-
-			<br>
-			<br>
-			<br>
-
-			<div style="margin: 50px 0;">
-				<h3>lead.state.solarBudget</h3>
-				{{ JSON.stringify(lead.state.solarBudget) }}
-			</div>
-
-			<!-- <div style="margin: 50px 0;">
-				<h3>house.state.coverageData</h3>
-				{{ JSON.stringify(house.state.coverageData) }}
-			</div> -->
-
-      <button @click="global.changeView('funnel')">funnel-view</button>
-      <button @click="global.changeView('Unifamiliar')">house-view</button>
-      <button @click="global.changeView('Negocio')">business-view</button>
 		</div>`;
 
 	new Vue({
