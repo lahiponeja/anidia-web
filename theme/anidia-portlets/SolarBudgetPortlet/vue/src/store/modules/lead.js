@@ -69,7 +69,6 @@ const submitHouseData = function(solarBudgetRequest) {
   const results = new Promise((resolve, reject) => {
     houseFormService.postHouseForm(xml).then((res)=> {
       const jsonData = xmlToJsonImp(res.data);
-      console.log(jsonData)
       setSolarBudget(jsonData.SolarBudget)
       resolve(state.solarBudget)
       house.changeHouseStep("presupuesto");

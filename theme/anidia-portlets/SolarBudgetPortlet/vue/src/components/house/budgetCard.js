@@ -84,7 +84,6 @@ const budgetCard = {
 
     finalPrice() {
       const sum = Number(this.solarBudget.size.price.replace('.', '')) + this.allExtrasSum
-      console.log('sum: ', sum)
       return sum
     }, 
 
@@ -140,7 +139,6 @@ const budgetCard = {
 
     finalPriceSuperior() { 
       const sum = Number(this.solarBudget.size.price.replace('.', '')) + this.allExtraSuperiorsSum
-      console.log('sum Superior: ', sum)
       return sum
     },
 

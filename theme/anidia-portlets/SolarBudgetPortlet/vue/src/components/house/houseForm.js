@@ -27,65 +27,9 @@ const houseForm = {
       }).catch((err) => {
         // window.dataLayer.push(this.house.getDatalayerDetailsStepInfo("FUNNEL - CONTRATACIÓN", "details KO", "gas"));
         this.sendingForm = false
-        console.log(err)
+        console.error(err)
       })
     },
-
-    // showVentilationGrillFn(){
-    //   if (this.gasBudgetRequest.boilerLocation === "Lavadero/Terraza") {
-    //     this.gasBudgetRequest.hasVentilationGrill = true
-    //     this.showVentilationGrillRadios = false
-    //     return false
-    //   } else if(this.gasBudgetRequest.boilerLocation === "Cocina") {
-    //     this.showVentilationGrillRadios = true
-    //     return true
-    //   } else if(this.gasBudgetRequest.boilerLocation === "Baño") {
-    //     this.gasBudgetRequest.hasVentilationGrill = true
-    //     this.showVentilationGrillRadios = false
-    //     return false
-    //   }
-    // },
-    // showConnectConvertDeviceToKitchenFn(){
-    //   if (this.gasBudgetRequest.boilerLocation === "Lavadero/Terraza") {
-    //     this.gasBudgetRequest.connectDeviceToKitchen = false
-    //     this.gasBudgetRequest.convertDeviceKitchen = false
-    //     this.showConnectConvertDeviceToKitchen = false
-    //     return false
-    //   } else if(this.gasBudgetRequest.boilerLocation === "Cocina") {
-    //     this.showConnectConvertDeviceToKitchen = true
-    //     return true
-    //   } else if(this.gasBudgetRequest.boilerLocation === "Baño") {
-    //     this.gasBudgetRequest.connectDeviceToKitchen = false
-    //     this.gasBudgetRequest.convertDeviceKitchen = false
-    //     this.showConnectConvertDeviceToKitchen = false
-    //     return false
-    //   }
-    // },
-
-    // toggleInfoItem(e) {
-    //   e.target.parentElement.classList.toggle("an-info--hidden")
-    // },
-
-    // closeInfoItem(el) {
-    //   el.classList.add("an-info--hidden")
-    // }
-  },
-  computed: {
-    // kitchenSelected() {
-    //   return (
-    //     this.gasBudgetRequest.gasNaturalUse === "ACS+Cocina"
-    //     ||
-    //     this.gasBudgetRequest.gasNaturalUse === "ACS+Cocina+Calefacción"
-    //   )
-    // },
-
-    // heatingSelected() {
-    //   return (
-    //     this.gasBudgetRequest.gasNaturalUse === "ACS+Calefacción"
-    //     ||
-    //     this.gasBudgetRequest.gasNaturalUse === "ACS+Cocina+Calefacción"
-    //   )
-    // }
   },
   mounted () {
     window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "details", "gas"));

@@ -264,10 +264,8 @@ const getAvailability = function(postalCode) {
   return new Promise((resolve, reject) =>{
     coverageService.getAvailability(postalCode).then((res) => {
       const resJson = xmlToJsonImp(res.data);
-      console.log(resJson)
       if( Object.keys(resJson.Installer).length > 0 ) {
         const { installerCode } = resJson.Installer
-        console.log(resJson.Installer)
         lead.setInstallerCode(installerCode)
         resolve(installerCode)
       } else {

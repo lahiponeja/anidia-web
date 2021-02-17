@@ -149,7 +149,6 @@ export default function customSelect() {
         elSelectNative.value = value;
         updateCustomSelectChecked(value, e.target.textContent);
         closeSelectCustom();
-        // setFlag(value);
       });
 
       elOption.addEventListener("mouseenter", (e) => {
@@ -158,37 +157,7 @@ export default function customSelect() {
     });
   }
 
-
-  // let locationOrigin = window.location.origin,
-  //     prefixSelect = document.querySelector(".prefix-select"),
-  //     flagImgArr = document.querySelectorAll(".an-select__flag"),
-  //     prefixSelectValue = prefixSelect.value;
-
-  // prefixSelect.addEventListener("change", function() {
-  //   prefixSelectValue = prefixSelect.value;
-  //   // setFlag(prefixSelect.value);
-  // })
-
-  // function setFlag(prefixSelectValue) {
-  //   console.log("setFlag", prefixSelectValue)
-  //   flagImgArr.forEach((flagImg) => {
-  //     switch(prefixSelectValue) {
-  //       case "+34":
-  //         flagImg.src = locationOrigin + "/o/anidia-theme/images/flags/flag-spain.svg";
-  //         break;
-  //       case "+44":
-  //         flagImg.src = locationOrigin + "/o/anidia-theme/images/flags/flag-uk.svg";
-  //         break;
-  //       case "+49":
-  //         flagImg.src = locationOrigin + "/o/anidia-theme/images/flags/flag-germany.svg";
-  //         break;
-  //     }
-  //   });
-  // }
-
   if(selects.length) {
     selects.forEach((elem)=> customSelect.call(elem));
   }
-
-  // setFlag("+34");
 }

@@ -20,7 +20,6 @@ export default {
     setFlag(e) {
       const { value } = e.target
       this.activeFlag = phonePrefixesArr.find((prefix) => { return prefix.value == value }).flagUrl
-      console.log("this.activeFlag", this.activeFlag);
     },
 
     setPrefix(prefixNum, flagImgUrl) {

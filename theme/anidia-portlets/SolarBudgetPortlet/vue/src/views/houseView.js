@@ -2,7 +2,7 @@ import coverageForm from '../components/house/coverageForm'
 import houseForm from '../components/house/houseForm'
 import budgetCard from '../components/house/budgetCard'
 import budgetReady from '../components/house/budgetReady'
-// import modal from '../components/modal'
+import modal from '../components/modal'
 
 const homeView = {
   components: {
@@ -10,7 +10,7 @@ const homeView = {
     'house-form': houseForm,
     'budget-card': budgetCard,
     'budget-ready': budgetReady,
-    // modal,
+    modal,
   },
   inject: ["global", "house", "lead"],
   data() {
