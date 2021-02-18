@@ -387,13 +387,13 @@ const coverageForm = {
                         :key="'municipality-'+index"
                         v-bind="resultProps[index]"
                       >
-                        {{ result.municipalityName }}
+                        {{result.populationName}} ({{ result.municipalityName }})
                       </li>
                     </ul>
 
                     <ul id="municustomul" v-show="house.state.autocompData.municipalities.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li @click="[setValue(municipality.municipalityName, 'municipalityName', '#municustomul'), onSubmitMunicipalities(municipality)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(municipality, index) in house.state.autocompData.municipalities" :key="'second-municipality-'+index">
-                        {{ municipality.municipalityName }}
+                        {{municipality}} ({{ municipality.municipalityName }})
                       </li>
                     </ul>
                   </div>
