@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.kernel.log.*;
 
 import org.json.*;
 import com.liferay.solarBudget.dto.v1_0.PostalCode;
@@ -25,6 +26,9 @@ public class Geocode{
     static String GEOCODE_PROPERTIES_URL = System.getenv().get("GEOCODE_PROPERTIES_URL");
     static String GEOCODE_ADDRESSES_URL = System.getenv().get("GEOCODE_ADDRESSES_URL");
     static String GEOCODE_ESTATES_URL = System.getenv().get("GEOCODE_ESTATES_URL");
+
+	  private Log log = LogFactoryUtil.getLog(Geocode.class.getName());
+
     private String getGeocodeToken() {
 
         JSONObject jsonRequestBody = new JSONObject();
@@ -43,12 +47,14 @@ public class Geocode{
         POST(HttpRequest.BodyPublishers.ofString(jsonRequestBody.toString())).
           build();
 
+        log.info("Requesting token to " + Geocode.GEOCODE_LOGIN_URL);
+
       HttpResponse<String> response = null;
       try {
         response = client.send(request, HttpResponse.BodyHandlers.ofString());
       } catch (IOException | InterruptedException e) {
         if(response != null) {
-          System.out.println(response.body());
+          log.info(response.body());
         }
         e.printStackTrace();
         return null;
@@ -58,7 +64,7 @@ public class Geocode{
       try {
         json = new JSONObject(response.body());
       } catch (JSONException e) {
-        System.out.println(response.body());
+        log.info(response.body());
         e.printStackTrace();
         return null;
       }
@@ -66,12 +72,12 @@ public class Geocode{
       try {
         return json.getString("UserToken") + "@" + json.getString("UserDomain");
       } catch (JSONException e) {
-        System.out.println(json.toString());
+        log.info(json.toString());
         e.printStackTrace();
         return null;
       }
     }
-    
+
 
 
     public List<PostalCode> getMunicipalities(String postalCode) {
@@ -84,10 +90,10 @@ public class Geocode{
             header("codSesion", getGeocodeToken()).
             GET().
             build();
-    
+
         HttpResponse<String> response = null;
         JSONArray responseJson;
-        System.out.println("Requesting municipalities to " + url);
+        log.info("Requesting municipalities to " + url);
         try {
           response = client.send(request, HttpResponse.BodyHandlers.ofString());
           responseJson = new JSONArray(response.body());
@@ -96,12 +102,12 @@ public class Geocode{
           return postalCodes;
         } catch (JSONException e) {
           if(response != null) {
-            System.out.println("Geocode response: " + response.body());
+            log.info("Geocode response: " + response.body());
           }
           e.printStackTrace();
           return postalCodes;
         }
-    
+
 
         for (int i = 0 ; i < responseJson.length(); i++) {
           JSONObject postalcodeJson = null;
@@ -113,19 +119,19 @@ public class Geocode{
             postalCodeData.setPopulationName(postalcodeJson.getString("desPoblacion"));
             postalCodeData.setPopulationId(postalcodeJson.getString("codPoblacion"));
             postalCodeData.setProvinceId(postalcodeJson.getString("codProvincia"));
-            postalCodes.add(postalCodeData);  
+            postalCodes.add(postalCodeData);
           } catch (JSONException e) {
-            System.out.println("Geocode response: " + response.body());
+            log.info("Geocode response: " + response.body());
             if(postalcodeJson != null) {
-              System.out.println("Json Object with error: " + postalcodeJson.toString());
+              log.info("Json Object with error: " + postalcodeJson.toString());
             }
             e.printStackTrace();
-          }         
+          }
         }
-        return postalCodes;  
+        return postalCodes;
       }
 
-    
+
     public List<Property> getProperties( String postalCode, String municipalityId,
     String addressId, String portalNumber) {
       List<Property> properties = new ArrayList<Property>();
@@ -151,8 +157,8 @@ public class Geocode{
           header("codSesion", getGeocodeToken()).
           GET().
           build();
-  
-      System.out.println("Requesting properties to " + urlBuilder.toString());
+
+      log.info("Requesting properties to " + urlBuilder.toString());
 
 
       HttpResponse<String> response = null;
@@ -166,12 +172,12 @@ public class Geocode{
         return properties;
       } catch (JSONException e) {
         if(response != null) {
-          System.out.println("Geocode response: " + response.body());
+          log.info("Geocode response: " + response.body());
         }
         e.printStackTrace();
         return properties;
       }
-          
+
           for (int i = 0 ; i < responseJson.length(); i++) {
               JSONObject propertyJson = null;
               try {
@@ -182,7 +188,7 @@ public class Geocode{
                 property.setLadder(propertyJson.optString("escalera"));
                 property.setFloor(propertyJson.optString("piso"));
                 property.setDoor(propertyJson.optString("puerta"));
-        
+
                 StringBuilder completeAddress = new StringBuilder();
                 if(property.getBlock() != null && !property.getBlock().equals("")) {
                   completeAddress.append("Bloque ");
@@ -203,22 +209,22 @@ public class Geocode{
                   completeAddress.append("Puerta ");
                   completeAddress.append(property.getDoor());
                 }
-        
+
                 if(completeAddress.toString().equals("")) {
                   property.setAddress(propertyJson.optString("Direccion_completa__c"));
                 } else {
                   property.setAddress(completeAddress.toString());
-                }   
-                
+                }
+
                 properties.add(property);
               } catch (JSONException e) {
-                System.out.println("Geocode response: " + response.body());
+                log.info("Geocode response: " + response.body());
                 if(propertyJson != null) {
-                  System.out.println("Json Object with error: " + propertyJson.toString());
+                  log.info("Json Object with error: " + propertyJson.toString());
                 }
                 e.printStackTrace();
             }
-          }  
+          }
     return properties;
   }
 
@@ -242,7 +248,7 @@ public class Geocode{
         GET().
         build();
 
-    System.out.println("Requesting addresses to " + urlBuilder.toString());
+    log.info("Requesting addresses to " + urlBuilder.toString());
 
     HttpResponse<String> response = null;
     JSONArray responseJson;
@@ -254,7 +260,7 @@ public class Geocode{
       return addresses;
     } catch (JSONException e) {
       if(response != null) {
-        System.out.println("Geocode response: " + response.body());
+        log.info("Geocode response: " + response.body());
       }
       e.printStackTrace();
       return addresses;
@@ -269,16 +275,16 @@ public class Geocode{
         address.setKind(addressJson.getString("tipoVia"));
         address.setName(addressJson.getString("desVia"));
         address.setAddressId(addressJson.getString("codVia"));
-        addresses.add(address);  
+        addresses.add(address);
       } catch (JSONException e) {
-        System.out.println("Geocode response: " + response.body());
+        log.info("Geocode response: " + response.body());
         if(addressJson != null) {
-          System.out.println("Json Object with error: " + addressJson.toString());
+          log.info("Json Object with error: " + addressJson.toString());
         }
         e.printStackTrace();
-      }         
+      }
     }
-    return addresses;  
+    return addresses;
   }
 
   public List<Estate> getEstates(String populationId, String addressId) {
@@ -299,7 +305,7 @@ public class Geocode{
         GET().
         build();
 
-    System.out.println("Requesting addresses to " + urlBuilder.toString());
+    log.info("Requesting addresses to " + urlBuilder.toString());
 
     HttpResponse<String> response = null;
     JSONArray responseJson;
@@ -311,7 +317,7 @@ public class Geocode{
       return estates;
     } catch (JSONException e) {
       if(response != null) {
-        System.out.println("Geocode response: " + response.body());
+        log.info("Geocode response: " + response.body());
       }
       e.printStackTrace();
       return estates;
@@ -326,15 +332,15 @@ public class Geocode{
         estate.setNumber(estateJson.getString("numPortal"));
         estate.setAnnex(estateJson.getString("letra"));
         estate.setGateId(estateJson.getString("codRedexisPortal"));
-        estates.add(estate);  
+        estates.add(estate);
       } catch (JSONException e) {
-        System.out.println("Geocode response: " + response.body());
+        log.info("Geocode response: " + response.body());
         if(estateJson != null) {
-          System.out.println("Json Object with error: " + estateJson.toString());
+          log.info("Json Object with error: " + estateJson.toString());
         }
         e.printStackTrace();
-      }         
+      }
     }
-    return estates;  
+    return estates;
   }
 }
