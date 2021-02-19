@@ -132,14 +132,41 @@ const houseForm = {
             </div>
 
             <div class="an-input an-form__item">
-              <input v-model="gasBudgetRequest.floorNumber" type="number" min="0" class="an-input__field" placeholder="Plantas" required="">
+              <div class="an-select an-select--full-width">
+                <span class="an-select__icon an-icon--chevron-down"></span>
+                <select v-model="gasBudgetRequest.floorNumber" class="an-select__native" required>
+                  <option disabled value="">Número de plantas</option>
+                  <option>1</option>
+                  <option>2</option>
+                </select>
+              </div>
             </div>
             <div class="an-input an-form__item">
-              <input v-model="gasBudgetRequest.bathroomNumber" type="number" min="0" class="an-input__field" placeholder="Baños" required="">
+              <div class="an-select an-select--full-width">
+                <span class="an-select__icon an-icon--chevron-down"></span>
+                <select v-model="gasBudgetRequest.bathroomNumber" class="an-select__native" required>
+                  <option disabled value="">Número de baños</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                </select>
+              </div>
             </div>
             <div class="an-input an-form__item">
-              <input v-model="gasBudgetRequest.staysNumber" type="number" min="0" class="an-input__field" placeholder="Número de estancias" required="">
-            <p class="an-input__caption an-body-s-regular">*(Incluye cocina y salón y excluye baños)</p>
+              <div class="an-select an-select--full-width">
+                <span class="an-select__icon an-icon--chevron-down"></span>
+                <select v-model="gasBudgetRequest.staysNumber" class="an-select__native" required>
+                  <option disabled value="">Número de estancias</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                </select>
+              </div>
+              <p class="an-input__caption an-body-s-regular">*(Incluye cocina y salón y excluye baños)</p>
             </div>
           </div>
 
@@ -334,7 +361,23 @@ const houseForm = {
           </div>
           <div class="an-form__flex an-form__flex--2-cols mb-xxl">
             <div class="an-input an-form__item">
-              <input v-model="gasBudgetRequest.metersBoilerToWindow" type="number" class="an-input__field" required="">
+              <div class="an-select an-select--full-width">
+                <span class="an-select__icon an-icon--chevron-down"></span>
+                <select v-model="gasBudgetRequest.metersBoilerToWindow" class="an-select__native" required>
+                  <option disabled value="">Seleccione una opción...</option>
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                </select>
+              </div>
             </div>
           </div>
 
