@@ -293,7 +293,7 @@ const getMunicipalities = function(pc) {
     coverageService.getMunicipalities(pc).then((res) => {
       const resJson = xmlToJsonImp(res.data);
       const { items } = resJson.Page.items
-      state.autocompData.municipalities = [items];
+      state.autocompData.municipalities = items.length ? items : [items]
       resolve(items)
     }).catch((err) => {
       reject(err)

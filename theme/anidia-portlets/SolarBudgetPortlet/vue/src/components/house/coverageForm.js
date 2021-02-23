@@ -59,16 +59,6 @@ const coverageForm = {
         this.lead.setAddress(this.formData.propertyAddress)
         this.house.changeHouseStep('vivienda');
       }
-      // if(this.isValidStatusCode) {
-        // this.house.setPostalCode(this.formData.postalCode);
-        // window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture OK", "gas"));
-      // } else {
-      //   this.house.setPostalCode(this.formData.postalCode);
-      //   window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
-      //   this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-      //   if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.remove('hide');
-      // }
-
       this.house.resetAutocompleteData()
     },
 
@@ -393,7 +383,7 @@ const coverageForm = {
 
                     <ul id="municustomul" v-show="house.state.autocompData.municipalities.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li @click="[setValue(municipality.municipalityName, 'municipalityName', '#municustomul'), onSubmitMunicipalities(municipality)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(municipality, index) in house.state.autocompData.municipalities" :key="'second-municipality-'+index">
-                        {{municipality}} ({{ municipality.municipalityName }})
+                        {{municipality.populationName}} ({{ municipality.municipalityName }})
                       </li>
                     </ul>
                   </div>
