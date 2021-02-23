@@ -1,4 +1,4 @@
-package com.liferay.gasBudget.dto.v1_0;
+package com.liferay.solarBudget.dto.v1_0;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;

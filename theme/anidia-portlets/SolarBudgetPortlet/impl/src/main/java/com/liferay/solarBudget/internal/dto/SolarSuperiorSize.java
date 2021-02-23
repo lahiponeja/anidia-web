@@ -1,13 +1,10 @@
-package com.liferay.gasBudget.internal.dto;
+package com.liferay.solarBudget.internal.dto;
 
-
-public class SolarSize {
+public class SolarSuperiorSize {
 
     private String value;
-    private String unitPrice;
     private String price;
     private String basePanels;
-    private String totalPanels;
 
     public String getValue() {
         return value;
@@ -15,14 +12,6 @@ public class SolarSize {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public String getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(String unitPrice) {
-        this.unitPrice = unitPrice;
     }
 
     public String getPrice() {
@@ -39,14 +28,6 @@ public class SolarSize {
 
     public void setBasePanels(String basePanels) {
         this.basePanels = basePanels;
-    }
-
-    public String getTotalPanels() {
-        return totalPanels;
-    }
-
-    public void setTotalPanels(String totalPanels) {
-        this.totalPanels = totalPanels;
     }
 
 }

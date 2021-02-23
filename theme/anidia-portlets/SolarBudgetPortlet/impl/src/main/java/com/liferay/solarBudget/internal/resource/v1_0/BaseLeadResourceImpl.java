@@ -1,12 +1,12 @@
-package com.liferay.gasBudget.internal.resource.v1_0;
+package com.liferay.solarBudget.internal.resource.v1_0;
 
-import com.liferay.gasBudget.dto.v1_0.Lead;
-import com.liferay.gasBudget.resource.v1_0.LeadResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
 import com.liferay.portal.vulcan.util.TransformUtil;
+import com.liferay.solarBudget.dto.v1_0.Lead;
+import com.liferay.solarBudget.resource.v1_0.LeadResource;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tags;
@@ -35,7 +35,7 @@ public abstract class BaseLeadResourceImpl implements LeadResource {
 	/**
 	 * Invoke this method with the command line:
 	 *
-	 * curl -X 'POST' 'http://localhost:8080/o/gas-budget/v1.0/leads' -d $'{"calculatorGas": ___, "personalData": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
+	 * curl -X 'POST' 'http://localhost:8080/o/solar-budget/v1.0/leads' -d $'{"calculatorSolar": ___, "personalData": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
 	 */
 	@Override
 	@Consumes({"application/json", "application/xml"})

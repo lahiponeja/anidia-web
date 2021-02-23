@@ -30,6 +30,62 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Estate")
 public class Estate {
 
+	@Schema(description = "Type of the address (street, avenue...)")
+	public String getAddressKind() {
+		return addressKind;
+	}
+
+	public void setAddressKind(String addressKind) {
+		this.addressKind = addressKind;
+	}
+
+	@JsonIgnore
+	public void setAddressKind(
+		UnsafeSupplier<String, Exception> addressKindUnsafeSupplier) {
+
+		try {
+			addressKind = addressKindUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String addressKind;
+
+	@Schema(description = "Name of the address")
+	public String getAddressName() {
+		return addressName;
+	}
+
+	public void setAddressName(String addressName) {
+		this.addressName = addressName;
+	}
+
+	@JsonIgnore
+	public void setAddressName(
+		UnsafeSupplier<String, Exception> addressNameUnsafeSupplier) {
+
+		try {
+			addressName = addressNameUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String addressName;
+
 	@Schema(description = "Annex to the gate number (e.g BIS in 2 BIS)")
 	public String getAnnex() {
 		return annex;
@@ -140,6 +196,34 @@ public class Estate {
 		StringBundler sb = new StringBundler();
 
 		sb.append("{");
+
+		if (addressKind != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"addressKind\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(addressKind));
+
+			sb.append("\"");
+		}
+
+		if (addressName != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"addressName\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(addressName));
+
+			sb.append("\"");
+		}
 
 		if (annex != null) {
 			if (sb.length() > 1) {

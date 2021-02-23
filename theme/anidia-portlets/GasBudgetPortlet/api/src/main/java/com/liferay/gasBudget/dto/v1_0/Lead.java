@@ -61,36 +61,6 @@ public class Lead {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected CalculatorGas calculatorGas;
 
-	@Schema(description = "Calculator solar of the Lead")
-	@Valid
-	public CalculatorSolar getCalculatorSolar() {
-		return calculatorSolar;
-	}
-
-	public void setCalculatorSolar(CalculatorSolar calculatorSolar) {
-		this.calculatorSolar = calculatorSolar;
-	}
-
-	@JsonIgnore
-	public void setCalculatorSolar(
-		UnsafeSupplier<CalculatorSolar, Exception>
-			calculatorSolarUnsafeSupplier) {
-
-		try {
-			calculatorSolar = calculatorSolarUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected CalculatorSolar calculatorSolar;
-
 	@Schema(description = "Personal information of the Lead")
 	@Valid
 	public PersonalData getPersonalData() {
@@ -155,16 +125,6 @@ public class Lead {
 			sb.append("\"calculatorGas\": ");
 
 			sb.append(String.valueOf(calculatorGas));
-		}
-
-		if (calculatorSolar != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"calculatorSolar\": ");
-
-			sb.append(String.valueOf(calculatorSolar));
 		}
 
 		if (personalData != null) {

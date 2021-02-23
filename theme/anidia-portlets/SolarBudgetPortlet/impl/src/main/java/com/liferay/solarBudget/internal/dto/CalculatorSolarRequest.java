@@ -1,4 +1,4 @@
-package com.liferay.gasBudget.internal.dto;
+package com.liferay.solarBudget.internal.dto;
 
 public class CalculatorSolarRequest {
 

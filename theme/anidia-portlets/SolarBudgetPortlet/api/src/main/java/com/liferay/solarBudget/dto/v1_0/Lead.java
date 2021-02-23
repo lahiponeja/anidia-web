@@ -1,4 +1,4 @@
-package com.liferay.gasBudget.dto.v1_0;
+package com.liferay.solarBudget.dto.v1_0;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,6 +18,8 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
+import javax.validation.Valid;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -25,26 +27,28 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("SolarOutputInverter")
+@GraphQLName("Lead")
 @JsonFilter("Liferay.Vulcan")
-@XmlRootElement(name = "SolarOutputInverter")
-public class SolarOutputInverter {
+@XmlRootElement(name = "Lead")
+public class Lead {
 
-	@Schema(description = "Brand")
-	public String getBrand() {
-		return brand;
+	@Schema(description = "Calculator solar of the Lead")
+	@Valid
+	public CalculatorSolar getCalculatorSolar() {
+		return calculatorSolar;
 	}
 
-	public void setBrand(String brand) {
-		this.brand = brand;
+	public void setCalculatorSolar(CalculatorSolar calculatorSolar) {
+		this.calculatorSolar = calculatorSolar;
 	}
 
 	@JsonIgnore
-	public void setBrand(
-		UnsafeSupplier<String, Exception> brandUnsafeSupplier) {
+	public void setCalculatorSolar(
+		UnsafeSupplier<CalculatorSolar, Exception>
+			calculatorSolarUnsafeSupplier) {
 
 		try {
-			brand = brandUnsafeSupplier.get();
+			calculatorSolar = calculatorSolarUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -56,23 +60,24 @@ public class SolarOutputInverter {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String brand;
+	protected CalculatorSolar calculatorSolar;
 
-	@Schema(description = "Model")
-	public String getModel() {
-		return model;
+	@Schema(description = "Personal information of the Lead")
+	@Valid
+	public PersonalData getPersonalData() {
+		return personalData;
 	}
 
-	public void setModel(String model) {
-		this.model = model;
+	public void setPersonalData(PersonalData personalData) {
+		this.personalData = personalData;
 	}
 
 	@JsonIgnore
-	public void setModel(
-		UnsafeSupplier<String, Exception> modelUnsafeSupplier) {
+	public void setPersonalData(
+		UnsafeSupplier<PersonalData, Exception> personalDataUnsafeSupplier) {
 
 		try {
-			model = modelUnsafeSupplier.get();
+			personalData = personalDataUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -84,35 +89,7 @@ public class SolarOutputInverter {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String model;
-
-	@Schema(description = "Price")
-	public String getPrice() {
-		return price;
-	}
-
-	public void setPrice(String price) {
-		this.price = price;
-	}
-
-	@JsonIgnore
-	public void setPrice(
-		UnsafeSupplier<String, Exception> priceUnsafeSupplier) {
-
-		try {
-			price = priceUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String price;
+	protected PersonalData personalData;
 
 	@Override
 	public boolean equals(Object object) {
@@ -120,13 +97,13 @@ public class SolarOutputInverter {
 			return true;
 		}
 
-		if (!(object instanceof SolarOutputInverter)) {
+		if (!(object instanceof Lead)) {
 			return false;
 		}
 
-		SolarOutputInverter solarOutputInverter = (SolarOutputInverter)object;
+		Lead lead = (Lead)object;
 
-		return Objects.equals(toString(), solarOutputInverter.toString());
+		return Objects.equals(toString(), lead.toString());
 	}
 
 	@Override
@@ -141,46 +118,24 @@ public class SolarOutputInverter {
 
 		sb.append("{");
 
-		if (brand != null) {
+		if (calculatorSolar != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"brand\": ");
+			sb.append("\"calculatorSolar\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(brand));
-
-			sb.append("\"");
+			sb.append(String.valueOf(calculatorSolar));
 		}
 
-		if (model != null) {
+		if (personalData != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"model\": ");
+			sb.append("\"personalData\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(model));
-
-			sb.append("\"");
-		}
-
-		if (price != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"price\": ");
-
-			sb.append("\"");
-
-			sb.append(_escape(price));
-
-			sb.append("\"");
+			sb.append(String.valueOf(personalData));
 		}
 
 		sb.append("}");
