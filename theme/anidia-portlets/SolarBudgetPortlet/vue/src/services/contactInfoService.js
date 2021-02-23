@@ -1,4 +1,4 @@
-import { http } from './index'
+import { httpSolar } from './index'
 
 const contactInfoService = {
   /**
@@ -7,7 +7,7 @@ const contactInfoService = {
    * @param { string } payload
    */
   postLeads: function(payload) {
-    return http.post('leads', payload)
+    return httpSolar.post('leads', payload)
   },
 
 }
