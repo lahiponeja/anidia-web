@@ -84,7 +84,7 @@ const budgetCard = {
 
     finalPrice() {
       const sum = Number(this.solarBudget.size.price.replace('.', '')) + this.allExtrasSum
-      return sum
+      return sum.toFixed(2)
     }, 
 
 
@@ -139,7 +139,7 @@ const budgetCard = {
 
     finalPriceSuperior() { 
       const sum = Number(this.solarBudget.size.price.replace('.', '')) + this.allExtraSuperiorsSum
-      return sum
+      return !Number.isNaN(sum) ? sum.toFixed(2) : false
     },
 
 
@@ -192,7 +192,7 @@ const budgetCard = {
         </div>
         <div class="an-card--pack__info">
           <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h1">{{ finalPrice }} <span class="an-h3">€</span></p>
+          <p class="an-h2">{{ finalPrice }} <span class="an-h3">€</span></p>
           <!-- <p class="an-h4">567€ de ahorro anual</p>
           <p class="an-h4">12.500€ de ahorro en 25 años</p> -->
         </div>
@@ -317,14 +317,14 @@ const budgetCard = {
 
       <!-- second card -->
 
-      <div class="an-card an-card--pack an-card--vue" data-card="">
+      <div v-if="finalPriceSuperior" class="an-card an-card--pack an-card--vue" data-card="">
         <div class="an-card--pack__intro">
           <p class="an-h5">Según tus necesidades especiales</p>
           <!-- <p class="an-h5">Pago único 5.200€</p> -->
         </div>
         <div class="an-card--pack__info">
           <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h1">{{ finalPriceSuperior }} <span class="an-h3">€</span></p>
+          <p class="an-h2">{{ finalPriceSuperior }} <span class="an-h3">€</span></p>
           <!-- <p class="an-h4">567€ de ahorro anual</p>
           <p class="an-h4">12.500€ de ahorro en 25 años</p> -->
         </div>

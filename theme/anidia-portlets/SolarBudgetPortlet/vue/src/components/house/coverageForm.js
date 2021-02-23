@@ -14,6 +14,7 @@ const coverageForm = {
     return {
       formData: {
         postalCode: "",
+        populationName: "",
         municipalityName: "",
         municipalityId: "",
         provinceId: "",
@@ -118,24 +119,7 @@ const coverageForm = {
       })
     },
 
-    checkAvailability(result) {
-      const { postalCode } = result
-
-      this.checkingAvailability = true
-
-      this.house.getAvailability(postalCode)
-      .then(() => { 
-        this.onSubmitPostalCode(result)
-        this.checkingAvailability = false
-       })
-      .catch((err) => {
-        console.error(err)
-        this.checkingAvailability = false
-      })
-    },
-
     onSubmitPostalCode(result) {
-
       const { postalCode } = result
       this.formData.postalCode = postalCode
       // Save object in the store
@@ -158,8 +142,25 @@ const coverageForm = {
     /*************************************
      * MUNICIPALITIES | Municipios
     *************************************/
+
+    checkAvailability(result) {
+      const { municipalityId } = result
+
+      this.checkingAvailability = true
+
+      this.house.getAvailability(this.formData.postalCode, municipalityId)
+      .then(() => { 
+        this.onSubmitMunicipalities(result)
+        this.checkingAvailability = false
+       })
+      .catch((err) => {
+        console.error(err)
+        this.checkingAvailability = false
+      })
+    },
+
     onSubmitMunicipalities(result) {
-      const { municipalityId, municipalityName, provinceId, populationId } = result
+      const { populationName, municipalityId, municipalityName, provinceId, populationId } = result
       this.formData.provMunId =  provinceId + municipalityId
 
       // Save object in the store
@@ -170,6 +171,7 @@ const coverageForm = {
       this.formData.municipalityId = municipalityId
       this.formData.provinceId = provinceId
       this.formData.populationId = populationId
+      this.formData.populationName = populationName
 
       this.loadingAddressess = true
       this.house.getAddresses(populationId, this.formData.postalCode) // OBTENER CALLES
@@ -292,7 +294,7 @@ const coverageForm = {
            <div class="an-input an-form__item">
               <autocomplete
                 :debounce-time="700"
-                @submit="checkAvailability"
+                @submit="onSubmitPostalCode"
                 :search="searchPostalCodes"
                 :get-result-value="getResultValue"
                 placeholder="Código Postal"
@@ -338,7 +340,7 @@ const coverageForm = {
             <div class="an-input an-form__item" :class="{ 'an-input--disabled': !!!municipalitiesArr.length }">
               <small v-show="loadingMunicipalities" style="position: absolute;z-index: 1;right: 30px;">Cargando municipios...</small>
               <autocomplete
-                @submit="onSubmitMunicipalities"
+                @submit="checkAvailability"
                 :search="search"
                 :get-result-value="getResultValue"
                 placeholder="Municipios"
@@ -359,12 +361,12 @@ const coverageForm = {
                   <div v-bind="rootProps" v-click-outside:municustomul="hideHelperDropdown">
                     <input
                       :disabled="!!!municipalitiesArr.length"
-                      v-model="formData.municipalityName"
+                      v-model="formData.populationName"
                       v-bind="inputProps"
                       v-on="inputListeners"
                       class="an-input__field"
                       @focus="[
-                        setActiveField('municipalitiesArr', 'municipalityName'),
+                        setActiveField('municipalitiesArr', 'populationName'),
                         showHelperDropdown('#municustomul')
                       ]"
                       @keyup="checkResultsLength('#municustomul', results)"
@@ -382,7 +384,7 @@ const coverageForm = {
                     </ul>
 
                     <ul id="municustomul" v-show="house.state.autocompData.municipalities.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
-                      <li @click="[setValue(municipality.municipalityName, 'municipalityName', '#municustomul'), onSubmitMunicipalities(municipality)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(municipality, index) in house.state.autocompData.municipalities" :key="'second-municipality-'+index">
+                      <li @click="[setValue(municipality.populationName, 'populationName', '#municustomul'), checkAvailability(municipality)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(municipality, index) in house.state.autocompData.municipalities" :key="'second-municipality-'+index">
                         {{municipality.populationName}} ({{ municipality.municipalityName }})
                       </li>
                     </ul>

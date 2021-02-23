@@ -15,8 +15,8 @@ const coverageService = {
    * API GET Method
    * @param { string } id
    */
-  getAvailability: function(postalCode) {
-    return httpSolar.get(`availability?postalCode=${postalCode}`)
+  getAvailability: function(postalCode, municipalityId) {
+    return httpSolar.get(`availability?postalCode=${postalCode}&municipalityId=${municipalityId}`)
   },
 
   /**
