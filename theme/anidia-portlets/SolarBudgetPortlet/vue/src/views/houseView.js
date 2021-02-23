@@ -5,6 +5,7 @@ import budgetReady from '../components/house/budgetReady'
 import modal from '../components/modal'
 
 const homeView = {
+  inject: ["global", "house", "lead"],
   components: {
     'coverage-form': coverageForm,
     'house-form': houseForm,
@@ -12,7 +13,6 @@ const homeView = {
     'budget-ready': budgetReady,
     modal,
   },
-  inject: ["global", "house", "lead"],
   data() {
     return {
       formSuccess: false,
@@ -44,7 +44,7 @@ const homeView = {
   },
   template: /*html*/`
     <div class="an-house an-funnel__titles bg-white pt-xxxl pb-xxxl">
-      <!-- <modal /> -->
+      <modal />
       <template v-if="!formSuccess">
         <div class="an-house__steps an-wrapper an-wrapper--med">
           <div class="an-funnel__titles mb-xl">
