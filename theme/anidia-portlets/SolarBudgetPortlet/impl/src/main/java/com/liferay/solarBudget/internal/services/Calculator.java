@@ -100,21 +100,21 @@ public class Calculator {
     superiorInstallation.setPanelsType(jsonSuperiorInstallation.getString("PanelType"));
     superiorInstallation.setInverterType(jsonSuperiorInstallation.getString("InverterType"));
     superiorInstallation.setExtraFornius(jsonSuperiorInstallation.getString("ExtraFornius"));
-    superiorInstallation.setPanelsExtra(jsonSuperiorInstallation.getString("PanelsExtra"));
-    superiorInstallation.setTriphasicExtra(jsonSuperiorInstallation.getString("TriphasicExtra"));
-    superiorInstallation.setInverterExtra(jsonSuperiorInstallation.getString("InverterExtra"));
-    superiorInstallation.setRoofExtra(jsonSuperiorInstallation.getString("RoofExtra"));
-    superiorInstallation.setPergolaExtra(jsonSuperiorInstallation.getString("PergolaExtra"));
-    superiorInstallation.setPipelineExtra(jsonSuperiorInstallation.getString("PipelineExtra"));
-    superiorInstallation.setCarCharger(jsonSuperiorInstallation.getString("CarCharcher"));
-    superiorInstallation.setBattery(jsonSuperiorInstallation.getString("Battery"));
-    superiorInstallation.setAdditionalPanelsInstallation(jsonSuperiorInstallation.getString("AdditionalPanelsInstallation"));
+    superiorInstallation.setPanelsExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("PanelsExtra")));
+    superiorInstallation.setTriphasicExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("TriphasicExtra")));
+    superiorInstallation.setInverterExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("InverterExtra")));
+    superiorInstallation.setRoofExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("RoofExtra")));
+    superiorInstallation.setPergolaExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("PergolaExtra")));
+    superiorInstallation.setPipelineExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("PipelineExtra")));
+    superiorInstallation.setCarCharger(this.sanitizePrice(jsonSuperiorInstallation.getString("CarCharcher")));
+    superiorInstallation.setBattery(this.sanitizePrice(jsonSuperiorInstallation.getString("Battery")));
+    superiorInstallation.setAdditionalPanelsInstallation(this.sanitizePrice(jsonSuperiorInstallation.getString("AdditionalPanelsInstallation")));
     return superiorInstallation;
   }
   private SuperiorSize createSuperiorSize(JSONObject jsonSuperiorSize) throws JSONException {
     SuperiorSize superiorSize = new SuperiorSize();
-    superiorSize.setValue(jsonSuperiorSize.get("Value") != null ? jsonSuperiorSize.get("Value").toString() : "" );
-    superiorSize.setPrice(jsonSuperiorSize.get("Price") != null ? jsonSuperiorSize.get("Price").toString() : "" );
+    superiorSize.setValue(jsonSuperiorSize.get("Value") != null ? this.sanitizePrice(jsonSuperiorSize.get("Value").toString()) : "" );
+    superiorSize.setPrice(jsonSuperiorSize.get("Price") != null ? this.sanitizePrice(jsonSuperiorSize.get("Price").toString()) : "" );
     superiorSize.setBasePanels(jsonSuperiorSize.get("BasePanels") != null ? jsonSuperiorSize.get("BasePanels").toString() : "" );
     return superiorSize;
   }
@@ -122,8 +122,8 @@ public class Calculator {
   private SolarBudgetSize createSize(JSONObject jsonSize) throws JSONException {
     SolarBudgetSize size = new SolarBudgetSize();
     size.setValue(jsonSize.get("Value") != null ? jsonSize.get("Value").toString() : "" );
-    size.setUnitPrice(jsonSize.get("UnitPrice") != null ? jsonSize.get("UnitPrice").toString() : "" );
-    size.setPrice(jsonSize.get("Price") != null ? jsonSize.get("Price").toString() : "" );
+    size.setUnitPrice(jsonSize.get("UnitPrice") != null ? this.sanitizePrice(jsonSize.get("UnitPrice").toString()) : "" );
+    size.setPrice(jsonSize.get("Price") != null ? this.sanitizePrice(jsonSize.get("Price").toString()) : "" );
     size.setBasePanels(jsonSize.get("BasePanels") != null ? jsonSize.get("BasePanels").toString() : "" );
     size.setTotalPanels(jsonSize.get("TotalPanels") != null ? jsonSize.get("TotalPanels").toString() : "" );
     return size;
@@ -132,7 +132,7 @@ public class Calculator {
     SolarOutputInverter inverter = new SolarOutputInverter();
     inverter.setBrand(jsonExtra.get("Brand") != null ? jsonExtra.get("Brand").toString() : "" );
     inverter.setModel(jsonExtra.get("Model") != null ? jsonExtra.get("Model").toString() : "" );
-    inverter.setPrice(jsonExtra.get("Price") != null ? jsonExtra.get("Price").toString() : "" );
+    inverter.setPrice(jsonExtra.get("Price") != null ? this.sanitizePrice(jsonExtra.get("Price").toString()) : "" );
     return inverter;
   }
 }
