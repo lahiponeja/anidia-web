@@ -62,6 +62,8 @@ public class OpenAPIResourceImpl {
 
 			add(PropertyResourceImpl.class);
 
+			add(LeadResourceImpl.class);
+
 			add(OpenAPIResourceImpl.class);
 		}
 	};

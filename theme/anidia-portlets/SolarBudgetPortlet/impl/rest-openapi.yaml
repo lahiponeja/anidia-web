@@ -309,6 +309,29 @@ components:
           type: string
 
 paths:
+  "/leads":
+    post:
+      operationId: postLead
+      summary: Create a Lead in CRM
+      description: Collects the lead information and send it to CRM
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Lead"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/Lead"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lead"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Lead"
+          description: The lead has been saved in CRM
   "/solar-budgets":
     post:
       operationId: postSolarBudget
