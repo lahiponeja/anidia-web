@@ -61,21 +61,21 @@ public class Calculator {
 
     try {
       JSONObject jsonResponse =  new JSONObject(response.body());
- 
+
       JSONObject jsonBudget = jsonResponse.getJSONObject("data").getJSONArray("items").getJSONObject(0);
       responseBudget.setPanelsType(jsonBudget.getString("PanelsType"));
-      responseBudget.setTotalPrice(jsonBudget.get("TotalPrice").toString());
+      responseBudget.setTotalPrice(this.sanitizePrice(jsonBudget.get("TotalPrice").toString()));
       responseBudget.setSize(this.createSize(jsonBudget.getJSONObject("Size")));
       responseBudget.setInverter(this.createInverter(jsonBudget.getJSONObject("Inverter")));
-      responseBudget.setPanelsExtra(jsonBudget.getJSONObject("PanelsExtra").getString("UnitPrice"));
-      responseBudget.setTriphasicExtra(jsonBudget.getJSONObject("TriphasicExtra").getString("UnitPrice"));
-      responseBudget.setInverterExtra(jsonBudget.getJSONObject("InverterExtra").getString("UnitPrice"));
-      responseBudget.setRoofExtra(jsonBudget.getJSONObject("RoofExtra").getString("UnitPrice"));
-      responseBudget.setPergolaExtra(jsonBudget.getJSONObject("PergolaExtra").getString("UnitPrice"));
-      responseBudget.setPipelineExtra(jsonBudget.getJSONObject("PipelineExtra").getString("UnitPrice"));
-      responseBudget.setCarCharger(jsonBudget.getJSONObject("CarCharcher").getString("UnitPrice"));
-      responseBudget.setBattery(jsonBudget.getJSONObject("Battery").getString("UnitPrice"));
-      responseBudget.setAdditionalPanelsInstallation(jsonBudget.getJSONObject("AdditionalPanelsInstallation").getString("UnitPrice"));
+      responseBudget.setPanelsExtra(this.sanitizePrice(jsonBudget.getJSONObject("PanelsExtra").getString("UnitPrice")));
+      responseBudget.setTriphasicExtra(this.sanitizePrice(jsonBudget.getJSONObject("TriphasicExtra").getString("UnitPrice")));
+      responseBudget.setInverterExtra(this.sanitizePrice(jsonBudget.getJSONObject("InverterExtra").getString("UnitPrice")));
+      responseBudget.setRoofExtra(this.sanitizePrice(jsonBudget.getJSONObject("RoofExtra").getString("UnitPrice")));
+      responseBudget.setPergolaExtra(this.sanitizePrice(jsonBudget.getJSONObject("PergolaExtra").getString("UnitPrice")));
+      responseBudget.setPipelineExtra(this.sanitizePrice(jsonBudget.getJSONObject("PipelineExtra").getString("UnitPrice")));
+      responseBudget.setCarCharger(this.sanitizePrice(jsonBudget.getJSONObject("CarCharcher").getString("UnitPrice")));
+      responseBudget.setBattery(this.sanitizePrice(jsonBudget.getJSONObject("Battery").getString("UnitPrice")));
+      responseBudget.setAdditionalPanelsInstallation(this.sanitizePrice(jsonBudget.getJSONObject("AdditionalPanelsInstallation").getString("UnitPrice")));
 
       JSONObject jsonSuperiorInstallation = jsonBudget.getJSONObject("SuperiorInstallation");
       responseBudget.setSuperiorInstallation(this.createSuperiorInstallation(jsonSuperiorInstallation));
@@ -88,9 +88,14 @@ public class Calculator {
     return responseBudget;
 
   }
+
+  private String sanitizePrice(String price) {
+    return price.replaceAll("€", "").replace(".", "").replace(",", ".");
+  }
+
   private SuperiorInstallation createSuperiorInstallation(JSONObject jsonSuperiorInstallation) throws JSONException {
     SuperiorInstallation superiorInstallation = new SuperiorInstallation();
-    
+
     superiorInstallation.setSuperiorSize(this.createSuperiorSize(jsonSuperiorInstallation.getJSONObject("SuperiorSize")));
     superiorInstallation.setPanelsType(jsonSuperiorInstallation.getString("PanelType"));
     superiorInstallation.setInverterType(jsonSuperiorInstallation.getString("InverterType"));
