@@ -41,7 +41,7 @@
 					</div>
 				</div>
 			</div>
-			<form:input id="${namespace}phoneNumber" cssClass="an-input__field" path="phoneNumber" placeholder="${phonePlaceholder}" required="required" />
+			<form:input id="${namespace}phoneNumber" cssClass="an-input__field" data-validation-message="Introduce un número de teléfono, sin espacios ni guiones." type="text" pattern="\d{9}" path="phoneNumber" placeholder="${phonePlaceholder}" required="required" />
 		</div>
 		<div class="an-select__form">
 			<form:select id="${namespace}productType" path="productType">
