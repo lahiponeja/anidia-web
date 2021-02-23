@@ -25,15 +25,15 @@ components:
         houseType:
           description: Kind of house
           type: string
-          enum: [ Unifamiliar de 1 planta sin A/A, Unifamiliar de 1 planta con A/A, 
+          enum: [ Unifamiliar de 1 planta sin A/A, Unifamiliar de 1 planta con A/A,
           Unifamiliar de 2-3 plantas sin A/A ni piscina, Unifamiliar de 2-3 plantas con A/A o piscina,
           Unifamiliar de 2-3 plantas con A/A y piscina o calefacción eléctrica ]
         monthlyConsumption:
           description: Monthly consumprion
-          type: integer 
+          type: integer
         roofType:
           description: Roof type
-          type: string 
+          type: string
           enum: ["Plano o inclinación menor a 20º", "Inclinación superior a 20º"]
 
 
@@ -82,7 +82,7 @@ components:
         superiorInstallation:
           description: Superior installation data
           $ref: "#/components/schemas/SuperiorInstallation"
-        
+
 
     SolarBudgetSize:
       description: Information about some extra from the solar budget
@@ -115,7 +115,7 @@ components:
         price:
           description: Price
           type: string
-    
+
     SuperiorSize:
       properties:
         value:
@@ -191,6 +191,12 @@ components:
     Estate:
       description: All the information about an estate
       properties:
+        addressKind:
+          description: Type of the address (street, avenue...)
+          type: string
+        addressName:
+          description: Name of the address
+          type: string
         number:
           description: Number of the gate
           type: string
@@ -200,6 +206,7 @@ components:
         gateId:
           description: Unique identifier of the gate
           type: string
+
     Property:
       description: All the information about the house in which someone lives
       properties:
@@ -222,7 +229,85 @@ components:
           description: Door in the flor of the property (e.g. C)
           type: string
 
-    
+    Lead:
+      description: Information about a lead to be sent to CRM
+      properties:
+        personalData:
+          description: Personal information of the Lead
+          $ref: "#/components/schemas/PersonalData"
+        calculatorSolar:
+          description: Calculator solar of the Lead
+          $ref: "#/components/schemas/CalculatorSolar"
+
+    PersonalData:
+      description: Personal information of the Lead
+      properties:
+        firstName:
+          description: First name of the lead
+          type: string
+        lastName:
+          description: Last name of the lead
+          type: string
+        email:
+          description: Email of the lead
+          type: string
+        phone:
+          description: Phone (including international prefix)
+          type: string
+        prodInterest:
+          description: Product of Interest (gas, solar, mantenimiento)
+          type: string
+          enum: [gas, solar, mantenimiento]
+        acceptNotCom:
+          description: Wether the lead has accepted commercial communications
+          type: boolean
+        postalCode:
+          description: Postal Code of the Lead
+          $ref: "#/components/schemas/PostalCode"
+        estate:
+          description: Estate of the lead
+          $ref: "#/components/schemas/Estate"
+        property:
+          description: Full property of the Lead
+          $ref: "#/components/schemas/Property"
+
+    CalculatorSolar:
+      description: Calculator solar information to send Lead
+      properties:
+        input:
+          description: Input object
+          $ref: "#/components/schemas/SolarBudgetRequest"
+        selectedExtras:
+          description: Selected extras
+          $ref: "#/components/schemas/SelectedExtras"
+        superiorInstallation:
+          type: boolean
+        output:
+          description: Output object
+          $ref: "#/components/schemas/SolarBudget"
+        finalPrice:
+          type: string
+        InstallerCode:
+          type: string
+
+    SelectedExtras:
+      description: asdasd
+      properties:
+        extraPanels:
+          type: string
+        triphasicExtra:
+          type: string
+        roofExtra:
+          type: string
+        pergolaExtra:
+          type: string
+        pipelineUnderground:
+          type: string
+        battery:
+          type: string
+        carCharger:
+          type: string
+
 paths:
   "/solar-budgets":
     post:
@@ -275,7 +360,7 @@ paths:
                   $ref: "#/components/schemas/PostalCode"
           description: ""
       tags: ["PostalCode"]
-  
+
   "/availability":
     get:
       operationId: getAvailability
@@ -336,7 +421,7 @@ paths:
           required: true
           schema:
             type: "string"
-            
+
       responses:
         200:
           content:
