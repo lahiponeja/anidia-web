@@ -35,7 +35,7 @@ public abstract class BaseLeadResourceImpl implements LeadResource {
 	/**
 	 * Invoke this method with the command line:
 	 *
-	 * curl -X 'POST' 'http://localhost:8080/o/gas-budget/v1.0/leads' -d $'{"calculatorGas": ___, "calculatorSolar": ___, "personalData": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
+	 * curl -X 'POST' 'http://localhost:8080/o/gas-budget/v1.0/leads' -d $'{"calculatorGas": ___, "personalData": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
 	 */
 	@Override
 	@Consumes({"application/json", "application/xml"})
