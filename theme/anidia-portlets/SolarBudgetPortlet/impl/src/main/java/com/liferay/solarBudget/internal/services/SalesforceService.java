@@ -11,6 +11,7 @@ import java.net.*;
 import java.net.http.*;
 import java.util.*;
 import org.json.*;
+import com.liferay.portal.kernel.log.*;
 
 
 public class SalesforceService {
@@ -21,6 +22,8 @@ public class SalesforceService {
 	static String SALESFORCE_CLIENT_SECRET = System.getenv().get("SALESFORCE_CLIENT_SECRET");
 	static String SALESFORCE_CLIENT_ID = System.getenv().get("SALESFORCE_CLIENT_ID");
 	static String SALESFORCE_USERNAME = System.getenv().get("SALESFORCE_USERNAME");
+
+  private Log _log = LogFactoryUtil.getLog(SalesforceService.class.getName());
 
 	private String getSalesforceToken() {
 
@@ -48,7 +51,7 @@ public class SalesforceService {
 			response = client.send(request, HttpResponse.BodyHandlers.ofString());
 		} catch (IOException | InterruptedException e) {
 			if(response != null) {
-				System.out.println(response.body());
+				_log.info(response.body());
 			}
 			e.printStackTrace();
 			return null;
@@ -58,7 +61,7 @@ public class SalesforceService {
 		try {
 			json = new JSONObject(response.body());
 		} catch (JSONException e) {
-			System.out.println(response.body());
+			_log.info(response.body());
 			e.printStackTrace();
 			return null;
 		}
@@ -66,7 +69,7 @@ public class SalesforceService {
 		try {
 			return json.getString("access_token");
 		} catch (JSONException e) {
-			System.out.println(json.toString());
+			_log.info(json.toString());
 			e.printStackTrace();
 			return null;
 		}
@@ -78,7 +81,7 @@ public class SalesforceService {
 		StringBuilder urlBuilder = new StringBuilder();
 		urlBuilder.append(SALESFORCE_LEAD_URL);
 
-		System.out.println("URL Crear lead: " + urlBuilder.toString());
+		_log.info("URL Crear lead: " + urlBuilder.toString());
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder().
 			uri(URI.create(urlBuilder.toString())).
@@ -94,14 +97,14 @@ public class SalesforceService {
 			}
 		} catch (IOException | InterruptedException | PortletException e) {
 			if(response != null) {
-				System.out.println(response.body());
+				_log.info(response.body());
 			}
 			e.printStackTrace();
 			return null;
 		}
 
-		System.out.println("** Lead creado correctamente ** " + response.statusCode());
-		System.out.println("** Respuesta creado lead ** " + response.body());
+		_log.info("** Lead creado correctamente ** " + response.statusCode());
+		_log.info("** Respuesta creado lead ** " + response.body());
 		return lead;
 	}
 
@@ -111,7 +114,7 @@ public class SalesforceService {
 		String mapperString = "";
 		try {
 			mapperString = mapper.writeValueAsString(mapToSendLeadRequest(lead));
-			System.out.println("** String lead request: " + mapperString);
+			_log.info("** String lead request: " + mapperString);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
