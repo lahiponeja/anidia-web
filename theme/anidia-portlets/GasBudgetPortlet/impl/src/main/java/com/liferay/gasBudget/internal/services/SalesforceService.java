@@ -367,9 +367,9 @@ public class SalesforceService {
 		}
 		else if (lead.getCalculatorSolar() != null){
 			sendLeadRequest.setCalculatorSolar(mapToCalculatorSolar(lead.getCalculatorSolar()));
-			sendLeadRequest.getPersonalData().setPrivacyPolicy("SolarServicios");
+			sendLeadRequest.getPersonalData().setPrivacyPolicy("GasServicios");
 		}
-		
+
 		return sendLeadRequest;
 	}
 

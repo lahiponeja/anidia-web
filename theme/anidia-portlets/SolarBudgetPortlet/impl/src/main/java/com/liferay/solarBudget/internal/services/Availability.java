@@ -9,6 +9,7 @@ import java.net.http.HttpResponse;
 import com.liferay.portal.kernel.json.JSON;
 import com.liferay.solarBudget.dto.v1_0.Installer;
 
+import com.liferay.portal.kernel.log.*;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 public class Availability {
   static String SOLAR_AVAILABILITY_REQUEST_URL = System.getenv().get("SOLAR_AVAILABILITY_REQUEST_URL");
 	static String SOLUSOFT_SECRET = System.getenv().get("SOLUSOFT_SECRET");
+	private Log log = LogFactoryUtil.getLog(Availability.class.getName());
 
 	public Installer checkAvailability(String postalCode, String municipalityId) {
     Installer installer = new Installer();
@@ -28,13 +30,13 @@ public class Availability {
 			GET().
       build();
 
-    System.out.println("Consultando disponibilidad llamando a " + url);
+    log.info("Consultando disponibilidad llamando a " + url);
 
 
     HttpResponse<String> response;
     try {
       response = client.send(request, HttpResponse.BodyHandlers.ofString());
-      System.out.println(">    Respuesta " + response.body());
+      log.info(">    Respuesta " + response.body());
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
       return null;
