@@ -48,7 +48,8 @@ const setSelectedExtras = function(selectedExtrasObj) {
     pipelineUnderground: selectedExtrasObj.pipelineExtra,
     triphasicExtra: selectedExtrasObj.triphasicExtra ? 'SI' : 'NO',
     roofExtra: selectedExtrasObj.roofExtra ? 'SI' : 'NO',
-    pergolaExtra: selectedExtrasObj.pergolaExtra ? 'SI' : 'NO'
+    pergolaExtra: selectedExtrasObj.pergolaExtra ? 'SI' : 'NO',
+    inverterExtra: selectedExtrasObj.inverterExtra ? 'SI' : 'NO'
   })
 }
 

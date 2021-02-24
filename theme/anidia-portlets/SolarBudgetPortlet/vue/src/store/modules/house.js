@@ -142,7 +142,8 @@ const submitUserContactInfo = function (budgetReadyForm) {
         "pergolaExtra": "string",
         "pipelineUnderground": "string",
         "battery": "string",
-        "carCharger": "string"
+        "carCharger": "string",
+        "inverterExtra": "string"
       },
       "superiorInstallation": true,
       "output": {

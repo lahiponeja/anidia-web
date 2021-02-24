@@ -38,7 +38,8 @@ const leadDefault = function() {
        pergolaExtra: "",
        pipelineUnderground: "",
        battery: "",
-       carCharger: ""
+       carCharger: "",
+       inverterExtra: ""
      },
      superiorInstallation: false,
      output: {
