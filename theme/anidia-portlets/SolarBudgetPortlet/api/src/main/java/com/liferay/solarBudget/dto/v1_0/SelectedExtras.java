@@ -115,6 +115,34 @@ public class SelectedExtras {
 	protected String extraPanels;
 
 	@Schema
+	public String getInverterExtra() {
+		return inverterExtra;
+	}
+
+	public void setInverterExtra(String inverterExtra) {
+		this.inverterExtra = inverterExtra;
+	}
+
+	@JsonIgnore
+	public void setInverterExtra(
+		UnsafeSupplier<String, Exception> inverterExtraUnsafeSupplier) {
+
+		try {
+			inverterExtra = inverterExtraUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String inverterExtra;
+
+	@Schema
 	public String getPergolaExtra() {
 		return pergolaExtra;
 	}
@@ -291,6 +319,20 @@ public class SelectedExtras {
 			sb.append("\"");
 
 			sb.append(_escape(extraPanels));
+
+			sb.append("\"");
+		}
+
+		if (inverterExtra != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"inverterExtra\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(inverterExtra));
 
 			sb.append("\"");
 		}
