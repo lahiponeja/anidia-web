@@ -169,6 +169,7 @@ public class SalesforceService {
 		extras.setPipelineUnderground(selectedExtras.getPipelineUnderground());
 		extras.setBattery(selectedExtras.getBattery());
 		extras.setCarCharger(selectedExtras.getCarCharger());
+		extras.setInverterExtra(selectedExtras.getInverterExtra());
 		return extras;
 	}
 

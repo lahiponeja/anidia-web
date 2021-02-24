@@ -9,6 +9,7 @@ public class SelectedSolarExtrasRequest {
     private String pipelineUnderground;
     private String battery;
     private String carCharger;
+    private String inverterExtra;
 
     public String getExtraPanels() {
     return extraPanels;
@@ -64,6 +65,14 @@ public class SelectedSolarExtrasRequest {
 
     public void setCarCharger(String carCharger) {
     this.carCharger = carCharger;
+    }
+
+    public String getInverterExtra() {
+    return inverterExtra;
+    }
+
+    public void setInverterExtra(String inverterExtra) {
+    this.inverterExtra = inverterExtra;
     }
 
 }
