@@ -88,6 +88,34 @@ public class CalculatorSolar {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String finalPrice;
 
+	@Schema
+	public String getFinalPriceIva() {
+		return finalPriceIva;
+	}
+
+	public void setFinalPriceIva(String finalPriceIva) {
+		this.finalPriceIva = finalPriceIva;
+	}
+
+	@JsonIgnore
+	public void setFinalPriceIva(
+		UnsafeSupplier<String, Exception> finalPriceIvaUnsafeSupplier) {
+
+		try {
+			finalPriceIva = finalPriceIvaUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String finalPriceIva;
+
 	@Schema(description = "Input object")
 	@Valid
 	public SolarBudgetRequest getInput() {
@@ -116,6 +144,34 @@ public class CalculatorSolar {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected SolarBudgetRequest input;
+
+	@Schema
+	public String getIvaPrice() {
+		return ivaPrice;
+	}
+
+	public void setIvaPrice(String ivaPrice) {
+		this.ivaPrice = ivaPrice;
+	}
+
+	@JsonIgnore
+	public void setIvaPrice(
+		UnsafeSupplier<String, Exception> ivaPriceUnsafeSupplier) {
+
+		try {
+			ivaPrice = ivaPriceUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String ivaPrice;
 
 	@Schema(description = "Output object")
 	@Valid
@@ -259,6 +315,20 @@ public class CalculatorSolar {
 			sb.append("\"");
 		}
 
+		if (finalPriceIva != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"finalPriceIva\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(finalPriceIva));
+
+			sb.append("\"");
+		}
+
 		if (input != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -267,6 +337,20 @@ public class CalculatorSolar {
 			sb.append("\"input\": ");
 
 			sb.append(String.valueOf(input));
+		}
+
+		if (ivaPrice != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"ivaPrice\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(ivaPrice));
+
+			sb.append("\"");
 		}
 
 		if (output != null) {
