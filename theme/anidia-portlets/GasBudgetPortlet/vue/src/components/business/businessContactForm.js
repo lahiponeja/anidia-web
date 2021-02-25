@@ -100,7 +100,7 @@ const businessContactForm = {
             </div>
           </div>
 
-          <input v-model="phoneNumber" v-on:input="reportPhoneValidation" v-on:invalid="setPhoneCustomValidationMessage" data-validation-message="Introduce un número de teléfono, sin espacios ni guiones." type="text" pattern="\\d{9}" class="an-input__field" placeholder="Teléfono" required="">
+          <input v-model="phoneNumber" v-on:input="reportPhoneValidation" v-on:invalid="setPhoneCustomValidationMessage" data-validation-message="Introduce tu número completo, sin espacios ni guiones." type="text" pattern="\\d{9}" class="an-input__field" placeholder="Teléfono" required="">
         </div>
         <div class="an-input an-form__item">
           <input v-model="businessFormData.email" type="email" class="an-input__field" placeholder="Email*" required="">
