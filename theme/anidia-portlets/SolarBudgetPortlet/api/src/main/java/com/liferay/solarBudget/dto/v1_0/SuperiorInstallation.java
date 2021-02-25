@@ -373,6 +373,34 @@ public class SuperiorInstallation {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected SuperiorSize superiorSize;
 
+	@Schema(description = "Total power of the budget (KwP)")
+	public String getTotalPowerInstalled() {
+		return totalPowerInstalled;
+	}
+
+	public void setTotalPowerInstalled(String totalPowerInstalled) {
+		this.totalPowerInstalled = totalPowerInstalled;
+	}
+
+	@JsonIgnore
+	public void setTotalPowerInstalled(
+		UnsafeSupplier<String, Exception> totalPowerInstalledUnsafeSupplier) {
+
+		try {
+			totalPowerInstalled = totalPowerInstalledUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String totalPowerInstalled;
+
 	@Schema
 	public String getTriphasicExtra() {
 		return triphasicExtra;
@@ -591,6 +619,20 @@ public class SuperiorInstallation {
 			sb.append("\"superiorSize\": ");
 
 			sb.append(String.valueOf(superiorSize));
+		}
+
+		if (totalPowerInstalled != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"totalPowerInstalled\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(totalPowerInstalled));
+
+			sb.append("\"");
 		}
 
 		if (triphasicExtra != null) {
