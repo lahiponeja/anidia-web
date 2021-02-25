@@ -203,7 +203,7 @@ const coverageForm = {
       })
 
       this.formData.addressKind = kind
-      this.formData.addressName = name
+      this.formData.addressName = `${kind} ${name}`
       this.formData.addressId = addressId
 
       this.loadingEstates = true
@@ -228,13 +228,17 @@ const coverageForm = {
     },
 
     onSubmitEstates(result) {
-      const { gateId, number } = result
+      const { gateId, number, annex } = result
 
       // Save object in the store
-      this.house.setCoverageData("estate", { gateId, number })
+      this.house.setCoverageData("estate", { gateId, number, annex })
       this.lead.setEstateData({ number, gateId })
 
-      this.formData.number = number
+      if(annex) {
+        this.formData.number = `${number} ${annex}`
+      } else {
+        this.formData.number = number
+      }
 
       // AL PARECER NO HARÁ FALTA CONSULTAR VIVIENDAS
       //------------------------------------------------
@@ -436,13 +440,13 @@ const coverageForm = {
                         :key="'address-'+index"
                         v-bind="resultProps[index]"
                       >
-                        {{ result.name }}
+                        {{result.kind}} {{ result.name }}
                       </li>
                     </ul>
 
                     <ul id="addresscustomul" v-show="house.state.autocompData.addresses.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li v-for="(address, index) in house.state.autocompData.addresses" :key="'second-address-'+index" @click="[setValue(address.name, 'name', '#addresscustomul'), onSubmitAddresses(address)]" v-bind="resultProps[index]" class="an-select__custom-option">
-                        {{ address.name }}
+                        {{address.kind}} {{ address.name }}
                       </li>
                     </ul>
                   </div>
