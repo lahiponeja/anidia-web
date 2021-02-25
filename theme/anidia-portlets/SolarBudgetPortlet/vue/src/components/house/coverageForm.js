@@ -203,7 +203,7 @@ const coverageForm = {
       })
 
       this.formData.addressKind = kind
-      this.formData.addressName = `${kind} ${name}`
+      this.formData.addressName =  kind ? `${kind} ${name}` : name
       this.formData.addressId = addressId
 
       this.loadingEstates = true
