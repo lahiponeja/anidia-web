@@ -170,6 +170,7 @@ const submitUserContactInfo = function (budgetReadyForm) {
         "battery": "string",
         "additionalPanelsInstallation": "string",
         "totalPrice": "string",
+        "totalPowerInstalled": "string",
         "superiorInstallation": {
           "superiorSize": {
             "value": "string",
@@ -187,7 +188,8 @@ const submitUserContactInfo = function (budgetReadyForm) {
           "pipelineExtra": "string",
           "carCharger": "string",
           "battery": "string",
-          "additionalPanelsInstallation": "string"
+          "additionalPanelsInstallation": "string",
+          "totalPowerInstalled": "string"
         }
       },
       "finalPrice": "string",

@@ -66,6 +66,7 @@ const leadDefault = function() {
        battery: "",
        additionalPanelsInstallation: "",
        totalPrice: "",
+       totalPowerInstalled: "",
        superiorInstallation: {
          superiorSize: {
            value: "",
@@ -83,7 +84,8 @@ const leadDefault = function() {
          pipelineExtra: "",
          carCharger: "",
          battery: "",
-         additionalPanelsInstallation: ""
+         additionalPanelsInstallation: "",
+         totalPowerInstalled: ""
        }
      },
      finalPrice: "",

@@ -22,23 +22,25 @@ const solarBudgetDefault = function() {
        value: ""
     },
     superiorInstallation: {
-       additionalPanelsInstallation: "",
-       battery: "",
-       carCharger: "",
-       extraFornius: "",
-       inverterExtra: "",
-       panelsExtra: "",
-       pergolaExtra: "",
-       pipelineExtra: "",
-       roofExtra: "",
-       superiorSize: {
-          basePanels: "",
-          price: "",
-          value: ""
-       },
-       triphasicExtra: ""
+      additionalPanelsInstallation: "",
+      battery: "",
+      carCharger: "",
+      extraFornius: "",
+      inverterExtra: "",
+      panelsExtra: "",
+      pergolaExtra: "",
+      pipelineExtra: "",
+      roofExtra: "",
+      superiorSize: {
+        basePanels: "",
+        price: "",
+        value: ""
+      },
+      triphasicExtra: "",
+      totalPowerInstalled: ""
     },
     totalPrice: "",
+    totalPowerInstalled: "",
     triphasicExtra: ""
   }
 }
