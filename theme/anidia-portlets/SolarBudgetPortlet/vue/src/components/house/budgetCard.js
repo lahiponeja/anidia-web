@@ -87,6 +87,17 @@ const budgetCard = {
       return sum.toFixed(2)
     }, 
 
+    ivaRate() {
+      return 0.21;
+    },
+
+    finalPriceIvaExtra() {
+      return  this.finalPrice*this.ivaRate;
+    },
+
+    finalPriceWithIva() {
+      return  this.finalPrice*(1+this.ivaRate);
+    },
 
     /************************************ 
    * EXTRAS | SUPERIOR
@@ -142,6 +153,14 @@ const budgetCard = {
       return !Number.isNaN(sum) ? sum.toFixed(2) : false
     },
 
+    finalPriceSuperiorIvaExtra() {
+      return  this.finalPriceSuperior*this.ivaRate;
+    },
+
+    finalPriceSuperiorWithIva() {
+      return  this.finalPriceSuperior*(1+this.ivaRate);
+    }
+
 
   },
   methods: {
@@ -191,13 +210,13 @@ const budgetCard = {
       <div class="an-card an-card--pack an-card--vue featured" data-card="">
         <div class="an-card--pack__intro">
           <p class="an-h5">Según tus necesidades especiales</p>
-          <!-- <p class="an-h5">Pago único 5.200€</p> -->
+          <p class="an-h5">Pago único {{formatPrice(finalPrice) }}€</p>
         </div>
         <div class="an-card--pack__info">
           <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ formatPrice(finalPrice) }} <span class="an-h3">€</span></p>
-          <!-- <p class="an-h4">567€ de ahorro anual</p>
-          <p class="an-h4">12.500€ de ahorro en 25 años</p> -->
+          <p class="an-h2">{{ formatPrice(finalPrice/12) }} <span class="an-h3">€ mes</span></p>
+          <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
+          <p class="an-h5">Precio total IVA Incluido: {{ formatPrice(finalPriceWithIva) }}€</p>
         </div>
         <ul class="an-list">
           <li class="an-list__item an-body-m-regular">
@@ -323,13 +342,13 @@ const budgetCard = {
       <div v-if="finalPriceSuperior" class="an-card an-card--pack an-card--vue" data-card="">
         <div class="an-card--pack__intro">
           <p class="an-h5">Según tus necesidades especiales</p>
-          <!-- <p class="an-h5">Pago único 5.200€</p> -->
+          <p class="an-h5">Pago único {{ formatPrice(finalPriceSuperior) }}€</p>
         </div>
         <div class="an-card--pack__info">
           <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ formatPrice(finalPriceSuperior) }} <span class="an-h3">€</span></p>
-          <!-- <p class="an-h4">567€ de ahorro anual</p>
-          <p class="an-h4">12.500€ de ahorro en 25 años</p> -->
+          <p class="an-h2">{{ formatPrice(finalPriceSuperior/12) }} <span class="an-h3">€/mes</span></p>
+          <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
+          <p class="an-h5">Precio total IVA Incluido: {{ formatPrice(finalPriceSuperiorWithIva) }}€</p>
         </div>
         <ul class="an-list">
           <li class="an-list__item an-body-m-regular">
