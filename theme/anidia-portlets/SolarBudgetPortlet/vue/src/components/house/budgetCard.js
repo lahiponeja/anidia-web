@@ -172,6 +172,9 @@ const budgetCard = {
 
       this.house.changeHouseStep('presupuesto-realizado')
 
+    },
+    formatPrice(price) {
+      return new Intl.NumberFormat('es-ES', { maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(price);
     }
   },
   mounted() {
@@ -192,7 +195,7 @@ const budgetCard = {
         </div>
         <div class="an-card--pack__info">
           <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ finalPrice }} <span class="an-h3">€</span></p>
+          <p class="an-h2">{{ formatPrice(finalPrice) }} <span class="an-h3">€</span></p>
           <!-- <p class="an-h4">567€ de ahorro anual</p>
           <p class="an-h4">12.500€ de ahorro en 25 años</p> -->
         </div>
@@ -324,7 +327,7 @@ const budgetCard = {
         </div>
         <div class="an-card--pack__info">
           <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ finalPriceSuperior }} <span class="an-h3">€</span></p>
+          <p class="an-h2">{{ formatPrice(finalPriceSuperior) }} <span class="an-h3">€</span></p>
           <!-- <p class="an-h4">567€ de ahorro anual</p>
           <p class="an-h4">12.500€ de ahorro en 25 años</p> -->
         </div>
