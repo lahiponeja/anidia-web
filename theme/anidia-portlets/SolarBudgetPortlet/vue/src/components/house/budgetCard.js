@@ -223,9 +223,9 @@ const budgetCard = {
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
             {{ leadData.calculatorSolar.input.houseType }}
           </li>
-          <li v-if="leadData.calculatorSolar.input.monthlyConsumption" class="an-list__item an-body-m-regular">
+          <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
-            Consumo de energía mensual {{ leadData.calculatorSolar.input.monthlyConsumption }}€
+            Consumo de energía mensual {{ solarBudget.totalPowerInstalled }} KwP
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
@@ -355,9 +355,9 @@ const budgetCard = {
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
             {{ leadData.calculatorSolar.input.houseType }}
           </li>
-          <li v-if="leadData.calculatorSolar.input.monthlyConsumption" class="an-list__item an-body-m-regular">
+          <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
-            Consumo de energía mensual {{ leadData.calculatorSolar.input.monthlyConsumption }}€
+            Consumo de energía mensual {{ solarBudget.superiorInstallation.totalPowerInstalled }} KwP
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
