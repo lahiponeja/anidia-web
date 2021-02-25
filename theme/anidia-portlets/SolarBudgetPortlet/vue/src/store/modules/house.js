@@ -325,7 +325,18 @@ const getEstates = function(populationId, addressId) {
       const resJson = xmlToJsonImp(res.data);
       const { items } = resJson.Page.items
       const result = items
-      state.autocompData.estates = result.length ? result : [result]
+      const checkIfIsArrayResults = result.length ? result : [result]
+      state.autocompData.estates = checkIfIsArrayResults.sort((e, b) => {
+        if((e.number == b.number)) {
+          var annexa = typeof(e.annex) == "undefined" ? "" : e.annex;
+          var annexb = typeof(b.annex) == "undefined" ? "" : e.annex;
+          return annexa.localeCompare(annexb);
+        } else {
+          var numbera = typeof(e.number) == "undefined" ? "" : e.number;
+          var numberb = typeof(b.number) == "undefined" ? "" : e.number;
+          return numbera.localeCompare(numberb);
+        }
+      });
       resolve(items)
     }).catch((err) => {
       reject(err)
