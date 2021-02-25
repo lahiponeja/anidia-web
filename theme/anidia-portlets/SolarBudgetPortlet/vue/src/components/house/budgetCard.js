@@ -137,8 +137,8 @@ const budgetCard = {
       )
     },
 
-    finalPriceSuperior() { 
-      const sum = Number(this.solarBudget.size.price.replace('.', '')) + this.allExtraSuperiorsSum
+    finalPriceSuperior() {
+      const sum = Number(this.solarBudget.superiorInstallation.superiorSize.price.replace('.', '')) + this.allExtraSuperiorsSum
       return !Number.isNaN(sum) ? sum.toFixed(2) : false
     },
 
@@ -339,7 +339,7 @@ const budgetCard = {
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
-            Instalación de {{ solarBudget.size.basePanels }} paneles solares
+            Instalación de {{ solarBudget.superiorInstallation.superiorSize.basePanels }} paneles solares
           </li>
         </ul>
         <div class="an-accordion">
