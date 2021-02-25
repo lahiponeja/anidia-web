@@ -40,6 +40,8 @@ public class PersonalDataRequest {
 
     private String codInmueble;
 
+    private String descInmueble;
+
     public Boolean getAcceptNotCom() {
         return acceptNotCom;
     }
@@ -174,6 +176,14 @@ public class PersonalDataRequest {
 
     public void setCodInmueble(String codInmueble) {
         this.codInmueble = codInmueble;
+    }
+
+    public String getDescInmueble() {
+        return descInmueble;
+    }
+
+    public void setDescInmueble(String descInmueble) {
+        this.descInmueble = descInmueble;
     }
 
     public String getPrivacyPolicy() {

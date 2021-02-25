@@ -299,6 +299,7 @@ public class SalesforceService {
 			personalDataRequest.setAddressPlant(personalData.getProperty().getFloor());
 			personalDataRequest.setAddressStair(personalData.getProperty().getLadder());
 			personalDataRequest.setCodInmueble(personalData.getProperty().getPropertyId());
+			personalDataRequest.setDescInmueble(personalData.getProperty().getAddress());
 		}
 
 		if (personalData.getEstate() != null) {
