@@ -97,13 +97,8 @@ public class Geocode{
         try {
           response = client.send(request, HttpResponse.BodyHandlers.ofString());
           responseJson = new JSONArray(response.body());
-         } catch (IOException | InterruptedException e) {
-          e.printStackTrace();
-          return postalCodes;
-        } catch (JSONException e) {
-          if(response != null) {
-            log.info("Geocode response: " + response.body());
-          }
+          log.info("Geocode response: " + responseJson);
+        } catch (JSONException | IOException | InterruptedException e) {
           e.printStackTrace();
           return postalCodes;
         }
@@ -167,13 +162,8 @@ public class Geocode{
       try {
         response = client.send(request, HttpResponse.BodyHandlers.ofString());
         responseJson = new JSONArray(response.body());
-      } catch (IOException | InterruptedException e) {
-        e.printStackTrace();
-        return properties;
-      } catch (JSONException e) {
-        if(response != null) {
-          log.info("Geocode response: " + response.body());
-        }
+        log.info("Geocode response: " + responseJson);
+      } catch (JSONException | IOException | InterruptedException e) {
         e.printStackTrace();
         return properties;
       }
@@ -255,13 +245,8 @@ public class Geocode{
     try {
       response = client.send(request, HttpResponse.BodyHandlers.ofString());
       responseJson = new JSONArray(response.body());
-     } catch (IOException | InterruptedException e) {
-      e.printStackTrace();
-      return addresses;
-    } catch (JSONException e) {
-      if(response != null) {
-        log.info("Geocode response: " + response.body());
-      }
+      log.info("Geocode response: " + responseJson);
+     } catch (JSONException | IOException | InterruptedException e) {
       e.printStackTrace();
       return addresses;
     }
@@ -312,13 +297,9 @@ public class Geocode{
     try {
       response = client.send(request, HttpResponse.BodyHandlers.ofString());
       responseJson = new JSONArray(response.body());
-     } catch (IOException | InterruptedException e) {
-      e.printStackTrace();
-      return estates;
-    } catch (JSONException e) {
-      if(response != null) {
-        log.info("Geocode response: " + response.body());
-      }
+      log.info("Geocode response: " + responseJson);
+
+     } catch (JSONException | IOException | InterruptedException e) {
       e.printStackTrace();
       return estates;
     }
