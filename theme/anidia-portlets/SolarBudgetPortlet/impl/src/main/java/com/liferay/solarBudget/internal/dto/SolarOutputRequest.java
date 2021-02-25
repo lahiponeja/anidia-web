@@ -17,6 +17,7 @@ public class SolarOutputRequest {
     private String battery;
     private String additionalPanelsInstallation;
     private String totalPrice;
+    private String totalPowerInstalled;
     private SolarSuperiorInstallation superiorInstallation;
 
     public String getPanelsType() {
@@ -121,6 +122,14 @@ public class SolarOutputRequest {
 
     public void setTotalPrice(String totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getTotalPowerInstalled() {
+        return totalPowerInstalled;
+    }
+
+    public void setTotalPowerInstalled(String totalPowerInstalled) {
+        this.totalPowerInstalled = totalPowerInstalled;
     }
 
     public SolarSuperiorInstallation getSuperiorInstallation() {

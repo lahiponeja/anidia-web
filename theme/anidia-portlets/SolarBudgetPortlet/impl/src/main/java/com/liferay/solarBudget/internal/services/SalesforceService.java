@@ -208,6 +208,7 @@ public class SalesforceService {
 		outputRequest.setTotalPrice(calculatorSolarOutput.getTotalPrice());
 		outputRequest.setSize(mapToSolarSize(calculatorSolarOutput.getSize()));
 		outputRequest.setInverter(mapToSolarInverter(calculatorSolarOutput.getInverter()));
+		outputRequest.setTotalPowerInstalled(calculatorSolarOutput.getTotalPowerInstalled());
 		outputRequest.setSuperiorInstallation(mapToSolarSuperiorInstallation(calculatorSolarOutput.getSuperiorInstallation()));
 
 		return outputRequest;
@@ -261,6 +262,7 @@ public class SalesforceService {
 		sInstallation.setExtraFornius(superiorInstallation.getExtraFornius());
 		sInstallation.setAdditionalPanelsInstallation(superiorInstallation.getAdditionalPanelsInstallation());
 		sInstallation.setSuperiorSize(mapToSolarSuperiorSize(superiorInstallation.getSuperiorSize()));
+		sInstallation.setTotalPowerInstalled(superiorInstallation.getTotalPowerInstalled());
 
 		return sInstallation;
 	}

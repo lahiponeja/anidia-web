@@ -16,6 +16,7 @@ public class SolarSuperiorInstallation {
     private String carCharger;
     private String battery;
     private String additionalPanelsInstallation;
+    private String totalPowerInstalled;
 
     public SolarSuperiorSize getSuperiorSize() {
         return superiorSize;
@@ -121,4 +122,11 @@ public class SolarSuperiorInstallation {
         this.additionalPanelsInstallation = additionalPanelsInstallation;
     }
 
+    public String getTotalPowerInstalled() {
+        return totalPowerInstalled;
+    }
+
+    public void setTotalPowerInstalled(String totalPowerInstalled) {
+        this.totalPowerInstalled = totalPowerInstalled;
+    }
 }
