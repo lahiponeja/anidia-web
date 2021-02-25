@@ -497,13 +497,13 @@ const coverageForm = {
                         :key="'estate-'+index"
                         v-bind="resultProps[index]"
                       >
-                        {{ result.number }}
+                        {{ result.number }} {{ result.annex }}
                       </li>
                     </ul>
 
                     <ul id="estatescustomul" v-show="house.state.autocompData.estates.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li @click="[setValue(estate.number, 'number', '#estatescustomul'), onSubmitEstates(estate)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(estate, index) in house.state.autocompData.estates" :key="'second-estate-'+index">
-                        {{ estate.number }}
+                        {{ estate.number }} {{ estate.annex }}
                       </li>
                     </ul>
                   </div>
