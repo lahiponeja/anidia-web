@@ -53,8 +53,10 @@ const setSelectedExtras = function(selectedExtrasObj) {
   })
 }
 
-const setFinalPrice = function(finalPrice) {
+const setFinalPrice = function(finalPrice, ivaPrice, finalPriceIva) {
   state.lead.calculatorSolar.finalPrice = finalPrice
+  state.lead.calculatorSolar.ivaPrice = ivaPrice
+  state.lead.calculatorSolar.finalPriceIva = finalPriceIva
 }
 
 const submitHouseData = function(solarBudgetRequest) {

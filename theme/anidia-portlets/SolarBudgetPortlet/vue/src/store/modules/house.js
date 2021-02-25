@@ -191,6 +191,8 @@ const submitUserContactInfo = function (budgetReadyForm) {
         }
       },
       "finalPrice": "string",
+      "ivaPrice": "string",
+      "finalPriceIva": "string",
       "InstallerCode": "string"
     }
   }

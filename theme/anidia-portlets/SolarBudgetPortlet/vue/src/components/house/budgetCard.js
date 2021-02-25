@@ -182,11 +182,11 @@ const budgetCard = {
       if(type === 'sup') {
         this.lead.setSuperiorInstalation(true)
         this.lead.setSelectedExtras(this.superiorExtras)
-        this.lead.setFinalPrice(this.finalPriceSuperior)
+        this.lead.setFinalPrice(this.finalPriceSuperior, this.finalPriceSuperiorIvaExtra, this.finalPriceSuperiorWithIva)
       } else {
         this.lead.setSuperiorInstalation(false)
         this.lead.setSelectedExtras(this.extras)
-        this.lead.setFinalPrice(this.finalPrice)
+        this.lead.setFinalPrice(this.finalPrice, this.finalPriceIvaExtra, this.finalPriceWithIva)
       }
 
       this.house.changeHouseStep('presupuesto-realizado')
