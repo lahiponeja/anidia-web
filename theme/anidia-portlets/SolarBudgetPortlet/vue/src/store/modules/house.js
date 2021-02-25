@@ -261,9 +261,9 @@ const setHouseType = function(payload) {
   state.houseType = payload
 }
 
-const getAvailability = function(postalCode, municipalityId) {
+const getAvailability = function(postalCode, provinceId, municipalityId) {
   return new Promise((resolve, reject) =>{
-    coverageService.getAvailability(postalCode, municipalityId).then((res) => {
+    coverageService.getAvailability(postalCode, provinceId, municipalityId).then((res) => {
       const resJson = xmlToJsonImp(res.data);
       if( Object.keys(resJson.Installer).length > 0 ) {
         const { installerCode } = resJson.Installer

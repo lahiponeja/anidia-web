@@ -144,12 +144,12 @@ const coverageForm = {
     *************************************/
 
     checkAvailability(result) {
-      const { municipalityId } = result
+      const { municipalityId, provinceId } = result
 
       this.checkingAvailability = true
 
-      this.house.getAvailability(this.formData.postalCode, municipalityId)
-      .then(() => { 
+      this.house.getAvailability(this.formData.postalCode, provinceId, municipalityId)
+      .then(() => {
         this.onSubmitMunicipalities(result)
         this.checkingAvailability = false
        })
