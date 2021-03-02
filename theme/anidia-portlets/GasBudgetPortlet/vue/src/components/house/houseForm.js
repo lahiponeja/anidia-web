@@ -17,7 +17,7 @@ const houseForm = {
         kitchenUse: "",
         heatingUse: "",
         boilerLocation: "",
-        hasVentilationGrill: true,
+        hasVentilationGrill: false,
         personsWater: "",
         metersBoilerToWindow: "",
         metersWaterIntake: "",
@@ -48,14 +48,14 @@ const houseForm = {
 
     showVentilationGrillFn(){
       if (this.gasBudgetRequest.boilerLocation === "Lavadero/Terraza") {
-        this.gasBudgetRequest.hasVentilationGrill = true
+        this.gasBudgetRequest.hasVentilationGrill = false
         this.showVentilationGrillRadios = false
         return false
       } else if(this.gasBudgetRequest.boilerLocation === "Cocina") {
         this.showVentilationGrillRadios = true
         return true
       } else if(this.gasBudgetRequest.boilerLocation === "Baño") {
-        this.gasBudgetRequest.hasVentilationGrill = true
+        this.gasBudgetRequest.hasVentilationGrill = false
         this.showVentilationGrillRadios = false
         return false
       }
