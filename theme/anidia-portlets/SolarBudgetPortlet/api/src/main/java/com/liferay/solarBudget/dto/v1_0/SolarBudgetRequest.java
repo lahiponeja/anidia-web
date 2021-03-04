@@ -75,41 +75,6 @@ public class SolarBudgetRequest {
 
 	}
 
-	@GraphQLName("RoofType")
-	public static enum RoofType {
-
-		PLANO_O_INCLINACIN_MENOR_A_20("Plano o inclinación menor a 20º"),
-		INCLINACIN_SUPERIOR_A_20("Inclinación superior a 20º");
-
-		@JsonCreator
-		public static RoofType create(String value) {
-			for (RoofType roofType : values()) {
-				if (Objects.equals(roofType.getValue(), value)) {
-					return roofType;
-				}
-			}
-
-			return null;
-		}
-
-		@JsonValue
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private RoofType(String value) {
-			_value = value;
-		}
-
-		private final String _value;
-
-	}
-
 	@Schema(description = "Kind of house")
 	@Valid
 	public HouseType getHouseType() {
@@ -176,44 +141,6 @@ public class SolarBudgetRequest {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer monthlyConsumption;
 
-	@Schema(description = "Roof type")
-	@Valid
-	public RoofType getRoofType() {
-		return roofType;
-	}
-
-	@JsonIgnore
-	public String getRoofTypeAsString() {
-		if (roofType == null) {
-			return null;
-		}
-
-		return roofType.toString();
-	}
-
-	public void setRoofType(RoofType roofType) {
-		this.roofType = roofType;
-	}
-
-	@JsonIgnore
-	public void setRoofType(
-		UnsafeSupplier<RoofType, Exception> roofTypeUnsafeSupplier) {
-
-		try {
-			roofType = roofTypeUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected RoofType roofType;
-
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
@@ -263,20 +190,6 @@ public class SolarBudgetRequest {
 			sb.append("\"monthlyConsumption\": ");
 
 			sb.append(monthlyConsumption);
-		}
-
-		if (roofType != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"roofType\": ");
-
-			sb.append("\"");
-
-			sb.append(roofType);
-
-			sb.append("\"");
 		}
 
 		sb.append("}");

@@ -8,9 +8,8 @@ const houseForm = {
   data() {
     return {
       solarBudgetRequest: {
-        houseType: "", 
+        houseType: "",
         monthlyConsumption: "",
-        roofType: ""
       },
 
       sendingForm: false,
@@ -45,28 +44,6 @@ const houseForm = {
       </div>
 
         <form @submit.prevent="submitRequest">
-          <!-- 🚧 ¿Cómo es el tejado de tu vivienda? 🚧 -->
-          <p class="an-body-l-bold mb-xl">¿Cómo es el tejado de tu vivienda?</p>
-          <div class="an-form__flex an-form__flex--2-cols an-form__flex--justify-normal mb-l">
-            <div class="an-radio an-form__item">
-              <input v-model="solarBudgetRequest.roofType" value="Plano o inclinación menor a 20º" class="an-radio__input" checked="" type="radio" name="roof-type" id="piso-plano" required>
-              <label class="an-radio__label" for="piso-plano">
-                <span>
-                  Plano o con una inclinación menor a 20º
-                </span>
-              </label>
-            </div>
-
-            <div class="an-radio an-form__item">
-              <input v-model="solarBudgetRequest.roofType" value="Inclinación superior a 20º" class="an-radio__input" type="radio" name="roof-type" id="piso-inclinado" required>
-              <label class="an-radio__label" for="piso-inclinado">
-                <span>
-                  Con una inclinación superior a 20º
-                </span>
-              </label>
-            </div>
-          </div>
-          
           <!-- 🚧 ¿Sabes el gasto mensual que tienes de electricidad? 🚧 -->
           <p class="an-body-l-bold mb-xl">¿Sabes el gasto mensual que tienes de electricidad?</p>
           <!-- <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal mb-l"> -->
@@ -78,7 +55,7 @@ const houseForm = {
                   Si
                 </span>
               </label>
-            </div> 
+            </div>
             <div class="an-radio an-form__item width-150">
               <input v-model="knowMonthlyExpenses" :value="false" class="an-radio__input" type="radio" name="monthly-expenses" id="gasto-mensual-no">
               <label class="an-radio__label w-half" for="gasto-mensual-no">

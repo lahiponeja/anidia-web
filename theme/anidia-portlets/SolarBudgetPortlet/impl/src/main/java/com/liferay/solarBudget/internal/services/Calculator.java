@@ -33,7 +33,6 @@ public class Calculator {
       jsonRequest.put("EntryKey", "Web");
       jsonRequest.put("HouseType", solarBudgetRequest.getHouseTypeAsString());
       jsonRequest.put("MonthlyConsumption", solarBudgetRequest.getMonthlyConsumption());
-      jsonRequest.put("RoofType", solarBudgetRequest.getRoofTypeAsString());
     } catch (JSONException e) {
       e.printStackTrace();
       return responseBudget;

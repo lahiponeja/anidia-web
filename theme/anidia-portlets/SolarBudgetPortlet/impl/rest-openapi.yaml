@@ -31,11 +31,6 @@ components:
         monthlyConsumption:
           description: Monthly consumprion
           type: integer
-        roofType:
-          description: Roof type
-          type: string
-          enum: ["Plano o inclinación menor a 20º", "Inclinación superior a 20º"]
-
 
     SolarBudget:
       description: Information about the solar budget sent by Solusoft API

@@ -17,19 +17,18 @@ const leadDefault = function() {
        addressKind: "",
        addressName: "",
        number: "",
-       annex: "",//Letra 
+       annex: "",//Letra
        gateId: ""// Código redexis de portal,
      },
      property: {
        address: ""// Aquí metemos el texto libre del piso
      }
    },
- 
+
    calculatorSolar: {
      input: {
        houseType: "",
-       monthlyConsumption: "",
-       roofType: ""
+       monthlyConsumption: ""
      },
      selectedExtras: {
        extraPanels: "",
