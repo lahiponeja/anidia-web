@@ -85,7 +85,15 @@ const budgetCard = {
     finalPrice() {
       const sum = Number(this.solarBudget.size.price.replace('.', '')) + this.allExtrasSum
       return sum.toFixed(2)
-    }, 
+    },
+
+    finalMonthlyPrice() {
+      return finalPrice * monthlyRate;
+    },
+
+    monthlyRate() {
+      return 0.011077;
+    },
 
     ivaRate() {
       return 0.21;
@@ -153,6 +161,10 @@ const budgetCard = {
       return !Number.isNaN(sum) ? sum.toFixed(2) : false
     },
 
+    finalMonthlyPriceSuperior() {
+      return finalPriceSuperior * monthlyRate;
+    },
+
     finalPriceSuperiorIvaExtra() {
       return  this.finalPriceSuperior*this.ivaRate;
     },
@@ -214,7 +226,7 @@ const budgetCard = {
         </div>
         <div class="an-card--pack__info">
           <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ formatPrice(finalPrice/12) }} <span class="an-h3">€ mes</span></p>
+          <p class="an-h2">{{ formatPrice(finalMonthlyPrice) }} <span class="an-h3">€ mes</span></p>
           <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
           <p class="an-h5">Precio total IVA Incluido: {{ formatPrice(finalPriceWithIva) }}€</p>
         </div>
@@ -346,7 +358,7 @@ const budgetCard = {
         </div>
         <div class="an-card--pack__info">
           <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ formatPrice(finalPriceSuperior/12) }} <span class="an-h3">€/mes</span></p>
+          <p class="an-h2">{{ formatPrice(finalMonthlyPriceSuperior) }} <span class="an-h3">€/mes</span></p>
           <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
           <p class="an-h5">Precio total IVA Incluido: {{ formatPrice(finalPriceSuperiorWithIva) }}€</p>
         </div>
