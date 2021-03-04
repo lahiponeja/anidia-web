@@ -16,28 +16,33 @@ import com.liferay.gasBudget.dto.v1_0.GasBudgetRequest.PersonsWater;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.log.Log;
+
 public class Calculator {
   static String GAS_BUDGET_REQUEST_URL = System.getenv().get("GAS_BUDGET_REQUEST_URL");
 	static String SOLUSOFT_SECRET = System.getenv().get("SOLUSOFT_SECRET");
+  private static Log _log = LogFactoryUtil.getLog(Calculator.class);
 
 	public GasBudget createGasBudget(GasBudgetRequest gasBudgetRequest) {
+
 
     JSONObject jsonRequest = new JSONObject();
     GasBudget responseBudget = new GasBudget();
 
     try {
       jsonRequest.put("ZipCode", gasBudgetRequest.getPostalCode());
-      jsonRequest.put("HouseType", gasBudgetRequest.getHouseType());
-      jsonRequest.put("PropertyMeters", gasBudgetRequest.getPropertyMeters());
+      jsonRequest.put("HouseType", gasBudgetRequest.getHouseTypeAsString());
+      jsonRequest.put("PropertyMeters", gasBudgetRequest.getPropertyMetersAsString());
       jsonRequest.put("StaysNumber", gasBudgetRequest.getStaysNumber());
-      jsonRequest.put("BathroomNumber", gasBudgetRequest.getBathroomNumber());
-      jsonRequest.put("FloorNumber", gasBudgetRequest.getFloorNumber());
-      jsonRequest.put("GasNaturalUse", gasBudgetRequest.getGasNaturalUse() );
-      jsonRequest.put("ACSUse", gasBudgetRequest.getAcsUse());
-      jsonRequest.put("KitchenUse", gasBudgetRequest.getKitchenUse());
-      jsonRequest.put("HeatingUse", gasBudgetRequest.getHeatingUse());
+      jsonRequest.put("BathroomNumber", gasBudgetRequest.getBathroomNumber().toString());
+      jsonRequest.put("FloorNumber", gasBudgetRequest.getFloorNumber().toString());
+      jsonRequest.put("GasNaturalUse", gasBudgetRequest.getGasNaturalUseAsString() );
+      jsonRequest.put("ACSUse", gasBudgetRequest.getAcsUseAsString());
+      jsonRequest.put("KitchenUse", gasBudgetRequest.getKitchenUseAsString());
+      jsonRequest.put("HeatingUse", gasBudgetRequest.getHeatingUseAsString());
       jsonRequest.put("PersonsWater", this.translatePersonsWater(gasBudgetRequest.getPersonsWater()));
-      jsonRequest.put("BoilerLocation", gasBudgetRequest.getBoilerLocation());
+      jsonRequest.put("BoilerLocation", gasBudgetRequest.getBoilerLocationAsString());
       jsonRequest.put("Extras", new JSONObject());
 
       jsonRequest.getJSONObject("Extras").put("MetersBoilerToWindow", gasBudgetRequest.getMetersBoilerToWindow());
@@ -61,13 +66,13 @@ public class Calculator {
 			POST(HttpRequest.BodyPublishers.ofString(jsonRequest.toString())).
       build();
 
-    System.out.println("Solicitando presupuesto a " + Calculator.GAS_BUDGET_REQUEST_URL);
-    System.out.println(">    Detalle de presupuesto " + jsonRequest.toString());
+    _log.info("Solicitando presupuesto a " + Calculator.GAS_BUDGET_REQUEST_URL);
+    _log.info(">    Detalle de presupuesto " + jsonRequest.toString());
 
     HttpResponse<String> response;
     try {
       response = client.send(request, HttpResponse.BodyHandlers.ofString());
-      System.out.println(">    Respuesta " + response.body());
+      _log.info(">    Respuesta " + response.body());
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
       return null;

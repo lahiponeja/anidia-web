@@ -116,10 +116,10 @@ tasks.register("build.portlets.gradle-v4") {
   group = 'Anidia'
   description = 'Builds all the portlets that compile in Gradle 4 and copy them to the deploy folder'
 
-  //dependsOn 'build.portlets.contact_form'
-  //dependsOn 'build.portlets.faqs_module'
     dependsOn 'build.portlets.gas_budget'
     dependsOn 'build.portlets.gas_comparator'
+    dependsOn 'build.portlets.solar_budget'
+
 
 }
 
@@ -179,6 +179,27 @@ tasks.register("build.portlets.gas_budget") {
     }
     exec {
       commandLine 'cp', 'theme/anidia-portlets/GasBudgetPortlet/vue/dist/gas-budget-portlet-1.0.0.jar', 'liferay/deploy'
+    }
+  }
+}
+
+tasks.register("build.portlets.solar_budget") {
+  group = 'Anidia'
+  description = 'Builds the Solar Budget portlet and copy them to the deploy folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-portlets/SolarBudgetPortlet'
+      commandLine 'gradle', 'build'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/SolarBudgetPortlet/api/build/libs/solar-budget-api-1.0.0.jar', 'liferay/deploy'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/SolarBudgetPortlet/impl/build/libs/solar-budget-impl-1.0.0.jar', 'liferay/deploy'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/SolarBudgetPortlet/vue/dist/solar-budget-portlet-1.0.0.jar', 'liferay/deploy'
     }
   }
 }
@@ -264,6 +285,10 @@ tasks.register("install.npm.portlets") {
     }
     exec {
       workingDir 'theme/anidia-portlets/GasBudgetPortlet/vue'
+      commandLine 'npm', 'install'
+    }
+    exec {
+      workingDir 'theme/anidia-portlets/SolarBudgetPortlet/vue'
       commandLine 'npm', 'install'
     }
   }

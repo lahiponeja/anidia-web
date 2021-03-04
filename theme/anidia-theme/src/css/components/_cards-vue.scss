@@ -1,0 +1,26 @@
+.an-cards-vue {
+  align-items: center;
+  display: flex;
+  margin-bottom: rem(52);
+  margin-right: rem(20);
+  overflow-x: auto;
+  padding: 0 rem(20);
+  white-space: nowrap;
+
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  -ms-scroll-snap-type: x mandatory;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @include desktop {
+    align-items: flex-start;
+    justify-content: center;
+    margin-right: 0;
+    padding: 0;
+  }
+}

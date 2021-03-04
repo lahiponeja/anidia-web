@@ -40,6 +40,17 @@ const businessContactForm = {
           componentName: name
         }
       })
+    },
+    setPhoneCustomValidationMessage(event) {
+      var input = event.target;
+      input.setCustomValidity('');
+      if(!input.validity.valid) {
+        input.setCustomValidity(input.dataset.validationMessage);
+      }
+    },
+    reportPhoneValidation(event) {
+      var input = event.target;
+      input.reportValidity();
     }
   },
   mounted() {
@@ -88,15 +99,15 @@ const businessContactForm = {
               </div>
             </div>
           </div>
-          
-          <input v-model="phoneNumber" type="number" class="an-input__field" placeholder="Teléfono" required="">
+
+          <input v-model="phoneNumber" v-on:input="reportPhoneValidation" v-on:invalid="setPhoneCustomValidationMessage" data-validation-message="Introduce tu número completo, sin espacios ni guiones." type="text" pattern="\\d{9}" class="an-input__field" placeholder="Teléfono" required="">
         </div>
         <div class="an-input an-form__item">
           <input v-model="businessFormData.email" type="email" class="an-input__field" placeholder="Email*" required="">
         </div>
         <div class="an-input an-form__item">
           <div class="an-checkbox mt-xl">
-            <input v-model="businessFormData.privacyPolicy" class="an-checkbox__input" type="checkbox" name="privacy-policy" id="privacy-policy">
+            <input v-model="businessFormData.privacyPolicy" class="an-checkbox__input" type="checkbox" name="privacy-policy" id="privacy-policy" required="">
             <label class="an-checkbox__label" for="privacy-policy">
               <span> He leído y acepto <a href="#" @click.prevent="openModal('privacyPolicyModal')">la política de privacidad</a> </span>
             </label>

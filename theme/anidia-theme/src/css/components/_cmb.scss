@@ -1,11 +1,11 @@
 .an-cmb {
   align-items: center;
   color: $font-color-default;
-  display: flex !important;
   font-family: $open-sans-bold-family;
   justify-content: center;
 
   @include tablet {
+    display: flex !important;
     height: rem(80);
     padding: 0 rem(18);
     position: fixed;

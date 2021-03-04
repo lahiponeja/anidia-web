@@ -25,7 +25,6 @@ const state = reactive({
     acsIndividual: true,
     acsUse: "",
     numberOfPeople: 1,
-    heatingIndividual: true,
     heatingUse: "",
     singleFamilyHouse: true,
     lastFloor: true,
@@ -81,7 +80,7 @@ const resetComparatorStateData = function () {
     energyType: "",
     electricityConsumption: 0,
   })
-  
+
   Object.assign(state.gasConsumptionComparison, {
     consumptionRequired: "",
     currentCost: "",
@@ -94,7 +93,6 @@ const resetComparatorStateData = function () {
     acsIndividual: true,
     acsUse: "",
     numberOfPeople: 1,
-    heatingIndividual: true,
     heatingUse: "",
     singleFamilyHouse: true,
     lastFloor: true,
@@ -172,7 +170,7 @@ const activeComponent = function() {
 }
 
 const submitUserContactInfo = function (compSavingForm) {
-  const { 
+  const {
     name,
     lastname,
     phone,
