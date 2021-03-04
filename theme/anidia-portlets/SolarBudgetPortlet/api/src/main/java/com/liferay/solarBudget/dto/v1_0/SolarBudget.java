@@ -378,6 +378,34 @@ public class SolarBudget {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected SuperiorInstallation superiorInstallation;
 
+	@Schema(description = "Total power of the budget (KwP)")
+	public String getTotalPowerInstalled() {
+		return totalPowerInstalled;
+	}
+
+	public void setTotalPowerInstalled(String totalPowerInstalled) {
+		this.totalPowerInstalled = totalPowerInstalled;
+	}
+
+	@JsonIgnore
+	public void setTotalPowerInstalled(
+		UnsafeSupplier<String, Exception> totalPowerInstalledUnsafeSupplier) {
+
+		try {
+			totalPowerInstalled = totalPowerInstalledUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String totalPowerInstalled;
+
 	@Schema(description = "Total price")
 	public String getTotalPrice() {
 		return totalPrice;
@@ -615,6 +643,20 @@ public class SolarBudget {
 			sb.append("\"superiorInstallation\": ");
 
 			sb.append(String.valueOf(superiorInstallation));
+		}
+
+		if (totalPowerInstalled != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"totalPowerInstalled\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(totalPowerInstalled));
+
+			sb.append("\"");
 		}
 
 		if (totalPrice != null) {

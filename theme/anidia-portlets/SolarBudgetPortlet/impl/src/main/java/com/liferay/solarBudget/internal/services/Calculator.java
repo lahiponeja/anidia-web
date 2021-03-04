@@ -76,6 +76,7 @@ public class Calculator {
       responseBudget.setCarCharger(this.sanitizePrice(jsonBudget.getJSONObject("CarCharcher").getString("UnitPrice")));
       responseBudget.setBattery(this.sanitizePrice(jsonBudget.getJSONObject("Battery").getString("UnitPrice")));
       responseBudget.setAdditionalPanelsInstallation(this.sanitizePrice(jsonBudget.getJSONObject("AdditionalPanelsInstallation").getString("UnitPrice")));
+      responseBudget.setTotalPowerInstalled(this.sanitizePrice(jsonBudget.getString("TotalPowerInstalled")));
 
       JSONObject jsonSuperiorInstallation = jsonBudget.getJSONObject("SuperiorInstallation");
       responseBudget.setSuperiorInstallation(this.createSuperiorInstallation(jsonSuperiorInstallation));
@@ -109,6 +110,8 @@ public class Calculator {
     superiorInstallation.setCarCharger(this.sanitizePrice(jsonSuperiorInstallation.getString("CarCharcher")));
     superiorInstallation.setBattery(this.sanitizePrice(jsonSuperiorInstallation.getString("Battery")));
     superiorInstallation.setAdditionalPanelsInstallation(this.sanitizePrice(jsonSuperiorInstallation.getString("AdditionalPanelsInstallation")));
+    superiorInstallation.setTotalPowerInstalled(this.sanitizePrice(jsonSuperiorInstallation.getString("TotalPowerInstalled")));
+
     return superiorInstallation;
   }
   private SuperiorSize createSuperiorSize(JSONObject jsonSuperiorSize) throws JSONException {

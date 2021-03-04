@@ -87,6 +87,17 @@ const budgetCard = {
       return sum.toFixed(2)
     }, 
 
+    ivaRate() {
+      return 0.21;
+    },
+
+    finalPriceIvaExtra() {
+      return  this.finalPrice*this.ivaRate;
+    },
+
+    finalPriceWithIva() {
+      return  this.finalPrice*(1+this.ivaRate);
+    },
 
     /************************************ 
    * EXTRAS | SUPERIOR
@@ -137,10 +148,18 @@ const budgetCard = {
       )
     },
 
-    finalPriceSuperior() { 
-      const sum = Number(this.solarBudget.size.price.replace('.', '')) + this.allExtraSuperiorsSum
+    finalPriceSuperior() {
+      const sum = Number(this.solarBudget.superiorInstallation.superiorSize.price.replace('.', '')) + this.allExtraSuperiorsSum
       return !Number.isNaN(sum) ? sum.toFixed(2) : false
     },
+
+    finalPriceSuperiorIvaExtra() {
+      return  this.finalPriceSuperior*this.ivaRate;
+    },
+
+    finalPriceSuperiorWithIva() {
+      return  this.finalPriceSuperior*(1+this.ivaRate);
+    }
 
 
   },
@@ -163,15 +182,18 @@ const budgetCard = {
       if(type === 'sup') {
         this.lead.setSuperiorInstalation(true)
         this.lead.setSelectedExtras(this.superiorExtras)
-        this.lead.setFinalPrice(this.finalPriceSuperior)
+        this.lead.setFinalPrice(this.finalPriceSuperior, this.finalPriceSuperiorIvaExtra, this.finalPriceSuperiorWithIva)
       } else {
         this.lead.setSuperiorInstalation(false)
         this.lead.setSelectedExtras(this.extras)
-        this.lead.setFinalPrice(this.finalPrice)
+        this.lead.setFinalPrice(this.finalPrice, this.finalPriceIvaExtra, this.finalPriceWithIva)
       }
 
       this.house.changeHouseStep('presupuesto-realizado')
 
+    },
+    formatPrice(price) {
+      return new Intl.NumberFormat('es-ES', { maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(price);
     }
   },
   mounted() {
@@ -188,22 +210,22 @@ const budgetCard = {
       <div class="an-card an-card--pack an-card--vue featured" data-card="">
         <div class="an-card--pack__intro">
           <p class="an-h5">Según tus necesidades especiales</p>
-          <!-- <p class="an-h5">Pago único 5.200€</p> -->
+          <p class="an-h5">Pago único {{formatPrice(finalPrice) }}€</p>
         </div>
         <div class="an-card--pack__info">
           <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ finalPrice }} <span class="an-h3">€</span></p>
-          <!-- <p class="an-h4">567€ de ahorro anual</p>
-          <p class="an-h4">12.500€ de ahorro en 25 años</p> -->
+          <p class="an-h2">{{ formatPrice(finalPrice/12) }} <span class="an-h3">€ mes</span></p>
+          <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
+          <p class="an-h5">Precio total IVA Incluido: {{ formatPrice(finalPriceWithIva) }}€</p>
         </div>
         <ul class="an-list">
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
             {{ leadData.calculatorSolar.input.houseType }}
           </li>
-          <li v-if="leadData.calculatorSolar.input.monthlyConsumption" class="an-list__item an-body-m-regular">
+          <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
-            Consumo de energía mensual {{ leadData.calculatorSolar.input.monthlyConsumption }}€
+            Consumo de energía mensual {{ solarBudget.totalPowerInstalled }} KwP
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
@@ -320,26 +342,26 @@ const budgetCard = {
       <div v-if="finalPriceSuperior" class="an-card an-card--pack an-card--vue" data-card="">
         <div class="an-card--pack__intro">
           <p class="an-h5">Según tus necesidades especiales</p>
-          <!-- <p class="an-h5">Pago único 5.200€</p> -->
+          <p class="an-h5">Pago único {{ formatPrice(finalPriceSuperior) }}€</p>
         </div>
         <div class="an-card--pack__info">
           <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ finalPriceSuperior }} <span class="an-h3">€</span></p>
-          <!-- <p class="an-h4">567€ de ahorro anual</p>
-          <p class="an-h4">12.500€ de ahorro en 25 años</p> -->
+          <p class="an-h2">{{ formatPrice(finalPriceSuperior/12) }} <span class="an-h3">€/mes</span></p>
+          <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
+          <p class="an-h5">Precio total IVA Incluido: {{ formatPrice(finalPriceSuperiorWithIva) }}€</p>
         </div>
         <ul class="an-list">
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
             {{ leadData.calculatorSolar.input.houseType }}
           </li>
-          <li v-if="leadData.calculatorSolar.input.monthlyConsumption" class="an-list__item an-body-m-regular">
+          <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
-            Consumo de energía mensual {{ leadData.calculatorSolar.input.monthlyConsumption }}€
+            Consumo de energía mensual {{ solarBudget.superiorInstallation.totalPowerInstalled }} KwP
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
-            Instalación de {{ solarBudget.size.basePanels }} paneles solares
+            Instalación de {{ solarBudget.superiorInstallation.superiorSize.basePanels }} paneles solares
           </li>
         </ul>
         <div class="an-accordion">

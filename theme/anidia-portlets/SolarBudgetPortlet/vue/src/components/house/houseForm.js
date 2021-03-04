@@ -47,12 +47,12 @@ const houseForm = {
         <form @submit.prevent="submitRequest">
           <!-- 🚧 ¿Cómo es el tejado de tu vivienda? 🚧 -->
           <p class="an-body-l-bold mb-xl">¿Cómo es el tejado de tu vivienda?</p>
-          <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-l">
+          <div class="an-form__flex an-form__flex--2-cols an-form__flex--justify-normal mb-l">
             <div class="an-radio an-form__item">
               <input v-model="solarBudgetRequest.roofType" value="Plano o inclinación menor a 20º" class="an-radio__input" checked="" type="radio" name="roof-type" id="piso-plano" required>
               <label class="an-radio__label" for="piso-plano">
                 <span>
-                  Plano
+                  Plano o con una inclinación menor a 20º
                 </span>
               </label>
             </div>
@@ -61,7 +61,7 @@ const houseForm = {
               <input v-model="solarBudgetRequest.roofType" value="Inclinación superior a 20º" class="an-radio__input" type="radio" name="roof-type" id="piso-inclinado" required>
               <label class="an-radio__label" for="piso-inclinado">
                 <span>
-                  Inclinado
+                  Con una inclinación superior a 20º
                 </span>
               </label>
             </div>

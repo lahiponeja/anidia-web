@@ -144,12 +144,12 @@ const coverageForm = {
     *************************************/
 
     checkAvailability(result) {
-      const { municipalityId } = result
+      const { municipalityId, provinceId } = result
 
       this.checkingAvailability = true
 
-      this.house.getAvailability(this.formData.postalCode, municipalityId)
-      .then(() => { 
+      this.house.getAvailability(this.formData.postalCode, provinceId, municipalityId)
+      .then(() => {
         this.onSubmitMunicipalities(result)
         this.checkingAvailability = false
        })
@@ -203,7 +203,7 @@ const coverageForm = {
       })
 
       this.formData.addressKind = kind
-      this.formData.addressName = name
+      this.formData.addressName =  kind ? `${kind} ${name}` : name
       this.formData.addressId = addressId
 
       this.loadingEstates = true
@@ -228,13 +228,17 @@ const coverageForm = {
     },
 
     onSubmitEstates(result) {
-      const { gateId, number } = result
+      const { gateId, number, annex } = result
 
       // Save object in the store
-      this.house.setCoverageData("estate", { gateId, number })
+      this.house.setCoverageData("estate", { gateId, number, annex })
       this.lead.setEstateData({ number, gateId })
 
-      this.formData.number = number
+      if(annex) {
+        this.formData.number = `${number} ${annex}`
+      } else {
+        this.formData.number = number
+      }
 
       // AL PARECER NO HARÁ FALTA CONSULTAR VIVIENDAS
       //------------------------------------------------
@@ -436,13 +440,13 @@ const coverageForm = {
                         :key="'address-'+index"
                         v-bind="resultProps[index]"
                       >
-                        {{ result.name }}
+                        {{result.kind}} {{ result.name }}
                       </li>
                     </ul>
 
                     <ul id="addresscustomul" v-show="house.state.autocompData.addresses.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li v-for="(address, index) in house.state.autocompData.addresses" :key="'second-address-'+index" @click="[setValue(address.name, 'name', '#addresscustomul'), onSubmitAddresses(address)]" v-bind="resultProps[index]" class="an-select__custom-option">
-                        {{ address.name }}
+                        {{address.kind}} {{ address.name }}
                       </li>
                     </ul>
                   </div>
@@ -493,13 +497,13 @@ const coverageForm = {
                         :key="'estate-'+index"
                         v-bind="resultProps[index]"
                       >
-                        {{ result.number }}
+                        {{ result.number }} {{ result.annex }}
                       </li>
                     </ul>
 
                     <ul id="estatescustomul" v-show="house.state.autocompData.estates.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li @click="[setValue(estate.number, 'number', '#estatescustomul'), onSubmitEstates(estate)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(estate, index) in house.state.autocompData.estates" :key="'second-estate-'+index">
-                        {{ estate.number }}
+                        {{ estate.number }} {{ estate.annex }}
                       </li>
                     </ul>
                   </div>

@@ -38,7 +38,8 @@ const leadDefault = function() {
        pergolaExtra: "",
        pipelineUnderground: "",
        battery: "",
-       carCharger: ""
+       carCharger: "",
+       inverterExtra: ""
      },
      superiorInstallation: false,
      output: {
@@ -65,6 +66,7 @@ const leadDefault = function() {
        battery: "",
        additionalPanelsInstallation: "",
        totalPrice: "",
+       totalPowerInstalled: "",
        superiorInstallation: {
          superiorSize: {
            value: "",
@@ -82,10 +84,13 @@ const leadDefault = function() {
          pipelineExtra: "",
          carCharger: "",
          battery: "",
-         additionalPanelsInstallation: ""
+         additionalPanelsInstallation: "",
+         totalPowerInstalled: ""
        }
      },
      finalPrice: "",
+     ivaPrice: "",
+     finalPriceIva: "",
      InstallerCode: ""
    }
  }

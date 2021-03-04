@@ -142,7 +142,8 @@ const submitUserContactInfo = function (budgetReadyForm) {
         "pergolaExtra": "string",
         "pipelineUnderground": "string",
         "battery": "string",
-        "carCharger": "string"
+        "carCharger": "string",
+        "inverterExtra": "string"
       },
       "superiorInstallation": true,
       "output": {
@@ -169,6 +170,7 @@ const submitUserContactInfo = function (budgetReadyForm) {
         "battery": "string",
         "additionalPanelsInstallation": "string",
         "totalPrice": "string",
+        "totalPowerInstalled": "string",
         "superiorInstallation": {
           "superiorSize": {
             "value": "string",
@@ -186,10 +188,13 @@ const submitUserContactInfo = function (budgetReadyForm) {
           "pipelineExtra": "string",
           "carCharger": "string",
           "battery": "string",
-          "additionalPanelsInstallation": "string"
+          "additionalPanelsInstallation": "string",
+          "totalPowerInstalled": "string"
         }
       },
       "finalPrice": "string",
+      "ivaPrice": "string",
+      "finalPriceIva": "string",
       "InstallerCode": "string"
     }
   }
@@ -260,9 +265,9 @@ const setHouseType = function(payload) {
   state.houseType = payload
 }
 
-const getAvailability = function(postalCode, municipalityId) {
+const getAvailability = function(postalCode, provinceId, municipalityId) {
   return new Promise((resolve, reject) =>{
-    coverageService.getAvailability(postalCode, municipalityId).then((res) => {
+    coverageService.getAvailability(postalCode, provinceId, municipalityId).then((res) => {
       const resJson = xmlToJsonImp(res.data);
       if( Object.keys(resJson.Installer).length > 0 ) {
         const { installerCode } = resJson.Installer
@@ -324,7 +329,18 @@ const getEstates = function(populationId, addressId) {
       const resJson = xmlToJsonImp(res.data);
       const { items } = resJson.Page.items
       const result = items
-      state.autocompData.estates = result.length ? result : [result]
+      const checkIfIsArrayResults = result.length ? result : [result]
+      state.autocompData.estates = checkIfIsArrayResults.sort((e, b) => {
+        if((e.number == b.number)) {
+          var annexa = typeof(e.annex) == "undefined" ? "" : e.annex;
+          var annexb = typeof(b.annex) == "undefined" ? "" : e.annex;
+          return annexa.localeCompare(annexb);
+        } else {
+          var numbera = typeof(e.number) == "undefined" ? "" : e.number;
+          var numberb = typeof(b.number) == "undefined" ? "" : e.number;
+          return numbera.localeCompare(numberb);
+        }
+      });
       resolve(items)
     }).catch((err) => {
       reject(err)

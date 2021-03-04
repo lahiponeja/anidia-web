@@ -79,6 +79,9 @@ components:
         totalPrice:
           description: Total price
           type: string
+        totalPowerInstalled:
+          description: Total power of the budget (KwP)
+          type: string
         superiorInstallation:
           description: Superior installation data
           $ref: "#/components/schemas/SuperiorInstallation"
@@ -153,6 +156,9 @@ components:
         battery:
           type: string
         additionalPanelsInstallation:
+          type: string
+        totalPowerInstalled:
+          description: Total power of the budget (KwP)
           type: string
     PostalCode:
       description: Postal code and name for municipalities covered by Anidia
@@ -287,6 +293,10 @@ components:
           $ref: "#/components/schemas/SolarBudget"
         finalPrice:
           type: string
+        ivaPrice:
+          type: string
+        finalPriceIva:
+          type: string
         InstallerCode:
           type: string
 
@@ -306,6 +316,8 @@ components:
         battery:
           type: string
         carCharger:
+          type: string
+        inverterExtra:
           type: string
 
 paths:

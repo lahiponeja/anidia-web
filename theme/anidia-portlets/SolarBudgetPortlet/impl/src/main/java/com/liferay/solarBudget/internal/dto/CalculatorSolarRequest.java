@@ -7,7 +7,9 @@ public class CalculatorSolarRequest {
     private SolarOutputRequest output;
     private SelectedSolarExtrasRequest selectedExtras;
     private Boolean superiorInstallation;
-    private String finalPrice;
+    private String totalPrice;
+    private String ivaPrice;
+    private String totalPriceIva;
     private String installerCode;
 
     public SolarInputRequest getInput() {
@@ -42,12 +44,28 @@ public class CalculatorSolarRequest {
         this.superiorInstallation = superiorInstallation;
     }
 
-    public String getFinalPrice(){
-        return finalPrice;
+    public String getTotalPrice(){
+        return totalPrice;
     }
 
-    public void setFinalPrice(String finalPrice) {
-        this.finalPrice = finalPrice;
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getIvaPrice(){
+        return ivaPrice;
+    }
+
+    public void setIvaPrice(String ivaPrice) {
+        this.ivaPrice = ivaPrice;
+    }
+
+    public String getTotalPriceIva(){
+        return totalPriceIva;
+    }
+
+    public void setTotalPriceIva(String totalPriceIva) {
+        this.totalPriceIva = totalPriceIva;
     }
 
     public String getInstallerCode(){

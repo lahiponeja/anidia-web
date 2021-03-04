@@ -145,7 +145,9 @@ public class SalesforceService {
 	private CalculatorSolarRequest mapToCalculatorSolar(CalculatorSolar calculatorSolar) {
 		CalculatorSolarRequest calculatorSolarRequest = new CalculatorSolarRequest();
 		calculatorSolarRequest.setSuperiorInstallation(calculatorSolar.getSuperiorInstallation());
-		calculatorSolarRequest.setFinalPrice(calculatorSolar.getFinalPrice());
+		calculatorSolarRequest.setTotalPrice(calculatorSolar.getFinalPrice());
+		calculatorSolarRequest.setIvaPrice(calculatorSolar.getIvaPrice());
+		calculatorSolarRequest.setTotalPriceIva(calculatorSolar.getFinalPriceIva());
 		calculatorSolarRequest.setInstallerCode(calculatorSolar.getInstallerCode());
 
 		calculatorSolarRequest.setSelectedExtras(maptoSelectedExtras(calculatorSolar.getSelectedExtras()));
@@ -169,6 +171,7 @@ public class SalesforceService {
 		extras.setPipelineUnderground(selectedExtras.getPipelineUnderground());
 		extras.setBattery(selectedExtras.getBattery());
 		extras.setCarCharger(selectedExtras.getCarCharger());
+		extras.setInverterExtra(selectedExtras.getInverterExtra());
 		return extras;
 	}
 
@@ -205,6 +208,7 @@ public class SalesforceService {
 		outputRequest.setTotalPrice(calculatorSolarOutput.getTotalPrice());
 		outputRequest.setSize(mapToSolarSize(calculatorSolarOutput.getSize()));
 		outputRequest.setInverter(mapToSolarInverter(calculatorSolarOutput.getInverter()));
+		outputRequest.setTotalPowerInstalled(calculatorSolarOutput.getTotalPowerInstalled());
 		outputRequest.setSuperiorInstallation(mapToSolarSuperiorInstallation(calculatorSolarOutput.getSuperiorInstallation()));
 
 		return outputRequest;
@@ -258,6 +262,7 @@ public class SalesforceService {
 		sInstallation.setExtraFornius(superiorInstallation.getExtraFornius());
 		sInstallation.setAdditionalPanelsInstallation(superiorInstallation.getAdditionalPanelsInstallation());
 		sInstallation.setSuperiorSize(mapToSolarSuperiorSize(superiorInstallation.getSuperiorSize()));
+		sInstallation.setTotalPowerInstalled(superiorInstallation.getTotalPowerInstalled());
 
 		return sInstallation;
 	}
@@ -296,6 +301,7 @@ public class SalesforceService {
 			personalDataRequest.setAddressPlant(personalData.getProperty().getFloor());
 			personalDataRequest.setAddressStair(personalData.getProperty().getLadder());
 			personalDataRequest.setCodInmueble(personalData.getProperty().getPropertyId());
+			personalDataRequest.setDescInmueble(personalData.getProperty().getAddress());
 		}
 
 		if (personalData.getEstate() != null) {
