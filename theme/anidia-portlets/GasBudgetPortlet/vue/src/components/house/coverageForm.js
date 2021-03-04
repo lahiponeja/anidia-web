@@ -60,7 +60,7 @@ const coverageForm = {
       } else {
         this.house.setPostalCode(this.formData.postalCode);
         window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
-        this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+        this.house.setCoverageError('Hemos detectado que ya tienes gas natural instalado');
         if(document.querySelector('.an-centered-featured')) document.querySelector('.an-centered-featured').classList.remove('hide');
       }
 
@@ -315,7 +315,8 @@ const coverageForm = {
                 >
                   <div v-bind="rootProps">
                     <input
-                      v-model="formData.postalCode"
+                      v-bind:value="formData.postalCode"
+                      v-on:input="formData.postalCode= $event.target.value"
                       v-bind="inputProps"
                       v-on="inputListeners"
                       class="an-input__field"
@@ -362,7 +363,8 @@ const coverageForm = {
                   <div v-bind="rootProps" v-click-outside:municustomul="hideHelperDropdown">
                     <input
                       :disabled="!!!municipalitiesArr.length"
-                      v-model="formData.municipalityName"
+                      v-bind:value="formData.municipalityName"
+                      v-on:input="formData.municipalityName= $event.target.value"
                       v-bind="inputProps"
                       v-on="inputListeners"
                       class="an-input__field"
@@ -419,7 +421,8 @@ const coverageForm = {
                   <div v-bind="rootProps" v-click-outside:addresscustomul="hideHelperDropdown">
                     <input
                       :disabled="!!!addressesArr.length"
-                      v-model="formData.addressName"
+                      v-bind:value="formData.addressName"
+                      v-on:input="formData.addressName= $event.target.value"
                       v-bind="inputProps"
                       v-on="inputListeners"
                       class="an-input__field"
@@ -476,7 +479,8 @@ const coverageForm = {
                   <div v-bind="rootProps" v-click-outside:estatescustomul="hideHelperDropdown">
                     <input
                       :disabled="!!!estatesArr.length"
-                      v-model="formData.number"
+                      v-bind:value="formData.number"
+                      v-on:input="formData.number= $event.target.value"
                       v-bind="inputProps"
                       v-on="inputListeners"
                       class="an-input__field"
@@ -533,7 +537,8 @@ const coverageForm = {
                   <div v-bind="rootProps" v-click-outside:propertiescustomul="hideHelperDropdown">
                     <input
                       :disabled="!!!propertiesArr.length"
-                      v-model="formData.houseType"
+                      v-bind:value="formData.houseType"
+                      v-on:input="formData.houseType= $event.target.value"
                       v-bind="inputProps"
                       v-on="inputListeners"
                       class="an-input__field"

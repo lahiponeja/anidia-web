@@ -1,5 +1,12 @@
 # Anidia
 
+### Requisitos
+
+* Configurar el fichero `.env` con las variables de entorno. En la raiz del proyecto tenemos un `.env.example` que podemos editar y popular con los valores que se encuentran en el keepass de desarrollo.
+* Tener en nuestra máquina Java 11
+* Tener en nuestra máquina gradle 4
+* Tener en nuestra máquina gradle 5
+
 ## Arranque en local
 
 Para arrancar el Doker solo hay que levantar las imagenes mediante `docker-compose`.
@@ -186,6 +193,11 @@ Estas cadenas se obtienen al intentar acceder a la API y recibir el error corres
 A partir de aquí la API está disponible en la URL indicada. Por ejemplo: http://localhost:8080/o/sample-vue/v1.0/municipalities/52006.
 
 ## Despliegue con Gradle
+
+El despliegue ha de hacerse por partes siguiendo este orden de ejecución:
+* `gradle build.gradle-v5`
+* `gradle install.npm`
+* `gradle build.gradle-v4`
 
 Para encapsular los distintos procesos de despliegue usamos un build de gradle que tiene distintas opciones:
 

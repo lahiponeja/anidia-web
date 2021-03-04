@@ -68,6 +68,9 @@ public class SalesforceService {
         personalData.setEmail(leadDTO.getEmail());
         personalData.setProdInterest(leadDTO.getProductType());
         personalData.setPrivacyPolicy("GasServicios");
+        if(leadDTO.getCommunicationAccepted() != null) {
+            personalData.setAcceptNotCom(leadDTO.getCommunicationAccepted());
+        }
 
         sendLeadRequest.setPersonalData(personalData);
 
