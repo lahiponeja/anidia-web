@@ -148,6 +148,10 @@
         .an-card--pack:not(.featured) {
           transform: translateX(-20px);
         }
+
+        &:first-child:not(.featured) .an-card--pack {
+          transform: translateX(20px);
+        }
       }
 
       &:first-child {
