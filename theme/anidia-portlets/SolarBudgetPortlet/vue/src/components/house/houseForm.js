@@ -10,6 +10,7 @@ const houseForm = {
       solarBudgetRequest: {
         houseType: "",
         monthlyConsumption: "",
+        annualConsumption: ""
       },
 
       sendingForm: false,

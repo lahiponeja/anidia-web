@@ -132,7 +132,8 @@ const submitUserContactInfo = function (budgetReadyForm) {
     "calculatorSolar": {
       "input": {
         "houseType": "TO-DO",
-        "monthlyConsumption": "TO-DO"
+        "monthlyConsumption": "TO-DO",
+        "annualConsumption": "TO-DO"
       },
       "selectedExtras": {
         "extraPanels": "string",

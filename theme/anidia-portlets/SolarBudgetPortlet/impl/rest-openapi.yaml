@@ -29,7 +29,10 @@ components:
           Unifamiliar de 2-3 plantas sin A/A ni piscina, Unifamiliar de 2-3 plantas con A/A o piscina,
           Unifamiliar de 2-3 plantas con A/A y piscina o calefacción eléctrica ]
         monthlyConsumption:
-          description: Monthly consumprion
+          description: Monthly consumption in euros
+          type: integer
+        annualConsumption:
+          description: Yearly consumption in KW
           type: integer
 
     SolarBudget:
