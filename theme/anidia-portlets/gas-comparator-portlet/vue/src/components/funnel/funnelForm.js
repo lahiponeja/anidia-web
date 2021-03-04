@@ -99,7 +99,7 @@ const funnelForm = {
 
             <div class="an-form__item">
               <div class="an-input">
-                <input v-model="energyConsumption.electricityConsumption" type="number" class="an-input__field" required="">
+                <input v-model="energyConsumption.electricityConsumption" type="number" min=0 class="an-input__field" required="">
               </div>
             </div>
           </div>

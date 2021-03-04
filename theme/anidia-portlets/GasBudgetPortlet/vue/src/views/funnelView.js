@@ -13,6 +13,11 @@ const funnelView = {
     postalCodesLoaded() {
       return this.house.state.autocompData.postalCodes.length > 0
     },
+    mainViewsArrWithoutFunnel() {
+      return this.global.state.mainViewsArr.filter(elem => {
+        return elem.name !== 'funnel'
+      })
+    }
   },
   methods: {
     pickOption(option) {
@@ -41,13 +46,13 @@ const funnelView = {
         </div>
         <div class="an-funnel__cards">
           <!-- CARD ITEM -->
-          <div v-for="(option, index) in global.state.mainViewsArr" :key="index" class="an-funnel__cards-item">
-            <template v-if="option.name !== 'funnel'">          
+          <div v-for="(option, index) in mainViewsArrWithoutFunnel" :key="index" class="an-funnel__cards-item">
+            <!-- <template v-if="option.name !== 'funnel'"> -->       
               <div @click="pickOption(option.name)" class="an-selection" :class="{'an-selection--filled': (optionPicked === option.name)}">
                 <p class="an-menu-bold an-card__text">{{ option.title }}</p>
                 <div class="an-selection__icon" :class="option.icon"></div>
               </div>
-            </template>
+            <!-- </template> -->
           </div>
 
         </div>

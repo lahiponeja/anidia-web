@@ -132,13 +132,13 @@ const houseForm = {
             </div>
 
             <div class="an-input an-form__item">
-              <input v-model="gasBudgetRequest.floorNumber" type="text" class="an-input__field" placeholder="Plantas" required="">
+              <input v-model="gasBudgetRequest.floorNumber" type="number" min="0" class="an-input__field" placeholder="Plantas" required="">
             </div>
             <div class="an-input an-form__item">
-              <input v-model="gasBudgetRequest.bathroomNumber" type="text" class="an-input__field" placeholder="Baños" required="">
+              <input v-model="gasBudgetRequest.bathroomNumber" type="number" min="0" class="an-input__field" placeholder="Baños" required="">
             </div>
             <div class="an-input an-form__item">
-              <input v-model="gasBudgetRequest.staysNumber" type="text" class="an-input__field" placeholder="Número de estancias" required="">
+              <input v-model="gasBudgetRequest.staysNumber" type="number" min="0" class="an-input__field" placeholder="Número de estancias" required="">
             <p class="an-input__caption an-body-s-regular">*(Incluye cocina y salón y excluye baños)</p>
             </div>
           </div>
@@ -308,7 +308,7 @@ const houseForm = {
               <input v-model="gasBudgetRequest.personsWater" type="radio" class="an-selection__radio" id="agua-caliente-dos-sitios" name="uso-agua-caliente" value="Entre 3-4">
 
               <div class="an-selection">
-                <p class="an-menu-bold an-card__text">Agua caliente en dos sitios a la vez para 2 o 3 personas</p>
+                <p class="an-menu-bold an-card__text">Agua caliente en dos sitios a la vez para 3 o 4 personas</p>
                 <div class="an-selection__icon an-icon--hot-water-three"></div>
               </div>
             </label>
@@ -317,7 +317,7 @@ const houseForm = {
               <input v-model="gasBudgetRequest.personsWater" type="radio" class="an-selection__radio" id="agua-caliente-tres-sitios" name="uso-agua-caliente" value="Más de 4">
 
               <div class="an-selection">
-                <p class="an-menu-bold an-card__text">Agua caliente en tres o más sitios a la vez para 4 o más personas</p>
+                <p class="an-menu-bold an-card__text">Agua caliente en tres o más sitios a la vez para 5 o más personas</p>
                 <div class="an-selection__icon an-icon--hot-water-four"></div>
               </div>
             </label>
@@ -465,10 +465,21 @@ const houseForm = {
               </div>
             </div>
             <div class="an-form__flex an-form__flex--2-cols mb-xxl">
-              <div class="an-input an-form__item">
-                <input v-model="gasBudgetRequest.radiatorsBathroom" type="text" placeholder="Radiadores" class="an-input__field" required="">
+            <div class="an-input an-form__item">
+              <div class="an-select an-select--full-width mb-none">
+                <span class="an-select__icon an-icon--chevron-down"></span>
+                <select v-model="gasBudgetRequest.radiatorsBathroom" class="an-select__native" required="required">
+                  <option disabled value="">Seleccione una opción...</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
               </div>
             </div>
+          </div>
+
           </template>
 
           <div class="an-form__flex an-form__flex--6-cols mb-xxl">
