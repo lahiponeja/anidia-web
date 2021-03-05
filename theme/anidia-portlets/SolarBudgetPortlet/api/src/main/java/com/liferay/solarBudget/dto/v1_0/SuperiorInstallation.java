@@ -345,6 +345,34 @@ public class SuperiorInstallation {
 	protected String roofExtra;
 
 	@Schema
+	public String getSuperiorInverterExtra() {
+		return superiorInverterExtra;
+	}
+
+	public void setSuperiorInverterExtra(String superiorInverterExtra) {
+		this.superiorInverterExtra = superiorInverterExtra;
+	}
+
+	@JsonIgnore
+	public void setSuperiorInverterExtra(
+		UnsafeSupplier<String, Exception> superiorInverterExtraUnsafeSupplier) {
+
+		try {
+			superiorInverterExtra = superiorInverterExtraUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String superiorInverterExtra;
+
+	@Schema
 	@Valid
 	public SuperiorSize getSuperiorSize() {
 		return superiorSize;
@@ -607,6 +635,20 @@ public class SuperiorInstallation {
 			sb.append("\"");
 
 			sb.append(_escape(roofExtra));
+
+			sb.append("\"");
+		}
+
+		if (superiorInverterExtra != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"superiorInverterExtra\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(superiorInverterExtra));
 
 			sb.append("\"");
 		}

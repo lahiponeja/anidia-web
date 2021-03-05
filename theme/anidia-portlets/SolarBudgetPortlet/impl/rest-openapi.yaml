@@ -65,6 +65,9 @@ components:
         pipelineExtra:
           description: Extra pipeline
           type: string
+        superiorInverterExtra:
+          description: Price for the superior inverter
+          type: string
         carCharger:
           description: Car charger
           type: string
@@ -148,6 +151,8 @@ components:
         pergolaExtra:
           type: string
         pipelineExtra:
+          type: string
+        superiorInverterExtra:
           type: string
         carCharger:
           type: string
