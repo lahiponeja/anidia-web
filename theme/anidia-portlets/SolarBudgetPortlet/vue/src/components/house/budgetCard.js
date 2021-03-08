@@ -363,7 +363,7 @@ const budgetCard = {
                 <div class="an-checkbox an-checkbox--white">
                   <input class="an-checkbox__input" type="checkbox" v-model="extras.superiorInverterExtra" id="check6Superior">
                   <label class="an-checkbox__label" for="check6Superior">
-                    <span class="an-body-m-regular an-tooltip an-tooltip--green">
+                    <span class="an-body-m-regular an-tooltip">
                       Inversor de tipo superior
                       <div class="an-tooltip__content an-tooltip__content--slide">
                         <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Inversor de tipo superior</p>
