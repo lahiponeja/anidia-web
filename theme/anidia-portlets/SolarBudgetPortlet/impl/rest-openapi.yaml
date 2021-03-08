@@ -322,6 +322,8 @@ components:
           type: string
         inverterExtra:
           type: string
+        superiorInverterExtra:
+          type: string
 
 paths:
   "/leads":
