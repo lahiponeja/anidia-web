@@ -7,6 +7,7 @@ const budgetCard = {
       extras: {
         panelsExtra: 0,
         pipelineExtra: 0,
+        superiorInverterExtra: false,
         triphasicExtra: false,
         roofExtra: false,
         pergolaExtra: false,
@@ -18,7 +19,8 @@ const budgetCard = {
         triphasicExtra: false,
         roofExtra: false,
         pergolaExtra: false,
-        inverterExtra: false
+        inverterExtra: false,
+        superiorInverterExtra: false
       }
     }
   },
@@ -67,18 +69,26 @@ const budgetCard = {
 
       return 0
     },
-    
+
+    superiorInverterExtraTotalPrice() {
+      if(this.extras.superiorInverterExtra) {
+        return Number(this.solarBudget.superiorInverterExtra)
+      }
+
+      return 0
+    },
 
 
     // EXTRAS SUM
     allExtrasSum() {
       return (
-        this.panelsExtraTotalPrice + 
+        this.panelsExtraTotalPrice +
         this.pipelineExtraTotalPrice +
         this.triphasicExtraTotalPrice +
         this.roofExtraTotalPrice +
         this.pergolaExtraTotalPrice +
-        this.inverterExtraTotalPrice
+        this.inverterExtraTotalPrice +
+        this.superiorInverterExtraTotalPrice
         )
     },
 
@@ -144,6 +154,13 @@ const budgetCard = {
 
       return 0
     },
+    superiorInverterExtraSuperiorTotalPrice() {
+      if(this.superiorExtras.superiorInverterExtra) {
+        return Number(this.solarBudget.superiorInstallation.superiorInverterExtra)
+      }
+
+      return 0
+    },
 
     allExtraSuperiorsSum() {
       return (
@@ -152,7 +169,8 @@ const budgetCard = {
         this.triphasicExtraSuperiorTotalPrice +
         this.roofExtraSuperiorTotalPrice +
         this.pergolaExtraSuperiorTotalPrice +
-        this.inverterExtraSuperiorTotalPrice
+        this.inverterExtraSuperiorTotalPrice +
+        this.superiorInverterExtraSuperiorTotalPrice
       )
     },
 
@@ -341,6 +359,20 @@ const budgetCard = {
                   </label>
                 </div>
               </li>
+              <li class="an-card__extra-list__item mb-s">
+                <div class="an-checkbox">
+                  <input class="an-checkbox__input" type="checkbox" v-model="superiorExtras.superiorInverterExtra" id="check6Superior">
+                  <label class="an-checkbox__label" for="check6Superior">
+                    <span class="an-body-m-regular an-tooltip an-tooltip--green">
+                      Inversor de tipo superior
+                      <div class="an-tooltip__content an-tooltip__content--slide">
+                        <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Inversor de tipo superior</p>
+                        <p class="an-tooltip__text">Instalación de un inversor Fronius con mejores características que el inversor standard.</p>
+                      </div>
+                    </span>
+                  </label>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
@@ -468,6 +500,20 @@ const budgetCard = {
                       <div class="an-tooltip__content an-tooltip__content--slide">
                         <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Extra Inversor</p>
                         <p class="an-tooltip__text">Incrementa la potencia del inversor dejándolo sobredimensionado. Esto permitirá que en un futuro puedas incrementar la potencia instalada sin tener que modificarlo.</p>
+                      </div>
+                    </span>
+                  </label>
+                </div>
+              </li>
+              <li class="an-card__extra-list__item mb-s">
+                <div class="an-checkbox">
+                  <input class="an-checkbox__input" type="checkbox" v-model="superiorExtras.superiorInverterExtra" id="check6Superior">
+                  <label class="an-checkbox__label" for="check6Superior">
+                    <span class="an-body-m-regular an-tooltip an-tooltip--green">
+                      Inversor de tipo superior
+                      <div class="an-tooltip__content an-tooltip__content--slide">
+                        <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Inversor de tipo superior</p>
+                        <p class="an-tooltip__text">Instalación de un inversor Fronius con mejores características que el inversor standard.</p>
                       </div>
                     </span>
                   </label>

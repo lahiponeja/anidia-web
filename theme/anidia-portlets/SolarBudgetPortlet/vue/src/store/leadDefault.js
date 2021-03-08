@@ -39,7 +39,8 @@ const leadDefault = function() {
        pipelineUnderground: "",
        battery: "",
        carCharger: "",
-       inverterExtra: ""
+       inverterExtra: "",
+       superiorInverterExtra: ""
      },
      superiorInstallation: false,
      output: {
@@ -59,6 +60,7 @@ const leadDefault = function() {
        panelsExtra: "",
        triphasicExtra: "",
        inverterExtra: "",
+       superiorInverterExtra: "",
        roofExtra: "",
        pergolaExtra: "",
        pipelineExtra: "",
@@ -79,6 +81,7 @@ const leadDefault = function() {
          panelsExtra: "",
          triphasicExtra: "",
          inverterExtra: "",
+         superiorInverterExtra: "",
          roofExtra: "",
          pergolaExtra: "",
          pipelineExtra: "",
