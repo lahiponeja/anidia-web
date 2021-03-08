@@ -98,7 +98,7 @@ const budgetCard = {
     },
 
     finalMonthlyPrice() {
-      return finalPrice * monthlyRate;
+      return this.finalPrice * this.monthlyRate;
     },
 
     monthlyRate() {
@@ -180,7 +180,7 @@ const budgetCard = {
     },
 
     finalMonthlyPriceSuperior() {
-      return finalPriceSuperior * monthlyRate;
+      return this.finalPriceSuperior * this.monthlyRate;
     },
 
     finalPriceSuperiorIvaExtra() {
@@ -360,8 +360,8 @@ const budgetCard = {
                 </div>
               </li>
               <li class="an-card__extra-list__item mb-s">
-                <div class="an-checkbox">
-                  <input class="an-checkbox__input" type="checkbox" v-model="superiorExtras.superiorInverterExtra" id="check6Superior">
+                <div class="an-checkbox an-checkbox--white">
+                  <input class="an-checkbox__input" type="checkbox" v-model="extras.superiorInverterExtra" id="check6Superior">
                   <label class="an-checkbox__label" for="check6Superior">
                     <span class="an-body-m-regular an-tooltip an-tooltip--green">
                       Inversor de tipo superior
