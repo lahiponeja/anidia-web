@@ -93,7 +93,7 @@ const budgetCard = {
     },
 
     finalPrice() {
-      const sum = Number(this.solarBudget.size.price.replace('.', '')) + this.allExtrasSum
+      const sum = Number(this.solarBudget.size.price) + this.allExtrasSum
       return sum.toFixed(2)
     },
 
@@ -175,7 +175,7 @@ const budgetCard = {
     },
 
     finalPriceSuperior() {
-      const sum = Number(this.solarBudget.superiorInstallation.superiorSize.price.replace('.', '')) + this.allExtraSuperiorsSum
+      const sum = Number(this.solarBudget.superiorInstallation.superiorSize.price) + this.allExtraSuperiorsSum
       return !Number.isNaN(sum) ? sum.toFixed(2) : false
     },
 
