@@ -172,6 +172,7 @@ public class SalesforceService {
 		extras.setBattery(selectedExtras.getBattery());
 		extras.setCarCharger(selectedExtras.getCarCharger());
 		extras.setInverterExtra(selectedExtras.getInverterExtra());
+		extras.setSuperiorInverterExtra(selectedExtras.getSuperiorInverterExtra());
 		return extras;
 	}
 
@@ -199,6 +200,7 @@ public class SalesforceService {
 		outputRequest.setPanelsExtra(calculatorSolarOutput.getPanelsExtra());
 		outputRequest.setTriphasicExtra(calculatorSolarOutput.getTriphasicExtra());
 		outputRequest.setInverterExtra(calculatorSolarOutput.getInverterExtra());
+		outputRequest.setSuperiorInverterExtra(calculatorSolarOutput.getSuperiorInverterExtra());
 		outputRequest.setRoofExtra(calculatorSolarOutput.getRoofExtra());
 		outputRequest.setPergolaExtra(calculatorSolarOutput.getPergolaExtra());
 		outputRequest.setPipelineExtra(calculatorSolarOutput.getPipelineExtra());

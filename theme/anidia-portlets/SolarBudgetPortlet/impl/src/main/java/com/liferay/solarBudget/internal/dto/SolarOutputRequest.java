@@ -4,140 +4,149 @@ package com.liferay.solarBudget.internal.dto;
 
 public class SolarOutputRequest {
 
-    private String panelsType;
-    private SolarSize size;
-    private SolarInverter inverter;
-    private String panelsExtra;
-    private String triphasicExtra;
-    private String inverterExtra;
-    private String roofExtra;
-    private String pergolaExtra;
-    private String pipelineExtra;
-    private String carCharger;
-    private String battery;
-    private String additionalPanelsInstallation;
-    private String totalPrice;
-    private String totalPowerInstalled;
-    private SolarSuperiorInstallation superiorInstallation;
+  private String panelsType;
+  private SolarSize size;
+  private SolarInverter inverter;
+  private String panelsExtra;
+  private String triphasicExtra;
+  private String inverterExtra;
+  private String superiorInverterExtra;
+  private String roofExtra;
+  private String pergolaExtra;
+  private String pipelineExtra;
+  private String carCharger;
+  private String battery;
+  private String additionalPanelsInstallation;
+  private String totalPrice;
+  private String totalPowerInstalled;
+  private SolarSuperiorInstallation superiorInstallation;
 
-    public String getPanelsType() {
-        return panelsType;
-    }
+  public String getPanelsType() {
+    return panelsType;
+  }
 
-    public void setPanelsType(String panelsType) {
-        this.panelsType = panelsType;
-    }
+  public void setPanelsType(String panelsType) {
+    this.panelsType = panelsType;
+  }
 
-    public SolarSize getSize() {
-        return size;
-    }
+  public SolarSize getSize() {
+    return size;
+  }
 
-    public void setSize(SolarSize size) {
-        this.size = size;
-    }
+  public void setSize(SolarSize size) {
+    this.size = size;
+  }
 
-    public SolarInverter getInverter() {
-        return inverter;
-    }
+  public SolarInverter getInverter() {
+    return inverter;
+  }
 
-    public void setInverter(SolarInverter inverter) {
-        this.inverter = inverter;
-    }
+  public void setInverter(SolarInverter inverter) {
+    this.inverter = inverter;
+  }
 
-    public String getPanelsExtra() {
-        return panelsExtra;
-    }
+  public String getPanelsExtra() {
+    return panelsExtra;
+  }
 
-    public void setPanelsExtra(String panelsExtra) {
-        this.panelsExtra = panelsExtra;
-    }
+  public void setPanelsExtra(String panelsExtra) {
+    this.panelsExtra = panelsExtra;
+  }
 
-    public String getTriphasicExtra() {
-        return triphasicExtra;
-    }
+  public String getTriphasicExtra() {
+    return triphasicExtra;
+  }
 
-    public void setTriphasicExtra(String triphasicExtra) {
-        this.triphasicExtra = triphasicExtra;
-    }
+  public void setTriphasicExtra(String triphasicExtra) {
+    this.triphasicExtra = triphasicExtra;
+  }
 
-    public String getInverterExtra() {
-        return inverterExtra;
-    }
+  public String getInverterExtra() {
+    return inverterExtra;
+  }
 
-    public void setInverterExtra(String inverterExtra) {
+  public void setInverterExtra(String inverterExtra) {
     this.inverterExtra = inverterExtra;
-    }
+  }
 
-    public String getRoofExtra() {
-        return roofExtra;
-    }
+  public String getSuperiorInverterExtra() {
+    return superiorInverterExtra;
+  }
 
-    public void setRoofExtra(String roofExtra) {
-        this.roofExtra = roofExtra;
-    }
+  public void setSuperiorInverterExtra(String superiorInverterExtra) {
+    this.superiorInverterExtra = superiorInverterExtra;
+  }
 
-    public String getPergolaExtra() {
-        return pergolaExtra;
-    }
+  public String getRoofExtra() {
+    return roofExtra;
+  }
 
-    public void setPergolaExtra(String pergolaExtra) {
-        this.pergolaExtra = pergolaExtra;
-    }
+  public void setRoofExtra(String roofExtra) {
+    this.roofExtra = roofExtra;
+  }
 
-    public String getPipelineExtra() {
-        return pipelineExtra;
-    }
+  public String getPergolaExtra() {
+    return pergolaExtra;
+  }
 
-    public void setPipelineExtra(String pipelineExtra) {
-        this.pipelineExtra = pipelineExtra;
-    }
+  public void setPergolaExtra(String pergolaExtra) {
+    this.pergolaExtra = pergolaExtra;
+  }
 
-    public String getCarCharger() {
-        return carCharger;
-    }
+  public String getPipelineExtra() {
+    return pipelineExtra;
+  }
 
-    public void setCarCharger(String carCharger) {
-        this.carCharger = carCharger;
-    }
+  public void setPipelineExtra(String pipelineExtra) {
+    this.pipelineExtra = pipelineExtra;
+  }
 
-    public String getBattery() {
-        return battery;
-    }
+  public String getCarCharger() {
+    return carCharger;
+  }
 
-    public void setBattery(String battery) {
-    this.battery = battery;
-    }
+  public void setCarCharger(String carCharger) {
+    this.carCharger = carCharger;
+  }
 
-    public String getAdditionalPanelsInstallation() {
-        return additionalPanelsInstallation;
-    }
+  public String getBattery() {
+    return battery;
+  }
 
-    public void setAdditionalPanelsInstallation(String additionalPanelsInstallation) {
-        this.additionalPanelsInstallation = additionalPanelsInstallation;
-    }
+  public void setBattery(String battery) {
+  this.battery = battery;
+  }
 
-    public String getTotalPrice() {
-        return totalPrice;
-    }
+  public String getAdditionalPanelsInstallation() {
+    return additionalPanelsInstallation;
+  }
 
-    public void setTotalPrice(String totalPrice) {
-        this.totalPrice = totalPrice;
-    }
+  public void setAdditionalPanelsInstallation(String additionalPanelsInstallation) {
+    this.additionalPanelsInstallation = additionalPanelsInstallation;
+  }
 
-    public String getTotalPowerInstalled() {
-        return totalPowerInstalled;
-    }
+  public String getTotalPrice() {
+    return totalPrice;
+  }
 
-    public void setTotalPowerInstalled(String totalPowerInstalled) {
-        this.totalPowerInstalled = totalPowerInstalled;
-    }
+  public void setTotalPrice(String totalPrice) {
+    this.totalPrice = totalPrice;
+  }
 
-    public SolarSuperiorInstallation getSuperiorInstallation() {
-        return superiorInstallation;
-    }
+  public String getTotalPowerInstalled() {
+    return totalPowerInstalled;
+  }
 
-    public void setSuperiorInstallation(SolarSuperiorInstallation superiorInstallation) {
-        this.superiorInstallation = superiorInstallation;
-    }
+  public void setTotalPowerInstalled(String totalPowerInstalled) {
+    this.totalPowerInstalled = totalPowerInstalled;
+  }
+
+  public SolarSuperiorInstallation getSuperiorInstallation() {
+    return superiorInstallation;
+  }
+
+  public void setSuperiorInstallation(SolarSuperiorInstallation superiorInstallation) {
+    this.superiorInstallation = superiorInstallation;
+  }
 
 }
