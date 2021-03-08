@@ -255,6 +255,7 @@ public class SalesforceService {
 		sInstallation.setPanelsExtra(superiorInstallation.getPanelsExtra());
 		sInstallation.setTriphasicExtra(superiorInstallation.getTriphasicExtra());
 		sInstallation.setInverterExtra(superiorInstallation.getInverterExtra());
+		sInstallation.setSuperiorInverterExtra(superiorInstallation.getSuperiorInverterExtra());
 		sInstallation.setInverterType(superiorInstallation.getInverterType());
 		sInstallation.setRoofExtra(superiorInstallation.getRoofExtra());
 		sInstallation.setPergolaExtra(superiorInstallation.getPergolaExtra());
