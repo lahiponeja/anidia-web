@@ -75,6 +75,40 @@ public class SolarBudgetRequest {
 
 	}
 
+	@GraphQLName("PanelsType")
+	public static enum PanelsType {
+
+		STANDARD("standard"), LG("lg");
+
+		@JsonCreator
+		public static PanelsType create(String value) {
+			for (PanelsType panelsType : values()) {
+				if (Objects.equals(panelsType.getValue(), value)) {
+					return panelsType;
+				}
+			}
+
+			return null;
+		}
+
+		@JsonValue
+		public String getValue() {
+			return _value;
+		}
+
+		@Override
+		public String toString() {
+			return _value;
+		}
+
+		private PanelsType(String value) {
+			_value = value;
+		}
+
+		private final String _value;
+
+	}
+
 	@Schema(description = "Yearly consumption in KW")
 	public Integer getAnnualConsumption() {
 		return annualConsumption;
@@ -169,6 +203,44 @@ public class SolarBudgetRequest {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer monthlyConsumption;
 
+	@Schema(description = "Kind of panels to be included in the budget")
+	@Valid
+	public PanelsType getPanelsType() {
+		return panelsType;
+	}
+
+	@JsonIgnore
+	public String getPanelsTypeAsString() {
+		if (panelsType == null) {
+			return null;
+		}
+
+		return panelsType.toString();
+	}
+
+	public void setPanelsType(PanelsType panelsType) {
+		this.panelsType = panelsType;
+	}
+
+	@JsonIgnore
+	public void setPanelsType(
+		UnsafeSupplier<PanelsType, Exception> panelsTypeUnsafeSupplier) {
+
+		try {
+			panelsType = panelsTypeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected PanelsType panelsType;
+
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
@@ -228,6 +300,20 @@ public class SolarBudgetRequest {
 			sb.append("\"monthlyConsumption\": ");
 
 			sb.append(monthlyConsumption);
+		}
+
+		if (panelsType != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"panelsType\": ");
+
+			sb.append("\"");
+
+			sb.append(panelsType);
+
+			sb.append("\"");
 		}
 
 		sb.append("}");

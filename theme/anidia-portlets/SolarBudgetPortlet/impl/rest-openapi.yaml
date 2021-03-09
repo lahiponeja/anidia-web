@@ -34,6 +34,10 @@ components:
         annualConsumption:
           description: Yearly consumption in KW
           type: integer
+        panelsType:
+          description: Kind of panels to be included in the budget
+          type: string
+          enum: ["standard", "lg"]
 
     SolarBudget:
       description: Information about the solar budget sent by Solusoft API

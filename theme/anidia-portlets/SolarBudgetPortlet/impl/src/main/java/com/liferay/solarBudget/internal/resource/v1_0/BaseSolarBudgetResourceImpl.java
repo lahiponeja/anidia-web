@@ -37,7 +37,7 @@ public abstract class BaseSolarBudgetResourceImpl
 	/**
 	 * Invoke this method with the command line:
 	 *
-	 * curl -X 'POST' 'http://localhost:8080/o/solar-budget/v1.0/solar-budgets' -d $'{"annualConsumption": ___, "houseType": ___, "monthlyConsumption": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
+	 * curl -X 'POST' 'http://localhost:8080/o/solar-budget/v1.0/solar-budgets' -d $'{"annualConsumption": ___, "houseType": ___, "monthlyConsumption": ___, "panelsType": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
 	 */
 	@Override
 	@Consumes({"application/json", "application/xml"})
