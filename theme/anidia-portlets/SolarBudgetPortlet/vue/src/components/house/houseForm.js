@@ -102,7 +102,7 @@ const houseForm = {
         <p class="an-body-l-bold mb-xl">¿Sabes el gasto mensual que tienes de electricidad?</p>
         <!-- <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal mb-l"> -->
         <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal mb-l">
-          <div class="an-radio an-form__item display-flex width-150">
+          <div class="an-radio an-form__item display-flex width-150 mb-0">
             <input v-model="knowMonthlyExpenses" :value="true" class="an-radio__input" checked="" type="radio" name="monthly-expenses" id="gasto-mensual-si">
             <label class="an-radio__label w-half" for="gasto-mensual-si">
               <span>
@@ -110,7 +110,7 @@ const houseForm = {
               </span>
             </label>
           </div>
-          <div class="an-radio an-form__item width-150">
+          <div class="an-radio an-form__item display-flex width-150 mb-0">
             <input v-model="knowMonthlyExpenses" :value="false" class="an-radio__input" type="radio" name="monthly-expenses" id="gasto-mensual-no">
             <label class="an-radio__label w-half" for="gasto-mensual-no">
               <span>
@@ -121,6 +121,7 @@ const houseForm = {
 
           <div v-if="knowMonthlyExpenses" class="an-form__item mb-0">
             <div class="an-input mb-0">
+              <span class="an-select__icon an-icon--chevron-down"></span>
               <select v-model="solarBudgetRequest.monthlyConsumption" class="an-select__native" required>
                 <option disabled value="">Seleccione una opción...</option>
                 <option value="50">50 €/mes</option>
@@ -137,7 +138,7 @@ const houseForm = {
           <p class="an-body-l-bold mb-xl">¿Sabes el consumo anual que tienes de electricidad?</p>
           <!-- <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal mb-l"> -->
           <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal mb-l">
-            <div class="an-radio an-form__item display-flex width-150">
+            <div class="an-radio an-form__item display-flex width-150 mb-0">
               <input v-model="knowAnnualConsumption" :value="true" class="an-radio__input" checked="" type="radio" name="annual-consumption" id="consumo-anual-si">
               <label class="an-radio__label w-half" for="consumo-anual-si">
                 <span>
@@ -145,7 +146,7 @@ const houseForm = {
                 </span>
               </label>
             </div>
-            <div class="an-radio an-form__item width-150">
+            <div class="an-radio an-form__item display-flex width-150 mb-0">
               <input v-model="knowAnnualConsumption" :value="false" class="an-radio__input" type="radio" name="annual-consumption" id="consumo-anual-no">
               <label class="an-radio__label w-half" for="consumo-anual-no">
                 <span>
