@@ -17,19 +17,20 @@ const leadDefault = function() {
        addressKind: "",
        addressName: "",
        number: "",
-       annex: "",//Letra 
+       annex: "",//Letra
        gateId: ""// Código redexis de portal,
      },
      property: {
        address: ""// Aquí metemos el texto libre del piso
      }
    },
- 
+
    calculatorSolar: {
      input: {
        houseType: "",
+       panelsType: "",
        monthlyConsumption: "",
-       roofType: ""
+       annualConsumption: ""
      },
      selectedExtras: {
        extraPanels: "",
@@ -39,7 +40,8 @@ const leadDefault = function() {
        pipelineUnderground: "",
        battery: "",
        carCharger: "",
-       inverterExtra: ""
+       inverterExtra: "",
+       superiorInverterExtra: ""
      },
      superiorInstallation: false,
      output: {
@@ -59,6 +61,7 @@ const leadDefault = function() {
        panelsExtra: "",
        triphasicExtra: "",
        inverterExtra: "",
+       superiorInverterExtra: "",
        roofExtra: "",
        pergolaExtra: "",
        pipelineExtra: "",
@@ -79,6 +82,7 @@ const leadDefault = function() {
          panelsExtra: "",
          triphasicExtra: "",
          inverterExtra: "",
+         superiorInverterExtra: "",
          roofExtra: "",
          pergolaExtra: "",
          pipelineExtra: "",

@@ -49,7 +49,8 @@ const setSelectedExtras = function(selectedExtrasObj) {
     triphasicExtra: selectedExtrasObj.triphasicExtra ? 'SI' : 'NO',
     roofExtra: selectedExtrasObj.roofExtra ? 'SI' : 'NO',
     pergolaExtra: selectedExtrasObj.pergolaExtra ? 'SI' : 'NO',
-    inverterExtra: selectedExtrasObj.inverterExtra ? 'SI' : 'NO'
+    inverterExtra: selectedExtrasObj.inverterExtra ? 'SI' : 'NO',
+    superiorInverterExtra: selectedExtrasObj.superiorInverterExtra ? 'SI' : 'NO'
   })
 }
 
