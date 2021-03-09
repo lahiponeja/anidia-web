@@ -118,8 +118,14 @@ const houseForm = {
 
           <div v-if="knowMonthlyExpenses" class="an-form__item mb-0">
             <div class="an-input mb-0">
-              <input v-model="solarBudgetRequest.monthlyConsumption" type="number" min="0" class="an-input__field" required>
-              <span class="an-input__field-right-text">€/mes</span>
+              <select v-model="solarBudgetRequest.monthlyConsumption" class="an-select__native" required>
+                <option disabled value="">Seleccione una opción...</option>
+                <option value="50">50 €/mes</option>
+                <option value="180">180 €/mes</option>
+                <option value="250">250 €/mes</option>
+                <option value="350">350 €/mes</option>
+                <option value="500">500 €/mes</option>
+              </select>
             </div>
           </div>
         </div>
