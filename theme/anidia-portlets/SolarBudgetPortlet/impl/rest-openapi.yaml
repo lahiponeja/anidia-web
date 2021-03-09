@@ -37,7 +37,7 @@ components:
         panelsType:
           description: Kind of panels to be included in the budget
           type: string
-          enum: ["standard", "lg"]
+          enum: ["Standard", "Diseño (LG)"]
 
     SolarBudget:
       description: Information about the solar budget sent by Solusoft API
