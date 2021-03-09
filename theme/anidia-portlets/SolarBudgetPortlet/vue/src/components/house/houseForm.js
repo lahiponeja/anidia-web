@@ -35,6 +35,9 @@ const houseForm = {
     },
     toggleInfoItem(e) {
       e.target.parentElement.classList.toggle("an-info--hidden")
+    },
+    closeInfoItem(el) {
+      el.classList.add("an-info--hidden")
     }
   },
   mounted () {
