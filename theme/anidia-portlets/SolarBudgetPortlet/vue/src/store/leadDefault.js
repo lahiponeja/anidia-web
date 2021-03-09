@@ -28,6 +28,7 @@ const leadDefault = function() {
    calculatorSolar: {
      input: {
        houseType: "",
+       panelsType: "",
        monthlyConsumption: "",
        annualConsumption: ""
      },

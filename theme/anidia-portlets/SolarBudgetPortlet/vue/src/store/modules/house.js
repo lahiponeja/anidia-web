@@ -87,6 +87,7 @@ const state = reactive({
   userFullName: "",
   coverageError: "",
   houseType: "",
+  panelsType: "",
   postalCode: "",
 })
 
@@ -132,6 +133,7 @@ const submitUserContactInfo = function (budgetReadyForm) {
     "calculatorSolar": {
       "input": {
         "houseType": "TO-DO",
+        "panelsType": "TO-DO",
         "monthlyConsumption": "TO-DO",
         "annualConsumption": "TO-DO"
       },

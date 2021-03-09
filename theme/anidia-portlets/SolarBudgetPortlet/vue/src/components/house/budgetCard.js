@@ -255,6 +255,10 @@ const budgetCard = {
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
+            Paneles {{ leadData.calculatorSolar.input.panelsType }}
+          </li>
+          <li class="an-list__item an-body-m-regular">
+            <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
             Consumo de energía mensual {{ solarBudget.totalPowerInstalled }} KwP
           </li>
           <li class="an-list__item an-body-m-regular">
@@ -398,6 +402,10 @@ const budgetCard = {
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
             {{ leadData.calculatorSolar.input.houseType }}
+          </li>
+          <li class="an-list__item an-body-m-regular">
+            <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
+            Paneles {{ leadData.calculatorSolar.input.panelsType }}
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>

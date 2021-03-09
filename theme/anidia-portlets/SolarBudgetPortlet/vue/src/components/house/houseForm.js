@@ -9,6 +9,7 @@ const houseForm = {
     return {
       solarBudgetRequest: {
         houseType: "",
+        panelsType: "",
         monthlyConsumption: "",
         annualConsumption: ""
       },
@@ -32,6 +33,9 @@ const houseForm = {
         console.error(err)
       })
     },
+    toggleInfoItem(e) {
+      e.target.parentElement.classList.toggle("an-info--hidden")
+    }
   },
   mounted () {
     window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "details", "gas"));
@@ -47,6 +51,30 @@ const houseForm = {
       </div>
 
         <form @submit.prevent="submitRequest">
+
+        <!-- 🚧 Selecciona el tipo de paneles 🚧 -->
+          <div class="d-flex mb-xl">
+            <p class="an-body-l-bold">¿Qué tipo de panel deseas?</p>
+            <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
+              <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
+              <div class="an-info__box">
+                Disponemos de paneles solares de la mejor calidad (Tier 1) y precio, ya incluidos en la talla básica. Si aun así quieres paneles LG de diseño puedes, escoge tu opción.
+              </div>
+            </div>
+          </div>
+        <div class="an-form__flex an-form__flex--2-cols">
+
+          <div class="an-form__item">
+            <div class="an-select an-select--full-width">
+              <span class="an-select__icon an-icon--chevron-down"></span>
+              <select v-model="solarBudgetRequest.panelsType" class="an-select__native" required>
+                <option disabled value="">Seleccione una opción...</option>
+                <option value="Standard">Paneles básicos</option>
+                <option value="Diseño (LG)">Paneles de Diseño LG</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
         <!-- 🚧 Indícanos el tipo de vivienda 🚧 -->
         <p class="an-body-l-bold mb-xl">Indícanos el tipo de vivienda</p>
