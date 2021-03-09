@@ -87,6 +87,7 @@ const state = reactive({
   userFullName: "",
   coverageError: "",
   houseType: "",
+  panelsType: "",
   postalCode: "",
 })
 
@@ -132,9 +133,10 @@ const submitUserContactInfo = function (budgetReadyForm) {
     "calculatorSolar": {
       "input": {
         "houseType": "TO-DO",
+        "panelsType": "TO-DO",
         "monthlyConsumption": "TO-DO",
-        "roofType": "TO-DO"
-      }, 
+        "annualConsumption": "TO-DO"
+      },
       "selectedExtras": {
         "extraPanels": "string",
         "triphasicExtra": "string",
@@ -163,6 +165,7 @@ const submitUserContactInfo = function (budgetReadyForm) {
         "panelsExtra": "string",
         "triphasicExtra": "string",
         "inverterExtra": "string",
+        "superiorInverterExtra": "string",
         "roofExtra": "string",
         "pergolaExtra": "string",
         "pipelineExtra": "string",
@@ -183,6 +186,7 @@ const submitUserContactInfo = function (budgetReadyForm) {
           "panelsExtra": "string",
           "triphasicExtra": "string",
           "inverterExtra": "string",
+          "superiorInverterExtra": "string",
           "roofExtra": "string",
           "pergolaExtra": "string",
           "pipelineExtra": "string",

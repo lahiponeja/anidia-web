@@ -5,7 +5,6 @@ import com.liferay.portal.vulcan.pagination.Page;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ServiceScope;
 import com.liferay.solarBudget.internal.services.Geocode;
-import com.liferay.solarBudget.internal.services.FakeGeocode;
 import com.liferay.solarBudget.dto.v1_0.PostalCode;
 /**
  * @author David Brenes
@@ -18,9 +17,7 @@ public class PostalCodeResourceImpl extends BasePostalCodeResourceImpl {
 
 	@Override
 	public Page<PostalCode> getMunicipalityPostalCodePage(@NotNull String postalCode){
-		// Faking estates response since CTI is down
-		//Geocode geocode = new Geocode();
-		FakeGeocode geocode = new FakeGeocode();
+		Geocode geocode = new Geocode();
 		return Page.of(geocode.getMunicipalities(postalCode));
 	}
 

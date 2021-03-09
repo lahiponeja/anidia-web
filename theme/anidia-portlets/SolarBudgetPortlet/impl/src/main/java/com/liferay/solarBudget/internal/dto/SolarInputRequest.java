@@ -6,7 +6,7 @@ public class SolarInputRequest {
     private String houseType;
     private Integer monthlyConsumption;
     private Integer annualConsumption;
-    private String roofType;
+    private String panelsType;
 
     public String getHouseType() {
     return houseType;
@@ -32,12 +32,12 @@ public class SolarInputRequest {
     this.annualConsumption = annualConsumption;
     }
 
-    public String getRoofType() {
-    return roofType;
+    public String getPanelsType() {
+    return panelsType;
     }
 
-    public void setRoofType(String roofType) {
-    this.roofType = roofType;
+    public void setPanelsType(String panelsType) {
+    this.panelsType = panelsType;
     }
 
 }

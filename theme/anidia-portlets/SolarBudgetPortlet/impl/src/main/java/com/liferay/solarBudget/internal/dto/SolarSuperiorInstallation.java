@@ -10,6 +10,7 @@ public class SolarSuperiorInstallation {
     private String panelsExtra;
     private String triphasicExtra;
     private String inverterExtra;
+    private String superiorInverterExtra;
     private String roofExtra;
     private String pergolaExtra;
     private String pipelineExtra;
@@ -72,6 +73,14 @@ public class SolarSuperiorInstallation {
 
     public void setInverterExtra(String inverterExtra) {
         this.inverterExtra = inverterExtra;
+    }
+
+    public String getSuperiorInverterExtra() {
+        return superiorInverterExtra;
+    }
+
+    public void setSuperiorInverterExtra(String superiorInverterExtra) {
+        this.superiorInverterExtra = superiorInverterExtra;
     }
 
     public String getRoofExtra() {

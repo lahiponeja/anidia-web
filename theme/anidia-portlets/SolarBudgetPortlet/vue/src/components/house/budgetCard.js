@@ -7,6 +7,7 @@ const budgetCard = {
       extras: {
         panelsExtra: 0,
         pipelineExtra: 0,
+        superiorInverterExtra: false,
         triphasicExtra: false,
         roofExtra: false,
         pergolaExtra: false,
@@ -18,7 +19,8 @@ const budgetCard = {
         triphasicExtra: false,
         roofExtra: false,
         pergolaExtra: false,
-        inverterExtra: false
+        inverterExtra: false,
+        superiorInverterExtra: false
       }
     }
   },
@@ -67,25 +69,41 @@ const budgetCard = {
 
       return 0
     },
-    
+
+    superiorInverterExtraTotalPrice() {
+      if(this.extras.superiorInverterExtra) {
+        return Number(this.solarBudget.superiorInverterExtra) * ( Number(this.solarBudget.size.basePanels) + this.extras.panelsExtra )
+      }
+
+      return 0
+    },
 
 
     // EXTRAS SUM
     allExtrasSum() {
       return (
-        this.panelsExtraTotalPrice + 
+        this.panelsExtraTotalPrice +
         this.pipelineExtraTotalPrice +
         this.triphasicExtraTotalPrice +
         this.roofExtraTotalPrice +
         this.pergolaExtraTotalPrice +
-        this.inverterExtraTotalPrice
+        this.inverterExtraTotalPrice +
+        this.superiorInverterExtraTotalPrice
         )
     },
 
     finalPrice() {
-      const sum = Number(this.solarBudget.size.price.replace('.', '')) + this.allExtrasSum
+      const sum = Number(this.solarBudget.size.price) + this.allExtrasSum
       return sum.toFixed(2)
-    }, 
+    },
+
+    finalMonthlyPrice() {
+      return this.finalPrice * this.monthlyRate;
+    },
+
+    monthlyRate() {
+      return 0.011077;
+    },
 
     ivaRate() {
       return 0.21;
@@ -136,6 +154,13 @@ const budgetCard = {
 
       return 0
     },
+    superiorInverterExtraSuperiorTotalPrice() {
+      if(this.superiorExtras.superiorInverterExtra) {
+        return Number(this.solarBudget.superiorInstallation.superiorInverterExtra) * ( Number(this.solarBudget.superiorInstallation.superiorSize.basePanels) + this.superiorExtras.panelsExtra )
+      }
+
+      return 0
+    },
 
     allExtraSuperiorsSum() {
       return (
@@ -144,13 +169,18 @@ const budgetCard = {
         this.triphasicExtraSuperiorTotalPrice +
         this.roofExtraSuperiorTotalPrice +
         this.pergolaExtraSuperiorTotalPrice +
-        this.inverterExtraSuperiorTotalPrice
+        this.inverterExtraSuperiorTotalPrice +
+        this.superiorInverterExtraSuperiorTotalPrice
       )
     },
 
     finalPriceSuperior() {
-      const sum = Number(this.solarBudget.superiorInstallation.superiorSize.price.replace('.', '')) + this.allExtraSuperiorsSum
+      const sum = Number(this.solarBudget.superiorInstallation.superiorSize.price) + this.allExtraSuperiorsSum
       return !Number.isNaN(sum) ? sum.toFixed(2) : false
+    },
+
+    finalMonthlyPriceSuperior() {
+      return this.finalPriceSuperior * this.monthlyRate;
     },
 
     finalPriceSuperiorIvaExtra() {
@@ -214,7 +244,7 @@ const budgetCard = {
         </div>
         <div class="an-card--pack__info">
           <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ formatPrice(finalPrice/12) }} <span class="an-h3">€ mes</span></p>
+          <p class="an-h2">{{ formatPrice(finalMonthlyPrice) }} <span class="an-h3">€ mes</span></p>
           <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
           <p class="an-h5">Precio total IVA Incluido: {{ formatPrice(finalPriceWithIva) }}€</p>
         </div>
@@ -222,6 +252,10 @@ const budgetCard = {
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
             {{ leadData.calculatorSolar.input.houseType }}
+          </li>
+          <li class="an-list__item an-body-m-regular">
+            <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
+            Paneles {{ leadData.calculatorSolar.input.panelsType }}
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
@@ -329,6 +363,20 @@ const budgetCard = {
                   </label>
                 </div>
               </li>
+              <li class="an-card__extra-list__item mb-s">
+                <div class="an-checkbox an-checkbox--white">
+                  <input class="an-checkbox__input" type="checkbox" v-model="extras.superiorInverterExtra" id="check6Superior">
+                  <label class="an-checkbox__label" for="check6Superior">
+                    <span class="an-body-m-regular an-tooltip">
+                      Inversor de tipo superior
+                      <div class="an-tooltip__content an-tooltip__content--slide">
+                        <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Inversor de tipo superior</p>
+                        <p class="an-tooltip__text">Instalación de un inversor Fronius con mejores características que el inversor standard.</p>
+                      </div>
+                    </span>
+                  </label>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
@@ -346,7 +394,7 @@ const budgetCard = {
         </div>
         <div class="an-card--pack__info">
           <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ formatPrice(finalPriceSuperior/12) }} <span class="an-h3">€/mes</span></p>
+          <p class="an-h2">{{ formatPrice(finalMonthlyPriceSuperior) }} <span class="an-h3">€/mes</span></p>
           <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
           <p class="an-h5">Precio total IVA Incluido: {{ formatPrice(finalPriceSuperiorWithIva) }}€</p>
         </div>
@@ -354,6 +402,10 @@ const budgetCard = {
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
             {{ leadData.calculatorSolar.input.houseType }}
+          </li>
+          <li class="an-list__item an-body-m-regular">
+            <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
+            Paneles {{ leadData.calculatorSolar.input.panelsType }}
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
@@ -456,6 +508,20 @@ const budgetCard = {
                       <div class="an-tooltip__content an-tooltip__content--slide">
                         <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Extra Inversor</p>
                         <p class="an-tooltip__text">Incrementa la potencia del inversor dejándolo sobredimensionado. Esto permitirá que en un futuro puedas incrementar la potencia instalada sin tener que modificarlo.</p>
+                      </div>
+                    </span>
+                  </label>
+                </div>
+              </li>
+              <li class="an-card__extra-list__item mb-s">
+                <div class="an-checkbox">
+                  <input class="an-checkbox__input" type="checkbox" v-model="superiorExtras.superiorInverterExtra" id="check6Superior">
+                  <label class="an-checkbox__label" for="check6Superior">
+                    <span class="an-body-m-regular an-tooltip an-tooltip--green">
+                      Inversor de tipo superior
+                      <div class="an-tooltip__content an-tooltip__content--slide">
+                        <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Inversor de tipo superior</p>
+                        <p class="an-tooltip__text">Instalación de un inversor Fronius con mejores características que el inversor standard.</p>
                       </div>
                     </span>
                   </label>
