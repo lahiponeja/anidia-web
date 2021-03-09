@@ -72,7 +72,7 @@ const budgetCard = {
 
     superiorInverterExtraTotalPrice() {
       if(this.extras.superiorInverterExtra) {
-        return Number(this.solarBudget.superiorInverterExtra)
+        return Number(this.solarBudget.superiorInverterExtra) * ( Number(this.solarBudget.size.basePanels) + this.extras.panelsExtra )
       }
 
       return 0
@@ -156,7 +156,7 @@ const budgetCard = {
     },
     superiorInverterExtraSuperiorTotalPrice() {
       if(this.superiorExtras.superiorInverterExtra) {
-        return Number(this.solarBudget.superiorInstallation.superiorInverterExtra)
+        return Number(this.solarBudget.superiorInstallation.superiorInverterExtra) * ( Number(this.solarBudget.superiorInstallation.superiorSize.basePanels) + this.superiorExtras.panelsExtra )
       }
 
       return 0
