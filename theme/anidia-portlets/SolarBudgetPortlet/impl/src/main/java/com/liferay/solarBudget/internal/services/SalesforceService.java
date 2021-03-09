@@ -184,6 +184,7 @@ public class SalesforceService {
 	private SolarInputRequest mapToSolarInputRequest(SolarBudgetRequest calculatorSolarInput) {
 		SolarInputRequest inputRequest = new SolarInputRequest();
 		inputRequest.setHouseType(calculatorSolarInput.getHouseTypeAsString());
+		inputRequest.setPanelsType(calculatorSolarInput.getPanelsTypeAsString());
 		inputRequest.setMonthlyConsumption(calculatorSolarInput.getMonthlyConsumption());
 		inputRequest.setAnnualConsumption(calculatorSolarInput.getAnnualConsumption());
 		return inputRequest;
