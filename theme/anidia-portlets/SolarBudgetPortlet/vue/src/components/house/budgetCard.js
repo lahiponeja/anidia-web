@@ -98,7 +98,7 @@ const budgetCard = {
     },
 
     finalMonthlyPrice() {
-      return this.finalPrice * this.monthlyRate;
+      return Math.floor(this.finalPrice * this.monthlyRate);
     },
 
     monthlyRate() {
@@ -180,7 +180,7 @@ const budgetCard = {
     },
 
     finalMonthlyPriceSuperior() {
-      return this.finalPriceSuperior * this.monthlyRate;
+      return Math.floor(this.finalPriceSuperior * this.monthlyRate);
     },
 
     finalPriceSuperiorIvaExtra() {
@@ -240,13 +240,12 @@ const budgetCard = {
       <div class="an-card an-card--pack an-card--vue featured" data-card="">
         <div class="an-card--pack__intro">
           <p class="an-h5">Según tus necesidades especiales</p>
-          <p class="an-h5">Pago único {{formatPrice(finalPrice) }}€</p>
+          <p class="an-h5">Pago único {{formatPrice(finalPriceWithIva) }}€</p>
         </div>
         <div class="an-card--pack__info">
-          <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ formatPrice(finalMonthlyPrice) }} <span class="an-h3">€ mes</span></p>
+          <p class="an-h4">Desde</p>
+          <p class="an-h2">{{ formatPrice(finalMonthlyPrice) }} <span class="an-h3">€/mes*</span></p>
           <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
-          <p class="an-h5">Precio total IVA Incluido: {{ formatPrice(finalPriceWithIva) }}€</p>
         </div>
         <ul class="an-list">
           <li class="an-list__item an-body-m-regular">
@@ -390,13 +389,12 @@ const budgetCard = {
       <div v-if="finalPriceSuperior" class="an-card an-card--pack an-card--vue" data-card="">
         <div class="an-card--pack__intro">
           <p class="an-h5">Según tus necesidades especiales</p>
-          <p class="an-h5">Pago único {{ formatPrice(finalPriceSuperior) }}€</p>
+          <p class="an-h5">Pago único {{ formatPrice(finalPriceSuperiorWithIva) }}€</p>
         </div>
         <div class="an-card--pack__info">
-          <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ formatPrice(finalMonthlyPriceSuperior) }} <span class="an-h3">€/mes</span></p>
+          <p class="an-h4">Desde</p>
+          <p class="an-h2">{{ formatPrice(finalMonthlyPriceSuperior) }} <span class="an-h3">€/mes*</span></p>
           <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
-          <p class="an-h5">Precio total IVA Incluido: {{ formatPrice(finalPriceSuperiorWithIva) }}€</p>
         </div>
         <ul class="an-list">
           <li class="an-list__item an-body-m-regular">
@@ -535,7 +533,9 @@ const budgetCard = {
         </button>
       </div>
     </div>
-
+    <p class="an-body-s-bold color-an-theme-dark-grey mt-xl">
+    * Cuota aportada, a modo de ejemplo, calculada para un préstamo a 120 meses (10 años) con un TIN de 5,95% y TAE de 6,12%. Sujeto al tipo de interés actual ofrecido por las entidades financiera y sujeto a la aceptación de concesión del préstamo por parte de las entidades financieras.
+    </p>
     <div class="an-form__flex an-form__flex--6-cols mb-xxl">
       <button @click="calculateAgain" type="button" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--half-arrow-left mt-xl">
         <span>Volver a calcular</span>
