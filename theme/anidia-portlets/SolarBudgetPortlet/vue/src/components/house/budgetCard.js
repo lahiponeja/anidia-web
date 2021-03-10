@@ -32,7 +32,15 @@ const budgetCard = {
       return this.lead.state.lead
     },
 
-    /************************************ 
+    panelsTypeDescription() {
+      if(this.leadData.calculatorSolar.input.panelsType == "Standard") {
+        return "Paneles recomendados por Anidia";
+      } else if (this.leadData.calculatorSolar.input.panelsType == "Diseño (LG)") {
+        return "Paneles de Diseño LG";
+      }
+    },
+
+    /************************************
      * EXTRAS | NOT SUPERIOR
      *************************************/ 
     panelsExtraTotalPrice() {
@@ -254,7 +262,7 @@ const budgetCard = {
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
-            Paneles {{ leadData.calculatorSolar.input.panelsType }}
+            {{ panelsTypeDescription }}
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
@@ -403,7 +411,7 @@ const budgetCard = {
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
-            Paneles {{ leadData.calculatorSolar.input.panelsType }}
+            {{ panelsTypeDescription }}
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>

@@ -64,6 +64,9 @@ const submitHouseData = function(solarBudgetRequest) {
   const { input } = state.lead.calculatorSolar
 
   const dataObj = Object.assign(input, solarBudgetRequest)
+  if(!input.panelsType) {
+    input.panelsType = "Standard";
+  }
   const options = {
     rootName: 'SolarBudgetRequest', // defaults to 'root'
     attributes: false
