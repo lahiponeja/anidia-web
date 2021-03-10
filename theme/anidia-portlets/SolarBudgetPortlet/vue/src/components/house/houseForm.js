@@ -16,8 +16,8 @@ const houseForm = {
 
       sendingForm: false,
       submitFormError: false, // TODO
-      knowMonthlyExpenses: true,
-      knowAnnualConsumption: true
+      knowMonthlyExpenses: false,
+      knowAnnualConsumption: false
 
     }
   },
@@ -55,29 +55,7 @@ const houseForm = {
 
         <form @submit.prevent="submitRequest">
 
-        <!-- 🚧 Selecciona el tipo de paneles 🚧 -->
-          <div class="d-flex mb-xl">
-            <p class="an-body-l-bold">¿Qué tipo de panel deseas?</p>
-            <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
-              <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
-              <div class="an-info__box">
-                Disponemos de paneles solares de la mejor calidad (Tier 1) y precio, ya incluidos en la talla básica. Si aun así quieres paneles LG de diseño puedes, escoge tu opción.
-              </div>
-            </div>
-          </div>
-        <div class="an-form__flex an-form__flex--2-cols">
 
-          <div class="an-form__item">
-            <div class="an-select an-select--full-width">
-              <span class="an-select__icon an-icon--chevron-down"></span>
-              <select v-model="solarBudgetRequest.panelsType" class="an-select__native" required>
-                <option disabled value="">Seleccione una opción...</option>
-                <option value="Standard">Paneles básicos</option>
-                <option value="Diseño (LG)">Paneles de Diseño LG</option>
-              </select>
-            </div>
-          </div>
-        </div>
 
         <!-- 🚧 Indícanos el tipo de vivienda 🚧 -->
         <p class="an-body-l-bold mb-xl">Indícanos el tipo de vivienda</p>
@@ -103,18 +81,18 @@ const houseForm = {
         <!-- <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal mb-l"> -->
         <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal mb-l">
           <div class="an-radio an-form__item display-flex width-150 mb-0">
-            <input v-model="knowMonthlyExpenses" :value="true" class="an-radio__input" checked="" type="radio" name="monthly-expenses" id="gasto-mensual-si">
-            <label class="an-radio__label w-half" for="gasto-mensual-si">
-              <span>
-                Si
-              </span>
-            </label>
-          </div>
-          <div class="an-radio an-form__item display-flex width-150 mb-0">
             <input v-model="knowMonthlyExpenses" :value="false" class="an-radio__input" type="radio" name="monthly-expenses" id="gasto-mensual-no">
             <label class="an-radio__label w-half" for="gasto-mensual-no">
               <span>
                 No
+              </span>
+            </label>
+          </div>
+          <div class="an-radio an-form__item display-flex width-150 mb-0">
+            <input v-model="knowMonthlyExpenses" :value="true" class="an-radio__input" checked="" type="radio" name="monthly-expenses" id="gasto-mensual-si">
+            <label class="an-radio__label w-half" for="gasto-mensual-si">
+              <span>
+                Si
               </span>
             </label>
           </div>
@@ -139,18 +117,18 @@ const houseForm = {
           <!-- <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal mb-l"> -->
           <div class="an-form__flex an-form__flex--3-cols an-form__flex--justify-normal mb-l">
             <div class="an-radio an-form__item display-flex width-150 mb-0">
-              <input v-model="knowAnnualConsumption" :value="true" class="an-radio__input" checked="" type="radio" name="annual-consumption" id="consumo-anual-si">
-              <label class="an-radio__label w-half" for="consumo-anual-si">
-                <span>
-                  Si
-                </span>
-              </label>
-            </div>
-            <div class="an-radio an-form__item display-flex width-150 mb-0">
               <input v-model="knowAnnualConsumption" :value="false" class="an-radio__input" type="radio" name="annual-consumption" id="consumo-anual-no">
               <label class="an-radio__label w-half" for="consumo-anual-no">
                 <span>
                   No
+                </span>
+              </label>
+            </div>
+            <div class="an-radio an-form__item display-flex width-150 mb-0">
+              <input v-model="knowAnnualConsumption" :value="true" class="an-radio__input" checked="" type="radio" name="annual-consumption" id="consumo-anual-si">
+              <label class="an-radio__label w-half" for="consumo-anual-si">
+                <span>
+                  Si
                 </span>
               </label>
             </div>
@@ -163,8 +141,30 @@ const houseForm = {
             </div>
           </div>
 
+          <!-- 🚧 Selecciona el tipo de paneles 🚧 -->
+          <div class="d-flex mb-xl">
+            <p class="an-body-l-bold">¿Qué tipo de panel deseas?</p>
+            <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
+              <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
+              <div class="an-info__box">
+                Disponemos de paneles solares de la mejor calidad (Tier 1) y precio, ya incluidos en la talla básica. Si aun así quieres paneles LG de diseño puedes, escoge tu opción.
+              </div>
+            </div>
+          </div>
 
+          <div class="an-form__flex an-form__flex--2-cols">
 
+            <div class="an-form__item">
+              <div class="an-select an-select--full-width">
+                <span class="an-select__icon an-icon--chevron-down"></span>
+                <select v-model="solarBudgetRequest.panelsType" class="an-select__native">
+                  <option disabled value="">Seleccione una opción...</option>
+                  <option value="Standard">Paneles recomendados por Anidia</option>
+                  <option value="Diseño (LG)">Paneles de Diseño LG</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
 
           <div class="an-form__flex an-form__flex--6-cols mb-xxl">

@@ -32,7 +32,7 @@ public class Calculator {
     try {
       jsonRequest.put("EntryKey", "Web");
       jsonRequest.put("HouseType", solarBudgetRequest.getHouseTypeAsString());
-      jsonRequest.put("PanelsSelected", solarBudgetRequest.getPanelsTypeAsString());
+      jsonRequest.put("PanelsSelected", (solarBudgetRequest.getPanelsType() == null) ? "Standard" : solarBudgetRequest.getPanelsTypeAsString());
       jsonRequest.put("MonthlyConsumption", solarBudgetRequest.getMonthlyConsumption());
       jsonRequest.put("AnnualConsumption", solarBudgetRequest.getAnnualConsumption());
     } catch (JSONException e) {

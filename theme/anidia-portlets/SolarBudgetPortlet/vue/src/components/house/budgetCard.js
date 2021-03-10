@@ -32,7 +32,15 @@ const budgetCard = {
       return this.lead.state.lead
     },
 
-    /************************************ 
+    panelsTypeDescription() {
+      if(this.leadData.calculatorSolar.input.panelsType == "Standard") {
+        return "Paneles recomendados por Anidia";
+      } else if (this.leadData.calculatorSolar.input.panelsType == "Diseño (LG)") {
+        return "Paneles de Diseño LG";
+      }
+    },
+
+    /************************************
      * EXTRAS | NOT SUPERIOR
      *************************************/ 
     panelsExtraTotalPrice() {
@@ -72,7 +80,7 @@ const budgetCard = {
 
     superiorInverterExtraTotalPrice() {
       if(this.extras.superiorInverterExtra) {
-        return Number(this.solarBudget.superiorInverterExtra) * ( Number(this.solarBudget.size.basePanels) + this.extras.panelsExtra )
+        return Number(this.solarBudget.superiorInverterExtra)
       }
 
       return 0
@@ -98,7 +106,7 @@ const budgetCard = {
     },
 
     finalMonthlyPrice() {
-      return this.finalPrice * this.monthlyRate;
+      return Math.floor(this.finalPrice * this.monthlyRate);
     },
 
     monthlyRate() {
@@ -156,7 +164,7 @@ const budgetCard = {
     },
     superiorInverterExtraSuperiorTotalPrice() {
       if(this.superiorExtras.superiorInverterExtra) {
-        return Number(this.solarBudget.superiorInstallation.superiorInverterExtra) * ( Number(this.solarBudget.superiorInstallation.superiorSize.basePanels) + this.superiorExtras.panelsExtra )
+        return Number(this.solarBudget.superiorInstallation.superiorInverterExtra)
       }
 
       return 0
@@ -180,7 +188,7 @@ const budgetCard = {
     },
 
     finalMonthlyPriceSuperior() {
-      return this.finalPriceSuperior * this.monthlyRate;
+      return Math.floor(this.finalPriceSuperior * this.monthlyRate);
     },
 
     finalPriceSuperiorIvaExtra() {
@@ -240,13 +248,12 @@ const budgetCard = {
       <div class="an-card an-card--pack an-card--vue featured" data-card="">
         <div class="an-card--pack__intro">
           <p class="an-h5">Según tus necesidades especiales</p>
-          <p class="an-h5">Pago único {{formatPrice(finalPrice) }}€</p>
+          <p class="an-h5">Pago único {{formatPrice(finalPriceWithIva) }}€</p>
         </div>
         <div class="an-card--pack__info">
-          <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ formatPrice(finalMonthlyPrice) }} <span class="an-h3">€ mes</span></p>
+          <p class="an-h4">Desde</p>
+          <p class="an-h2">{{ formatPrice(finalMonthlyPrice) }} <span class="an-h3">€/mes*</span></p>
           <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
-          <p class="an-h5">Precio total IVA Incluido: {{ formatPrice(finalPriceWithIva) }}€</p>
         </div>
         <ul class="an-list">
           <li class="an-list__item an-body-m-regular">
@@ -255,7 +262,7 @@ const budgetCard = {
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
-            Paneles {{ leadData.calculatorSolar.input.panelsType }}
+            {{ panelsTypeDescription }}
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
@@ -276,7 +283,7 @@ const budgetCard = {
               <li class="an-card__extra-list__item mb-s">
                 <div class="an-checkbox an-checkbox--white">
                     <span class="an-body-m-regular an-tooltip">
-                      Paneles solares extra
+                      Paneles solares extra (nº de paneles)
                       <div class="an-tooltip__content an-tooltip__content--slide">
                         <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Paneles solares extra</p>
                         <p class="an-tooltip__text">Incrementa la potencia de la talla seleccionada para cubrir todas las necesidades de tu hogar presentes y futuras.</p>
@@ -335,7 +342,7 @@ const budgetCard = {
               <li class="an-card__extra-list__item mb-s">
                 <div class="an-checkbox an-checkbox--white">
                     <span class="an-body-m-regular an-tooltip">
-                      Canalización soterrada
+                      Canalización soterrada (metros)
                       <div class="an-tooltip__content an-tooltip__content--slide">
                         <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Canalización soterrada</p>
                         <p class="an-tooltip__text">Para la realización de una instalación soterrada bajo la petición del cliente.</p>
@@ -390,13 +397,12 @@ const budgetCard = {
       <div v-if="finalPriceSuperior" class="an-card an-card--pack an-card--vue" data-card="">
         <div class="an-card--pack__intro">
           <p class="an-h5">Según tus necesidades especiales</p>
-          <p class="an-h5">Pago único {{ formatPrice(finalPriceSuperior) }}€</p>
+          <p class="an-h5">Pago único {{ formatPrice(finalPriceSuperiorWithIva) }}€</p>
         </div>
         <div class="an-card--pack__info">
-          <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ formatPrice(finalMonthlyPriceSuperior) }} <span class="an-h3">€/mes</span></p>
+          <p class="an-h4">Desde</p>
+          <p class="an-h2">{{ formatPrice(finalMonthlyPriceSuperior) }} <span class="an-h3">€/mes*</span></p>
           <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
-          <p class="an-h5">Precio total IVA Incluido: {{ formatPrice(finalPriceSuperiorWithIva) }}€</p>
         </div>
         <ul class="an-list">
           <li class="an-list__item an-body-m-regular">
@@ -405,7 +411,7 @@ const budgetCard = {
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
-            Paneles {{ leadData.calculatorSolar.input.panelsType }}
+            {{ panelsTypeDescription }}
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
@@ -426,7 +432,7 @@ const budgetCard = {
               <li class="an-card__extra-list__item mb-s">
                 <div class="an-checkbox">
                     <span class="an-body-m-regular an-tooltip an-tooltip--green">
-                      Paneles solares extra
+                      Paneles solares extra (nº de paneles)
                       <div class="an-tooltip__content an-tooltip__content--slide">
                         <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Paneles solares extra</p>
                         <p class="an-tooltip__text">Incrementa la potencia de la talla seleccionada para cubrir todas las necesidades de tu hogar presentes y futuras.</p>
@@ -485,7 +491,7 @@ const budgetCard = {
               <li class="an-card__extra-list__item mb-s">
                 <div class="an-checkbox">
                     <span class="an-body-m-regular an-tooltip an-tooltip--green">
-                      Canalización soterrada
+                      Canalización soterrada (metros)
                       <div class="an-tooltip__content an-tooltip__content--slide">
                         <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Canalización soterrada</p>
                         <p class="an-tooltip__text">Para la realización de una instalación soterrada bajo la petición del cliente.</p>
@@ -535,7 +541,9 @@ const budgetCard = {
         </button>
       </div>
     </div>
-
+    <p class="an-body-s-bold color-an-theme-dark-grey mt-xl">
+    * Cuota aportada, a modo de ejemplo, calculada para un préstamo a 120 meses (10 años) con un TIN de 5,95% y TAE de 6,12%. Sujeto al tipo de interés actual ofrecido por las entidades financiera y sujeto a la aceptación de concesión del préstamo por parte de las entidades financieras.
+    </p>
     <div class="an-form__flex an-form__flex--6-cols mb-xxl">
       <button @click="calculateAgain" type="button" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--half-arrow-left mt-xl">
         <span>Volver a calcular</span>

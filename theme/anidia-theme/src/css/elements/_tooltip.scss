@@ -40,6 +40,11 @@
     }
   }
 
+  &:after {
+    font-family: "an-icons";
+    content: $an-icon-info;
+  }
+
   &--green {
     #{$el}__content {
       background-color: $an-theme;
