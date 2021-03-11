@@ -75,17 +75,16 @@ public class SolarBudgetRequest {
 
 	}
 
-	@GraphQLName("RoofType")
-	public static enum RoofType {
+	@GraphQLName("PanelsType")
+	public static enum PanelsType {
 
-		PLANO_O_INCLINACIN_MENOR_A_20("Plano o inclinación menor a 20º"),
-		INCLINACIN_SUPERIOR_A_20("Inclinación superior a 20º");
+		STANDARD("Standard"), DISEO_LG("Diseño (LG)");
 
 		@JsonCreator
-		public static RoofType create(String value) {
-			for (RoofType roofType : values()) {
-				if (Objects.equals(roofType.getValue(), value)) {
-					return roofType;
+		public static PanelsType create(String value) {
+			for (PanelsType panelsType : values()) {
+				if (Objects.equals(panelsType.getValue(), value)) {
+					return panelsType;
 				}
 			}
 
@@ -102,13 +101,41 @@ public class SolarBudgetRequest {
 			return _value;
 		}
 
-		private RoofType(String value) {
+		private PanelsType(String value) {
 			_value = value;
 		}
 
 		private final String _value;
 
 	}
+
+	@Schema(description = "Yearly consumption in KW")
+	public Integer getAnnualConsumption() {
+		return annualConsumption;
+	}
+
+	public void setAnnualConsumption(Integer annualConsumption) {
+		this.annualConsumption = annualConsumption;
+	}
+
+	@JsonIgnore
+	public void setAnnualConsumption(
+		UnsafeSupplier<Integer, Exception> annualConsumptionUnsafeSupplier) {
+
+		try {
+			annualConsumption = annualConsumptionUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Integer annualConsumption;
 
 	@Schema(description = "Kind of house")
 	@Valid
@@ -148,7 +175,7 @@ public class SolarBudgetRequest {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected HouseType houseType;
 
-	@Schema(description = "Monthly consumprion")
+	@Schema(description = "Monthly consumption in euros")
 	public Integer getMonthlyConsumption() {
 		return monthlyConsumption;
 	}
@@ -176,31 +203,31 @@ public class SolarBudgetRequest {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer monthlyConsumption;
 
-	@Schema(description = "Roof type")
+	@Schema(description = "Kind of panels to be included in the budget")
 	@Valid
-	public RoofType getRoofType() {
-		return roofType;
+	public PanelsType getPanelsType() {
+		return panelsType;
 	}
 
 	@JsonIgnore
-	public String getRoofTypeAsString() {
-		if (roofType == null) {
+	public String getPanelsTypeAsString() {
+		if (panelsType == null) {
 			return null;
 		}
 
-		return roofType.toString();
+		return panelsType.toString();
 	}
 
-	public void setRoofType(RoofType roofType) {
-		this.roofType = roofType;
+	public void setPanelsType(PanelsType panelsType) {
+		this.panelsType = panelsType;
 	}
 
 	@JsonIgnore
-	public void setRoofType(
-		UnsafeSupplier<RoofType, Exception> roofTypeUnsafeSupplier) {
+	public void setPanelsType(
+		UnsafeSupplier<PanelsType, Exception> panelsTypeUnsafeSupplier) {
 
 		try {
-			roofType = roofTypeUnsafeSupplier.get();
+			panelsType = panelsTypeUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -212,7 +239,7 @@ public class SolarBudgetRequest {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected RoofType roofType;
+	protected PanelsType panelsType;
 
 	@Override
 	public boolean equals(Object object) {
@@ -241,6 +268,16 @@ public class SolarBudgetRequest {
 
 		sb.append("{");
 
+		if (annualConsumption != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"annualConsumption\": ");
+
+			sb.append(annualConsumption);
+		}
+
 		if (houseType != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -265,16 +302,16 @@ public class SolarBudgetRequest {
 			sb.append(monthlyConsumption);
 		}
 
-		if (roofType != null) {
+		if (panelsType != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"roofType\": ");
+			sb.append("\"panelsType\": ");
 
 			sb.append("\"");
 
-			sb.append(roofType);
+			sb.append(panelsType);
 
 			sb.append("\"");
 		}

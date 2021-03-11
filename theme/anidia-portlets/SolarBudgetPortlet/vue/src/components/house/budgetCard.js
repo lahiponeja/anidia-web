@@ -7,6 +7,7 @@ const budgetCard = {
       extras: {
         panelsExtra: 0,
         pipelineExtra: 0,
+        superiorInverterExtra: false,
         triphasicExtra: false,
         roofExtra: false,
         pergolaExtra: false,
@@ -18,7 +19,8 @@ const budgetCard = {
         triphasicExtra: false,
         roofExtra: false,
         pergolaExtra: false,
-        inverterExtra: false
+        inverterExtra: false,
+        superiorInverterExtra: false
       }
     }
   },
@@ -30,7 +32,15 @@ const budgetCard = {
       return this.lead.state.lead
     },
 
-    /************************************ 
+    panelsTypeDescription() {
+      if(this.leadData.calculatorSolar.input.panelsType == "Standard") {
+        return "Paneles recomendados por Anidia";
+      } else if (this.leadData.calculatorSolar.input.panelsType == "Diseño (LG)") {
+        return "Paneles de Diseño LG";
+      }
+    },
+
+    /************************************
      * EXTRAS | NOT SUPERIOR
      *************************************/ 
     panelsExtraTotalPrice() {
@@ -67,25 +77,41 @@ const budgetCard = {
 
       return 0
     },
-    
+
+    superiorInverterExtraTotalPrice() {
+      if(this.extras.superiorInverterExtra) {
+        return Number(this.solarBudget.superiorInverterExtra)
+      }
+
+      return 0
+    },
 
 
     // EXTRAS SUM
     allExtrasSum() {
       return (
-        this.panelsExtraTotalPrice + 
+        this.panelsExtraTotalPrice +
         this.pipelineExtraTotalPrice +
         this.triphasicExtraTotalPrice +
         this.roofExtraTotalPrice +
         this.pergolaExtraTotalPrice +
-        this.inverterExtraTotalPrice
+        this.inverterExtraTotalPrice +
+        this.superiorInverterExtraTotalPrice
         )
     },
 
     finalPrice() {
-      const sum = Number(this.solarBudget.size.price.replace('.', '')) + this.allExtrasSum
+      const sum = Number(this.solarBudget.size.price) + this.allExtrasSum
       return sum.toFixed(2)
-    }, 
+    },
+
+    finalMonthlyPrice() {
+      return Math.floor(this.finalPrice * this.monthlyRate);
+    },
+
+    monthlyRate() {
+      return 0.011077;
+    },
 
     ivaRate() {
       return 0.21;
@@ -136,6 +162,13 @@ const budgetCard = {
 
       return 0
     },
+    superiorInverterExtraSuperiorTotalPrice() {
+      if(this.superiorExtras.superiorInverterExtra) {
+        return Number(this.solarBudget.superiorInstallation.superiorInverterExtra)
+      }
+
+      return 0
+    },
 
     allExtraSuperiorsSum() {
       return (
@@ -144,13 +177,18 @@ const budgetCard = {
         this.triphasicExtraSuperiorTotalPrice +
         this.roofExtraSuperiorTotalPrice +
         this.pergolaExtraSuperiorTotalPrice +
-        this.inverterExtraSuperiorTotalPrice
+        this.inverterExtraSuperiorTotalPrice +
+        this.superiorInverterExtraSuperiorTotalPrice
       )
     },
 
     finalPriceSuperior() {
-      const sum = Number(this.solarBudget.superiorInstallation.superiorSize.price.replace('.', '')) + this.allExtraSuperiorsSum
+      const sum = Number(this.solarBudget.superiorInstallation.superiorSize.price) + this.allExtraSuperiorsSum
       return !Number.isNaN(sum) ? sum.toFixed(2) : false
+    },
+
+    finalMonthlyPriceSuperior() {
+      return Math.floor(this.finalPriceSuperior * this.monthlyRate);
     },
 
     finalPriceSuperiorIvaExtra() {
@@ -210,18 +248,21 @@ const budgetCard = {
       <div class="an-card an-card--pack an-card--vue featured" data-card="">
         <div class="an-card--pack__intro">
           <p class="an-h5">Según tus necesidades especiales</p>
-          <p class="an-h5">Pago único {{formatPrice(finalPrice) }}€</p>
+          <p class="an-h5">Pago único {{formatPrice(finalPriceWithIva) }}€</p>
         </div>
         <div class="an-card--pack__info">
-          <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ formatPrice(finalPrice/12) }} <span class="an-h3">€ mes</span></p>
+          <p class="an-h4">Desde</p>
+          <p class="an-h2">{{ formatPrice(finalMonthlyPrice) }} <span class="an-h3">€/mes*</span></p>
           <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
-          <p class="an-h5">Precio total IVA Incluido: {{ formatPrice(finalPriceWithIva) }}€</p>
         </div>
         <ul class="an-list">
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
             {{ leadData.calculatorSolar.input.houseType }}
+          </li>
+          <li class="an-list__item an-body-m-regular">
+            <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
+            {{ panelsTypeDescription }}
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
@@ -242,7 +283,7 @@ const budgetCard = {
               <li class="an-card__extra-list__item mb-s">
                 <div class="an-checkbox an-checkbox--white">
                     <span class="an-body-m-regular an-tooltip">
-                      Paneles solares extra
+                      Paneles solares extra (paneles)
                       <div class="an-tooltip__content an-tooltip__content--slide">
                         <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Paneles solares extra</p>
                         <p class="an-tooltip__text">Incrementa la potencia de la talla seleccionada para cubrir todas las necesidades de tu hogar presentes y futuras.</p>
@@ -301,7 +342,7 @@ const budgetCard = {
               <li class="an-card__extra-list__item mb-s">
                 <div class="an-checkbox an-checkbox--white">
                     <span class="an-body-m-regular an-tooltip">
-                      Canalización soterrada
+                      Canalización soterrada (metros)
                       <div class="an-tooltip__content an-tooltip__content--slide">
                         <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Canalización soterrada</p>
                         <p class="an-tooltip__text">Para la realización de una instalación soterrada bajo la petición del cliente.</p>
@@ -329,6 +370,20 @@ const budgetCard = {
                   </label>
                 </div>
               </li>
+              <li class="an-card__extra-list__item mb-s">
+                <div class="an-checkbox an-checkbox--white">
+                  <input class="an-checkbox__input" type="checkbox" v-model="extras.superiorInverterExtra" id="check6Superior">
+                  <label class="an-checkbox__label" for="check6Superior">
+                    <span class="an-body-m-regular an-tooltip">
+                      Inversor de tipo superior
+                      <div class="an-tooltip__content an-tooltip__content--slide">
+                        <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Inversor de tipo superior</p>
+                        <p class="an-tooltip__text">Instalación de un inversor Fronius con mejores características que el inversor standard.</p>
+                      </div>
+                    </span>
+                  </label>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
@@ -342,18 +397,21 @@ const budgetCard = {
       <div v-if="finalPriceSuperior" class="an-card an-card--pack an-card--vue" data-card="">
         <div class="an-card--pack__intro">
           <p class="an-h5">Según tus necesidades especiales</p>
-          <p class="an-h5">Pago único {{ formatPrice(finalPriceSuperior) }}€</p>
+          <p class="an-h5">Pago único {{ formatPrice(finalPriceSuperiorWithIva) }}€</p>
         </div>
         <div class="an-card--pack__info">
-          <!-- <p class="an-h4">Desde</p> -->
-          <p class="an-h2">{{ formatPrice(finalPriceSuperior/12) }} <span class="an-h3">€/mes</span></p>
+          <p class="an-h4">Desde</p>
+          <p class="an-h2">{{ formatPrice(finalMonthlyPriceSuperior) }} <span class="an-h3">€/mes*</span></p>
           <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
-          <p class="an-h5">Precio total IVA Incluido: {{ formatPrice(finalPriceSuperiorWithIva) }}€</p>
         </div>
         <ul class="an-list">
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
             {{ leadData.calculatorSolar.input.houseType }}
+          </li>
+          <li class="an-list__item an-body-m-regular">
+            <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
+            {{ panelsTypeDescription }}
           </li>
           <li class="an-list__item an-body-m-regular">
             <div class="an-list__icon an-icon--check-circle">&nbsp;</div>
@@ -374,7 +432,7 @@ const budgetCard = {
               <li class="an-card__extra-list__item mb-s">
                 <div class="an-checkbox">
                     <span class="an-body-m-regular an-tooltip an-tooltip--green">
-                      Paneles solares extra
+                      Paneles solares extra (paneles)
                       <div class="an-tooltip__content an-tooltip__content--slide">
                         <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Paneles solares extra</p>
                         <p class="an-tooltip__text">Incrementa la potencia de la talla seleccionada para cubrir todas las necesidades de tu hogar presentes y futuras.</p>
@@ -433,7 +491,7 @@ const budgetCard = {
               <li class="an-card__extra-list__item mb-s">
                 <div class="an-checkbox">
                     <span class="an-body-m-regular an-tooltip an-tooltip--green">
-                      Canalización soterrada
+                      Canalización soterrada (metros)
                       <div class="an-tooltip__content an-tooltip__content--slide">
                         <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Canalización soterrada</p>
                         <p class="an-tooltip__text">Para la realización de una instalación soterrada bajo la petición del cliente.</p>
@@ -461,6 +519,20 @@ const budgetCard = {
                   </label>
                 </div>
               </li>
+              <li class="an-card__extra-list__item mb-s">
+                <div class="an-checkbox">
+                  <input class="an-checkbox__input" type="checkbox" v-model="superiorExtras.superiorInverterExtra" id="check6Superior">
+                  <label class="an-checkbox__label" for="check6Superior">
+                    <span class="an-body-m-regular an-tooltip an-tooltip--green">
+                      Inversor de tipo superior
+                      <div class="an-tooltip__content an-tooltip__content--slide">
+                        <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Inversor de tipo superior</p>
+                        <p class="an-tooltip__text">Instalación de un inversor Fronius con mejores características que el inversor standard.</p>
+                      </div>
+                    </span>
+                  </label>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
@@ -469,7 +541,9 @@ const budgetCard = {
         </button>
       </div>
     </div>
-
+    <p class="an-body-s-bold color-an-theme-dark-grey mt-xl">
+    * Cuota aportada, a modo de ejemplo, calculada para un préstamo a 120 meses (10 años) con un TIN de 5,95% y TAE de 6,12%. Sujeto al tipo de interés actual ofrecido por las entidades financiera y sujeto a la aceptación de concesión del préstamo por parte de las entidades financieras.
+    </p>
     <div class="an-form__flex an-form__flex--6-cols mb-xxl">
       <button @click="calculateAgain" type="button" class="an-btn an-btn--flatter an-btn--gradient an-btn--icon an-icon--half-arrow-left mt-xl">
         <span>Volver a calcular</span>

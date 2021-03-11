@@ -172,6 +172,7 @@ public class SalesforceService {
 		extras.setBattery(selectedExtras.getBattery());
 		extras.setCarCharger(selectedExtras.getCarCharger());
 		extras.setInverterExtra(selectedExtras.getInverterExtra());
+		extras.setSuperiorInverterExtra(selectedExtras.getSuperiorInverterExtra());
 		return extras;
 	}
 
@@ -183,8 +184,9 @@ public class SalesforceService {
 	private SolarInputRequest mapToSolarInputRequest(SolarBudgetRequest calculatorSolarInput) {
 		SolarInputRequest inputRequest = new SolarInputRequest();
 		inputRequest.setHouseType(calculatorSolarInput.getHouseTypeAsString());
+		inputRequest.setPanelsType((calculatorSolarInput.getPanelsType() == null) ? "Standard" : calculatorSolarInput.getPanelsTypeAsString());
 		inputRequest.setMonthlyConsumption(calculatorSolarInput.getMonthlyConsumption());
-		inputRequest.setRoofType(calculatorSolarInput.getRoofTypeAsString());
+		inputRequest.setAnnualConsumption(calculatorSolarInput.getAnnualConsumption());
 		return inputRequest;
 	}
 
@@ -199,6 +201,7 @@ public class SalesforceService {
 		outputRequest.setPanelsExtra(calculatorSolarOutput.getPanelsExtra());
 		outputRequest.setTriphasicExtra(calculatorSolarOutput.getTriphasicExtra());
 		outputRequest.setInverterExtra(calculatorSolarOutput.getInverterExtra());
+		outputRequest.setSuperiorInverterExtra(calculatorSolarOutput.getSuperiorInverterExtra());
 		outputRequest.setRoofExtra(calculatorSolarOutput.getRoofExtra());
 		outputRequest.setPergolaExtra(calculatorSolarOutput.getPergolaExtra());
 		outputRequest.setPipelineExtra(calculatorSolarOutput.getPipelineExtra());
@@ -253,6 +256,7 @@ public class SalesforceService {
 		sInstallation.setPanelsExtra(superiorInstallation.getPanelsExtra());
 		sInstallation.setTriphasicExtra(superiorInstallation.getTriphasicExtra());
 		sInstallation.setInverterExtra(superiorInstallation.getInverterExtra());
+		sInstallation.setSuperiorInverterExtra(superiorInstallation.getSuperiorInverterExtra());
 		sInstallation.setInverterType(superiorInstallation.getInverterType());
 		sInstallation.setRoofExtra(superiorInstallation.getRoofExtra());
 		sInstallation.setPergolaExtra(superiorInstallation.getPergolaExtra());
