@@ -283,7 +283,7 @@ const budgetCard = {
               <li class="an-card__extra-list__item mb-s">
                 <div class="an-checkbox an-checkbox--white">
                     <span class="an-body-m-regular an-tooltip">
-                      Paneles solares extra (nº de paneles)
+                      Paneles solares extra (paneles)
                       <div class="an-tooltip__content an-tooltip__content--slide">
                         <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Paneles solares extra</p>
                         <p class="an-tooltip__text">Incrementa la potencia de la talla seleccionada para cubrir todas las necesidades de tu hogar presentes y futuras.</p>
@@ -432,7 +432,7 @@ const budgetCard = {
               <li class="an-card__extra-list__item mb-s">
                 <div class="an-checkbox">
                     <span class="an-body-m-regular an-tooltip an-tooltip--green">
-                      Paneles solares extra (nº de paneles)
+                      Paneles solares extra (paneles)
                       <div class="an-tooltip__content an-tooltip__content--slide">
                         <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Paneles solares extra</p>
                         <p class="an-tooltip__text">Incrementa la potencia de la talla seleccionada para cubrir todas las necesidades de tu hogar presentes y futuras.</p>
