@@ -196,34 +196,134 @@
   &--blog {
     overflow: hidden;
     max-width: rem(498);
+    background-color: $white;
+    margin: auto rem(20) rem(40);
+    z-index: 1;
+    position: relative;
+    $parent: &;
+
+    @include desktop {
+      margin: 0 rem(13) rem(52);
+    }
+
+    &:first-child {
+      max-width: 100%;
+      width: 100%;
+      height: rem(500);
+      background: transparent;
+      margin-bottom: rem(40);
+     
+      @include desktop {
+        transform: translateY(140px);
+        height: rem(702);
+        margin-bottom: 0;
+      }
+    }
 
     &__img {
-      height: rem(270);
+      height: rem(184);
       background-size: cover;
       background-position: center;
+
+      @include desktop {
+        height: rem(270);
+      }
+
+      #{ $parent }:first-child & {
+        height: 100%;
+      }
     }
 
     &__content {
       color: $an-theme;
-      padding: rem(44) rem(36) rem(22);
+      padding: rem(24);
+      padding-bottom: 0;
       transform: translateY(-20px);
       background: $white;
       border-radius: rem(20);
 
+      @include desktop {
+        padding: rem(40) rem(36);
+        padding-bottom: 0;
+      }
+
+      #{ $parent }:first-child & {
+        background: transparent;
+        position: absolute;
+        max-width: rem(666);
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        bottom: 0;
+
+        @include desktop {
+          bottom: auto;
+          padding: rem(66);
+        }
+      }
+
       .an-pill {
         margin-bottom: rem(20);
+
+        #{ $parent }:first-child & {
+          order: 1;
+          color: $white;
+        }
       }
 
       &__date {
         margin-bottom: rem(14);
+        font-family: $fs-emeric-semibold-family;
+        font-size: rem(12);
+        line-height: rem(14);
+        letter-spacing: 1.71429px;
+        text-transform: uppercase;
+        display: block;
+
+        #{ $parent }:first-child & {
+          display: none;
+        }
       }
 
-      .n-body-l-bold {
-        margin-bottom: rem(30);
+      h3 {
+        margin-bottom: rem(24);
+        font-family: $open-sans-bold-family;
+        font-size: rem(18);
+        line-height: rem(25);
+
+        @include desktop {
+          font-size: rem(24);
+          line-height: rem(30);
+        }
+
+        #{ $parent }:first-child & {
+          font-size: rem(30);
+          line-height: rem(36);
+          color: $white;
+          font-family: $fs-emeric-semibold-family;
+          order: 0;
+
+          @include desktop {
+            font-size: rem(60);
+            line-height: rem(70);
+          }
+        }
       }
 
-      .an-icon--half-arrow-right::before {
-        font-size: rem(50);
+      .an-icon--half-arrow-right {
+       
+        &::before {
+          font-size: rem(50);
+          line-height: rem(24);
+          margin-bottom: rem(20);
+        }
+        &:hover {
+          text-decoration: none;
+        }
+
+        #{ $parent }:first-child & {
+          order: 2
+        }
       }
     }
   }

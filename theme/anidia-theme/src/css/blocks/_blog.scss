@@ -1,0 +1,26 @@
+.portlet-blogs {
+
+  .widget-mode-detail {
+    .title {
+      font-family: $fs-emeric-semibold-family;
+      font-size: rem(24);
+      font-weight: normal;
+      line-height: rem(32);
+      text-align: center;
+      color: $white;
+  
+      @include tablet {
+        font-size: rem(80);
+        line-height: rem(94);
+      }
+    }
+  }
+}
+
+.an-blog {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: rem(1220);
+  margin: auto;
+}
