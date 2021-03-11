@@ -108,8 +108,7 @@ public class GasComparator {
             jsonRequest.put("ACSIndividual", gasConsumptionByUse.getAcsIndividual() ? "Si" : "No");
             jsonRequest.put("ACSUse", gasConsumptionByUse.getAcsUse());
             jsonRequest.put("NumberOfPeople", gasConsumptionByUse.getNumberOfPeople());
-            jsonRequest
-                .put("HeatingIndividual", gasConsumptionByUse.getHeatingIndividual() ? "Si" : "No");
+            jsonRequest.put("HeatingIndividual", "Si");
             jsonRequest.put("HeatingUse", gasConsumptionByUse.getHeatingUse());
             jsonRequest
                 .put("SingleFamilyHouse", gasConsumptionByUse.getSingleFamilyHouse() ? "Si" : "No");
