@@ -181,7 +181,7 @@ const coverageForm = {
       })
 
       this.formData.addressKind = kind
-      this.formData.addressName = name
+      this.formData.addressName = `${kind} ${name}`
 
       this.loadingEstates = true
       this.house.getEstates(this.formData.provMunId, this.formData.postalCode, kind, name)
@@ -205,12 +205,16 @@ const coverageForm = {
     },
 
     onSubmitEstates(result) {
-      const { gateId, number } = result
+      const { gateId, number, annex } = result
 
       // Save object in the store
-      this.house.setCoverageData("estate", { gateId, number })
+      this.house.setCoverageData("estate", { gateId, number, annex })
 
-      this.formData.number = number
+      if(annex) {
+        this.formData.number = `${number} ${annex}`
+      } else {
+        this.formData.number = number
+      }
 
       this.loadingProperties = true
       this.house.getProperties(gateId)
@@ -440,13 +444,13 @@ const coverageForm = {
                         :key="'address-'+index"
                         v-bind="resultProps[index]"
                       >
-                        {{ result.name }}
+                        {{ result.kind }} {{ result.name }}
                       </li>
                     </ul>
 
                     <ul id="addresscustomul" v-show="house.state.autocompData.addresses.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
-                      <li v-for="(address, index) in house.state.autocompData.addresses" :key="'second-address-'+index" @click="[setValue(address.name, 'name', '#addresscustomul'), onSubmitAddresses(address)]" v-bind="resultProps[index]" class="an-select__custom-option">
-                        {{ address.name }}
+                      <li v-for="(address, index) in house.state.autocompData.addresses" :key="'second-address-'+index" @click="[setValue(address.kind + ' ' + address.name, 'name', '#addresscustomul'), onSubmitAddresses(address)]" v-bind="resultProps[index]" class="an-select__custom-option">
+                        {{ address.kind }} {{ address.name }}
                       </li>
                     </ul>
                   </div>
@@ -498,13 +502,13 @@ const coverageForm = {
                         :key="'estate-'+index"
                         v-bind="resultProps[index]"
                       >
-                        {{ result.number }}
+                        {{ result.number }} {{ result.annex }}
                       </li>
                     </ul>
 
                     <ul id="estatescustomul" v-show="house.state.autocompData.estates.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
-                      <li @click="[setValue(estate.number, 'number', '#estatescustomul'), onSubmitEstates(estate)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(estate, index) in house.state.autocompData.estates" :key="'second-estate-'+index">
-                        {{ estate.number }}
+                      <li @click="[setValue(estate.number + ' ' + estate-annex, 'number', '#estatescustomul'), onSubmitEstates(estate)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(estate, index) in house.state.autocompData.estates" :key="'second-estate-'+index">
+                        {{ estate.number }} {{ estate.annex }}
                       </li>
                     </ul>
                   </div>
@@ -573,7 +577,7 @@ const coverageForm = {
           <button type="submit" :disabled="!formData.status" :class="{ 'an-btn--disabled': !formData.status  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Comprobar</span>
           </button>
-      
+
         </form>
       </div>
       <h5 class="mt-xl">¿No encuentras tu dirección? Llama al <a href="tel:+34900922203" class="an-link">900 92 22 03 </a>y te atendemos</h5>
@@ -584,7 +588,7 @@ const coverageForm = {
         <button @click="goBack" type="button" class="an-btn an-btn--green-border an-btn--icon an-icon--half-arrow-left mt-xl">
           <span>Volver a calcular</span>
         </button>
-      </div>  
+      </div>
     </template>
   </div>`
   }
