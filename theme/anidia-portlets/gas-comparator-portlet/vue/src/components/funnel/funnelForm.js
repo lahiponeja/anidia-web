@@ -48,7 +48,12 @@ const funnelForm = {
   },
   mounted() {
     window.dataLayer.push(this.comparator.getDatalayerInitialInfo("engagement", "calculator", "energyspent"));
+    window.scrollTo({
+      top: 200,
+      behavior: 'smooth',
+    })
     if(document.querySelector('.an-featured')) document.querySelector('.an-featured').classList.add('hide');
+
   },
   template: /*html*/`
     <div class="an-form an-wrapper">
