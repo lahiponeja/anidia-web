@@ -12,6 +12,7 @@ import com.liferay.portal.kernel.json.JSON;
 import com.liferay.gasBudget.dto.v1_0.GasBudgetRequest.MetersWaterIntake;
 import com.liferay.gasBudget.dto.v1_0.GasBudgetRequest.PersonsWater;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -101,9 +102,35 @@ public class Calculator {
       responseBudget.getPrincipalBudget().setRadiatorsBathroom(this.createExtra(jsonExtras.getJSONObject("RadiatorsBathroom")));
       responseBudget.getPrincipalBudget().setExtraTotalPrice(jsonExtras.getString("ExtraTotalPrice"));
 
-      GasBudget[] aux = new GasBudget[3];
-      aux[0] = responseBudget.getPrincipalBudget();
-      responseBudget.setGasBudgets(aux);
+
+      JSONArray alternatives = jsonBudget.getJSONArray("AlternativePacks");
+
+      GasBudget[] resultAlternativePacks = new GasBudget[3];
+      for (int i=0; i < 3; i++) {
+        GasBudget aux  = new GasBudget();
+
+        aux.setProposedPack(alternatives.getJSONObject(i).getString("ProposedPack"));
+        aux.setEquipment(alternatives.getJSONObject(i).getString("Equipment"));
+        aux.setBaseBudget(alternatives.getJSONObject(i).getString("BaseBadget"));
+        aux.setBonus(alternatives.getJSONObject(i).getString("Bonus"));
+        aux.setTotalBudget(alternatives.getJSONObject(i).getString("TotalBudget"));
+        aux.setVat(alternatives.getJSONObject(i).getString("Iva21"));
+        aux.setTotalPrice(alternatives.getJSONObject(i).getString("TotalPVP"));
+
+        aux.setMetersBoilerToWindow(this.createExtra(jsonExtras.getJSONObject("MetersBoilerToWindow")));
+        aux.setMetersWaterIntake(this.createExtra(jsonExtras.getJSONObject("MetersWaterIntake")));
+        aux.setHasVentilationGrill(this.createExtra(jsonExtras.getJSONObject("HasVentilationGrill")));
+        aux.setControllHeatingFloor(this.createExtra(jsonExtras.getJSONObject("ControllHeatingFloor")));
+        aux.setConnectDeviceToKitchen(this.createExtra(jsonExtras.getJSONObject("ConnectDeviceToKitchen")));
+        aux.setConvertDeviceKitchen(this.createExtra(jsonExtras.getJSONObject("ConvertDeviceKitchen")));
+        aux.setRadiatorsBathroom(this.createExtra(jsonExtras.getJSONObject("RadiatorsBathroom")));
+        aux.setExtraTotalPrice(jsonExtras.getString("ExtraTotalPrice"));
+
+        resultAlternativePacks[i] = aux;
+
+      }
+
+      responseBudget.setGasBudgets(resultAlternativePacks);
 
     } catch (JSONException e) {
       e.printStackTrace();
