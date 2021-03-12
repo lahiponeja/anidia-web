@@ -24,3 +24,54 @@
   max-width: rem(1220);
   margin: auto;
 }
+
+// REFACTOR WITH CUSTOM TEMPLATE
+#senna_surface1-default {
+  .component-image {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    img {
+      min-height: rem(900);
+    }
+  }
+  .component-heading {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    text-align: center !important;
+    max-width: rem(850);
+    width: 100%;
+    top: 0;
+  }
+
+  #fragment-0-cozp {
+    height: rem(700);
+  }
+
+  #fragment-0-dbtt {
+    background: $white;
+    border-radius: rem(100);
+    overflow: hidden;
+    transform: translateY(-168px);
+
+    .component-paragraph {
+      padding-top: rem(200);
+      max-width: rem(1024);
+      margin: auto;
+      p {
+        margin-bottom: rem(50);
+      }
+    }
+  }
+
+  .component-button {
+    margin-bottom: rem(200) !important;
+
+    .btn {
+      @extend %an-btn;
+      @extend %an-btn--white;
+    }
+  }
+}
