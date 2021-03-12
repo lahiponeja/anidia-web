@@ -1,13 +1,13 @@
 package com.liferay.gasBudget.internal.resource.v1_0;
 
+import com.liferay.gasBudget.dto.v1_0.GasBudgetRequest;
+import com.liferay.gasBudget.dto.v1_0.GasBudgetResult;
+import com.liferay.gasBudget.resource.v1_0.GasBudgetResultResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
 import com.liferay.portal.vulcan.util.TransformUtil;
-import com.liferay.gasBudget.dto.v1_0.GasBudget;
-import com.liferay.gasBudget.dto.v1_0.GasBudgetRequest;
-import com.liferay.gasBudget.resource.v1_0.GasBudgetResource;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tags;
@@ -31,7 +31,8 @@ import javax.ws.rs.core.UriInfo;
  */
 @Generated("")
 @Path("/v1.0")
-public abstract class BaseGasBudgetResourceImpl implements GasBudgetResource {
+public abstract class BaseGasBudgetResultResourceImpl
+	implements GasBudgetResultResource {
 
 	/**
 	 * Invoke this method with the command line:
@@ -47,10 +48,10 @@ public abstract class BaseGasBudgetResourceImpl implements GasBudgetResource {
 	@Path("/gas-budgets")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {})
-	public GasBudget postGasBudget(GasBudgetRequest gasBudgetRequest)
+	public GasBudgetResult postGasBudget(GasBudgetRequest gasBudgetRequest)
 		throws Exception {
 
-		return new GasBudget();
+		return new GasBudgetResult();
 	}
 
 	public void setContextAcceptLanguage(AcceptLanguage contextAcceptLanguage) {
@@ -82,7 +83,8 @@ public abstract class BaseGasBudgetResourceImpl implements GasBudgetResource {
 	}
 
 	protected void preparePatch(
-		GasBudget gasBudget, GasBudget existingGasBudget) {
+		GasBudgetResult gasBudgetResult,
+		GasBudgetResult existingGasBudgetResult) {
 	}
 
 	protected <T, R> List<R> transform(

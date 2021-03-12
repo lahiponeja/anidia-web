@@ -1,10 +1,10 @@
 package com.liferay.gasBudget.resource.v1_0;
 
+import com.liferay.gasBudget.dto.v1_0.GasBudgetRequest;
+import com.liferay.gasBudget.dto.v1_0.GasBudgetResult;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
-import com.liferay.gasBudget.dto.v1_0.GasBudget;
-import com.liferay.gasBudget.dto.v1_0.GasBudgetRequest;
 
 import javax.annotation.Generated;
 
@@ -25,9 +25,9 @@ import org.osgi.annotation.versioning.ProviderType;
  */
 @Generated("")
 @ProviderType
-public interface GasBudgetResource {
+public interface GasBudgetResultResource {
 
-	public GasBudget postGasBudget(GasBudgetRequest gasBudgetRequest)
+	public GasBudgetResult postGasBudget(GasBudgetRequest gasBudgetRequest)
 		throws Exception;
 
 	public default void setContextAcceptLanguage(

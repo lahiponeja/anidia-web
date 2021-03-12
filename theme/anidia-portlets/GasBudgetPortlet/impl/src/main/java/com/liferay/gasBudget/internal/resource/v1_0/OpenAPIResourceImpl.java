@@ -60,7 +60,7 @@ public class OpenAPIResourceImpl {
 
 			add(LeadResourceImpl.class);
 
-			add(GasBudgetResourceImpl.class);
+			add(GasBudgetResultResourceImpl.class);
 
 			add(SampleResourceImpl.class);
 
