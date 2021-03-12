@@ -9,6 +9,7 @@ const solarBudgetDefault = function() {
        price: "0"
     },
     inverterExtra: "",
+    superiorInverterExtra: "",
     panelsExtra: "",
     panelsType: "",
     pergolaExtra: "",
@@ -27,6 +28,7 @@ const solarBudgetDefault = function() {
       carCharger: "",
       extraFornius: "",
       inverterExtra: "",
+      superiorInverterExtra: "",
       panelsExtra: "",
       pergolaExtra: "",
       pipelineExtra: "",

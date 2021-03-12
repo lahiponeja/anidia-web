@@ -49,7 +49,8 @@ const setSelectedExtras = function(selectedExtrasObj) {
     triphasicExtra: selectedExtrasObj.triphasicExtra ? 'SI' : 'NO',
     roofExtra: selectedExtrasObj.roofExtra ? 'SI' : 'NO',
     pergolaExtra: selectedExtrasObj.pergolaExtra ? 'SI' : 'NO',
-    inverterExtra: selectedExtrasObj.inverterExtra ? 'SI' : 'NO'
+    inverterExtra: selectedExtrasObj.inverterExtra ? 'SI' : 'NO',
+    superiorInverterExtra: selectedExtrasObj.superiorInverterExtra ? 'SI' : 'NO'
   })
 }
 
@@ -63,6 +64,9 @@ const submitHouseData = function(solarBudgetRequest) {
   const { input } = state.lead.calculatorSolar
 
   const dataObj = Object.assign(input, solarBudgetRequest)
+  if(!input.panelsType) {
+    input.panelsType = "Standard";
+  }
   const options = {
     rootName: 'SolarBudgetRequest', // defaults to 'root'
     attributes: false
