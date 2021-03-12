@@ -209,6 +209,7 @@ const budgetCard = {
         this.house.changeHouseStep('cobertura')
       }
     },
+
     toggleAccordeon(card) {
       if(card === 'sup') {
         this.accordeaonSupIsOpen = !this.accordeaonSupIsOpen
@@ -216,6 +217,7 @@ const budgetCard = {
         this.accordeaonIsOpen = !this.accordeaonIsOpen
       }
     },
+
     selectBudget(type) {
       if(type === 'sup') {
         this.lead.setSuperiorInstalation(true)
@@ -230,9 +232,11 @@ const budgetCard = {
       this.house.changeHouseStep('presupuesto-realizado')
 
     },
+
     formatPrice(price) {
       return new Intl.NumberFormat('es-ES', { maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(price);
     }
+    
   },
   mounted() {
     // window.dataLayer.push(this.house.getDatalayerDetailsStepInfo("FUNNEL - CONTRATACIÓN", "maintenanceupselling", "gas"));

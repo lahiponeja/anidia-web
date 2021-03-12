@@ -1,4 +1,5 @@
 .an-cards-vue {
+  width: 100%;
   align-items: center;
   display: flex;
   margin-bottom: rem(52);
@@ -22,5 +23,32 @@
     justify-content: center;
     margin-right: 0;
     padding: 0;
+  }
+
+  &__dots {
+    align-items: center;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    @include desktop {
+      display: none;
+    }
+  }
+
+  &__dot {
+    cursor: pointer;
+    background: $white;
+    overflow: hidden;
+    display: flex;
+    width: rem(6);
+    height: rem(6);
+    border-radius: 100%;
+    margin-right: rem(20);
+
+    &[aria-pressed=true] {
+      width: rem(15);
+      height: rem(15);
+    }
   }
 }
