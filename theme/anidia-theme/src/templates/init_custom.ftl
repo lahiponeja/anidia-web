@@ -31,6 +31,10 @@ This file allows you to override and define new FreeMarker variables.
   <#assign css_class = css_class + " anidia-header-white" />
 </#if>
 
+<#if getterUtil.getString(themeDisplay.getThemeSetting("Página de detalle de blog")) == "true">
+	<#assign css_class = css_class + " anidia-single-post-page" />
+</#if>
+
 <#-- ---------- Footer -------------  -->
 <#-- Settings for the footer menu  -->
 
