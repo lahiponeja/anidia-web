@@ -376,8 +376,8 @@ const budgetCard = {
               </li>
               <li class="an-card__extra-list__item mb-s">
                 <div class="an-checkbox an-checkbox--white">
-                  <input class="an-checkbox__input" type="checkbox" v-model="extras.superiorInverterExtra" id="check6Superior">
-                  <label class="an-checkbox__label" for="check6Superior">
+                  <input class="an-checkbox__input" type="checkbox" v-model="extras.superiorInverterExtra" id="check6SuperiorInverterExtra">
+                  <label class="an-checkbox__label" for="check6SuperiorInverterExtra">
                     <span class="an-body-m-regular an-tooltip">
                       Inversor de tipo superior
                       <div class="an-tooltip__content an-tooltip__content--slide">
@@ -525,8 +525,8 @@ const budgetCard = {
               </li>
               <li class="an-card__extra-list__item mb-s">
                 <div class="an-checkbox">
-                  <input class="an-checkbox__input" type="checkbox" v-model="superiorExtras.superiorInverterExtra" id="check6Superior">
-                  <label class="an-checkbox__label" for="check6Superior">
+                  <input class="an-checkbox__input" type="checkbox" v-model="superiorExtras.superiorInverterExtra" id="check6SuperiorSuperiorInverterExtra">
+                  <label class="an-checkbox__label" for="check6SuperiorSuperiorInverterExtra">
                     <span class="an-body-m-regular an-tooltip an-tooltip--green">
                       Inversor de tipo superior
                       <div class="an-tooltip__content an-tooltip__content--slide">
