@@ -78,7 +78,7 @@ public class SolarBudgetRequest {
 	@GraphQLName("PanelsType")
 	public static enum PanelsType {
 
-		STANDARD("Standard"), DISEO_LG("Diseño (LG)");
+		STANDARD("Standard"), DISEOLG("Diseño(LG)");
 
 		@JsonCreator
 		public static PanelsType create(String value) {
