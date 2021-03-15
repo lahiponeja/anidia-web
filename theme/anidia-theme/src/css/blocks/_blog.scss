@@ -27,6 +27,13 @@
 
 // REFACTOR WITH CUSTOM TEMPLATE
 .anidia-single-post-page {
+  #content {
+    padding: 0 rem(20);
+
+    @include tablet {
+      padding: 0;
+    }
+  }
   .component-image {
     position: absolute;
     left: 0;
@@ -34,9 +41,14 @@
     width: 100%;
 
     img {
-      min-height: rem(900);
+      min-height: 100vh;
+
+      @include tablet {
+        min-height: rem(900);
+      }
     }
   }
+
   h1 {
     position: absolute;
     left: 50%;
@@ -49,19 +61,25 @@
 
   #fragment-0-tgve {
     background: $white;
-    border-radius: rem(100);
-    overflow: hidden;
-    transform: translateY(-168px);
-    margin-bottom: rem(-100);
+
+    @include tablet {
+      border-radius: rem(100);
+      overflow: hidden;
+      transform: translateY(-168px);
+      margin-bottom: rem(-100);
+    }
 
     h2 {
       font-family: $open-sans-regular-family;
       font-size: rem(24);
       line-height: rem(30);
       color: $an-theme;
-      padding-top: rem(200);
       max-width: rem(1024);
       margin: auto;
+
+      @include tablet {
+        padding-top: rem(200);
+      }
     }
   }
 
