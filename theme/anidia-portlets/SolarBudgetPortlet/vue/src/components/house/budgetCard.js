@@ -35,7 +35,7 @@ const budgetCard = {
     panelsTypeDescription() {
       if(this.leadData.calculatorSolar.input.panelsType == "Standard") {
         return "Paneles recomendados por Anidia";
-      } else if (this.leadData.calculatorSolar.input.panelsType == "Diseño (LG)") {
+      } else if (this.leadData.calculatorSolar.input.panelsType == "Diseño(LG)") {
         return "Paneles de Diseño LG";
       }
     },
