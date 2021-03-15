@@ -160,7 +160,7 @@ const houseForm = {
                 <select v-model="solarBudgetRequest.panelsType" class="an-select__native">
                   <option disabled value="">Seleccione una opción...</option>
                   <option value="Standard">Paneles recomendados por Anidia</option>
-                  <option value="Diseño (LG)">Paneles de Diseño LG</option>
+                  <option value="Diseño(LG)">Paneles de Diseño LG</option>
                 </select>
               </div>
             </div>
