@@ -71,8 +71,7 @@ public class Calculator {
       responseBudget.setPanelsExtra(this.sanitizePrice(jsonBudget.getJSONObject("PanelsExtra").getString("UnitPrice")));
       responseBudget.setTriphasicExtra(this.sanitizePrice(jsonBudget.getJSONObject("TriphasicExtra").getString("UnitPrice")));
       responseBudget.setInverterExtra(this.sanitizePrice(jsonBudget.getJSONObject("InverterExtra").getString("UnitPrice")));
-      // responseBudget.setSuperiorInverterExtra(this.sanitizePrice(jsonBudget.getJSONObject("SuperiorInverterExtra").getString("UnitPrice")));
-      responseBudget.setSuperiorInverterExtra("661.157024793388");
+      responseBudget.setSuperiorInverterExtra(this.sanitizePrice(jsonBudget.getJSONObject("Inverter").getString("PriceExtra")));
       responseBudget.setRoofExtra(this.sanitizePrice(jsonBudget.getJSONObject("RoofExtra").getString("UnitPrice")));
       responseBudget.setPergolaExtra(this.sanitizePrice(jsonBudget.getJSONObject("PergolaExtra").getString("UnitPrice")));
       responseBudget.setPipelineExtra(this.sanitizePrice(jsonBudget.getJSONObject("PipelineExtra").getString("UnitPrice")));
@@ -107,8 +106,7 @@ public class Calculator {
     superiorInstallation.setPanelsExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("PanelsExtra")));
     superiorInstallation.setTriphasicExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("TriphasicExtra")));
     superiorInstallation.setInverterExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("InverterExtra")));
-    // superiorInstallation.setSuperiorInverterExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("SuperiorInverterExtra")));
-    superiorInstallation.setSuperiorInverterExtra("661.157024793388");
+    superiorInstallation.setSuperiorInverterExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("ExtraFornius")));
     superiorInstallation.setRoofExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("RoofExtra")));
     superiorInstallation.setPergolaExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("PergolaExtra")));
     superiorInstallation.setPipelineExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("PipelineExtra")));
