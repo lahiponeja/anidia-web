@@ -1,0 +1,10 @@
+Bundle-Name: solar-budget-api
+Bundle-SymbolicName: solar-budget-api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.solarBudget.dto.v1_0,\
+	com.liferay.solarBudget.resource.v1_0
+Import-Package: com.liferay.*;version="[1.0.0,99.0.0)",\
+\
+	*
+-noee: true
