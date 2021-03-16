@@ -81,6 +81,7 @@ const state = reactive({
   },
   houseFormData: {},
   gasBudget: {},
+  gasBudgetArray: [],
   userContactInfo: {},
   userFullName: "",
   coverageError: "",
@@ -349,8 +350,8 @@ const submitHouseData = function(gasBudgetRequest) {
   const results = new Promise((resolve, reject) => {
     houseFormService.postHouseForm(xml).then((res)=> {
       const jsonData = xmlToJsonImp(res.data);
-      Object.assign(state.gasBudget, jsonData.GasBudget);
-      resolve(state.gasBudget)
+      state.gasBudgetArray = jsonData
+      resolve(state.gasBudgetArray)
       changeHouseStep("presupuesto");
     })
     .catch((err)=>{
