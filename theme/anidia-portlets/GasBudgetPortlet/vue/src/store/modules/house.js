@@ -113,7 +113,6 @@ const submitUserContactInfo = function (budgetReadyForm) {
     lastname,
     phone,
     email,
-    privacyPolicy,
     offersAndServices } = budgetReadyForm;
 
   const requestBody = {
@@ -198,7 +197,6 @@ const submitBusinessContactInfo = function (budgetReadyForm) {
     lastname,
     phone,
     email,
-    privacyPolicy,
     offersAndServices } = budgetReadyForm;
 
   const requestBody = {
@@ -237,6 +235,10 @@ const setPostalCode = function(payload) {
 
 const setHouseType = function(payload) {
   state.houseType = payload
+}
+
+const setGasBudget = function(payload) {
+  state.gasBudget = payload
 }
 
 const getPostalCodes = function () {
@@ -414,6 +416,7 @@ export default {
   state: shallowReadonly(state),
   setPostalCode,
   setHouseType,
+  setGasBudget,
   changeHouseStep,
   submitUserContactInfo,
   getPostalCodes,

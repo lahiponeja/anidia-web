@@ -24,6 +24,11 @@ const budgetCard = {
         this.house.changeHouseStep("cobertura");
       }
     },
+
+    setBudget (singleGasBudget) {
+      this.house.setGasBudget(singleGasBudget)
+      this.house.changeHouseStep('presupuesto-realizado')
+    }
   },
   mounted() {
     window.dataLayer.push(
@@ -120,7 +125,7 @@ const budgetCard = {
             {{ houseFormData.personsWater }} personas
           </li>
         </ul>
-        <button @click="house.changeHouseStep('presupuesto-realizado')" class="an-btn an-btn--flatter an-btn--white">
+        <button @click="setBudget(principalBudget)" class="an-btn an-btn--flatter an-btn--white">
           <span>Recibir presupuesto detallado</span>
         </button>
       </div>
@@ -163,7 +168,7 @@ const budgetCard = {
         {{ houseFormData.personsWater }} personas
       </li>
     </ul>
-    <button @click="house.changeHouseStep('presupuesto-realizado')" class="an-btn an-btn--flatter an-btn--white">
+    <button @click="setBudget(singleGasBudget)" class="an-btn an-btn--flatter an-btn--white">
       <span>Recibir presupuesto detallado</span>
     </button>
   </div>
