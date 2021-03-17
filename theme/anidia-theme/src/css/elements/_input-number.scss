@@ -1,0 +1,38 @@
+.an-input-number {
+  $el: &;
+
+  &__button {
+    background-color: $an-theme;
+    border-radius: 50%;
+    color: $an-theme-dark-grey;
+    height: rem(31);
+    line-height: rem(1);
+    width: rem(31);
+
+    &.disabled {
+      background-color: $an-theme;
+      box-shadow: 0 0 20px rgba(0, 0, 0, .14363);
+      opacity: .7;
+      pointer-events: none;
+    }
+  }
+
+  &__input {
+    background: none;
+    border: none;
+    color: $an-theme-dark-grey;
+    max-width: rem(28);
+    text-align: center;
+  }
+
+  &--white {
+
+    #{$el}__button:not(.disabled) {
+      background-color: $white;
+    }
+
+    #{$el}__input {
+      color: $white;
+    }
+  }
+}

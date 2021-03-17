@@ -1,0 +1,10 @@
+apiDir: "../api/src/main/java"
+apiPackagePath: "com.liferay.solarBudget"
+application:
+    baseURI: "/solar-budget"
+    className: "SolarBudgetApplication"
+    name: "Liferay.SolarBudget"
+    security:
+        guestAllowed: true
+author: "David Brenes"
+generateGraphQL: false

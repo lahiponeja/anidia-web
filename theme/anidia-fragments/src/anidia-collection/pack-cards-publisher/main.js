@@ -1,17 +1,35 @@
 function packCards() {
-  const dots = document.querySelectorAll('.an-pack-cards__dot');
+  const dotsContainer = document.querySelector('.an-pack-cards__dots');
   const cardContainer = document.querySelector('.an-pack-cards .portlet-body');
   const nCards = document.querySelectorAll('.an-card--pack').length;
+  let dots;
 
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', e => {
-      e.preventDefault();
-      e.stopPropagation();
-      setAriaPressed(i);
-      const scrollLeft = Math.floor(cardContainer.scrollWidth * (i / nCards));
-      smoothScroll(cardContainer, scrollLeft);
-    });
-  });
+
+  function createDots() {
+    for (let index = 0; index < nCards; index++) {
+      const li = document.createElement('li')
+
+      if(index === 0) {
+        li.setAttribute("aria-pressed", "true");
+      }
+      li.setAttribute("class", "an-pack-cards__dot");
+      dotsContainer.append(li)
+    }
+
+    dots = document.querySelectorAll('.an-pack-cards__dot');
+
+		dots.forEach((dot, i) => {
+			dot.addEventListener('click', e => {
+				e.preventDefault();
+				e.stopPropagation();
+				setAriaPressed(i);
+				const scrollLeft = Math.floor(cardContainer.scrollWidth * (i / nCards));
+				smoothScroll(cardContainer, scrollLeft);
+			});
+		});
+  }
+
+	createDots()
 
   cardContainer.addEventListener('scroll', () => {
     let index = Math.round((cardContainer.scrollLeft / cardContainer.scrollWidth) * nCards);

@@ -6,7 +6,7 @@
   display: flex;
   margin-bottom: rem(40);
   position: relative;
-  max-width: 100%;
+  max-width: 90%;
   width: rem(496);
 
   &__caption {
@@ -60,7 +60,6 @@
       font-size: rem(18);
     }
 
-
     &--textarea {
       height: rem(250);
       padding: rem(25);
@@ -83,7 +82,13 @@
     }
   }
 
-  &--disabled {
+  &__field {
+    &-right-text {
+      margin-left: rem(16);
+    }
+  }
+
+  &--disabled { 
     #{ $parent }__field {
       background-color: $an-theme-soft-grey;
       box-shadow: none;
