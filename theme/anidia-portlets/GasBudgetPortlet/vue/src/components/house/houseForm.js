@@ -270,7 +270,7 @@ const houseForm = {
                 <p class="an-body-m-bold color-an-theme">¿Dónde está o va a estar el calentador/caldera instalado?</p>
                 <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
                   <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
-                  <div class="an-info__box"> 
+                  <div class="an-info__box">
                     En que ubicación de la casa se va a poner el equipo, la misma determinara los trabajos a realizar.
                   </div>
                 </div>
@@ -290,10 +290,10 @@ const houseForm = {
 
           <template v-if="showVentilationGrillRadios">
             <div class="d-flex mb-xl">
-              <p class="an-body-l-bold">¿Necesita instalar rejilla de ventilación?</p> 
+              <p class="an-body-l-bold">¿Necesita instalar rejilla de ventilación?</p>
               <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
                 <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
-                <div class="an-info__box"> 
+                <div class="an-info__box">
                   Se tienen que tener rejillas superiores e inferiores.
                 </div>
               </div>
@@ -351,10 +351,10 @@ const houseForm = {
           </div>
 
           <div class="d-flex mb-xl">
-            <p class="an-body-l-bold">¿Distancia entre calentador/caldera y la ventana/pared exterior?</p> 
+            <p class="an-body-l-bold">¿Distancia entre calentador/caldera y la ventana/pared exterior?</p>
             <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
               <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
-              <div class="an-info__box"> 
+              <div class="an-info__box">
                 Nos puede indicar los metros entre donde quiere instalar el calentador/caldera y la ventana más próxima de la estancia o la pared exterior más próxima en caso de no existir ventana.
               </div>
             </div>
@@ -382,10 +382,10 @@ const houseForm = {
           </div>
 
           <div class="d-flex mb-xl">
-            <p class="an-body-l-bold">¿Distancia entre las tomas de agua y la ubicación calentador/caldera?</p> 
+            <p class="an-body-l-bold">¿Distancia entre las tomas de agua y la ubicación calentador/caldera?</p>
             <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
               <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
-              <div class="an-info__box"> 
+              <div class="an-info__box">
                 Si la ubicación del nuevo calentador/caldera es distinta de la ubicación de su aparato de generación de agua caliente actual indique la distancia en metros.
               </div>
             </div>
@@ -408,10 +408,10 @@ const houseForm = {
 
           <template v-if="showConnectConvertDeviceToKitchen">
             <div class="d-flex mb-xl">
-              <p class="an-body-l-bold">¿Necesita conectar su cocina a la instalación de gas?</p> 
+              <p class="an-body-l-bold">¿Necesita conectar su cocina a la instalación de gas?</p>
               <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
                 <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
-                <div class="an-info__box"> 
+                <div class="an-info__box">
                   Si no quiere utilizar cocinas eléctricas se podría conectar una cocina de gas a la nueva instalación.
                 </div>
               </div>
@@ -437,10 +437,10 @@ const houseForm = {
             </div>
 
             <div class="d-flex mb-xl">
-              <p class="an-body-l-bold">¿Quiere intentar reutilizar su cocina?</p> 
+              <p class="an-body-l-bold">¿Quiere intentar reutilizar su cocina?</p>
               <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
                 <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
-                <div class="an-info__box"> 
+                <div class="an-info__box">
                   Reutilizar la cocina existente (no eléctrica) para que funcione a gas natural transformándola.
                 </div>
               </div>
@@ -467,12 +467,12 @@ const houseForm = {
           </template>
 
           <template v-if="heatingSelected">
-            
+
             <div class="d-flex mb-xl">
-              <p class="an-body-l-bold">¿Quiere controlar la calefacción de manera independiente en cada planta de su vivienda?</p> 
+              <p class="an-body-l-bold">¿Quiere controlar la calefacción de manera independiente en cada planta de su vivienda?</p>
               <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
                 <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
-                <div class="an-info__box"> 
+                <div class="an-info__box">
                   Solo se debería activar si tiene varias plantas, si no, no da lugar.
                 </div>
               </div>
@@ -499,10 +499,10 @@ const houseForm = {
             </div>
 
             <div class="d-flex mb-xl">
-              <p class="an-body-l-bold">¿Necesita algún radiador toallero en su/s baño/s?</p> 
+              <p class="an-body-l-bold">¿Necesita algún radiador toallero en su/s baño/s?</p>
               <div class="an-info an-info--hidden" v-click-outside="closeInfoItem">
                 <span class="an-info__icon an-icon--info" @click="toggleInfoItem"></span>
-                <div class="an-info__box"> 
+                <div class="an-info__box">
                   El radiador que se instalará en su baño será tipo toallero.
                 </div>
               </div>

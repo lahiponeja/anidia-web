@@ -361,13 +361,16 @@ public class SalesforceService {
 	private SendLeadRequest mapToSendLeadRequest(Lead lead) {
 
 		SendLeadRequest sendLeadRequest = new SendLeadRequest();
+
+		sendLeadRequest.setPersonalData(mapToPersonalDataRequest(lead.getPersonalData()));
 		if (lead.getCalculatorGas() != null){
 			sendLeadRequest.setCalculatorGas(mapToCalculatorGas(lead.getCalculatorGas()));
+			sendLeadRequest.getPersonalData().setPrivacyPolicy("GasServicios");
 		}
-		sendLeadRequest.setPersonalData(mapToPersonalDataRequest(lead.getPersonalData()));
-		sendLeadRequest.getPersonalData().setPrivacyPolicy("GasServicios");
+
 		return sendLeadRequest;
 	}
+
 
 	/**
 	 *
