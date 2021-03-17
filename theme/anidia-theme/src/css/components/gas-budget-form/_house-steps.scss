@@ -106,5 +106,73 @@
       }
     }
   }
+  .an-cards {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    /* 2018 spec - For Safari 11, Chrome 69+ */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* Needed to work on iOS Safari */
+    /* 2015 spec - For Firefox, Edge, IE */
+    scroll-snap-type: mandatory;
+    -ms-scroll-snap-type: mandatory;
+    scroll-snap-points-x: repeat(100%);
+    -ms-scroll-snap-points-x: repeat(100%);
+    flex-direction: row;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 90rem;
 
+    @include desktop {
+      width: auto;
+    }
+  
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  
+    .an-card {
+      scroll-snap-align: center;
+      margin-right: rem(20);
+      margin-bottom: rem(24);
+      margin-top: rem(24);
+      z-index: 1;
+      order: 0;
+      width: 100%;
+      min-width: calc(100% - 40px);
+  
+      @include desktop {
+        width: auto;
+        min-width: rem(500);
+      }
+  
+      &:first-child {
+        margin-left: rem(20);
+  
+        @include desktop {
+          margin-left: 0;
+        }
+      }
+  
+      &.featured {
+        order: 0;
+        z-index: 2;
+      }
+    }
+  }
+  
+  .an-pack-cards__dots {
+    display: flex;
+
+    .an-pack-cards__dot {
+      background: $an-theme;
+
+      @include desktop {
+        &:nth-child(n+3) {
+          display: none;
+        }
+      }
+    }
+  }
 }
