@@ -124,18 +124,17 @@ public class SuperiorInstallation {
 	protected BudgetExtra carCharger;
 
 	@Schema
-	@Valid
-	public BudgetExtra getExtraFornius() {
+	public String getExtraFornius() {
 		return extraFornius;
 	}
 
-	public void setExtraFornius(BudgetExtra extraFornius) {
+	public void setExtraFornius(String extraFornius) {
 		this.extraFornius = extraFornius;
 	}
 
 	@JsonIgnore
 	public void setExtraFornius(
-		UnsafeSupplier<BudgetExtra, Exception> extraForniusUnsafeSupplier) {
+		UnsafeSupplier<String, Exception> extraForniusUnsafeSupplier) {
 
 		try {
 			extraFornius = extraForniusUnsafeSupplier.get();
@@ -150,7 +149,7 @@ public class SuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected BudgetExtra extraFornius;
+	protected String extraFornius;
 
 	@Schema
 	@Valid
@@ -534,7 +533,11 @@ public class SuperiorInstallation {
 
 			sb.append("\"extraFornius\": ");
 
-			sb.append(String.valueOf(extraFornius));
+			sb.append("\"");
+
+			sb.append(_escape(extraFornius));
+
+			sb.append("\"");
 		}
 
 		if (inverterExtra != null) {

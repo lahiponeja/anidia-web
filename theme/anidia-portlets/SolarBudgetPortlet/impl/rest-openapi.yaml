@@ -86,7 +86,7 @@ components:
           type: "string"
         totalPowerInstalled:
           description: Total power of the budget (KwP)
-          $ref: "#/components/schemas/BudgetExtra"
+          type: string
         superiorInstallation:
           description: Superior installation data
           $ref: "#/components/schemas/SuperiorInstallation"
@@ -152,7 +152,7 @@ components:
         inverterType:
           type: string
         extraFornius:
-          $ref: "#/components/schemas/BudgetExtra"
+          type: string
         panelsExtra:
           $ref: "#/components/schemas/BudgetExtra"
         triphasicExtra:

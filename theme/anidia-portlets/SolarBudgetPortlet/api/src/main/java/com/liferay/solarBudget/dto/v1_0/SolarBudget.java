@@ -417,19 +417,17 @@ public class SolarBudget {
 	protected BudgetExtra superiorInverterExtra;
 
 	@Schema(description = "Total power of the budget (KwP)")
-	@Valid
-	public BudgetExtra getTotalPowerInstalled() {
+	public String getTotalPowerInstalled() {
 		return totalPowerInstalled;
 	}
 
-	public void setTotalPowerInstalled(BudgetExtra totalPowerInstalled) {
+	public void setTotalPowerInstalled(String totalPowerInstalled) {
 		this.totalPowerInstalled = totalPowerInstalled;
 	}
 
 	@JsonIgnore
 	public void setTotalPowerInstalled(
-		UnsafeSupplier<BudgetExtra, Exception>
-			totalPowerInstalledUnsafeSupplier) {
+		UnsafeSupplier<String, Exception> totalPowerInstalledUnsafeSupplier) {
 
 		try {
 			totalPowerInstalled = totalPowerInstalledUnsafeSupplier.get();
@@ -444,7 +442,7 @@ public class SolarBudget {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected BudgetExtra totalPowerInstalled;
+	protected String totalPowerInstalled;
 
 	@Schema(description = "Total price")
 	public String getTotalPrice() {
@@ -671,7 +669,11 @@ public class SolarBudget {
 
 			sb.append("\"totalPowerInstalled\": ");
 
-			sb.append(String.valueOf(totalPowerInstalled));
+			sb.append("\"");
+
+			sb.append(_escape(totalPowerInstalled));
+
+			sb.append("\"");
 		}
 
 		if (totalPrice != null) {
