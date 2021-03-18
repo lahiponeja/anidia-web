@@ -33,19 +33,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SuperiorInstallation {
 
 	@Schema
-	public String getAdditionalPanelsInstallation() {
+	@Valid
+	public BudgetExtra getAdditionalPanelsInstallation() {
 		return additionalPanelsInstallation;
 	}
 
 	public void setAdditionalPanelsInstallation(
-		String additionalPanelsInstallation) {
+		BudgetExtra additionalPanelsInstallation) {
 
 		this.additionalPanelsInstallation = additionalPanelsInstallation;
 	}
 
 	@JsonIgnore
 	public void setAdditionalPanelsInstallation(
-		UnsafeSupplier<String, Exception>
+		UnsafeSupplier<BudgetExtra, Exception>
 			additionalPanelsInstallationUnsafeSupplier) {
 
 		try {
@@ -62,20 +63,21 @@ public class SuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String additionalPanelsInstallation;
+	protected BudgetExtra additionalPanelsInstallation;
 
 	@Schema
-	public String getBattery() {
+	@Valid
+	public BudgetExtra getBattery() {
 		return battery;
 	}
 
-	public void setBattery(String battery) {
+	public void setBattery(BudgetExtra battery) {
 		this.battery = battery;
 	}
 
 	@JsonIgnore
 	public void setBattery(
-		UnsafeSupplier<String, Exception> batteryUnsafeSupplier) {
+		UnsafeSupplier<BudgetExtra, Exception> batteryUnsafeSupplier) {
 
 		try {
 			battery = batteryUnsafeSupplier.get();
@@ -90,20 +92,21 @@ public class SuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String battery;
+	protected BudgetExtra battery;
 
 	@Schema
-	public String getCarCharger() {
+	@Valid
+	public BudgetExtra getCarCharger() {
 		return carCharger;
 	}
 
-	public void setCarCharger(String carCharger) {
+	public void setCarCharger(BudgetExtra carCharger) {
 		this.carCharger = carCharger;
 	}
 
 	@JsonIgnore
 	public void setCarCharger(
-		UnsafeSupplier<String, Exception> carChargerUnsafeSupplier) {
+		UnsafeSupplier<BudgetExtra, Exception> carChargerUnsafeSupplier) {
 
 		try {
 			carCharger = carChargerUnsafeSupplier.get();
@@ -118,20 +121,21 @@ public class SuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String carCharger;
+	protected BudgetExtra carCharger;
 
 	@Schema
-	public String getExtraFornius() {
+	@Valid
+	public BudgetExtra getExtraFornius() {
 		return extraFornius;
 	}
 
-	public void setExtraFornius(String extraFornius) {
+	public void setExtraFornius(BudgetExtra extraFornius) {
 		this.extraFornius = extraFornius;
 	}
 
 	@JsonIgnore
 	public void setExtraFornius(
-		UnsafeSupplier<String, Exception> extraForniusUnsafeSupplier) {
+		UnsafeSupplier<BudgetExtra, Exception> extraForniusUnsafeSupplier) {
 
 		try {
 			extraFornius = extraForniusUnsafeSupplier.get();
@@ -146,20 +150,21 @@ public class SuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String extraFornius;
+	protected BudgetExtra extraFornius;
 
 	@Schema
-	public String getInverterExtra() {
+	@Valid
+	public BudgetExtra getInverterExtra() {
 		return inverterExtra;
 	}
 
-	public void setInverterExtra(String inverterExtra) {
+	public void setInverterExtra(BudgetExtra inverterExtra) {
 		this.inverterExtra = inverterExtra;
 	}
 
 	@JsonIgnore
 	public void setInverterExtra(
-		UnsafeSupplier<String, Exception> inverterExtraUnsafeSupplier) {
+		UnsafeSupplier<BudgetExtra, Exception> inverterExtraUnsafeSupplier) {
 
 		try {
 			inverterExtra = inverterExtraUnsafeSupplier.get();
@@ -174,7 +179,7 @@ public class SuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String inverterExtra;
+	protected BudgetExtra inverterExtra;
 
 	@Schema
 	public String getInverterType() {
@@ -205,17 +210,18 @@ public class SuperiorInstallation {
 	protected String inverterType;
 
 	@Schema
-	public String getPanelsExtra() {
+	@Valid
+	public BudgetExtra getPanelsExtra() {
 		return panelsExtra;
 	}
 
-	public void setPanelsExtra(String panelsExtra) {
+	public void setPanelsExtra(BudgetExtra panelsExtra) {
 		this.panelsExtra = panelsExtra;
 	}
 
 	@JsonIgnore
 	public void setPanelsExtra(
-		UnsafeSupplier<String, Exception> panelsExtraUnsafeSupplier) {
+		UnsafeSupplier<BudgetExtra, Exception> panelsExtraUnsafeSupplier) {
 
 		try {
 			panelsExtra = panelsExtraUnsafeSupplier.get();
@@ -230,7 +236,7 @@ public class SuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String panelsExtra;
+	protected BudgetExtra panelsExtra;
 
 	@Schema
 	public String getPanelsType() {
@@ -261,17 +267,18 @@ public class SuperiorInstallation {
 	protected String panelsType;
 
 	@Schema
-	public String getPergolaExtra() {
+	@Valid
+	public BudgetExtra getPergolaExtra() {
 		return pergolaExtra;
 	}
 
-	public void setPergolaExtra(String pergolaExtra) {
+	public void setPergolaExtra(BudgetExtra pergolaExtra) {
 		this.pergolaExtra = pergolaExtra;
 	}
 
 	@JsonIgnore
 	public void setPergolaExtra(
-		UnsafeSupplier<String, Exception> pergolaExtraUnsafeSupplier) {
+		UnsafeSupplier<BudgetExtra, Exception> pergolaExtraUnsafeSupplier) {
 
 		try {
 			pergolaExtra = pergolaExtraUnsafeSupplier.get();
@@ -286,20 +293,21 @@ public class SuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String pergolaExtra;
+	protected BudgetExtra pergolaExtra;
 
 	@Schema
-	public String getPipelineExtra() {
+	@Valid
+	public BudgetExtra getPipelineExtra() {
 		return pipelineExtra;
 	}
 
-	public void setPipelineExtra(String pipelineExtra) {
+	public void setPipelineExtra(BudgetExtra pipelineExtra) {
 		this.pipelineExtra = pipelineExtra;
 	}
 
 	@JsonIgnore
 	public void setPipelineExtra(
-		UnsafeSupplier<String, Exception> pipelineExtraUnsafeSupplier) {
+		UnsafeSupplier<BudgetExtra, Exception> pipelineExtraUnsafeSupplier) {
 
 		try {
 			pipelineExtra = pipelineExtraUnsafeSupplier.get();
@@ -314,20 +322,21 @@ public class SuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String pipelineExtra;
+	protected BudgetExtra pipelineExtra;
 
 	@Schema
-	public String getRoofExtra() {
+	@Valid
+	public BudgetExtra getRoofExtra() {
 		return roofExtra;
 	}
 
-	public void setRoofExtra(String roofExtra) {
+	public void setRoofExtra(BudgetExtra roofExtra) {
 		this.roofExtra = roofExtra;
 	}
 
 	@JsonIgnore
 	public void setRoofExtra(
-		UnsafeSupplier<String, Exception> roofExtraUnsafeSupplier) {
+		UnsafeSupplier<BudgetExtra, Exception> roofExtraUnsafeSupplier) {
 
 		try {
 			roofExtra = roofExtraUnsafeSupplier.get();
@@ -342,20 +351,22 @@ public class SuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String roofExtra;
+	protected BudgetExtra roofExtra;
 
 	@Schema
-	public String getSuperiorInverterExtra() {
+	@Valid
+	public BudgetExtra getSuperiorInverterExtra() {
 		return superiorInverterExtra;
 	}
 
-	public void setSuperiorInverterExtra(String superiorInverterExtra) {
+	public void setSuperiorInverterExtra(BudgetExtra superiorInverterExtra) {
 		this.superiorInverterExtra = superiorInverterExtra;
 	}
 
 	@JsonIgnore
 	public void setSuperiorInverterExtra(
-		UnsafeSupplier<String, Exception> superiorInverterExtraUnsafeSupplier) {
+		UnsafeSupplier<BudgetExtra, Exception>
+			superiorInverterExtraUnsafeSupplier) {
 
 		try {
 			superiorInverterExtra = superiorInverterExtraUnsafeSupplier.get();
@@ -370,7 +381,7 @@ public class SuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String superiorInverterExtra;
+	protected BudgetExtra superiorInverterExtra;
 
 	@Schema
 	@Valid
@@ -430,17 +441,18 @@ public class SuperiorInstallation {
 	protected String totalPowerInstalled;
 
 	@Schema
-	public String getTriphasicExtra() {
+	@Valid
+	public BudgetExtra getTriphasicExtra() {
 		return triphasicExtra;
 	}
 
-	public void setTriphasicExtra(String triphasicExtra) {
+	public void setTriphasicExtra(BudgetExtra triphasicExtra) {
 		this.triphasicExtra = triphasicExtra;
 	}
 
 	@JsonIgnore
 	public void setTriphasicExtra(
-		UnsafeSupplier<String, Exception> triphasicExtraUnsafeSupplier) {
+		UnsafeSupplier<BudgetExtra, Exception> triphasicExtraUnsafeSupplier) {
 
 		try {
 			triphasicExtra = triphasicExtraUnsafeSupplier.get();
@@ -455,7 +467,7 @@ public class SuperiorInstallation {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String triphasicExtra;
+	protected BudgetExtra triphasicExtra;
 
 	@Override
 	public boolean equals(Object object) {
@@ -492,11 +504,7 @@ public class SuperiorInstallation {
 
 			sb.append("\"additionalPanelsInstallation\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(additionalPanelsInstallation));
-
-			sb.append("\"");
+			sb.append(String.valueOf(additionalPanelsInstallation));
 		}
 
 		if (battery != null) {
@@ -506,11 +514,7 @@ public class SuperiorInstallation {
 
 			sb.append("\"battery\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(battery));
-
-			sb.append("\"");
+			sb.append(String.valueOf(battery));
 		}
 
 		if (carCharger != null) {
@@ -520,11 +524,7 @@ public class SuperiorInstallation {
 
 			sb.append("\"carCharger\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(carCharger));
-
-			sb.append("\"");
+			sb.append(String.valueOf(carCharger));
 		}
 
 		if (extraFornius != null) {
@@ -534,11 +534,7 @@ public class SuperiorInstallation {
 
 			sb.append("\"extraFornius\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(extraFornius));
-
-			sb.append("\"");
+			sb.append(String.valueOf(extraFornius));
 		}
 
 		if (inverterExtra != null) {
@@ -548,11 +544,7 @@ public class SuperiorInstallation {
 
 			sb.append("\"inverterExtra\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(inverterExtra));
-
-			sb.append("\"");
+			sb.append(String.valueOf(inverterExtra));
 		}
 
 		if (inverterType != null) {
@@ -576,11 +568,7 @@ public class SuperiorInstallation {
 
 			sb.append("\"panelsExtra\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(panelsExtra));
-
-			sb.append("\"");
+			sb.append(String.valueOf(panelsExtra));
 		}
 
 		if (panelsType != null) {
@@ -604,11 +592,7 @@ public class SuperiorInstallation {
 
 			sb.append("\"pergolaExtra\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(pergolaExtra));
-
-			sb.append("\"");
+			sb.append(String.valueOf(pergolaExtra));
 		}
 
 		if (pipelineExtra != null) {
@@ -618,11 +602,7 @@ public class SuperiorInstallation {
 
 			sb.append("\"pipelineExtra\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(pipelineExtra));
-
-			sb.append("\"");
+			sb.append(String.valueOf(pipelineExtra));
 		}
 
 		if (roofExtra != null) {
@@ -632,11 +612,7 @@ public class SuperiorInstallation {
 
 			sb.append("\"roofExtra\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(roofExtra));
-
-			sb.append("\"");
+			sb.append(String.valueOf(roofExtra));
 		}
 
 		if (superiorInverterExtra != null) {
@@ -646,11 +622,7 @@ public class SuperiorInstallation {
 
 			sb.append("\"superiorInverterExtra\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(superiorInverterExtra));
-
-			sb.append("\"");
+			sb.append(String.valueOf(superiorInverterExtra));
 		}
 
 		if (superiorSize != null) {
@@ -684,11 +656,7 @@ public class SuperiorInstallation {
 
 			sb.append("\"triphasicExtra\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(triphasicExtra));
-
-			sb.append("\"");
+			sb.append(String.valueOf(triphasicExtra));
 		}
 
 		sb.append("}");
