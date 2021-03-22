@@ -129,11 +129,8 @@ const budgetCard = {
     },
 
     finalPrice({superior, withTax}) {
-      let basePrice = Number(this.baseSize({superior: superior}).price);
-      if(withTax) {
-        basePrice = basePrice * 1.21;
-      }
-
+      const baseSize = Number(this.baseSize({superior: superior}));
+      const basePrice = withTax ? baseSize.priceWithTax : baseSize.price;
       const sum = basePrice + this.allExtrasSum({superior: superior, withTax: withTax})
       return sum.toFixed(2)
     },
