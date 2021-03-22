@@ -225,7 +225,7 @@ public class SalesforceService {
 		SolarSize size = new SolarSize();
 		size.setValue(budgetSize.getValue());
 		size.setUnitPrice(budgetSize.getUnitPrice());
-		size.setPrice(budgetSize.getPrice());
+		size.setPrice(budgetSize.getPriceWithTax());
 		size.setBasePanels(budgetSize.getBasePanels());
 		size.setTotalPanels(budgetSize.getTotalPanels());
 		return size;
@@ -279,7 +279,7 @@ public class SalesforceService {
 	private SolarSuperiorSize mapToSolarSuperiorSize(SuperiorSize superiorSize) {
 		SolarSuperiorSize size = new SolarSuperiorSize();
 		size.setValue(superiorSize.getValue());
-		size.setPrice(superiorSize.getPrice());
+		size.setPrice(superiorSize.getPriceWithTax());
 		size.setBasePanels(superiorSize.getBasePanels());
 		return size;
 	}

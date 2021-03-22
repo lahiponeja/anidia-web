@@ -146,6 +146,7 @@ public class Calculator {
     SuperiorSize superiorSize = new SuperiorSize();
     superiorSize.setValue(jsonSuperiorSize.get("Value") != null ? this.sanitizePrice(jsonSuperiorSize.get("Value").toString()) : "" );
     superiorSize.setPrice(jsonSuperiorSize.get("Price") != null ? this.sanitizePrice(jsonSuperiorSize.get("Price").toString()) : "" );
+    superiorSize.setPriceWithTax(jsonSuperiorSize.get("Price") != null ? this.sanitizePrice(jsonSuperiorSize.get("Price").toString()) : "" );
     superiorSize.setBasePanels(jsonSuperiorSize.get("BasePanels") != null ? jsonSuperiorSize.get("BasePanels").toString() : "" );
     return superiorSize;
   }
@@ -155,6 +156,7 @@ public class Calculator {
     size.setValue(jsonSize.get("Value") != null ? jsonSize.get("Value").toString() : "" );
     size.setUnitPrice(jsonSize.get("UnitPrice") != null ? this.sanitizePrice(jsonSize.get("UnitPrice").toString()) : "" );
     size.setPrice(jsonSize.get("Price") != null ? this.sanitizePrice(jsonSize.get("Price").toString()) : "" );
+    size.setPriceWithTax(jsonSize.get("Price") != null ? this.sanitizePrice(jsonSize.get("Price").toString()) : "" );
     size.setBasePanels(jsonSize.get("BasePanels") != null ? jsonSize.get("BasePanels").toString() : "" );
     size.setTotalPanels(jsonSize.get("TotalPanels") != null ? jsonSize.get("TotalPanels").toString() : "" );
     return size;

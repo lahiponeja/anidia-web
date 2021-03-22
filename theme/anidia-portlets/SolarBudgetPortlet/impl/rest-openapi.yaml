@@ -113,6 +113,9 @@ components:
         price:
           description: Price for the extra
           type: string
+        priceWithTax:
+          description: Price with tax for the extra
+          type: string
         basePanels:
           description: Base panels
           type: string
@@ -139,6 +142,9 @@ components:
            type: string
         price:
            type: string
+        priceWithTax:
+          description: Price with tax for the extra
+          type: string
         basePanels:
           description: Base panels
           type: string
