@@ -198,16 +198,16 @@ public class SalesforceService {
 	private SolarOutputRequest mapToSolarOutputRequest(SolarBudget calculatorSolarOutput) {
 		SolarOutputRequest outputRequest = new SolarOutputRequest();
 		outputRequest.setPanelsType(calculatorSolarOutput.getPanelsType());
-		outputRequest.setPanelsExtra(calculatorSolarOutput.getPanelsExtra());
-		outputRequest.setTriphasicExtra(calculatorSolarOutput.getTriphasicExtra());
-		outputRequest.setInverterExtra(calculatorSolarOutput.getInverterExtra());
-		outputRequest.setSuperiorInverterExtra(calculatorSolarOutput.getSuperiorInverterExtra());
-		outputRequest.setRoofExtra(calculatorSolarOutput.getRoofExtra());
-		outputRequest.setPergolaExtra(calculatorSolarOutput.getPergolaExtra());
-		outputRequest.setPipelineExtra(calculatorSolarOutput.getPipelineExtra());
-		outputRequest.setCarCharger(calculatorSolarOutput.getCarCharger());
-		outputRequest.setBattery(calculatorSolarOutput.getBattery());
-		outputRequest.setAdditionalPanelsInstallation(calculatorSolarOutput.getAdditionalPanelsInstallation());
+		outputRequest.setPanelsExtra(calculatorSolarOutput.getPanelsExtra().getPriceWithTax());
+		outputRequest.setTriphasicExtra(calculatorSolarOutput.getTriphasicExtra().getPriceWithTax());
+		outputRequest.setInverterExtra(calculatorSolarOutput.getInverterExtra().getPriceWithTax());
+		outputRequest.setSuperiorInverterExtra(calculatorSolarOutput.getSuperiorInverterExtra().getPriceWithTax());
+		outputRequest.setRoofExtra(calculatorSolarOutput.getRoofExtra().getPriceWithTax());
+		outputRequest.setPergolaExtra(calculatorSolarOutput.getPergolaExtra().getPriceWithTax());
+		outputRequest.setPipelineExtra(calculatorSolarOutput.getPipelineExtra().getPriceWithTax());
+		outputRequest.setCarCharger(calculatorSolarOutput.getCarCharger().getPriceWithTax());
+		outputRequest.setBattery(calculatorSolarOutput.getBattery().getPriceWithTax());
+		outputRequest.setAdditionalPanelsInstallation(calculatorSolarOutput.getAdditionalPanelsInstallation().getPriceWithTax());
 		outputRequest.setTotalPrice(calculatorSolarOutput.getTotalPrice());
 		outputRequest.setSize(mapToSolarSize(calculatorSolarOutput.getSize()));
 		outputRequest.setInverter(mapToSolarInverter(calculatorSolarOutput.getInverter()));
@@ -225,7 +225,7 @@ public class SalesforceService {
 		SolarSize size = new SolarSize();
 		size.setValue(budgetSize.getValue());
 		size.setUnitPrice(budgetSize.getUnitPrice());
-		size.setPrice(budgetSize.getPrice());
+		size.setPrice(budgetSize.getPriceWithTax());
 		size.setBasePanels(budgetSize.getBasePanels());
 		size.setTotalPanels(budgetSize.getTotalPanels());
 		return size;
@@ -253,18 +253,18 @@ public class SalesforceService {
 	private SolarSuperiorInstallation mapToSolarSuperiorInstallation(SuperiorInstallation superiorInstallation) {
 		SolarSuperiorInstallation sInstallation = new SolarSuperiorInstallation();
 		sInstallation.setPanelsType(superiorInstallation.getPanelsType());
-		sInstallation.setPanelsExtra(superiorInstallation.getPanelsExtra());
-		sInstallation.setTriphasicExtra(superiorInstallation.getTriphasicExtra());
-		sInstallation.setInverterExtra(superiorInstallation.getInverterExtra());
-		sInstallation.setSuperiorInverterExtra(superiorInstallation.getSuperiorInverterExtra());
+		sInstallation.setPanelsExtra(superiorInstallation.getPanelsExtra().getPriceWithTax());
+		sInstallation.setTriphasicExtra(superiorInstallation.getTriphasicExtra().getPriceWithTax());
+		sInstallation.setInverterExtra(superiorInstallation.getInverterExtra().getPriceWithTax());
+		sInstallation.setSuperiorInverterExtra(superiorInstallation.getSuperiorInverterExtra().getPriceWithTax());
 		sInstallation.setInverterType(superiorInstallation.getInverterType());
-		sInstallation.setRoofExtra(superiorInstallation.getRoofExtra());
-		sInstallation.setPergolaExtra(superiorInstallation.getPergolaExtra());
-		sInstallation.setPipelineExtra(superiorInstallation.getPipelineExtra());
-		sInstallation.setCarCharger(superiorInstallation.getCarCharger());
-		sInstallation.setBattery(superiorInstallation.getBattery());
+		sInstallation.setRoofExtra(superiorInstallation.getRoofExtra().getPriceWithTax());
+		sInstallation.setPergolaExtra(superiorInstallation.getPergolaExtra().getPriceWithTax());
+		sInstallation.setPipelineExtra(superiorInstallation.getPipelineExtra().getPriceWithTax());
+		sInstallation.setCarCharger(superiorInstallation.getCarCharger().getPriceWithTax());
+		sInstallation.setBattery(superiorInstallation.getBattery().getPriceWithTax());
 		sInstallation.setExtraFornius(superiorInstallation.getExtraFornius());
-		sInstallation.setAdditionalPanelsInstallation(superiorInstallation.getAdditionalPanelsInstallation());
+		sInstallation.setAdditionalPanelsInstallation(superiorInstallation.getAdditionalPanelsInstallation().getPriceWithTax());
 		sInstallation.setSuperiorSize(mapToSolarSuperiorSize(superiorInstallation.getSuperiorSize()));
 		sInstallation.setTotalPowerInstalled(superiorInstallation.getTotalPowerInstalled());
 
@@ -279,7 +279,7 @@ public class SalesforceService {
 	private SolarSuperiorSize mapToSolarSuperiorSize(SuperiorSize superiorSize) {
 		SolarSuperiorSize size = new SolarSuperiorSize();
 		size.setValue(superiorSize.getValue());
-		size.setPrice(superiorSize.getPrice());
+		size.setPrice(superiorSize.getPriceWithTax());
 		size.setBasePanels(superiorSize.getBasePanels());
 		return size;
 	}

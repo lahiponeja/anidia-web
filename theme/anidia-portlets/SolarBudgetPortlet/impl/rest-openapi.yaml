@@ -53,37 +53,37 @@ components:
           $ref: "#/components/schemas/SolarOutputInverter"
         panelsExtra:
           description: Extra panels
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         triphasicExtra:
           description: Extra triphasic
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         inverterExtra:
           description: Extra inverter
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         roofExtra:
           description: Extra roof
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         pergolaExtra:
           description: Extra pergola
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         pipelineExtra:
           description: Extra pipeline
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         superiorInverterExtra:
           description: Price for the superior inverter
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         carCharger:
           description: Car charger
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         battery:
           description: Battery
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         additionalPanelsInstallation:
           description: Additional Installation
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         totalPrice:
           description: Total price
-          type: string
+          type: "string"
         totalPowerInstalled:
           description: Total power of the budget (KwP)
           type: string
@@ -91,6 +91,15 @@ components:
           description: Superior installation data
           $ref: "#/components/schemas/SuperiorInstallation"
 
+    BudgetExtra:
+      description: Information about an extra
+      properties:
+        price:
+          description: Price for the extra
+          type: string
+        priceWithTax:
+          description: Price for the extra with taxes
+          type: string
 
     SolarBudgetSize:
       description: Information about some extra from the solar budget
@@ -103,6 +112,9 @@ components:
           type: string
         price:
           description: Price for the extra
+          type: string
+        priceWithTax:
+          description: Price with tax for the extra
           type: string
         basePanels:
           description: Base panels
@@ -130,6 +142,9 @@ components:
            type: string
         price:
            type: string
+        priceWithTax:
+          description: Price with tax for the extra
+          type: string
         basePanels:
           description: Base panels
           type: string
@@ -145,25 +160,25 @@ components:
         extraFornius:
           type: string
         panelsExtra:
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         triphasicExtra:
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         inverterExtra:
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         roofExtra:
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         pergolaExtra:
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         pipelineExtra:
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         superiorInverterExtra:
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         carCharger:
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         battery:
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         additionalPanelsInstallation:
-          type: string
+          $ref: "#/components/schemas/BudgetExtra"
         totalPowerInstalled:
           description: Total power of the budget (KwP)
           type: string
