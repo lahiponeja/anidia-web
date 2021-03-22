@@ -578,7 +578,7 @@ const coverageForm = {
             </div> -->
           </div>
 
-          <button type="submit" :disabled="!formData.propertyAddress" :class="{ 'an-btn--disabled': !formData.propertyAddress  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
+          <button type="submit" :disabled="!formData.number" :class="{ 'an-btn--disabled': !formData.number  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Comprobar</span>
           </button>
       
