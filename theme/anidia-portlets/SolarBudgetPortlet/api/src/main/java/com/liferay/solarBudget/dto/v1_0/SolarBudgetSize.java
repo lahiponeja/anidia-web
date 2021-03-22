@@ -86,6 +86,34 @@ public class SolarBudgetSize {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String price;
 
+	@Schema(description = "Price with tax for the extra")
+	public String getPriceWithTax() {
+		return priceWithTax;
+	}
+
+	public void setPriceWithTax(String priceWithTax) {
+		this.priceWithTax = priceWithTax;
+	}
+
+	@JsonIgnore
+	public void setPriceWithTax(
+		UnsafeSupplier<String, Exception> priceWithTaxUnsafeSupplier) {
+
+		try {
+			priceWithTax = priceWithTaxUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String priceWithTax;
+
 	@Schema(description = "Total panels")
 	public String getTotalPanels() {
 		return totalPanels;
@@ -221,6 +249,20 @@ public class SolarBudgetSize {
 			sb.append("\"");
 
 			sb.append(_escape(price));
+
+			sb.append("\"");
+		}
+
+		if (priceWithTax != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"priceWithTax\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(priceWithTax));
 
 			sb.append("\"");
 		}
