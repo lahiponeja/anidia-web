@@ -12,6 +12,9 @@ const coverageForm = {
   },
   data() {
     return {
+      value: '',
+      results: [],
+      isCustomAddress: false,
       formData: {
         postalCode: "",
         municipalityName: "",
@@ -29,7 +32,7 @@ const coverageForm = {
 
       selected: {
         fieldArr: "",
-        fieldKey: "",
+        fieldKey: ""
       },
 
       statusCodes: {
@@ -70,11 +73,16 @@ const coverageForm = {
     /*************************************
      * GENERAL
     *************************************/
-    search(index) {
-      if (index.length < 1) { return [] }
-      return this[this.selected.fieldArr].filter(pc => {
-        return pc[this.selected.fieldKey].toLowerCase().startsWith(index.toLowerCase())
-      })
+    search(input) {
+      this.value = input
+      if (input.length < 1) this.results = []
+      else {
+        this.results =  this[this.selected.fieldArr].filter(pc => {
+          return pc[this.selected.fieldKey].toLowerCase()
+            .startsWith(input.toLowerCase())
+        })
+      }
+      return this.results
     },
 
     getResultValue(result) {
@@ -125,20 +133,22 @@ const coverageForm = {
     },
 
     onSubmitPostalCode(result) {
-      const { postalCode } = result
-      this.formData.postalCode = postalCode
-      // Save object in the store
-      this.house.setCoverageData("postalCode", { postalCode })
-      // Get municipalities
-      this.loadingMunicipalities = true,
-      this.house.getMunicipalities(postalCode)
-        .then(() => { this.loadingMunicipalities = false })
-        .catch((err) => {
-          window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
-          this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
-          this.loadingMunicipalities = false
-          console.error(err)
-        })
+      if (result) {
+        const { postalCode } = result
+        this.formData.postalCode = postalCode
+        // Save object in the store
+        this.house.setCoverageData("postalCode", { postalCode })
+        // Get municipalities
+        this.loadingMunicipalities = true,
+        this.house.getMunicipalities(postalCode)
+          .then(() => { this.loadingMunicipalities = false })
+          .catch((err) => {
+            window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
+            this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+            this.loadingMunicipalities = false
+            console.error(err)
+          })
+      }
     },
 
 
@@ -256,6 +266,27 @@ const coverageForm = {
       this.formData.houseType = address
       this.formData.status = status
     },
+
+    createCustomAddress() {
+      this.isCustomAddress = true
+    },
+
+    resetCustomAddress() {
+      this.isCustomAddress = false
+      this.value = ''
+      this.formData.postalCode = ""
+      this.formData.municipalityName = ""
+      this.formData.municipalityId = ""
+      this.formData.provinceId = ""
+      this.formData.provMunId = ""
+      this.formData.addressKind = ""
+      this.formData.addressName = ""
+      this.formData.name = ""
+      this.formData.number = ""
+      this.formData.houseType = ""
+      this.formData.status = "" 
+      this.formData.privacyPolicy = false
+    }
   },
   computed: {
     postalCodesArr() {
@@ -277,7 +308,9 @@ const coverageForm = {
     isValidStatusCode() {
       return this.statusCodes.validArr.indexOf(this.formData.status) != -1
     },
-
+    noresults() {
+      return this.value && this.results.length === 0
+    }
   },
 
   mounted() {
@@ -294,17 +327,35 @@ const coverageForm = {
       <div class="an-form an-wrapper">
         <p class="an-body-l-bold mb-xl">Rellena tu dirección para saber si tenemos cobertura en tu zona</p>
         <form @submit.prevent="submitRequest">
-          <div class="an-form__flex an-form__flex--2-cols">
+        <div v-if="isCustomAddress" class="an-form__flex an-form__flex--2-cols">
+          <!--INPUT FIELD: formData.postalCode -->
+          <div class="an-input an-form__item">
+            <input v-model="formData.postalCode" type="text" class="an-input__field" required="" placeholder="Código Postal">
+          </div>
+          <div class="an-input an-form__item">
+            <input v-model="formData.municipalityName" type="text" class="an-input__field" required="" placeholder="Municipios">
+          </div>
+          <div class="an-input an-form__item">
+            <input v-model="formData.addressName" type="text" class="an-input__field" required="" placeholder="Calle">
+          </div>
+          <div class="an-input an-form__item">
+            <input v-model="formData.number" type="text" class="an-input__field" required="" placeholder="Número">
+          </div>
+          <div class="an-input an-form__item">
+            <input v-model="formData.houseType" type="text" class="an-input__field" required="" placeholder="Vivienda (bloque, escalera, piso, puerta)">
+          </div>
+        </div>
+          <div v-else class="an-form__flex an-form__flex--2-cols">
           <!--INPUT FIELD: formData.postalCode -->
            <div class="an-input an-form__item">
               <autocomplete
                 :debounce-time="700"
-                @submit="onSubmitPostalCode"
-                :search="searchPostalCodes"
-                :get-result-value="getResultValue"
+                :search="search"
                 placeholder="Código Postal"
                 style="width: 100%;"
                 auto-select
+                @submit="onSubmitPostalCode"
+                :get-result-value="getResultValue"
                 >
                 <template
                   #default="{
@@ -318,15 +369,28 @@ const coverageForm = {
                   }"
                 >
                   <div v-bind="rootProps">
-                    <input
+                  <input
                       v-bind:value="formData.postalCode"
                       v-on:input="formData.postalCode= $event.target.value"
                       v-bind="inputProps"
                       v-on="inputListeners"
                       class="an-input__field"
+                      :class="[
+                        'autocomplete-input'
+                      ]"
                       @focus="setActiveField('postalCodesArr', 'postalCode')"
                       required=""
                     >
+                    <ul
+                      v-if="noresults && selected.fieldKey ==='postalCode'"
+                      class="an-select__custom-options an-select__custom-options--custom"
+                      style="display: block;"
+                    >
+                      <li class="an-select__custom-option" @click="createCustomAddress()">
+                        No encuentro mi dirección
+                      </li>
+                    </ul>
+                    
                     <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                       <li
                         class="an-select__custom-option"
@@ -365,13 +429,16 @@ const coverageForm = {
                   }"
                 >
                   <div v-bind="rootProps" v-click-outside:municustomul="hideHelperDropdown">
-                    <input
+                  <input
                       :disabled="!!!municipalitiesArr.length"
                       v-bind:value="formData.municipalityName"
                       v-on:input="formData.municipalityName= $event.target.value"
                       v-bind="inputProps"
                       v-on="inputListeners"
                       class="an-input__field"
+                      :class="[
+                        'autocomplete-input'
+                      ]"
                       @focus="[
                         setActiveField('municipalitiesArr', 'municipalityName'),
                         showHelperDropdown('#municustomul')
@@ -379,7 +446,15 @@ const coverageForm = {
                       @keyup="checkResultsLength('#municustomul', results)"
                       required=""
                       >
-                    <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
+                      <ul v-if="noresults && selected.fieldKey ==='municipalityName'"
+                      class="an-select__custom-options an-select__custom-options--custom"
+                      style="display: block;"
+                    >
+                      <li class="an-select__custom-option" @click="createCustomAddress()">
+                        No encuentro mi dirección
+                      </li>
+                    </ul>
+                    <ul v-if="!noresults && selected.fieldKey === 'municipalityName'" class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
@@ -390,7 +465,7 @@ const coverageForm = {
                       </li>
                     </ul>
 
-                    <ul id="municustomul" v-show="house.state.autocompData.municipalities.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
+                    <ul v-if="!noresults && selected.fieldKey === 'municipalityName'" id="municustomul" v-show="house.state.autocompData.municipalities.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li @click="[setValue(municipality.municipalityName, 'municipalityName', '#municustomul'), onSubmitMunicipalities(municipality)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(municipality, index) in house.state.autocompData.municipalities" :key="'second-municipality-'+index">
                         {{ municipality.municipalityName }}
                       </li>
@@ -437,7 +512,15 @@ const coverageForm = {
                       @keyup="checkResultsLength('#addresscustomul', results)"
                       required=""
                       >
-                    <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
+                    <ul v-if="noresults && selected.fieldKey ==='name'"
+                      class="an-select__custom-options an-select__custom-options--custom"
+                      style="display: block;"
+                    >
+                      <li class="an-select__custom-option" @click="createCustomAddress()">
+                        No encuentro mi dirección
+                      </li>
+                    </ul>
+                    <ul v-if="!noresults && selected.fieldKey ==='name'" class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
@@ -448,7 +531,7 @@ const coverageForm = {
                       </li>
                     </ul>
 
-                    <ul id="addresscustomul" v-show="house.state.autocompData.addresses.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
+                    <ul v-if="!noresults && selected.fieldKey ==='name'" id="addresscustomul" v-show="house.state.autocompData.addresses.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li v-for="(address, index) in house.state.autocompData.addresses" :key="'second-address-'+index" @click="[setValue(address.kind + ' ' + address.name, 'name', '#addresscustomul'), onSubmitAddresses(address)]" v-bind="resultProps[index]" class="an-select__custom-option">
                         {{ address.kind }} {{ address.name }}
                       </li>
@@ -495,7 +578,15 @@ const coverageForm = {
                       @keyup="checkResultsLength('#estatescustomul', results)"
                       required=""
                       >
-                    <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
+                    <ul v-if="noresults && selected.fieldKey ==='number'"
+                      class="an-select__custom-options an-select__custom-options--custom"
+                      style="display: block;"
+                    >
+                      <li class="an-select__custom-option" @click="createCustomAddress()">
+                        No encuentro mi dirección
+                      </li>
+                    </ul>
+                    <ul v-if="!noresults && selected.fieldKey ==='number'" class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
@@ -506,7 +597,7 @@ const coverageForm = {
                       </li>
                     </ul>
 
-                    <ul id="estatescustomul" v-show="house.state.autocompData.estates.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
+                    <ul v-if="!noresults && selected.fieldKey ==='number'" id="estatescustomul" v-show="house.state.autocompData.estates.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li @click="[setValue(estate.number + ' ' + estate-annex, 'number', '#estatescustomul'), onSubmitEstates(estate)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(estate, index) in house.state.autocompData.estates" :key="'second-estate-'+index">
                         {{ estate.number }} {{ estate.annex }}
                       </li>
@@ -552,7 +643,15 @@ const coverageForm = {
                       ]"
                       @keyup="checkResultsLength('#propertiescustomul', results)"
                     >
-                    <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
+                    <ul v-if="noresults && selected.fieldKey ==='address'"
+                      class="an-select__custom-options an-select__custom-options--custom"
+                      style="display: block;"
+                    >
+                      <li class="an-select__custom-option" @click="createCustomAddress()">
+                        No encuentro mi dirección
+                      </li>
+                    </ul>
+                    <ul v-if="!noresults && selected.fieldKey ==='address'" class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
@@ -563,7 +662,7 @@ const coverageForm = {
                       </li>
                     </ul>
 
-                    <ul id="propertiescustomul" v-show="house.state.autocompData.properties.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
+                    <ul v-if="!noresults && selected.fieldKey ==='address'" id="propertiescustomul" v-show="house.state.autocompData.properties.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li @click="[setValue(property.address, 'address', '#propertiescustomul'), onSubmitProperties(property)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(property, index) in house.state.autocompData.properties" :key="'second-property-'+index">
                         {{ property.address }}
                       </li>
@@ -574,7 +673,11 @@ const coverageForm = {
             </div>
           </div>
 
-          <button type="submit" :disabled="!formData.status" :class="{ 'an-btn--disabled': !formData.status  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
+          <button v-if="isCustomAddress" @click="resetCustomAddress" type="button" class="an-btn an-btn--green-border an-btn--icon an-icon--half-arrow-left mt-xl">
+            <span>Volver a calcular</span>
+          </button>
+
+          <button type="submit" :disabled="!formData.status && !isCustomAddress" :class="{ 'an-btn--disabled': !formData.status && !isCustomAddress  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Comprobar</span>
           </button>
 
