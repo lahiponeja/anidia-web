@@ -35,9 +35,6 @@ components:
         numberOfPeople:
           description: Number of people living in the house
           type: integer
-        heatingIndividual:
-          description: Heating is individual, not collective from the building
-          type: boolean
         heatingUse:
           description: Kind of energy used for heating
           type: string

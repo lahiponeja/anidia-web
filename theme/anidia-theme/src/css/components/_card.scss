@@ -1,5 +1,7 @@
 %an-card,
 .an-card {
+  $el: &;
+
   border-radius: rem(20);
   display: flex;
   flex-direction: column;
@@ -463,6 +465,85 @@
     }
   }
 
+  &--vue {
+    height: fit-content;
+    justify-content: flex-start;
+    max-width: rem(500);
+    min-width: 100%;
+    overflow: hidden;
+    padding: rem(36) rem(18);
+    position: relative;
+    scroll-snap-align: center;
+    white-space: initial;
+
+    @include desktop {
+      min-width: initial;
+      padding: rem(56);
+    }
+
+    &:last-child {
+      margin-left: rem(27);
+    }
+
+    &.featured {
+      // &::after {
+      //   @include gradient-green-bg;
+      //   border-radius: 50%;
+      //   content: '';
+      //   height: rem(415);
+      //   opacity: 44%;
+      //   position: absolute;
+      //   right: -43%;
+      //   top: -6%;
+      //   width: rem(426);
+      //   z-index: 1;
+      //   pointer-events: none;
+
+      //   @include desktop {
+      //     height: rem(597);
+      //     right: -38%;
+      //     top: -21%;
+      //     width: rem(613);
+      //   }
+      // }
+
+      #{$el}--pack__info {
+        color: #C5EF3F;
+      }
+    }
+
+    #{$el}--pack__intro {
+      margin-bottom: rem(19);
+      z-index: 2;
+
+      .an-h5:first-child {
+        color: $an-theme-dark-grey;
+        margin-bottom: rem(6);
+      }
+    }
+
+    #{$el}--pack__info {
+      margin-bottom: rem(43);
+      z-index: 2;
+
+      .an-h4 {
+        font-size: rem(24);
+      }
+    }
+
+    .an-list {
+      z-index: 2;
+    }
+
+    .an-body-m-regular {
+      font-size: rem(14);
+
+      @include desktop {
+        font-size: initial;
+      }
+    }
+  }
+
   &__title {
     color: $an-theme;
   }
@@ -474,5 +555,19 @@
     &:hover {
       transform: translateY(-2px);
     }
+  }
+
+  &__extra-list {
+    margin-bottom: rem(71);
+
+    .an-checkbox {
+      margin-bottom: 0;
+    }
+  }
+
+  &__extra-list__item {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
   }
 }

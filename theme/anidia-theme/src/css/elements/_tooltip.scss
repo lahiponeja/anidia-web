@@ -1,0 +1,57 @@
+.an-tooltip {
+  $el: &;
+  position: relative;
+
+  &__content {
+    background-color: $white;
+    border-radius: rem(10);
+    display: none;
+    font-size: rem(12);
+    line-height: rem(14);
+    padding: rem(13);
+    position: absolute;
+    white-space: initial;
+    width: rem(213);
+    z-index: 2;
+
+    &--slide {
+      right: 20%;
+      top: 50%;
+      transform: translate(100%, -50%);
+    }
+  }
+
+  &__title {
+    color: $an-theme;
+    display: flex;
+  }
+
+  &__icon {
+    margin-right: rem(7);
+  }
+
+  &__text {
+    color: $an-theme-dark-grey;
+  }
+
+  &:hover {
+    #{$el}__content {
+      display: block;
+    }
+  }
+
+  &:after {
+    font-family: "an-icons";
+    content: $an-icon-info;
+  }
+
+  &--green {
+    #{$el}__content {
+      background-color: $an-theme;
+    }
+
+    #{$el}__title {
+      color: $white;
+    }
+  }
+}

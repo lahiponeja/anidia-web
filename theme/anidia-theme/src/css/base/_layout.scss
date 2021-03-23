@@ -5,6 +5,7 @@
   max-width: rem(1440);
   padding: 0 rem(20);
   width: 100%;
+  position: relative;
 
   @include tablet {
     padding: 0 rem(60);

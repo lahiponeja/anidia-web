@@ -4,7 +4,6 @@ const compHotWater = {
     return {
       savingsData: {
         acsIndividual: true,
-        heatingIndividual: true,
         acsUse: "",
         numberOfPeople: 1,
       }
@@ -14,12 +13,11 @@ const compHotWater = {
     submitRequest() {
       this.comparator.setSavingByUse({
         acsIndividual: this.savingsData.acsIndividual,
-        heatingIndividual: this.savingsData.heatingIndividual,
         acsUse: this.savingsData.acsUse,
         numberOfPeople: this.savingsData.numberOfPeople,
       })
       window.dataLayer.push(this.comparator.getDatalayerWaterStepInfo("engagement", "calculator", "hotwater"));
-      
+
       this.comparator.changeStepComponent('comp-heating')
     },
 
@@ -66,28 +64,6 @@ const compHotWater = {
             <label class="an-radio__label" for="hot-water-no">
               <span>
                 No
-              </span>
-            </label>
-          </div>
-        </div>
-
-        <!-- 🚧 Mi caldera/calentador es: 🚧 -->
-        <p class="an-body-l-bold mb-xl">Mi caldera/calentador es:</p>
-        <div class="an-form__flex an-form__flex--6-cols an-form__flex--justify-normal mb-xxl">
-          <div class="an-radio an-form__item">
-            <input v-model="savingsData.heatingIndividual" :value="true" class="an-radio__input" checked="" type="radio" name="individual-heating" id="individual-heating-si">
-            <label class="an-radio__label" for="individual-heating-si">
-              <span>
-                Individual
-              </span>
-            </label>
-          </div>
-
-          <div class="an-radio an-form__item">
-            <input v-model="savingsData.heatingIndividual" :value="false" class="an-radio__input" type="radio" name="individual-heating" id="individual-heating-no">
-            <label class="an-radio__label" for="individual-heating-no">
-              <span>
-                Colectivo
               </span>
             </label>
           </div>

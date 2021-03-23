@@ -204,36 +204,6 @@ public class GasConsumptionByUse {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected AcsUse acsUse;
 
-	@Schema(
-		description = "Heating is individual, not collective from the building"
-	)
-	public Boolean getHeatingIndividual() {
-		return heatingIndividual;
-	}
-
-	public void setHeatingIndividual(Boolean heatingIndividual) {
-		this.heatingIndividual = heatingIndividual;
-	}
-
-	@JsonIgnore
-	public void setHeatingIndividual(
-		UnsafeSupplier<Boolean, Exception> heatingIndividualUnsafeSupplier) {
-
-		try {
-			heatingIndividual = heatingIndividualUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Boolean heatingIndividual;
-
 	@Schema(description = "Kind of energy used for heating")
 	@Valid
 	public HeatingUse getHeatingUse() {
@@ -527,16 +497,6 @@ public class GasConsumptionByUse {
 			sb.append(acsUse);
 
 			sb.append("\"");
-		}
-
-		if (heatingIndividual != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"heatingIndividual\": ");
-
-			sb.append(heatingIndividual);
 		}
 
 		if (heatingUse != null) {
