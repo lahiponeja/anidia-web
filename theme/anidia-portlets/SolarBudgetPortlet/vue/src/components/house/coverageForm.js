@@ -56,8 +56,8 @@ const coverageForm = {
     },
 
     submitRequest() {
-      if(this.formData.propertyAddress) {
-        this.lead.setAddress(this.formData.propertyAddress)
+      this.formData.propertyAddress && this.lead.setAddress(this.formData.propertyAddress)
+      if(this.formData.number) {
         this.house.changeHouseStep('vivienda');
       }
       this.house.resetAutocompleteData()
