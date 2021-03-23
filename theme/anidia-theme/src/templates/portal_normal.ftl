@@ -63,7 +63,6 @@
       <label class="anidia-header">
         <input type="checkbox" class="anidia-header__input"/>
         <span class="anidia-header__menu">
-          <img alt="${logo_description}" src="${images_folder}/logo-menu-mobile-white.svg" class="hide anidia-logo--menu"/>
           <span class="anidia-header__hamburger"></span>
         </span>
           <@liferay.navigation_menu
