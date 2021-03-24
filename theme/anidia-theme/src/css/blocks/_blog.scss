@@ -18,11 +18,49 @@
 }
 
 .an-blog {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: rem(1220);
-  margin: auto;
+  padding-top: rem(100);
+
+  .an-h6,
+  &__heading {
+    text-align: center;
+  }
+
+  &__heading {
+    color: $an-theme;
+
+    .bg-an-theme & {
+      color: $white;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: rem(1220);
+    margin: auto;
+    margin-bottom: rem(108);
+    margin-top: rem(56);
+
+    &.an-blog__content--multi {
+      margin-top: rem(-84);
+    }
+  }
+
+  &__footer {
+    justify-content: center;
+    display: flex;
+    
+    .an-btn {
+      &:first-of-type {
+        margin-right: rem(20);
+      }
+
+      &:last-of-type {
+        margin-left: rem(20);
+      }
+    }
+  }
 }
 
 // REFACTOR WITH CUSTOM TEMPLATE

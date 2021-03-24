@@ -214,9 +214,12 @@
       margin-bottom: rem(40);
      
       @include desktop {
-        transform: translateY(140px);
-        height: rem(702);
-        margin-bottom: 0;
+
+        .an-blog__content.an-blog__content--multi & {
+          transform: translateY(140px);
+          height: rem(702);
+          margin-bottom: 0;
+        } 
       }
     }
 
