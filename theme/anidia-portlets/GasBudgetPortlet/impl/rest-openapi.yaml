@@ -110,6 +110,9 @@ components:
         property:
           description: Full property of the Lead
           $ref: "#/components/schemas/Property"
+        newAddress:
+          description: If the address exists or is new
+          type: boolean
     CalculatorGas:
       description: Calculator gas information to send Lead
       properties:

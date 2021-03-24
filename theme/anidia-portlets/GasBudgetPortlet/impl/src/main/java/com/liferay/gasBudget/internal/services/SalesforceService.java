@@ -395,6 +395,7 @@ public class SalesforceService {
 		personalDataRequest.setFirstName(personalData.getFirstName());
 		personalDataRequest.setLastName(personalData.getLastName());
 		personalDataRequest.setPhone(personalData.getPhone());
+		personalDataRequest.setNewAddress(personalData.getNewAddress());
 
 		if (personalData.getProperty() != null) {
 			personalDataRequest.setAddressBloq(personalData.getProperty().getBlock());

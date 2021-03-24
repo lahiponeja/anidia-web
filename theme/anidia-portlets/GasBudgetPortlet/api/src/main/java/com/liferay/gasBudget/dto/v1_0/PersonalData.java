@@ -211,6 +211,34 @@ public class PersonalData {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String lastName;
 
+	@Schema(description = "If the address exists or is new")
+	public Boolean getNewAddress() {
+		return newAddress;
+	}
+
+	public void setNewAddress(Boolean newAddress) {
+		this.newAddress = newAddress;
+	}
+
+	@JsonIgnore
+	public void setNewAddress(
+		UnsafeSupplier<Boolean, Exception> newAddressUnsafeSupplier) {
+
+		try {
+			newAddress = newAddressUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Boolean newAddress;
+
 	@Schema(description = "Phone (including international prefix)")
 	public String getPhone() {
 		return phone;
@@ -422,6 +450,16 @@ public class PersonalData {
 			sb.append(_escape(lastName));
 
 			sb.append("\"");
+		}
+
+		if (newAddress != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"newAddress\": ");
+
+			sb.append(newAddress);
 		}
 
 		if (phone != null) {
