@@ -333,6 +333,7 @@ const coverageForm = {
       top: 200,
       behavior: 'smooth',
     })
+    this.resetCustomAddress()
   },
   template: /*html*/
   `<div>
@@ -520,9 +521,9 @@ const coverageForm = {
                       class="an-input__field"
                       @focus="[
                         setActiveField('addressesArr', 'name'),
-                        showHelperDropdown('#addresscustomul')
+                        !noresults ? showHelperDropdown('#addresscustomul') : ''
                       ]"
-                      @keyup="checkResultsLength('#addresscustomul', results)"
+                      @keyup="!noresults ? checkResultsLength('#addresscustomul', results) : ''"
                       required=""
                       >
                     <ul v-if="noresults && selected.fieldKey ==='name'"
@@ -586,9 +587,9 @@ const coverageForm = {
                       class="an-input__field"
                       @focus="[
                         setActiveField('estatesArr', 'number'),
-                        showHelperDropdown('#estatescustomul')
+                        !noresults ? showHelperDropdown('#estatescustomul') : ''
                       ]"
-                      @keyup="checkResultsLength('#estatescustomul', results)"
+                      @keyup="!noresults ? checkResultsLength('#estatescustomul', results) : '' "
                       required=""
                       >
                     <ul v-if="noresults && selected.fieldKey ==='number'"
@@ -652,9 +653,9 @@ const coverageForm = {
                       class="an-input__field"
                       @focus="[
                         setActiveField('propertiesArr', 'address'),
-                        showHelperDropdown('#propertiescustomul')
+                        !noresults ? showHelperDropdown('#propertiescustomul') : ''
                       ]"
-                      @keyup="checkResultsLength('#propertiescustomul', results)"
+                      @keyup="!noresults ? checkResultsLength('#propertiescustomul', results) : ''"
                     >
                     <ul v-if="noresults && selected.fieldKey ==='address'"
                       class="an-select__custom-options an-select__custom-options--custom"
