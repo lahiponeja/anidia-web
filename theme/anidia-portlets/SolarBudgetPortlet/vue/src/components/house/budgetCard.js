@@ -372,23 +372,6 @@ const budgetCard = {
             <ul class="an-card__extra-list">
               <li class="an-card__extra-list__item mb-s">
                 <div class="an-checkbox">
-                    <span class="an-body-m-regular an-tooltip an-tooltip--green">
-                      Paneles solares extra (paneles)
-                      <div class="an-tooltip__content an-tooltip__content--slide">
-                        <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Paneles solares extra</p>
-                        <p class="an-tooltip__text">Incrementa la potencia de la talla seleccionada para cubrir todas las necesidades de tu hogar presentes y futuras.</p>
-                      </div>
-                    </span>
-                  </label>
-                </div>
-                <div class="an-input-number" data-inumber="">
-                  <button @click="superiorExtras.panelsExtra--" type="button" data-inumber-decrement="" aria-label="Decrement" class="an-input-number__button" :class="{ 'disabled': !superiorExtras.panelsExtra }">-</button>
-                  <input type="number" min="0" v-model="superiorExtras.panelsExtra" class="an-input-number__input">
-                  <button @click="++superiorExtras.panelsExtra" type="button" data-inumber-increment="" aria-label="Increment" class="an-input-number__button">+</button>
-                </div>
-              </li>
-              <li class="an-card__extra-list__item mb-s">
-                <div class="an-checkbox">
                   <input class="an-checkbox__input" type="checkbox" v-model="superiorExtras.triphasicExtra" id="check2Superior">
                   <label class="an-checkbox__label" for="check2Superior">
                     <span class="an-body-m-regular an-tooltip an-tooltip--green">
