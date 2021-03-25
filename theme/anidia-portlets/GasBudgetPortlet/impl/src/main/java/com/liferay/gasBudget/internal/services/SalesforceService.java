@@ -10,6 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.net.*;
 import java.net.http.*;
 import java.util.*;
+
+import org.apache.commons.lang3.StringUtils;
 import org.json.*;
 
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -442,7 +444,9 @@ public class SalesforceService {
 		inputRequest.setKitchenUse(calculatorGasInput.getKitchenUse());
 		inputRequest.setPersonsWater(this.translatePersonsWater(calculatorGasInput.getPersonsWater()));
 		inputRequest.setPropertyMeters(calculatorGasInput.getPropertyMeters());
-		inputRequest.setStaysNumber(Long.valueOf(calculatorGasInput.getStaysNumber()));
+		if (calculatorGasInput.getStaysNumber() != null && StringUtils.isNumeric(calculatorGasInput.getStaysNumber())) {
+			inputRequest.setStaysNumber(Long.valueOf(calculatorGasInput.getStaysNumber()));
+		}
 		inputRequest.setZipCode(calculatorGasInput.getZipCode());
 
 		return inputRequest;
@@ -460,8 +464,13 @@ public class SalesforceService {
 		extrasInput.setHasVentilationGrill(Boolean.valueOf(calculatorGasInputExtras.getHasVentilationGrill()));
 		extrasInput.setMetersBoilerToWindow(calculatorGasInputExtras.getMetersBoilerToWindow());
 		extrasInput.setConnectDeviceToKitchen(Boolean.valueOf(calculatorGasInputExtras.getConnectDeviceToKitchen()));
-		String replaceMetersWaterIntake = calculatorGasInputExtras.getMetersWaterIntake().substring(2);
-		extrasInput.setMetersWaterIntake(replaceMetersWaterIntake);
+		if (calculatorGasInputExtras.getMetersWaterIntake() !=null &&
+				calculatorGasInputExtras.getMetersWaterIntake().length() > 2) {
+			extrasInput.setMetersWaterIntake(calculatorGasInputExtras.getMetersWaterIntake().substring(2));
+		} else {
+			extrasInput.setMetersWaterIntake("");
+		}
+
 		extrasInput.setRadiatorsBathroom(calculatorGasInputExtras.getRadiatorsBathroom());
 
 		return extrasInput;
@@ -499,8 +508,12 @@ public class SalesforceService {
 		extrasOutput.setHasVentilationGrill(calculatorGasOutputExtras.getHasVentilationGrill());
 		extrasOutput.setConnectDeviceToKitchen(calculatorGasOutputExtras.getConnectDeviceToKitchen());
 		extrasOutput.setMetersBoilerToWindow(calculatorGasOutputExtras.getMetersBoilerToWindow());
-		String replaceMetersWaterIntake = calculatorGasOutputExtras.getMetersWaterIntake().substring(2);
-		extrasOutput.setMetersWaterIntake(replaceMetersWaterIntake);
+		if (calculatorGasOutputExtras.getMetersWaterIntake() != null && calculatorGasOutputExtras.getMetersWaterIntake().length() > 2) {
+			extrasOutput.setMetersWaterIntake(calculatorGasOutputExtras.getMetersWaterIntake().substring(2));
+		} else {
+			extrasOutput.setMetersWaterIntake("");
+		}
+
 		extrasOutput.setRadiatorsBathroom(calculatorGasOutputExtras.getRadiatorsBathroom());
 
 		return extrasOutput;
