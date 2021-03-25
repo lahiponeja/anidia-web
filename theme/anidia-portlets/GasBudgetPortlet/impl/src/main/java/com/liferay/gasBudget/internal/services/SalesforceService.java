@@ -2,6 +2,7 @@ package com.liferay.gasBudget.internal.services;
 
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.liferay.gasBudget.dto.v1_0.*;
 import com.liferay.gasBudget.internal.dto.*;
 import com.liferay.gasBudget.internal.exception.*;
@@ -346,10 +347,16 @@ public class SalesforceService {
 
 		ObjectMapper mapper = new ObjectMapper();
 		String mapperString = "";
+
 		try {
 			mapperString = mapper.writeValueAsString(mapToSendLeadRequest(lead));
+			if (lead.getPersonalData().getNewAddress() != null && lead.getPersonalData().getNewAddress()) {
+				JSONObject toSend = new JSONObject();
+				toSend.put("personalData",new JSONObject(mapper.writeValueAsString(mapToSendLeadRequest(lead).getPersonalData())));
+				mapperString = toSend.toString();
+			}
 			_log.info("** String lead request: " + mapperString);
-		} catch (JsonProcessingException e) {
+		} catch (JsonProcessingException | JSONException e) {
 			e.printStackTrace();
 		}
 		return mapperString;
