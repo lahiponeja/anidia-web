@@ -160,13 +160,13 @@ const submitUserContactInfo = function (budgetReadyForm) {
         "iva21": state.gasBudget.vat,
         "totalPVP": state.gasBudget ? state.gasBudget.totalPrice : 0,
         "extras": {
-          "MetersBoilerToWindow":state.gasBudget.metersBoilerToWindow ? state.gasBudget.metersBoilerToWindow.price : 0,
-          "MetersWaterIntake": state.gasBudget.metersWaterIntake ? state.gasBudget.metersWaterIntake.price : 0,
-          "HasVentilationGrill": state.gasBudget.hasVentilationGrill ? state.gasBudget.hasVentilationGrill.price : 0,
-          "ControllHeatingFloor": state.gasBudget.controllHeatingFloor ? state.gasBudget.controllHeatingFloor.price : 0,
-          "ConvertDeviceKitchen": state.gasBudget.convertDeviceKitchen ? state.gasBudget.convertDeviceKitchen.price : 0,
-          "RadiatorsBathroom": state.gasBudget.radiatorsBathroom ? state.gasBudget.radiatorsBathroom.price : 0,
-          "ExtraTotalPrice": state.gasBudget.extraTotalPrice ? state.gasBudget.extraTotalPrice : 0
+          "MetersBoilerToWindow":state.gasBudget.metersBoilerToWindow ? state.gasBudget.metersBoilerToWindow.price : '0,00 €',
+          "MetersWaterIntake": state.gasBudget.metersWaterIntake ? state.gasBudget.metersWaterIntake.price : '0,00 €',
+          "HasVentilationGrill": state.gasBudget.hasVentilationGrill ? state.gasBudget.hasVentilationGrill.price : '0,00 €',
+          "ControllHeatingFloor": state.gasBudget.controllHeatingFloor ? state.gasBudget.controllHeatingFloor.price : '0,00 €',
+          "ConvertDeviceKitchen": state.gasBudget.convertDeviceKitchen ? state.gasBudget.convertDeviceKitchen.price : '0,00 €',
+          "RadiatorsBathroom": state.gasBudget.radiatorsBathroom ? state.gasBudget.radiatorsBathroom.price : '0,00 €',
+          "ExtraTotalPrice": state.gasBudget.extraTotalPrice ? state.gasBudget.extraTotalPrice : '0,00 €'
         }
       }
     }
