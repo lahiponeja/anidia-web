@@ -3,9 +3,7 @@ package com.liferay.gasBudget.internal.dto;
 
 public class SendLeadRequest {
 
-    //@JsonProperty("calculatorGas")
     private CalculatorGasRequest calculatorGas;
-    //@JsonProperty("personalData")
     private PersonalDataRequest personalData;
 
     public CalculatorGasRequest getCalculatorGas() {

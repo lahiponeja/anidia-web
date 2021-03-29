@@ -1,0 +1,10 @@
+// paddings
+$width-desktop: 50 100 150 200 250 300 350;
+
+@each $size in $width-desktop {
+  $i: index($width-desktop, $size);
+
+  .width-#{nth($width-desktop, $i)} {
+    width: #{$size}px !important;
+  }
+}

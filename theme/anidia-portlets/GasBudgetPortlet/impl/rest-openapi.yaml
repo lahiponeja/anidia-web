@@ -15,7 +15,6 @@ components:
         provinceId:
           description: Municipality name (2 first digits from postal code)
           type: string
-      type: object
     Address:
       description: All the information about an address from Anidia CRM
       properties:
