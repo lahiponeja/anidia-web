@@ -1,17 +1,19 @@
-<#list entries as entry>
-
-    <#if entry?is_first>
-    <div class="an-blog">
-    </#if>
-
+<div class="an-blog">
+<#assign totalEntries = entries.getList().size()>
+  <#if totalEntries..getList()?size >= 3>
+  <div class="an-blog__content an-blog__content--multi">
+  <#else>
+  <div class="an-blog__content">
+  </#if>
+ 
+  <#list entries as entry>
     <#assign viewURL = renderResponse.createRenderURL() />
     ${viewURL.setWindowState("MAXIMIZED")}
     ${viewURL.setParameter("mvcRenderCommandName", "/blogs/view_entry")}
     ${viewURL.setParameter("redirect", currentURL)}
     ${viewURL.setParameter("urlTitle", entry.getUrlTitle())}
-    
-    <#assign blogsEntryClassName = "com.liferay.blogs.kernel.model.BlogsEntry" />
 
+    <#assign blogsEntryClassName = "com.liferay.blogs.kernel.model.BlogsEntry" />
       <article class="blog-entry an-card an-card--blog">
           <img src="${entry.getSmallImageURL(themeDisplay)}" alt="${htmlUtil.escape(entry.getTitle())}" class="an-card--blog__img" />
           <div class="an-card--blog__content">
@@ -31,8 +33,6 @@
           <a href="${viewURL}" class="an-icon--half-arrow-right an-card__icon-link"></a>
           </div>
       </article>
-
-    <#if !entry?has_next>
-    </div>
-    </#if>
-</#list>
+  </#list>
+  </div>
+</div>
