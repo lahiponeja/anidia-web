@@ -40,6 +40,8 @@ public class PersonalDataRequest {
 
     private String codInmueble;
 
+    private Boolean newAddress;
+
     public Boolean getAcceptNotCom() {
         return acceptNotCom;
     }
@@ -182,5 +184,13 @@ public class PersonalDataRequest {
 
     public void setPrivacyPolicy(String privacyPolicy) {
         this.privacyPolicy = privacyPolicy;
+    }
+
+    public Boolean getNewAddress() {
+        return newAddress;
+    }
+
+    public void setNewAddress(Boolean newAddress) {
+        this.newAddress = newAddress;
     }
 }

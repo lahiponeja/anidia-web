@@ -41,7 +41,7 @@ const budgetReady = {
     goBack() {
       const confirmation = confirm("¿Estás seguro de que quieres volver a calcular?")
       if(confirmation) {
-        this.house.changeHouseStep('vivienda')
+        this.house.state.houseFormData.newAddress ? this.house.changeHouseStep('cobertura') : this.house.changeHouseStep('vivienda')
       }
     },
 
