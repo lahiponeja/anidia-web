@@ -129,6 +129,7 @@ tasks.register("build.portlets.gradle-v5") {
 
   dependsOn 'build.portlets.contact_form'
   dependsOn 'build.portlets.faqs_module'
+  dependsOn 'build.portlets.blogs_module'
 
 }
 
@@ -158,6 +159,21 @@ tasks.register("build.portlets.faqs_module") {
     }
     exec {
       commandLine 'cp', 'theme/anidia-portlets/FAQsModule/build/libs/FAQsModule-1.0.0.jar', 'liferay/deploy'
+    }
+  }
+}
+
+tasks.register("build.portlets.blogs_module") {
+  group = 'Anidia'
+  description = 'Builds the BLOGS module portlet files and copies it to the deploy folder'
+
+  doLast {
+    exec {
+      workingDir 'theme/anidia-portlets/BlogsModule'
+      commandLine 'gradle', 'build'
+    }
+    exec {
+      commandLine 'cp', 'theme/anidia-portlets/BlogsModule/build/libs/BlogsModule-1.0.0.jar', 'liferay/deploy'
     }
   }
 }

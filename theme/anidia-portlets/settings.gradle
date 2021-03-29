@@ -16,4 +16,4 @@ apply plugin: "net.saliman.properties"
 apply plugin: "com.liferay.workspace"
 
 rootProject.name = 'anidia-portlets'
-include 'samplePortlet', 'module-jsp-override', 'FAQsModule'
+include 'samplePortlet', 'module-jsp-override', 'FAQsModule', 'BlogsModule'
