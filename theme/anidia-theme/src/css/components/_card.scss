@@ -229,6 +229,7 @@
       height: rem(184);
       background-size: cover;
       background-position: center;
+      background-color: $an-theme-dark-grey;
 
       @include desktop {
         height: rem(270);
