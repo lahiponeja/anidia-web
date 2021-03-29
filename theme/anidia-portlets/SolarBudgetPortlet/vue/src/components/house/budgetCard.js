@@ -42,45 +42,73 @@ const budgetCard = {
 
     /************************************
      * EXTRAS | NOT SUPERIOR
-     *************************************/ 
-    panelsExtraTotalPrice() {
-      return this.solarBudget.panelsExtra * this.extras.panelsExtra
+     *************************************/
+
+    monthlyRate() {
+      return 0.011077;
     },
-    pipelineExtraTotalPrice() {
-      return this.solarBudget.pipelineExtra * this.extras.pipelineExtra
+
+    hasSuperiorInstallation() {
+      const sum = Number(this.solarBudget.superiorInstallation.superiorSize.price)
+      return !Number.isNaN(sum)
+    }
+
+  },
+  methods: {
+
+    baseBudget({superior}){
+      return superior ? this.solarBudget.superiorInstallation : this.solarBudget;
     },
-    triphasicExtraTotalPrice() {
-      if(this.extras.triphasicExtra) {
-        return Number(this.solarBudget.triphasicExtra)
+
+    baseSize({superior}){
+      return superior ? this.baseBudget({superior: superior}).superiorSize : this.baseBudget({superior: superior}).size;
+    },
+
+    selectedExtras({superior}) {
+      return superior ? this.superiorExtras : this.extras;
+    },
+
+    panelsExtraTotalPrice({superior, withTax}) {
+      const basePanelsPrice = withTax ? this.baseBudget({superior: superior}).panelsExtra.priceWithTax : this.baseBudget({superior: superior}).panelsExtra.price;
+      return basePanelsPrice * this.selectedExtras({superior: superior}).panelsExtra
+    },
+    pipelineExtraTotalPrice({superior, withTax}) {
+      const basePipelinePrice = withTax ? this.baseBudget({superior: superior}).pipelineExtra.priceWithTax : this.baseBudget({superior: superior}).pipelineExtra.price;
+      return basePipelinePrice * this.selectedExtras({superior: superior}).pipelineExtra
+    },
+    triphasicExtraTotalPrice({superior, withTax}) {
+      if(this.selectedExtras({superior: superior}).triphasicExtra) {
+        return withTax ? Number(this.baseBudget({superior: superior}).triphasicExtra.priceWithTax) : Number(this.baseBudget({superior: superior}).triphasicExtra.price)
+      }
+      return 0
+    },
+    roofExtraTotalPrice({superior, withTax}) {
+      if(this.selectedExtras({superior: superior}).roofExtra) {
+        const baseRoofPrice = withTax ? this.baseBudget({superior: superior}).roofExtra.priceWithTax : this.baseBudget({superior: superior}).roofExtra.price;
+        return baseRoofPrice * ( Number(this.baseSize({superior: superior}).basePanels) + this.selectedExtras({superior: superior}).panelsExtra )
       }
 
       return 0
     },
-    roofExtraTotalPrice() {
-      if(this.extras.roofExtra) {
-        return this.solarBudget.roofExtra * ( Number(this.solarBudget.size.basePanels) + this.extras.panelsExtra )
+    pergolaExtraTotalPrice({superior, withTax}) {
+      if(this.selectedExtras({superior: superior}).pergolaExtra) {
+        const basePergolaPrice = withTax ? this.baseBudget({superior: superior}).pergolaExtra.priceWithTax : this.baseBudget({superior: superior}).pergolaExtra.price;
+        return basePergolaPrice * ( Number(this.baseSize({superior: superior}).basePanels) + this.selectedExtras({superior: superior}).panelsExtra )
       }
-      
+
       return 0
     },
-    pergolaExtraTotalPrice() {
-      if(this.extras.pergolaExtra) {
-        return this.solarBudget.pergolaExtra * ( Number(this.solarBudget.size.basePanels) + this.extras.panelsExtra )
-      }
-      
-      return 0
-    },
-    inverterExtraTotalPrice() {
-      if(this.extras.inverterExtra) {
-        return Number(this.solarBudget.inverterExtra)
+    inverterExtraTotalPrice({superior, withTax}) {
+      if(this.selectedExtras({superior: superior}).inverterExtra) {
+        return withTax ? Number(this.baseBudget({superior: superior}).inverterExtra.priceWithTax) : Number(this.baseBudget({superior: superior}).inverterExtra.price)
       }
 
       return 0
     },
 
-    superiorInverterExtraTotalPrice() {
-      if(this.extras.superiorInverterExtra) {
-        return Number(this.solarBudget.superiorInverterExtra)
+    superiorInverterExtraTotalPrice({superior, withTax}) {
+      if(this.selectedExtras({superior: superior}).superiorInverterExtra) {
+        return withTax ? Number(this.baseBudget({superior: superior}).superiorInverterExtra.priceWithTax) : Number(this.baseBudget({superior: superior}).superiorInverterExtra.price)
       }
 
       return 0
@@ -88,120 +116,29 @@ const budgetCard = {
 
 
     // EXTRAS SUM
-    allExtrasSum() {
+    allExtrasSum({superior, withTax}) {
       return (
-        this.panelsExtraTotalPrice +
-        this.pipelineExtraTotalPrice +
-        this.triphasicExtraTotalPrice +
-        this.roofExtraTotalPrice +
-        this.pergolaExtraTotalPrice +
-        this.inverterExtraTotalPrice +
-        this.superiorInverterExtraTotalPrice
+        this.panelsExtraTotalPrice({superior: superior, withTax: withTax}) +
+        this.pipelineExtraTotalPrice({superior: superior, withTax: withTax}) +
+        this.triphasicExtraTotalPrice({superior: superior, withTax: withTax}) +
+        this.roofExtraTotalPrice({superior: superior, withTax: withTax}) +
+        this.pergolaExtraTotalPrice({superior: superior, withTax: withTax}) +
+        this.inverterExtraTotalPrice({superior: superior, withTax: withTax}) +
+        this.superiorInverterExtraTotalPrice({superior: superior, withTax: withTax})
         )
     },
 
-    finalPrice() {
-      const sum = Number(this.solarBudget.size.price) + this.allExtrasSum
+    finalPrice({superior, withTax}) {
+      const baseSize = this.baseSize({superior: superior});
+      const basePrice = withTax ? Number(baseSize.priceWithTax) : Number(baseSize.price);
+      const sum = basePrice + this.allExtrasSum({superior: superior, withTax: withTax})
       return sum.toFixed(2)
     },
 
-    finalMonthlyPrice() {
-      return Math.floor(this.finalPrice * this.monthlyRate);
+    finalMonthlyPrice({superior, withTax}) {
+      return Math.floor(this.finalPrice({superior: superior, withTax: withTax}) * this.monthlyRate);
     },
 
-    monthlyRate() {
-      return 0.011077;
-    },
-
-    ivaRate() {
-      return 0.21;
-    },
-
-    finalPriceIvaExtra() {
-      return  this.finalPrice*this.ivaRate;
-    },
-
-    finalPriceWithIva() {
-      return  this.finalPrice*(1+this.ivaRate);
-    },
-
-    /************************************ 
-   * EXTRAS | SUPERIOR
-   *************************************/ 
-    panelsExtraSuperiorTotalPrice() {
-      return this.solarBudget.superiorInstallation.panelsExtra * this.superiorExtras.panelsExtra
-    },
-    pipelineExtraSuperiorTotalPrice() {
-      return this.solarBudget.superiorInstallation.pipelineExtra * this.superiorExtras.pipelineExtra
-    },
-    triphasicExtraSuperiorTotalPrice() {
-      if(this.superiorExtras.triphasicExtra) {
-        return Number(this.solarBudget.superiorInstallation.triphasicExtra)
-      }
-
-      return 0
-    },
-    roofExtraSuperiorTotalPrice() {
-      if(this.superiorExtras.roofExtra) {
-        return this.solarBudget.superiorInstallation.roofExtra * ( Number(this.solarBudget.superiorInstallation.superiorSize.basePanels) + this.superiorExtras.panelsExtra )
-      }
-      
-      return 0
-    },
-    pergolaExtraSuperiorTotalPrice() {
-      if(this.superiorExtras.pergolaExtra) {
-        return this.solarBudget.superiorInstallation.pergolaExtra * ( Number(this.solarBudget.superiorInstallation.superiorSize.basePanels) + this.superiorExtras.panelsExtra )
-      }
-      
-      return 0
-    },
-    inverterExtraSuperiorTotalPrice() {
-      if(this.superiorExtras.inverterExtra) {
-        return Number(this.solarBudget.superiorInstallation.inverterExtra)
-      }
-
-      return 0
-    },
-    superiorInverterExtraSuperiorTotalPrice() {
-      if(this.superiorExtras.superiorInverterExtra) {
-        return Number(this.solarBudget.superiorInstallation.superiorInverterExtra)
-      }
-
-      return 0
-    },
-
-    allExtraSuperiorsSum() {
-      return (
-        this.panelsExtraSuperiorTotalPrice + 
-        this.pipelineExtraSuperiorTotalPrice +
-        this.triphasicExtraSuperiorTotalPrice +
-        this.roofExtraSuperiorTotalPrice +
-        this.pergolaExtraSuperiorTotalPrice +
-        this.inverterExtraSuperiorTotalPrice +
-        this.superiorInverterExtraSuperiorTotalPrice
-      )
-    },
-
-    finalPriceSuperior() {
-      const sum = Number(this.solarBudget.superiorInstallation.superiorSize.price) + this.allExtraSuperiorsSum
-      return !Number.isNaN(sum) ? sum.toFixed(2) : false
-    },
-
-    finalMonthlyPriceSuperior() {
-      return Math.floor(this.finalPriceSuperior * this.monthlyRate);
-    },
-
-    finalPriceSuperiorIvaExtra() {
-      return  this.finalPriceSuperior*this.ivaRate;
-    },
-
-    finalPriceSuperiorWithIva() {
-      return  this.finalPriceSuperior*(1+this.ivaRate);
-    }
-
-
-  },
-  methods: {
     calculateAgain() {
       const confirmation = confirm('¿Estás seguro de que quieres volver a calcular?')
       if(confirmation) {
@@ -222,11 +159,11 @@ const budgetCard = {
       if(type === 'sup') {
         this.lead.setSuperiorInstalation(true)
         this.lead.setSelectedExtras(this.superiorExtras)
-        this.lead.setFinalPrice(this.finalPriceSuperior, this.finalPriceSuperiorIvaExtra, this.finalPriceSuperiorWithIva)
+        this.lead.setFinalPrice(this.finalPrice({superior: true, withTax: false}), this.finalPrice({superior: true, withTax: true}))
       } else {
         this.lead.setSuperiorInstalation(false)
         this.lead.setSelectedExtras(this.extras)
-        this.lead.setFinalPrice(this.finalPrice, this.finalPriceIvaExtra, this.finalPriceWithIva)
+        this.lead.setFinalPrice(this.finalPrice({superior: false, withTax: false}), this.finalPrice({superior: false, withTax: true}))
       }
 
       this.house.changeHouseStep('presupuesto-realizado')
@@ -236,7 +173,7 @@ const budgetCard = {
     formatPrice(price) {
       return new Intl.NumberFormat('es-ES', { maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(price);
     }
-    
+
   },
   mounted() {
     // window.dataLayer.push(this.house.getDatalayerDetailsStepInfo("FUNNEL - CONTRATACIÓN", "maintenanceupselling", "gas"));
@@ -252,11 +189,11 @@ const budgetCard = {
       <div class="an-card an-card--pack an-card--vue featured" data-card="">
         <div class="an-card--pack__intro">
           <p class="an-h5">Según tus necesidades especiales</p>
-          <p class="an-h5">Pago único {{formatPrice(finalPriceWithIva) }}€</p>
+          <p class="an-h5">Pago único {{formatPrice(finalPrice({superior: false, withTax: true})) }}€</p>
         </div>
         <div class="an-card--pack__info">
           <p class="an-h4">Desde</p>
-          <p class="an-h2">{{ formatPrice(finalMonthlyPrice) }} <span class="an-h3">€/mes*</span></p>
+          <p class="an-h2">{{ formatPrice(finalMonthlyPrice({superior: false, withTax: true})) }} <span class="an-h3">€/mes*</span></p>
           <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
         </div>
         <ul class="an-list">
@@ -398,14 +335,14 @@ const budgetCard = {
 
       <!-- second card -->
 
-      <div v-if="finalPriceSuperior" class="an-card an-card--pack an-card--vue" data-card="">
+      <div v-if="hasSuperiorInstallation" class="an-card an-card--pack an-card--vue" data-card="">
         <div class="an-card--pack__intro">
           <p class="an-h5">Según tus necesidades especiales</p>
-          <p class="an-h5">Pago único {{ formatPrice(finalPriceSuperiorWithIva) }}€</p>
+          <p class="an-h5">Pago único {{ formatPrice(finalPrice({superior: true, withTax: true})) }}€</p>
         </div>
         <div class="an-card--pack__info">
           <p class="an-h4">Desde</p>
-          <p class="an-h2">{{ formatPrice(finalMonthlyPriceSuperior) }} <span class="an-h3">€/mes*</span></p>
+          <p class="an-h2">{{ formatPrice(finalMonthlyPrice({superior: true, withTax: true})) }} <span class="an-h3">€/mes*</span></p>
           <p class="an-h4">Genera ahorros de hasta el 60% en tu factura de la luz</p>
         </div>
         <ul class="an-list">
@@ -433,23 +370,6 @@ const budgetCard = {
           </button>
           <div class="an-accordion__content" :class="{ 'closed': !accordeaonSupIsOpen }" id="accordion_item_1">
             <ul class="an-card__extra-list">
-              <li class="an-card__extra-list__item mb-s">
-                <div class="an-checkbox">
-                    <span class="an-body-m-regular an-tooltip an-tooltip--green">
-                      Paneles solares extra (paneles)
-                      <div class="an-tooltip__content an-tooltip__content--slide">
-                        <p class="an-tooltip__title an-body-xs-bold mb-xs"><span class="an-icon--info an-tooltip__icon"></span>Paneles solares extra</p>
-                        <p class="an-tooltip__text">Incrementa la potencia de la talla seleccionada para cubrir todas las necesidades de tu hogar presentes y futuras.</p>
-                      </div>
-                    </span>
-                  </label>
-                </div>
-                <div class="an-input-number" data-inumber="">
-                  <button @click="superiorExtras.panelsExtra--" type="button" data-inumber-decrement="" aria-label="Decrement" class="an-input-number__button" :class="{ 'disabled': !superiorExtras.panelsExtra }">-</button>
-                  <input type="number" min="0" v-model="superiorExtras.panelsExtra" class="an-input-number__input">
-                  <button @click="++superiorExtras.panelsExtra" type="button" data-inumber-increment="" aria-label="Increment" class="an-input-number__button">+</button>
-                </div>
-              </li>
               <li class="an-card__extra-list__item mb-s">
                 <div class="an-checkbox">
                   <input class="an-checkbox__input" type="checkbox" v-model="superiorExtras.triphasicExtra" id="check2Superior">
@@ -557,6 +477,3 @@ const budgetCard = {
 }
 
 export default budgetCard;
-
-
-

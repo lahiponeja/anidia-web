@@ -25,40 +25,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("SuperiorSize")
+@GraphQLName("BudgetExtra")
 @JsonFilter("Liferay.Vulcan")
-@XmlRootElement(name = "SuperiorSize")
-public class SuperiorSize {
+@XmlRootElement(name = "BudgetExtra")
+public class BudgetExtra {
 
-	@Schema(description = "Base panels")
-	public String getBasePanels() {
-		return basePanels;
-	}
-
-	public void setBasePanels(String basePanels) {
-		this.basePanels = basePanels;
-	}
-
-	@JsonIgnore
-	public void setBasePanels(
-		UnsafeSupplier<String, Exception> basePanelsUnsafeSupplier) {
-
-		try {
-			basePanels = basePanelsUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String basePanels;
-
-	@Schema
+	@Schema(description = "Price for the extra")
 	public String getPrice() {
 		return price;
 	}
@@ -86,7 +58,7 @@ public class SuperiorSize {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String price;
 
-	@Schema(description = "Price with tax for the extra")
+	@Schema(description = "Price for the extra with taxes")
 	public String getPriceWithTax() {
 		return priceWithTax;
 	}
@@ -114,47 +86,19 @@ public class SuperiorSize {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String priceWithTax;
 
-	@Schema
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
-	@JsonIgnore
-	public void setValue(
-		UnsafeSupplier<String, Exception> valueUnsafeSupplier) {
-
-		try {
-			value = valueUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String value;
-
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
 			return true;
 		}
 
-		if (!(object instanceof SuperiorSize)) {
+		if (!(object instanceof BudgetExtra)) {
 			return false;
 		}
 
-		SuperiorSize superiorSize = (SuperiorSize)object;
+		BudgetExtra budgetExtra = (BudgetExtra)object;
 
-		return Objects.equals(toString(), superiorSize.toString());
+		return Objects.equals(toString(), budgetExtra.toString());
 	}
 
 	@Override
@@ -168,20 +112,6 @@ public class SuperiorSize {
 		StringBundler sb = new StringBundler();
 
 		sb.append("{");
-
-		if (basePanels != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"basePanels\": ");
-
-			sb.append("\"");
-
-			sb.append(_escape(basePanels));
-
-			sb.append("\"");
-		}
 
 		if (price != null) {
 			if (sb.length() > 1) {
@@ -207,20 +137,6 @@ public class SuperiorSize {
 			sb.append("\"");
 
 			sb.append(_escape(priceWithTax));
-
-			sb.append("\"");
-		}
-
-		if (value != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"value\": ");
-
-			sb.append("\"");
-
-			sb.append(_escape(value));
 
 			sb.append("\"");
 		}

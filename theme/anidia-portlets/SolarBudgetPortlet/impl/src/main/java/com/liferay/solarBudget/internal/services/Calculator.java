@@ -12,6 +12,7 @@ import com.liferay.solarBudget.dto.v1_0.SolarBudgetRequest;
 import com.liferay.solarBudget.dto.v1_0.SolarBudgetSize;
 import com.liferay.solarBudget.dto.v1_0.SolarOutputInverter;
 import com.liferay.solarBudget.dto.v1_0.SuperiorInstallation;
+import com.liferay.solarBudget.dto.v1_0.BudgetExtra;
 import com.liferay.solarBudget.dto.v1_0.SuperiorSize;
 
 import org.json.JSONException;
@@ -68,16 +69,23 @@ public class Calculator {
       responseBudget.setTotalPrice(this.sanitizePrice(jsonBudget.get("TotalPrice").toString()));
       responseBudget.setSize(this.createSize(jsonBudget.getJSONObject("Size")));
       responseBudget.setInverter(this.createInverter(jsonBudget.getJSONObject("Inverter")));
-      responseBudget.setPanelsExtra(this.sanitizePrice(jsonBudget.getJSONObject("PanelsExtra").getString("UnitPrice")));
-      responseBudget.setTriphasicExtra(this.sanitizePrice(jsonBudget.getJSONObject("TriphasicExtra").getString("UnitPrice")));
-      responseBudget.setInverterExtra(this.sanitizePrice(jsonBudget.getJSONObject("InverterExtra").getString("UnitPrice")));
-      responseBudget.setSuperiorInverterExtra(this.sanitizePrice(jsonBudget.getJSONObject("Inverter").getString("PriceExtra")));
-      responseBudget.setRoofExtra(this.sanitizePrice(jsonBudget.getJSONObject("RoofExtra").getString("UnitPrice")));
-      responseBudget.setPergolaExtra(this.sanitizePrice(jsonBudget.getJSONObject("PergolaExtra").getString("UnitPrice")));
-      responseBudget.setPipelineExtra(this.sanitizePrice(jsonBudget.getJSONObject("PipelineExtra").getString("UnitPrice")));
-      responseBudget.setCarCharger(this.sanitizePrice(jsonBudget.getJSONObject("CarCharcher").getString("UnitPrice")));
-      responseBudget.setBattery(this.sanitizePrice(jsonBudget.getJSONObject("Battery").getString("UnitPrice")));
-      responseBudget.setAdditionalPanelsInstallation(this.sanitizePrice(jsonBudget.getJSONObject("AdditionalPanelsInstallation").getString("UnitPrice")));
+
+      responseBudget.setPanelsExtra(this.createBudgetExtra(jsonBudget.getJSONObject("PanelsExtra")));
+      responseBudget.setTriphasicExtra(this.createBudgetExtra(jsonBudget.getJSONObject("TriphasicExtra")));
+      responseBudget.setInverterExtra(this.createBudgetExtra(jsonBudget.getJSONObject("InverterExtra")));
+      responseBudget.setRoofExtra(this.createBudgetExtra(jsonBudget.getJSONObject("RoofExtra")));
+      responseBudget.setPergolaExtra(this.createBudgetExtra(jsonBudget.getJSONObject("PergolaExtra")));
+      responseBudget.setPipelineExtra(this.createBudgetExtra(jsonBudget.getJSONObject("PipelineExtra")));
+      responseBudget.setCarCharger(this.createBudgetExtra(jsonBudget.getJSONObject("CarCharcher")));
+      responseBudget.setBattery(this.createBudgetExtra(jsonBudget.getJSONObject("Battery")));
+
+      // Fronuis inverter extra comes with a different format
+      BudgetExtra tempExtra = new BudgetExtra();
+      tempExtra.setPrice(this.sanitizePrice(jsonBudget.getJSONObject("Inverter").getString("PriceExtra")));
+      tempExtra.setPriceWithTax(this.sanitizePrice(jsonBudget.getJSONObject("Inverter").getString("TaxPriceExtra")));
+      responseBudget.setSuperiorInverterExtra(tempExtra);
+
+      responseBudget.setAdditionalPanelsInstallation(this.createBudgetExtra(jsonBudget.getJSONObject("AdditionalPanelsInstallation")));
       responseBudget.setTotalPowerInstalled(this.sanitizePrice(jsonBudget.getString("TotalPowerInstalled")));
 
       JSONObject jsonSuperiorInstallation = jsonBudget.getJSONObject("SuperiorInstallation");
@@ -96,6 +104,15 @@ public class Calculator {
     return price.replaceAll("€", "").replace(".", "").replace(",", ".");
   }
 
+  private BudgetExtra createBudgetExtra(JSONObject jsonBudgetExtra) throws JSONException {
+    BudgetExtra tempExtra = new BudgetExtra();
+
+    tempExtra.setPrice(this.sanitizePrice(jsonBudgetExtra.getString("UnitPrice")));
+    tempExtra.setPriceWithTax(this.sanitizePrice(jsonBudgetExtra.getString("UnitTaxPrice")));
+
+    return tempExtra;
+  }
+
   private SuperiorInstallation createSuperiorInstallation(JSONObject jsonSuperiorInstallation) throws JSONException {
     SuperiorInstallation superiorInstallation = new SuperiorInstallation();
 
@@ -103,16 +120,24 @@ public class Calculator {
     superiorInstallation.setPanelsType(jsonSuperiorInstallation.getString("PanelType"));
     superiorInstallation.setInverterType(jsonSuperiorInstallation.getString("InverterType"));
     superiorInstallation.setExtraFornius(jsonSuperiorInstallation.getString("ExtraFornius"));
-    superiorInstallation.setPanelsExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("PanelsExtra")));
-    superiorInstallation.setTriphasicExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("TriphasicExtra")));
-    superiorInstallation.setInverterExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("InverterExtra")));
-    superiorInstallation.setSuperiorInverterExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("ExtraFornius")));
-    superiorInstallation.setRoofExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("RoofExtra")));
-    superiorInstallation.setPergolaExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("PergolaExtra")));
-    superiorInstallation.setPipelineExtra(this.sanitizePrice(jsonSuperiorInstallation.getString("PipelineExtra")));
-    superiorInstallation.setCarCharger(this.sanitizePrice(jsonSuperiorInstallation.getString("CarCharcher")));
-    superiorInstallation.setBattery(this.sanitizePrice(jsonSuperiorInstallation.getString("Battery")));
-    superiorInstallation.setAdditionalPanelsInstallation(this.sanitizePrice(jsonSuperiorInstallation.getString("AdditionalPanelsInstallation")));
+
+    superiorInstallation.setPanelsExtra(this.createBudgetExtra(jsonSuperiorInstallation.getJSONObject("PanelsExtra")));
+    superiorInstallation.setTriphasicExtra(this.createBudgetExtra(jsonSuperiorInstallation.getJSONObject("TriphasicExtra")));
+    superiorInstallation.setInverterExtra(this.createBudgetExtra(jsonSuperiorInstallation.getJSONObject("InverterExtra")));
+    superiorInstallation.setRoofExtra(this.createBudgetExtra(jsonSuperiorInstallation.getJSONObject("RoofExtra")));
+    superiorInstallation.setPergolaExtra(this.createBudgetExtra(jsonSuperiorInstallation.getJSONObject("PergolaExtra")));
+    superiorInstallation.setPipelineExtra(this.createBudgetExtra(jsonSuperiorInstallation.getJSONObject("PipelineExtra")));
+    superiorInstallation.setCarCharger(this.createBudgetExtra(jsonSuperiorInstallation.getJSONObject("CarCharcher")));
+    superiorInstallation.setBattery(this.createBudgetExtra(jsonSuperiorInstallation.getJSONObject("Battery")));
+
+
+    // Fronuis inverter extra comes with a different format
+    BudgetExtra tempExtra = new BudgetExtra();
+    tempExtra.setPrice(this.sanitizePrice(jsonSuperiorInstallation.getString("ExtraFornius")));
+    tempExtra.setPriceWithTax(this.sanitizePrice(jsonSuperiorInstallation.getString("TaxExtraFornius")));
+    superiorInstallation.setSuperiorInverterExtra(tempExtra);
+
+    superiorInstallation.setAdditionalPanelsInstallation(this.createBudgetExtra(jsonSuperiorInstallation.getJSONObject("AdditionalPanelsInstallation")));
     superiorInstallation.setTotalPowerInstalled(this.sanitizePrice(jsonSuperiorInstallation.getString("TotalPowerInstalled")));
 
     return superiorInstallation;
@@ -121,6 +146,7 @@ public class Calculator {
     SuperiorSize superiorSize = new SuperiorSize();
     superiorSize.setValue(jsonSuperiorSize.get("Value") != null ? this.sanitizePrice(jsonSuperiorSize.get("Value").toString()) : "" );
     superiorSize.setPrice(jsonSuperiorSize.get("Price") != null ? this.sanitizePrice(jsonSuperiorSize.get("Price").toString()) : "" );
+    superiorSize.setPriceWithTax(jsonSuperiorSize.get("TaxPrice") != null ? this.sanitizePrice(jsonSuperiorSize.get("TaxPrice").toString()) : "" );
     superiorSize.setBasePanels(jsonSuperiorSize.get("BasePanels") != null ? jsonSuperiorSize.get("BasePanels").toString() : "" );
     return superiorSize;
   }
@@ -130,6 +156,7 @@ public class Calculator {
     size.setValue(jsonSize.get("Value") != null ? jsonSize.get("Value").toString() : "" );
     size.setUnitPrice(jsonSize.get("UnitPrice") != null ? this.sanitizePrice(jsonSize.get("UnitPrice").toString()) : "" );
     size.setPrice(jsonSize.get("Price") != null ? this.sanitizePrice(jsonSize.get("Price").toString()) : "" );
+    size.setPriceWithTax(jsonSize.get("TaxPrice") != null ? this.sanitizePrice(jsonSize.get("TaxPrice").toString()) : "" );
     size.setBasePanels(jsonSize.get("BasePanels") != null ? jsonSize.get("BasePanels").toString() : "" );
     size.setTotalPanels(jsonSize.get("TotalPanels") != null ? jsonSize.get("TotalPanels").toString() : "" );
     return size;
