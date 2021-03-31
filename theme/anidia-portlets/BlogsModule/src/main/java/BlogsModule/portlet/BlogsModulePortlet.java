@@ -67,14 +67,14 @@ public class BlogsModulePortlet extends MVCPortlet {
 
 		String searchTerm = ParamUtil.getString(renderRequest, "searchTerm");
 		String searchTag = ParamUtil.getString(renderRequest,"searchTag");
-		int page = ParamUtil.getInteger(renderRequest,"page");
+		int page = ParamUtil.getInteger(renderRequest,"page") == 0 ? 1 : ParamUtil.getInteger(renderRequest,"page");
 
 		if ( searchTag!= null && !searchTag.equals("")) {
 			blogEntries = getBlogsByTag(themeDisplay,searchTag,(page - 1) * pageSize,pageSize * page);
 		} else if (searchTerm!= null && !searchTerm.equals("")) {
 			blogEntries = getBlogsBySearch(themeDisplay, searchTerm);
-		} else {
-			blogEntries = BlogsEntryLocalServiceUtil.getBlogsEntries((page - 1) * pageSize,pageSize * page);
+		} else  {
+			blogEntries = BlogsEntryLocalServiceUtil.getBlogsEntries((page - 1) * pageSize, pageSize * page);
 		}
 
 		JSONObject jsonReturn = new JSONObject();
