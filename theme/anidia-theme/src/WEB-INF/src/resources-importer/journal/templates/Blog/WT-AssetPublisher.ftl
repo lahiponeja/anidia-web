@@ -14,7 +14,7 @@
     <#assign entryURL = "/web/guest/b/" + entry.getAssetRenderer().getUrlTitle() />
 
       <article class="blog-entry an-card an-card--blog">
-          <img src="${blogEntry.getSmallImageURL(themeDisplay)}" alt="${htmlUtil.escape(entry.getTitle())}" class="an-card--blog__img" />
+          <img src="${blogEntry.getCoverImageURL(themeDisplay)}" alt="${htmlUtil.escape(entry.getTitle())}" class="an-card--blog__img" />
           <div class="an-card--blog__content">
             <div class="an-pill">
               <span class="entry-categories an-body-xs-bold">
