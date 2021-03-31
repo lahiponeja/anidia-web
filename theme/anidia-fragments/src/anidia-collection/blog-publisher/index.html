@@ -1,0 +1,47 @@
+[#switch configuration.Color]
+[#case 'Verde']
+<div class="bg-an-theme pl-s pr-s pb-s">
+  [#break]
+
+[#case 'Verde claro']
+<div class="bg-an-theme-light pl-s pr-s pb-s">
+[#break]
+
+[#case 'Blanco']
+<div class="bg-white pl-s pr-s pb-s">
+[#break]
+
+[#case 'Transparente']
+<div class="bg-transparent pl-s pr-s pb-s">
+[#break]
+
+[#case 'Gris oscuro']
+<div class="bg-an-theme-dark-grey pl-s pr-s pb-s">
+[#break]
+
+[#case 'Gris claro']
+<div class="bg-an-theme-soft-grey pl-s pr-s pb-s">
+[#break]
+
+[default]
+<div class="bg-an-theme pl-s pr-s pb-s">
+[/#switch]
+
+  <div class="an-blog">
+    <lfr-editable id="Pre-Título" class="an-h6 mb-m" type="text">PRE-TÍTULO</lfr-editable>
+    <h2 class="an-blog__heading">
+      <lfr-editable id="Título" type="text">Título</lfr-editable>
+    </h2>
+    <div class="an-blog__content">
+      <lfr-widget-asset-list> </lfr-widget-asset-list>
+    </div>
+    <div class="an-blog__footer">
+      [#if configuration.Enlace1 != '']
+        <a href="${htmlUtil.escape(configuration.Enlace1)}" class="an-btn an-btn--green-border">${htmlUtil.escape(configuration.TextoEnlace1)}</a>
+      [/#if]
+      [#if configuration.Enlace2 != '']
+        <a href="${htmlUtil.escape(configuration.Enlace2)}" class="an-btn an-btn--green-border">${htmlUtil.escape(configuration.TextoEnlace2)}</a>
+      [/#if]
+    </div>
+  </div>
+</div>
