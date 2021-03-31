@@ -3,6 +3,6 @@
   "configurationPath": "configuration.json",
   "htmlPath": "index.html",
   "jsPath": "main.js",
-  "name": "blog",
+  "name": "blog-publisher",
   "type": "section"
 }
