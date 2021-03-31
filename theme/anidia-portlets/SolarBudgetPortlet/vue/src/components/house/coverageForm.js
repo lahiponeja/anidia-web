@@ -125,14 +125,14 @@ const coverageForm = {
       // Save object in the store
       this.house.setCoverageData("postalCode", { postalCode })
       this.lead.setPostalCodeData({ postalCode })
-      
+
       // Get municipalities
       this.loadingMunicipalities = true,
       this.house.getMunicipalities(postalCode)  // OBTENER MUNICIPIOS
         .then(() => { this.loadingMunicipalities = false })
         .catch((err) => {
           // window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
-          this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+          this.house.setCoverageError('Vaya, de momento no podemos prestar servicio en tu zona. Lo sentimos mucho.');
           this.loadingMunicipalities = false
           console.error(err)
         })
@@ -155,6 +155,7 @@ const coverageForm = {
        })
       .catch((err) => {
         console.error(err)
+        this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
         this.checkingAvailability = false
       })
     },
