@@ -202,6 +202,7 @@
     margin: auto rem(20) rem(40);
     z-index: 1;
     position: relative;
+    justify-content: flex-start;
     $parent: &;
 
     @include desktop {
@@ -214,6 +215,7 @@
       height: rem(500);
       background: transparent;
       margin-bottom: rem(40);
+      justify-content: center;
      
       @include desktop {
 

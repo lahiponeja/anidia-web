@@ -24,9 +24,6 @@ JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
 JSONArray contentArray = contentJson.getJSONArray("data");
 %>
 
-<%= contentArray %>
-
-
 <div id="blogsDivId"  class="bg-white pl-s pr-s pt-s pb-s">
 	<div class="an-blog">
 		<form method="post" class="an-accordeon__search an-wrapper">
@@ -37,23 +34,37 @@ JSONArray contentArray = contentJson.getJSONArray("data");
 			<input class="an-btn an-btn--green-border an-btn--flatter an-accordeon__search-btn" type="submit" value="Buscar">
 		</form>
 
+		<div class="an-blog__categories an-wrapper">
+			<h6 class="an-h6 mb-s">O busca por tematica</h6>
+			<div class="an-pill">
+				<a href="#"><span class="entry-categories an-body-xs-bold"></span></a>
+			</div>
+		</div>
+
 
 		<div class="an-blog__content an-blog__content--multi" data-accordeon-list>
 			<%
 			if (contentArray != null){
-			
 				for (int i = 0 ; i < contentArray.length(); i++) {
 					JSONObject item = contentArray.getJSONObject(i);
 						%>
 				<article class="blog-entry an-card an-card--blog">
 					<img src='<%= item.getString("image") %>' alt="" class="an-card--blog__img" />
 					<div class="an-card--blog__content">
-						<% JSONArray tags = item.getJSONArray("tags") %>
-						<%= tags %>
+						<%
+						if (item.getJSONArray("tags") != null){
+						JSONArray kk = item.getJSONArray("tags");
+						for (int a = 0 ; a < kk.length(); a++) {
+							String singleTag = kk.getString(a);
+						%>
 						<div class="an-pill">
-							<span class="entry-categories an-body-xs-bold"></span>
+							<span class="entry-categories an-body-xs-bold"><%= singleTag %></span>
 						</div>
-					<time datetime="" class="meta an-card--blog__content__date an-body-xs-bold"><%= item.getString("date") %></time>
+						<%
+						}
+					}
+				%>				
+					<time datetime="" class="meta an-card--blog__content__date an-h6"><%= item.getString("date") %></time>
 					<h3 class="an-body-l-bold"><a href='<%= item.getString("url") %>'><span><%= item.getString("title") %></span></a></h3>
 					<a href='<%= item.getString("url") %>' class="an-icon--half-arrow-right an-card__icon-link"></a>
 					</div>

@@ -21,7 +21,6 @@
   padding-top: rem(100);
   margin-bottom: rem(165);
 
-  .an-h6,
   &__heading {
     text-align: center;
   }
@@ -61,6 +60,16 @@
         margin-left: rem(20);
       }
     }
+  }
+
+  &__categories {
+    display: block;
+    color: $an-theme;
+
+  }
+
+  .an-h6 {
+   text-transform: uppercase;   
   }
 }
 
