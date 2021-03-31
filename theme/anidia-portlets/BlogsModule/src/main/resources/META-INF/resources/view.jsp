@@ -22,14 +22,13 @@ String usedSearchTerm = (String)renderRequest.getAttribute("searchTerm");
 String content = (String)renderRequest.getAttribute("contentJson");
 JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
 JSONArray contentArray = contentJson.getJSONArray("data");
-
 %>
+
+<%= contentArray %>
+
 
 <div id="blogsDivId"  class="bg-white pl-s pr-s pt-s pb-s">
 	<div class="an-blog">
-
-		<span><%= decodeContent(contentArray.getJSONObject(1).getString("content")) %></span>
-
 		<form method="post" class="an-accordeon__search an-wrapper">
 			<div class="an-input an-input--icon-left an-accordeon__search-input-wrapper">
 				<span class="an-icon--search"></span>
@@ -40,52 +39,30 @@ JSONArray contentArray = contentJson.getJSONArray("data");
 
 
 		<div class="an-blog__content an-blog__content--multi" data-accordeon-list>
-				<article class="blog-entry an-card an-card--blog" data-accordeon-list-item>
-					<img src="" alt="" class="an-card--blog__img" />
+			<%
+			if (contentArray != null){
+			
+				for (int i = 0 ; i < contentArray.length(); i++) {
+					JSONObject item = contentArray.getJSONObject(i);
+						%>
+				<article class="blog-entry an-card an-card--blog">
+					<img src='<%= item.getString("image") %>' alt="" class="an-card--blog__img" />
 					<div class="an-card--blog__content">
+						<% JSONArray tags = item.getJSONArray("tags") %>
+						<%= tags %>
 						<div class="an-pill">
-							<span class="entry-categories an-body-xs-bold">
-								PRUEBA TITULO
-							</span>
+							<span class="entry-categories an-body-xs-bold"></span>
 						</div>
-					<time datetime="" class="meta an-card--blog__content__date an-body-xs-bold">
-						12 JULIO 2020
-					</time>
-					<h3 class="an-body-l-bold"><a href=""><span>Lorem ipsum dolor sit amet, consectetur adipiscing </span></a></h3>
-					<a href="" class="an-icon--half-arrow-right an-card__icon-link"></a>
+					<time datetime="" class="meta an-card--blog__content__date an-body-xs-bold"><%= item.getString("date") %></time>
+					<h3 class="an-body-l-bold"><a href='<%= item.getString("url") %>'><span><%= item.getString("title") %></span></a></h3>
+					<a href='<%= item.getString("url") %>' class="an-icon--half-arrow-right an-card__icon-link"></a>
 					</div>
-			</article>
-			<article class="blog-entry an-card an-card--blog" data-accordeon-list-item>
-				<img src="" alt="" class="an-card--blog__img" />
-				<div class="an-card--blog__content">
-					<div class="an-pill">
-						<span class="entry-categories an-body-xs-bold">
-							Lorem ipsum dolor
-						</span>
-					</div>
-				<time datetime="" class="meta an-card--blog__content__date an-body-xs-bold">
-					12 JULIO 2020
-				</time>
-				<h3 class="an-body-l-bold"><a href=""><span>Lorem ipsum dolor sit amet, consectetur adipiscing </span></a></h3>
-				<a href="" class="an-icon--half-arrow-right an-card__icon-link"></a>
-				</div>
-		</article>
-		<article class="blog-entry an-card an-card--blog" data-accordeon-list-item>
-			<img src="" alt="" class="an-card--blog__img" />
-			<div class="an-card--blog__content">
-				<div class="an-pill">
-					<span class="entry-categories an-body-xs-bold">
-						Lorem ipsum dolor
-					</span>
-				</div>
-			<time datetime="" class="meta an-card--blog__content__date an-body-xs-bold">
-				12 JULIO 2020
-			</time>
-			<h3 class="an-body-l-bold"><a href=""><span>Lorem ipsum dolor sit amet, consectetur adipiscing </span></a></h3>
-			<a href="" class="an-icon--half-arrow-right an-card__icon-link"></a>
-			</div>
-	</article>
-				</div>
+				</article>
+				<%
+				}
+			}
+			%>
+		</div>
 	</div>
 </div>
 
