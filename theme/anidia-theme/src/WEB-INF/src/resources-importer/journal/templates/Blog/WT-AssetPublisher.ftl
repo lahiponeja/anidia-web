@@ -13,19 +13,13 @@
     <#assign blogEntry = entry.getAssetRenderer().getAssetObject() />
     <#assign entryURL = "/web/guest/b/" + entry.getAssetRenderer().getUrlTitle() />
 
+
       <article class="blog-entry an-card an-card--blog">
           <img src="${blogEntry.getCoverImageURL(themeDisplay)}" alt="${htmlUtil.escape(entry.getTitle())}" class="an-card--blog__img" />
           <div class="an-card--blog__content">
-            <div class="an-pill">
-              <span class="entry-categories an-body-xs-bold">
-                <@liferay_ui["asset-categories-summary"]
-                className=blogsEntryClassName
-                classPK=entry.getEntryId()
-                portletURL=renderResponse.createRenderURL()
-                />
-              </span>
-            </div>
-
+            <#list entry.getTagNames() as tag>
+              <div class="an-pill">${tag}</div>
+            </#list>
           <time datetime="${dateUtil.getDate(entry.getCreateDate(), "yyyy-MM-dd'T'HH:mm:ssZ", locale)}" class="meta an-card--blog__content__date an-body-xs-bold">
             ${dateUtil.getDate(entry.getCreateDate(), "dd MMM yyyy", locale)}
           </time>
