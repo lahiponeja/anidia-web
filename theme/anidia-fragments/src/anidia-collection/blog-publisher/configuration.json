@@ -1,6 +1,39 @@
 {
   "fieldSets": [
     {
+      "label": "Botones",
+      "fields": [
+        {
+          "name": "Enlace1",
+          "label": "Enlace primer botón",
+          "description": "Enlace del primer botón del módulo",
+          "type": "text",
+          "dataType": "string"
+        },
+        {
+          "name": "TextoEnlace1",
+          "label": "Texto primer botón",
+          "description": "Texto del primer botón del módulo",
+          "type": "text",
+          "dataType": "string"
+        },
+        {
+          "name": "Enlace2",
+          "label": "Enlace segundo botón",
+          "description": "Enlace del segundo botón del módulo",
+          "type": "text",
+          "dataType": "string"
+        },
+        {
+          "name": "TextoEnlace2",
+          "label": "Texto segundo botón",
+          "description": "Texto del segundo botón del módulo",
+          "type": "text",
+          "dataType": "string"
+        },
+      ]
+    },
+    {
       "label": "Fondo",
       "fields": [
         {
