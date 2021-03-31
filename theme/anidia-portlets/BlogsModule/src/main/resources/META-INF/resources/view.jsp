@@ -4,20 +4,31 @@
 page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %><%@
 page import="com.liferay.portal.kernel.json.JSONObject"%><%@ 
 page import="com.liferay.portal.kernel.json.JSONArray" %>
+<%@ page import="java.util.Base64" %>
+<%@ page import="com.liferay.portal.kernel.json.JSON" %>
+<%@ page import="java.io.UnsupportedEncodingException" %>
 
 
 <portlet:defineObjects />
+<%!
+public String decodeContent(String encodedContent) throws UnsupportedEncodingException {
+	byte[] dec = Base64.getDecoder().decode(encodedContent.getBytes());
+	return new String(dec, "UTF8");
+}
+%>
 
 <%
-String usedSearchTerm = (String)renderRequest.getAttribute("usedSearchTerm");
+String usedSearchTerm = (String)renderRequest.getAttribute("searchTerm");
 String content = (String)renderRequest.getAttribute("contentJson");
 JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
 JSONArray contentArray = contentJson.getJSONArray("data");
-JSONArray setOfCategoriesArray = contentJson.getJSONArray("foundCategories");
+
 %>
 
 <div id="blogsDivId"  class="bg-white pl-s pr-s pt-s pb-s">
 	<div class="an-blog">
+
+		<span><%= decodeContent(contentArray.getJSONObject(1).getString("content")) %></span>
 
 		<form method="post" class="an-accordeon__search an-wrapper">
 			<div class="an-input an-input--icon-left an-accordeon__search-input-wrapper">

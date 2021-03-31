@@ -22,9 +22,14 @@ import org.json.JSONObject;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import javax.portlet.*;
+import javax.portlet.Portlet;
+import javax.portlet.PortletException;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -86,7 +91,15 @@ public class BlogsModulePortlet extends MVCPortlet {
 				jsonEntry.put("title",entry.getTitle());
 				jsonEntry.put("subtitle",entry.getSubtitle());
 				jsonEntry.put("date",entry.getDisplayDate());
-				jsonEntry.put("content",entry.getContent());
+
+				byte[] utf8;
+				try {
+					utf8 = entry.getContent().getBytes("UTF8");
+					jsonEntry.put("content",new String(Base64.getEncoder().encode(utf8)));
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+
 				jsonEntry.put("url",entry.getUrlTitle());
 
 				JSONArray tags = new JSONArray();
