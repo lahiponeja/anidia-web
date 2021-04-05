@@ -57,8 +57,16 @@ const coverageForm = {
 
     submitRequest() {
       if (this.formData.newAddress) {
+        this.house.setPostalCode({
+          postalCode: this.formData.postalCode,
+          municipalityName: this.formData.municipalityName
+        })
         this.house.setHouseFormData(this.formData)
-        // window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
+        this.house.setCoverageData("property", {
+          address: this.formData.addressName,
+          block: this.formData.number,
+          door:this.formData.houseType
+        })
         this.house.changeHouseStep('presupuesto-realizado');
       } else {
         if(this.isValidStatusCode) {
