@@ -105,8 +105,8 @@ public class Calculator {
 
       JSONArray alternatives = jsonBudget.getJSONArray("AlternativePacks");
 
-      GasBudget[] resultAlternativePacks = new GasBudget[3];
-      for (int i=0; i < 3; i++) {
+      GasBudget[] resultAlternativePacks = new GasBudget[alternatives.length()];
+      for (int i=0; i < alternatives.length(); i++) {
         GasBudget aux  = new GasBudget();
 
         aux.setProposedPack(alternatives.getJSONObject(i).getString("ProposedPack"));
