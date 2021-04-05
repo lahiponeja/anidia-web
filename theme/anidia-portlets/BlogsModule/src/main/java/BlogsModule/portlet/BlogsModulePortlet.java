@@ -80,7 +80,7 @@ public class BlogsModulePortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		List<BlogsEntry> blogEntries;
-		int pageSize = 7;
+		int pageSize = BlogsModulePortletKeys.PAGE_SIZE;
 
 		String searchTerm = ParamUtil.getString(renderRequest, "searchTerm");
 		String searchTag = ParamUtil.getString(renderRequest,"searchTag");
@@ -89,10 +89,10 @@ public class BlogsModulePortlet extends MVCPortlet {
 		String searchCategory = "";
 		String url = PortalUtil.getHttpServletRequest(renderRequest).getRequestURI();
 		
-		if (url.contains("gas")) {
-			searchCategory = "gas";
-		} else if (url.contains("solar")) {
-			searchCategory = "solar";
+		if (url.contains(BlogsModulePortletKeys.GAS_CATEGORY)) {
+			searchCategory = BlogsModulePortletKeys.GAS_CATEGORY;
+		} else if (url.contains(BlogsModulePortletKeys.SOLAR_CATEGORY)) {
+			searchCategory = BlogsModulePortletKeys.SOLAR_CATEGORY;
 		} 
 
 		if (searchTerm!= null && !searchTerm.equals("")) {
@@ -190,7 +190,7 @@ public class BlogsModulePortlet extends MVCPortlet {
 
 	private List<BlogsEntry> getBlogsBySearch(ThemeDisplay themeDisplay, String categoryName, String searchTerm) {
 		List<BlogsEntry> blogsEntries = new ArrayList<>();
-		FuzzyQuery contentQuery = queries.fuzzy("content",searchTerm);
+		FuzzyQuery contentQuery = queries.fuzzy(Field.CONTENT,searchTerm);
 		TermQuery categoryQuery = queries.term(Field.ASSET_CATEGORY_IDS, getCategoryId(categoryName));
 
 		BooleanQuery booleanQuery = queries.booleanQuery()
