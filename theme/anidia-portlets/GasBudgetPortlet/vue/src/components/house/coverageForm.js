@@ -57,16 +57,23 @@ const coverageForm = {
 
     submitRequest() {
       if (this.formData.newAddress) {
-        this.house.setPostalCode({
+        this.house.setCoverageDataPostaCode({
           postalCode: this.formData.postalCode,
-          municipalityName: this.formData.municipalityName
+          municipalityName: this.formData.municipalityName,
+          municipalityId: "",
+          provinceId: ""
+        })
+        this.house.setEstate({
+          addressName: this.formData.addressName,
+          number: this.formData.number,
+          addressKind: "",
+          annex: "",
+          gateId: ""
+        })
+        this.house.setCoverageData("property", {
+          block: this.formData.houseType
         })
         this.house.setHouseFormData(this.formData)
-        this.house.setCoverageData("property", {
-          address: this.formData.addressName,
-          block: this.formData.number,
-          door:this.formData.houseType
-        })
         this.house.changeHouseStep('presupuesto-realizado');
       } else {
         if(this.isValidStatusCode) {

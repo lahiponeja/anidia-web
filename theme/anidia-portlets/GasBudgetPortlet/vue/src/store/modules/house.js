@@ -242,6 +242,14 @@ const setGasBudget = function(payload) {
   state.gasBudget = payload
 }
 
+const setEstate = function(payload) {
+  state.coverageData.estate = payload
+}
+
+const setCoverageDataPostaCode = function(payload) {
+  state.coverageData.postalCode = payload
+}
+
 const getPostalCodes = function () {
   coverageService.getPostalCodes().then((res) => {
     const resJson = xmlToJsonImp(res.data);
@@ -436,5 +444,7 @@ export default {
   getDatalayerAddressStepInfo,
   getDatalayerDetailsStepInfo,
   getLeadFormStepInfo,
-  setHouseFormData
+  setHouseFormData,
+  setEstate,
+  setCoverageDataPostaCode
 }
