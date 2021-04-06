@@ -1,41 +1,53 @@
 package BlogsModule.portlet;
 
 import BlogsModule.constants.BlogsModulePortletKeys;
+import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetTag;
+import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetTagLocalServiceUtil;
 import com.liferay.asset.kernel.service.persistence.AssetEntryQuery;
 import com.liferay.blogs.model.BlogsEntry;
 import com.liferay.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.search.document.Document;
 import com.liferay.portal.search.query.BooleanQuery;
 import com.liferay.portal.search.query.FuzzyQuery;
 import com.liferay.portal.search.query.Queries;
-import com.liferay.portal.search.searcher.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-
-import javax.portlet.Portlet;
-import javax.portlet.PortletException;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+import com.liferay.portal.search.query.TermQuery;
+import com.liferay.portal.search.searcher.SearchRequest;
+import com.liferay.portal.search.searcher.SearchRequestBuilder;
+import com.liferay.portal.search.searcher.SearchRequestBuilderFactory;
+import com.liferay.portal.search.searcher.SearchResponse;
+import com.liferay.portal.search.searcher.Searcher;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.portlet.Portlet;
+import javax.portlet.PortletException;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 
 /*    
- * @author danieldelapena
+ * @author Fran Serrano
  */
 @Component(
 	immediate = true,
@@ -68,22 +80,28 @@ public class BlogsModulePortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		List<BlogsEntry> blogEntries;
-		int pageSize = 7;
+		int pageSize = BlogsModulePortletKeys.PAGE_SIZE;
 
 		String searchTerm = ParamUtil.getString(renderRequest, "searchTerm");
 		String searchTag = ParamUtil.getString(renderRequest,"searchTag");
 		int page = ParamUtil.getInteger(renderRequest,"page") == 0 ? 1 : ParamUtil.getInteger(renderRequest,"page");
 
-		if ( searchTag!= null && !searchTag.equals("")) {
-			blogEntries = getBlogsByTag(themeDisplay,searchTag,(page - 1) * pageSize,pageSize * page);
-		} else if (searchTerm!= null && !searchTerm.equals("")) {
-			blogEntries = getBlogsBySearch(themeDisplay, searchTerm);
+		String searchCategory = "";
+		String url = PortalUtil.getHttpServletRequest(renderRequest).getRequestURI();
+		
+		if (url.contains(BlogsModulePortletKeys.GAS_CATEGORY)) {
+			searchCategory = BlogsModulePortletKeys.GAS_CATEGORY;
+		} else if (url.contains(BlogsModulePortletKeys.SOLAR_CATEGORY)) {
+			searchCategory = BlogsModulePortletKeys.SOLAR_CATEGORY;
+		} 
+
+		if (searchTerm!= null && !searchTerm.equals("")) {
+			blogEntries = getBlogsBySearch(themeDisplay, searchCategory, searchTerm);
 		} else  {
-			blogEntries = BlogsEntryLocalServiceUtil.getBlogsEntries((page - 1) * pageSize, pageSize * page);
+			blogEntries = getBlogsByTagAndCategory(themeDisplay, searchCategory,searchTag,(page - 1) * pageSize,pageSize * page);
 		}
 
 		JSONObject jsonReturn = new JSONObject();
-		jsonReturn.append("data", new JSONObject());
 
 		blogEntries.forEach(entry -> {
 			if(!entry.isExpired() && !entry.isInTrash() && !entry.isDraft()) {
@@ -125,18 +143,36 @@ public class BlogsModulePortlet extends MVCPortlet {
 		super.doView(renderRequest, renderResponse);
 	}
 
+	private long getCategoryId(String categoryName) {
+		AssetCategory assetCategory;
+		DynamicQuery query = DynamicQueryFactoryUtil.forClass(AssetCategory.class,
+				PortalClassLoaderUtil.getClassLoader())
+				.add(PropertyFactoryUtil.forName("name").eq(categoryName));
+		assetCategory = (AssetCategory) AssetCategoryLocalServiceUtil.dynamicQuery(query, 0, 1).get(0);
+		return assetCategory.getCategoryId();
+	}
 
-	private List<BlogsEntry> getBlogsByTag(ThemeDisplay themeDisplay, String tagName, int start, int end) {
-		List<BlogsEntry> blogsEntries = new ArrayList<>();
+	private long getAssetTagId(ThemeDisplay themeDisplay, String tagName) {
 		AssetTag assetTag;
 		try {
 			assetTag = AssetTagLocalServiceUtil.getTag(themeDisplay.getScopeGroupId(), tagName);
 		} catch (PortalException e) {
-			return blogsEntries;
+			return -1;
 		}
+		return assetTag.getTagId();
+	}
+
+
+	private List<BlogsEntry> getBlogsByTagAndCategory(ThemeDisplay themeDisplay, String categoryName, String tagName, int start, int end) {
+		List<BlogsEntry> blogsEntries = new ArrayList<>();
 
 		AssetEntryQuery query = new AssetEntryQuery();
-		query.setAnyTagIds(new long[]{assetTag.getTagId()});
+		if (categoryName != null && !categoryName.equals("")) {
+			query.setAnyCategoryIds(new long[]{getCategoryId(categoryName)});
+		}
+		if (tagName != null && !tagName.equals("")) {
+			query.setAnyTagIds(new long[]{getAssetTagId(themeDisplay, tagName)});
+		}
 		query.setClassName(BlogsEntry.class.getName());
 		query.setStart(start);
 		query.setEnd(end);
@@ -152,10 +188,13 @@ public class BlogsModulePortlet extends MVCPortlet {
 
 	}
 
-	private List<BlogsEntry> getBlogsBySearch(ThemeDisplay themeDisplay, String searchTerm) {
+	private List<BlogsEntry> getBlogsBySearch(ThemeDisplay themeDisplay, String categoryName, String searchTerm) {
 		List<BlogsEntry> blogsEntries = new ArrayList<>();
-		FuzzyQuery contentQuery = queries.fuzzy("content",searchTerm);
-		BooleanQuery booleanQuery = queries.booleanQuery().addMustQueryClauses(contentQuery);
+		FuzzyQuery contentQuery = queries.fuzzy(Field.CONTENT,searchTerm);
+		TermQuery categoryQuery = queries.term(Field.ASSET_CATEGORY_IDS, getCategoryId(categoryName));
+
+		BooleanQuery booleanQuery = queries.booleanQuery()
+				.addMustQueryClauses(contentQuery,categoryQuery);
 
 		SearchRequestBuilder searchRequestBuilder =	searchRequestBuilderFactory.builder();
 		searchRequestBuilder.emptySearchEnabled(true);

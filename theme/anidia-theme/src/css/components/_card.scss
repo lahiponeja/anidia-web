@@ -334,6 +334,11 @@
         }
       }
     }
+
+    &__tags {
+      display: flex;
+      order: 1;
+    }
   }
 
   &--menu {

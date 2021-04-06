@@ -71,6 +71,17 @@
   .an-h6 {
    text-transform: uppercase;   
   }
+
+  .an-pill {
+    text-transform: capitalize;
+    padding: 0 rem(22);
+    height: rem(30);
+    margin-right: rem(28);
+  }
+
+  .an-accordeon__search-input-wrapper {
+    margin-bottom: 0;
+  }
 }
 
 // REFACTOR WITH CUSTOM TEMPLATE
