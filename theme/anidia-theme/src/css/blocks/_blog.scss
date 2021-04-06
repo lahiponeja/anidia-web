@@ -43,7 +43,9 @@
     margin-top: rem(56);
 
     &.an-blog__content--multi {
-      margin-top: rem(-84);
+      @include tablet {
+        margin-top: rem(-84);
+      } 
     }
   }
 
@@ -65,6 +67,7 @@
   &__categories {
     display: block;
     color: $an-theme;
+    margin-bottom: rem(48);
 
     @include tablet {
       margin-bottom: rem(100);
@@ -94,7 +97,12 @@
   }
 
   .an-accordeon__search-input-wrapper {
-    margin-bottom: 0;
+    max-width: 100%;
+
+    @include tablet {
+      margin-bottom: 0;
+      max-width: 90%;
+    }
   }
 
   &__footer {
