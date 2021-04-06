@@ -33,7 +33,6 @@
 	}
 
 %>
-<%= searchTerm %>
 
 <div id="blogsDivId"  class="bg-white pl-s pr-s pt-s pb-s">
 	<div class="an-blog">
@@ -41,7 +40,6 @@
 			<div class="an-input an-input--icon-left an-accordeon__search-input-wrapper">
 				<span class="an-icon--search"></span>
 				<input type="text" class="an-input__field" value="<%=searchTerm%>" placeholder="Busca por palabras" name="<portlet:namespace/>searchTerm" id="<portlet:namespace/>searchTerm"/>
-				<input type="hidden" value="<%=categoryName%>" name="<portlet:namespace/>categoryName" id="<portlet:namespace/>categoryName"/>
 			</div>
 			<input class="an-btn an-btn--green-border an-btn--flatter an-accordeon__search-btn" type="submit" value="Buscar">
 		</form>
