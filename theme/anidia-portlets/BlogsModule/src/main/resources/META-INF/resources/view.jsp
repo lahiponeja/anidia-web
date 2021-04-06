@@ -1,3 +1,4 @@
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file="/init.jsp" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
 <%@
@@ -9,7 +10,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 
-
 <portlet:defineObjects />
 <%!
 	public String decodeContent(String encodedContent) throws UnsupportedEncodingException {
@@ -20,10 +20,10 @@
 
 <%
 	String searchTerm = (String)renderRequest.getAttribute("searchTerm");
-	String categoryName = (String)renderRequest.getAttribute("categoryName");
 	String content = (String)renderRequest.getAttribute("contentJson");
 	JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
 	JSONArray contentArray = contentJson.getJSONArray("data");
+	Integer pageID = (Integer)renderRequest.getAttribute("page");
 
 	List<String> categories = new ArrayList<String>();
 	for (int j = 0 ; j < contentArray.length(); j++) {
@@ -31,7 +31,6 @@
 			categories.add(tag.toString());
 		});
 	}
-
 %>
 
 <div id="blogsDivId"  class="bg-white pl-s pr-s pt-s pb-s">
@@ -46,19 +45,21 @@
 
 		<div class="an-blog__categories an-wrapper">
 			<h6 class="an-h6 mb-s">O busca por tematica</h6>
-			<%
-			for(int i = 0; i < categories.size(); i++) {
-			%>
-			<div class="an-pill">
-				<a href="#"><span class="entry-categories an-body-xs-bold"><%= (String)categories.get(i) %></span></a>
-			</div>
-			<%
-			}
-			%>
+			<form id="tagForm" method="post" onsubmit="this.submit();">
+				<input type="hidden" name="<portlet:namespace/>searchTag" value="" id="<portlet:namespace/>searchTag">
+			<% for(int i = 0; i < categories.size(); i++) { %>
+				<a class="an-pill" href="javascript:void();" onclick="searchByTag(e);" ><span class="entry-categories an-body-xs-bold"><%= (String)categories.get(i) %></span></a>
+			<% } %>
+		</form>
 		</div>
 
-
-		<div class="an-blog__content an-blog__content--multi" data-accordeon-list>
+		<h6 class="an-wrapper an-h6 mb-s"><%= contentArray.length() %> elementos encontrados</h6>
+		
+		<% if (contentArray.length() > 1){ %>
+			<div class="an-blog__content an-blog__content--multi" data-accordeon-list>
+		<% } else { %>	
+			<div class="an-blog__content" data-accordeon-list>
+			<% } %>
 			<%
 			if (contentArray != null){
 				for (int i = 0 ; i < contentArray.length(); i++) {
@@ -82,7 +83,7 @@
 						}
 					%>	
 						</div>	
-					<time datetime="" class="meta an-card--blog__content__date an-h6"><%= item.getString("date") %></time>
+					<time class="meta an-card--blog__content__date an-h6"><%= item.getString("date") %></time>
 					<h3 class="an-body-l-bold"><a href='<%= item.getString("url") %>'><span><%= item.getString("title") %></span></a></h3>
 					<a href='<%= item.getString("url") %>' class="an-icon--half-arrow-right an-card__icon-link"></a>
 				</div>
@@ -92,13 +93,24 @@
 				}
 			%>
 		</div>
+
+		<% if (contentArray.length() == 7){ %>
+			<form method="post" class="an-blog__footer">
+				<input type="hidden" value="<%= pageID + 1 %>" name="<portlet:namespace/>page" id="<portlet:namespace/>page"/>
+				<input class="an-btn an-btn--green-border an-btn--flatter" type="submit" value="Ver más">
+			</form>
+		<% }  %>
 	</div>
 </div>
 ​
 <script>
 	<%if(searchTerm != ""){%>
-    document.getElementById("blogsDivId").scrollIntoView(true);
-<%}%>
+			document.getElementById("blogsDivId").scrollIntoView(true);
+	<%}%>
+	function searchByTag(e) {
+		document.querySelector('#tagForm input').value = e.target.innerHTML;
+		document.getElementById('tagForm').onsubmit();
+	}
 </script>
 ​
 <script type="application/ld+json">

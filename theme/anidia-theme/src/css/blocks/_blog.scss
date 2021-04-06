@@ -66,21 +66,39 @@
     display: block;
     color: $an-theme;
 
-  }
+    @include tablet {
+      margin-bottom: rem(100);
+    }
 
-  .an-h6 {
-   text-transform: uppercase;   
+    .an-pill {
+      margin-right: rem(28);
+      transition: all .3s ease;
+    
+      &:hover {
+        color: $white;
+        background-color: $an-theme;
+        border-color: $an-theme;
+        text-decoration: none;
+      }
+    }
   }
 
   .an-pill {
     text-transform: capitalize;
     padding: 0 rem(22);
     height: rem(30);
-    margin-right: rem(28);
+  }
+
+  .an-h6 {
+   text-transform: uppercase;   
   }
 
   .an-accordeon__search-input-wrapper {
     margin-bottom: 0;
+  }
+
+  &__footer {
+    text-align: center;
   }
 }
 
