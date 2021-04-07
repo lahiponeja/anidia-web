@@ -28,13 +28,11 @@
 [/#switch]
 
   <div class="an-blog">
-    <lfr-editable id="Pre-Título" class="an-h6 mb-m" type="text">PRE-TÍTULO</lfr-editable>
+    <lfr-editable id="Pre-Título" class="an-blog__preheading an-h6 mb-m" type="text">PRE-TÍTULO</lfr-editable>
     <h2 class="an-blog__heading">
       <lfr-editable id="Título" type="text">Título</lfr-editable>
     </h2>
-    <div class="an-blog__content">
-      <lfr-widget-asset-list> </lfr-widget-asset-list>
-    </div>
+    <lfr-widget-asset-list> </lfr-widget-asset-list>
     <div class="an-blog__footer">
       [#if configuration.Enlace1 != '']
         <a href="${htmlUtil.escape(configuration.Enlace1)}" class="an-btn an-btn--green-border">${htmlUtil.escape(configuration.TextoEnlace1)}</a>

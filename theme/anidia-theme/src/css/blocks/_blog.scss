@@ -21,12 +21,13 @@
   padding-top: rem(100);
   margin-bottom: rem(165);
 
-  &__heading {
+  &__preheading {
     text-align: center;
   }
 
   &__heading {
     color: $an-theme;
+    text-align: center;
 
     .bg-an-theme & {
       color: $white;
