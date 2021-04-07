@@ -32,9 +32,12 @@ import com.liferay.portal.search.searcher.SearchResponse;
 import com.liferay.portal.search.searcher.Searcher;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -78,6 +81,8 @@ public class BlogsModulePortlet extends MVCPortlet {
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+		DateFormatSymbols symbols = new DateFormatSymbols( new Locale("es", "ES"));
+		SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy",symbols);
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		List<BlogsEntry> blogEntries;
 		int pageSize = BlogsModulePortletKeys.PAGE_SIZE;
@@ -108,7 +113,7 @@ public class BlogsModulePortlet extends MVCPortlet {
 				JSONObject jsonEntry = new JSONObject();
 				jsonEntry.put("title",entry.getTitle());
 				jsonEntry.put("subtitle",entry.getSubtitle());
-				jsonEntry.put("date",entry.getDisplayDate());
+				jsonEntry.put("date",formatter.format(entry.getDisplayDate()));
 
 				byte[] utf8;
 				try {
@@ -190,7 +195,7 @@ public class BlogsModulePortlet extends MVCPortlet {
 
 	private List<BlogsEntry> getBlogsBySearch(ThemeDisplay themeDisplay, String categoryName, String searchTerm) {
 		List<BlogsEntry> blogsEntries = new ArrayList<>();
-		FuzzyQuery contentQuery = queries.fuzzy(Field.CONTENT,searchTerm);
+		FuzzyQuery contentQuery = queries.fuzzy(Field.CONTENT,searchTerm.toLowerCase(Locale.ROOT));
 		TermQuery categoryQuery = queries.term(Field.ASSET_CATEGORY_IDS, getCategoryId(categoryName));
 
 		BooleanQuery booleanQuery = queries.booleanQuery()

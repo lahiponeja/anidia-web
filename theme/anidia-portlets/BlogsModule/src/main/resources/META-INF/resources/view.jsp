@@ -1,10 +1,9 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file="/init.jsp" %>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
-<%@
-		page import="com.liferay.portal.kernel.json.JSONArray" %><%@
-		page import="com.liferay.portal.kernel.json.JSONFactoryUtil"%><%@
-		page import="com.liferay.portal.kernel.json.JSONObject" %>
+<%@	page import="com.liferay.portal.kernel.json.JSONArray" %>
+<%@	page import="com.liferay.portal.kernel.json.JSONFactoryUtil"%>
+<%@	page import="com.liferay.portal.kernel.json.JSONObject" %>
 <%@ page import="java.io.UnsupportedEncodingException" %>
 <%@ page import="java.util.Base64" %>
 <%@ page import="java.util.List" %>
@@ -21,8 +20,14 @@
 <%
 	String searchTerm = (String)renderRequest.getAttribute("searchTerm");
 	String content = (String)renderRequest.getAttribute("contentJson");
-	JSONObject contentJson = JSONFactoryUtil.createJSONObject(content);
-	JSONArray contentArray = contentJson.getJSONArray("data");
+	JSONObject contentJson = (JSONObject) JSONFactoryUtil.createJSONObject(content);
+
+	JSONArray contentArray;
+	if (contentJson.has("data")) {
+		contentArray = contentJson.getJSONArray("data");
+	} else {
+		contentArray = JSONFactoryUtil.createJSONArray();
+	}
 	Integer pageID = (Integer)renderRequest.getAttribute("page");
 
 	List<String> categories = new ArrayList<String>();
