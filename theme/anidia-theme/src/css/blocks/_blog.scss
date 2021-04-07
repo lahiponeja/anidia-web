@@ -159,6 +159,7 @@
 
     @include tablet {
       margin: auto;
+      margin-top: calc(100vh - 120px);
       // border-radius: rem(100);
       // overflow: hidden;
       // transform: translateY(-168px);
