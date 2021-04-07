@@ -258,7 +258,7 @@
       #{ $parent }:first-child & {
         background: transparent;
         position: absolute;
-        max-width: rem(666);
+        max-width: 80%;
         display: flex;
         flex-direction: column;
         align-items: baseline;

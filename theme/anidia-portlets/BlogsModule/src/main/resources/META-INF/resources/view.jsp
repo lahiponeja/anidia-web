@@ -48,6 +48,7 @@
 			<input class="an-btn an-btn--green-border an-btn--flatter an-accordeon__search-btn" type="submit" value="Buscar">
 		</form>
 
+		<% if (categories.length() > 0){ %>
 		<div class="an-blog__categories an-wrapper">
 			<h6 class="an-h6 mb-s">O busca por tematica</h6>
 			<form id="tagForm" method="post" onsubmit="this.submit();">
@@ -57,6 +58,7 @@
 			<% } %>
 		</form>
 		</div>
+		<% } %>
 
 		<h6 class="an-wrapper an-h6 mb-s"><%= contentArray.length() %> elementos encontrados</h6>
 		
