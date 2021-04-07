@@ -127,6 +127,7 @@
 
     img {
       min-height: 100vh;
+      object-fit: cover;
 
       @include tablet {
         min-height: rem(900);
@@ -135,23 +136,33 @@
   }
 
   h1 {
+    color: $white;
     position: absolute;
     left: 50%;
-    transform: translate(-50%, 100%);
+    transform: translate(-50%, 0);
     text-align: center !important;
     max-width: rem(850);
     width: 100%;
     top: 0;
-  }
-
-  #fragment-0-tgve {
-    background: $white;
+    margin-top: 30%;
 
     @include tablet {
-      border-radius: rem(100);
-      overflow: hidden;
-      transform: translateY(-168px);
-      margin-bottom: rem(-100);
+      margin-top: 25%;
+    }
+  }
+
+  .component-paragraph {
+    background: $white;
+    max-width: rem(1024);
+    margin-top: calc(100vh - 80px);
+
+    @include tablet {
+      margin: auto;
+      // border-radius: rem(100);
+      // overflow: hidden;
+      // transform: translateY(-168px);
+      // margin-bottom: rem(-100);
+      min-height: rem(700);
     }
 
     h2 {
@@ -161,33 +172,25 @@
       color: $an-theme;
       max-width: rem(1024);
       margin: auto;
+      margin-top: rem(48);
+      margin-bottom: rem(24);
+    }
 
+    p {
+      margin-bottom: rem(50);
+      font-family: $open-sans-regular-family;
+      font-size: rem(16);
+      line-height: rem(24);
+    
       @include tablet {
-        padding-top: rem(200);
+        font-size: rem(18);
+        line-height: rem(28);
       }
     }
-  }
 
-  #fragment-0-cozp {
-    height: rem(700);
-  }
-
-  #fragment-0-dbtt {
-    .component-paragraph {
-      max-width: rem(1024);
-      margin: auto;
-
-      p {
-        margin-bottom: rem(50);
-        font-family: $open-sans-regular-family;
-        font-size: rem(16);
-        line-height: rem(24);
-      
-        @include tablet {
-          font-size: rem(18);
-          line-height: rem(28);
-        }
-      }
+    img {
+      margin-top: rem(48);
+      margin-bottom: rem(48);
     }
   }
 
@@ -197,6 +200,8 @@
 
   .component-button {
     margin-bottom: rem(200) !important;
+    display: flex;
+    justify-content: center;
 
     .btn {
       @extend %an-btn;
