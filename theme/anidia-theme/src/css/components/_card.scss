@@ -229,8 +229,7 @@
 
     &__img {
       height: rem(184);
-      background-size: cover;
-      background-position: center;
+      object-fit: cover;
       background-color: $an-theme-dark-grey;
 
       @include desktop {

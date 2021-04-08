@@ -91,8 +91,9 @@
 					%>	
 						</div>	
 					<time class="meta an-card--blog__content__date an-h6"><%= item.getString("date") %></time>
-					<h3 class="an-body-l-bold"><a href='<%= item.getString("url") %>'><span><%= item.getString("title") %></span></a></h3>
-					<a href='<%= item.getString("url") %>' class="an-icon--half-arrow-right an-card__icon-link"></a>
+					<% String url = item.getString("url"); %>
+					<h3 class="an-body-l-bold"><a href="javascript:void();" onclick="goTo('<%= url %>');"><span><%= item.getString("title") %></span></a></h3>
+					<a href="javascript:void();" onclick="goTo('<%= url %>');" class="an-icon--half-arrow-right an-card__icon-link"></a>
 				</div>
 			</article>
 			<%
@@ -117,6 +118,9 @@
 	function searchByTag(e) {
 		document.querySelector('#tagForm input').value = e.target.innerHTML;
 		document.getElementById('tagForm').onsubmit();
+	}
+	function goTo(url) {
+		window.location.href = window.location.origin + "/es/web/guest/b/" + url;
 	}
 </script>
 ​
