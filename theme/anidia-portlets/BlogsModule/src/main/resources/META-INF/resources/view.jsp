@@ -48,59 +48,64 @@
 			<input class="an-btn an-btn--green-border an-btn--flatter an-accordeon__search-btn" type="submit" value="Buscar">
 		</form>
 
-		<% if (categories.size() > 0){ %>
-		<div class="an-blog__categories an-wrapper">
-			<h6 class="an-h6 mb-s">O busca por tematica</h6>
-			<form id="tagForm" method="post" onsubmit="this.submit();">
-				<input type="hidden" name="<portlet:namespace/>searchTag" value="" id="<portlet:namespace/>searchTag">
-			<% for(int i = 0; i < categories.size(); i++) { %>
-				<a class="an-pill" href="javascript:void();" onclick="searchByTag(e);" ><span class="entry-categories an-body-xs-bold"><%= (String)categories.get(i) %></span></a>
-			<% } %>
-		</form>
-		</div>
-		<% } %>
-
-		<h6 class="an-wrapper an-h6 mb-s"><%= contentArray.length() %> elementos encontrados</h6>
-		
-		<% if (contentArray.length() > 1){ %>
-			<div class="an-blog__content an-blog__content--multi" data-accordeon-list>
-		<% } else { %>	
-			<div class="an-blog__content" data-accordeon-list>
-			<% } %>
-			<%
-			if (contentArray != null){
-				for (int i = 0 ; i < contentArray.length(); i++) {
-					JSONObject item = contentArray.getJSONObject(i);
-						%>
-				<article class="blog-entry an-card an-card--blog">
-					<img src='<%= item.getString("image") %>' alt="" class="an-card--blog__img" />
-					<div class="an-card--blog__content">
-						<div class="an-card--blog__tags">
-							<%
-							if (item.getJSONArray("tags") != null){
-							JSONArray kk = item.getJSONArray("tags");
-							for (int a = 0 ; a < kk.length(); a++) {
-								String singleTag = kk.getString(a);
-							%>
-							<div class="an-pill">
-								<span class="entry-categories an-body-xs-bold"><%= singleTag %></span>
-							</div>
-							<%
-							}
-						}
-					%>	
-						</div>	
-					<time class="meta an-card--blog__content__date an-h6"><%= item.getString("date") %></time>
-					<% String url = item.getString("url"); %>
-					<h3 class="an-body-l-bold"><a href="javascript:void();" onclick="goTo('<%= url %>');"><span><%= item.getString("title") %></span></a></h3>
-					<a href="javascript:void();" onclick="goTo('<%= url %>');" class="an-icon--half-arrow-right an-card__icon-link"></a>
+		<% if (contentArray.length() > 0){ %>
+			<% if (categories.size() > 0){ %>
+				<div class="an-blog__categories an-wrapper">
+					<h6 class="an-h6 mb-s">O busca por tematica</h6>
+					<form id="tagForm" method="post" onsubmit="this.submit();">
+						<input type="hidden" name="<portlet:namespace/>searchTag" value="" id="<portlet:namespace/>searchTag">
+					<% for(int i = 0; i < categories.size(); i++) { %>
+						<a class="an-pill" href="javascript:void();" onclick="searchByTag(e);" ><span class="entry-categories an-body-xs-bold"><%= (String)categories.get(i) %></span></a>
+					<% } %>
+					</form>
 				</div>
-			</article>
-			<%
-				}
-				}
-			%>
-		</div>
+				<% } %>
+
+			<h6 class="an-wrapper an-h6 mb-s"><%= contentArray.length() %> elementos encontrados</h6>
+			
+			<% if (contentArray.length() > 1){ %>
+				<div class="an-blog__content an-blog__content--multi" data-accordeon-list>
+			<% } else { %>	
+				<div class="an-blog__content" data-accordeon-list>
+				<% } %>
+				<%
+				if (contentArray != null){
+					for (int i = 0 ; i < contentArray.length(); i++) {
+						JSONObject item = contentArray.getJSONObject(i);
+							%>
+					<article class="blog-entry an-card an-card--blog">
+						<img src='<%= item.getString("image") %>' alt="" class="an-card--blog__img" />
+						<div class="an-card--blog__content">
+							<div class="an-card--blog__tags">
+								<%
+								if (item.getJSONArray("tags") != null){
+								JSONArray kk = item.getJSONArray("tags");
+								for (int a = 0 ; a < kk.length(); a++) {
+									String singleTag = kk.getString(a);
+								%>
+								<div class="an-pill">
+									<span class="entry-categories an-body-xs-bold"><%= singleTag %></span>
+								</div>
+								<%
+								}
+							}
+						%>	
+							</div>	
+						<time class="meta an-card--blog__content__date an-h6"><%= item.getString("date") %></time>
+						<% String url = item.getString("url"); %>
+						<h3 class="an-body-l-bold"><a href="javascript:void();" onclick="goTo('<%= url %>');"><span><%= item.getString("title") %></span></a></h3>
+						<a href="javascript:void();" onclick="goTo('<%= url %>');" class="an-icon--half-arrow-right an-card__icon-link"></a>
+					</div>
+				</article>
+				<%
+					}
+					}
+				%>
+			</div>
+		<% } else{ %>	
+			<p class="an-body-l-regular">Lo sentimos pero no hemos encontrado artículos que coincidan con tu búsqueda.</p>
+			<p class="an-body-l-regular">Prueba con otros términos o consulta las Preguntas Frecuentes</p>
+		<% }  %>
 
 		<% if (contentArray.length() == 7){ %>
 			<form method="post" class="an-blog__footer">
