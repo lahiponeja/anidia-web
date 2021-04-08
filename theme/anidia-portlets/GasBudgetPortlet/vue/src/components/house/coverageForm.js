@@ -314,6 +314,10 @@ const coverageForm = {
       this.formData.houseType = ""
       this.formData.status = "" 
       this.formData.privacyPolicy = false
+      this.house.state.autocompData.municipalities = ''
+      this.house.state.autocompData.addresses = ''
+      this.house.state.autocompData.estates = ''
+      this.house.state.autocompData.properties = ''
     }
   },
   computed: {
@@ -475,15 +479,7 @@ const coverageForm = {
                       @keyup="!noresults ? checkResultsLength('#municustomul', results) : ''"
                       required=""
                       >
-                      <ul v-if="noresults && selected.fieldKey ==='municipalityName'"
-                      class="an-select__custom-options an-select__custom-options--custom"
-                      style="display: block;"
-                    >
-                      <li class="an-select__custom-option" @click="createCustomAddress()">
-                        No encuentro mi dirección
-                      </li>
-                    </ul>
-                    <ul v-if="!noresults && selected.fieldKey === 'municipalityName'" class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
+                    <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
@@ -492,11 +488,17 @@ const coverageForm = {
                       >
                         {{ result.municipalityName }}
                       </li>
+                      <li class="an-select__custom-option">
+                        No encuentro mi dirección
+                      </li>
                     </ul>
 
-                    <ul v-if="!noresults && selected.fieldKey === 'municipalityName'" id="municustomul" v-show="house.state.autocompData.municipalities.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
+                    <ul id="municustomul" v-show="house.state.autocompData.municipalities.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li @click="[setValue(municipality.municipalityName, 'municipalityName', '#municustomul'), onSubmitMunicipalities(municipality)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(municipality, index) in house.state.autocompData.municipalities" :key="'second-municipality-'+index">
                         {{ municipality.municipalityName }}
+                      </li>
+                      <li class="an-select__custom-option" @click="createCustomAddress()">
+                        No encuentro mi dirección
                       </li>
                     </ul>
                   </div>
@@ -541,15 +543,7 @@ const coverageForm = {
                       @keyup="!noresults ? checkResultsLength('#addresscustomul', results) : ''"
                       required=""
                       >
-                    <ul v-if="noresults && selected.fieldKey ==='name'"
-                      class="an-select__custom-options an-select__custom-options--custom"
-                      style="display: block;"
-                    >
-                      <li class="an-select__custom-option" @click="createCustomAddress()">
-                        No encuentro mi dirección
-                      </li>
-                    </ul>
-                    <ul v-if="!noresults && selected.fieldKey ==='name'" class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
+                    <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
@@ -558,11 +552,17 @@ const coverageForm = {
                       >
                         {{ result.kind }} {{ result.name }}
                       </li>
+                      <li class="an-select__custom-option">
+                        No encuentro mi dirección
+                      </li>
                     </ul>
 
-                    <ul v-if="!noresults && selected.fieldKey ==='name'" id="addresscustomul" v-show="house.state.autocompData.addresses.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
+                    <ul id="addresscustomul" v-show="house.state.autocompData.addresses.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li v-for="(address, index) in house.state.autocompData.addresses" :key="'second-address-'+index" @click="[setValue(address.kind + ' ' + address.name, 'name', '#addresscustomul'), onSubmitAddresses(address)]" v-bind="resultProps[index]" class="an-select__custom-option">
                         {{ address.kind }} {{ address.name }}
+                      </li>
+                      <li class="an-select__custom-option" @click="createCustomAddress()">
+                        No encuentro mi dirección
                       </li>
                     </ul>
                   </div>
@@ -607,15 +607,8 @@ const coverageForm = {
                       @keyup="!noresults ? checkResultsLength('#estatescustomul', results) : '' "
                       required=""
                       >
-                    <ul v-if="noresults && selected.fieldKey ==='number'"
-                      class="an-select__custom-options an-select__custom-options--custom"
-                      style="display: block;"
-                    >
-                      <li class="an-select__custom-option" @click="createCustomAddress()">
-                        No encuentro mi dirección
-                      </li>
-                    </ul>
-                    <ul v-if="!noresults && selected.fieldKey ==='number'" class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
+                   
+                    <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
@@ -624,12 +617,18 @@ const coverageForm = {
                       >
                         {{ result.number }} {{ result.annex }}
                       </li>
+                      <li class="an-select__custom-option">
+                        No encuentro mi dirección
+                      </li>
                     </ul>
 
-                    <ul v-if="!noresults && selected.fieldKey ==='number'" id="estatescustomul" v-show="house.state.autocompData.estates.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
+                    <ul id="estatescustomul" v-show="house.state.autocompData.estates.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li @click="[setValue(estate.number + ' ' + estate-annex, 'number', '#estatescustomul'), onSubmitEstates(estate)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(estate, index) in house.state.autocompData.estates" :key="'second-estate-'+index">
                         {{ estate.number }} {{ estate.annex }}
                       </li>
+                      <li class="an-select__custom-option" @click="createCustomAddress()">
+                      No encuentro mi dirección
+                    </li>
                     </ul>
                   </div>
                 </template>
@@ -672,15 +671,7 @@ const coverageForm = {
                       ]"
                       @keyup="!noresults ? checkResultsLength('#propertiescustomul', results) : ''"
                     >
-                    <ul v-if="noresults && selected.fieldKey ==='address'"
-                      class="an-select__custom-options an-select__custom-options--custom"
-                      style="display: block;"
-                    >
-                      <li class="an-select__custom-option" @click="createCustomAddress()">
-                        No encuentro mi dirección
-                      </li>
-                    </ul>
-                    <ul v-if="!noresults && selected.fieldKey ==='address'" class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
+                    <ul class="an-select__custom-options" style="display: block;" v-bind="resultListProps" v-on="resultListListeners">
                       <li
                         class="an-select__custom-option"
                         v-for="(result, index) in results"
@@ -689,12 +680,17 @@ const coverageForm = {
                       >
                         {{ result.address }}
                       </li>
+                      <li class="an-select__custom-option" >
+                        No encuentro mi dirección
+                      </li>
                     </ul>
-
-                    <ul v-if="!noresults && selected.fieldKey ==='address'" id="propertiescustomul" v-show="house.state.autocompData.properties.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
+                    <ul id="propertiescustomul" v-show="house.state.autocompData.properties.length" class="an-select__custom-options" style="position: absolute; width: 100%; top: 100%; z-index: 3;">
                       <li @click="[setValue(property.address, 'address', '#propertiescustomul'), onSubmitProperties(property)]" v-bind="resultProps[index]" class="an-select__custom-option" v-for="(property, index) in house.state.autocompData.properties" :key="'second-property-'+index">
                         {{ property.address }}
                       </li>
+                      <li class="an-select__custom-option" @click="createCustomAddress()">
+                      No encuentro mi dirección
+                    </li>
                     </ul>
                   </div>
                 </template>
