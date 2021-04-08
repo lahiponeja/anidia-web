@@ -109,6 +109,11 @@
   &__footer {
     text-align: center;
   }
+
+  &__no-results {
+    text-align: center;
+    color: $an-theme;
+  }
 }
 
 // REFACTOR WITH CUSTOM TEMPLATE

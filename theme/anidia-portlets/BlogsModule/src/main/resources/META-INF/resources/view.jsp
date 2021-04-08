@@ -103,8 +103,10 @@
 				%>
 			</div>
 		<% } else{ %>	
-			<p class="an-body-l-regular">Lo sentimos pero no hemos encontrado artículos que coincidan con tu búsqueda.</p>
-			<p class="an-body-l-regular">Prueba con otros términos o consulta las Preguntas Frecuentes</p>
+			<div class="an-blog__no-results">
+				<p class="an-body-l-regular mb-xs">Lo sentimos pero no hemos encontrado artículos que coincidan con tu búsqueda.</p>
+				<p class="an-body-l-regular">Prueba con otros términos o consulta las Preguntas Frecuentes</p>
+			</div>
 		<% }  %>
 
 		<% if (contentArray.length() == 7){ %>
