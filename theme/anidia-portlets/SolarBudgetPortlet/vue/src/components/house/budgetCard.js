@@ -337,7 +337,7 @@ const budgetCard = {
 
       <div v-if="hasSuperiorInstallation" class="an-card an-card--pack an-card--vue" data-card="">
         <div class="an-card--pack__intro">
-          <p class="an-h5">Según tus necesidades especiales</p>
+          <p class="an-h5 mb-m">Según tus posibles necesidades futuras</p>
           <p class="an-h5">Pago único {{ formatPrice(finalPrice({superior: true, withTax: true})) }}€</p>
         </div>
         <div class="an-card--pack__info">
