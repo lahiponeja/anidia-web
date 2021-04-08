@@ -131,7 +131,6 @@ const budgetCard = {
 
     <div v-for="(singleGasBudget, index) in gasBudgets"  class="an-card an-card--pack an-card--pack--big">
       <div class="an-card--pack__intro">
-        <h5>{{ singleGasBudget.proposedPack }}</h5>
         <h5>{{ singleGasBudget.equipment }}</h5>
       </div>
       <div class="an-card--pack__info">
