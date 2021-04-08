@@ -15,7 +15,9 @@
 
 
       <article class="blog-entry an-card an-card--blog">
-          <img src="${blogEntry.getCoverImageURL(themeDisplay)}" alt="${htmlUtil.escape(entry.getTitle())}" class="an-card--blog__img" />
+          <div class="an-card--blog__img-container">
+            <img src="${blogEntry.getCoverImageURL(themeDisplay)}" alt="${htmlUtil.escape(entry.getTitle())}" class="an-card--blog__img" />
+          </div>
           <div class="an-card--blog__content">
             <#list entry.getTagNames() as tag>
               <div class="an-pill">${tag}</div>
