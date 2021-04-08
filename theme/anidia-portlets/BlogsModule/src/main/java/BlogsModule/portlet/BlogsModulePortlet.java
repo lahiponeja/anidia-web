@@ -153,8 +153,14 @@ public class BlogsModulePortlet extends MVCPortlet {
 		DynamicQuery query = DynamicQueryFactoryUtil.forClass(AssetCategory.class,
 				PortalClassLoaderUtil.getClassLoader())
 				.add(PropertyFactoryUtil.forName("name").eq(categoryName));
-		assetCategory = (AssetCategory) AssetCategoryLocalServiceUtil.dynamicQuery(query, 0, 1).get(0);
-		return assetCategory.getCategoryId();
+
+		List results = AssetCategoryLocalServiceUtil.dynamicQuery(query, 0, 1);
+		if(results.isEmpty()){
+			return -1;
+		} else {
+			assetCategory = (AssetCategory) results.get(0);
+			return assetCategory.getCategoryId();
+		}
 	}
 
 	private long getAssetTagId(ThemeDisplay themeDisplay, String tagName) {
