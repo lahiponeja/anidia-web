@@ -1,0 +1,11 @@
+.share-social-links {
+ 
+  h5 {
+    text-transform: uppercase;
+    color: $an-theme;
+    margin-right: rem(28);
+  }
+  span::before {
+    color: $an-theme;
+  }
+}
