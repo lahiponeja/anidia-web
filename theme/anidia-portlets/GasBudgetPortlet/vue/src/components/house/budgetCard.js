@@ -89,7 +89,6 @@ const budgetCard = {
 
       <div v-if="principalBudget" class="an-card an-card--pack an-card--pack--big featured">
         <div class="an-card--pack__intro">
-          <h5>{{ principalBudget.proposedPack }}</h5>
           <h5>{{ principalBudget.equipment }}</h5>
         </div>
         <div class="an-card--pack__info">

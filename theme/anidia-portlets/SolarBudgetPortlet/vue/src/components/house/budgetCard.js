@@ -171,7 +171,7 @@ const budgetCard = {
     },
 
     formatPrice(price) {
-      return new Intl.NumberFormat('es-ES', { maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(price);
+      return new Intl.NumberFormat('de-DE', { maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(price);
     }
 
   },
@@ -188,7 +188,7 @@ const budgetCard = {
       <!-- first card -->
       <div class="an-card an-card--pack an-card--vue featured" data-card="">
         <div class="an-card--pack__intro">
-          <p class="an-h5">Según tus necesidades especiales</p>
+          <p class="an-h5 mb-m">Según tus posibles necesidades futuras</p>
           <p class="an-h5">Pago único {{formatPrice(finalPrice({superior: false, withTax: true})) }}€</p>
         </div>
         <div class="an-card--pack__info">

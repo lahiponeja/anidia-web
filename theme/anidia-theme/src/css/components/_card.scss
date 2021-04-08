@@ -265,11 +265,8 @@
       }
 
       h5 {
-        color: $an-theme-dark-grey;
-
-        &:last-child {
-          color: $an-theme;
-        }
+        color: $an-theme;
+        white-space: nowrap;
       }
     }
 
@@ -405,27 +402,6 @@
     }
 
     &.featured {
-      // &::after {
-      //   @include gradient-green-bg;
-      //   border-radius: 50%;
-      //   content: '';
-      //   height: rem(415);
-      //   opacity: 44%;
-      //   position: absolute;
-      //   right: -43%;
-      //   top: -6%;
-      //   width: rem(426);
-      //   z-index: 1;
-      //   pointer-events: none;
-
-      //   @include desktop {
-      //     height: rem(597);
-      //     right: -38%;
-      //     top: -21%;
-      //     width: rem(613);
-      //   }
-      // }
-
       #{$el}--pack__info {
         color: #C5EF3F;
       }
@@ -437,7 +413,6 @@
 
       .an-h5:first-child {
         color: $an-theme-dark-grey;
-        margin-bottom: rem(6);
       }
     }
 
@@ -452,14 +427,6 @@
 
     .an-list {
       z-index: 2;
-    }
-
-    .an-body-m-regular {
-      font-size: rem(14);
-
-      @include desktop {
-        font-size: initial;
-      }
     }
   }
 
