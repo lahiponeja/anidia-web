@@ -118,13 +118,6 @@
 
 // REFACTOR WITH CUSTOM TEMPLATE
 .anidia-single-post-page {
-  #content {
-    padding: 0 rem(20);
-
-    @include tablet {
-      padding: 0;
-    }
-  }
   .component-image {
     position: absolute;
     left: 0;

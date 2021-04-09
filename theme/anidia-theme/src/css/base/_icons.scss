@@ -674,3 +674,10 @@ $an-icon-info: "\ea0c";
   content: $an-icon-info;
   display: block;
 }
+
+$an-icon-twitter: "\e930";
+.an-icon--twitter:before {
+  font-family: $an-icons;
+  content: $an-icon-twitter;
+  display: block;
+}

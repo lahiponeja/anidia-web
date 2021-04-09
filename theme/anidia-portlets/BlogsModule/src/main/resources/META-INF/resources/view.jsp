@@ -74,7 +74,9 @@
 						JSONObject item = contentArray.getJSONObject(i);
 							%>
 					<article class="blog-entry an-card an-card--blog">
-						<img src='<%= item.getString("image") %>' alt="" class="an-card--blog__img" />
+						<div class="an-card--blog__img-container">
+							<img src='<%= item.getString("image") %>' alt="" class="an-card--blog__img" />
+						</div>
 						<div class="an-card--blog__content">
 							<div class="an-card--blog__tags">
 								<%

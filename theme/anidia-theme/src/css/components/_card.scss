@@ -228,21 +228,21 @@
     }
 
     &__img {
-      height: rem(184);
+      height: 100%;
       object-fit: cover;
       background-color: $an-theme-dark-grey;
 
-      @include desktop {
-        height: rem(270);
-      }
-
-      #{ $parent }:first-child & {
-        height: 100%;
-      }
-
       &-container {
-        height: 100%;
         position: relative;
+        height: rem(184);
+
+        @include desktop {
+          height: rem(270);
+        }
+
+        #{ $parent }:first-child & {
+          height: 100%;
+        }
 
         &::after {
           content: '';
