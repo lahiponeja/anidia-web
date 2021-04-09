@@ -9,4 +9,13 @@
     color: $an-theme;
     font-size: rem(25);
   }
+
+  a:hover {
+    text-decoration: none;
+    color: darken($color: $an-theme, $amount: 10)
+  }
+
+  li {
+    margin-right: rem(26);
+  }
 }
