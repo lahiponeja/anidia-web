@@ -81,6 +81,7 @@ const state = reactive({
   },
   houseFormData: {},
   gasBudget: {},
+  gasBudgetArray: [],
   userContactInfo: {},
   userFullName: "",
   coverageError: "",
@@ -237,6 +238,18 @@ const setHouseType = function(payload) {
   state.houseType = payload
 }
 
+const setGasBudget = function(payload) {
+  state.gasBudget = payload
+}
+
+const setEstate = function(payload) {
+  state.coverageData.estate = payload
+}
+
+const setCoverageDataPostaCode = function(payload) {
+  state.coverageData.postalCode = payload
+}
+
 const getPostalCodes = function () {
   coverageService.getPostalCodes().then((res) => {
     const resJson = xmlToJsonImp(res.data);
@@ -348,8 +361,8 @@ const submitHouseData = function(gasBudgetRequest) {
   const results = new Promise((resolve, reject) => {
     houseFormService.postHouseForm(xml).then((res)=> {
       const jsonData = xmlToJsonImp(res.data);
-      Object.assign(state.gasBudget, jsonData.GasBudget);
-      resolve(state.gasBudget)
+      state.gasBudgetArray = jsonData
+      resolve(state.gasBudgetArray)
       changeHouseStep("presupuesto");
     })
     .catch((err)=>{
@@ -412,6 +425,7 @@ export default {
   state: shallowReadonly(state),
   setPostalCode,
   setHouseType,
+  setGasBudget,
   changeHouseStep,
   submitUserContactInfo,
   getPostalCodes,
@@ -430,5 +444,7 @@ export default {
   getDatalayerAddressStepInfo,
   getDatalayerDetailsStepInfo,
   getLeadFormStepInfo,
-  setHouseFormData
+  setHouseFormData,
+  setEstate,
+  setCoverageDataPostaCode
 }

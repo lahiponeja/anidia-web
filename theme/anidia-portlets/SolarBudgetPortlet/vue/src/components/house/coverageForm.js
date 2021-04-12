@@ -56,8 +56,8 @@ const coverageForm = {
     },
 
     submitRequest() {
-      if(this.formData.propertyAddress) {
-        this.lead.setAddress(this.formData.propertyAddress)
+      this.formData.propertyAddress && this.lead.setAddress(this.formData.propertyAddress)
+      if(this.formData.number) {
         this.house.changeHouseStep('vivienda');
       }
       this.house.resetAutocompleteData()
@@ -125,14 +125,14 @@ const coverageForm = {
       // Save object in the store
       this.house.setCoverageData("postalCode", { postalCode })
       this.lead.setPostalCodeData({ postalCode })
-      
+
       // Get municipalities
       this.loadingMunicipalities = true,
       this.house.getMunicipalities(postalCode)  // OBTENER MUNICIPIOS
         .then(() => { this.loadingMunicipalities = false })
         .catch((err) => {
           // window.dataLayer.push(this.house.getDatalayerAddressStepInfo("FUNNEL - CONTRATACIÓN", "coberture KO", "gas"));
-          this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
+          this.house.setCoverageError('Vaya, de momento no podemos prestar servicio en tu zona. Lo sentimos mucho.');
           this.loadingMunicipalities = false
           console.error(err)
         })
@@ -155,6 +155,7 @@ const coverageForm = {
        })
       .catch((err) => {
         console.error(err)
+        this.house.setCoverageError('Vaya, de momento no prestamos servicio en tu zona. Lo sentimos mucho.');
         this.checkingAvailability = false
       })
     },
@@ -578,7 +579,7 @@ const coverageForm = {
             </div> -->
           </div>
 
-          <button type="submit" :disabled="!formData.propertyAddress" :class="{ 'an-btn--disabled': !formData.propertyAddress  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
+          <button type="submit" :disabled="!formData.number" :class="{ 'an-btn--disabled': !formData.number  }" class="an-btn an-btn--white-border an-btn--icon an-icon--check-simple mt-xl">
             <span>Comprobar</span>
           </button>
       

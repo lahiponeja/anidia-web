@@ -310,6 +310,15 @@ components:
         radiatorsBathroom:
           description: Number of the radiators in the bathroom.
           type: integer
+    GasBudgetResult:
+      description: Information about the gas budget sent by Solusoft API and alternative packs
+      properties:
+        PrincipalBudget:
+          $ref: "#/components/schemas/GasBudget"
+        GasBudgets:
+          type: array
+          items:
+            $ref: "#/components/schemas/GasBudget"
     GasBudget:
       description: Information about the gas budget sent by Solusoft API
       properties:
@@ -404,10 +413,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GasBudget"
+                $ref: "#/components/schemas/GasBudgetResult"
             application/xml:
               schema:
-                $ref: "#/components/schemas/GasBudget"
+                $ref: "#/components/schemas/GasBudgetResult"
           description: The budget has been created
   "/leads":
     post:
