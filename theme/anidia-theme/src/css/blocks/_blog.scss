@@ -170,7 +170,7 @@
     margin-top: 30%;
 
     @include tablet {
-      margin-top: 25%;
+      margin-top: rem(250);
     }
   }
 
@@ -188,7 +188,7 @@
     padding: 0.375rem 0.8125rem;
     display: inline-block;
 
-    @include tablet {
+    @include desktop {
       margin-top: 40%;
     }
   }

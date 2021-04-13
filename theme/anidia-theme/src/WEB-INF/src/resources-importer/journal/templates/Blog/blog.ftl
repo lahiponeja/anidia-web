@@ -15,7 +15,9 @@
 
     <#assign blogsEntryClassName = "com.liferay.blogs.kernel.model.BlogsEntry" />
       <article class="blog-entry an-card an-card--blog">
-          <img src="${entry.getSmallImageURL(themeDisplay)}" alt="${htmlUtil.escape(entry.getTitle())}" class="an-card--blog__img" />
+      		<div class="an-card--blog__img-container">
+					  <img src="${entry.getSmallImageURL(themeDisplay)}" alt="${htmlUtil.escape(entry.getTitle())}" class="an-card--blog__img" />
+					</div>
           <div class="an-card--blog__content">
             <div class="an-pill">
               <span class="entry-categories an-body-xs-bold">
