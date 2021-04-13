@@ -230,6 +230,11 @@
     &__img {
       object-fit: cover;
       background-color: $an-theme-dark-grey;
+      height: rem(184);
+
+      @include desktop {
+        height: rem(270);
+      }
 
       #{ $parent }:first-child & {
         height: 100%;

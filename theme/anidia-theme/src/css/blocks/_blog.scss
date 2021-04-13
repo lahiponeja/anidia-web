@@ -50,16 +50,18 @@
   }
 
   &__footer {
-    justify-content: center;
-    display: flex;
-    
-    .an-btn {
-      &:first-of-type {
-        margin-right: rem(20);
-      }
-
-      &:last-of-type {
-        margin-left: rem(20);
+    @include tablet {
+      justify-content: center;
+      display: flex;
+      
+      .an-btn {
+        &:first-of-type {
+          margin-right: rem(20);
+        }
+  
+        &:last-of-type {
+          margin-left: rem(20);
+        }
       }
     }
   }
