@@ -168,9 +168,17 @@
       padding: rem(45) 0 rem(25) 0;
       position: relative;
       top: rem(-28);
-      max-height: 300px;
+      max-height: rem(300);
       overflow: auto;
       z-index: 3 !important;
+
+      &--custom {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        visibility: visible;
+        top: 100%;
+      }
     }
 
     &-option {

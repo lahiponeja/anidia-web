@@ -118,10 +118,10 @@
     min-width: unset;
     padding: 0;
     position: static;
-    width: rem(40);
+    width: rem(160);
 
     &::before {
-      color: $white;
+      color: $an-theme;
       font-size: rem(26);
       height: unset;
       width: unset;
@@ -129,6 +129,26 @@
 
     &::after {
       display: none;
+    }
+
+    .an-cmb__text {
+      margin-bottom: rem(4);
+  
+      @include tablet {
+        font-size: rem(12);
+        line-height: rem(17);
+        margin-bottom: rem(2);
+      }
+    }
+
+    .an-cmb__number {
+      font-size: rem(15);
+      line-height: rem(15);
+  
+      @include tablet {
+      font-size: rem(15);
+      line-height: rem(15);
+      }
     }
   }
 }

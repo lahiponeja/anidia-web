@@ -265,11 +265,8 @@
       }
 
       h5 {
-        color: $an-theme-dark-grey;
-
-        &:last-child {
-          color: $an-theme;
-        }
+        color: $an-theme;
+        white-space: normal;
       }
     }
 
@@ -351,6 +348,8 @@
       background-color: $an-theme;
       color: $white;
       border: none;
+      position: relative;
+      overflow: hidden;
 
       h2,
       h3 {
@@ -361,6 +360,23 @@
       .an-list__icon::before,
       .an-card--pack__info {
         color: $white;
+      }
+
+      [class^="an"] {
+        position: relative;
+        z-index: 2;
+      }
+
+      &::before {
+        content: '';
+        width: 546px;
+        height: 546px;
+        position: absolute;
+        background: linear-gradient( 226.24deg, #78BE21 23.14%, #FFC72C 160.34%);
+        border-radius: 100%;
+        top: -25%;
+        left: 18%;
+        opacity: 0.5;
       }
     }
   }
@@ -386,27 +402,6 @@
     }
 
     &.featured {
-      // &::after {
-      //   @include gradient-green-bg;
-      //   border-radius: 50%;
-      //   content: '';
-      //   height: rem(415);
-      //   opacity: 44%;
-      //   position: absolute;
-      //   right: -43%;
-      //   top: -6%;
-      //   width: rem(426);
-      //   z-index: 1;
-      //   pointer-events: none;
-
-      //   @include desktop {
-      //     height: rem(597);
-      //     right: -38%;
-      //     top: -21%;
-      //     width: rem(613);
-      //   }
-      // }
-
       #{$el}--pack__info {
         color: #C5EF3F;
       }
@@ -418,7 +413,6 @@
 
       .an-h5:first-child {
         color: $an-theme-dark-grey;
-        margin-bottom: rem(6);
       }
     }
 
@@ -433,14 +427,6 @@
 
     .an-list {
       z-index: 2;
-    }
-
-    .an-body-m-regular {
-      font-size: rem(14);
-
-      @include desktop {
-        font-size: initial;
-      }
     }
   }
 

@@ -81,6 +81,7 @@ const state = reactive({
   },
   houseFormData: {},
   gasBudget: {},
+  gasBudgetArray: [],
   userContactInfo: {},
   userFullName: "",
   coverageError: "",
@@ -112,7 +113,6 @@ const submitUserContactInfo = function (budgetReadyForm) {
     lastname,
     phone,
     email,
-    privacyPolicy,
     offersAndServices } = budgetReadyForm;
 
   const requestBody = {
@@ -125,7 +125,8 @@ const submitUserContactInfo = function (budgetReadyForm) {
       "acceptNotCom": offersAndServices,
       "postalCode": state.coverageData.postalCode,
       "estate": state.coverageData.estate,
-      "property": state.coverageData.property
+      "property": state.coverageData.property,
+      "newAddress": state.houseFormData.newAddress
     },
     "calculatorGas": {
       "input": {
@@ -158,15 +159,15 @@ const submitUserContactInfo = function (budgetReadyForm) {
         "bonus": state.gasBudget.bonus,
         "totalBudget": state.gasBudget.totalBudget,
         "iva21": state.gasBudget.vat,
-        "totalPVP": state.gasBudget.totalPrice,
+        "totalPVP": state.gasBudget ? state.gasBudget.totalPrice : 0,
         "extras": {
-          "MetersBoilerToWindow": state.gasBudget.metersBoilerToWindow.price,
-          "MetersWaterIntake": state.gasBudget.metersWaterIntake.price,
-          "HasVentilationGrill": state.gasBudget.hasVentilationGrill.price,
-          "ControllHeatingFloor": state.gasBudget.controllHeatingFloor.price,
-          "ConvertDeviceKitchen": state.gasBudget.convertDeviceKitchen.price,
-          "RadiatorsBathroom": state.gasBudget.radiatorsBathroom.price,
-          "ExtraTotalPrice": state.gasBudget.extraTotalPrice
+          "MetersBoilerToWindow":state.gasBudget.metersBoilerToWindow ? state.gasBudget.metersBoilerToWindow.price : '0,00 €',
+          "MetersWaterIntake": state.gasBudget.metersWaterIntake ? state.gasBudget.metersWaterIntake.price : '0,00 €',
+          "HasVentilationGrill": state.gasBudget.hasVentilationGrill ? state.gasBudget.hasVentilationGrill.price : '0,00 €',
+          "ControllHeatingFloor": state.gasBudget.controllHeatingFloor ? state.gasBudget.controllHeatingFloor.price : '0,00 €',
+          "ConvertDeviceKitchen": state.gasBudget.convertDeviceKitchen ? state.gasBudget.convertDeviceKitchen.price : '0,00 €',
+          "RadiatorsBathroom": state.gasBudget.radiatorsBathroom ? state.gasBudget.radiatorsBathroom.price : '0,00 €',
+          "ExtraTotalPrice": state.gasBudget.extraTotalPrice ? state.gasBudget.extraTotalPrice : '0,00 €'
         }
       }
     }
@@ -197,7 +198,6 @@ const submitBusinessContactInfo = function (budgetReadyForm) {
     lastname,
     phone,
     email,
-    privacyPolicy,
     offersAndServices } = budgetReadyForm;
 
   const requestBody = {
@@ -236,6 +236,18 @@ const setPostalCode = function(payload) {
 
 const setHouseType = function(payload) {
   state.houseType = payload
+}
+
+const setGasBudget = function(payload) {
+  state.gasBudget = payload
+}
+
+const setEstate = function(payload) {
+  state.coverageData.estate = payload
+}
+
+const setCoverageDataPostaCode = function(payload) {
+  state.coverageData.postalCode = payload
 }
 
 const getPostalCodes = function () {
@@ -349,8 +361,8 @@ const submitHouseData = function(gasBudgetRequest) {
   const results = new Promise((resolve, reject) => {
     houseFormService.postHouseForm(xml).then((res)=> {
       const jsonData = xmlToJsonImp(res.data);
-      Object.assign(state.gasBudget, jsonData.GasBudget);
-      resolve(state.gasBudget)
+      state.gasBudgetArray = jsonData
+      resolve(state.gasBudgetArray)
       changeHouseStep("presupuesto");
     })
     .catch((err)=>{
@@ -413,6 +425,7 @@ export default {
   state: shallowReadonly(state),
   setPostalCode,
   setHouseType,
+  setGasBudget,
   changeHouseStep,
   submitUserContactInfo,
   getPostalCodes,
@@ -430,5 +443,8 @@ export default {
   getDatalayerFirstStepInfo,
   getDatalayerAddressStepInfo,
   getDatalayerDetailsStepInfo,
-  getLeadFormStepInfo
+  getLeadFormStepInfo,
+  setHouseFormData,
+  setEstate,
+  setCoverageDataPostaCode
 }

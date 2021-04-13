@@ -109,7 +109,9 @@ components:
         property:
           description: Full property of the Lead
           $ref: "#/components/schemas/Property"
-
+        newAddress:
+          description: If the address exists or is new
+          type: boolean
     CalculatorGas:
       description: Calculator gas information to send Lead
       properties:
@@ -308,6 +310,15 @@ components:
         radiatorsBathroom:
           description: Number of the radiators in the bathroom.
           type: integer
+    GasBudgetResult:
+      description: Information about the gas budget sent by Solusoft API and alternative packs
+      properties:
+        PrincipalBudget:
+          $ref: "#/components/schemas/GasBudget"
+        GasBudgets:
+          type: array
+          items:
+            $ref: "#/components/schemas/GasBudget"
     GasBudget:
       description: Information about the gas budget sent by Solusoft API
       properties:
@@ -402,10 +413,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GasBudget"
+                $ref: "#/components/schemas/GasBudgetResult"
             application/xml:
               schema:
-                $ref: "#/components/schemas/GasBudget"
+                $ref: "#/components/schemas/GasBudgetResult"
           description: The budget has been created
   "/leads":
     post:
