@@ -202,7 +202,7 @@
 
     @include desktop {
       margin: auto;
-      margin-top: calc(900vh - 200px);
+      margin-top: calc(900% - 200px);
       min-height: rem(700);
     }
 
