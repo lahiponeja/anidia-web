@@ -176,24 +176,24 @@
     }
   }
 
-  .component-html {
-    position: absolute;
-    color: $white;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-    top: 0;
-    text-transform: capitalize;
-    margin-top: 50%;
-    border: 0.125rem solid;
-    border-radius: 2.5rem;
-    padding: 0.375rem 0.8125rem;
-    display: inline-block;
+  // .component-html {
+  //   position: absolute;
+  //   color: $white;
+  //   position: absolute;
+  //   left: 50%;
+  //   transform: translate(-50%, 0);
+  //   top: 0;
+  //   text-transform: capitalize;
+  //   margin-top: 50%;
+  //   border: 0.125rem solid;
+  //   border-radius: 2.5rem;
+  //   padding: 0.375rem 0.8125rem;
+  //   display: inline-block;
 
-    @include desktop {
-      margin-top: 40%;
-    }
-  }
+  //   @include desktop {
+  //     margin-top: 40%;
+  //   }
+  // }
 
   .component-paragraph {
     background: $white;
@@ -202,7 +202,7 @@
 
     @include desktop {
       margin: auto;
-      margin-top: 45%;
+      margin-top: calc(900vh - 200px);
       min-height: rem(700);
     }
 

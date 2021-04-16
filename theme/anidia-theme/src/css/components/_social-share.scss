@@ -1,4 +1,5 @@
 .share-social-links {
+ text-align: center;
  
   h5 {
     text-transform: uppercase;
@@ -17,5 +18,13 @@
 
   li {
     margin-right: rem(26);
+  }
+
+  .an-btn {
+    margin-bottom: rem(100);
+
+    @include desktop {
+      margin-bottom: rem(200);
+    }
   }
 }
