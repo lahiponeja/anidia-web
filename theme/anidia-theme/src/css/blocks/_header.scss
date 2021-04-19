@@ -517,10 +517,10 @@
   display: none;
 }
 
-.active-section {
+.active {
   &.nav-item {
     border-color: $an-theme;
-    
+
     .nav-link {
       color: $an-theme;
     }
@@ -528,16 +528,16 @@
 }
 
 @include desktop {
-  .active-section {
+  .active {
     &.nav-item {
       border-color: inherit;
 
       .nav-link {
         color: inherit;
-  
+
         .text-truncate {
           display: flex;
-  
+
           &:after {
             content: '';
             border-bottom: 2px solid;
@@ -548,11 +548,11 @@
             left: 0;
           }
         }
-  
+
         &.dropdown-toggle {
           .text-truncate {
             display: flex;
-  
+
             &:after {
               content: '';
               border-bottom: 2px solid;
