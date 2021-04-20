@@ -23,6 +23,7 @@
 			<setting configurable="true" key="Versión de Call Center en móvil" options="icono,icono + texto" type="select" value="icono" />
 			<setting configurable="true" key="Esquema de colores de fondo de la página" options="verde,blanco,blanco con imagen,verde claro" type="select" value="verde" />
       <setting configurable="true" key="Esquema de colores de cabecera" options="verde,blanco" type="select" value="verde" />
+			<setting configurable="true" key="Página de detalle de blog" type="checkbox" value="false" />
 			<setting configurable="true" key="Entorno OneTrust" options="test,produccion" type="select" value="test" />
 			<setting configurable="true" key="GTM - Category" options="-,gas,solar,mantenimiento,calculator" type="select" value="-" />
 			<setting configurable="true" key="GTM - PageType" options="-,home,subhome,FUNNEL - CONTRATACIÓN," type="select" value="-" />

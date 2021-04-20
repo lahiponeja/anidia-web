@@ -1,0 +1,4 @@
+Bundle-Name: BlogsModule
+Bundle-SymbolicName: BlogsModule
+Bundle-Version: 1.0.0
+Export-Package: BlogsModule.constants
