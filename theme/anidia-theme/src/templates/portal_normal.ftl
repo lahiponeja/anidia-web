@@ -128,13 +128,10 @@
 				<button id="ot-sdk-btn" class="ot-sdk-show-settings">Configurar cookies</button>
       </div>
       <div class="footer__rrss">
-        <a href="#" class="footer__rrss__single" target="_blank"><span class="an-icon--pinterest"></span></a>
-        <a href="#" class="footer__rrss__single" target="_blank"><span class="an-icon--instagram"></span></a>
-        <a href="#" class="footer__rrss__single" target="_blank"><span class="an-icon--linkedin"></span></a>
-        <a href="#" class="footer__rrss__single" target="_blank"><span class="an-icon--facebook"></span></a>
+        <a href="https://www.instagram.com/anidia_energia/?hl=en" class="footer__rrss__single" target="_blank"><span class="an-icon--instagram"></span></a>
+        <a href="https://www.linkedin.com/company/69436690/admin/" class="footer__rrss__single" target="_blank"><span class="an-icon--linkedin"></span></a>
+        <a href="https://www.facebook.com/Anidia-112734967221796" class="footer__rrss__single" target="_blank"><span class="an-icon--facebook"></span></a>
       </div>
-
-
 
 	</footer>
 </div>
@@ -149,7 +146,6 @@
 
 <#include "${full_templates_path}/footer/gtm.ftl" />
 <#include "${full_templates_path}/footer/menu_script.ftl" />
-<#include "${full_templates_path}/footer/active_navitem_script.ftl" />
 <script src="${javascript_folder}/main.js" type="text/javascript"></script>
 
 <script>

@@ -72,6 +72,7 @@ gradle/
 build/
 gradlew.bat
 gradlew
+dist/
 
 .env
 .tool-versions
